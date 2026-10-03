@@ -5,14 +5,17 @@ import "../../design-system/tokens.css";
 import "../../design-system/components.css";
 import "./styles/app.css";
 import { App } from "./App";
+import { AuthProvider } from "@/lib/auth";
 
 const root = document.getElementById("root");
 if (!root) throw new Error("Brak elementu #root");
 
 createRoot(root).render(
   <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </AuthProvider>
   </StrictMode>,
 );
