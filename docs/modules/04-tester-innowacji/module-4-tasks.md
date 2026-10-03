@@ -50,13 +50,13 @@ Plan na podstawie `docs/modules/04-tester-innowacji/module-4-tester-innowacji.ht
 ## Status zadań
 
 - [x] TI00 · DDL i modele cyklu testowego · zależy: T01, T02 — zmiana `db/init.sql` wymaga wpisu w uwagach Modułu 1 · agent: Auto · 2026-10-04
-- [~] TI01 · Kontrakty Pydantic, statusy i walidacja domenowa · zależy: TI00, T08 · agent: Auto · 2026-10-04
-- [ ] TI02 · Tokeny dostępu testera i operacje udziału · zależy: TI00, TI01, T15
-- [ ] TI03 · API publiczne i panelu Hubu · zależy: TI01, TI02, T15
-- [ ] TI04 · Pipeline AI: dopasowanie, agregacja i raport · zależy: TI01, T05, TI03
-- [ ] TI05 · Frontend publiczny: lista naborów, zgłoszenie i dostęp tokenowy · zależy: TI03, F04, F05
-- [ ] TI06 · Frontend panelu Hubu: nabory, zgłoszenia, moderacja i raport · zależy: TI03, TI04, F04, F05
-- [ ] TI07 · Dane demo, integracja i ścieżka demonstracyjna · zależy: TI02, TI03, TI04, TI05, TI06
+- [x] TI01 · Kontrakty Pydantic, statusy i walidacja domenowa · zależy: TI00, T08 · agent: Auto · 2026-10-04
+- [x] TI02 · Tokeny dostępu testera i operacje udziału · zależy: TI00, TI01, T15 · agent: Auto · 2026-10-04
+- [x] TI03 · API publiczne i panelu Hubu · zależy: TI01, TI02, T15 · agent: Auto · 2026-10-04
+- [x] TI04 · Pipeline AI: dopasowanie, agregacja i raport · zależy: TI01, T05, TI03 · agent: Auto · 2026-10-04
+- [x] TI05 · Frontend publiczny: lista naborów, zgłoszenie i dostęp tokenowy · zależy: TI03, F04, F05 · agent: Auto · 2026-10-04
+- [x] TI06 · Frontend panelu Hubu: nabory, zgłoszenia, moderacja i raport · zależy: TI03, TI04, F04, F05 · agent: Auto · 2026-10-04
+- [x] TI07 · Dane demo, integracja i ścieżka demonstracyjna · zależy: TI02, TI03, TI04, TI05, TI06 · agent: Auto · 2026-10-04
 
 ### Fale równoległości
 

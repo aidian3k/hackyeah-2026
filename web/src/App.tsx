@@ -4,6 +4,9 @@ import { AppShell } from "@/components/layout/AppShell";
 import { RequireRole } from "@/components/RequireRole";
 import { FindPage } from "@/pages/FindPage";
 import { IdeaPage } from "@/pages/IdeaPage";
+import { InnovationTestAccessPage } from "@/pages/InnovationTestAccessPage";
+import { InnovationTestPage } from "@/pages/InnovationTestPage";
+import { InnovationTestsPage } from "@/pages/InnovationTestsPage";
 import { KnowledgePage } from "@/pages/KnowledgePage";
 import { LibraryPage } from "@/pages/LibraryPage";
 import { LoginPage } from "@/pages/LoginPage";
@@ -11,6 +14,9 @@ import { MyReportsPage } from "@/pages/MyReportsPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { SolutionPage } from "@/pages/SolutionPage";
 import { InboxPage } from "@/pages/panel/InboxPage";
+import { PanelInnovationTestCreatePage } from "@/pages/panel/InnovationTestCreatePage";
+import { PanelInnovationTestManagePage } from "@/pages/panel/InnovationTestManagePage";
+import { PanelInnovationTestsPage } from "@/pages/panel/InnovationTestsPage";
 import { ReportPage } from "@/pages/panel/ReportPage";
 import { ReportsPage } from "@/pages/panel/ReportsPage";
 import { SolutionReviewPage } from "@/pages/panel/SolutionReviewPage";
@@ -48,6 +54,9 @@ export function App() {
         <Route path="rozwiazania" element={<LibraryPage />} />
         <Route path="rozwiazania/:id" element={<SolutionPage />} />
         <Route path="wiedza" element={<KnowledgePage />} />
+        <Route path="testy" element={<InnovationTestsPage />} />
+        <Route path="testy/dostep/:token" element={<InnovationTestAccessPage />} />
+        <Route path="testy/:id" element={<InnovationTestPage />} />
         <Route element={<RequireRole requiredRole="reporter" />}>
           <Route path="mam-pomysl" element={<IdeaPage />} />
           <Route path="moje-zgloszenia" element={<MyReportsPage />} />
@@ -60,6 +69,9 @@ export function App() {
         <Route path="zgloszenia/:id" element={<ReportPage />} />
         <Route path="rozwiazania" element={<SolutionsQueuePage />} />
         <Route path="rozwiazania/:id" element={<SolutionReviewPage />} />
+        <Route path="testy" element={<PanelInnovationTestsPage />} />
+        <Route path="testy/nowy" element={<PanelInnovationTestCreatePage />} />
+        <Route path="testy/:id" element={<PanelInnovationTestManagePage />} />
         <Route path="trendy" element={<TrendsPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>

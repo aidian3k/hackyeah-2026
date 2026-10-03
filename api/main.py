@@ -17,7 +17,7 @@ from api.config import settings
 from api.db import engine
 from api.errors import REQUEST_ID_HEADER, install_error_handlers
 from api.log import request_id_var, setup_logging
-from api.routers import chat, meta, reports, search, solutions, staff
+from api.routers import chat, innovation_tests, meta, reports, search, solutions, staff
 
 log = logging.getLogger(__name__)
 
@@ -87,6 +87,7 @@ def create_app() -> FastAPI:
         reports.router,
         solutions.router,
         staff.router,
+        innovation_tests.router,
         meta.router,
         meta.health_router,
     ):

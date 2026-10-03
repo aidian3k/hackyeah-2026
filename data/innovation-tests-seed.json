@@ -1,0 +1,114 @@
+{
+  "solution": {
+    "title": "Klub seniora w sąsiedztwie",
+    "summary": "Lokalne spotkania i wsparcie sąsiedzkie dla osób starszych zagrożonych samotnością.",
+    "body": "Program łączy wolontariuszy z seniorami poprzez regularne wizyty i kluby rozmów.",
+    "organization": "ROPS Kraków — dane demo Moduł 4",
+    "gmina": "Kraków",
+    "powiat": "m. Kraków",
+    "category": "LONELINESS",
+    "target_group": "Seniorzy 60+",
+    "content_hash": "m4-seed-solution-v1",
+    "status": "PUBLISHED"
+  },
+  "test": {
+    "title": "Szukamy testerów klubu seniora",
+    "goal_description": "Sprawdzamy, czy instrukcja i materiały pomagają zorganizować klub rozmów w małej gminie.",
+    "instruction": "Przeczytaj instrukcję, przeprowadź krótką rozmowę z seniorem i oceń przydatność.",
+    "target_group": "Seniorzy 60+ oraz opiekunowie",
+    "tester_type": "mieszkańcy, opiekunowie, NGO",
+    "location": "Małopolska",
+    "seats_limit": 5,
+    "mode": "HYBRID",
+    "estimated_duration": "ok. 45 min",
+    "ends_in_days": 21,
+    "materials": [
+      {
+        "title": "Instrukcja organizacji klubu",
+        "type": "INSTRUCTION",
+        "locator": "https://example.com/m4/instrukcja",
+        "description": "Kroki przygotowania pierwszego spotkania.",
+        "sort_order": 1
+      },
+      {
+        "title": "Lista pytań pomocniczych",
+        "type": "FILE",
+        "locator": "https://example.com/m4/pytania.pdf",
+        "description": "PDF do wydruku.",
+        "sort_order": 2
+      }
+    ]
+  },
+  "applications": [
+    {
+      "key": "submitted",
+      "display_name": "Jan Nowak",
+      "email": "jan.nowak.m4@example.com",
+      "tester_type": "RESIDENT",
+      "wojewodztwo": "małopolskie",
+      "powiat": "krakowski",
+      "gmina": "Zabierzów",
+      "is_target_group_member": false,
+      "motivation": "Chcę pomóc sąsiadom seniorom w mojej gminie.",
+      "status": "SUBMITTED"
+    },
+    {
+      "key": "accepted",
+      "display_name": "Maria Zielińska",
+      "email": "maria.zielinska.m4@example.com",
+      "tester_type": "CAREGIVER",
+      "wojewodztwo": "małopolskie",
+      "powiat": "wielicki",
+      "gmina": "Niepołomice",
+      "is_target_group_member": true,
+      "motivation": "Opiekuję się mamą i chcę przetestować gotowe materiały.",
+      "status": "ACCEPTED"
+    },
+    {
+      "key": "rejected",
+      "display_name": "Piotr Lewandowski",
+      "email": "piotr.lewandowski.m4@example.com",
+      "tester_type": "OTHER",
+      "wojewodztwo": "śląskie",
+      "powiat": "bielski",
+      "gmina": "Bielsko-Biała",
+      "is_target_group_member": false,
+      "motivation": "Interesuję się innowacjami społecznymi poza regionem.",
+      "status": "REJECTED",
+      "rejection_reason": "Nabór dotyczy testerów z Małopolski."
+    },
+    {
+      "key": "completed",
+      "display_name": "Fundacja Razem",
+      "email": "fundacja.razem.m4@example.com",
+      "tester_type": "NGO",
+      "wojewodztwo": "małopolskie",
+      "powiat": "m. Kraków",
+      "gmina": "Kraków",
+      "is_target_group_member": false,
+      "motivation": "Chcemy sprawdzić materiały przed wdrożeniem w klubie seniora.",
+      "status": "COMPLETED",
+      "feedback": {
+        "usefulness": 5,
+        "ease_of_use": 4,
+        "accessibility": 4,
+        "fit_to_needs": 5,
+        "comment": "Instrukcja jest jasna i praktyczna.",
+        "improvement": "Dodać wersję z większą czcionką."
+      }
+    },
+    {
+      "key": "canceled",
+      "display_name": "OPS Demo",
+      "email": "ops.demo.m4@example.com",
+      "tester_type": "SOCIAL_INSTITUTION",
+      "wojewodztwo": "małopolskie",
+      "powiat": "tarnowski",
+      "gmina": "Tarnów",
+      "is_target_group_member": false,
+      "motivation": "Planowaliśmy udział, ale brakuje teraz osób do testu.",
+      "status": "CANCELED",
+      "cancel_reason": "Brak zasobów kadrowych w tym miesiącu."
+    }
+  ]
+}

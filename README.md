@@ -67,6 +67,15 @@ Opcjonalnie dodaj przykładowe zgłoszenia, żeby panel i liczniki „podobny pr
 docker compose exec api python -m scripts.seed_reports
 ```
 
+Dane demo Modułu 4 (Tester innowacji — nabór OPEN + zgłoszenia we wszystkich statusach):
+
+```bash
+docker compose exec api python -m scripts.seed_innovation_tests
+# albo: make seed-m4
+```
+
+Ścieżka demo: [`docs/modules/04-tester-innowacji/module-4-calibration.md`](docs/modules/04-tester-innowacji/module-4-calibration.md).
+
 Ingest jest idempotentny — można go uruchamiać ponownie.
 
 ### 4. Sprawdzenie
@@ -83,8 +92,9 @@ Potem otwórz http://localhost:8080:
 
 - `/` — Znajdź rozwiązanie (czat),
 - `/rozwiazania` — Biblioteka innowacji, `/wiedza` — Wiedza o wyzwaniach,
+- `/testy` — otwarte nabory testerów innowacji, `/testy/dostep/:token` — status i ankieta testera,
 - `/mam-pomysl` — zgłoszenie własnego pomysłu, `/moje-zgloszenia` — odpowiedzi zespołu Hubu (rola reporter),
-- `/panel` — panel administratora (rola administrator).
+- `/panel` — panel administratora (rola administrator), w tym `/panel/testy` — nabory testerów.
 
 #### Konta demo
 
