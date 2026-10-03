@@ -1,0 +1,1546 @@
+[
+  {
+    "kind": "SOLUTION",
+    "title": "Telefon Życzliwości dla seniorów",
+    "summary": "Codzienne rozmowy telefoniczne przeszkolonych wolontariuszy z samotnymi osobami 65+, które rzadko wychodzą z domu i nie mają z kim porozmawiać.",
+    "body": "## Na czym polega\nWolontariusze dzwonią do zapisanych seniorów codziennie albo kilka razy w tygodniu o stałej porze. Rozmowa trwa zwykle 15–30 minut: o samopoczuciu, codziennych sprawach, wspomnieniach. Dla wielu osób starszych, które siedzą same w domu, to jedyny stały kontakt z drugim człowiekiem w ciągu dnia.\n\n## Jak to działa w praktyce\nSeniorów zgłaszają rodziny, sąsiedzi, pracownicy socjalni i parafie. Każdy senior ma „swojego” wolontariusza, co buduje zaufanie. Wolontariusz, który zauważy niepokojące sygnały (pogorszenie zdrowia, brak jedzenia, przygnębienie), przekazuje informację koordynatorce, a ta w porozumieniu z ośrodkiem pomocy społecznej organizuje wsparcie.\n\n## Efekty\nPo roku działania program objął ok. 60 osób. W ankiecie większość uczestników deklarowała, że czuje się mniej samotna i chętniej wychodzi na spotkania klubu seniora. Koszt to głównie telefon, szkolenia i drobne spotkania integracyjne wolontariuszy.",
+    "organization": "Fundacja Wspólna Sprawa",
+    "gmina": "Wieliczka",
+    "powiat": "wielicki",
+    "category": "LONELINESS",
+    "tags": [
+      "seniorzy",
+      "samotność",
+      "wolontariat",
+      "telefon",
+      "rozmowa"
+    ],
+    "target_group": "osoby 65+",
+    "cost_range": "do 10 tys. zł",
+    "implementation_steps": [
+      "Rekrutacja wolontariuszy",
+      "Szkolenie z komunikacji i rozpoznawania sygnałów kryzysu",
+      "Zbieranie zgłoszeń od OPS, parafii i rodzin",
+      "Uruchomienie dyżurów telefonicznych",
+      "Comiesięczne spotkania superwizyjne wolontariuszy"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/telefon-zyczliwosci-wieliczka",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 4,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Klub Seniora „Pod Lipami” w remizie OSP",
+    "summary": "Wiejski klub seniora działający dwa razy w tygodniu w remizie strażackiej: wspólne gotowanie, gimnastyka, wycieczki i rozmowy przy kawie.",
+    "body": "Klub powstał z inicjatywy koła gospodyń wiejskich, które zauważyło, że po zamknięciu sklepu we wsi starsi mieszkańcy przestali się spotykać. Remizę OSP udostępniono bezpłatnie w każdy wtorek i czwartek po południu.\n\nProgram spotkań jest układany przez samych uczestników: wspólne pieczenie, gimnastyka na krzesłach prowadzona przez fizjoterapeutkę z gminnego ośrodka zdrowia, wieczory wspomnień, nauka obsługi telefonu z pomocą młodzieży. Raz w miesiącu klub organizuje wycieczkę.\n\nKluczowy okazał się transport: strażacy-ochotnicy podwożą osoby, które same nie dojdą. Dzięki temu do klubu trafiają ludzie, którzy wcześniej praktycznie nie wychodzili z domu. Klub korzysta z małych grantów gminnych i z programu wsparcia kół gospodyń wiejskich.",
+    "organization": "Koło Gospodyń Wiejskich w Książu Wielkim",
+    "gmina": "Książ Wielki",
+    "powiat": "miechowski",
+    "category": "LONELINESS",
+    "tags": [
+      "klub seniora",
+      "seniorzy",
+      "samotność",
+      "KGW",
+      "OSP",
+      "wieś"
+    ],
+    "target_group": "osoby starsze z terenów wiejskich",
+    "cost_range": "do 20 tys. zł rocznie",
+    "implementation_steps": [
+      "Znalezienie bezpłatnej sali (remiza, świetlica, szkoła)",
+      "Zebranie grupy inicjatywnej seniorów",
+      "Ustalenie stałego harmonogramu spotkań",
+      "Zorganizowanie podwózki dla osób z ograniczoną mobilnością",
+      "Złożenie wniosku o mały grant gminny"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/klub-seniora-pod-lipami",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 3,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Sąsiedzka Sieć Wsparcia – wolontariat sąsiedzki",
+    "summary": "Mieszkańcy osiedla i sołectwa umawiają się na regularne odwiedziny u starszych sąsiadów, drobne zakupy i wspólne spacery.",
+    "body": "## Idea\nZamiast budować nową instytucję, program łączy w pary sąsiadów mieszkających blisko siebie: osoba starsza, która jest sama, i wolontariusz z tej samej ulicy. Odwiedziny raz w tygodniu, telefon w razie potrzeby, pomoc w zakupach czy przy wizycie u lekarza.\n\n## Organizacja\nKoordynatorka zatrudniona na pół etatu przez stowarzyszenie prowadzi bazę wolontariuszy i seniorów, dobiera pary i raz w miesiącu organizuje spotkanie wszystkich uczestników przy kawie. Wolontariusze przechodzą krótkie szkolenie z bezpieczeństwa i z tego, gdzie zgłaszać problemy (OPS, lekarz rodzinny).\n\n## Dlaczego działa\nOsoby starsze łatwiej otwierają się przed kimś „swoim” z sąsiedztwa niż przed urzędnikiem. Relacje często przetrwają koniec projektu. Model sprawdza się zarówno na wsi, jak i w nowych osiedlach podmiejskich, gdzie seniorzy wprowadzili się do dzieci i nikogo nie znają.",
+    "organization": "Stowarzyszenie Dobre Sąsiedztwo",
+    "gmina": "Zielonki",
+    "powiat": "krakowski",
+    "category": "LONELINESS",
+    "tags": [
+      "wolontariat sąsiedzki",
+      "seniorzy",
+      "samotność",
+      "odwiedziny",
+      "sąsiedzi"
+    ],
+    "target_group": "samotne osoby starsze",
+    "cost_range": "20–50 tys. zł rocznie",
+    "implementation_steps": [
+      "Zatrudnienie koordynatora",
+      "Kampania informacyjna w parafii, sklepach i na grupie mieszkańców",
+      "Rekrutacja i szkolenie wolontariuszy",
+      "Dobieranie par senior–wolontariusz",
+      "Comiesięczne spotkania integracyjne"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/siec-sasiedzka-zielonki",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 3,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Gminny program przeciwdziałania izolacji społecznej osób starszych na lata 2024–2027",
+    "summary": "Program zakłada przeciwdziałanie wykluczeniu społecznemu i osamotnieniu osób w wieku poprodukcyjnym poprzez rozwój form aktywizacji i wsparcia środowiskowego.",
+    "body": "## Cel główny\nCelem programu jest ograniczenie zjawiska izolacji społecznej i osamotnienia osób w wieku senioralnym zamieszkujących teren gminy, w szczególności osób jednoosobowych gospodarstw domowych oraz osób o ograniczonej sprawności ruchowej.\n\n## Cele szczegółowe\n1. Zwiększenie dostępności środowiskowych form wsparcia dziennego.\n2. Rozwój wolontariatu na rzecz osób starszych, w tym wolontariatu międzypokoleniowego.\n3. Wczesna identyfikacja osób zagrożonych osamotnieniem przez pracowników socjalnych, pielęgniarki środowiskowe i sołtysów.\n4. Zapewnienie dostępu do informacji o ofercie gminy dla osób nieposługujących się internetem.\n\n## Działania\nRealizatorem programu jest Miejsko-Gminny Ośrodek Pomocy Społecznej we współpracy z organizacjami pozarządowymi wyłonionymi w otwartym konkursie ofert. Przewiduje się m.in. prowadzenie klubów seniora w sołectwach, usługę teleopieki, okresowe wizyty monitorujące u osób samotnie zamieszkujących oraz dystrybucję papierowego informatora.\n\n## Monitoring\nWskaźniki: liczba osób objętych wsparciem, liczba aktywnych wolontariuszy, odsetek uczestników deklarujących poprawę samopoczucia w corocznym badaniu ankietowym.",
+    "organization": "Miejsko-Gminny Ośrodek Pomocy Społecznej",
+    "gmina": "Niepołomice",
+    "powiat": "wielicki",
+    "category": "LONELINESS",
+    "tags": [
+      "polityka senioralna",
+      "izolacja społeczna",
+      "osamotnienie",
+      "program gminny",
+      "uchwała"
+    ],
+    "target_group": "osoby w wieku senioralnym",
+    "cost_range": "powyżej 100 tys. zł rocznie",
+    "implementation_steps": [
+      "Diagnoza liczby osób samotnie zamieszkujących",
+      "Opracowanie programu i przyjęcie uchwałą rady",
+      "Konkurs ofert dla organizacji pozarządowych",
+      "Uruchomienie działań w sołectwach",
+      "Coroczny raport z monitoringu"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/program-przeciwdzialania-izolacji-niepolomice",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 2,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Kawiarenka Międzypokoleniowa w bibliotece",
+    "summary": "Cotygodniowe spotkania seniorów i licealistów przy kawie: rozmowy, gry planszowe, wspólne czytanie i nagrywanie wspomnień.",
+    "body": "Biblioteka osiedlowa raz w tygodniu zamienia czytelnię w kawiarenkę. Uczniowie liceum w ramach wolontariatu szkolnego przychodzą porozmawiać z seniorami z okolicznych bloków. Z czasem powstał projekt nagrywania wspomnień – młodzież przygotowała podcast o historii osiedla.\n\nSpotkania są otwarte, nie trzeba się zapisywać. Seniorzy, którzy wcześniej wychodzili z domu tylko do sklepu, mają stały punkt w tygodniu. Młodzież zyskuje zaświadczenie o wolontariacie i, jak sama mówi, „dziadków z osiedla”.",
+    "organization": "Stowarzyszenie Most Pokoleń",
+    "gmina": "Tarnów",
+    "powiat": "Tarnów",
+    "category": "LONELINESS",
+    "tags": [
+      "międzypokoleniowe",
+      "seniorzy",
+      "młodzież",
+      "biblioteka",
+      "samotność"
+    ],
+    "target_group": "seniorzy i młodzież",
+    "cost_range": "do 5 tys. zł",
+    "implementation_steps": [
+      "Porozumienie biblioteki ze szkołą",
+      "Ustalenie stałego terminu",
+      "Plakaty w klatkach schodowych i przychodni",
+      "Prowadzenie spotkań przez bibliotekarkę i opiekuna wolontariatu"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/kawiarenka-miedzypokoleniowa-tarnow",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 2,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Program „Aktywny Senior+” – Dzienny Dom Senior+",
+    "summary": "Dzienny dom pobytu dla 25 seniorów: posiłek, zajęcia ruchowe, terapia zajęciowa i wsparcie psychologa, współfinansowany z programu Senior+.",
+    "body": "## Opis\nDzienny Dom Senior+ działa od poniedziałku do piątku w godzinach 8–16 w zaadaptowanym budynku dawnej szkoły. Uczestnicy mają zapewniony ciepły posiłek, zajęcia rehabilitacji ruchowej, terapię zajęciową (rękodzieło, ogród), trening pamięci oraz konsultacje psychologa i dietetyka.\n\n## Finansowanie\nAdaptacja budynku i wyposażenie zostały sfinansowane z modułu I programu wieloletniego Senior+, a bieżące funkcjonowanie z modułu II oraz budżetu gminy. Uczestnicy wnoszą odpłatność zależną od dochodu.\n\n## Rezultaty\nLista oczekujących przekracza liczbę miejsc, dlatego gmina planuje uruchomienie filii w drugiej miejscowości. Rodziny podkreślają, że dzięki placówce mogą łączyć pracę z opieką nad starszymi rodzicami.",
+    "organization": "Ośrodek Pomocy Społecznej",
+    "gmina": "Myślenice",
+    "powiat": "myślenicki",
+    "category": "AGING",
+    "tags": [
+      "Senior+",
+      "dzienny dom",
+      "seniorzy",
+      "aktywizacja",
+      "rehabilitacja"
+    ],
+    "target_group": "osoby 60+ nieaktywne zawodowo",
+    "cost_range": "powyżej 100 tys. zł",
+    "implementation_steps": [
+      "Wskazanie budynku i analiza wymagań programu Senior+",
+      "Złożenie wniosku do modułu I",
+      "Adaptacja i wyposażenie",
+      "Zatrudnienie kadry",
+      "Rekrutacja uczestników i ustalenie zasad odpłatności"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/aktywny-senior-plus-myslenice",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 4,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Teleopieka – opaski SOS dla osób starszych",
+    "summary": "Seniorzy mieszkający samotnie otrzymują opaskę z przyciskiem alarmowym i czujnikiem upadku połączoną z całodobowym centrum monitoringu.",
+    "body": "Usługa teleopieki obejmuje opaskę na nadgarstek z przyciskiem SOS, czujnikiem upadku i funkcją rozmowy głosowej. Po naciśnięciu przycisku senior łączy się z ratownikiem centrum, który ocenia sytuację i powiadamia rodzinę, sąsiada albo wzywa pogotowie.\n\nGmina finansuje usługę dla osób 65+ mieszkających samotnie, z pierwszeństwem dla osób po hospitalizacji. Operator centrum dzwoni też raz w tygodniu z „telefonem kontrolnym”, co dla części osób jest dodatkowym kontaktem z otoczeniem.\n\nRodziny wskazują poczucie bezpieczeństwa jako główną korzyść; w pierwszym roku odnotowano kilkanaście interwencji po upadkach.",
+    "organization": "Urząd Miasta i Gminy",
+    "gmina": "Skawina",
+    "powiat": "krakowski",
+    "category": "AGING",
+    "tags": [
+      "teleopieka",
+      "opaska SOS",
+      "bezpieczeństwo",
+      "seniorzy",
+      "upadki"
+    ],
+    "target_group": "osoby 65+ mieszkające samotnie",
+    "cost_range": "50–100 tys. zł rocznie",
+    "implementation_steps": [
+      "Wybór operatora w zapytaniu ofertowym",
+      "Ustalenie kryteriów kwalifikacji",
+      "Nabór uczestników przez OPS",
+      "Instalacja i instruktaż",
+      "Ocena po 12 miesiącach"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/teleopieka-opaski-sos-skawina",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 3,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Opieka wytchnieniowa dla opiekunów osób starszych",
+    "summary": "Opiekunowie rodzinni zyskują kilka godzin lub dni odpoczynku, gdy opiekę nad niesamodzielnym seniorem przejmuje przeszkolony asystent.",
+    "body": "Opiekunowie osób starszych i niesamodzielnych często latami nie mają ani jednego wolnego dnia. Usługa opieki wytchnieniowej pozwala im na odpoczynek, załatwienie spraw albo leczenie, podczas gdy opiekę w domu przejmuje przeszkolony opiekun.\n\nUsługa jest realizowana w formie dziennej (do 240 godzin rocznie na rodzinę) oraz krótkoterminowego pobytu całodobowego. Dodatkowo opiekunowie mogą korzystać z grupy wsparcia i poradnictwa psychologicznego.",
+    "organization": "Centrum Usług Społecznych",
+    "gmina": "Wadowice",
+    "powiat": "wadowicki",
+    "category": "AGING",
+    "tags": [
+      "opieka wytchnieniowa",
+      "opiekunowie rodzinni",
+      "seniorzy",
+      "niesamodzielność"
+    ],
+    "target_group": "opiekunowie osób starszych",
+    "cost_range": "50–100 tys. zł rocznie",
+    "implementation_steps": [
+      "Rozpoznanie potrzeb rodzin",
+      "Nabór i szkolenie opiekunów wytchnieniowych",
+      "Ustalenie limitów godzin",
+      "Uruchomienie grupy wsparcia dla opiekunów"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/opieka-wytchnieniowa-wadowice",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 3,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Uchwała nr XII/123/2024 w sprawie Gminnego Programu Polityki Senioralnej",
+    "summary": "Uchwała rady gminy przyjmująca wieloletni program polityki senioralnej, w tym Gminną Kartę Seniora i radę seniorów.",
+    "body": "## Zakres uchwały\nUchwała nr XII/123/2024 Rady Gminy przyjmuje Gminny Program Polityki Senioralnej na lata 2024–2028. Program obejmuje obszary: zdrowie i profilaktyka, aktywność społeczna, bezpieczeństwo, mieszkalnictwo dostosowane do potrzeb osób starszych oraz partycypacja.\n\n## Instrumenty\n- Gminna Karta Seniora uprawniająca do zniżek w obiektach gminnych i u partnerów,\n- Gminna Rada Seniorów jako ciało konsultacyjne,\n- coroczny przegląd dostępności budynków użyteczności publicznej,\n- dofinansowanie wkładu własnego organizacji realizujących zadania na rzecz seniorów.\n\n## Uwagi wdrożeniowe\nDoświadczenia pokazują, że sama uchwała nie wystarcza – kluczowe jest wyznaczenie koordynatora programu i zabezpieczenie środków w budżecie.",
+    "organization": "Rada Gminy",
+    "gmina": "Mogilany",
+    "powiat": "krakowski",
+    "category": "AGING",
+    "tags": [
+      "uchwała",
+      "polityka senioralna",
+      "Karta Seniora",
+      "rada seniorów"
+    ],
+    "target_group": "osoby 60+",
+    "cost_range": "zależnie od budżetu gminy",
+    "implementation_steps": [
+      "Diagnoza sytuacji seniorów",
+      "Konsultacje z radą seniorów",
+      "Przygotowanie projektu uchwały",
+      "Wyznaczenie koordynatora",
+      "Monitoring roczny"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/uchwala-xii-123-2024-polityka-senioralna",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 2,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Uniwersytet Trzeciego Wieku przy domu kultury",
+    "summary": "Wykłady, warsztaty i sekcje zainteresowań dla seniorów prowadzone przez lokalnych ekspertów i studentów-wolontariuszy.",
+    "body": "UTW prowadzi w roku akademickim cotygodniowe wykłady (zdrowie, historia regionu, prawo konsumenckie), lektorat języka angielskiego, sekcję nordic walking i warsztaty komputerowe. Słuchacze płacą symboliczną składkę semestralną.\n\nUniwersytet stał się miejscem, gdzie seniorzy nawiązują znajomości i angażują się w życie miasta – słuchacze współorganizują dni seniora i prowadzą wolontariat w szpitalu.",
+    "organization": "Miejski Ośrodek Kultury",
+    "gmina": "Sucha Beskidzka",
+    "powiat": "suski",
+    "category": "AGING",
+    "tags": [
+      "UTW",
+      "edukacja",
+      "seniorzy",
+      "aktywność"
+    ],
+    "target_group": "osoby 55+",
+    "cost_range": "20–50 tys. zł rocznie",
+    "implementation_steps": [
+      "Porozumienie z uczelnią patronacką",
+      "Przygotowanie programu semestru",
+      "Rekrutacja słuchaczy",
+      "Uruchomienie sekcji zainteresowań"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/utw-sucha-beskidzka",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 2,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Punkt konsultacyjny zdrowia psychicznego dla dzieci i młodzieży",
+    "summary": "Bezpłatne konsultacje psychologa i psychoterapeuty dla uczniów i rodziców bez skierowania i bez kolejki, w ramach I poziomu referencyjnego.",
+    "body": "## Opis\nPunkt działa w budynku poradni psychologiczno-pedagogicznej trzy popołudnia w tygodniu. Młodzież może zapisać się sama (od 13 lat), przez pedagoga szkolnego albo przez rodzica. Pierwsza konsultacja odbywa się w ciągu 7 dni od zgłoszenia.\n\n## Współpraca\nPunkt współpracuje z pedagogami szkolnymi, którzy przechodzą wspólne szkolenia z rozpoznawania kryzysu psychicznego. W sytuacjach zagrożenia życia zespół ma ustaloną ścieżkę przekazania do centrum zdrowia psychicznego dla dzieci.\n\n## Efekty\nCzas oczekiwania na pierwszą rozmowę skrócił się z kilku miesięcy do tygodnia. Najczęstsze powody zgłoszeń to obniżony nastrój, lęk i przemoc rówieśnicza.",
+    "organization": "Fundacja Zdrowa Głowa",
+    "gmina": "Chrzanów",
+    "powiat": "chrzanowski",
+    "category": "MENTAL_HEALTH",
+    "tags": [
+      "zdrowie psychiczne",
+      "młodzież",
+      "psycholog",
+      "kryzys",
+      "szkoła"
+    ],
+    "target_group": "dzieci i młodzież 10–18 lat",
+    "cost_range": "50–100 tys. zł rocznie",
+    "implementation_steps": [
+      "Porozumienie z poradnią i szkołami",
+      "Zatrudnienie psychologa i psychoterapeuty",
+      "Ścieżka pilnych przypadków z CZP",
+      "Informacja dla uczniów i rodziców"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/punkt-konsultacyjny-mlodziez-chrzanow",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 4,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "„Głowa do góry” – program profilaktyki depresji w szkołach",
+    "summary": "Cykl warsztatów dla uczniów klas 7–8 i szkół średnich o emocjach, stresie i szukaniu pomocy, połączony ze szkoleniem nauczycieli.",
+    "body": "Program obejmuje 6 spotkań warsztatowych w każdej klasie, prowadzonych przez psychologów i przeszkolonych rówieśników-liderów. Tematy: rozpoznawanie emocji, radzenie sobie ze stresem, objawy depresji, gdzie szukać pomocy, jak wspierać kolegę w kryzysie.\n\nRównolegle nauczyciele przechodzą szkolenie z pierwszej pomocy psychologicznej, a rodzice są zapraszani na spotkanie online. Ewaluacja przed i po programie wykazała wzrost wiedzy o źródłach pomocy.",
+    "organization": "Stowarzyszenie Profilaktyki Młodzieżowej",
+    "gmina": "Nowy Sącz",
+    "powiat": "Nowy Sącz",
+    "category": "MENTAL_HEALTH",
+    "tags": [
+      "depresja",
+      "profilaktyka",
+      "szkoła",
+      "zdrowie psychiczne",
+      "warsztaty"
+    ],
+    "target_group": "uczniowie 13–19 lat",
+    "cost_range": "20–50 tys. zł",
+    "implementation_steps": [
+      "Zgoda dyrekcji i rady rodziców",
+      "Szkolenie liderów rówieśniczych",
+      "Warsztaty w klasach",
+      "Szkolenie nauczycieli",
+      "Ewaluacja"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/glowa-do-gory-profilaktyka-depresji",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 4,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Grupa wsparcia dla osób w kryzysie psychicznym i ich bliskich",
+    "summary": "Cotygodniowe spotkania prowadzone przez psychologa i asystenta zdrowienia, dla osób po kryzysie psychicznym oraz ich rodzin.",
+    "body": "Grupa spotyka się w sali parafialnej w każdy czwartek wieczorem. Spotkania prowadzi psycholog i asystent zdrowienia – osoba z własnym doświadczeniem kryzysu psychicznego. Uczestnicy dzielą się doświadczeniami, uczą się rozpoznawać sygnały nawrotu i wspólnie szukają sposobów na codzienne trudności.\n\nDla rodzin prowadzona jest osobna grupa psychoedukacyjna. Wiele osób trafia tu po wypisie ze szpitala, kiedy brakuje im wsparcia w środowisku.",
+    "organization": "Stowarzyszenie Razem po Kryzysie",
+    "gmina": "Brzesko",
+    "powiat": "brzeski",
+    "category": "MENTAL_HEALTH",
+    "tags": [
+      "grupa wsparcia",
+      "kryzys psychiczny",
+      "asystent zdrowienia",
+      "rodzina"
+    ],
+    "target_group": "dorośli po kryzysie psychicznym i ich bliscy",
+    "cost_range": "do 10 tys. zł",
+    "implementation_steps": [
+      "Pozyskanie sali",
+      "Zaangażowanie psychologa i asystenta zdrowienia",
+      "Informacja w szpitalu i poradni",
+      "Regularne spotkania"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/grupa-wsparcia-opiekunow-brzesko",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 2,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Powiatowy telefon wsparcia w kryzysie",
+    "summary": "Linia wsparcia czynna wieczorami i w weekendy, obsługiwana przez psychologów i interwentów kryzysowych z punktu interwencji kryzysowej.",
+    "body": "Punkt Interwencji Kryzysowej uruchomił numer telefonu czynny codziennie 16–22 oraz w weekendy. Dzwonić mogą osoby w żałobie, po rozstaniu, doświadczające przemocy lub myśli rezygnacyjnych, a także ich bliscy.\n\nRozmowa może zakończyć się umówieniem bezpłatnej konsultacji stacjonarnej. Najwięcej połączeń przypada na niedzielne wieczory i okres świąteczny.",
+    "organization": "Powiatowe Centrum Pomocy Rodzinie",
+    "gmina": "Olkusz",
+    "powiat": "olkuski",
+    "category": "MENTAL_HEALTH",
+    "tags": [
+      "interwencja kryzysowa",
+      "telefon wsparcia",
+      "zdrowie psychiczne"
+    ],
+    "target_group": "dorośli w kryzysie",
+    "cost_range": "50–100 tys. zł rocznie",
+    "implementation_steps": [
+      "Ustalenie dyżurów",
+      "Szkolenie interwentów",
+      "Promocja numeru",
+      "Procedura postępowania w zagrożeniu życia"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/telefon-wsparcia-kryzysowego-olkusz",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 3,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Przeciwdziałanie depresji wieku podeszłego – badania przesiewowe w POZ",
+    "summary": "Pielęgniarki POZ wykonują u pacjentów 65+ krótkie badanie przesiewowe w kierunku depresji i kierują do psychologa w ośrodku zdrowia.",
+    "body": "Podczas wizyt kontrolnych pielęgniarka przeprowadza z pacjentem 65+ krótki kwestionariusz w kierunku depresji (Geriatryczna Skala Depresji, wersja skrócona). Przy wyniku wskazującym na ryzyko pacjent jest umawiany na konsultację z psychologiem, który przyjmuje raz w tygodniu w ośrodku zdrowia.\n\nProgram uświadamia, że przygnębienie, wycofanie i brak apetytu u starszych osób to często objawy depresji, a nie „normalna starość”. Część pacjentów kierowana jest dodatkowo do klubu seniora.",
+    "organization": "Samodzielny Publiczny Zakład Opieki Zdrowotnej",
+    "gmina": "Proszowice",
+    "powiat": "proszowicki",
+    "category": "MENTAL_HEALTH",
+    "tags": [
+      "depresja",
+      "seniorzy",
+      "POZ",
+      "badania przesiewowe"
+    ],
+    "target_group": "osoby 65+",
+    "cost_range": "do 20 tys. zł",
+    "implementation_steps": [
+      "Szkolenie pielęgniarek",
+      "Ustalenie ścieżki do psychologa",
+      "Wdrożenie kwestionariusza",
+      "Współpraca z klubem seniora"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/zdrowie-psychiczne-seniorow-proszowice",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 3,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Cyfrowi Wolontariusze – młodzież uczy seniorów smartfonów",
+    "summary": "Uczniowie szkół średnich prowadzą indywidualne lekcje obsługi smartfona, komunikatorów i wideorozmów dla seniorów.",
+    "body": "Każdy senior przychodzi ze swoim telefonem, a uczeń-wolontariusz pomaga mu rozwiązać konkretny problem: wideorozmowa z wnukami, zdjęcia, bankowość mobilna, e-recepta. Zajęcia odbywają się w szkole po lekcjach, raz w tygodniu.\n\nWideorozmowy z rodziną za granicą okazały się najczęstszą motywacją – dla wielu seniorów to sposób na mniejsze poczucie osamotnienia. Wolontariusze przechodzą szkolenie z cierpliwej komunikacji i z bezpieczeństwa w sieci.",
+    "organization": "Zespół Szkół Ponadpodstawowych",
+    "gmina": "Kęty",
+    "powiat": "oświęcimski",
+    "category": "DIGITAL_EXCLUSION",
+    "tags": [
+      "kompetencje cyfrowe",
+      "smartfon",
+      "seniorzy",
+      "wolontariat młodzieżowy",
+      "wideorozmowy"
+    ],
+    "target_group": "seniorzy",
+    "cost_range": "do 5 tys. zł",
+    "implementation_steps": [
+      "Nabór wolontariuszy w szkole",
+      "Krótkie szkolenie",
+      "Zapisy seniorów przez klub seniora i parafię",
+      "Cotygodniowe dyżury"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/cyfrowi-wolontariusze-oswiecimski",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 3,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Punkt Cyfrowej Pomocy – Profil Zaufany i e-usługi publiczne",
+    "summary": "W urzędzie działa stanowisko, gdzie mieszkańcy z pomocą asystenta zakładają Profil Zaufany, mObywatela i załatwiają sprawy online.",
+    "body": "## Zakres pomocy\nAsystent cyfrowy pomaga w założeniu Profilu Zaufanego, instalacji aplikacji mObywatel, wypełnieniu wniosków przez internet (500+, dodatki, deklaracje), rejestracji do lekarza i korzystaniu z Internetowego Konta Pacjenta.\n\n## Uzasadnienie\nWiele świadczeń i usług przeszło do kanałów elektronicznych. Mieszkańcy bez kompetencji cyfrowych byli zależni od rodziny lub rezygnowali z przysługujących im świadczeń. Punkt ogranicza zjawisko wykluczenia z dostępu do usług publicznych.",
+    "organization": "Urząd Gminy",
+    "gmina": "Liszki",
+    "powiat": "krakowski",
+    "category": "DIGITAL_EXCLUSION",
+    "tags": [
+      "Profil Zaufany",
+      "mObywatel",
+      "e-usługi",
+      "wykluczenie cyfrowe"
+    ],
+    "target_group": "dorośli bez kompetencji cyfrowych",
+    "cost_range": "20–50 tys. zł rocznie",
+    "implementation_steps": [
+      "Wyznaczenie stanowiska i asystenta",
+      "Szkolenie z e-usług",
+      "Informacja w sołectwach",
+      "Statystyka obsłużonych spraw"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/e-urzad-profil-zaufany-punkt",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 3,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Wypożyczalnia tabletów z internetem w bibliotece gminnej",
+    "summary": "Biblioteka wypożycza tablety z kartą SIM na miesiąc razem z instrukcją i dwiema lekcjami obsługi.",
+    "body": "Osoby, które nie mają w domu komputera ani internetu, mogą wypożyczyć tablet z pakietem danych na 30 dni. Przed wypożyczeniem bibliotekarka prowadzi dwie lekcje: obsługa, poczta, wideorozmowa, e-booki.\n\nZ wypożyczalni korzystają głównie seniorzy i osoby z małych wsi. Część z nich po okresie próbnym kupiła własne urządzenie.",
+    "organization": "Gminna Biblioteka Publiczna",
+    "gmina": "Uście Gorlickie",
+    "powiat": "gorlicki",
+    "category": "DIGITAL_EXCLUSION",
+    "tags": [
+      "tablet",
+      "biblioteka",
+      "dostęp do internetu",
+      "seniorzy",
+      "wieś"
+    ],
+    "target_group": "osoby bez dostępu do sprzętu",
+    "cost_range": "do 20 tys. zł",
+    "implementation_steps": [
+      "Zakup tabletów i kart SIM",
+      "Regulamin wypożyczeń",
+      "Szkolenie bibliotekarzy",
+      "Promocja przez sołtysów"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/wypozyczalnia-tabletow-biblioteka",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 2,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Bezpieczny Senior w Sieci – warsztaty o oszustwach internetowych",
+    "summary": "Warsztaty z policją i bankiem o metodach „na wnuczka”, fałszywych SMS-ach i bezpiecznej bankowości elektronicznej.",
+    "body": "Cykl trzech spotkań: rozpoznawanie oszustw telefonicznych i SMS-owych, bezpieczne zakupy i bankowość w internecie, ochrona danych osobowych. Prowadzą dzielnicowy i pracownik lokalnego banku spółdzielczego.\n\nUczestnicy dostają kartkę z najważniejszymi zasadami do powieszenia przy telefonie. Warsztaty prowadzone są w klubach seniora, co ułatwia dotarcie do osób, które nie korzystają z ogłoszeń w internecie.",
+    "organization": "Stowarzyszenie Cyfrowa Małopolska",
+    "gmina": "Trzebinia",
+    "powiat": "chrzanowski",
+    "category": "DIGITAL_EXCLUSION",
+    "tags": [
+      "oszustwa",
+      "bezpieczeństwo w sieci",
+      "seniorzy",
+      "bankowość"
+    ],
+    "target_group": "seniorzy",
+    "cost_range": "do 5 tys. zł",
+    "implementation_steps": [
+      "Porozumienie z policją i bankiem",
+      "Ustalenie terminów w klubach seniora",
+      "Przygotowanie materiałów",
+      "Warsztaty"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/bezpieczny-senior-w-sieci",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 2,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Program „e-Senior” – przeciwdziałanie wykluczeniu cyfrowemu osób starszych",
+    "summary": "Projekt na rzecz podniesienia kompetencji cyfrowych osób w wieku 60+ poprzez kursy w małych grupach w sołectwach.",
+    "body": "Projekt ma na celu ograniczenie wykluczenia cyfrowego osób starszych poprzez realizację kursów podstawowych i zaawansowanych w grupach do 8 osób, prowadzonych bezpośrednio w świetlicach wiejskich. Trenerzy dojeżdżają z mobilną pracownią komputerową.\n\nW ramach projektu przeszkolono ponad 200 osób. Uczestnicy wskazywali wzrost samodzielności w kontaktach z urzędami i służbą zdrowia.",
+    "organization": "Lokalna Grupa Działania",
+    "gmina": "Miechów",
+    "powiat": "miechowski",
+    "category": "DIGITAL_EXCLUSION",
+    "tags": [
+      "e-Senior",
+      "kursy komputerowe",
+      "wykluczenie cyfrowe",
+      "sołectwa"
+    ],
+    "target_group": "osoby 60+",
+    "cost_range": "50–100 tys. zł",
+    "implementation_steps": [
+      "Pozyskanie dofinansowania",
+      "Zakup mobilnej pracowni",
+      "Rekrutacja w sołectwach",
+      "Kursy w grupach",
+      "Ankieta końcowa"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/e-senior-kursy-komputerowe-miechow",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 3,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Gminny bus na żądanie dla mieszkańców wsi bez komunikacji",
+    "summary": "Mieszkańcy dzwonią dzień wcześniej, a gminny bus zawozi ich do lekarza, urzędu, apteki i na targ.",
+    "body": "## Problem\nPo likwidacji prywatnych linii autobusowych wiele wsi zostało bez transportu publicznego. Osoby bez samochodu, zwłaszcza seniorzy, nie miały jak dojechać do lekarza czy urzędu.\n\n## Rozwiązanie\nGmina uruchomiła 9-osobowy bus jeżdżący na zamówienie telefoniczne. Dyspozytor układa trasy tak, aby zebrać kilka osób z sąsiednich wsi. Przejazd kosztuje symbolicznie, a dla osób z niepełnosprawnościami jest bezpłatny.\n\n## Efekty\nBus wykonuje kilkadziesiąt kursów tygodniowo. Mieszkańcy wskazują, że dzięki temu mogą samodzielnie załatwiać sprawy i rzadziej rezygnują z wizyt lekarskich.",
+    "organization": "Urząd Miejski",
+    "gmina": "Dąbrowa Tarnowska",
+    "powiat": "dąbrowski",
+    "category": "SERVICE_ACCESS",
+    "tags": [
+      "transport",
+      "bus na żądanie",
+      "wykluczenie komunikacyjne",
+      "wieś",
+      "seniorzy"
+    ],
+    "target_group": "mieszkańcy wsi bez samochodu",
+    "cost_range": "powyżej 100 tys. zł rocznie",
+    "implementation_steps": [
+      "Analiza potrzeb transportowych",
+      "Zakup lub leasing busa",
+      "Uruchomienie dyspozytorni",
+      "Regulamin i cennik",
+      "Ocena po pół roku"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/bus-na-zadanie-dabrowa",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 4,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "CUS Wieliczka – jedno okienko usług społecznych",
+    "summary": "Centrum Usług Społecznych łączy w jednym miejscu informację o wszystkich usługach: opiekuńczych, zdrowotnych, edukacyjnych i aktywizacyjnych.",
+    "body": "## Model\nCentrum Usług Społecznych (CUS) zastąpiło dotychczasowy ośrodek pomocy społecznej. Mieszkaniec przychodzi do jednego punktu, gdzie organizator usług społecznych rozpoznaje jego potrzeby i przygotowuje indywidualny plan usług – niezależnie od tego, czy wsparcie zapewnia gmina, organizacja pozarządowa czy podmiot ekonomii społecznej.\n\n## Kluczowe elementy\n- Gminny Program Usług Społecznych oparty na diagnozie potrzeb,\n- organizator usług społecznych i organizator społeczności lokalnej,\n- katalog usług dostępny dla wszystkich mieszkańców, nie tylko osób w trudnej sytuacji materialnej.\n\n## Dlaczego to ważne\nMieszkańcy nie muszą wiedzieć, która instytucja za co odpowiada. Usługi są lepiej skoordynowane, a gmina widzi, gdzie brakuje oferty.",
+    "organization": "Centrum Usług Społecznych",
+    "gmina": "Wieliczka",
+    "powiat": "wielicki",
+    "category": "SERVICE_ACCESS",
+    "tags": [
+      "CUS",
+      "usługi społeczne",
+      "jedno okienko",
+      "organizator usług"
+    ],
+    "target_group": "wszyscy mieszkańcy",
+    "cost_range": "powyżej 100 tys. zł rocznie",
+    "implementation_steps": [
+      "Diagnoza potrzeb i zasobów",
+      "Uchwała o utworzeniu CUS",
+      "Gminny Program Usług Społecznych",
+      "Zatrudnienie organizatorów",
+      "Katalog usług"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/cus-wieliczka-jedno-okienko",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 5,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Mobilny Punkt Usług Społecznych w sołectwach",
+    "summary": "Raz w tygodniu do każdego sołectwa przyjeżdża pracownik socjalny, prawnik i doradca – w świetlicy lub busie.",
+    "body": "Zespół w składzie: pracownik socjalny, doradca prawny (nieodpłatna pomoc prawna) i asystent cyfrowy objeżdża sołectwa według stałego grafiku. Mieszkańcy mogą złożyć wniosek, uzyskać poradę, zgłosić potrzebę usług opiekuńczych.\n\nPunkt szczególnie pomaga osobom starszym i z niepełnosprawnościami, dla których dojazd do siedziby gminy jest barierą. Rozwiązanie jest tańsze niż utrzymywanie stałych filii.",
+    "organization": "Gminny Ośrodek Pomocy Społecznej",
+    "gmina": "Łącko",
+    "powiat": "nowosądecki",
+    "category": "SERVICE_ACCESS",
+    "tags": [
+      "mobilne usługi",
+      "pomoc prawna",
+      "sołectwa",
+      "dostępność"
+    ],
+    "target_group": "mieszkańcy odległych sołectw",
+    "cost_range": "20–50 tys. zł rocznie",
+    "implementation_steps": [
+      "Grafik objazdów",
+      "Udostępnienie świetlic",
+      "Porozumienie z punktem nieodpłatnej pomocy prawnej",
+      "Informacja przez sołtysów"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/mobilny-punkt-uslug-spolecznych",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 3,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Usługa transportu door-to-door dla osób z niepełnosprawnościami",
+    "summary": "Przewóz osób z potrzebą wsparcia w mobilności „od drzwi do drzwi” z pomocą asystenta, m.in. na rehabilitację i do urzędów.",
+    "body": "Usługa obejmuje przewóz dostosowanym pojazdem wraz z pomocą kierowcy-asystenta w wyjściu z mieszkania, pokonaniu schodów i dotarciu do celu. Przejazd zamawia się telefonicznie z dwudniowym wyprzedzeniem.\n\nZ usługi korzystają osoby na wózkach, osoby niewidome i seniorzy z ograniczoną mobilnością. Wcześniej wiele z nich nie wychodziło z domu tygodniami.",
+    "organization": "Powiatowe Centrum Pomocy Rodzinie",
+    "gmina": "Biecz",
+    "powiat": "gorlicki",
+    "category": "SERVICE_ACCESS",
+    "tags": [
+      "door-to-door",
+      "transport",
+      "niepełnosprawność",
+      "mobilność"
+    ],
+    "target_group": "osoby z niepełnosprawnościami",
+    "cost_range": "50–100 tys. zł rocznie",
+    "implementation_steps": [
+      "Pozyskanie pojazdu dostosowanego",
+      "Szkolenie kierowców-asystentów",
+      "System zamówień",
+      "Kryteria dostępu"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/transport-door-to-door-gorlicki",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 3,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Usługi sąsiedzkie – opieka świadczona przez sąsiadów",
+    "summary": "Gmina zatrudnia na umowę zlecenia sąsiadów, którzy pomagają starszym osobom w codziennych czynnościach w ich domach.",
+    "body": "W małych miejscowościach brakuje opiekunek z agencji. Usługi sąsiedzkie polegają na tym, że przeszkolona osoba z sąsiedztwa świadczy pomoc w codziennych czynnościach: zakupy, przygotowanie posiłku, sprzątanie, towarzyszenie. Ośrodek pomocy społecznej kwalifikuje osoby i nadzoruje jakość.\n\nModel daje zatrudnienie lokalnym mieszkańcom i zapewnia seniorom pomoc od kogoś, kogo znają, co ogranicza też ich osamotnienie.",
+    "organization": "Ośrodek Pomocy Społecznej",
+    "gmina": "Tuchów",
+    "powiat": "tarnowski",
+    "category": "SERVICE_ACCESS",
+    "tags": [
+      "usługi sąsiedzkie",
+      "usługi opiekuńcze",
+      "seniorzy",
+      "zatrudnienie lokalne"
+    ],
+    "target_group": "osoby starsze wymagające pomocy",
+    "cost_range": "50–100 tys. zł rocznie",
+    "implementation_steps": [
+      "Rekrutacja opiekunów sąsiedzkich",
+      "Szkolenie",
+      "Kwalifikacja seniorów przez OPS",
+      "Nadzór i rozliczanie godzin"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/uslugi-sasiedzkie-tuchow",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 3,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Lokalne Partnerstwo na rzecz Usług Społecznych",
+    "summary": "Stałe forum OPS, szkół, przychodni, parafii i organizacji, które co miesiąc omawia przypadki i planuje wspólne działania.",
+    "body": "Partnerstwo zawarte porozumieniem przez gminę, OPS, szkoły, przychodnię POZ, parafię, policję i trzy organizacje pozarządowe. Raz w miesiącu odbywa się spotkanie koordynacyjne: wymiana informacji o nowych potrzebach, ustalenie, kto się czym zajmie, unikanie dublowania działań.\n\nDzięki partnerstwu udało się m.in. wspólnie zorganizować zimową akcję sprawdzania samotnych seniorów i zbudować wspólny kalendarz wydarzeń.",
+    "organization": "Urząd Miasta",
+    "gmina": "Bukowno",
+    "powiat": "olkuski",
+    "category": "COORDINATION",
+    "tags": [
+      "partnerstwo lokalne",
+      "koordynacja",
+      "współpraca międzysektorowa"
+    ],
+    "target_group": "instytucje i organizacje lokalne",
+    "cost_range": "do 10 tys. zł",
+    "implementation_steps": [
+      "Mapowanie instytucji",
+      "Porozumienie o współpracy",
+      "Wyznaczenie koordynatora",
+      "Comiesięczne spotkania"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/lokalne-partnerstwo-uslug-bukowno",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 3,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Cyfrowa mapa zasobów społecznych powiatu",
+    "summary": "Ogólnodostępna baza wszystkich usług i organizacji w powiecie z wyszukiwarką według potrzeby, miejsca i grupy docelowej.",
+    "body": "Mapa zbiera w jednym miejscu informacje o placówkach, organizacjach, klubach, grupach wsparcia i usługach – z adresami, godzinami i zasadami korzystania. Aktualizują ją sami realizatorzy po zalogowaniu, a koordynator weryfikuje wpisy.\n\nZ mapy korzystają pracownicy socjalni, pielęgniarki i nauczyciele, kiedy muszą szybko wskazać mieszkańcowi, gdzie szukać pomocy. Dostępna jest też wersja drukowana dla osób bez internetu.",
+    "organization": "Powiatowe Centrum Pomocy Rodzinie",
+    "gmina": "Dobczyce",
+    "powiat": "myślenicki",
+    "category": "COORDINATION",
+    "tags": [
+      "mapa zasobów",
+      "baza usług",
+      "informacja",
+      "koordynacja"
+    ],
+    "target_group": "pracownicy instytucji i mieszkańcy",
+    "cost_range": "20–50 tys. zł",
+    "implementation_steps": [
+      "Inwentaryzacja zasobów",
+      "Wybór narzędzia",
+      "Szkolenie realizatorów",
+      "Promocja i aktualizacja"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/mapa-zasobow-spolecznych-limanowski",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 2,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Koordynator opieki (case manager) dla osób niesamodzielnych",
+    "summary": "Jedna osoba prowadzi seniora przez wszystkie usługi – zdrowotne i społeczne – i pilnuje ciągłości wsparcia po wypisie ze szpitala.",
+    "body": "Po wypisie ze szpitala osoby starsze często „gubią się” między systemem ochrony zdrowia a pomocą społeczną. Koordynator opieki kontaktuje się z pacjentem jeszcze w szpitalu, organizuje usługi opiekuńcze, sprzęt rehabilitacyjny, wizytę pielęgniarki i kontakt z OPS.\n\nPilotaż objął 40 osób. Liczba ponownych hospitalizacji w ciągu 30 dni była wyraźnie niższa niż w grupie porównawczej.",
+    "organization": "Fundacja Opieka Razem",
+    "gmina": "Nowy Sącz",
+    "powiat": "Nowy Sącz",
+    "category": "COORDINATION",
+    "tags": [
+      "case management",
+      "koordynacja opieki",
+      "wypis ze szpitala",
+      "seniorzy"
+    ],
+    "target_group": "osoby niesamodzielne po hospitalizacji",
+    "cost_range": "50–100 tys. zł rocznie",
+    "implementation_steps": [
+      "Porozumienie szpital–OPS",
+      "Zatrudnienie koordynatorów",
+      "Procedura zgłoszeń przy wypisie",
+      "Monitoring ponownych hospitalizacji"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/koordynator-opieki-case-manager",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 5,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Opracowanie Gminnego Programu Usług Społecznych na podstawie diagnozy potrzeb",
+    "summary": "Proces partycypacyjnej diagnozy potrzeb i zasobów prowadzący do przyjęcia programu usług społecznych zgodnie z ustawą o CUS.",
+    "body": "## Przebieg\nDiagnoza objęła analizę danych zastanych, ankietę wśród mieszkańców, wywiady z instytucjami oraz warsztaty w sołectwach. Na tej podstawie zidentyfikowano usługi deficytowe (opiekuńcze, transport, wsparcie psychologiczne) oraz zasoby, które można lepiej wykorzystać.\n\n## Rezultat\nProgram określa katalog usług, sposób ich zlecania organizacjom pozarządowym i wskaźniki monitoringu. Dokument stał się podstawą do aplikowania o środki zewnętrzne.",
+    "organization": "Urząd Miejski",
+    "gmina": "Kalwaria Zebrzydowska",
+    "powiat": "wadowicki",
+    "category": "COORDINATION",
+    "tags": [
+      "diagnoza potrzeb",
+      "program usług społecznych",
+      "partycypacja",
+      "CUS"
+    ],
+    "target_group": "samorząd",
+    "cost_range": "20–50 tys. zł",
+    "implementation_steps": [
+      "Zespół roboczy",
+      "Diagnoza",
+      "Warsztaty z mieszkańcami",
+      "Projekt programu",
+      "Konsultacje i uchwała"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/gminny-program-uslug-spolecznych-kalwaria",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 3,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Międzyinstytucjonalny zespół ds. osób starszych zagrożonych osamotnieniem",
+    "summary": "Zespół złożony z pracowników OPS, pielęgniarek środowiskowych, dzielnicowych i sołtysów prowadzi wspólną listę seniorów wymagających wsparcia.",
+    "body": "Zespół spotyka się raz w miesiącu. Każdy z członków zgłasza osoby starsze, które zauważył w swojej pracy jako samotne lub zaniedbane – dzielnicowy podczas obchodu, pielęgniarka w trakcie wizyty, sołtys znający wieś. Dla każdej osoby ustalane jest, kto i jaką formę wsparcia zaproponuje.\n\nRozwiązanie pozwala dotrzeć do osób, które same nigdy nie zgłosiłyby się po pomoc. Przetwarzanie danych odbywa się na podstawie porozumienia i zgody zainteresowanych.",
+    "organization": "Ośrodek Pomocy Społecznej",
+    "gmina": "Brzeszcze",
+    "powiat": "oświęcimski",
+    "category": "COORDINATION",
+    "tags": [
+      "zespół interdyscyplinarny",
+      "seniorzy",
+      "osamotnienie",
+      "współpraca służb"
+    ],
+    "target_group": "osoby starsze",
+    "cost_range": "bez dodatkowych kosztów",
+    "implementation_steps": [
+      "Porozumienie instytucji",
+      "Zasady wymiany informacji i zgody",
+      "Comiesięczne spotkania",
+      "Indywidualne plany wsparcia"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/zespol-interdyscyplinarny-seniorzy-brzeszcze",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 2,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Wielofunkcyjne Centrum Wsi w dawnej szkole",
+    "summary": "Zamknięta szkoła zamieniona w centrum: punkt lekarski, biblioteka, świetlica, klub seniora i przestrzeń coworkingowa.",
+    "body": "Po likwidacji małej szkoły budynek groził ruiną. Mieszkańcy wraz z gminą i stowarzyszeniem przekształcili go w centrum wsi. Raz w tygodniu przyjmuje lekarz POZ, działa punkt biblioteczny, świetlica dla dzieci, klub seniora oraz kilka stanowisk pracy zdalnej z szybkim internetem.\n\nCentrum stało się miejscem, które zatrzymuje życie społeczne we wsi i ułatwia decyzję o pozostaniu młodym rodzinom pracującym zdalnie.",
+    "organization": "Stowarzyszenie Rozwoju Wsi",
+    "gmina": "Ropa",
+    "powiat": "gorlicki",
+    "category": "DEPOPULATION",
+    "tags": [
+      "depopulacja",
+      "centrum wsi",
+      "szkoła",
+      "coworking",
+      "usługi"
+    ],
+    "target_group": "mieszkańcy małych wsi",
+    "cost_range": "powyżej 100 tys. zł",
+    "implementation_steps": [
+      "Porozumienie z gminą o użyczeniu budynku",
+      "Plan funkcji z mieszkańcami",
+      "Pozyskanie funduszy na remont",
+      "Uruchomienie usług"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/wiejskie-centrum-uslug-ropa",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 3,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "„Wracam do siebie” – program zachęt dla młodych osób wracających do gminy",
+    "summary": "Pakiet wsparcia dla osób wracających z dużych miast: działka lub mieszkanie na preferencyjnych warunkach, mentoring i grant na start firmy.",
+    "body": "Gmina, w której liczba mieszkańców spada od dwóch dekad, przygotowała pakiet dla młodych osób chcących wrócić lub osiedlić się: pierwszeństwo w najmie mieszkań gminnych, bonifikata przy zakupie działki, bon na żłobek oraz mikrogrant na rozpoczęcie działalności gospodarczej z mentoringiem lokalnych przedsiębiorców.\n\nProgram promowany jest wśród absolwentów lokalnych szkół. W pierwszych dwóch latach skorzystało kilkanaście rodzin.",
+    "organization": "Urząd Gminy",
+    "gmina": "Uście Gorlickie",
+    "powiat": "gorlicki",
+    "category": "DEPOPULATION",
+    "tags": [
+      "powroty",
+      "młodzi",
+      "mieszkania",
+      "przedsiębiorczość",
+      "depopulacja"
+    ],
+    "target_group": "młode osoby i rodziny",
+    "cost_range": "powyżej 100 tys. zł",
+    "implementation_steps": [
+      "Analiza zasobu mieszkań i działek",
+      "Uchwała o zasadach wsparcia",
+      "Fundusz mikrograntów",
+      "Kampania wśród absolwentów"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/program-powrotow-wracam-do-domu",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 2,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Wioska tematyczna jako sposób na ożywienie wsi",
+    "summary": "Mieszkańcy zbudowali ofertę turystyczno-edukacyjną wokół lokalnej tradycji, tworząc miejsca pracy i powód do pozostania we wsi.",
+    "body": "Wieś zidentyfikowała swój wyróżnik – tradycję zielarską – i stworzyła ofertę warsztatów dla szkół i turystów: ogród ziołowy, warsztaty z wyrobu naparów i kosmetyków, gry terenowe. Działania prowadzi spółdzielnia socjalna założona przez mieszkańców.\n\nOferta przyciąga grupy szkolne z Krakowa i okolic, daje dochód kilku rodzinom i wzmacnia więzi między mieszkańcami.",
+    "organization": "Spółdzielnia Socjalna Zielne Pole",
+    "gmina": "Słaboszów",
+    "powiat": "miechowski",
+    "category": "DEPOPULATION",
+    "tags": [
+      "wioska tematyczna",
+      "ekonomia społeczna",
+      "turystyka",
+      "depopulacja"
+    ],
+    "target_group": "mieszkańcy wsi",
+    "cost_range": "50–100 tys. zł",
+    "implementation_steps": [
+      "Warsztaty odkrywania potencjału wsi",
+      "Założenie spółdzielni socjalnej",
+      "Przygotowanie oferty",
+      "Promocja wśród szkół"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/wioska-tematyczna-slaboszow",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 2,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Mała szkoła prowadzona przez stowarzyszenie zamiast likwidacji",
+    "summary": "Rodzice przejęli prowadzenie małej szkoły podstawowej, łącząc klasy i rozszerzając ofertę o zajęcia dla całej społeczności.",
+    "body": "Gdy gmina planowała likwidację szkoły z powodu niskiej liczby uczniów, rodzice założyli stowarzyszenie i przejęli jej prowadzenie. Szkoła realizuje nauczanie w klasach łączonych, a po południu budynek służy jako dom kultury, świetlica i miejsce spotkań seniorów.\n\nUtrzymanie szkoły zatrzymało wyjazdy części rodzin z dziećmi i stworzyło lokalne centrum aktywności.",
+    "organization": "Stowarzyszenie Przyjaciół Szkoły",
+    "gmina": "Radziemice",
+    "powiat": "proszowicki",
+    "category": "DEPOPULATION",
+    "tags": [
+      "mała szkoła",
+      "edukacja",
+      "stowarzyszenie",
+      "depopulacja"
+    ],
+    "target_group": "dzieci i rodziny",
+    "cost_range": "powyżej 100 tys. zł rocznie",
+    "implementation_steps": [
+      "Założenie stowarzyszenia",
+      "Porozumienie z gminą o przekazaniu szkoły",
+      "Organizacja klas łączonych",
+      "Popołudniowa oferta dla społeczności"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/szkola-male-grupy-radziemice",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 3,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Centrum pracy zdalnej i program przyciągania nowych mieszkańców",
+    "summary": "Gmina uzdrowiskowa przyciąga pracowników zdalnych ofertą coworkingu, pakietem powitalnym i siecią lokalnych mentorów.",
+    "body": "W odpowiedzi na odpływ młodych mieszkańców gmina uruchomiła coworking w budynku pijalni i program „Nowy Mieszkaniec”: pakiet powitalny z informacjami o usługach, spotkanie z sołtysem i lokalnymi organizacjami oraz pomoc w znalezieniu mieszkania.\n\nInicjatywa łączy działania na rzecz rozwoju gospodarczego z integracją nowych mieszkańców ze społecznością.",
+    "organization": "Urząd Miasta i Gminy",
+    "gmina": "Muszyna",
+    "powiat": "nowosądecki",
+    "category": "DEPOPULATION",
+    "tags": [
+      "praca zdalna",
+      "coworking",
+      "nowi mieszkańcy",
+      "depopulacja"
+    ],
+    "target_group": "pracownicy zdalni i młode rodziny",
+    "cost_range": "50–100 tys. zł",
+    "implementation_steps": [
+      "Adaptacja przestrzeni",
+      "Pakiet powitalny",
+      "Sieć ambasadorów gminy",
+      "Promocja w mediach społecznościowych"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/praca-zdalna-sloty-muszyna",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 1,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Klub Nowych Mieszkańców – integracja osiedli podmiejskich",
+    "summary": "Cykliczne spotkania sąsiedzkie, piknik powitalny i grupy zainteresowań łączące nowych mieszkańców osiedli z rdzenną społecznością wsi.",
+    "body": "## Problem\nW gminie, której liczba mieszkańców wzrosła o połowę w ciągu 15 lat, nowe osiedla funkcjonują jako „sypialnie” Krakowa. Nowi mieszkańcy nie znają sąsiadów ani lokalnych instytucji, a między nimi a dawnymi mieszkańcami narastają napięcia.\n\n## Rozwiązanie\nGminny ośrodek kultury powołał Klub Nowych Mieszkańców: piknik powitalny raz w roku, pakiet informacji o gminie, grupy zainteresowań (biegowa, planszówkowa, ogrodnicza) i wspólne akcje z KGW i OSP. Dla seniorów, którzy przeprowadzili się do dzieci, prowadzone są osobne spotkania.\n\n## Efekty\nWzrosła frekwencja w konsultacjach społecznych, a część nowych mieszkańców zaangażowała się w działalność organizacji lokalnych.",
+    "organization": "Gminny Ośrodek Kultury",
+    "gmina": "Wielka Wieś",
+    "powiat": "krakowski",
+    "category": "SUBURBAN_GROWTH",
+    "tags": [
+      "suburbanizacja",
+      "integracja",
+      "nowi mieszkańcy",
+      "sąsiedztwo"
+    ],
+    "target_group": "nowi mieszkańcy",
+    "cost_range": "20–50 tys. zł rocznie",
+    "implementation_steps": [
+      "Diagnoza nowych osiedli",
+      "Pakiet powitalny",
+      "Piknik integracyjny",
+      "Grupy zainteresowań",
+      "Wspólne akcje z KGW i OSP"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/klub-nowych-mieszkancow-wielka-wies",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 2,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Prognoza demograficzna dla planowania przedszkoli i szkół",
+    "summary": "Gmina łączy dane o pozwoleniach na budowę z PESEL, aby z wyprzedzeniem planować miejsca w przedszkolach, żłobkach i szkołach.",
+    "body": "Szybki napływ młodych rodzin powodował chroniczny brak miejsc w przedszkolach. Gmina zbudowała prosty model prognostyczny łączący dane o wydanych pozwoleniach na budowę, oddanych mieszkaniach i strukturze wieku nowych mieszkańców.\n\nPrognoza na 5 lat jest aktualizowana co roku i stanowi podstawę planu inwestycji oświatowych oraz decyzji o zlecaniu miejsc w placówkach niepublicznych.",
+    "organization": "Urząd Gminy",
+    "gmina": "Zabierzów",
+    "powiat": "krakowski",
+    "category": "SUBURBAN_GROWTH",
+    "tags": [
+      "prognoza demograficzna",
+      "przedszkola",
+      "szkoły",
+      "planowanie",
+      "suburbanizacja"
+    ],
+    "target_group": "samorząd, rodziny z dziećmi",
+    "cost_range": "do 20 tys. zł",
+    "implementation_steps": [
+      "Zebranie danych z wydziałów",
+      "Model prognostyczny",
+      "Coroczna aktualizacja",
+      "Powiązanie z planem inwestycji"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/planowanie-oswiaty-zabierzow",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 3,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Budżet obywatelski z pulą dla nowych osiedli",
+    "summary": "Wydzielona pula budżetu obywatelskiego dla osiedli bez infrastruktury społecznej: place zabaw, świetlice, ścieżki rowerowe.",
+    "body": "W budżecie obywatelskim wydzielono pulę dla obszarów, gdzie powstały nowe osiedla, a brakuje przestrzeni wspólnych. Mieszkańcy zgłaszają projekty i głosują, a gmina pomaga w ich przygotowaniu na warsztatach.\n\nZrealizowano m.in. kontenerową świetlicę sąsiedzką, plac zabaw i siłownię plenerową. Proces budżetu stał się też okazją do poznania się sąsiadów.",
+    "organization": "Urząd Gminy",
+    "gmina": "Michałowice",
+    "powiat": "krakowski",
+    "category": "SUBURBAN_GROWTH",
+    "tags": [
+      "budżet obywatelski",
+      "partycypacja",
+      "osiedla",
+      "przestrzeń wspólna"
+    ],
+    "target_group": "mieszkańcy nowych osiedli",
+    "cost_range": "powyżej 100 tys. zł",
+    "implementation_steps": [
+      "Uchwała o budżecie obywatelskim",
+      "Wydzielenie puli",
+      "Warsztaty projektowe",
+      "Głosowanie",
+      "Realizacja"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/budzet-obywatelski-osiedla-michalowice",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 3,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Świetlica sąsiedzka na nowym osiedlu – dom sąsiedzki",
+    "summary": "Lokal użytkowy od dewelopera zaadaptowany na dom sąsiedzki prowadzony przez animatora: zajęcia dla dzieci, seniorów i wydarzenia.",
+    "body": "W ramach negocjacji przy planie miejscowym deweloper przekazał gminie lokal użytkowy na parterze bloku. Organizacja pozarządowa prowadzi w nim dom sąsiedzki: popołudniowe zajęcia dla dzieci, poranne spotkania dla rodziców z maluchami i seniorów, wymianę rzeczy, wydarzenia sąsiedzkie.\n\nAnimator pomaga mieszkańcom realizować własne inicjatywy. Świetlica ogranicza anonimowość osiedla i daje miejsce spotkań osobom, które czują się tu obce.",
+    "organization": "Fundacja Sąsiedzi",
+    "gmina": "Kocmyrzów-Luborzyca",
+    "powiat": "krakowski",
+    "category": "SUBURBAN_GROWTH",
+    "tags": [
+      "dom sąsiedzki",
+      "animacja",
+      "osiedle",
+      "deweloper",
+      "integracja"
+    ],
+    "target_group": "mieszkańcy osiedla",
+    "cost_range": "50–100 tys. zł rocznie",
+    "implementation_steps": [
+      "Pozyskanie lokalu",
+      "Konkurs na operatora",
+      "Zatrudnienie animatora",
+      "Program zajęć współtworzony z mieszkańcami"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/swietlica-sasiedzka-kocmyrzow",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 2,
+    "media": []
+  },
+  {
+    "kind": "SOLUTION",
+    "title": "Porozumienie międzygminne o komunikacji aglomeracyjnej",
+    "summary": "Gminy podmiejskie wspólnie finansują linie autobusowe dowożące do węzłów kolejowych i tramwajowych z jednym biletem.",
+    "body": "Mieszkańcy nowych osiedli byli skazani na samochód, co powodowało korki i wykluczało dzieci, młodzież i seniorów bez prawa jazdy. Gmina zawarła porozumienie z sąsiednimi samorządami i operatorem komunikacji miejskiej o uruchomieniu linii dowozowych z biletem aglomeracyjnym.\n\nRozwiązanie wymaga długofalowego finansowania, ale poprawiło dostęp do szkół średnich, pracy i usług w mieście.",
+    "organization": "Urząd Miasta i Gminy",
+    "gmina": "Świątniki Górne",
+    "powiat": "krakowski",
+    "category": "SUBURBAN_GROWTH",
+    "tags": [
+      "komunikacja",
+      "aglomeracja",
+      "porozumienie międzygminne",
+      "transport"
+    ],
+    "target_group": "mieszkańcy gmin podmiejskich",
+    "cost_range": "powyżej 100 tys. zł rocznie",
+    "implementation_steps": [
+      "Analiza potoków pasażerskich",
+      "Negocjacje z gminami i operatorem",
+      "Porozumienie międzygminne",
+      "Uruchomienie linii",
+      "Monitoring frekwencji"
+    ],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/wspolny-bilet-aglomeracyjny-swiatniki",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 3,
+    "media": []
+  },
+  {
+    "kind": "KNOWLEDGE",
+    "title": "Mapa Wyzwań Małopolski: samotność i izolacja osób starszych",
+    "summary": "Diagnoza zjawiska osamotnienia osób starszych w Małopolsce: skala, przyczyny, grupy najbardziej narażone i luki w ofercie wsparcia.",
+    "body": "## Skala zjawiska\nLiczba jednoosobowych gospodarstw domowych prowadzonych przez osoby w wieku 65+ systematycznie rośnie. W gminach wiejskich, z których młodsze pokolenia wyjechały do Krakowa lub za granicę, wielu seniorów mieszka samotnie w dużych domach, często w znacznej odległości od sąsiadów i usług. W miastach problem dotyczy przede wszystkim starszych osiedli bloków, gdzie seniorzy na wyższych piętrach bez windy rzadko wychodzą z mieszkań.\n\n## Przyczyny\nOsamotnienie ma kilka nakładających się przyczyn: śmierć współmałżonka, wyjazd dzieci, ograniczona sprawność ruchowa, brak transportu publicznego, zamknięcie lokalnych miejsc spotkań (sklep, poczta, szkoła) oraz wykluczenie cyfrowe, które odcina od kontaktu z rodziną. Często towarzyszą mu objawy depresji, które bywają mylone z „naturalnym” procesem starzenia.\n\n## Grupy najbardziej narażone\n- osoby 75+ mieszkające samotnie, szczególnie kobiety po śmierci męża,\n- seniorzy po hospitalizacji, którzy wracają do pustego domu,\n- osoby starsze, które przeprowadziły się do dzieci na nowe osiedla podmiejskie i nie znają nikogo w okolicy,\n- opiekunowie rodzinni osób niesamodzielnych, którzy sami tracą kontakty społeczne.\n\n## Luki w ofercie\nOferta jest skoncentrowana w miastach powiatowych. W wielu gminach brakuje klubów seniora, a te istniejące docierają głównie do osób już aktywnych. Najtrudniej dotrzeć do tych, którzy nie wychodzą z domu – wymagają one form „wychodzących”: odwiedzin, telefonów, wolontariatu sąsiedzkiego.\n\n## Kierunki działań\nNajbardziej obiecujące są rozwiązania łączące wczesną identyfikację (pracownik socjalny, pielęgniarka środowiskowa, sołtys, dzielnicowy) z niskoprogowymi formami kontaktu: telefonem życzliwości, wolontariatem sąsiedzkim, klubami w świetlicach i remizach z zapewnionym dowozem. Ważne jest też, by gminy włączały przeciwdziałanie osamotnieniu do programów polityki senioralnej i usług społecznych.",
+    "organization": "Regionalny Ośrodek Polityki Społecznej (opracowanie ilustracyjne)",
+    "gmina": "Kraków",
+    "powiat": "Kraków",
+    "category": "LONELINESS",
+    "tags": [
+      "diagnoza",
+      "samotność",
+      "seniorzy",
+      "Mapa Wyzwań"
+    ],
+    "target_group": "osoby starsze",
+    "cost_range": null,
+    "implementation_steps": [],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/mapa-wyzwan-samotnosc-seniorow",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 1,
+    "media": []
+  },
+  {
+    "kind": "KNOWLEDGE",
+    "title": "Starzenie się ludności Małopolski – diagnoza regionalna",
+    "summary": "Opis zmian demograficznych w regionie, rosnącej liczby osób 80+ oraz konsekwencji dla usług opiekuńczych i zdrowotnych.",
+    "body": "## Zmiany demograficzne\nMałopolska należy do regionów o relatywnie korzystnej strukturze wieku, ale udział osób 65+ rośnie we wszystkich powiatach. Najszybciej przybywa osób w wieku 80+, które najczęściej potrzebują wsparcia w codziennym funkcjonowaniu. Starzenie się jest szybsze w powiatach peryferyjnych niż w aglomeracji krakowskiej.\n\n## Konsekwencje dla usług\nRośnie zapotrzebowanie na usługi opiekuńcze w miejscu zamieszkania, opiekę wytchnieniową, teleopiekę i dzienne formy wsparcia. Jednocześnie maleje liczba potencjalnych opiekunów rodzinnych, a na rynku pracy brakuje opiekunek, zwłaszcza w małych miejscowościach.\n\n## Zdrowie\nWielochorobowość, ryzyko upadków i depresja wieku podeszłego wymagają ściślejszej współpracy POZ z pomocą społeczną. Szczególnie newralgiczny jest moment wypisu ze szpitala.\n\n## Zróżnicowanie terytorialne\nW aglomeracji krakowskiej seniorzy mają relatywnie dobry dostęp do usług, ale częściej mieszkają samotnie w starszych blokach bez wind. W powiatach górskich i peryferyjnych (np. gorlickim, nowosądeckim, miechowskim) problemem jest przede wszystkim odległość: do lekarza specjalisty, apteki czy ośrodka pomocy społecznej trzeba dojechać kilkanaście kilometrów, a komunikacja publiczna jest szczątkowa. W takich miejscach rośnie rola sąsiedztwa, sołtysów, kół gospodyń wiejskich i parafii jako nieformalnej sieci wsparcia.\n\n## Rekomendacje\nRozwój usług środowiskowych zamiast instytucjonalnych, wsparcie opiekunów rodzinnych, koordynacja opieki zdrowotnej i społecznej oraz programy aktywności, które opóźniają utratę samodzielności.",
+    "organization": "Regionalny Ośrodek Polityki Społecznej (opracowanie ilustracyjne)",
+    "gmina": "Kraków",
+    "powiat": "Kraków",
+    "category": "AGING",
+    "tags": [
+      "diagnoza",
+      "demografia",
+      "starzenie się",
+      "usługi opiekuńcze"
+    ],
+    "target_group": "osoby starsze",
+    "cost_range": null,
+    "implementation_steps": [],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/diagnoza-starzenie-sie-malopolski",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 1,
+    "media": []
+  },
+  {
+    "kind": "KNOWLEDGE",
+    "title": "Zdrowie psychiczne dzieci i młodzieży w Małopolsce – wyzwania",
+    "summary": "Diagnoza dostępności wsparcia psychologicznego i psychiatrycznego dla dzieci i młodzieży oraz roli szkół i środowiska lokalnego.",
+    "body": "## Problem\nOd kilku lat obserwuje się wzrost zgłoszeń dotyczących obniżonego nastroju, lęku, samookaleczeń i prób samobójczych wśród młodzieży. Czas oczekiwania na konsultację psychiatryczną w publicznym systemie bywa liczony w miesiącach, a w wielu powiatach brakuje ośrodków I poziomu referencyjnego.\n\n## Rola środowiska\nPierwszą linią są szkoły, ale pedagodzy i psycholodzy szkolni są przeciążeni. Duże znaczenie mają rodzice, którzy często nie wiedzą, jak rozpoznać kryzys i gdzie szukać pomocy, a także organizacje prowadzące świetlice i telefony zaufania.\n\n## Bariery\nStygmatyzacja, odległość od placówek na terenach wiejskich, brak koordynacji między szkołą, poradnią i ochroną zdrowia.\n\n## Sygnały ostrzegawcze\nRodzice i nauczyciele najczęściej przeoczają wycofanie z kontaktów rówieśniczych, nagłe pogorszenie ocen, zaburzenia snu, drażliwość oraz zwiększone korzystanie z ekranów kosztem relacji. U części młodzieży kryzys poprzedza przemoc rówieśnicza, w tym cyberprzemoc, której dorośli nie widzą. Wczesne rozpoznanie tych sygnałów i rozmowa bez oceniania zwiększają szansę, że młody człowiek przyjmie pomoc.\n\n## Kierunki\nRozwój ośrodków środowiskowych, profilaktyka w szkołach, szkolenia z pierwszej pomocy psychologicznej dla nauczycieli, grupy wsparcia dla rodziców i jasna ścieżka postępowania w kryzysie.",
+    "organization": "Regionalny Ośrodek Polityki Społecznej (opracowanie ilustracyjne)",
+    "gmina": "Kraków",
+    "powiat": "Kraków",
+    "category": "MENTAL_HEALTH",
+    "tags": [
+      "diagnoza",
+      "zdrowie psychiczne",
+      "młodzież",
+      "szkoła"
+    ],
+    "target_group": "dzieci i młodzież",
+    "cost_range": null,
+    "implementation_steps": [],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/diagnoza-zdrowie-psychiczne-mlodziezy",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 1,
+    "media": []
+  },
+  {
+    "kind": "KNOWLEDGE",
+    "title": "Wykluczenie cyfrowe a dostęp do usług publicznych",
+    "summary": "Krótka diagnoza: kto nie korzysta z internetu, jakie usługi stają się przez to niedostępne i jakie formy wsparcia sprawdzają się lokalnie.",
+    "body": "Z internetu nie korzysta wciąż znaczna część osób najstarszych, mieszkańców małych wsi i osób o niskich dochodach. Coraz więcej świadczeń, rejestracji i usług przenosi się do kanałów cyfrowych, co pogłębia nierówności w dostępie. Wykluczenie cyfrowe nasila też osamotnienie – utrudnia kontakt z rodziną mieszkającą daleko.\n\nNajlepiej sprawdzają się formy indywidualne i bliskie miejsca zamieszkania: asystent cyfrowy w urzędzie, wolontariat młodzieży, wypożyczalnie sprzętu w bibliotekach oraz utrzymanie analogowych kanałów kontaktu dla osób, które nie przejdą do cyfrowych.",
+    "organization": "Regionalny Ośrodek Polityki Społecznej (opracowanie ilustracyjne)",
+    "gmina": "Kraków",
+    "powiat": "Kraków",
+    "category": "DIGITAL_EXCLUSION",
+    "tags": [
+      "diagnoza",
+      "wykluczenie cyfrowe",
+      "e-usługi"
+    ],
+    "target_group": "osoby starsze i mieszkańcy wsi",
+    "cost_range": null,
+    "implementation_steps": [],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/diagnoza-wykluczenie-cyfrowe",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 1,
+    "media": []
+  },
+  {
+    "kind": "KNOWLEDGE",
+    "title": "Wyludnianie się gmin peryferyjnych – diagnoza",
+    "summary": "Charakterystyka gmin tracących mieszkańców, mechanizmu „spirali” zamykania usług i możliwych interwencji.",
+    "body": "## Gdzie i dlaczego\nMieszkańców tracą przede wszystkim gminy położone peryferyjnie względem Krakowa i miast subregionalnych, słabo skomunikowane, z ograniczonym rynkiem pracy. Wyjeżdżają głównie młode osoby po szkole średniej i studiach.\n\n## Spirala depopulacji\nSpadek liczby mieszkańców prowadzi do zamykania szkół, sklepów, poczty i linii autobusowych, co z kolei zniechęca kolejne rodziny do pozostania. W miejscowościach zostają przede wszystkim osoby starsze, coraz bardziej osamotnione i zależne od usług, których jest coraz mniej.\n\n## Możliwe interwencje\nWielofunkcyjne centra wsi, transport na żądanie, przejmowanie małych szkół przez stowarzyszenia, programy zachęt dla powracających, rozwój ekonomii społecznej opartej na lokalnych zasobach oraz praca zdalna.",
+    "organization": "Regionalny Ośrodek Polityki Społecznej (opracowanie ilustracyjne)",
+    "gmina": "Kraków",
+    "powiat": "Kraków",
+    "category": "DEPOPULATION",
+    "tags": [
+      "diagnoza",
+      "depopulacja",
+      "wieś",
+      "migracje"
+    ],
+    "target_group": "mieszkańcy gmin wiejskich",
+    "cost_range": null,
+    "implementation_steps": [],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/diagnoza-depopulacja-gmin-wiejskich",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 1,
+    "media": []
+  },
+  {
+    "kind": "KNOWLEDGE",
+    "title": "Suburbanizacja wokół Krakowa – konsekwencje społeczne",
+    "summary": "Diagnoza szybkiego wzrostu gmin podmiejskich: presja na usługi, problem integracji nowych mieszkańców i braków infrastruktury społecznej.",
+    "body": "## Zjawisko\nGminy powiatów krakowskiego i wielickiego należą do najszybciej rosnących w kraju. Napływają głównie młode rodziny z dziećmi, ale też seniorzy przeprowadzający się bliżej dzieci.\n\n## Konsekwencje\nInfrastruktura społeczna (żłobki, przedszkola, szkoły, przychodnie, komunikacja) nie nadąża za liczbą mieszkańców. Nowe osiedla powstają bez przestrzeni wspólnych, a ich mieszkańcy pracują i spędzają czas w Krakowie, słabo identyfikując się z gminą. Między dawnymi a nowymi mieszkańcami pojawiają się napięcia, a seniorzy „przesadzeni” na nowe osiedla są szczególnie narażeni na osamotnienie.\n\n## Kierunki\nPrognozowanie demograficzne w planowaniu inwestycji, negocjowanie z deweloperami przestrzeni społecznych, animacja sąsiedzka, porozumienia międzygminne w zakresie transportu.",
+    "organization": "Regionalny Ośrodek Polityki Społecznej (opracowanie ilustracyjne)",
+    "gmina": "Kraków",
+    "powiat": "Kraków",
+    "category": "SUBURBAN_GROWTH",
+    "tags": [
+      "diagnoza",
+      "suburbanizacja",
+      "aglomeracja krakowska"
+    ],
+    "target_group": "mieszkańcy gmin podmiejskich",
+    "cost_range": null,
+    "implementation_steps": [],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/diagnoza-suburbanizacja-krakow",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 1,
+    "media": []
+  },
+  {
+    "kind": "KNOWLEDGE",
+    "title": "Koordynacja usług społecznych w gminach – stan i bariery",
+    "summary": "Analiza rozproszenia usług między instytucjami, braku wymiany informacji oraz doświadczeń centrów usług społecznych.",
+    "body": "## Rozproszenie\nUsługi społeczne świadczą równolegle ośrodki pomocy społecznej, PCPR, placówki ochrony zdrowia, szkoły, organizacje pozarządowe i parafie. Mieszkaniec musi sam ustalić, kto za co odpowiada, a instytucje często nie wiedzą o swoich działaniach.\n\n## Bariery\nBrak wspólnej informacji o zasobach, obawy dotyczące wymiany danych osobowych, krótkoterminowe finansowanie projektowe i brak osoby odpowiedzialnej za koordynację.\n\n## Dobre kierunki\nCentra usług społecznych z organizatorem usług, lokalne partnerstwa, mapy zasobów, koordynatorzy opieki dla osób niesamodzielnych oraz międzyinstytucjonalne zespoły wczesnej identyfikacji potrzeb.",
+    "organization": "Regionalny Ośrodek Polityki Społecznej (opracowanie ilustracyjne)",
+    "gmina": "Kraków",
+    "powiat": "Kraków",
+    "category": "COORDINATION",
+    "tags": [
+      "diagnoza",
+      "koordynacja",
+      "CUS",
+      "usługi społeczne"
+    ],
+    "target_group": "samorządy i instytucje",
+    "cost_range": null,
+    "implementation_steps": [],
+    "contact": {
+      "name": null,
+      "email": null,
+      "phone": null
+    },
+    "source_url": "https://example.org/seed-demo/diagnoza-koordynacja-uslug-spolecznych",
+    "source_name": "SEED_DEMO",
+    "evidence_level": 1,
+    "media": []
+  }
+]

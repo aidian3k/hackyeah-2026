@@ -1,0 +1,9 @@
+.env
+.env.bak*
+.venv/
+__pycache__/
+*.egg-info/
+build/
+.ruff_cache/
+.DS_Store
+data/raw/html-cache/

@@ -8,6 +8,7 @@ Obecnie budujemy **Moduł 1 — Matchmaking społeczny**: backend PoC, który pr
 
 - Specyfikacja (źródło prawdy): `docs/module-1-matchmaking.html` (v0.5).
 - Plan implementacji i status zadań: `docs/module-1-tasks.md` — **zanim zaczniesz pracę, przeczytaj protokół na górze tego pliku**.
+- Frontend (osobny moduł w `web/`): plan i status zadań w `docs/frontend-tasks.md` — ten sam protokół pracy, zadania F00–F21.
 - Kontekst biznesowy wyzwania: `docs/base.md`.
 
 ## Stack (ADR-001, ADR-002)
@@ -67,7 +68,7 @@ curl -N -X POST localhost:8000/api/chat -H 'Content-Type: application/json' \
 - Jeden kształt `SolutionCard` w całym API (`api/schemas.py`, budowany przez `api/cards.py`). Poza wyszukiwaniem `scores = null`.
 - Prefiksy embeddingów (`query:` / `passage:`) dokleja wyłącznie provider. Korpus i zapytania liczone tym samym modelem.
 - Odpowiedzi z bazy rozwiązań: każde twierdzenie z cytowaniem `[n]`, `[n]` = pozycja karty. Zmyślone `[n]` wycina filtr strumieniowy.
-- Moduł 1 nie zawiera kodu frontendowego (bez katalogu `web/`). Weryfikacja ręczna: curl, psql, `python -c` — bez testów automatycznych i bez przeglądarki.
+- Moduł 1 (backend) nie zawiera kodu frontendowego — frontend żyje wyłącznie w `web/` i nie zmienia `api/`, `db/` ani `scripts/`. Weryfikacja backendu ręczna: curl, psql, `python -c` — bez testów automatycznych i bez przeglądarki.
 - Teksty dla użytkownika (`label_pl`, `message_pl`) po polsku.
 
 ## Specyfikacja a zmiany decyzji
@@ -76,12 +77,14 @@ Sekcje specyfikacji mają statusy: `stable` (nie zmieniaj bez ADR), `draft` (kie
 
 ## Praca wielu agentów
 
-- Zadania i ich status są w `docs/module-1-tasks.md`. Każde zadanie zawiera cały potrzebny kontekst — nie musisz czytać HTML specyfikacji.
+- Zadania i ich status są w `docs/module-1-tasks.md` (backend) i `docs/frontend-tasks.md` (frontend). Każde zadanie zawiera cały potrzebny kontekst — nie musisz czytać HTML specyfikacji.
 - Bierz tylko zadanie, którego wszystkie zależności są `[x]`. Oznacz je `[~]` przed rozpoczęciem pracy, `[x]` po spełnieniu kryteriów „Gotowe, gdy”.
 - Zmieniaj wyłącznie pliki wymienione w swoim zadaniu. Potrzebna zmiana w cudzym pliku = wpis w „Uwagach między zadaniami”, nie edycja.
 - Nazwy modułów, funkcji i typów z sekcji „Wspólne kontrakty” w pliku zadań są wiążące — nie zmieniaj sygnatur, z których korzystają inne zadania.
 
 ## Interfejs
+
+Frontend: Vite + React + TypeScript w `web/` (`make web-dev`, `make web-mock`), zadania i wspólne kontrakty w `docs/frontend-tasks.md`. Bez autoryzacji i bez testów automatycznych — to samo co w backendzie.
 
 Każdy element interfejsu buduj według `DESIGN.md` i plików w `design-system/`:
 - importuj `design-system/tokens.css` i `design-system/components.css`, nie wpisuj kolorów na sztywno,

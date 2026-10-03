@@ -1,0 +1,11 @@
+[
+  {"code": "AGING", "label_pl": "Starzenie się społeczeństwa", "description": "Rosnący udział osób starszych i związane z tym potrzeby w zakresie opieki, aktywności i wsparcia seniorów.", "sort_order": 10},
+  {"code": "MENTAL_HEALTH", "label_pl": "Kryzys zdrowia psychicznego", "description": "Pogarszająca się kondycja psychiczna mieszkańców, w tym dzieci i młodzieży, oraz niewystarczająca dostępność wsparcia psychologicznego i psychiatrycznego.", "sort_order": 20},
+  {"code": "LONELINESS", "label_pl": "Samotność i izolacja społeczna", "description": "Osamotnienie i brak kontaktów społecznych, szczególnie wśród osób starszych, z niepełnosprawnościami i mieszkających samotnie.", "sort_order": 30},
+  {"code": "DIGITAL_EXCLUSION", "label_pl": "Wykluczenie cyfrowe", "description": "Brak umiejętności, sprzętu lub dostępu do internetu utrudniający korzystanie z e-usług, komunikacji i informacji.", "sort_order": 40},
+  {"code": "SERVICE_ACCESS", "label_pl": "Ograniczony dostęp do usług społecznych", "description": "Trudności w dotarciu do usług opiekuńczych, zdrowotnych, transportowych i socjalnych, zwłaszcza na terenach wiejskich.", "sort_order": 50},
+  {"code": "COORDINATION", "label_pl": "Brak koordynacji działań i współpracy międzysektorowej", "description": "Rozproszone działania instytucji publicznych, organizacji pozarządowych i biznesu oraz brak wymiany informacji między nimi.", "sort_order": 60},
+  {"code": "DEPOPULATION", "label_pl": "Depopulacja obszarów regionu", "description": "Wyludnianie się gmin wskutek odpływu młodych mieszkańców i spadku liczby urodzeń, prowadzące do zanikania usług lokalnych.", "sort_order": 70},
+  {"code": "SUBURBAN_GROWTH", "label_pl": "Gwałtowny wzrost ludności gmin okołokrakowskich", "description": "Szybki napływ mieszkańców do gmin wokół Krakowa, za którym nie nadąża infrastruktura społeczna, edukacyjna i komunikacyjna.", "sort_order": 80},
+  {"code": "OTHER", "label_pl": "Poza taksonomią — do przeglądu przez operatora", "description": "Zgłoszenia, które nie pasują do żadnej z kategorii i wymagają ręcznej klasyfikacji przez operatora Hubu.", "sort_order": 999}
+]

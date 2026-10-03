@@ -1,0 +1,11 @@
+{
+  "dla-seniorow": "AGING",
+  "dla-zdrowia-i-medycyny": "MENTAL_HEALTH",
+  "dla-dzieci-mlodziezy-i-rodziny": "SERVICE_ACCESS",
+  "dla-osob-o-ograniczonej-mobilnosci": "SERVICE_ACCESS",
+  "dla-osob-w-kryzysie-bezdomnosci": "SERVICE_ACCESS",
+  "dla-osob-z-niepelnosprawnoscia-intelektualna": "SERVICE_ACCESS",
+  "dla-osob-z-niepelnosprawnoscia-sensoryczna": "SERVICE_ACCESS",
+  "dla-rynku-pracy": "COORDINATION",
+  "dla-cudzoziemcow": "SERVICE_ACCESS"
+}

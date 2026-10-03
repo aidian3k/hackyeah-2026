@@ -1,0 +1,90 @@
+{
+  "new_reports": 12,
+  "new_unmatched": 5,
+  "pending_solutions": 3,
+  "latest_reports": [
+    {
+      "id": 415,
+      "raw_text": "U nas w gminie starsi ludzie siedzą sami w domach i nie mają z kim pogadać",
+      "category": "LONELINESS",
+      "category_label_pl": "Samotność i izolacja społeczna",
+      "gmina": "Wieliczka",
+      "powiat": "wielicki",
+      "reporter_type": "RESIDENT",
+      "severity_self": 3,
+      "matched": true,
+      "status": "NEW",
+      "top_solution_id": 1,
+      "top_rerank_score": 0.91,
+      "session_id": "b3f1c2d4-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+      "created_at": "2026-10-03T18:42:11+02:00",
+      "reply_count": 0
+    },
+    {
+      "id": 413,
+      "raw_text": "W naszej wsi od miesięcy nie ma zasięgu i ludzie nie mogą zadzwonić po pomoc",
+      "category": "OTHER",
+      "category_label_pl": "Poza taksonomią — do przeglądu przez operatora",
+      "gmina": "Uście Gorlickie",
+      "powiat": "gorlicki",
+      "reporter_type": "JST",
+      "severity_self": 4,
+      "matched": false,
+      "status": "NEW",
+      "top_solution_id": null,
+      "top_rerank_score": 0.21,
+      "session_id": "7a1e9f30-2b4c-4d8e-9f01-23456789abcd",
+      "created_at": "2026-10-03T17:05:48+02:00",
+      "reply_count": 0
+    },
+    {
+      "id": 409,
+      "raw_text": "Młodzież w szkole coraz częściej ma stany lękowe, a do psychologa czeka się miesiącami",
+      "category": "MENTAL_HEALTH",
+      "category_label_pl": "Kryzys zdrowia psychicznego",
+      "gmina": "Chrzanów",
+      "powiat": "chrzanowski",
+      "reporter_type": "NGO",
+      "severity_self": 5,
+      "matched": true,
+      "status": "NEW",
+      "top_solution_id": 11,
+      "top_rerank_score": 0.82,
+      "session_id": null,
+      "created_at": "2026-10-02T09:31:02+02:00",
+      "reply_count": 1
+    }
+  ],
+  "latest_pending": [
+    {
+      "id": 162,
+      "kind": "SOLUTION",
+      "rank": 1,
+      "title": "Spacery z kijkami dla seniorów z sołectwa",
+      "summary": "Cotygodniowe spacery nordic walking dla osób starszych prowadzone przez wolontariuszkę z koła gospodyń, połączone z kawą w świetlicy.",
+      "organization": "Stowarzyszenie Aktywna Wieś",
+      "gmina": "Łącko",
+      "powiat": "nowosądecki",
+      "category": "LONELINESS",
+      "category_label_pl": "Samotność i izolacja społeczna",
+      "tags": [
+        "seniorzy",
+        "ruch",
+        "wolontariat"
+      ],
+      "target_group": "osoby 60+",
+      "cost_range": "do 5 tys. zł",
+      "implementation_steps": [
+        "Zakup kijków",
+        "Ustalenie tras",
+        "Ogłoszenie w parafii i sklepie"
+      ],
+      "source_url": null,
+      "source_name": null,
+      "evidence_level": 1,
+      "media": [],
+      "origin": "USER_SUBMITTED",
+      "scores": null
+    }
+  ]
+}

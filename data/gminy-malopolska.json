@@ -1,0 +1,917 @@
+[
+  {
+    "name": "Kraków",
+    "powiat": "Kraków",
+    "type": "miejska"
+  },
+  {
+    "name": "Nowy Sącz",
+    "powiat": "Nowy Sącz",
+    "type": "miejska"
+  },
+  {
+    "name": "Tarnów",
+    "powiat": "Tarnów",
+    "type": "miejska"
+  },
+  {
+    "name": "Bochnia",
+    "powiat": "bocheński",
+    "type": "miejska"
+  },
+  {
+    "name": "Nowy Wiśnicz",
+    "powiat": "bocheński",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Bochnia (gmina wiejska)",
+    "powiat": "bocheński",
+    "type": "wiejska"
+  },
+  {
+    "name": "Drwinia",
+    "powiat": "bocheński",
+    "type": "wiejska"
+  },
+  {
+    "name": "Lipnica Murowana",
+    "powiat": "bocheński",
+    "type": "wiejska"
+  },
+  {
+    "name": "Łapanów",
+    "powiat": "bocheński",
+    "type": "wiejska"
+  },
+  {
+    "name": "Rzezawa",
+    "powiat": "bocheński",
+    "type": "wiejska"
+  },
+  {
+    "name": "Trzciana",
+    "powiat": "bocheński",
+    "type": "wiejska"
+  },
+  {
+    "name": "Żegocina",
+    "powiat": "bocheński",
+    "type": "wiejska"
+  },
+  {
+    "name": "Brzesko",
+    "powiat": "brzeski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Czchów",
+    "powiat": "brzeski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Borzęcin",
+    "powiat": "brzeski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Dębno",
+    "powiat": "brzeski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Gnojnik",
+    "powiat": "brzeski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Iwkowa",
+    "powiat": "brzeski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Szczurowa",
+    "powiat": "brzeski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Alwernia",
+    "powiat": "chrzanowski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Chrzanów",
+    "powiat": "chrzanowski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Libiąż",
+    "powiat": "chrzanowski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Trzebinia",
+    "powiat": "chrzanowski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Babice",
+    "powiat": "chrzanowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Dąbrowa Tarnowska",
+    "powiat": "dąbrowski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Szczucin",
+    "powiat": "dąbrowski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Bolesław (powiat dąbrowski)",
+    "powiat": "dąbrowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Gręboszów",
+    "powiat": "dąbrowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Mędrzechów",
+    "powiat": "dąbrowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Olesno",
+    "powiat": "dąbrowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Radgoszcz",
+    "powiat": "dąbrowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Gorlice",
+    "powiat": "gorlicki",
+    "type": "miejska"
+  },
+  {
+    "name": "Biecz",
+    "powiat": "gorlicki",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Bobowa",
+    "powiat": "gorlicki",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Gorlice (gmina wiejska)",
+    "powiat": "gorlicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Lipinki",
+    "powiat": "gorlicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Łużna",
+    "powiat": "gorlicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Moszczenica",
+    "powiat": "gorlicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Ropa",
+    "powiat": "gorlicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Sękowa",
+    "powiat": "gorlicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Uście Gorlickie",
+    "powiat": "gorlicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Krzeszowice",
+    "powiat": "krakowski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Skała",
+    "powiat": "krakowski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Skawina",
+    "powiat": "krakowski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Słomniki",
+    "powiat": "krakowski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Świątniki Górne",
+    "powiat": "krakowski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Czernichów",
+    "powiat": "krakowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Igołomia-Wawrzeńczyce",
+    "powiat": "krakowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Iwanowice",
+    "powiat": "krakowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Jerzmanowice-Przeginia",
+    "powiat": "krakowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Kocmyrzów-Luborzyca",
+    "powiat": "krakowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Liszki",
+    "powiat": "krakowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Michałowice",
+    "powiat": "krakowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Mogilany",
+    "powiat": "krakowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Sułoszowa",
+    "powiat": "krakowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Wielka Wieś",
+    "powiat": "krakowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Zabierzów",
+    "powiat": "krakowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Zielonki",
+    "powiat": "krakowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Limanowa",
+    "powiat": "limanowski",
+    "type": "miejska"
+  },
+  {
+    "name": "Mszana Dolna",
+    "powiat": "limanowski",
+    "type": "miejska"
+  },
+  {
+    "name": "Dobra",
+    "powiat": "limanowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Jodłownik",
+    "powiat": "limanowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Kamienica",
+    "powiat": "limanowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Laskowa",
+    "powiat": "limanowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Limanowa (gmina wiejska)",
+    "powiat": "limanowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Łukowica",
+    "powiat": "limanowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Mszana Dolna (gmina wiejska)",
+    "powiat": "limanowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Niedźwiedź",
+    "powiat": "limanowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Słopnice",
+    "powiat": "limanowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Szczawa",
+    "powiat": "limanowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Tymbark",
+    "powiat": "limanowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Książ Wielki",
+    "powiat": "miechowski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Miechów",
+    "powiat": "miechowski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Charsznica",
+    "powiat": "miechowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Gołcza",
+    "powiat": "miechowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Kozłów",
+    "powiat": "miechowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Racławice",
+    "powiat": "miechowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Słaboszów",
+    "powiat": "miechowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Dobczyce",
+    "powiat": "myślenicki",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Myślenice",
+    "powiat": "myślenicki",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Sułkowice",
+    "powiat": "myślenicki",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Lubień",
+    "powiat": "myślenicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Pcim",
+    "powiat": "myślenicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Raciechowice",
+    "powiat": "myślenicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Siepraw",
+    "powiat": "myślenicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Tokarnia",
+    "powiat": "myślenicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Wiśniowa",
+    "powiat": "myślenicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Grybów",
+    "powiat": "nowosądecki",
+    "type": "miejska"
+  },
+  {
+    "name": "Krynica-Zdrój",
+    "powiat": "nowosądecki",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Muszyna",
+    "powiat": "nowosądecki",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Piwniczna-Zdrój",
+    "powiat": "nowosądecki",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Stary Sącz",
+    "powiat": "nowosądecki",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Chełmiec",
+    "powiat": "nowosądecki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Gródek nad Dunajcem",
+    "powiat": "nowosądecki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Grybów (gmina wiejska)",
+    "powiat": "nowosądecki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Kamionka Wielka",
+    "powiat": "nowosądecki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Korzenna",
+    "powiat": "nowosądecki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Łabowa",
+    "powiat": "nowosądecki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Łącko",
+    "powiat": "nowosądecki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Łososina Dolna",
+    "powiat": "nowosądecki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Nawojowa",
+    "powiat": "nowosądecki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Podegrodzie",
+    "powiat": "nowosądecki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Rytro",
+    "powiat": "nowosądecki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Nowy Targ",
+    "powiat": "nowotarski",
+    "type": "miejska"
+  },
+  {
+    "name": "Czarny Dunajec",
+    "powiat": "nowotarski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Rabka-Zdrój",
+    "powiat": "nowotarski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Szczawnica",
+    "powiat": "nowotarski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Czorsztyn",
+    "powiat": "nowotarski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Jabłonka",
+    "powiat": "nowotarski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Krościenko nad Dunajcem",
+    "powiat": "nowotarski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Lipnica Wielka",
+    "powiat": "nowotarski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Łapsze Niżne",
+    "powiat": "nowotarski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Nowy Targ (gmina wiejska)",
+    "powiat": "nowotarski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Ochotnica Dolna",
+    "powiat": "nowotarski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Raba Wyżna",
+    "powiat": "nowotarski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Spytkowice (powiat nowotarski)",
+    "powiat": "nowotarski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Szaflary",
+    "powiat": "nowotarski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Bukowno",
+    "powiat": "olkuski",
+    "type": "miejska"
+  },
+  {
+    "name": "Olkusz",
+    "powiat": "olkuski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Wolbrom",
+    "powiat": "olkuski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Bolesław (powiat olkuski)",
+    "powiat": "olkuski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Klucze",
+    "powiat": "olkuski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Trzyciąż",
+    "powiat": "olkuski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Oświęcim",
+    "powiat": "oświęcimski",
+    "type": "miejska"
+  },
+  {
+    "name": "Brzeszcze",
+    "powiat": "oświęcimski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Chełmek",
+    "powiat": "oświęcimski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Kęty",
+    "powiat": "oświęcimski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Zator",
+    "powiat": "oświęcimski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Osiek",
+    "powiat": "oświęcimski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Oświęcim (gmina wiejska)",
+    "powiat": "oświęcimski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Polanka Wielka",
+    "powiat": "oświęcimski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Przeciszów",
+    "powiat": "oświęcimski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Koszyce",
+    "powiat": "proszowicki",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Nowe Brzesko",
+    "powiat": "proszowicki",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Proszowice",
+    "powiat": "proszowicki",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Koniusza",
+    "powiat": "proszowicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Pałecznica",
+    "powiat": "proszowicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Radziemice",
+    "powiat": "proszowicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Jordanów",
+    "powiat": "suski",
+    "type": "miejska"
+  },
+  {
+    "name": "Sucha Beskidzka",
+    "powiat": "suski",
+    "type": "miejska"
+  },
+  {
+    "name": "Maków Podhalański",
+    "powiat": "suski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Budzów",
+    "powiat": "suski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Bystra-Sidzina",
+    "powiat": "suski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Jordanów (gmina wiejska)",
+    "powiat": "suski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Stryszawa",
+    "powiat": "suski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Zawoja",
+    "powiat": "suski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Zembrzyce",
+    "powiat": "suski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Ciężkowice",
+    "powiat": "tarnowski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Radłów",
+    "powiat": "tarnowski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Ryglice",
+    "powiat": "tarnowski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Tuchów",
+    "powiat": "tarnowski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Wojnicz",
+    "powiat": "tarnowski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Zakliczyn",
+    "powiat": "tarnowski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Żabno",
+    "powiat": "tarnowski",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Gromnik",
+    "powiat": "tarnowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Lisia Góra",
+    "powiat": "tarnowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Pleśna",
+    "powiat": "tarnowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Rzepiennik Strzyżewski",
+    "powiat": "tarnowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Skrzyszów",
+    "powiat": "tarnowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Szerzyny",
+    "powiat": "tarnowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Tarnów (gmina wiejska)",
+    "powiat": "tarnowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Wierzchosławice",
+    "powiat": "tarnowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Wietrzychowice",
+    "powiat": "tarnowski",
+    "type": "wiejska"
+  },
+  {
+    "name": "Zakopane",
+    "powiat": "tatrzański",
+    "type": "miejska"
+  },
+  {
+    "name": "Biały Dunajec",
+    "powiat": "tatrzański",
+    "type": "wiejska"
+  },
+  {
+    "name": "Bukowina Tatrzańska",
+    "powiat": "tatrzański",
+    "type": "wiejska"
+  },
+  {
+    "name": "Kościelisko",
+    "powiat": "tatrzański",
+    "type": "wiejska"
+  },
+  {
+    "name": "Poronin",
+    "powiat": "tatrzański",
+    "type": "wiejska"
+  },
+  {
+    "name": "Andrychów",
+    "powiat": "wadowicki",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Kalwaria Zebrzydowska",
+    "powiat": "wadowicki",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Wadowice",
+    "powiat": "wadowicki",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Brzeźnica",
+    "powiat": "wadowicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Lanckorona",
+    "powiat": "wadowicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Mucharz",
+    "powiat": "wadowicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Spytkowice (powiat wadowicki)",
+    "powiat": "wadowicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Stryszów",
+    "powiat": "wadowicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Tomice",
+    "powiat": "wadowicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Wieprz",
+    "powiat": "wadowicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Niepołomice",
+    "powiat": "wielicki",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Wieliczka",
+    "powiat": "wielicki",
+    "type": "miejsko-wiejska"
+  },
+  {
+    "name": "Biskupice",
+    "powiat": "wielicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Gdów",
+    "powiat": "wielicki",
+    "type": "wiejska"
+  },
+  {
+    "name": "Kłaj",
+    "powiat": "wielicki",
+    "type": "wiejska"
+  }
+]
