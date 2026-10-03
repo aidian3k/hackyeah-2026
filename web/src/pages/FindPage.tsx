@@ -4,6 +4,7 @@ import { ChatForm } from "@/components/chat/ChatForm";
 import { ChatResults, RESULTS_HEADING_ID } from "@/components/chat/ChatResults";
 import { useChat } from "@/hooks/useChat";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+import { ModuleLabel } from "@/components/layout/ModuleLabel";
 import "@/styles/chat.css";
 
 /** Sekcja wyników montuje się dopiero przy phase = "streaming", więc fokus po następnej klatce. */
@@ -35,6 +36,7 @@ export function FindPage() {
   return (
     <div className="ds-page find-page">
       <div className="find-page__intro">
+        <ModuleLabel module="matchmaking" />
         <h1 tabIndex={-1}>Opisz problem</h1>
         <p className="find-page__lead">
           Napisz własnymi słowami, co się dzieje. Pokażemy sprawdzone rozwiązania z Małopolski.

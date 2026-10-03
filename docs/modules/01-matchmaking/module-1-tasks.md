@@ -1,6 +1,6 @@
 # Moduł 1 — plan implementacji i zadania
 
-Plan na podstawie `docs/module-1-matchmaking.html` (v0.5). Każde zadanie jest samowystarczalne: zawiera cel, pliki, wklejony kontekst ze specyfikacji, kroki i kryterium gotowości. Agent wykonujący zadanie **nie musi czytać specyfikacji HTML** — ale musi przeczytać `CLAUDE.md` (twarde reguły) oraz sekcję „Wspólne kontrakty” poniżej.
+Plan na podstawie `docs/modules/01-matchmaking/module-1-matchmaking.html` (v0.5). Każde zadanie jest samowystarczalne: zawiera cel, pliki, wklejony kontekst ze specyfikacji, kroki i kryterium gotowości. Agent wykonujący zadanie **nie musi czytać specyfikacji HTML** — ale musi przeczytać `CLAUDE.md` (twarde reguły) oraz sekcję „Wspólne kontrakty” poniżej.
 
 **Odstępstwa od specyfikacji (decyzja zespołu, 2026-10-03):**
 - **Bez autoryzacji.** Nie implementujemy tokenu STAFF, `report_token`, nagłówków `X-Access-Token` / `X-Report-Token`, kodów 401/403 ani `api/auth.py`. Wszystkie endpointy są otwarte. Kolumna `reports.report_token_hash` i pole `report_token` w zdarzeniu `report_saved` są usunięte.
@@ -1339,7 +1339,7 @@ pokazuje strumień w kolejności z tabeli; to samo z `"session_id":"s2"` → `si
 ## T25 — Kalibracja progów i próba generalna ścieżki demo
 
 **Zależy od:** T20, T21, T22, T23, T24, T26
-**Pliki:** `docs/module-1-calibration.md`, `.env.example` (tylko wartości progów)
+**Pliki:** `docs/modules/01-matchmaking/module-1-calibration.md`, `.env.example` (tylko wartości progów)
 
 **Cel:** ręczne ustawienie progów (ADR-014) i przejście pełnej ścieżki demo curlami.
 
@@ -1362,10 +1362,10 @@ pokazuje strumień w kolejności z tabeli; to samo z `"session_id":"s2"` → `si
    5. `GET /api/reports/{id}/replies` (autor czyta odpowiedź),
    6. `POST /api/solutions` → widoczne w `inbox.latest_pending` → `PATCH status=PUBLISHED` → pojawia się w `/api/chat` dla pasującego zapytania,
    7. `GET /api/stats` → sumy się zgadzają.
-   Zapisz komendy w `docs/module-1-calibration.md`.
+   Zapisz komendy w `docs/modules/01-matchmaking/module-1-calibration.md`.
 6. Plan awaryjny: hotspot; `RERANK_ENABLED=false` / `LLM_ENABLED=false`, gdy pada jeden dostawca; nagrany film.
 
-**Gotowe, gdy:** `docs/module-1-calibration.md` zawiera tabelę 15 zapytań z wynikami, wybrane progi z uzasadnieniem, komendy ścieżki demo (wszystkie kroki przechodzą) i plan awaryjny; zapytania bez rozwiązania dają `no_match`.
+**Gotowe, gdy:** `docs/modules/01-matchmaking/module-1-calibration.md` zawiera tabelę 15 zapytań z wynikami, wybrane progi z uzasadnieniem, komendy ścieżki demo (wszystkie kroki przechodzą) i plan awaryjny; zapytania bez rozwiązania dają `no_match`.
 
 ---
 
@@ -1501,11 +1501,11 @@ Format: `- [Txx → Tyy] <opis> — <agent>, <data>`. Dopisuj tylko na końcu, n
 - [T19 → T24, T25, frontend] `api/routers/chat.py`: wyszukiwanie **i** zapis działają w jednym zadaniu `spawn` (`_search_and_save`), strumień czyta wyniki etapów przez futures (`asyncio.shield`) — rozłączenie klienta nawet przed `candidates` nie gubi zgłoszenia (sprawdzone `curl -m 0.03`). Przy błędzie embeddingu/rerankera (`EMBEDDING_UNAVAILABLE`/`RERANK_UNAVAILABLE`) strumień zgodnie z algorytmem T19 to `status* → error → done` (bez `candidates` i bez `report_saved`; raport z `matched=false`, `search_events.flags={"error":true}` zapisany) — odstępstwo od skrótu „`candidates` zawsze” w CLAUDE.md, świadome. Błąd LLM: `error LLM_UNAVAILABLE` → `report_saved` → `done`, w `search_events.flags` `llm_error: true` i `latency_ms.llm`. Nieoczekiwany wyjątek → `error INTERNAL` + `done`. Ścieżka z prawdziwym LLM (tokeny, `answer_retracted`) niezweryfikowana — brak klucza. — orch-T19, 2026-10-03
 - [T24 → T25, ORCH] `scripts/seed_reports.py` + `data/reports-seed.json` (15 zgłoszeń, `session_id` `seed-demo-01..15`): grupy parafraz „samotni seniorzy” ×5 (Wieliczka, Myślenice, Bochnia, Nowy Targ, Limanowa), „wykluczenie cyfrowe seniorów” ×3, „brak transportu na wsi” ×2, 3 różne problemy, 2 spoza korpusu (bezpańskie psy, wysychające studnie → `no_match`). Zgłoszenia idą przez `POST /api/chat` po kolei; `--purge` usuwa najpierw `search_events` zgłoszeń seedu (FK `search_events.report_id` ma `ON DELETE SET NULL`, a tabela nie ma `session_id`), potem `reports` (odpowiedzi kaskadowo); `--purge-only` tylko sprząta. Wynik (tryb hash, próg 0.38): ostatnie parafrazy mają `similar_count/gmina_count` 4/4 i 2/2, różne problemy 0 — „Gotowe, gdy” spełnione. Wpis seed-demo-12 przeredagowany („…brakuje przedszkoli i żłobków…”), bo pierwsza wersja dawała top 1 „Rodzina adopcyjna dorasta”. — orch-T24, 2026-10-03
 - [T25 → ORCH, zespół] Za zgodą orkiestratora przepisany `api/providers/embeddings_hash.py` (tylko dev): bez n-gramów znakowych (kolizje kubełków dawały szum 0.20–0.25 dla każdego zapytania), stopwords, stem = prefiks 5 znaków, pojęcia z `data/synonyms.json` + `_EXTRA_CONCEPTS` (×1.5), waga 0.5–1.0 wg IDF z `data/solutions/*.json`, `1+ln(n)`. Wektor zależy od plików `data/` — po zmianie korpusu/synonimów: `python -m scripts.ingest data/solutions/ --reembed-all` + `python -m scripts.seed_reports --purge`. Korpus przeliczony (162), seed przeliczony. — orch-T25, 2026-10-03
-- [T25 → ORCH, zespół] Progi trybu hash (tylko lokalny `.env`): `MIN_COSINE_SCORE=0.28` (szum ≤ 0.253, trafne ≥ 0.316 na 18 zapytaniach), `SIMILAR_REPORT_THRESHOLD=0.38` (parafrazy ≥ 0.406, różne problemy ≤ 0.359). `.env.example`: domyślne OpenAI/Cohere bez zmian (0.50 / 0.82 / 0.35 — nieskalibrowane, brak kluczy) + zakomentowany blok „Tryb hash (dev)”. Kalibrację OpenAI/Cohere trzeba powtórzyć po dodaniu kluczy — gotowa procedura w `docs/module-1-calibration.md`. Ścieżka demo (7 kroków) przeszła curlami; testowe zgłoszenia `demo-run-*` i rozwiązanie `[DEMO]…` usunięte — w bazie korpus 162 + seed 15 zgłoszeń. Niezweryfikowane: LLM (streszczenie, `answer_retracted`) i reranker Cohere. — orch-T25, 2026-10-03
+- [T25 → ORCH, zespół] Progi trybu hash (tylko lokalny `.env`): `MIN_COSINE_SCORE=0.28` (szum ≤ 0.253, trafne ≥ 0.316 na 18 zapytaniach), `SIMILAR_REPORT_THRESHOLD=0.38` (parafrazy ≥ 0.406, różne problemy ≤ 0.359). `.env.example`: domyślne OpenAI/Cohere bez zmian (0.50 / 0.82 / 0.35 — nieskalibrowane, brak kluczy) + zakomentowany blok „Tryb hash (dev)”. Kalibrację OpenAI/Cohere trzeba powtórzyć po dodaniu kluczy — gotowa procedura w `docs/modules/01-matchmaking/module-1-calibration.md`. Ścieżka demo (7 kroków) przeszła curlami; testowe zgłoszenia `demo-run-*` i rozwiązanie `[DEMO]…` usunięte — w bazie korpus 162 + seed 15 zgłoszeń. Niezweryfikowane: LLM (streszczenie, `answer_retracted`) i reranker Cohere. — orch-T25, 2026-10-03
 - [T25 → T10] Obserwacja (nie błąd): ta sama treść o samotnych seniorach dostaje raz `AGING` (seed-demo-01..05), raz `LONELINESS` (zgłoszenie z demo z innym sformułowaniem) — heurystyka `data/category-keywords.json`; w `/api/stats` grupa „samotni seniorzy” liczy się jako `AGING`. Ewentualnie dociążyć słowa „samotn*/sami/izolac*” dla `LONELINESS`. Błędów w kodzie pipeline'u/routerów nie znaleziono. — orch-T25, 2026-10-03
 - [ORCH] **Podsumowanie do weryfikacji przez zespół (2026-10-03, wszystkie T00–T26 = [x]):**
   1. **Provider `hash` (dev)** — `api/providers/embeddings_hash.py` — odstępstwo od ADR-015; w T25 przepisany (stemy 5-literowe, koncepty z `synonyms.json`, IDF z `data/solutions/*.json`). Decyzja: zostawić jako tryb offline czy usunąć?
-  2. **Kalibracja tylko w trybie hash** — progi OpenAI/Cohere (0.50 / 0.35 / 0.82) nieskalibrowane; procedura w `docs/module-1-calibration.md`. Po dodaniu kluczy: `.env` → `EMBEDDING_PROVIDER=openai`, `RERANK_ENABLED=true`, `LLM_ENABLED=true`, usunąć progi dev, `make reset-db && make ingest && python -m scripts.seed_reports --purge`, potem powtórzyć T25.
+  2. **Kalibracja tylko w trybie hash** — progi OpenAI/Cohere (0.50 / 0.35 / 0.82) nieskalibrowane; procedura w `docs/modules/01-matchmaking/module-1-calibration.md`. Po dodaniu kluczy: `.env` → `EMBEDDING_PROVIDER=openai`, `RERANK_ENABLED=true`, `LLM_ENABLED=true`, usunąć progi dev, `make reset-db && make ingest && python -m scripts.seed_reports --purge`, potem powtórzyć T25.
   3. **Niezweryfikowane bez kluczy:** prawdziwe embeddingi OpenAI, rerank Cohere, strumień LLM (tokeny, cytowania `[n]`, `answer_retracted`). Ścieżki błędów (`ProviderError` → `error` + `done`) sprawdzone.
   4. **Kolejność SSE przy błędzie embeddingu/rerankera** (T19): `status* → error → done` bez `candidates` i bez `report_saved` — zgodnie z algorytmem T19, ale w napięciu z regułą „`candidates` zawsze” w CLAUDE.md. Raport i tak się zapisuje. Do decyzji.
   5. **183 gminy** (nie 182) — gmina Szczawa od 1.01.2025 (T03).

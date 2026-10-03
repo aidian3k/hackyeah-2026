@@ -9,6 +9,7 @@ import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { refreshInbox, useInbox } from "@/hooks/useInboxCount";
 import { formatDateTime, formatRelative, plural } from "@/lib/format";
 import { REPORTER_TYPE_LABELS } from "@/lib/labels";
+import { ModuleLabel } from "@/components/layout/ModuleLabel";
 import "@/styles/panel.css";
 
 const REPORT_EXCERPT_CHARS = 200;
@@ -109,6 +110,7 @@ export function InboxPage() {
   return (
     <div className="ds-page">
       <div className="ds-stack">
+        <ModuleLabel module="panel" />
         <h1 tabIndex={-1}>Nowe</h1>
         <p>
           Co nowego wpłynęło do Hubu. Lista odświeża się sama co 30 sekund. Pozycja znika, gdy zmienisz status

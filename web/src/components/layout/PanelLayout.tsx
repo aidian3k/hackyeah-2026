@@ -1,9 +1,10 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { useInboxCount } from "@/hooks/useInboxCount";
 import { plural } from "@/lib/format";
+import { MODULE_NAMES } from "@/lib/modules";
 import { Banner } from "./Banner";
 
-/** Rama Panelu Hubu: ten sam baner (paski raz na ekranie), nawigacja panelu z licznikiem „Nowe”. */
+/** Rama Panelu administratora: ten sam baner (paski raz na ekranie), nawigacja panelu z licznikiem „Nowe”. */
 export function PanelLayout() {
   const inboxCount = useInboxCount();
   const showBadge = inboxCount !== null && inboxCount > 0;
@@ -15,7 +16,7 @@ export function PanelLayout() {
       </a>
       <header className="ds-header">
         <Banner />
-        <nav className="ds-nav" aria-label="Panel Hubu">
+        <nav className="ds-nav" aria-label={MODULE_NAMES.panel}>
           <NavLink to="/panel" end className="ds-nav__item">
             Nowe
             {showBadge && (

@@ -66,7 +66,7 @@ Nagłówki układają się w hierarchię: `h1` „Opisz problem” → `h2` „W
 | 6 | „Mam pomysł” → „Do zatwierdzenia” → „Przejrzyj” → „Opublikuj w bibliotece” | OK. Pomysł jest w Bibliotece (wyszukiwanie) i w wynikach czatu. Testowe rekordy 174 i 175 przeniesiono potem do archiwum (`PATCH status=ARCHIVED`). |
 | 7 | Przełącznik „Wysoki kontrast” | OK. Ustawia `aria-pressed=true`, czarne tło i tekst `#FFF200`. Tryb zostaje po przejściu do panelu. Wyłączenie usuwa atrybut. |
 
-**Czas ścieżki 1–5.** Automat potrzebował 14 s, czyli same opóźnienia interfejsu i API są pomijalne. Szacunek dla prowadzącego demo: wstawienie przykładu z chipa i wybór gminy około 20 s, przejrzenie wyników około 30 s, krok 2 około 25 s, krok 3 około 25 s, krok 4 około 40 s, krok 5 około 15 s. Razem **około 2,5 min**, poniżej celu 3 min. Ryzyko czasu opisuje „Uwagi” w `docs/frontend-tasks.md`.
+**Czas ścieżki 1–5.** Automat potrzebował 14 s, czyli same opóźnienia interfejsu i API są pomijalne. Szacunek dla prowadzącego demo: wstawienie przykładu z chipa i wybór gminy około 20 s, przejrzenie wyników około 30 s, krok 2 około 25 s, krok 3 około 25 s, krok 4 około 40 s, krok 5 około 15 s. Razem **około 2,5 min**, poniżej celu 3 min. Ryzyko czasu opisuje „Uwagi” w `docs/modules/01-matchmaking/frontend-tasks.md`.
 
 **Przed nagraniem:**
 

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Alert } from "@/components/Alert";
 import { IdeaForm } from "@/components/idea/IdeaForm";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+import { ModuleLabel } from "@/components/layout/ModuleLabel";
 import "@/styles/idea.css";
 
 // F13: fiszka pomysłu. Wysłany pomysł trafia do kolejki Hubu (PENDING_REVIEW), nie do biblioteki.
@@ -32,6 +33,7 @@ export function IdeaPage() {
   return (
     <div className="ds-page idea-page">
       <header className="idea-page__intro">
+        <ModuleLabel module="kreator" />
         <h1 tabIndex={-1}>Podziel się pomysłem</h1>
         <p className="idea-page__lead">
           Opisz rozwiązanie, które działa albo które chcesz sprawdzić. Zespół Hubu je przejrzy, zanim pojawi się w

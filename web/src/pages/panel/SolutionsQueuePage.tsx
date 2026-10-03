@@ -8,6 +8,7 @@ import { SolutionCard } from "@/components/SolutionCard";
 import { useApi } from "@/hooks/useApi";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { plural } from "@/lib/format";
+import { ModuleLabel } from "@/components/layout/ModuleLabel";
 import "@/styles/components.css";
 
 const PAGE_SIZE = 20;
@@ -53,6 +54,7 @@ export function SolutionsQueuePage() {
   return (
     <div className="ds-page">
       <header className="ds-stack">
+        <ModuleLabel module="panel" />
         <h1 tabIndex={-1}>Do zatwierdzenia</h1>
         <p>
           Pomysły z formularza „Mam pomysł” trafiają do biblioteki i do wyszukiwania dopiero po przejrzeniu

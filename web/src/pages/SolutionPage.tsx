@@ -11,6 +11,7 @@ import { MediaList } from "@/components/solution/MediaList";
 import { useApi } from "@/hooks/useApi";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { youtubeId } from "@/lib/media";
+import { MODULE_NAMES } from "@/lib/modules";
 import "@/styles/solution.css";
 
 const NOT_FOUND_TITLE = "Nie znaleźliśmy tego rozwiązania";
@@ -92,6 +93,9 @@ export function SolutionPage() {
         {data && (
           <nav aria-label="Jesteś tutaj" className="breadcrumbs">
             <ol className="breadcrumbs__list">
+              <li>
+                <Link to="/wiedza">{MODULE_NAMES.zasobnik}</Link>
+              </li>
               <li>
                 {isKnowledge ? <Link to="/wiedza">Wiedza</Link> : <Link to="/rozwiazania">Biblioteka innowacji</Link>}
               </li>

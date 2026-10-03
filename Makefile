@@ -2,13 +2,23 @@ PY ?= $(if $(wildcard .venv/bin/python),.venv/bin/python,python)
 RUFF ?= $(if $(wildcard .venv/bin/ruff),.venv/bin/ruff,ruff)
 Q ?= starsi ludzie są samotni
 
-.PHONY: up down db dev ingest fmt lint psql reset-db chat
+.PHONY: up up-dev logs-dev down db dev ingest fmt lint psql reset-db chat
 
 up:
 	docker compose up -d --build
 
+# tryb deweloperski z hot reloadem: api (uvicorn --reload) na :8000, Vite z HMR na :5173
+DEV_COMPOSE = docker compose -f docker-compose.yml -f docker-compose.dev.yml
+
+up-dev:
+	docker compose stop web 2>/dev/null || true
+	$(DEV_COMPOSE) up -d --build db api web-dev
+
+logs-dev:
+	$(DEV_COMPOSE) logs -f api web-dev
+
 down:
-	docker compose down
+	$(DEV_COMPOSE) down
 
 db:
 	docker compose up -d --wait db
