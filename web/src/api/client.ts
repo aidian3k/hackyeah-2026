@@ -1,8 +1,13 @@
 import type {
+  ChallengeDetail,
+  ChallengeSummary,
   ConsentMeta,
+  CoverageRow,
   FeedbackCreate,
   GminaItem,
   Health,
+  IndicatorDetail,
+  IndicatorMeta,
   Inbox,
   InnovationTest,
   InnovationTestAccessLink,
@@ -24,6 +29,7 @@ import type {
   SolutionCard,
   SolutionCreated,
   SolutionDetail,
+  SolutionFacets,
   SolutionPatch,
   SolutionSubmit,
   Stats,
@@ -118,7 +124,7 @@ export async function request<T>(method: string, path: string, opts: RequestOpti
 export const api = {
   taxonomy: () => request<TaxonomyItem[]>("GET", "/api/taxonomy"),
   gminy: () => request<GminaItem[]>("GET", "/api/gminy"),
-  // kind, category, gmina, powiat, tag, evidence_min, q, status, sort, limit, offset
+  // kind, knowledge_type, category, gmina, powiat, tag, has_video, evidence_min, q, status, sort, limit, offset
   solutions: (q?: Query) => request<Page<SolutionCard>>("GET", "/api/solutions", { query: q }),
   solution: (id: number) => request<SolutionDetail>("GET", `/api/solutions/${id}`),
   submitSolution: (body: SolutionSubmit) => request<SolutionCreated>("POST", "/api/solutions", { body }),
@@ -137,6 +143,16 @@ export const api = {
   stats: (q?: Query) => request<Stats>("GET", "/api/stats", { query: q }),
   feedback: (body: FeedbackCreate) => request<void>("POST", "/api/feedback", { body }),
   health: () => request<Health>("GET", "/healthz", { acceptStatus: [503] }),
+
+  // Moduł 2: Zasobnik wiedzy
+  challenges: () => request<ChallengeSummary[]>("GET", "/api/challenges"),
+  challenge: (code: string) => request<ChallengeDetail>("GET", `/api/challenges/${encodeURIComponent(code)}`),
+  indicators: (q?: Query) => request<IndicatorMeta[]>("GET", "/api/indicators", { query: q }),
+  indicator: (code: string) => request<IndicatorDetail>("GET", `/api/indicators/${encodeURIComponent(code)}`),
+  // from, to (RRRR-MM-DD)
+  coverage: (q?: Query) => request<CoverageRow[]>("GET", "/api/stats/coverage", { query: q }),
+  // kind (domyślnie SOLUTION)
+  solutionFacets: (q?: Query) => request<SolutionFacets>("GET", "/api/solutions/facets", { query: q }),
 
   innovationTests: (q?: Query) =>
     request<Page<InnovationTest>>("GET", "/api/innovation-tests", { query: q }),

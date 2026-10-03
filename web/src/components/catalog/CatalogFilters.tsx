@@ -1,6 +1,5 @@
 import { useEffect, useId, useState, type FormEvent } from "react";
 import type { TaxonomyItem } from "@/api/types";
-import type { LibraryOverview } from "@/hooks/useLibraryOverview";
 import { ropsGroupByTag } from "@/lib/ropsGroups";
 
 /** Stan katalogu w parametrach URL (q, tag, category jak w GET /api/solutions; has_video — filtr Biblioteki). */
@@ -98,7 +97,7 @@ export function GroupChips({
   value,
   onChange,
 }: {
-  groups: LibraryOverview["groups"];
+  groups: { tag: string; count: number }[];
   value: string | null;
   onChange(tag: string | null): void;
 }) {

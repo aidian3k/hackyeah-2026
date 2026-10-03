@@ -4,16 +4,17 @@ import { firstVideo, youtubeThumbUrl } from "@/lib/media";
 import { ropsGroup } from "@/lib/ropsGroups";
 
 interface Props {
+  /** Pierwsze innowacje z filmem (już ograniczone limitem). */
   videos: SolutionCard[];
-  limit: number;
+  /** Wszystkie innowacje z filmem w Bibliotece. */
+  total: number;
   /** Włącza filtr „Tylko z filmem”. */
   onShowAll(): void;
 }
 
 /** „Obejrzyj, jak to działa”: innowacje z filmem jako duże kafelki (miniatura, tytuł, grupa). */
-export function FilmStrip({ videos, limit, onShowAll }: Props) {
-  const shown = videos.slice(0, limit);
-  if (shown.length === 0) return null;
+export function FilmStrip({ videos, total, onShowAll }: Props) {
+  if (videos.length === 0) return null;
 
   return (
     <section aria-labelledby="film-strip" className="flex flex-col gap-4 rounded-lg bg-surface-muted p-4 sm:p-6">
@@ -22,11 +23,11 @@ export function FilmStrip({ videos, limit, onShowAll }: Props) {
           Obejrzyj, jak to działa
         </h2>
         <button type="button" className="ds-btn ds-btn--link px-0" onClick={onShowAll}>
-          Wszystkie innowacje z filmem ({videos.length})
+          Wszystkie innowacje z filmem ({total})
         </button>
       </div>
       <ul className="m-0 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
-        {shown.map((card) => {
+        {videos.map((card) => {
           const video = firstVideo(card.media);
           const group = ropsGroup(card.tags);
           return (

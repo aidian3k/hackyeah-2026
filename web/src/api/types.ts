@@ -3,6 +3,7 @@
 export type ReporterType = "RESIDENT" | "NGO" | "JST" | "OTHER";
 export type ReportStatus = "NEW" | "TRIAGED" | "MATCHED" | "IN_PROGRESS" | "CLOSED";
 export type SolutionKind = "SOLUTION" | "KNOWLEDGE";
+export type KnowledgeType = "REPORT" | "MATERIAL";
 export type SolutionStatus = "PUBLISHED" | "PENDING_REVIEW" | "REJECTED" | "ARCHIVED";
 export type Stage = "preprocess" | "search" | "rerank" | "answer";
 
@@ -13,7 +14,7 @@ export interface Scores {
 export interface MediaItem { type: string; url: string; title: string | null }   // type w korpusie: video | materials | document | license
 
 export interface SolutionCard {
-  id: number; kind: SolutionKind; rank: number;
+  id: number; kind: SolutionKind; knowledge_type: KnowledgeType | null; rank: number;
   title: string; summary: string;
   organization: string | null; gmina: string | null; powiat: string | null;
   category: string | null; category_label_pl: string | null;
@@ -97,9 +98,20 @@ export interface Stats extends Counts {
   from: string; to: string;
   by_category: (Counts & { category: string | null; label_pl: string | null })[];
   by_gmina: (Counts & { gmina: string | null; powiat: string | null })[];
+  by_powiat: (Counts & { powiat: string | null })[];
   by_week: (Counts & { week: string })[];
   by_reporter_type: (Counts & { reporter_type: ReporterType })[];
 }
+
+// --- Moduł 2: Zasobnik wiedzy ---
+export interface KeyFact { label_pl: string; value: string; unit: string | null; year: number | null; source_name: string; source_url: string | null }
+export interface ChallengeSummary { code: string; label_pl: string; lead_pl: string | null; key_fact: KeyFact | null; solutions_count: number; knowledge_count: number; is_demo: boolean; updated_at: string | null }
+export interface IndicatorMeta { code: string; category: string; label_pl: string; unit: string; year: number; higher_is_worse: boolean; region_value: number | null; source_name: string; source_url: string | null; is_demo: boolean }
+export interface IndicatorDetail extends IndicatorMeta { values: { powiat: string; value: number }[] }
+export interface ChallengeDetail extends ChallengeSummary { key_facts: KeyFact[]; indicators: IndicatorMeta[]; reports: SolutionCard[]; materials: SolutionCard[]; solutions: SolutionCard[] }
+export interface CoverageRow { category: string; label_pl: string; reports_total: number; reports_unmatched: number; solutions_published: number; knowledge_published: number; is_gap: boolean }
+export interface SolutionFacets { total: number; with_video: number; groups: { tag: string; label_pl: string; count: number }[]; categories: { code: string; label_pl: string; count: number }[] }
+
 export interface FeedbackCreate { search_event_id: number; solution_id?: number | null; helpful: boolean }
 export interface TaxonomyItem { code: string; label_pl: string; description: string; sort_order: number }
 export interface GminaItem { name: string; powiat: string }
