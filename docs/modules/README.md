@@ -9,7 +9,7 @@ Siedem funkcjonalności z `docs/base.md` §2. Każdy moduł ma specyfikację HTM
 | 3 | III. Kreator pomysłów | `03-kreator-pomyslow/module-3-kreator-pomyslow.html` | `03-kreator-pomyslow/module-3-tasks.md` | szkielet; zalążek: fiszka |
 | 4 | IV. Tester innowacji | `04-tester-innowacji/module-4-tester-innowacji.html` | `04-tester-innowacji/module-4-tasks.md` | szkielet; brak |
 | 5 | V. Platforma aktywnej komunikacji | `05-platforma-komunikacji/module-5-platforma-komunikacji.html` | `05-platforma-komunikacji/module-5-tasks.md` | szkielet; zalążek: odpowiedzi do autora |
-| 6 | VI. Panel administratora | `06-panel-administratora/module-6-panel-administratora.html` | `06-panel-administratora/module-6-tasks.md` | szkielet; w dużej części pokryty przez M1 |
+| 6 | VI. Panel administratora | `06-panel-administratora/module-6-panel-administratora.html` | `06-panel-administratora/module-6-tasks.md` | draft v0.2 (zakres PoC, kontrakt `/api/admin`, ADR-M6-001 – 007); zadania PA/PAF do rozpisania |
 | 7 | VII. Middleman Innowacji | `07-middleman-innowacji/module-7-middleman-innowacji.html` | `07-middleman-innowacji/module-7-tasks.md` | szkielet; brak |
 
 Mocki strumieni SSE zostają w `docs/mocks/` — korzystają z nich `Makefile` (`make web-mock`) i skrypty w `web/scripts/`.
