@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Moduł 2 — Zasobnik wiedzy</title>
 <style>
-<style>
 :root{
   --bg:#fbfaf8; --surface:#ffffff; --surface-2:#f3f1ed; --border:#e0dcd4;
   --text:#1c1a17; --text-dim:#5f5a52; --accent:#8a4b1f; --accent-soft:#f6ece3;
@@ -92,18 +91,19 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 
 <header class="doc">
   <h1>Moduł 2 — Zasobnik wiedzy</h1>
-  <div class="sub">Dokument implementacyjny dla Małopolskiego Hubu Innowacji Społecznych (<code>base.md</code>, funkcjonalność II). <strong>Szkielet</strong> — sekcje do wypełnienia na sesji planowania. Odbiorca: agent lub programista implementujący moduł.</div>
+  <div class="sub">Dokument implementacyjny dla Małopolskiego Hubu Innowacji Społecznych (<code>base.md</code>, funkcjonalność II). Zakres MVP, model danych, kontrakty API i ekrany ustalone jako <strong>draft</strong> — kierunek zatwierdzony, szczegóły dopracowywane w kodzie. Odbiorca: agent lub programista implementujący moduł.</div>
   <div class="meta">
-    <span><strong>Wersja:</strong> v0.1</span>
-    <span><strong>Data:</strong> 2026-10-03</span>
-    <span><strong>Status:</strong> <span class="badge b-todo">szkielet</span></span>
+    <span><strong>Wersja:</strong> v0.4</span>
+    <span><strong>Data:</strong> 2026-10-04</span>
+    <span><strong>Status:</strong> <span class="badge b-draft">draft</span></span>
     <span><strong>Plik zadań:</strong> <code>docs/modules/02-zasobnik-wiedzy/module-2-tasks.md</code></span>
+    <span><strong>Research źródeł:</strong> <code>docs/modules/02-zasobnik-wiedzy/rops-zasoby-kontekst.md</code></span>
   </div>
 </header>
 
 <div class="note">
 <p><strong>Jak czytać ten dokument.</strong> Każda sekcja ma status: <span class="badge b-stable">stable</span> — ustalone, nie zmieniaj bez ADR; <span class="badge b-draft">draft</span> — kierunek ustalony, szczegóły do dopracowania w kodzie; <span class="badge b-todo">todo</span> — do zaplanowania, nie implementuj.</p>
-<p>Struktura i konwencje jak w <code>docs/modules/01-matchmaking/module-1-matchmaking.html</code>. Twarde reguły z <code>AGENTS.md</code> obowiązują także tutaj (progi w <code>settings</code>, <code>polish_simple</code>, brak treści w logach, jeden kształt <code>SolutionCard</code>, bez autoryzacji i bez testów automatycznych). Moduł 1 jest kontraktem zewnętrznym — zmiana jego tabel lub endpointów wymaga ADR i wpisu w „Uwagach między zadaniami” Modułu 1.</p>
+<p>Struktura i konwencje jak w <code>docs/modules/01-matchmaking/module-1-matchmaking.html</code>. Twarde reguły z <code>AGENTS.md</code> obowiązują także tutaj (progi w <code>settings</code>, <code>polish_simple</code>, brak treści w logach, jeden kształt <code>SolutionCard</code>, bez autoryzacji i bez testów automatycznych, frontend stylowany Tailwindem). Moduł 1 jest kontraktem zewnętrznym — zmiany jego tabel i endpointów opisują ADR-M2-001 i ADR-M2-005 i wymagają wpisu w „Uwagach między zadaniami” Modułu 1.</p>
 </div>
 
 <nav class="toc">
@@ -124,11 +124,12 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
     <li><a href="#s13">Rejestr decyzji (ADR)</a></li>
     <li><a href="#s14">Backlog kolejnych iteracji</a></li>
     <li><a href="#s15">Koszt utrzymania i zasoby</a></li>
-    <li><a href="#s16">Pytania otwarte do sesji planowania</a></li>
+    <li><a href="#s16">Pytania otwarte</a></li>
+    <li><a href="#s17">Odświeżenie interfejsu Biblioteki i strony innowacji</a></li>
   </ol>
 </nav>
 
-<h2 id="s1">1. Cel i kontekst biznesowy <span class="badge b-draft">draft</span></h2>
+<h2 id="s1">1. Cel i kontekst biznesowy <span class="badge b-stable">stable</span></h2>
 
 <h4>Wymaganie z <code>base.md</code> (II)</h4>
 <blockquote>
@@ -142,154 +143,482 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 <p>Dodatkowo moduł gromadzi dane o potrzebach, agreguje je w odpowiednich obszarach, co pozwoli wyznaczać trendy – ta opcja widoczna jest wyłącznie dla administratora.</p>
 </blockquote>
 
+<h4>Cel modułu w jednym zdaniu</h4>
+<p><strong>Jedno miejsce na każde wyzwanie społeczne Małopolski, które łączy diagnozę (fakty z raportów i mapę powiatów), sprawdzone innowacje z filmami i materiały edukacyjne — a pracownikom ROPS pokazuje, gdzie zgłoszenia mieszkańców wyprzedzają to, co biblioteka potrafi zaproponować.</strong></p>
+
+<h4>Nowa jakość (kryterium pomysłowości, <code>base.md</code> §6)</h4>
+<ul>
+<li><strong>Wyzwanie jako oś nawigacji.</strong> Dziś raport, katalog innowacji i materiały to osobne miejsca. Strona wyzwania spina je w jedną ścieżkę: „co się dzieje → co już działa → jak zacząć → opisz swój problem” (przejście do Matchmakingu).</li>
+<li><strong>Luki biblioteki.</strong> Panel zestawia zgłoszenia z Modułu 1 z liczbą opublikowanych rozwiązań w każdym wyzwaniu. ROPS widzi, gdzie mieszkańcy zgłaszają problemy, na które biblioteka nie ma odpowiedzi — to bezpośrednia wskazówka, czego szukać w kolejnych naborach.</li>
+<li><strong>Kafelkowa mapa powiatów</strong> zamiast klasycznej mapy geograficznej: każdy powiat ma równy kafelek z wartością wypisaną tekstem, jest obsługiwalny klawiaturą i ma tabelę alternatywną — czytelny dla seniorów i czytników ekranu (WCAG 2.1 AA).</li>
+</ul>
+
 <h4>Ocena w konkursie</h4>
-<p>Kryterium „Stopień spełnienia wyzwania” (40%): Matchmaking 10%, każda dodatkowa funkcjonalność +5%. Liczy się jakość działania — moduł ma być pokazywalny w demo, nie tylko obecny w nawigacji.</p>
+<p>Kryterium „Stopień spełnienia wyzwania” (40%): Matchmaking 10%, każda dodatkowa funkcjonalność +5%. Liczy się jakość działania — moduł ma być pokazywalny w demo (scenariusz S1 w sekcji 4), nie tylko obecny w nawigacji.</p>
 
-<div class="pending">
-<p><strong>Do uzupełnienia:</strong> cel modułu w jednym zdaniu, jak wspiera „cyfrowe serce” Hubu i czym wnosi „nową jakość” (kryterium pomysłowości z <code>base.md</code> §6).</p>
-</div>
+<h2 id="s2">2. Stan obecny — co już działa <span class="badge b-stable">stable</span></h2>
 
-<h2 id="s2">2. Stan obecny — co już działa <span class="badge b-draft">draft</span></h2>
-
-<p>Stan na 2026-10-03 po Module 1 (backend T00–T26) i module frontendowym (F00–F21).</p>
+<p>Stan na 2026-10-04, sprawdzony w kodzie (Moduł 1: T00–T26, frontend: F00–F21, zmiany z <code>docs/changes/</code>).</p>
 <div class="tablewrap">
 <table>
 <tr><th>Wymaganie</th><th>Pokrycie</th><th>Gdzie / czego brakuje</th></tr>
-<tr><td>Biblioteka Innowacji (katalog z filtrami)</td><td><span class="cov-yes">jest</span></td><td><code>/rozwiazania</code> (F11), <code>GET /api/solutions</code> (T21), 115 rekordów ze scrapera ROPS (T26)</td></tr>
-<tr><td>Filmy o innowacjach</td><td><span class="cov-yes">jest</span></td><td><code>/rozwiazania/:id</code> z osadzonym YouTube (F10), <code>solutions.media</code></td></tr>
-<tr><td>Kondycja Małopolski, raporty, Mapa Wyzwań Społecznych</td><td><span class="cov-no">brak</span></td><td>Tylko 7 wpisów <code>KNOWLEDGE</code> z <code>seed-demo.json</code> — ten plik jest usunięty w drzewie roboczym, po świeżym ingeście <code>/wiedza</code> będzie pusta</td></tr>
-<tr><td>Materiały edukacyjne</td><td><span class="cov-no">brak</span></td><td>Brak typu „materiał edukacyjny”, brak rozróżnienia wewnątrz <code>KNOWLEDGE</code> (raport / mapa / materiał)</td></tr>
-<tr><td>„Ciekawa, pomysłowa forma prezentacji”</td><td><span class="cov-part">częściowo</span></td><td>Karty i lista; brak mapy gmin, wizualizacji wyzwań, ścieżek tematycznych</td></tr>
-<tr><td>Szybka aktualizacja danych</td><td><span class="cov-part">częściowo</span></td><td>Tylko <code>make ingest</code> z CLI; w panelu nie da się edytować treści ani dodać wiedzy</td></tr>
-<tr><td>Agregacja potrzeb i trendy (tylko admin)</td><td><span class="cov-part">częściowo</span></td><td><code>GET /api/stats</code> + <code>/panel/trendy</code> (F18): kategorie i gminy w zakresie dat; brak trendu w czasie i powiązania z Mapą Wyzwań</td></tr>
+<tr><td>Biblioteka Innowacji (katalog z filtrami)</td><td><span class="cov-yes">jest</span></td><td><code>/rozwiazania</code> (F11), <code>GET /api/solutions</code> (T21), 115 rekordów <code>SOLUTION</code> ze scrapera ROPS (T26)</td></tr>
+<tr><td>Filmy o innowacjach</td><td><span class="cov-yes">jest</span></td><td><code>/rozwiazania/:id</code> osadza YouTube (F10, <code>VideoEmbed</code>); wszystkie 115 rekordów ma <code>media</code></td></tr>
+<tr><td>Kondycja Małopolski, raporty, Mapa Wyzwań</td><td><span class="cov-no">brak</span></td><td>Research 2026-10-04: „Mapy Wyzwań Społecznych” nie ma w serwisie ROPS — jej rolę pełni IOSS (ADR-M2-007). <code>/wiedza</code> listuje <code>kind = KNOWLEDGE</code>, ale korpus ma <strong>0</strong> takich wpisów (<code>data/solutions/rops-biblioteka.json</code> = 115 × <code>SOLUTION</code>). Po świeżym ingeście strona jest pusta. Brak danych liczbowych i mapy.</td></tr>
+<tr><td>Materiały edukacyjne</td><td><span class="cov-no">brak</span></td><td>Brak typu treści; <code>KNOWLEDGE</code> nie rozróżnia raportu i materiału</td></tr>
+<tr><td>„Konkretne informacje o kwestii”</td><td><span class="cov-part">częściowo</span></td><td><code>/wiedza</code> grupuje po 8 wyzwaniach z taksonomii, ale nie ma strony wyzwania łączącej diagnozę, rozwiązania i materiały</td></tr>
+<tr><td>„Ciekawa, pomysłowa forma”</td><td><span class="cov-part">częściowo</span></td><td>Karty i listy; brak mapy, faktów liczbowych, ścieżki tematycznej</td></tr>
+<tr><td>Szybka aktualizacja danych</td><td><span class="cov-part">częściowo</span></td><td><code>make ingest</code> z wiersza poleceń (idempotentny, obsługuje już <code>kind: KNOWLEDGE</code>); panel zmienia tylko <em>status</em> rozwiązania</td></tr>
+<tr><td>Agregacja potrzeb i trendy (tylko admin)</td><td><span class="cov-part">częściowo</span></td><td><code>GET /api/stats</code> zwraca <code>by_category</code>, <code>by_gmina</code>, <code>by_week</code>, <code>by_reporter_type</code>; <code>/panel/trendy</code> rysuje tylko kategorie i gminy (<code>by_week</code> pominięty w F18). Brak agregacji po powiatach i zestawienia z biblioteką.</td></tr>
 </table>
 </div>
 
-<h2 id="s3">3. Zakres MVP i granice <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Co dokładnie wchodzi do PoC tego modułu, a co jest backlogiem (sekcja 14)?</li>
-<li>Zasada granicy: czego ten moduł <strong>nie</strong> robi i który moduł to przejmuje?</li>
-</ul>
+<h2 id="s3">3. Zakres MVP i granice <span class="badge b-draft">draft</span></h2>
+
+<h3>W MVP</h3>
+<div class="tablewrap">
+<table>
+<tr><th>#</th><th>Element</th><th>Pokrywa (base.md)</th><th>Priorytet demo</th></tr>
+<tr><td>M1</td><td><strong>Treści wiedzy:</strong> profil każdego z 8 wyzwań (lead + 3–5 kluczowych faktów ze źródłem), wpisy <code>KNOWLEDGE</code> typu <code>REPORT</code> (≥ 1 na wyzwanie) i <code>MATERIAL</code> (≥ 5) — źródła w sekcji 6</td><td>A, C</td><td>krytyczny — bez treści moduł jest pusty</td></tr>
+<tr><td>M2</td><td><strong>Strona wyzwania</strong> <code>/wiedza/wyzwania/:code</code>: fakty → raporty → innowacje z filmami → materiały → „Opisz swój problem”</td><td>A, B, C, „konkretne informacje”</td><td>krytyczny</td></tr>
+<tr><td>M3</td><td><strong>Przegląd wiedzy</strong> <code>/wiedza</code>: kafelki 8 wyzwań z kluczowym faktem + sekcja materiałów</td><td>A, C</td><td>wysoki</td></tr>
+<tr><td>M4</td><td><strong>Trendy w panelu:</strong> zgłoszenia tydzień po tygodniu (<code>by_week</code>), zestawienie „zgłoszenia a biblioteka” (luki), agregacja po powiatach</td><td>D</td><td>wysoki</td></tr>
+<tr><td>M5</td><td><strong>Kafelkowa mapa powiatów</strong> z wyborem wskaźnika i tabelą alternatywną (na <code>/wiedza</code> i na stronie wyzwania)</td><td>A („Mapa Wyzwań”), „ciekawa forma”</td><td>średni — cel dodatkowy, gdy M1–M4 gotowe</td></tr>
+<tr><td>M6</td><td><strong>Szybka aktualizacja:</strong> pliki JSON w <code>data/knowledge/</code> + <code>make ingest-knowledge</code> (idempotentny); wskaźniki odświeżane skryptem <code>scripts/fetch_ioss.py</code> (ADR-M2-007); data aktualizacji i źródło widoczne przy każdym fakcie</td><td>„sprawna aktualizacja”</td><td>wysoki (tani)</td></tr>
+<tr><td>M7</td><td><strong>Lista materiałów</strong> <code>/wiedza/materialy</code> i trzecia pozycja w podnawigacji Zasobnika</td><td>C</td><td>średni</td></tr>
+</table>
 </div>
 
-<h2 id="s4">4. Użytkownicy i scenariusze <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<h3>Granice — czego moduł <strong>nie</strong> robi</h3>
 <ul>
-<li>Które grupy z <code>base.md</code> §3 korzystają z modułu: mieszkańcy/NGO, JST, pracownicy ROPS, eksperci?</li>
-<li>2–4 scenariusze krok po kroku (kto, co wpisuje, co dostaje) — w tym jeden scenariusz do nagrania demo.</li>
+<li><strong>Edycja treści w panelu</strong> (formularze dodawania i zmiany wiedzy) → Moduł 6 (Panel administratora). Tu tylko pliki + ingest.</li>
+<li><strong>Własny czat „zapytaj raport”</strong> → backlog (sekcja 14). Wiedza dalej zasila <code>candidates.context</code> czatu Modułu 1, bez zmian w nim.</li>
+<li><strong>Mapa geograficzna (GeoJSON)</strong> → backlog. W MVP kafelki (ADR-M2-004).</li>
+<li><strong>Canvas innowacji, asystent pomysłów</strong> → Moduł 3 (Kreator pomysłów). Zasobnik może do nich linkować.</li>
+<li><strong>Gmina w interfejsie</strong> — nie wracamy do niej (zmiana <code>bugs-2026-10-03-1</code> usuwa gminę z UI). Najdrobniejsza jednostka w Zasobniku to powiat (ADR-M2-003).</li>
 </ul>
+
+<h2 id="s4">4. Użytkownicy i scenariusze <span class="badge b-draft">draft</span></h2>
+
+<div class="tablewrap">
+<table>
+<tr><th>Grupa (<code>base.md</code> §3)</th><th>Po co przychodzi</th><th>Co dostaje</th></tr>
+<tr><td>Mieszkańcy, NGO</td><td>Zrozumieć problem w swoim otoczeniu, znaleźć inspirację</td><td>Strona wyzwania, filmy innowacji, materiały „jak zacząć”</td></tr>
+<tr><td>JST</td><td>Diagnoza do polityk lokalnych, katalog gotowych rozwiązań</td><td>Fakty i mapa powiatów ze źródłami, innowacje z poziomem dowodów</td></tr>
+<tr><td>Pracownicy ROPS (administrator)</td><td>Aktualizować wiedzę, widzieć trendy potrzeb</td><td>Ingest z plików, panel trendów z lukami biblioteki</td></tr>
+<tr><td>Eksperci</td><td>Odesłać innowatora lub JST do sprawdzonych materiałów</td><td>Stały adres strony wyzwania i listy materiałów</td></tr>
+</table>
 </div>
 
-<h2 id="s5">5. Architektura i zależności od Modułu 1 <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<h3>S1 — Urzędniczka gminy szuka diagnozy i rozwiązań (scenariusz demo)</h3>
+<ol>
+<li>Wchodzi bez logowania na <strong>Zasobnik wiedzy</strong> (<code>/wiedza</code>). Widzi 8 kafelków wyzwań; na kafelku „Starzenie się społeczeństwa” kluczowy fakt z liczbą i źródłem.</li>
+<li>Klika kafelek → <code>/wiedza/wyzwania/AGING</code>. Czyta 2–3 zdania wprowadzenia i 3–5 faktów (wartość, rok, źródło z linkiem).</li>
+<li>Na kafelkowej mapie powiatów (M5) widzi wskaźnik dla swojego powiatu; ta sama informacja jest w tabeli pod mapą.</li>
+<li>Przewija do „Co już działa”: 6 innowacji z biblioteki z najwyższym poziomem dowodów, pierwsza z filmem odtwarzanym na miejscu.</li>
+<li>Pobiera materiał „Jak zacząć”, a na końcu klika <strong>Opisz problem w swojej okolicy</strong> → Matchmaking (Moduł 1).</li>
+</ol>
+
+<h3>S2 — Pracownik ROPS aktualizuje wiedzę</h3>
+<ol>
+<li>Dopisuje nowy raport do <code>data/knowledge/records/wiedza.json</code> i poprawia fakt w <code>data/knowledge/challenges.json</code>.</li>
+<li>Uruchamia <code>make ingest-knowledge</code> — nowe wpisy są dodane, zmienione podmienione, niezmienione pominięte (idempotencja po <code>source_url</code> i kodach).</li>
+<li>Odświeża stronę wyzwania: nowy raport i nowa data aktualizacji przy fakcie.</li>
+</ol>
+
+<h3>S3 — Administrator sprawdza trendy i luki</h3>
+<ol>
+<li>Loguje się jako administrator, otwiera <code>/panel/trendy</code>.</li>
+<li>Widzi liczbę zgłoszeń tydzień po tygodniu i rozkład po powiatach.</li>
+<li>W sekcji „Zgłoszenia a biblioteka” wyzwanie „Samotność” jest oznaczone jako luka: dużo zgłoszeń bez dopasowania, mało opublikowanych rozwiązań. Link prowadzi do listy tych zgłoszeń.</li>
+</ol>
+
+<h3>S4 — Mieszkaniec uczy się o innowacjach społecznych</h3>
+<ol>
+<li>Z podnawigacji Zasobnika wybiera „Materiały”, filtruje po wyzwaniu albo przegląda materiały ogólne.</li>
+<li>Otwiera materiał (strona szczegółu jak dla rozwiązania, z linkiem do źródła i ewentualnym filmem).</li>
+</ol>
+
+<h2 id="s5">5. Architektura i zależności od Modułu 1 <span class="badge b-draft">draft</span></h2>
+
+<pre><code>obserwator.rops.krakow.pl (IOSS) ── scripts/fetch_ioss.py ─→ data/knowledge/indicators.json
+
+data/knowledge/challenges.json   ─┐
+data/knowledge/indicators.json   ─┼─ scripts/ingest_knowledge.py ─→ challenge_profiles, indicators, indicator_values
+data/knowledge/records/*.json    ─┴─ scripts/ingest.py (Moduł 1)  ─→ solutions (kind=KNOWLEDGE) + chunki z embeddingiem
+
+api/routers/knowledge.py   GET /api/challenges, /api/challenges/{code}, /api/indicators, /api/indicators/{code}
+api/routers/staff.py       GET /api/stats (+ by_powiat), GET /api/stats/coverage
+api/routers/solutions.py   GET /api/solutions (+ filtr knowledge_type)
+                              │
+web/  /wiedza, /wiedza/wyzwania/:code, /wiedza/materialy, /panel/trendy</code></pre>
+
+<h4>Reużywamy z Modułu 1 bez zmian</h4>
 <ul>
-<li>Nowe pliki w <code>api/</code> (router, pipeline, provider) i co reużywamy z Modułu 1 (providery, <code>SolutionCard</code>, <code>api.tasks.spawn</code>, taksonomia, gminy).</li>
-<li>Czy moduł zmienia istniejące tabele lub endpointy Modułu 1? Każda taka zmiana = ADR.</li>
+<li><code>SolutionCard</code> i <code>api/cards.py</code> — raporty i materiały to karty <code>kind = KNOWLEDGE</code>; jeden kształt w całym API.</li>
+<li><code>scripts/ingest.py</code> — chunking, embeddingi i idempotencja po <code>source_url</code>. Wpisy wiedzy trafiają do wyszukiwania i dalej zasilają <code>candidates.context</code> czatu.</li>
+<li><code>challenge_taxonomy</code> (8 wyzwań + <code>OTHER</code>), <code>data/gminy-malopolska.json</code> (mapowanie gmina → powiat, 22 powiaty).</li>
+<li>Frontend: <code>SolutionCard</code>, <code>VideoEmbed</code>, <code>BarList</code>, <code>LoadState</code>, <code>Alert</code>, <code>ZasobnikNav</code>, <code>useApi</code>.</li>
 </ul>
+
+<h4>Zmieniamy w Module 1 (addytywnie, z ADR)</h4>
+<ul>
+<li><code>solutions.knowledge_type</code> + pole <code>knowledge_type</code> w <code>SolutionCard</code> i w rekordzie ingestu — ADR-M2-001.</li>
+<li><code>GET /api/solutions</code>: nowy opcjonalny parametr <code>knowledge_type</code> — ADR-M2-001.</li>
+<li><code>GET /api/stats</code>: nowa grupa <code>by_powiat</code> i filtr <code>powiat</code>; <code>by_gmina</code> zostaje dla zgodności — ADR-M2-005.</li>
+</ul>
+<p>Żadna z tych zmian nie zmienia znaczenia istniejących pól ani odpowiedzi — stare klienty działają bez zmian. Reguła ADR-011 obowiązuje dalej: <code>KNOWLEDGE</code> nie trafia do kart rozwiązań czatu, streszczenia, cytowań ani <code>reports.matched</code>.</p>
+
+<h2 id="s6">6. Model danych <span class="badge b-draft">draft</span></h2>
+
+<p>DDL dopisywany do <code>db/init.sql</code> (jeden plik schematu, bez migracji). Istniejąca baza: <code>make down</code> z usunięciem wolumenu i ponowny ingest albo ręczny <code>ALTER</code> — opisane w zadaniu.</p>
+
+<pre><code>-- ADR-M2-001: podtyp wiedzy w istniejącej tabeli solutions
+CREATE TYPE knowledge_type AS ENUM ('REPORT', 'MATERIAL');
+ALTER TABLE solutions ADD COLUMN knowledge_type knowledge_type;   -- w init.sql: kolumna w CREATE TABLE
+ALTER TABLE solutions ADD CONSTRAINT solutions_knowledge_type_ck
+    CHECK ((kind = 'KNOWLEDGE') = (knowledge_type IS NOT NULL));
+-- REPORT   — diagnoza, raport, opracowanie o wyzwaniu (category wymagana przez ingest)
+-- MATERIAL — materiał edukacyjny (category opcjonalna: NULL = materiał ogólny o innowacjach)
+
+-- Profil wyzwania: wprowadzenie i kluczowe fakty (jeden wiersz na wyzwanie)
+CREATE TABLE challenge_profiles (
+    category     TEXT PRIMARY KEY REFERENCES challenge_taxonomy(code),
+    lead_pl      TEXT        NOT NULL,             -- 2–3 zdania: na czym polega wyzwanie w Małopolsce
+    key_facts    JSONB       NOT NULL DEFAULT '[]',
+        -- [{label_pl, value, unit, year, source_name, source_url}] — wartość jako tekst do wyświetlenia
+    is_demo      BOOLEAN     NOT NULL DEFAULT TRUE,  -- ADR-M2-002: dane przykładowe, oznaczane w UI
+    updated_at   TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+-- Wskaźniki do mapy powiatów
+CREATE TABLE indicators (
+    code            TEXT PRIMARY KEY,               -- np. 'AGING_65_PLUS_SHARE'
+    category        TEXT        NOT NULL REFERENCES challenge_taxonomy(code),
+    label_pl        TEXT        NOT NULL,           -- „Udział osób w wieku 65+”
+    unit            TEXT        NOT NULL,           -- '%', 'na 10 tys. mieszkańców'
+    year            SMALLINT    NOT NULL,
+    higher_is_worse BOOLEAN     NOT NULL DEFAULT TRUE,
+    region_value    NUMERIC,                        -- wartość dla województwa, podana w źródle (nie liczona)
+    source_name     TEXT        NOT NULL,
+    source_url      TEXT,
+    is_demo         BOOLEAN     NOT NULL DEFAULT TRUE,
+    sort_order      INT         NOT NULL DEFAULT 100,
+    updated_at      TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TABLE indicator_values (
+    indicator_code TEXT    NOT NULL REFERENCES indicators(code) ON DELETE CASCADE,
+    powiat         TEXT    NOT NULL,               -- nazwa jak w data/gminy-malopolska.json
+    value          NUMERIC NOT NULL,
+    PRIMARY KEY (indicator_code, powiat)
+);</code></pre>
+
+<h4>Pliki źródłowe (<code>data/knowledge/</code>)</h4>
+<div class="tablewrap">
+<table>
+<tr><th>Plik</th><th>Zawartość</th><th>Ładuje</th></tr>
+<tr><td><code>records/wiedza.json</code></td><td>Rekordy w formacie ingestu Modułu 1 z <code>kind: "KNOWLEDGE"</code> i <code>knowledge_type</code>; <code>source_url</code> wymagany (klucz idempotencji)</td><td><code>scripts/ingest.py</code></td></tr>
+<tr><td><code>challenges.json</code></td><td>Lista profili: <code>category</code>, <code>lead_pl</code>, <code>key_facts[]</code>, <code>is_demo</code></td><td><code>scripts/ingest_knowledge.py</code> (upsert po <code>category</code>)</td></tr>
+<tr><td><code>indicators.json</code></td><td>Lista wskaźników z metadanymi i słownikiem <code>values: {powiat: liczba}</code></td><td><code>scripts/ingest_knowledge.py</code> (upsert po <code>code</code>, wartości podmieniane w całości)</td></tr>
+</table>
+</div>
+<p>Walidacja przy ingeście: <code>category</code> z taksonomii (bez <code>OTHER</code>), powiat z listy 22 powiatów, komplet 22 wartości na wskaźnik (brak = błąd z nazwą powiatu), <code>source_name</code> niepusty. Błędny rekord nie przerywa ładowania pozostałych — raport błędów na końcu jak w <code>scripts/ingest.py</code>.</p>
+
+<h4>Źródła danych (research 2026-10-04, szczegóły w <code>rops-zasoby-kontekst.md</code>)</h4>
+<div class="tablewrap">
+<table>
+<tr><th>Dane</th><th>Źródło</th><th>Uwagi</th></tr>
+<tr><td><strong>Wskaźniki per powiat</strong> (<code>indicators.json</code>)</td><td><strong>IOSS</strong> — <a href="https://obserwator.rops.krakow.pl/">obserwator.rops.krakow.pl</a>, tabela HTML pod <code>/differenceanalysis/{id}</code>; dane GUS BDL i sprawozdań OPS, 2007–2024, 22 powiaty</td><td>Brak API; rok i obszar przez formularz POST. <code>is_demo = false</code>, <code>source_name</code> = „IOSS ROPS Kraków (GUS BDL)”, <code>source_url</code> = adres wskaźnika</td></tr>
+<tr><td><strong>Kluczowe fakty</strong> (<code>challenges.json</code>)</td><td>OZPS za 2024 (<a href="https://rops.krakow.pl/mpliki/PS/BA/Raport_OZPS_za_rok_2024.pdf">PDF</a>, rozdz. „Trendy i wnioski” s. 9–30) i za 2025; diagnoza „Usługi społeczne w Małopolsce… 2025” (38 s.); GUS Kraków „Sytuacja demograficzna województwa małopolskiego”</td><td>Raporty ROPS 2024–2026 na licencji <strong>CC BY 4.0</strong> — cytujemy z linkiem. Fakty z tych źródeł mają <code>is_demo = false</code></td></tr>
+<tr><td><strong>Raporty</strong> (<code>KNOWLEDGE/REPORT</code>)</td><td>OZPS 2024, 2025; Usługi społeczne 2025; Sektor opiekuńczy 2026; DPS wobec deinstytucjonalizacji 2025; Monitoring współpracy JST z PES 2022; GUS — demografia</td><td>Rekord = streszczenie (opracowane przez nas) + link do PDF; treści PDF nie kopiujemy</td></tr>
+<tr><td><strong>Materiały</strong> (<code>KNOWLEDGE/MATERIAL</code>)</td><td>SOCIAL CANVAS; Przewodnik po innowacjach społecznych (2019); „Połącz kropki” (2023); Innowacje społeczne dla dostępności (2022); 5 Ramowych Planów Wdrożenia (Usługa Wrażliwa 2026); podcast „Społeczny wymiar usług” (3 odcinki, YouTube → <code>media</code>)</td><td>Licencja niepodana — tylko link i własny opis, bez kopiowania treści</td></tr>
+</table>
 </div>
 
-<h2 id="s6">6. Model danych <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<h4>Wskaźniki IOSS na wyzwania (kod wskaźnika: <code>IOSS_&lt;id&gt;</code>)</h4>
+<div class="tablewrap">
+<table>
+<tr><th>Wyzwanie</th><th>Wskaźniki IOSS (id)</th><th>Na mapie domyślnie</th></tr>
+<tr><td>Starzenie się społeczeństwa (<code>AGING</code>)</td><td>odsetek 65+ (285), indeks starości (284), podwójne starzenie (273)</td><td>285</td></tr>
+<tr><td>Depopulacja (<code>DEPOPULATION</code>)</td><td>przyrost naturalny (91), saldo migracji stałych (98), ludność ogółem (186)</td><td>91</td></tr>
+<tr><td>Wzrost gmin okołokrakowskich (<code>SUBURBAN_GROWTH</code>)</td><td>saldo migracji (98), gęstość zaludnienia (7)</td><td>98</td></tr>
+<tr><td>Dostęp do usług (<code>SERVICE_ACCESS</code>)</td><td>mieszkańcy na 1 pracownika socjalnego (27), oczekujący na DPS (172), usługi opiekuńcze (227)</td><td>27</td></tr>
+<tr><td>Zdrowie psychiczne (<code>MENTAL_HEALTH</code>)</td><td>136, 228 — etykiety do odczytania z IOSS w Z01</td><td>136</td></tr>
+<tr><td>Samotność (<code>LONELINESS</code>)</td><td>brak bezpośredniego; zastępczo „wsparcie osób najstarszych” (274)</td><td>274, opis jako wskaźnik zastępczy</td></tr>
+<tr><td>Wykluczenie cyfrowe (<code>DIGITAL_EXCLUSION</code>)</td><td>brak danych per powiat</td><td>brak mapy — tylko fakty</td></tr>
+<tr><td>Koordynacja (<code>COORDINATION</code>)</td><td>brak danych per powiat</td><td>brak mapy — tylko fakty</td></tr>
+</table>
+</div>
+<p>Rok danych: najnowszy dostępny w IOSS dla wszystkich 22 powiatów (zweryfikowane: 2024 dla 65+, np. m. Tarnów 24,83%, Kraków 19,89%, limanowski 15,07%). Wskaźnik „zmiana r/r” liczymy tylko, gdy IOSS nie podaje go wprost — wtedy <code>label_pl</code> mówi to jawnie. Walidacja „22 wartości na wskaźnik” dotyczy wskaźników, które mają wartości; wyzwania bez wskaźnika nie pokazują mapy.</p>
+
+<h4>Do opracowania jako dane przykładowe (<code>is_demo = true</code>)</h4>
 <ul>
-<li>DDL nowych tabel i typów (dopisywany do <code>db/init.sql</code>), klucze obce do <code>solutions</code> / <code>reports</code>.</li>
-<li>Które kolumny są treścią (RODO, sekcja 11), a które statystyką?</li>
+<li><strong>Samotność, wykluczenie cyfrowe, koordynacja:</strong> lead i fakty opisowe (z wzmianek w OZPS i Monitoringu JST–PES tam, gdzie są), bez liczb wymyślonych per powiat.</li>
+<li><strong>Treści streszczeń</strong> raportów i materiałów piszemy sami — to nasze opracowanie, oznaczone źródłem.</li>
+<li><strong>Trendy potrzeb (D)</strong> liczymy z tabeli <code>reports</code> (seed + zgłoszenia z czatu); ROPS nie publikuje takich danych.</li>
 </ul>
+
+<h4>Treść czy statystyka (RODO)</h4>
+<p>Wszystkie nowe tabele zawierają wyłącznie treści publiczne i dane zagregowane — brak danych osobowych. Kolumny treściowe (<code>lead_pl</code>, <code>key_facts</code>) można logować tylko jako długość, jak inne treści.</p>
+
+<h2 id="s7">7. Logika i AI <span class="badge b-draft">draft</span></h2>
+<ul>
+<li><strong>Moduł działa w całości bez LLM.</strong> Strona wyzwania, mapa, materiały i trendy to zapytania SQL i dane z plików. <code>LLM_ENABLED=false</code> nic nie wyłącza.</li>
+<li><strong>Embeddingi:</strong> wpisy <code>KNOWLEDGE</code> są chunkowane i embeddowane przez istniejący ingest (OpenAI <code>text-embedding-3-large</code>, 1024). Dzięki temu czat Modułu 1 dalej pokazuje je w <code>candidates.context</code> — bez zmian w pipeline.</li>
+<li><strong>„Co już działa” na stronie wyzwania</strong> — bez wyszukiwania semantycznego: <code>kind = SOLUTION</code>, <code>status = PUBLISHED</code>, <code>category = :code</code>, sortowanie <code>evidence_level DESC, id ASC</code>, limit <code>CHALLENGE_TOP_SOLUTIONS</code>. Rozwiązania z filmem pierwsze przy równym poziomie dowodów.</li>
+<li><strong>Luka biblioteki</strong> (deterministyczna reguła, progi w <code>settings</code>): wyzwanie jest luką, gdy w zakresie dat <code>reports_unmatched ≥ COVERAGE_GAP_MIN_UNMATCHED</code> i <code>solutions_published &lt; COVERAGE_GAP_MAX_SOLUTIONS</code>.</li>
+<li><strong>Skala kolorów mapy:</strong> wartości dzielone na <code>MAP_SCALE_STEPS</code> przedziałów kwantylowych liczonych na froncie z <code>values</code>; kierunek wg <code>higher_is_worse</code>.</li>
+<li>AI w aktualizacji (asystent kuratora wyciągający fakty z PDF raportu) — backlog, sekcja 14.</li>
+</ul>
+
+<h2 id="s8">8. Kontrakt API <span class="badge b-draft">draft</span></h2>
+<p>Wszystkie endpointy otwarte (decyzja zespołu). Modele pydantic w <code>api/schemas.py</code>. Błędy w kształcie Modułu 1 (<code>ApiError</code>, <code>message_pl</code>): 404 <code>NOT_FOUND</code>, 422 <code>VALIDATION_ERROR</code>.</p>
+
+<h3>Nowe — <code>api/routers/knowledge.py</code></h3>
+<pre><code>GET /api/challenges → list[ChallengeSummary]           # 8 wyzwań, kolejność wg challenge_taxonomy.sort_order, bez OTHER
+ChallengeSummary {
+  code: str, label_pl: str,
+  lead_pl: str | null,                 # null, gdy brak profilu
+  key_fact: KeyFact | null,            # pierwszy z key_facts
+  solutions_count: int,                # PUBLISHED SOLUTION w tej kategorii
+  knowledge_count: int,                # PUBLISHED KNOWLEDGE w tej kategorii
+  is_demo: bool, updated_at: datetime | null
+}
+KeyFact { label_pl: str, value: str, unit: str | null, year: int | null, source_name: str, source_url: str | null }
+
+GET /api/challenges/{code} → ChallengeDetail            # 404 dla nieznanego kodu i dla OTHER
+ChallengeDetail = ChallengeSummary + {
+  key_facts: list[KeyFact],
+  indicators: list[IndicatorMeta],     # wskaźniki tej kategorii (do przełącznika mapy)
+  reports: list[SolutionCard],         # KNOWLEDGE/REPORT, limit CHALLENGE_TOP_KNOWLEDGE
+  materials: list[SolutionCard],       # KNOWLEDGE/MATERIAL tej kategorii, limit CHALLENGE_TOP_KNOWLEDGE
+  solutions: list[SolutionCard],       # SOLUTION, reguła z sekcji 7, limit CHALLENGE_TOP_SOLUTIONS
+}
+
+GET /api/indicators?category=AGING → list[IndicatorMeta]
+IndicatorMeta { code, category, label_pl, unit, year, higher_is_worse, region_value: float | null,
+                source_name, source_url: str | null, is_demo: bool }
+
+GET /api/indicators/{code} → IndicatorDetail             # 404 dla nieznanego kodu
+IndicatorDetail = IndicatorMeta + { values: list[{ powiat: str, value: float }] }   # 22 pozycje, alfabetycznie</code></pre>
+
+<h3>Zmienione (addytywnie)</h3>
+<pre><code>GET /api/solutions?kind=KNOWLEDGE&amp;knowledge_type=MATERIAL   # nowy filtr; z kind=SOLUTION → 422
+SolutionCard.knowledge_type: "REPORT" | "MATERIAL" | null    # null dla SOLUTION
+
+GET /api/stats?powiat=nowotarski                             # nowy filtr
+Stats.by_powiat: list[{ powiat: str | null, total, matched, unmatched }]   # powiat z reports.powiat
+
+GET /api/stats/coverage?from=…&amp;to=… → list[CoverageRow]      # zakres dat jak w /api/stats
+CoverageRow { category: str, label_pl: str,
+              reports_total: int, reports_unmatched: int,
+              solutions_published: int, knowledge_published: int,
+              is_gap: bool }                                  # reguła z sekcji 7; sortowanie: is_gap DESC, reports_unmatched DESC</code></pre>
+
+<h2 id="s9">9. Kontrakt dla frontendu (ekrany) <span class="badge b-draft">draft</span></h2>
+<p>Stylowanie zgodnie z <code>AGENTS.md</code>: klasy Tailwinda z presetu design systemu + komponenty <code>ds-*</code>, bez nowych plików CSS. Każdy ekran ma stany ładowania, pustki i błędu (<code>LoadState</code>), <code>h1</code> z fokusem po zmianie trasy i najwyżej jeden <code>ds-btn--cta</code>. Dane z <code>is_demo = true</code> oznaczone tekstem „Dane przykładowe” (nie samym kolorem).</p>
+
+<div class="tablewrap">
+<table>
+<tr><th>Trasa</th><th>Dostęp</th><th>Zawartość</th></tr>
+<tr><td><code>/wiedza</code></td><td>publiczny</td><td>Nagłówek modułu, podnawigacja (Wiedza o wyzwaniach · Biblioteka innowacji · Materiały). <strong>Kafelki 8 wyzwań</strong> (nazwa, kluczowy fakt, liczba rozwiązań, link). <strong>Mapa powiatów</strong> (M5) z wyborem wskaźnika. <strong>Materiały</strong>: do <code>KNOWLEDGE_PREVIEW_LIMIT</code> kart + link „Wszystkie materiały”.</td></tr>
+<tr><td><code>/wiedza/wyzwania/:code</code></td><td>publiczny</td><td>Kolejno: <code>h1</code> = nazwa wyzwania, lead, <strong>fakty</strong> (lista definicji: wartość, etykieta, rok, źródło jako link), <strong>mapa</strong> wskaźników tej kategorii, <strong>Raporty i diagnozy</strong> (karty), <strong>Co już działa</strong> (karty rozwiązań; pierwszy film osadzony przez <code>VideoEmbed</code>), <strong>Materiały</strong>, a na końcu <code>ds-btn--cta</code> „Opisz problem w swojej okolicy” → <code>/</code>. Nieznany kod → widok 404 z linkiem do <code>/wiedza</code>.</td></tr>
+<tr><td><code>/wiedza/materialy</code></td><td>publiczny</td><td>Lista kart <code>MATERIAL</code> z filtrem wyzwania (<code>ds-select</code>, opcja „Materiały ogólne”) i paginacją jak w bibliotece.</td></tr>
+<tr><td><code>/panel/trendy</code></td><td>administrator</td><td>Istniejące sekcje + <strong>Zgłoszenia w czasie</strong> (<code>by_week</code>, <code>BarList</code> z podziałem dopasowane/niedopasowane), <strong>Powiaty</strong> (<code>by_powiat</code> zamiast listy gmin), <strong>Zgłoszenia a biblioteka</strong> (tabela <code>CoverageRow</code>; luka oznaczona tekstem „Luka” + ikoną, link do <code>/panel/zgloszenia?category=…&amp;matched=false</code>).</td></tr>
+</table>
 </div>
 
-<h2 id="s7">7. Logika i AI <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<h4>Kafelkowa mapa powiatów (komponent <code>PowiatTileMap</code>)</h4>
 <ul>
-<li>Gdzie jest LLM / embeddingi, z jakim promptem i jakim kontraktem wejścia–wyjścia?</li>
-<li>Zachowanie przy wyłączonym LLM (<code>LLM_ENABLED=false</code>) i przy błędzie providera — moduł musi działać bez AI.</li>
+<li>Siatka CSS (Tailwind <code>grid</code>), 22 kafelki ułożone w przybliżeniu jak powiaty na mapie; układ (kolumna, wiersz) w <code>web/src/lib/powiatTiles.ts</code>.</li>
+<li>Kafelek = <code>&lt;li&gt;</code> z nazwą powiatu i wartością <strong>wypisaną tekstem</strong>; kolor tła to tylko dodatkowa informacja. Skala z tokenów: <code>surface-sunken</code> → <code>soft-blue</code> → <code>stripe-blue</code> → <code>navy</code> (dwa ostatnie z tekstem <code>on-navy</code>) — kontrast sprawdzany dla każdego stopnia, także w <code>data-contrast="high"</code>.</li>
+<li>Legenda z przedziałami, wartość dla województwa, rok i źródło pod mapą.</li>
+<li><strong>Tabela alternatywna</strong> (powiat, wartość) w <code>&lt;details&gt;</code> „Pokaż jako tabelę”, sortowalna po wartości; czytnik ekranu dostaje listę kafelków w kolejności alfabetycznej.</li>
+<li>Szerokość 360 px: siatka zamienia się w listę posortowaną po wartości.</li>
 </ul>
-</div>
 
-<h2 id="s8">8. Kontrakt API <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Lista endpointów z kształtem żądania i odpowiedzi (pydantic w <code>api/schemas.py</code>), kody błędów 404/422.</li>
-<li>Bez autoryzacji (decyzja zespołu) — wszystkie endpointy otwarte.</li>
-</ul>
+<h2 id="s10">10. Konfiguracja i feature flagi <span class="badge b-draft">draft</span></h2>
+<p>Nowe zmienne w <code>api.config.settings</code> (i <code>.env.example</code>) — zero literałów w kodzie.</p>
+<div class="tablewrap">
+<table>
+<tr><th>Zmienna</th><th>Domyślnie</th><th>Znaczenie</th></tr>
+<tr><td><code>CHALLENGE_TOP_SOLUTIONS</code></td><td>6</td><td>Liczba rozwiązań w „Co już działa”</td></tr>
+<tr><td><code>CHALLENGE_TOP_KNOWLEDGE</code></td><td>6</td><td>Limit raportów i osobno materiałów na stronie wyzwania</td></tr>
+<tr><td><code>KNOWLEDGE_PREVIEW_LIMIT</code></td><td>4</td><td>Materiały na stronie <code>/wiedza</code></td></tr>
+<tr><td><code>COVERAGE_GAP_MIN_UNMATCHED</code></td><td>3</td><td>Minimalna liczba niedopasowanych zgłoszeń, by uznać lukę</td></tr>
+<tr><td><code>COVERAGE_GAP_MAX_SOLUTIONS</code></td><td>5</td><td>Poniżej tylu opublikowanych rozwiązań wyzwanie może być luką</td></tr>
+<tr><td><code>ROPS_GROUP_TAG_PREFIX</code></td><td><code>"ROPS: "</code></td><td>Prefiks tagu grupy ROPS „dla kogo” (fasety Biblioteki, sekcja 17)</td></tr>
+</table>
 </div>
+<p>Po stronie frontendu <code>MAP_SCALE_STEPS = 4</code> jako stała w <code>powiatTiles.ts</code> (prezentacja, nie logika biznesowa). Brak flagi wyłączającej moduł — pusty zbiór danych daje stany „brak danych”, nie błędy.</p>
 
-<h2 id="s9">9. Kontrakt dla frontendu (ekrany) <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<h2 id="s11">11. RODO i bezpieczeństwo <span class="badge b-draft">draft</span></h2>
 <ul>
-<li>Trasy w <code>web/</code>, ekrany i stany (ładowanie, pusto, błąd), elementy nawigacji.</li>
-<li>Wymogi WCAG 2.1 AA i design systemu (<code>DESIGN.md</code>, najwyżej jeden <code>ds-btn--cta</code> na ekran).</li>
+<li>Moduł nie zbiera danych osobowych. Treści wiedzy są publiczne; statystyki to liczniki.</li>
+<li><code>/api/stats/coverage</code> i <code>by_powiat</code> zwracają tylko liczby — nigdy <code>raw_text</code>, <code>contact_email</code> ani treści zgłoszeń. W logach jak w Module 1: tylko kody i długości.</li>
+<li>Dane przykładowe (<code>is_demo</code>) nie mogą udawać oficjalnych danych ROPS: znacznik „Dane przykładowe” przy każdym fakcie i wskaźniku z <code>is_demo = true</code>, źródło zawsze widoczne (<code>base.md</code> §9).</li>
+<li>Endpointy otwarte jak cała aplikacja (decyzja zespołu); panel trendów ukryty w UI za rolą administratora (zmiana <code>feature-2026-10-03-1</code>).</li>
 </ul>
+
+<h2 id="s12">12. Struktura katalogów i kolejność prac <span class="badge b-draft">draft</span></h2>
+
+<pre><code>db/init.sql                         knowledge_type, challenge_profiles, indicators, indicator_values
+api/models.py api/schemas.py        modele ORM i pydantic (ChallengeSummary, ChallengeDetail, KeyFact, Indicator*, CoverageRow)
+api/routers/knowledge.py            (nowy) /api/challenges, /api/indicators
+api/routers/staff.py                by_powiat, /api/stats/coverage
+api/routers/solutions.py            filtr knowledge_type
+api/config.py .env.example          zmienne z sekcji 10
+scripts/ingest.py                   pole knowledge_type w rekordzie
+scripts/ingest_knowledge.py         (nowy) profile i wskaźniki
+scripts/fetch_ioss.py               (nowy) pobranie wskaźników z IOSS → data/knowledge/indicators.json
+data/knowledge/                     (nowy) challenges.json, indicators.json, records/wiedza.json
+Makefile                            ingest-knowledge
+web/src/api/types.ts client.ts      typy i metody
+web/src/lib/powiatTiles.ts          (nowy) układ kafelków
+web/src/components/knowledge/       (nowy) PowiatTileMap, KeyFacts, ChallengeTile
+web/src/pages/KnowledgePage.tsx     przebudowa /wiedza
+web/src/pages/ChallengePage.tsx     (nowy) /wiedza/wyzwania/:code
+web/src/pages/MaterialsPage.tsx     (nowy) /wiedza/materialy
+web/src/pages/panel/TrendsPage.tsx  sekcje: w czasie, powiaty, luki</code></pre>
+
+<h4>Zadania (szczegóły w <code>module-2-tasks.md</code>, prefiks <code>Z</code>)</h4>
+<div class="tablewrap">
+<table>
+<tr><th>ID</th><th>Zadanie</th><th>Zależy od</th></tr>
+<tr><td>Z00</td><td>Schemat: <code>init.sql</code>, <code>models.py</code>, <code>SolutionCard.knowledge_type</code>, ustawienia</td><td>—</td></tr>
+<tr><td>Z01</td><td>Skrypt <code>scripts/fetch_ioss.py</code> → <code>data/knowledge/indicators.json</code></td><td>—</td></tr>
+<tr><td>Z02</td><td>Treści: <code>challenges.json</code> (8 profili) i <code>records/wiedza.json</code> (raporty, materiały)</td><td>—</td></tr>
+<tr><td>Z03</td><td>Ingest: <code>knowledge_type</code> w <code>scripts/ingest.py</code>, <code>scripts/ingest_knowledge.py</code>, <code>make ingest-knowledge</code></td><td>Z00</td></tr>
+<tr><td>Z04</td><td>API wiedzy: <code>api/routers/knowledge.py</code> + filtr w <code>/api/solutions</code></td><td>Z00</td></tr>
+<tr><td>Z05</td><td>API statystyk: <code>by_powiat</code>, filtr <code>powiat</code>, <code>/api/stats/coverage</code></td><td>Z00</td></tr>
+<tr><td>Z06</td><td>Frontend: typy i klient</td><td>Z04, Z05, Z12</td></tr>
+<tr><td>Z07</td><td>Strona wyzwania <code>/wiedza/wyzwania/:code</code> (bez mapy)</td><td>Z06</td></tr>
+<tr><td>Z08</td><td>Przegląd <code>/wiedza</code> i <code>/wiedza/materialy</code></td><td>Z06, Z13</td></tr>
+<tr><td>Z09</td><td>Panel trendów: w czasie, powiaty, luki</td><td>Z06</td></tr>
+<tr><td>Z10</td><td><code>PowiatTileMap</code> na <code>/wiedza</code> i stronie wyzwania</td><td>Z07, Z08, Z13</td></tr>
+<tr><td>Z12</td><td>API Biblioteki: <code>has_video</code>, <code>/api/solutions/facets</code></td><td>Z00</td></tr>
+<tr><td>Z13</td><td>Biblioteka <code>/rozwiazania</code> i nowa karta <code>SolutionCard</code> (M8), podnawigacja i <code>ZasobnikHeader</code> (M10)</td><td>Z06, Z12</td></tr>
+<tr><td>Z14</td><td>Strona innowacji <code>/rozwiazania/:id</code> (M9)</td><td>Z13</td></tr>
+<tr><td>Z11</td><td>Dane w bazie i przejście scenariuszy S1–S4, dostępność</td><td>Z01–Z10, Z13, Z14</td></tr>
+</table>
 </div>
+<p><strong>Najkrótsza działająca ścieżka do demo:</strong> Z00 → Z02 + Z03 → Z04 → Z12 → Z06 → Z07 (strona wyzwania z faktami, raportami, filmami i materiałami). Z01 (dane do mapy) równolegle od początku; potem Z08 i Z09 równolegle, mapa (Z10) na końcu.</p>
 
-<h2 id="s10">10. Konfiguracja i feature flagi <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Nowe zmienne w <code>api.config.settings</code> (progi, limity, flagi włączenia modułu) — zero literałów w kodzie.</li>
-</ul>
-</div>
-
-<h2 id="s11">11. RODO i bezpieczeństwo <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Jakie dane osobowe zbiera moduł, co nie może wyjść z API i nie może trafić do logów?</li>
-</ul>
-</div>
-
-<h2 id="s12">12. Struktura katalogów i kolejność prac <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Drzewo nowych plików i ścieżka krytyczna do demo (najkrótsza działająca ścieżka).</li>
-</ul>
-</div>
-
-<h2 id="s13">13. Rejestr decyzji (ADR) <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Numeracja per moduł: <code>ADR-M2-001</code>… — żeby nie kolidować z ADR-001 – 019 Modułu 1.</li>
-</ul>
+<h2 id="s13">13. Rejestr decyzji (ADR) <span class="badge b-draft">draft</span></h2>
+<div class="tablewrap">
+<table>
+<tr><th>ADR</th><th>Decyzja</th><th>Uzasadnienie</th><th>Odrzucone</th></tr>
+<tr><td><strong>ADR-M2-001</strong></td><td>Raporty i materiały to <code>solutions</code> z <code>kind = KNOWLEDGE</code> i nową kolumną <code>knowledge_type</code> (<code>REPORT</code> / <code>MATERIAL</code>); pole w <code>SolutionCard</code> i filtr w <code>/api/solutions</code>.</td><td>Reużywa ingestu, chunkingu, embeddingów, kart i stron szczegółu; wiedza automatycznie zasila czat Modułu 1. Zmiana addytywna.</td><td>Osobna tabela <code>knowledge_items</code> — duplikacja ingestu i wyszukiwania; tagi typu <code>typ:raport</code> — brak walidacji.</td></tr>
+<tr><td><strong>ADR-M2-002</strong></td><td>Fakty i wskaźniki z flagą <code>is_demo</code>; UI oznacza dane przykładowe tekstem, źródło zawsze widoczne.</td><td>Fakty i wskaźniki z raportów ROPS (CC BY 4.0) i IOSS mają <code>is_demo = false</code>; przykładowe są tylko opisy wyzwań bez danych (samotność, wykluczenie cyfrowe, koordynacja). Nie mogą udawać oficjalnych danych ROPS. Podmiana = zmiana pliku i ingest.</td><td>Ukrywanie pochodzenia danych.</td></tr>
+<tr><td><strong>ADR-M2-003</strong></td><td>Najdrobniejsza jednostka w Zasobniku to <strong>powiat</strong> (22). Gmina zostaje tylko w danych zgłoszeń.</td><td>Spójne z usunięciem gminy z UI (<code>bugs-2026-10-03-1</code>); dane diagnostyczne ROPS są zwykle w układzie powiatów; mniej pustych komórek.</td><td>Mapa gmin (183) — za drobna dla danych i dla czytelności.</td></tr>
+<tr><td><strong>ADR-M2-004</strong></td><td>Mapa jako <strong>kafelki powiatów</strong> (siatka CSS) z tabelą alternatywną, bez biblioteki map i bez GeoJSON.</td><td>Dostępność (równe pola, tekst w każdym kafelku, klawiatura), zero zależności, czytelne dla seniorów.</td><td>Mapa geograficzna SVG/Leaflet — małe powiaty nieczytelne, trudna dostępność, nowa zależność (backlog).</td></tr>
+<tr><td><strong>ADR-M2-005</strong></td><td><code>/api/stats</code> dostaje <code>by_powiat</code> i filtr <code>powiat</code>; nowy <code>/api/stats/coverage</code>. <code>by_gmina</code> zostaje.</td><td>Trendy w tej samej jednostce co mapa; zestawienie z biblioteką to „nowa jakość” dla ROPS. Addytywnie — panel F18 działa dalej.</td><td>Usunięcie <code>by_gmina</code> — łamie kontrakt Modułu 1.</td></tr>
+<tr><td><strong>ADR-M2-006</strong></td><td>Aktualizacja danych w MVP przez pliki JSON i idempotentny ingest; edycja w panelu należy do Modułu 6.</td><td>Najtańsza droga do „sprawnej aktualizacji” w PoC; pliki są wersjonowane w git.</td><td>Formularze w panelu w tym module — dublowanie Modułu 6.</td></tr>
+<tr><td><strong>ADR-M2-008</strong></td><td>Biblioteka przeglądana przede wszystkim po <strong>grupach ROPS „dla kogo”</strong> (tagi <code>ROPS: …</code>), z filtrem „Z filmem”; nowe <code>GET /api/solutions/facets</code> i parametr <code>has_video</code>. Filtry gminy, poziomu sprawdzenia i sortowanie znikają z UI (API bez zmian).</td><td>Każda z 115 innowacji ma dokładnie jedną grupę ROPS — tak bibliotekę porządkuje ROPS; poziom sprawdzenia jest prawie stały (3), gmina usunięta z UI decyzją zespołu. Fasety dają liczby do nagłówka i chipów jednym zapytaniem.</td><td>Osobna kolumna <code>group</code> w <code>solutions</code> (zmiana tabeli Modułu 1 bez potrzeby); liczenie faset po stronie klienta (wymaga pobrania całej biblioteki).</td></tr>
+<tr><td><strong>ADR-M2-007</strong></td><td>Wskaźniki mapy z <strong>IOSS</strong> (obserwator.rops.krakow.pl, dane GUS BDL), pobierane skryptem <code>scripts/fetch_ioss.py</code> z tabel HTML do <code>data/knowledge/indicators.json</code>. Nasza mapa kafelkowa pełni rolę „Mapy Wyzwań Społecznych”.</td><td>„Mapy Wyzwań” nie ma w serwisie ROPS (research 2026-10-04); IOSS to oficjalne dane ROPS w układzie 22 powiatów. Skrypt + plik w repo = powtarzalna aktualizacja, a demo nie zależy od dostępności IOSS.</td><td>Ręczne przepisywanie liczb; GUS BDL API (limit 1000 żądań / 12 h, inne kody wskaźników — backlog); pobieranie z IOSS w runtime API.</td></tr>
+</table>
 </div>
 
 <h2 id="s14">14. Backlog kolejnych iteracji <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
 <ul>
-<li>Co świadomie odkładamy i co już przygotowujemy pod to w PoC.</li>
+<li><strong>Asystent kuratora (AI):</strong> wgranie PDF raportu → LLM proponuje lead, fakty i wskaźniki z cytatem strony → pracownik zatwierdza. Przygotowanie w PoC: format <code>challenges.json</code> i <code>indicators.json</code> jako docelowe wyjście asystenta.</li>
+<li><strong>„Zapytaj raport”:</strong> czat RAG ograniczony do <code>KNOWLEDGE</code> danego wyzwania, z cytowaniami jak w Module 1.</li>
+<li><strong>Zgłaszane a zdiagnozowane:</strong> zestawienie udziału zgłoszeń w powiecie z wartościami wskaźników (gdzie mieszkańcy zgłaszają problem, którego diagnoza nie widzi, i odwrotnie).</li>
+<li><strong>Mapa geograficzna</strong> (GeoJSON powiatów) jako alternatywny widok kafelków.</li>
+<li><strong>Edycja wiedzy w panelu</strong> — Moduł 6.</li>
+<li><strong>Automatyczna aktualizacja:</strong> wskaźniki z GUS BDL API (to samo źródło co IOSS) zamiast scrapera; nowe raporty ROPS wykrywane przez wyszukiwarkę serwisu (<code>GET /ajax/get-search</code>) lub listę <code>/badania-analizy-raporty/raporty-z-badan</code> — rops.krakow.pl nie ma RSS ani sitemap.</li>
+<li><strong>Biblioteka:</strong> tag „wdrożone w modelach usług” (9 innowacji z „Innowacje w małopolskich modelach”) i dopisanie 6 innowacji akcelerowanych w IWS 2.0, jeśli ich brakuje.</li>
+<li><strong>Ścieżki tematyczne</strong> (np. „Senior w gminie wiejskiej”) łączące kilka wyzwań.</li>
 </ul>
-</div>
 
-<h2 id="s15">15. Koszt utrzymania i zasoby <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<h2 id="s15">15. Koszt utrzymania i zasoby <span class="badge b-draft">draft</span></h2>
 <ul>
-<li>Koszt zmienny (LLM, generacja obrazów itp.) na jedno użycie i przy 10 tys. / 100 tys. użyć miesięcznie; zasoby ludzkie po stronie ROPS.</li>
+<li><strong>Koszt zmienny:</strong> brak wywołań LLM przy przeglądaniu. Jedyny koszt AI to embeddingi przy ingeście — kilkadziesiąt wpisów wiedzy to ułamek centa na pełne przeładowanie; ruch użytkowników (10 tys. czy 100 tys. odsłon miesięcznie) nie generuje kosztu AI.</li>
+<li><strong>Infrastruktura:</strong> ta sama baza PostgreSQL i API co Moduł 1; nowe tabele mają setki wierszy.</li>
+<li><strong>Zasoby ludzkie ROPS:</strong> kurator treści — aktualizacja plików po każdej nowej publikacji (szacunkowo kilka godzin na kwartał); przegląd luk z panelu przy planowaniu naborów.</li>
 </ul>
-</div>
 
-<h2 id="s16">16. Pytania otwarte do sesji planowania <span class="badge b-draft">draft</span></h2>
+<h2 id="s16">16. Pytania otwarte <span class="badge b-draft">draft</span></h2>
 <ol>
-<li>Skąd bierzemy dane Mapy Wyzwań i raportów (PDF, XLSX, strona ROPS)? Czy liczby per powiat/gmina, czy tylko opisy?</li>
-<li>Czy prezentujemy mapę geograficzną (GeoJSON gmin/powiatów Małopolski) — i jak zapewnić jej dostępność (tabela alternatywna)?</li>
-<li>Model wiedzy: rozszerzamy <code>solutions.kind</code> o podtypy, czy osobna tabela <code>knowledge_items</code>?</li>
-<li>„Zapytaj raport” — czy wiedza ma własny czat RAG, czy tylko zasila <code>candidates.context</code> w Module 1?</li>
-<li>Trendy: czy łączymy zgłoszenia z Modułu 1 z danymi z raportów (np. „problem zgłaszany, a nieobecny w diagnozie”)?</li>
-<li>Aktualizacja: edycja w panelu (przechodzi do Modułu 6) czy import plików (CSV/JSON) przez kuratora?</li>
+<li><strong>„Mapa Wyzwań Społecznych”</strong> nie istnieje publicznie (research 2026-10-04). Zapytać mentorów ROPS na stoisku, czy to planowany produkt Hubu i czy mają dane — do tego czasu obowiązuje ADR-M2-007.</li>
+<li><strong>Eksport CSV z IOSS</strong> nie zadziałał przez curl (formularz POST z tokenem); scraper czyta tabelę HTML. Jeśli struktura HTML okaże się niestabilna — fallback: ręczne uzupełnienie <code>indicators.json</code> z IOSS.</li>
+<li><strong>Wskaźniki zdrowia psychicznego</strong> (IOSS 136, 228) — potwierdzić etykiety i sens dla mapy w Z01.</li>
+<li><strong>Układ kafelków</strong> 22 powiatów — zatwierdzić w Z10.</li>
+<li><strong>Progi luki</strong> (<code>COVERAGE_GAP_*</code>) — skalibrować na seedzie zgłoszeń przed demo.</li>
+<li><strong>Przypisanie innowacji do wyzwań</strong> jest bardzo nierówne (81 × <code>SERVICE_ACCESS</code>, 0 dla samotności, wykluczenia cyfrowego, depopulacji i suburbanizacji). Czy przed demo przemapować kategorie (np. wiele wyzwań na innowację albo poprawione <code>data/rops-category-map.json</code>)? To zmiana danych Modułu 1 — wymaga ADR. Do tego czasu strona wyzwania pokazuje komunikat o braku rozwiązań (Z07).</li>
 </ol>
+
+<h2 id="s17">17. Odświeżenie interfejsu Biblioteki i strony innowacji <span class="badge b-draft">draft</span></h2>
+
+<p>Obecne ekrany Zasobnika (<code>/rozwiazania</code>, <code>/rozwiazania/:id</code>, podnawigacja) działają, ale są jednolitą siatką kart tekstowych i nie spełniają wymagania „ciekawa, pomysłowa, ale dostępna forma prezentacji innowacji, m.in. filmów”. Ta sekcja opisuje odświeżenie (elementy M8–M10); nowe ekrany wiedzy z sekcji 9 powstają od razu w tym samym stylu.</p>
+
+<h3>Audyt danych Biblioteki (2026-10-04, <code>data/solutions/rops-biblioteka.json</code>)</h3>
+<div class="tablewrap">
+<table>
+<tr><th>Pole</th><th>Stan</th><th>Wniosek dla UI</th></tr>
+<tr><td>Grupa ROPS „dla kogo” (tag <code>ROPS: …</code>)</td><td>9 grup, <strong>każda z 115 innowacji ma dokładnie jedną</strong>: rodzina 21, niepełnosprawność sensoryczna 20, seniorzy 20, ograniczona mobilność 18, niepełnosprawność intelektualna 14, zdrowie 9, cudzoziemcy 6, rynek pracy 5, bezdomność 2</td><td>Główna oś przeglądania — tak porządkuje bibliotekę sam ROPS. Filtr <code>tag</code> już jest w API.</td></tr>
+<tr><td>Film (<code>media.type = video</code>)</td><td><strong>26 ze 115</strong></td><td>Filmy jako wyróżniona sekcja i filtr „Z filmem”; karta bez filmu potrzebuje własnego wyglądu, nie pustego miejsca.</td></tr>
+<tr><td>Wyzwanie (<code>category</code>)</td><td><code>SERVICE_ACCESS</code> 81, <code>AGING</code> 20, <code>MENTAL_HEALTH</code> 9, <code>COORDINATION</code> 5; pozostałe 4 wyzwania — 0</td><td>Filtr wyzwań drugorzędny. Ryzyko dla stron wyzwań — pytanie otwarte 6.</td></tr>
+<tr><td><code>evidence_level</code></td><td>3 dla 111, 2 dla 4</td><td>Sortowanie i filtr po poziomie sprawdzenia niczego nie różnicują — znikają z UI (API bez zmian). Odznaka tylko na stronie innowacji.</td></tr>
+<tr><td><code>cost_range</code>, <code>implementation_steps</code></td><td>puste we wszystkich 115</td><td>Bez pól „Koszt” i „Jak wdrożyć” na kartach; na stronie innowacji sekcje ukryte, gdy puste (już tak działa).</td></tr>
+<tr><td>Pozostałe <code>media</code></td><td>materiały (115), licencja (115), dokumenty (27)</td><td>Sekcja „Do pobrania” z typem pliku zamiast ogólnej listy linków.</td></tr>
+<tr><td>Projekt (tag <code>Projekt: …</code>)</td><td>27 innowacji z 3 inkubatorów ROPS</td><td>Informacja na stronie innowacji („Powstało w projekcie …”), nie filtr.</td></tr>
+</table>
+</div>
+
+<h3>M8 — Biblioteka innowacji <code>/rozwiazania</code></h3>
+<ul>
+<li><strong>Nagłówek z liczbami:</strong> „115 innowacji · 26 z filmem · 9 grup odbiorców” (z <code>GET /api/solutions/facets</code>), krótki lead i pole wyszukiwania na pierwszym planie.</li>
+<li><strong>„Dla kogo” jako główny filtr:</strong> rząd przycisków <code>ds-chip</code> (<code>aria-pressed</code>) z 9 grupami i licznikami; jedna grupa naraz, „Wszystkie” resetuje. Grupa w URL (<code>?tag=</code>).</li>
+<li><strong>„Obejrzyj, jak to działa”:</strong> gdy nie ma filtrów — pasek do 6 innowacji z filmem (duże miniatury, tytuł, grupa) nad katalogiem; link „Wszystkie z filmem” włącza filtr.</li>
+<li><strong>Filtry dodatkowe</strong> (zwinięte w <code>&lt;details&gt;</code> na telefonie): wyzwanie, „Tylko z filmem” (checkbox). <strong>Bez gminy</strong> (zamyka punkt 3 zmiany <code>bugs-2026-10-03-1</code> dla Biblioteki), <strong>bez poziomu sprawdzenia i bez sortowania</strong>.</li>
+<li><strong>Karta innowacji</strong> (wspólny <code>SolutionCard</code>):
+  <ul>
+  <li>z filmem — miniatura 16:9 z etykietą „Film”;</li>
+  <li>bez filmu — nagłówek karty w kolorze <code>soft-*</code> grupy z ikoną grupy (9 ikon konturowych, <code>aria-hidden</code>);</li>
+  <li>grupa ROPS jako <code>ds-tag</code>, tytuł, streszczenie przycięte do 3 linii (<code>line-clamp-3</code>), organizacja;</li>
+  <li>bez „Koszt” i „Poziom sprawdzenia”; cała karta klikalna przez link w tytule (rozciągnięty obszar kliknięcia, jeden przystanek Tab).</li>
+  </ul>
+  Karta jest wspólna z czatem i panelem — czat zachowuje numer <code>[n]</code> i wszystkie obecne informacje dostępne dla czytników.</li>
+<li><strong>Siatka:</strong> 1 / 2 / 3 kolumny (telefon / tablet / desktop), 24 karty na stronę.</li>
+</ul>
+
+<h3>M9 — Strona innowacji <code>/rozwiazania/:id</code></h3>
+<ul>
+<li><strong>Nagłówek:</strong> okruszki, grupa ROPS i wyzwanie jako tagi, tytuł, organizacja; film (jeśli jest) od razu pod nagłówkiem na pełną szerokość treści.</li>
+<li><strong>Układ dwukolumnowy od <code>lg</code>:</strong> lewa kolumna — „W skrócie” (lead), „Opis” ze śródtytułami; prawa kolumna — karta „Najważniejsze” (dla kogo, grupa, wyzwanie, poziom sprawdzenia z opisem, projekt, organizacja, źródło) i „Do pobrania” (materiały, dokumenty, licencja z ikoną typu i informacją o nowej karcie). Na telefonie karta „Najważniejsze” idzie zaraz po leadzie.</li>
+<li><strong>„Podobne innowacje”:</strong> do 3 kart z tej samej grupy ROPS (bez bieżącej) + link „Więcej dla: &lt;grupa&gt;” → <code>/rozwiazania?tag=…</code>.</li>
+<li><strong>Zakończenie:</strong> „Masz podobny problem? Opisz go” → Matchmaking (jedyny <code>ds-btn--cta</code>) i „Wróć do wyników”.</li>
+<li>Wpisy <code>KNOWLEDGE</code> (raporty, materiały) używają tej samej strony z etykietą „Raport” / „Materiał”, bez sekcji „Podobne innowacje”, z okruszkami do <code>/wiedza</code> lub <code>/wiedza/materialy</code>.</li>
+</ul>
+
+<h3>M10 — Spójność Zasobnika</h3>
+<ul>
+<li><strong>Podnawigacja</strong> (Wiedza o wyzwaniach · Biblioteka innowacji · Materiały) jako zakładki z podkreśleniem aktywnej (<code>aria-current="page"</code>), jak <code>ds-nav</code>, ale mniejsze — zamiast obecnej listy linków.</li>
+<li><strong>Wspólny nagłówek stron Zasobnika</strong> (<code>ZasobnikHeader</code>): etykieta modułu, <code>h1</code>, lead, opcjonalny pasek liczb — na <code>/wiedza</code>, <code>/rozwiazania</code>, <code>/wiedza/materialy</code>, stronie wyzwania.</li>
+<li><strong>Styl:</strong> wyłącznie Tailwind z presetu + klasy <code>ds-*</code>. Przebudowywane ekrany przenoszą style z <code>catalog.css</code> i <code>solution.css</code> do klas Tailwinda, a nieużywane reguły usuwają (<code>AGENTS.md</code>). Wygląd sprawdzony w <code>data-contrast="high"</code>, przy 200 % i 360 px.</li>
+</ul>
+
+<h3>Zmiany API (addytywnie, ADR-M2-008)</h3>
+<pre><code>GET /api/solutions?has_video=true            # nowy filtr: media zawiera element type = "video"
+
+GET /api/solutions/facets?kind=SOLUTION → SolutionFacets   # tylko PUBLISHED
+SolutionFacets {
+  total: int,
+  with_video: int,
+  groups: list[{ tag: str, label_pl: str, count: int }],        # tagi z prefiksem settings.ROPS_GROUP_TAG_PREFIX ("ROPS: "),
+                                                                 # label_pl = tag bez prefiksu; sortowanie count DESC, tag ASC
+  categories: list[{ code: str, label_pl: str, count: int }]    # tylko count &gt; 0, wg challenge_taxonomy.sort_order
+}</code></pre>
 
 <hr>
 
 <footer>
-<p><strong>Moduł 2 — Zasobnik wiedzy</strong> · v0.1 · 2026-10-03 · Małopolski Hub Innowacji Społecznych.</p>
+<p><strong>Moduł 2 — Zasobnik wiedzy</strong> · v0.4 · 2026-10-04 · Małopolski Hub Innowacji Społecznych.</p>
+<p><strong>v0.4</strong> — sekcja 17: audyt danych Biblioteki i odświeżenie interfejsu (M8 Biblioteka, M9 strona innowacji, M10 spójność Zasobnika), ADR-M2-008 (grupy ROPS i fasety), zadania Z12–Z14.</p>
+<p><strong>v0.3</strong> — wyniki researchu rops.krakow.pl: źródła danych (IOSS, OZPS, diagnozy, materiały), mapowanie wskaźników IOSS na wyzwania, ADR-M2-007 (IOSS zamiast nieistniejącej „Mapy Wyzwań”), skrypt <code>fetch_ioss.py</code>, zadania Z00–Z11.</p>
+<p><strong>v0.2</strong> — zakres MVP (M1–M7), scenariusze S1–S4, model danych, kontrakt API i ekranów, konfiguracja, ADR-M2-001 – 006, kolejność prac Z00–Z10. Stan obecny zweryfikowany w kodzie (korpus bez wpisów <code>KNOWLEDGE</code>, <code>by_week</code> dostępny w API).</p>
 <p><strong>v0.1</strong> — szkielet: wymaganie z <code>base.md</code>, ocena pokrycia przez istniejącą implementację, pytania do sesji planowania.</p>
 <p>Dokument iteracyjny. Zmiany: nowa sekcja na końcu, wpis w spisie treści, ADR w sekcji 13 przy zmianie decyzji. Podnieś wersję w nagłówku i w stopce.</p>
 </footer>
