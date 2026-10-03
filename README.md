@@ -61,6 +61,16 @@ Baza startuje pusta (poza taksonomią). Załaduj korpus rozwiązań (115 innowac
 docker compose exec api python -m scripts.ingest data/solutions/
 ```
 
+Dane Modułu 2 (Zasobnik wiedzy — raporty i materiały ROPS, profile 8 wyzwań, wskaźniki IOSS dla 22 powiatów):
+
+```bash
+docker compose exec api python -m scripts.ingest data/knowledge/records/
+docker compose exec api python -m scripts.ingest_knowledge data/knowledge/
+# z hosta: make ingest-knowledge   (wskaźniki IOSS odświeżysz: python -m scripts.fetch_ioss)
+```
+
+Na istniejącej bazie sprzed Modułu 2: `make reset-db` (nowa kolumna `solutions.knowledge_type`) albo ręcznie `ALTER TABLE` + `make db-m2`.
+
 Opcjonalnie dodaj przykładowe zgłoszenia, żeby panel i liczniki „podobny problem zgłosiło już…” miały dane:
 
 ```bash
