@@ -1,0 +1,37 @@
+/*
+ * „Znajdź rozwiązanie” (F08): układ strony i formularza czatu.
+ * Tylko var(--…) z design-system/tokens.css; wygląd pól, chipów i przycisków z klas ds-….
+ */
+
+.find-page__intro { display: flex; flex-direction: column; gap: var(--space-3); max-width: 48rem; }
+.find-page__intro > * { margin: 0; }
+.find-page__intro > h1 { font: var(--text-h1); color: var(--navy); }
+.find-page__lead { font: var(--text-body-lg); color: var(--ink); }
+
+/* Formularz dla mieszkańców: wąska kolumna w rem (rośnie z powiększeniem tekstu). */
+.chat-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 48rem;
+  min-width: 0;
+}
+
+.chat-form__label { font: var(--text-h3); color: var(--ink); }
+.chat-form__message { font: var(--text-body-lg); resize: vertical; }
+.chat-form__privacy { margin-block-start: var(--space-2); }
+
+/* Przykłady: chipy w zawijanym rzędzie; długie teksty łamią się zamiast przewijać poziomo. */
+.chat-form__examples { display: flex; flex-direction: column; gap: var(--space-2); }
+.chat-form__examples-label { margin: 0; font: var(--text-body); color: var(--ink-muted); }
+.chat-form__chips { margin: 0; padding: 0; list-style: none; }
+.chat-form__chips > li { max-width: 100%; }
+.chat-form__chips .ds-chip { max-width: 100%; text-align: start; white-space: normal; overflow-wrap: anywhere; }
+
+.chat-form__actions { gap: var(--space-4); }
+.chat-form .ds-btn--cta[aria-disabled="true"] { cursor: progress; }
+
+/* Przełącznik scenariusza mocka (tylko DEV) — mniej widoczny niż pola formularza. */
+.chat-form__dev { padding-block-start: var(--space-4); border-block-start: 1px dashed var(--line-strong); /* grubość linii (1 px), nie odstęp */ }
+.chat-form__dev .ds-label { font: var(--text-small); color: var(--ink-muted); }
+.chat-form__dev .ds-select { max-width: 24rem; }

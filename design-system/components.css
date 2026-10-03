@@ -171,3 +171,380 @@ a { color: var(--navy); text-underline-offset: 3px; }
 }
 .ds-input:focus, .ds-select:focus, .ds-textarea:focus { border-color: var(--navy); }
 .ds-error { color: var(--danger); font: var(--text-small); }
+
+/* =====================================================================
+ * Rozszerzenia (F03): komponenty interfejsu Splot zbudowane z tokenów.
+ * Wartości w px poniżej to wyłącznie grubości obramowań, minimalne pola
+ * trafienia (44 / 24 px), rozmiary ikon i progi szerokości ekranu —
+ * tak jak w klasach powyżej. Kolory wyłącznie z tokens.css.
+ * ===================================================================== */
+
+/* ---------- Dostępność: tekst dla czytników, link „Przejdź do treści” ---------- */
+.ds-sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+.ds-skip-link {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 100;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--navy);
+  color: var(--on-navy);
+  font: var(--text-label);
+  font-size: 1rem;
+  text-decoration: underline;
+  transform: translateY(-200%);
+}
+.ds-skip-link:focus, .ds-skip-link:focus-visible { transform: none; }
+
+/* ---------- Układ: strona, stos, grupa, siatka kart ---------- */
+.ds-page {
+  display: grid;
+  gap: var(--space-8);
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: var(--space-8) var(--space-4);
+}
+.ds-page > * { min-width: 0; }
+@media (min-width: 900px) {
+  .ds-page { gap: var(--space-12); padding-block: var(--space-12); }
+}
+.ds-stack { display: flex; flex-direction: column; gap: var(--space-4); }
+.ds-stack > * { margin-block: 0; }
+.ds-cluster { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
+.ds-grid {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+}
+
+/* ---------- Alert: zawsze ikona + słowo (np. „Uwaga:”) ---------- */
+.ds-alert {
+  --ds-alert-tone: var(--info);
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  padding: var(--space-3) var(--space-4);
+  border-left: 4px solid var(--ds-alert-tone);
+  border-radius: var(--radius-sm);
+  background: var(--surface-sunken);
+  color: var(--ink);
+  font: var(--text-body);
+}
+.ds-alert--info    { --ds-alert-tone: var(--info); }
+.ds-alert--success { --ds-alert-tone: var(--success); }
+.ds-alert--warning { --ds-alert-tone: var(--warning); }
+.ds-alert--danger  { --ds-alert-tone: var(--danger); }
+.ds-alert__icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: var(--space-1);
+  color: var(--ds-alert-tone);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ds-alert__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+.ds-alert__body > * { margin: 0; }
+.ds-alert__title { font-weight: 700; }
+:root[data-contrast="high"] .ds-alert { border: 1px solid var(--line); border-left-width: 4px; }
+
+/* ---------- Pomoc do pola i licznik znaków ---------- */
+.ds-hint { margin: 0; font: var(--text-small); color: var(--ink-muted); }
+.ds-counter {
+  margin: 0;
+  font: var(--text-small);
+  color: var(--ink-muted);
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+.ds-counter[data-state="limit"] { color: var(--ink); font-weight: 700; }
+
+/* ---------- Choices: grupa radio jako duże pola ---------- */
+.ds-choices {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.ds-choices__legend { padding: 0; margin-bottom: var(--space-2); font: var(--text-label); font-size: 1rem; color: var(--ink); }
+.ds-choices__hint { margin: calc(-1 * var(--space-1)) 0 var(--space-1); font: var(--text-small); color: var(--ink-muted); }
+.ds-choices--inline { flex-direction: row; flex-wrap: wrap; }
+.ds-choice {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--ink);
+  font: var(--text-body-lg);
+  cursor: pointer;
+}
+.ds-choice:hover { background: var(--surface-sunken); }
+.ds-choice__input {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--navy);
+}
+.ds-choice:has(.ds-choice__input:checked) {
+  border: 2px solid var(--navy);
+  padding: calc(var(--space-2) - 0.5px) calc(var(--space-4) - 0.5px);
+  font-weight: 700;
+}
+.ds-choice:has(.ds-choice__input:checked)::after {
+  content: "✓";
+  content: "✓" / "";
+  margin-left: auto;
+  padding-left: var(--space-2);
+  font: var(--text-h3);
+  color: var(--navy);
+}
+.ds-choice:has(.ds-choice__input:focus-visible) { outline: 3px solid var(--focus); outline-offset: 2px; }
+.ds-choice__input:focus-visible { outline: none; }
+
+/* ---------- Wideo i miniatura filmu na karcie ---------- */
+.ds-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  background: var(--surface-sunken);
+}
+.ds-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.ds-card__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--surface-sunken);
+}
+.ds-card__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ds-card__media-label {
+  position: absolute;
+  left: var(--space-2);
+  bottom: var(--space-2);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3) var(--space-1) var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--navy);
+  color: var(--on-navy);
+  font: var(--text-label);
+}
+.ds-card__media-label svg { width: 20px; height: 20px; fill: currentColor; flex: none; }
+:root[data-contrast="high"] :is(.ds-video, .ds-card__media) { border: 1px solid var(--line); }
+
+/* ---------- Postęp wyszukiwania i spinner ---------- */
+.ds-progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ds-progress__step {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 28px;
+  color: var(--ink-muted);
+  font: var(--text-body);
+}
+.ds-progress__step[aria-current="step"] { color: var(--ink); font-weight: 700; }
+.ds-progress__step[data-state="done"] { color: var(--ink); }
+.ds-progress__icon {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+}
+.ds-progress__icon svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.ds-progress__step[data-state="done"] .ds-progress__icon { border: 0; color: var(--success); }
+.ds-progress__step[aria-current="step"] .ds-progress__icon { border: 0; }
+
+.ds-spinner {
+  display: inline-block;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--line);
+  border-top-color: var(--navy);
+  border-radius: var(--radius-pill);
+  animation: ds-spin 0.9s linear infinite;
+  vertical-align: middle;
+}
+.ds-spinner--large { width: 32px; height: 32px; border-width: 4px; }
+@keyframes ds-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .ds-spinner { animation: none; border-top-color: var(--line); border-right-color: var(--navy); border-bottom-color: var(--navy); }
+}
+
+/* ---------- Cytowanie [n] i numer karty ---------- */
+.ds-cite {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  min-height: 24px;
+  padding: 0 var(--space-1);
+  border-radius: var(--radius-sm);
+  color: var(--navy);
+  font: var(--text-label);
+  text-decoration: underline;
+  vertical-align: baseline;
+}
+.ds-cite:hover { background: var(--surface-sunken); }
+.ds-card:has(> .ds-rank) { position: relative; padding-right: calc(var(--space-4) + 2.5rem); }
+.ds-rank {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  min-height: 2rem;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--navy);
+  color: var(--on-navy);
+  font: var(--text-label);
+  font-size: 1rem;
+}
+
+/* ---------- Meta: lista definicji na karcie ---------- */
+.ds-meta {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+}
+.ds-meta__item { display: flex; flex-direction: column; gap: 0; min-width: 0; }
+.ds-meta dt { font: var(--text-label); color: var(--ink); }
+.ds-meta dd { margin: 0; font: var(--text-body); color: var(--ink); overflow-wrap: anywhere; }
+.ds-meta--small dd { font: var(--text-small); }
+@media (min-width: 600px) {
+  .ds-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-6); }
+}
+
+/* ---------- Badge: licznik przy pozycji nawigacji ---------- */
+.ds-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--navy);
+  color: var(--on-navy);
+  font: var(--text-label);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Tabela panelu ---------- */
+.ds-table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius-lg); }
+.ds-table { width: 100%; border-collapse: collapse; font: var(--text-body); color: var(--ink); }
+.ds-table caption { padding: var(--space-3) var(--space-4); text-align: start; font: var(--text-label); font-size: 1rem; }
+.ds-table th, .ds-table td { padding: var(--space-3) var(--space-4); text-align: start; vertical-align: top; }
+.ds-table thead th { font: var(--text-label); background: var(--surface-muted); border-bottom: 1.5px solid var(--line-strong); white-space: nowrap; }
+.ds-table tbody tr + tr :is(th, td) { border-top: 1px solid var(--line); }
+.ds-table tbody th { font-weight: 700; }
+.ds-table .ds-table__num { text-align: end; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* ---------- Paginacja ---------- */
+.ds-pagination { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); align-items: center; justify-content: space-between; }
+.ds-pagination__status { font: var(--text-body); color: var(--ink); }
+.ds-pagination__controls { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+
+/* ---------- Stopka (bez pasków) ---------- */
+.ds-footer {
+  margin-top: var(--space-12);
+  padding: var(--space-8) var(--space-4);
+  background: var(--surface-muted);
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  font: var(--text-body);
+}
+.ds-footer__inner { max-width: 72rem; margin-inline: auto; display: flex; flex-direction: column; gap: var(--space-4); }
+.ds-footer__links { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-6); margin: 0; padding: 0; list-style: none; }
+.ds-footer a { color: var(--navy); }
+.ds-footer__note { margin: 0; font: var(--text-small); color: var(--ink-muted); }
+
+/* ---------- Słupek wykresu (wypełnienie stripe-*, podpisy w ink obok) ---------- */
+.ds-bar {
+  --ds-bar-color: var(--stripe-blue);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-1) var(--space-3);
+  align-items: center;
+  color: var(--ink);
+}
+@media (min-width: 600px) {
+  .ds-bar { grid-template-columns: minmax(8rem, 14rem) minmax(0, 1fr) minmax(0, max-content); }
+}
+.ds-bar--magenta { --ds-bar-color: var(--stripe-magenta); }
+.ds-bar--blue    { --ds-bar-color: var(--stripe-blue); }
+.ds-bar--cyan    { --ds-bar-color: var(--stripe-cyan); }
+.ds-bar--green   { --ds-bar-color: var(--stripe-green); }
+.ds-bar--yellow  { --ds-bar-color: var(--stripe-yellow); }
+.ds-bar--violet  { --ds-bar-color: var(--violet); }
+.ds-bar--navy    { --ds-bar-color: var(--navy); }
+.ds-bar__label { font: var(--text-label); font-size: 1rem; color: var(--ink); overflow-wrap: anywhere; }
+.ds-bar__value { font: var(--text-small); color: var(--ink); }
+.ds-bar__track {
+  display: flex;
+  height: 1.25rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  overflow: hidden;
+}
+/* Szerokość segmentu: style="--ds-bar-share: 40%" */
+.ds-bar__fill { flex: none; width: var(--ds-bar-share, 0%); background: var(--ds-bar-color); }
+/* Druga część słupka (np. „bez dopasowania”): kontur zamiast wypełnienia, nie tylko inny kolor */
+.ds-bar__fill--rest { background: var(--surface); box-shadow: inset 0 0 0 2px var(--ds-bar-color); }
+.ds-bar-list { display: flex; flex-direction: column; gap: var(--space-4); margin: 0; padding: 0; list-style: none; }
+
+/* ---------- Cytat zgłoszenia mieszkańca (panel) ---------- */
+.ds-quote {
+  margin: 0;
+  padding: var(--space-4) var(--space-6);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface-muted);
+  color: var(--ink);
+  font: var(--text-body-lg);
+  overflow-wrap: anywhere;
+}
+.ds-quote > p { margin: 0; white-space: pre-line; }
+.ds-quote__footer { margin-top: var(--space-2); font: var(--text-small); color: var(--ink-muted); white-space: normal; }

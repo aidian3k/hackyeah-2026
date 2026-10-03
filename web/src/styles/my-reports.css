@@ -1,0 +1,55 @@
+/*
+ * „Moje zgłoszenia” (F12). Tylko var(--…) z design-system/tokens.css;
+ * karty i metadane mają klasy ds-… z components.css, tu jest wyłącznie układ.
+ */
+
+.my-reports {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.my-reports > li {
+  min-width: 0;
+}
+
+.my-report {
+  overflow-wrap: anywhere;
+}
+.my-report > * {
+  margin: 0;
+}
+.my-report__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-4);
+}
+.my-report__head > * {
+  margin: 0;
+}
+.my-report__title {
+  font: var(--text-h2);
+  color: var(--navy);
+}
+.my-report__count {
+  font: var(--text-label);
+  color: var(--ink);
+}
+.my-report__excerpt {
+  font: var(--text-body-lg);
+  color: var(--ink);
+}
+.my-report__none {
+  margin: 0;
+  font: var(--text-body);
+  color: var(--ink-muted);
+}
+/* Odpowiedzi to zagnieżdżone karty — oddzielone linią od danych zgłoszenia (1px = grubość linii jak w ds-card). */
+.my-report__replies {
+  padding-block-start: var(--space-4);
+  border-block-start: 1px solid var(--line);
+}

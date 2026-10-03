@@ -1,0 +1,50 @@
+/*
+ * Widok wyników czatu (F09). Tylko układ; wygląd z klas ds-… i tokenów.
+ * Regiony aria-live są w drzewie od początku (puste), więc zamiast `gap`
+ * odstęp dostaje tylko niepusty blok — puste regiony nie robią dziur.
+ */
+
+.chat-results { display: flex; flex-direction: column; min-width: 0; }
+.chat-results > * { margin: 0; }
+.chat-results > * + :not(:empty) { margin-block-start: var(--space-6); }
+.chat-results > h2 { font: var(--text-h2); color: var(--navy); }
+
+.chat-results__note { margin: 0; font: var(--text-body); color: var(--ink-muted); }
+.chat-results__also > h3 { font: var(--text-h3); color: var(--navy); }
+
+/* Cel cytowania: fokus programowy po kliknięciu myszą nie łapie :focus-visible,
+   więc karta dostaje ten sam obrys co globalny :focus-visible z DS (3 px / 2 px — wyjątek). */
+/* Obrys fokusu wg DESIGN.md (3 px, odsunięty o 2 px) — jak :focus-visible w DS; wyjątek od zakazu px. */
+.chat-results .card-list .ds-card:focus { outline: 3px solid var(--focus); outline-offset: 2px; }
+.chat-results .card-list .ds-card { scroll-margin-block-start: var(--space-16); }
+
+/* ---------- Podsumowanie ---------- */
+.answer-summary__head { display: flex; flex-direction: column; gap: var(--space-1); }
+.answer-summary__head > * { margin: 0; }
+.answer-summary__head > h3 { font: var(--text-h3); color: var(--navy); }
+.answer-summary__note { font: var(--text-small); color: var(--ink-muted); }
+.answer-summary__text { display: flex; flex-direction: column; gap: var(--space-3); max-width: 70ch; }
+.answer-summary__text > p { margin: 0; font: var(--text-body-lg); color: var(--ink); overflow-wrap: anywhere; }
+
+/* ---------- Skala problemu: najmocniejszy komunikat, większy tekst, bez accent ---------- */
+.scale-notice { font: var(--text-body-lg); padding: var(--space-4); }
+.scale-notice__lead { font: var(--text-h3); color: var(--ink); }
+.scale-notice__lead .ds-alert__title { font-weight: inherit; }
+.scale-notice__icon { color: var(--navy); }
+
+/* ---------- Wiedza o problemie ---------- */
+.knowledge-list__head { display: flex; flex-direction: column; gap: var(--space-1); }
+.knowledge-list__head > * { margin: 0; }
+.knowledge-list__head > h3 { font: var(--text-h3); color: var(--navy); }
+.knowledge-list__note { font: var(--text-body); color: var(--ink-muted); }
+.knowledge-list__items { display: flex; flex-direction: column; gap: var(--space-3); margin: 0; padding: 0; list-style: none; }
+.knowledge-item { overflow-wrap: anywhere; }
+.knowledge-item > * { margin: 0; }
+.knowledge-item__title { font: var(--text-body-lg); font-weight: 700; }
+
+/* ---------- Doprecyzowanie i opinia ---------- */
+.follow-up { max-width: 40rem; }
+.follow-up__intro { margin: 0; font: var(--text-body-lg); color: var(--ink); }
+.feedback-prompt__question { margin: 0; font: var(--text-body); font-weight: 700; color: var(--ink); }
+.feedback-prompt__status { margin: 0; font: var(--text-body); color: var(--ink-muted); }
+.feedback-prompt__status:not(:empty) { margin-block-start: var(--space-2); }

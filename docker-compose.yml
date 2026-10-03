@@ -28,5 +28,16 @@ services:
         condition: service_healthy
     command: uvicorn api.main:app --host 0.0.0.0 --port 8000
 
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+      additional_contexts:
+        design-system: ./design-system
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+
 volumes:
   pgdata:

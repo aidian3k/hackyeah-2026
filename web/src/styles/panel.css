@@ -1,0 +1,47 @@
+/*
+ * Panel Hubu (F14: skrzynka „Nowe”). Tylko var(--…) z design-system/tokens.css;
+ * wygląd pochodzi z klas ds-… w design-system/components.css, tu jest wyłącznie układ.
+ */
+
+/* ---------- Kafle liczb ---------- */
+.inbox-tile > * { margin: 0; }
+.inbox-tile__value {
+  font: var(--text-h2);
+  color: var(--navy);
+  font-variant-numeric: tabular-nums;
+}
+.inbox-tile__label { font: var(--text-body); color: var(--ink); }
+
+/* ---------- Najnowsze zgłoszenia ---------- */
+.inbox-list { display: flex; flex-direction: column; gap: var(--space-4); margin: 0; padding: 0; list-style: none; }
+.inbox-report__meta { display: flex; flex-direction: column; gap: var(--space-2); }
+.inbox-report__facts { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); }
+.inbox-report__link { font: var(--text-body); }
+
+/* Status dopasowania: ikona + słowo */
+.match-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font: var(--text-label);
+  color: var(--ink);
+}
+.match-status__icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2; /* ikony konturowe 2 px wg DESIGN.md */
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.match-status--matched .match-status__icon { color: var(--success); }
+.match-status--unmatched .match-status__icon { color: var(--warning); }
+
+/* ---------- Pomysły czekające na przejrzenie ---------- */
+.inbox-pending { overflow-wrap: anywhere; }
+.inbox-pending > * { margin: 0; }
+.inbox-pending > .ds-tag { align-self: flex-start; }
+.inbox-pending__title { font: var(--text-h3); }
+.inbox-pending__by { font: var(--text-small); color: var(--ink-muted); }
