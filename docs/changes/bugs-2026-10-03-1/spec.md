@@ -1,5 +1,7 @@
 # bugs-2026-10-03-1 — frontend po pierwszym sprincie
 
+**Status:** otwarte (brak planu)
+
 Lista zmian do wdrożenia po pierwszej iteracji frontendu.
 
 ## Do zmiany

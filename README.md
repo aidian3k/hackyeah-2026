@@ -83,8 +83,18 @@ Potem otwórz http://localhost:8080:
 
 - `/` — Znajdź rozwiązanie (czat),
 - `/rozwiazania` — Biblioteka innowacji, `/wiedza` — Wiedza o wyzwaniach,
-- `/mam-pomysl` — zgłoszenie własnego pomysłu, `/moje-zgloszenia` — odpowiedzi zespołu Hubu,
-- `/panel` — panel administratora (bez logowania — to PoC).
+- `/mam-pomysl` — zgłoszenie własnego pomysłu, `/moje-zgloszenia` — odpowiedzi zespołu Hubu (rola reporter),
+- `/panel` — panel administratora (rola administrator).
+
+#### Konta demo
+
+Logowanie jest wyłącznie po stronie frontendu (PoC, bez backendowego auth). Przycisk „Zaloguj się”
+jest w banerze; ekrany wymagające roli pokazują go też w miejscu treści.
+
+| Rola          | Login      | Hasło         |
+|---------------|------------|---------------|
+| reporter      | `reporter` | `reporter123` |
+| administrator | `admin`    | `admin123`    |
 
 ### Zmiana providera embeddingów
 
@@ -115,8 +125,12 @@ make web-mock                   # frontend na mocku SSE (docs/mocks) — bez bac
 
 ## Dokumentacja
 
+Pełna mapa: [`docs/README.md`](docs/README.md). Najważniejsze:
+
 - `docs/modules/01-matchmaking/module-1-matchmaking.html` — specyfikacja Modułu 1,
 - `docs/modules/01-matchmaking/module-1-tasks.md` — plan i status backendu, `docs/modules/01-matchmaking/frontend-tasks.md` — plan i status frontendu,
 - `docs/modules/01-matchmaking/frontend-a11y.md` — przegląd dostępności i scenariusz demo,
 - `DESIGN.md`, `design-system/` — design system interfejsu,
+- `docs/changes/` — zmiany i poprawki po sprincie (`spec.md` + `plan.md` per zmiana),
+- `AGENTS.md` — reguły pracy dla ludzi i agentów,
 - `docs/base.md` — kontekst biznesowy wyzwania.
