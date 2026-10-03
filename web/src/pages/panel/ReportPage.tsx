@@ -184,7 +184,7 @@ function ReportView({ report, onPatched, onRefresh }: ViewProps) {
             <p>{report.normalized_text}</p>
             <h3>Dane wyodrębnione automatycznie (JSON)</h3>
             {/* Zawijanie zamiast poziomego przewijania przy 320 px. */}
-            <pre style={{ whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}>
+            <pre className="whitespace-pre-wrap [overflow-wrap:anywhere]">
               {JSON.stringify(report.extracted, null, 2)}
             </pre>
           </div>
@@ -226,9 +226,6 @@ function TopMatch({ solutionId }: { solutionId: number | null }) {
       {solutionId === null ? (
         <Alert tone="warning">
           <p>Brak dopasowanego rozwiązania. To może być luka w bibliotece.</p>
-          <p>
-            <Link to="/mam-pomysl">Dodaj rozwiązanie do biblioteki</Link>
-          </p>
         </Alert>
       ) : (
         <TopMatchCard solutionId={solutionId} />

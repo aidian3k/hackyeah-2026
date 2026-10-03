@@ -17,7 +17,8 @@ export interface AuthSession {
 
 interface AuthContextValue {
   session: AuthSession | null;
-  login(username: string, password: string): boolean;
+  /** Zwraca sesję po udanym logowaniu, `null` przy złym loginie lub haśle. */
+  login(username: string, password: string): AuthSession | null;
   logout(): void;
 }
 
@@ -31,7 +32,6 @@ const ROLE_LABELS: Record<Role, string> = {
 export const AUTH_ACCOUNTS: AuthAccount[] = [
   { username: "reporter", password: "reporter123", role: "reporter", displayName: "Reporter demo" },
   { username: "admin", password: "admin123", role: "administrator", displayName: "Administrator demo" },
-  { username: "ops", password: "ops123", role: "administrator", displayName: "Administrator panelu" },
 ];
 
 function isRole(value: unknown): value is Role {
@@ -85,9 +85,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       session,
       login(username, password) {
         const account = findAccount(username, password);
-        if (!account) return false;
-        setSession({ username: account.username, role: account.role, displayName: account.displayName });
-        return true;
+        if (!account) return null;
+        const next: AuthSession = { username: account.username, role: account.role, displayName: account.displayName };
+        setSession(next);
+        return next;
       },
       logout() {
         setSession(null);
@@ -111,4 +112,20 @@ export function roleLabel(role: Role): string {
 
 export function roleHome(role: Role): string {
   return role === "administrator" ? "/panel" : "/";
+}
+
+/** Ścieżki wymagające roli — po wylogowaniu z nich wracamy na stronę główną. */
+export function isProtectedPath(pathname: string): boolean {
+  return /^\/(mam-pomysl|moje-zgloszenia|panel)(\/|$)/.test(pathname);
+}
+
+/** Przyjmuje tylko ścieżki wewnętrzne (`/…`, nie `//…`), żeby `?next=` nie wyprowadzał poza serwis. */
+export function safeNext(next: string | null): string | null {
+  if (!next || !next.startsWith("/") || next.startsWith("//")) return null;
+  return next;
+}
+
+/** Adres ekranu logowania z powrotem na `path`. */
+export function loginHref(path: string): string {
+  return path === "/" ? "/login" : `/login?next=${encodeURIComponent(path)}`;
 }

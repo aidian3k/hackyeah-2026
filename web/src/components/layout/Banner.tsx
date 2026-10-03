@@ -1,11 +1,12 @@
 import { ContrastToggle } from "./ContrastToggle";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth, roleLabel } from "@/lib/auth";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { isProtectedPath, loginHref, useAuth } from "@/lib/auth";
 
 /** Baner z nazwą i paskami marki. Paski występują tylko tutaj, raz na ekranie. */
 export function Banner() {
   const { session, logout } = useAuth();
   const navigate = useNavigate();
+  const { pathname, search } = useLocation();
 
   return (
     <div className="ds-banner">
@@ -23,25 +24,23 @@ export function Banner() {
       </svg>
       <div className="ds-banner__tools">
         {session ? (
-          <div className="ds-cluster">
-            <span className="ds-tag">
-              {session.displayName} · {roleLabel(session.role)}
-            </span>
-            <button
-              type="button"
-              className="ds-btn ds-btn--small"
-              onClick={() => {
-                logout();
-                navigate("/login", { replace: true });
-              }}
-            >
-              Wyloguj się
-            </button>
-          </div>
+          <button
+            type="button"
+            className="ds-btn ds-btn--small"
+            onClick={() => {
+              logout();
+              // Z ekranu publicznego nie wyrzucamy; z ekranu wymagającego roli — na stronę główną.
+              if (isProtectedPath(pathname)) navigate("/", { replace: true });
+            }}
+          >
+            Wyloguj się
+          </button>
         ) : (
-          <Link className="ds-btn ds-btn--small" to="/login">
-            Zaloguj się
-          </Link>
+          pathname !== "/login" && (
+            <Link className="ds-btn ds-btn--small" to={loginHref(pathname + search)}>
+              Zaloguj się
+            </Link>
+          )
         )}
         <ContrastToggle />
       </div>

@@ -1,9 +1,12 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { useAuth } from "@/lib/auth";
 import { MODULE_NAMES } from "@/lib/modules";
 
-/** Nawigacja publiczna — zakładki nazwane jak moduły w base.md. NavLink ustawia aria-current="page". */
+/** Nawigacja publiczna — zakładki nazwane jak moduły w base.md, zależne od roli. NavLink ustawia aria-current="page". */
 export function MainNav() {
   const { pathname } = useLocation();
+  const { session } = useAuth();
+  const isAdmin = session?.role === "administrator";
   // Zasobnik wiedzy obejmuje Wiedzę i Bibliotekę innowacji (z kartami rozwiązań).
   const inZasobnik = /^\/(wiedza|rozwiazania)(\/|$)/.test(pathname);
 
@@ -18,12 +21,21 @@ export function MainNav() {
       <Link to="/wiedza" className="ds-nav__item" aria-current={inZasobnik ? "page" : undefined}>
         {MODULE_NAMES.zasobnik}
       </Link>
-      <NavLink to="/mam-pomysl" className="ds-nav__item">
-        {MODULE_NAMES.kreator}
-      </NavLink>
-      <NavLink to="/moje-zgloszenia" className="ds-nav__item">
-        Moje zgłoszenia
-      </NavLink>
+      {isAdmin ? (
+        <NavLink to="/panel" className="ds-nav__item">
+          {MODULE_NAMES.panel}
+        </NavLink>
+      ) : (
+        <>
+          {/* Niezalogowany też widzi te zakładki — ekran pokaże komunikat z „Zaloguj się”. */}
+          <NavLink to="/mam-pomysl" className="ds-nav__item">
+            {MODULE_NAMES.kreator}
+          </NavLink>
+          <NavLink to="/moje-zgloszenia" className="ds-nav__item">
+            Moje zgłoszenia
+          </NavLink>
+        </>
+      )}
     </nav>
   );
 }

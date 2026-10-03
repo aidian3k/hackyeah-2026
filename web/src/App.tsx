@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import { Navigate, Outlet, Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { AppShell } from "@/components/layout/AppShell";
-import { PanelLayout } from "@/components/layout/PanelLayout";
+import { RequireRole } from "@/components/RequireRole";
 import { FindPage } from "@/pages/FindPage";
 import { IdeaPage } from "@/pages/IdeaPage";
 import { KnowledgePage } from "@/pages/KnowledgePage";
@@ -16,7 +16,6 @@ import { ReportsPage } from "@/pages/panel/ReportsPage";
 import { SolutionReviewPage } from "@/pages/panel/SolutionReviewPage";
 import { SolutionsQueuePage } from "@/pages/panel/SolutionsQueuePage";
 import { TrendsPage } from "@/pages/panel/TrendsPage";
-import { useAuth, type Role, roleHome } from "@/lib/auth";
 
 /**
  * Po zmianie ścieżki (nie przy pierwszym renderze) przenosi fokus na h1 nowej strony,
@@ -39,41 +38,30 @@ function useRouteFocus(): void {
   }, [pathname]);
 }
 
-function RequireRole({ requiredRole }: { requiredRole: Role }) {
-  const { session } = useAuth();
-  if (!session) return <Navigate to="/login" replace />;
-  if (session.role !== requiredRole) return <Navigate to={roleHome(session.role)} replace />;
-  return <Outlet />;
-}
-
 export function App() {
   useRouteFocus();
   return (
     <Routes>
-      <Route path="login" element={<LoginPage />} />
       <Route element={<AppShell />}>
         <Route index element={<FindPage />} />
+        <Route path="login" element={<LoginPage />} />
         <Route path="rozwiazania" element={<LibraryPage />} />
         <Route path="rozwiazania/:id" element={<SolutionPage />} />
         <Route path="wiedza" element={<KnowledgePage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Route>
-      <Route element={<RequireRole requiredRole="reporter" />}>
-        <Route element={<AppShell />}>
+        <Route element={<RequireRole requiredRole="reporter" />}>
           <Route path="mam-pomysl" element={<IdeaPage />} />
           <Route path="moje-zgloszenia" element={<MyReportsPage />} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
-      <Route element={<RequireRole requiredRole="administrator" />}>
-        <Route path="panel" element={<PanelLayout />}>
-          <Route index element={<InboxPage />} />
-          <Route path="zgloszenia" element={<ReportsPage />} />
-          <Route path="zgloszenia/:id" element={<ReportPage />} />
-          <Route path="rozwiazania" element={<SolutionsQueuePage />} />
-          <Route path="rozwiazania/:id" element={<SolutionReviewPage />} />
-          <Route path="trendy" element={<TrendsPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
+      <Route path="panel" element={<RequireRole requiredRole="administrator" layout="panel" />}>
+        <Route index element={<InboxPage />} />
+        <Route path="zgloszenia" element={<ReportsPage />} />
+        <Route path="zgloszenia/:id" element={<ReportPage />} />
+        <Route path="rozwiazania" element={<SolutionsQueuePage />} />
+        <Route path="rozwiazania/:id" element={<SolutionReviewPage />} />
+        <Route path="trendy" element={<TrendsPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );
