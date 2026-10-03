@@ -16,6 +16,7 @@ from sqlalchemy import (
     DateTime,
     ForeignKey,
     Integer,
+    Numeric,
     SmallInteger,
     Text,
     UniqueConstraint,
@@ -32,6 +33,11 @@ EMBEDDING_DIM = settings.EMBEDDING_DIM  # stały wymiar 1024 (ADR-004), jak vect
 class SolutionKind(enum.StrEnum):
     SOLUTION = "SOLUTION"
     KNOWLEDGE = "KNOWLEDGE"
+
+
+class KnowledgeType(enum.StrEnum):
+    REPORT = "REPORT"
+    MATERIAL = "MATERIAL"
 
 
 class SolutionOrigin(enum.StrEnum):
@@ -134,6 +140,9 @@ class Solution(Base):
         nullable=False,
         default=SolutionKind.SOLUTION,
         server_default=SolutionKind.SOLUTION.value,
+    )
+    knowledge_type: Mapped[KnowledgeType | None] = mapped_column(
+        _pg_enum(KnowledgeType, "knowledge_type")
     )
     title: Mapped[str] = mapped_column(Text, nullable=False)
     summary: Mapped[str] = mapped_column(Text, nullable=False)
@@ -313,9 +322,7 @@ class InnovationTest(Base):
     )
 
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
-    solution_id: Mapped[int] = mapped_column(
-        BigInteger, ForeignKey("solutions.id"), nullable=False
-    )
+    solution_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("solutions.id"), nullable=False)
     title: Mapped[str] = mapped_column(Text, nullable=False)
     goal_description: Mapped[str] = mapped_column(Text, nullable=False)
     instruction: Mapped[str] = mapped_column(Text, nullable=False)
@@ -470,3 +477,58 @@ class InnovationTestFeedback(Base):
     )
 
     application: Mapped[InnovationTestApplication] = relationship(back_populates="feedback")
+
+
+class ChallengeProfile(Base):
+    __tablename__ = "challenge_profiles"
+
+    category: Mapped[str] = mapped_column(
+        Text, ForeignKey("challenge_taxonomy.code"), primary_key=True
+    )
+    lead_pl: Mapped[str] = mapped_column(Text, nullable=False)
+    key_facts: Mapped[list[Any]] = mapped_column(
+        JSONB, nullable=False, default=list, server_default="[]"
+    )
+    is_demo: Mapped[bool] = mapped_column(
+        Boolean, nullable=False, default=True, server_default="true"
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+
+
+class Indicator(Base):
+    __tablename__ = "indicators"
+
+    code: Mapped[str] = mapped_column(Text, primary_key=True)
+    category: Mapped[str] = mapped_column(
+        Text, ForeignKey("challenge_taxonomy.code"), nullable=False
+    )
+    label_pl: Mapped[str] = mapped_column(Text, nullable=False)
+    unit: Mapped[str] = mapped_column(Text, nullable=False)
+    year: Mapped[int] = mapped_column(SmallInteger, nullable=False)
+    higher_is_worse: Mapped[bool] = mapped_column(
+        Boolean, nullable=False, default=True, server_default="true"
+    )
+    region_value: Mapped[float | None] = mapped_column(Numeric)
+    source_name: Mapped[str] = mapped_column(Text, nullable=False)
+    source_url: Mapped[str | None] = mapped_column(Text)
+    is_demo: Mapped[bool] = mapped_column(
+        Boolean, nullable=False, default=True, server_default="true"
+    )
+    sort_order: Mapped[int] = mapped_column(
+        Integer, nullable=False, default=100, server_default="100"
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+
+
+class IndicatorValueRow(Base):
+    __tablename__ = "indicator_values"
+
+    indicator_code: Mapped[str] = mapped_column(
+        Text, ForeignKey("indicators.code", ondelete="CASCADE"), primary_key=True
+    )
+    powiat: Mapped[str] = mapped_column(Text, primary_key=True)
+    value: Mapped[float] = mapped_column(Numeric, nullable=False)

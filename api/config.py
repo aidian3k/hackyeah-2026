@@ -70,6 +70,13 @@ class Settings(BaseSettings):
     CORS_ORIGINS: str = "http://localhost:5173"
     SEARCH_ENDPOINT_ENABLED: bool = True
 
+    # --- Moduł 2: Zasobnik wiedzy ---
+    CHALLENGE_TOP_SOLUTIONS: int = 6
+    CHALLENGE_TOP_KNOWLEDGE: int = 6
+    COVERAGE_GAP_MIN_UNMATCHED: int = 3
+    COVERAGE_GAP_MAX_SOLUTIONS: int = 5
+    ROPS_GROUP_TAG_PREFIX: str = "ROPS: "
+
     # --- Różne ---
     DATA_DIR: str = "data"
     LOG_LEVEL: str = "INFO"

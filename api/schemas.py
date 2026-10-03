@@ -13,6 +13,7 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationInfo, field_validat
 ReporterTypeLiteral = Literal["RESIDENT", "NGO", "JST", "OTHER"]
 ReportStatusLiteral = Literal["NEW", "TRIAGED", "MATCHED", "IN_PROGRESS", "CLOSED"]
 SolutionKindLiteral = Literal["SOLUTION", "KNOWLEDGE"]
+KnowledgeTypeLiteral = Literal["REPORT", "MATERIAL"]
 
 _EMAIL_RE = r"^[^@\s]+@[^@\s]+\.[^@\s]+$"
 
@@ -51,6 +52,7 @@ class MediaItem(BaseModel):
 class SolutionCard(BaseModel):
     id: int
     kind: SolutionKindLiteral
+    knowledge_type: KnowledgeTypeLiteral | None = None
     rank: int
     title: str
     summary: str
@@ -266,6 +268,13 @@ class StatsByGmina(BaseModel):
     unmatched: int
 
 
+class StatsByPowiat(BaseModel):
+    powiat: str | None
+    total: int
+    matched: int
+    unmatched: int
+
+
 class StatsByWeek(BaseModel):
     week: date
     total: int
@@ -290,6 +299,7 @@ class Stats(BaseModel):
     unmatched: int
     by_category: list[StatsByCategory]
     by_gmina: list[StatsByGmina]
+    by_powiat: list[StatsByPowiat] = Field(default_factory=list)
     by_week: list[StatsByWeek]
     by_reporter_type: list[StatsByReporterType]
 
@@ -349,9 +359,7 @@ TesterTypeLiteral = Literal[
 ]
 TestModeLiteral = Literal["ONLINE", "OFFLINE", "HYBRID"]
 InnovationTestStatusLiteral = Literal["OPEN", "CLOSED"]
-ApplicationStatusLiteral = Literal[
-    "SUBMITTED", "ACCEPTED", "REJECTED", "COMPLETED", "CANCELED"
-]
+ApplicationStatusLiteral = Literal["SUBMITTED", "ACCEPTED", "REJECTED", "COMPLETED", "CANCELED"]
 
 
 def _require_nonblank(value: str, label: str) -> str:
@@ -498,8 +506,7 @@ class InnovationTestApplicationPublic(BaseModel):
     status: ApplicationStatusLiteral
     consent_version: str
     message_pl: str = (
-        "Zgłoszenie zostało przyjęte. Hub skontaktuje się z Tobą, jeśli zakwalifikuje "
-        "Cię do testu."
+        "Zgłoszenie zostało przyjęte. Hub skontaktuje się z Tobą, jeśli zakwalifikuje Cię do testu."
     )
 
 
@@ -639,3 +646,85 @@ class InnovationTestReport(BaseModel):
     ai_model: str | None = None
     ai_prompt_version: str | None = None
     ai_generated_at: datetime | None = None
+
+
+# --- Moduł 2: Zasobnik wiedzy ------------------------------------------------------
+
+
+class KeyFact(BaseModel):
+    label_pl: str
+    value: str
+    unit: str | None = None
+    year: int | None = None
+    source_name: str
+    source_url: str | None = None
+
+
+class ChallengeSummary(BaseModel):
+    code: str
+    label_pl: str
+    lead_pl: str | None
+    key_fact: KeyFact | None
+    solutions_count: int
+    knowledge_count: int
+    is_demo: bool
+    updated_at: datetime | None
+
+
+class IndicatorMeta(BaseModel):
+    code: str
+    category: str
+    label_pl: str
+    unit: str
+    year: int
+    higher_is_worse: bool
+    region_value: float | None
+    source_name: str
+    source_url: str | None
+    is_demo: bool
+
+
+class IndicatorValue(BaseModel):
+    powiat: str
+    value: float
+
+
+class IndicatorDetail(IndicatorMeta):
+    values: list[IndicatorValue]
+
+
+class ChallengeDetail(ChallengeSummary):
+    key_facts: list[KeyFact]
+    indicators: list[IndicatorMeta]
+    reports: list[SolutionCard]
+    materials: list[SolutionCard]
+    solutions: list[SolutionCard]
+
+
+class CoverageRow(BaseModel):
+    category: str
+    label_pl: str
+    reports_total: int
+    reports_unmatched: int
+    solutions_published: int
+    knowledge_published: int
+    is_gap: bool
+
+
+class FacetGroup(BaseModel):
+    tag: str
+    label_pl: str
+    count: int
+
+
+class FacetCategory(BaseModel):
+    code: str
+    label_pl: str
+    count: int
+
+
+class SolutionFacets(BaseModel):
+    total: int
+    with_video: int
+    groups: list[FacetGroup]
+    categories: list[FacetCategory]

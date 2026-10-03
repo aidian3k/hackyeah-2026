@@ -64,6 +64,7 @@ def _card_fields(row: SolutionRow) -> dict[str, Any]:
     return {
         "id": s.id,
         "kind": _enum_value(s.kind),
+        "knowledge_type": _enum_value(s.knowledge_type) if s.knowledge_type else None,
         "title": s.title,
         "summary": s.summary,
         "organization": s.organization,
