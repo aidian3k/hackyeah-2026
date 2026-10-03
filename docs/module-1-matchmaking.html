@@ -86,10 +86,10 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
   <h1>Moduł 1 — Matchmaking społeczny</h1>
   <div class="sub">Dokument implementacyjny dla Małopolskiego Hubu Innowacji Społecznych. Odbiorca: agent lub programista implementujący backend. Interfejs użytkownika i warstwa tożsamości są poza zakresem tego modułu.</div>
   <div class="meta">
-    <span><strong>Wersja:</strong> v0.2</span>
+    <span><strong>Wersja:</strong> v0.3</span>
     <span><strong>Data:</strong> 2026-10-03</span>
     <span><strong>Status:</strong> <span class="badge b-draft">draft</span></span>
-    <span><strong>Zakres:</strong> backend — pipeline, API, zapis zgłoszeń, klastrowanie</span>
+    <span><strong>Zakres:</strong> backend — import korpusu z Biblioteki Innowacji ROPS, pipeline, API, zapis zgłoszeń, klastrowanie</span>
   </div>
 </header>
 
@@ -116,6 +116,7 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
     <li><a href="#s13">Struktura katalogów i kolejność prac</a></li>
     <li><a href="#s14">Rejestr decyzji (ADR)</a></li>
     <li><a href="#s15">Backlog kolejnych iteracji</a></li>
+    <li><a href="#s16">Import Biblioteki Innowacji Społecznych ROPS</a></li>
   </ol>
 </nav>
 
@@ -124,6 +125,8 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 <p>Małopolska ma dwa równoległe problemy. Pierwszy: realne wyzwania społeczne rosną. Drugi: rozwiązania na te wyzwania <em>już istnieją</em> — tworzą je organizacje pozarządowe, Centra Usług Społecznych, jednostki publiczne i grupy mieszkańców — ale są rozproszone, nieudokumentowane i nieskalowalne. Gmina A rozwiązuje w 2026 problem, który gmina B rozwiązała w 2023, i nigdy się o tym nie dowie.</p>
 
 <p>Moduł 1 zasypuje tę lukę: <strong>mieszkaniec opisuje problem po polsku, system znajduje istniejące rozwiązania</strong> i jednocześnie rejestruje zgłoszenie, żeby Hub widział skalę zjawiska.</p>
+
+<p><strong>Skąd biorą się „istniejące rozwiązania".</strong> Podstawowym korpusem jest publiczna <a href="https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/kategorie">Biblioteka Innowacji Społecznych ROPS Kraków</a>: około 115 opisanych i przetestowanych innowacji w 9 kategoriach (stan z 2026-10-03). Moduł 1 pobiera je automatycznie, zapisuje w naszej bazie i wyszukuje po nich (sekcja 16, ADR-009). Bez tego importu wyszukiwarka nie miałaby czego zwracać, a dane demonstracyjne (<code>seed-demo.json</code>) tylko uzupełniają wyzwania, których biblioteka nie pokrywa.</p>
 
 <h4>Wyzwania regionu (taksonomia bazowa)</h4>
 <div class="tablewrap">
@@ -155,6 +158,7 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 
 <h4>W zakresie Modułu 1</h4>
 <ul>
+<li><strong>Import Biblioteki Innowacji Społecznych ROPS</strong>: scraper wszystkich kategorii, snapshot w repozytorium, ponowny import idempotentny, archiwizacja wpisów usuniętych ze źródła (sekcja 16).</li>
 <li>Endpoint czatu <code>POST /api/chat</code> ze strumieniowaniem SSE — przyjmuje opis problemu w języku naturalnym.</li>
 <li>Hybrydowy pipeline wyszukiwania: tor leksykalny ‖ tor semantyczny → RRF → reranking.</li>
 <li>Odpowiedź RAG: krótkie streszczenie z cytowaniami + karty rozwiązań.</li>
@@ -175,6 +179,8 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 <tr><td>Canvas Innowacji Społecznych jako narzędzie w aplikacji</td><td>Moduł 4</td></tr>
 <tr><td><strong>Uwierzytelnianie, konta, role, uprawnienia</strong></td><td>Poza zakresem projektu w tej iteracji (ADR-007)</td></tr>
 <tr><td>Powiadomienia e-mail, eksporty, raportowanie</td><td>Backlog (sekcja 15)</td></tr>
+<tr><td>Parsowanie załączników biblioteki ROPS (PDF z folderem, archiwa ZIP z materiałami) do treści przeszukiwalnej</td><td>Backlog (sekcja 15). Moduł 1 zapisuje tylko odnośniki do nich</td></tr>
+<tr><td>Zapis zmian z powrotem do witryny ROPS</td><td>Nigdy — import działa tylko w jedną stronę, ROPS pozostaje źródłem prawdy</td></tr>
 </table>
 </div>
 
@@ -191,7 +197,7 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 <tr><th>Komponent</th><th>Technologia</th><th>Odpowiedzialność</th></tr>
 <tr><td><code>api</code></td><td>Python 3.12 + FastAPI + SQLAlchemy 2.0 (async)</td><td>Pipeline, SSE, zapis zgłoszeń, klastrowanie, API agregacji</td></tr>
 <tr><td><code>db</code></td><td>PostgreSQL 16 + <code>pgvector</code> + <code>unaccent</code> + <code>pg_trgm</code></td><td>Korpus, wektory, indeks odwrócony, zgłoszenia, klastry</td></tr>
-<tr><td><code>scripts</code></td><td>Python CLI (ten sam venv co <code>api</code>)</td><td>Ingest korpusu, backfill embeddingów, ewaluacja</td></tr>
+<tr><td><code>scripts</code></td><td>Python CLI (ten sam venv co <code>api</code>)</td><td>Scraper Biblioteki ROPS, ingest korpusu, backfill embeddingów, ewaluacja</td></tr>
 </table>
 </div>
 
@@ -241,7 +247,7 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 
 <h2 id="s4">4. Model danych <span class="badge b-stable">stable</span></h2>
 
-<p>Siedem tabel. DDL poniżej jest kompletny i do wklejenia — kolejność tworzenia odpowiada zależnościom kluczy obcych. Migracje przez Alembic, ale pierwsza migracja może być dosłownie tym plikiem.</p>
+<p>Osiem tabel (ósma, <code>import_runs</code>, doszła w ADR-009). DDL poniżej jest kompletny i do wklejenia — kolejność tworzenia odpowiada zależnościom kluczy obcych. Migracje przez Alembic, ale pierwsza migracja może być dosłownie tym plikiem.</p>
 
 <h3>4.1 Rozszerzenia i typy</h3>
 <pre><code>CREATE EXTENSION IF NOT EXISTS vector;
@@ -278,6 +284,14 @@ CREATE TYPE report_status   AS ENUM ('NEW', 'TRIAGED', 'MATCHED', 'IN_PROGRESS',
     contact              JSONB       NOT NULL DEFAULT '{}',     -- {"name":..,"email":..,"phone":..}
     source_url           TEXT,
     source_name          TEXT,                                  -- "Biblioteka Innowacji Społecznych"
+    -- ↓ pola importu ze źródeł zewnętrznych (ADR-009, sekcja 16)
+    external_id          TEXT,                                  -- "rops-bis:bawita" — stabilny klucz źródła
+    source_categories    TEXT[]      NOT NULL DEFAULT '{}',     -- kategorie w źródle: {"dla-seniorow"}
+    category_source      TEXT        NOT NULL DEFAULT 'MANUAL', -- KEYWORDS | LLM | SOURCE_MAP | MANUAL
+    authors              TEXT[]      NOT NULL DEFAULT '{}',     -- autorzy innowacji (wymóg CC BY)
+    license              TEXT,                                  -- "CC-BY-4.0"
+    resources            JSONB       NOT NULL DEFAULT '{}',     -- {"folder_pdf":..,"video":..,"materials":..}
+    source_seen_at       TIMESTAMPTZ,                           -- ostatni import, w którym wpis był w źródle
     evidence_level       SMALLINT    NOT NULL DEFAULT 1
                                      CHECK (evidence_level BETWEEN 1 AND 5),
     origin               solution_origin NOT NULL DEFAULT 'CURATED',
@@ -289,6 +303,7 @@ CREATE TYPE report_status   AS ENUM ('NEW', 'TRIAGED', 'MATCHED', 'IN_PROGRESS',
 );
 
 CREATE UNIQUE INDEX solutions_source_url_uq ON solutions (source_url) WHERE source_url IS NOT NULL;
+CREATE UNIQUE INDEX solutions_external_id_uq ON solutions (external_id) WHERE external_id IS NOT NULL;
 CREATE INDEX solutions_category_idx ON solutions (category);
 CREATE INDEX solutions_gmina_idx    ON solutions (gmina);
 CREATE INDEX solutions_status_idx   ON solutions (status);
@@ -301,6 +316,10 @@ CREATE INDEX solutions_title_trgm   ON solutions USING gin (title gin_trgm_ops);
 <tr><td><code>status</code></td><td>Wyszukiwanie <strong>widzi tylko</strong> <code>PUBLISHED</code>. <code>USER_SUBMITTED</code> startuje jako <code>PENDING_REVIEW</code> i nie zanieczyszcza wyników, dopóki operator nie zatwierdzi.</td></tr>
 <tr><td><code>evidence_level</code></td><td>1 = pomysł, 3 = wdrożone w jednej gminie, 5 = wdrożone wielokrotnie z ewaluacją. Wyświetlane na karcie, docelowo lekki mnożnik w rankingu (nie w v0.1).</td></tr>
 <tr><td><code>content_hash</code></td><td>Klucz idempotencji ingestu: ten sam hash ⇒ pomiń re-embedding (sekcja 9).</td></tr>
+<tr><td><code>external_id</code></td><td>Klucz upsertu dla danych importowanych. Dla biblioteki ROPS: <code>rops-bis:&lt;slug&gt;</code>, gdzie <code>slug</code> to część adresu po przecinku (<code>dla-seniorow,<strong>bawita</strong></code>). <strong>Nie</strong> używaj <code>source_url</code> jako klucza — zawiera kategorię, więc przeniesienie wpisu do innej kategorii w źródle utworzyłoby duplikat.</td></tr>
+<tr><td><code>source_categories</code> vs <code>category</code></td><td>Kategorie ROPS opisują <strong>grupę docelową</strong> („Dla seniorów", „Dla rynku pracy"), a nasza taksonomia — <strong>wyzwanie</strong> („Samotność i izolacja"). To dwa różne wymiary: <code>source_categories</code> przechowuje oryginał bez zmian, <code>category</code> to kod z <code>challenge_taxonomy</code> wyznaczony przy imporcie (16.5). Skąd pochodzi kod, mówi <code>category_source</code>.</td></tr>
+<tr><td><code>authors</code>, <code>license</code></td><td>Biblioteka publikuje innowacje na licencji CC BY 4.0, więc przy każdym wyświetleniu trzeba podać autorów i źródło. Dlatego oba pola trafiają do <code>SolutionCard</code> (sekcja 7.1).</td></tr>
+<tr><td><code>source_seen_at</code></td><td>Wpis, który zniknął ze źródła, dostaje <code>status = 'ARCHIVED'</code> i nie jest usuwany, bo wskazują na niego <code>reports.top_solution_id</code> i telemetria (16.6).</td></tr>
 </table>
 </div>
 
@@ -340,6 +359,7 @@ CREATE INDEX solution_chunks_emb_idx ON solution_chunks
 <li><code>chunk_index = 0</code> — zawsze <code>title + "\n" + summary</code>. To jest chunk, który trafia w większość zapytań.</li>
 <li><code>chunk_index &gt;= 1</code> — <code>body</code> pocięte po akapitach do ~1200 znaków, z zakładką ~150 znaków, granice na końcach zdań.</li>
 <li>Krótkie rozwiązanie (<code>body</code> pusty lub poniżej 400 znaków) ma dokładnie jeden chunk. Nie wymuszaj sztucznego cięcia.</li>
+<li><strong><code>body</code> z nagłówkami markdown <code>## …</code></strong> (tak wygląda każdy wpis z biblioteki ROPS, 16.4) — tnij najpierw po nagłówkach, a tekst nagłówka zapisz w <code>heading</code>. Na przykład „Jakich problemów dotyczy innowacja?" dostaje wagę <code>B</code> w torze leksykalnym. Sekcję dłuższą niż ~1200 znaków dotnij regułą akapitową powyżej. Sekcja „Autorzy" <strong>nie</strong> jest chunkiem: idzie do <code>solutions.authors</code>, bo nazwiska w wynikach wyszukiwania problemu tylko by zaszumiały.</li>
 </ul>
 
 <h3>4.5 <code>report_clusters</code> — grupy problemów (skala zjawiska)</h3>
@@ -410,6 +430,19 @@ CREATE INDEX reports_unmatched_idx ON reports (created_at DESC) WHERE NOT matche
     created_at         TIMESTAMPTZ NOT NULL DEFAULT now()
 );</code></pre>
 <p>Zapisywane przy każdym przejściu pipeline'u. <code>clicked_solution_id</code> i <code>helpful</code> dopisywane później przez <code>POST /api/feedback</code>. Bez tej tabeli nie da się stwierdzić, czy zmiana progu poprawiła, czy zepsuła system.</p>
+
+<h3>4.8 <code>import_runs</code> — przebiegi importu ze źródeł <span class="badge b-draft">draft</span></h3>
+<p>Dodane w ADR-009. Każde uruchomienie scrapera i ingestu zostawia jeden wiersz. Dzięki temu da się odpowiedzieć na pytania „kiedy ostatnio odświeżyliśmy bibliotekę" i „dlaczego zniknęło 40 wpisów". <code>/healthz</code> czyta stąd datę ostatniego udanego importu.</p>
+<pre><code>CREATE TABLE import_runs (
+    id            BIGSERIAL PRIMARY KEY,
+    source        TEXT        NOT NULL,          -- "rops-bis", "seed-demo", ...
+    snapshot_path TEXT,                          -- data/solutions/rops-biblioteka.json
+    started_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+    finished_at   TIMESTAMPTZ,
+    status        TEXT        NOT NULL DEFAULT 'RUNNING',   -- RUNNING | OK | FAILED | ABORTED_GUARD
+    stats         JSONB       NOT NULL DEFAULT '{}'  -- {"seen":115,"added":3,"updated":1,"unchanged":111,
+                                                     --  "archived":0,"invalid":0,"embedding_calls":4}
+);</code></pre>
 
 <h2 id="s5">5. Polski tor leksykalny <span class="badge b-stable">stable</span></h2>
 
@@ -490,7 +523,7 @@ class ProcessedQuery:
 <li><strong>Zdjęcie wstępów grzecznościowych</strong> — regex na <code>^(cześć|dzień dobry|witam|hej|dobry wieczór|szanowni państwo)[,!.\s]*</code>, rekurencyjnie. Zdejmowane <strong>tylko</strong> z <code>normalized</code>; <code>raw</code> zostaje nietknięty.</li>
 <li><strong>Ekstrakcja gminy i powiatu</strong> — dopasowanie do słownika <code>data/gminy-malopolska.json</code> (182 gminy, 22 powiaty, w tym formy odmienione: <code>Zakopane / w Zakopanem</code>, <code>Nowy Sącz / w Nowym Sączu</code>). Dopasowanie po tekście <code>unaccent</code>-owanym i lowercase. Zbudowany raz jako automat Aho-Corasick lub prosty zbiór n-gramów — nie regex per gmina.</li>
 <li><strong>Ekstrakcja identyfikatorów</strong> — wyrazy w <code>CAPS</code> (3+ znaki), ciągi alfanumeryczne z cyfrą, nazwy w cudzysłowie, frazy wielkolitrowe wielowyrazowe. Trafiają do <code>tsquery</code> z operatorem frazowym, żeby tor leksykalny ich <em>nie</em> zgubił.</li>
-<li><strong>Kategoria</strong> — słownik słów kluczowych per kod taksonomii (<code>samotn*, izolacj*, sam w domu → LONELINESS</code>). Gdy <code>LLM_ENABLED=true</code> i słownik nie trafia: jedno wywołanie klasyfikatora zwracającego wyłącznie kod. Gdy nic — <code>OTHER</code>, nie wymyślaj.</li>
+<li><strong>Kategoria</strong> — słownik słów kluczowych per kod taksonomii (<code>samotn*, izolacj*, sam w domu → LONELINESS</code>) w <code>data/category-keywords.json</code>. Ten sam plik klasyfikuje wpisy biblioteki ROPS przy imporcie (16.5). Gdy <code>LLM_ENABLED=true</code> i słownik nie trafia: jedno wywołanie klasyfikatora zwracającego wyłącznie kod. Gdy nic — <code>OTHER</code>, nie wymyślaj.</li>
 <li><strong>Rozszerzenie synonimami</strong> — <code>data/synonyms.json</code>, tylko dla toru leksykalnego.</li>
 <li><strong>Detekcja zbyt ogólnego zapytania</strong> — <code>too_vague</code> ustawiany, gdy po usunięciu stopwords zostają mniej niż 4 wyrazy treściowe. Pipeline <strong>mimo to leci dalej</strong>; flaga tylko dodaje do odpowiedzi prośbę o doprecyzowanie.</li>
 </ol>
@@ -809,6 +842,14 @@ Accept: text/event-stream
   "implementation_steps": ["Rekrutacja wolontariuszy", "Szkolenie", "..."],
   "source_url": "https://...",
   "source_name": "Biblioteka Innowacji Społecznych",
+  "source_categories": [{"slug": "dla-seniorow", "label_pl": "Dla seniorów"}],
+  "authors": ["Maria Lorenc", "Maciej Parol"],          // [] gdy brak
+  "license": "CC-BY-4.0",                               // null gdy brak
+  "resources": {                                        // każdy klucz opcjonalny, null gdy brak
+    "folder_pdf": "https://rops.krakow.pl/mpliki/IS/.../ROPS_Folder_IN_BaWita_v15_www.pdf",
+    "video": "https://www.youtube.com/watch?v=...",
+    "materials": "https://rops.krakow.pl/pliki/IS/bibloteka/bawita.zip"
+  },
   "evidence_level": 4,
   "origin": "CURATED",
   "scores": { "rerank": 0.91, "rrf": 0.0320, "lex_rank": 1, "vec_rank": 4 }
@@ -841,8 +882,9 @@ Accept: text/event-stream
 <tr><td><code>GET /api/clusters/{id}</code></td><td>Moduł 2</td><td>Klaster + do 20 zgłoszeń składowych (<code>raw_text</code>, gmina, data) + rozwiązania najczęściej dopasowywane w tym klastrze</td></tr>
 <tr><td><code>PATCH /api/clusters/{id}</code></td><td>Moduł 2</td><td><code>{label?, operator_severity?, operator_notes?, category?}</code> — <strong>ocena skali problemu przez pracownika Hubu</strong></td></tr>
 <tr><td><code>GET /api/taxonomy</code></td><td>oba</td><td>Lista wyzwań z etykietami polskimi — do filtrów i etykiet w interfejsie</td></tr>
+<tr><td><code>GET /api/sources</code></td><td>oba</td><td>Źródła korpusu: <code>[{source, source_name, url, solutions_published, solutions_archived, categories:[{slug,label_pl,count}], last_import:{finished_at,status,stats}}]</code>. Pozwala pokazać „Baza: 115 innowacji z Biblioteki ROPS, aktualizacja 2026-10-03" i daje Modułowi 2 status importu</td></tr>
 <tr><td><code>POST /api/feedback</code></td><td>frontend</td><td><code>{search_event_id, solution_id?, helpful}</code> — kciuk w górę/dół, dopisuje do <code>search_events</code></td></tr>
-<tr><td><code>GET /healthz</code></td><td>—</td><td><code>{db, embedding_provider, rerank_provider, embedding_meta_match}</code>. Status <code>503</code>, gdy metadane embeddingów nie zgadzają się z konfiguracją</td></tr>
+<tr><td><code>GET /healthz</code></td><td>—</td><td><code>{db, embedding_provider, rerank_provider, embedding_meta_match, corpus:{published, last_import_at}}</code>. Status <code>503</code>, gdy metadane embeddingów nie zgadzają się z konfiguracją albo korpus <code>PUBLISHED</code> jest pusty — wyszukiwarka bez danych jest awarią, a nie stanem poprawnym</td></tr>
 </table>
 </div>
 
@@ -864,7 +906,8 @@ Accept: text/event-stream
 <tr><td><code>no_match</code> zamiast <code>token</code> przy braku trafienia</td><td>Odrębne zdarzenie, nie puste streszczenie — frontend ma jawny sygnał do pokazania innego komunikatu</td></tr>
 <tr><td><code>report_saved</code> z <code>cluster_size</code> i listą gmin</td><td>Gotowe dane na komunikat „ten problem zgłosiło już N osób z M gmin". Najtańszy element demo o największym efekcie</td></tr>
 <tr><td><code>done</code> wysyłane <strong>zawsze</strong>, także po <code>error</code></td><td>Frontend może bezwarunkowo zamknąć wskaźnik ładowania na <code>done</code>, bez timeoutów</td></tr>
-<tr><td><code>SolutionCard</code> ma jeden kształt w całym API</td><td>Jeden typ TypeScript dla <code>/api/chat</code>, <code>/api/search</code> i <code>/api/solutions/{id}</code> — bez wariantów i pól warunkowych</td></tr>
+<tr><td><code>SolutionCard</code> ma jeden kształt w całym API</td><td>Jeden typ TypeScript dla <code>/api/chat</code>, <code>/api/search</code> i <code>/api/solutions/{id}</code> — bez wariantów i pól warunkowych. Pola importu (<code>authors</code>, <code>license</code>, <code>resources</code>, <code>source_categories</code>) są zawsze obecne, a puste mają wartość <code>[]</code>, <code>{}</code> albo <code>null</code></td></tr>
+<tr><td>Atrybucja źródła jest w danych</td><td>Wpisy z biblioteki ROPS są na licencji CC BY 4.0. Frontend <strong>musi</strong> pokazać na karcie <code>source_name</code>, <code>authors</code> i odnośnik <code>source_url</code>. To warunek licencji, a nie ozdoba</td></tr>
 <tr><td><code>GET /api/taxonomy</code> z etykietami polskimi</td><td>Frontend nigdy nie hardkoduje nazw wyzwań; zmiana taksonomii nie wymaga jego przebudowy</td></tr>
 </table>
 </div>
@@ -877,6 +920,7 @@ Accept: text/event-stream
 <ul>
 <li><strong>Ostrzeżenie o danych osobowych</strong> trwale widoczne przy polu wpisywania: „Nie wpisuj imion, adresów ani danych o zdrowiu konkretnych osób". To wymóg z sekcji 12, nie sugestia — backend nie potrafi go wymusić.</li>
 <li><strong><code>session_id</code></strong> — losowy UUID generowany raz po stronie klienta i trzymany lokalnie. Backend go nie wydaje i nie waliduje; służy wyłącznie do grupowania zgłoszeń z jednej sesji w telemetrii.</li>
+<li><strong>Atrybucja CC BY</strong> na każdej karcie z niepustym <code>license</code>: autorzy, nazwa źródła i odnośnik do oryginału w ROPS.</li>
 <li><strong>Brak własnej logiki rankingu.</strong> Kolejność w <code>candidates</code> jest ostateczna. Frontend nie sortuje, nie filtruje i nie odcina wyników po <code>scores</code> — progi są skalibrowane na zestawie ewaluacyjnym (sekcja 10) i żyją w konfiguracji backendu.</li>
 <li><strong>Dostępność</strong> — wykluczenie cyfrowe jest jednym z wyzwań, które adresujemy, więc interfejs nie może go pogłębiać: <code>aria-live="polite"</code> na strumieniowanej odpowiedzi, kontrast WCAG AA, tekst od 16 px, pełna obsługa klawiaturą, działanie na telefonie.</li>
 </ul>
@@ -887,12 +931,14 @@ Accept: text/event-stream
 
 <h2 id="s9">9. Ingest korpusu <span class="badge b-draft">draft</span></h2>
 
-<p>Dwa źródła wpływają do <strong>jednej</strong> tabeli <code>solutions</code>, rozróżniane polem <code>origin</code>:</p>
+<p>Kilka źródeł wpływa do <strong>jednej</strong> tabeli <code>solutions</code>, rozróżnianych polem <code>origin</code>. Najważniejszym źródłem jest Biblioteka Innowacji Społecznych ROPS. Jej import ma osobną specyfikację w <a href="#s16">sekcji 16</a>, a ta sekcja opisuje część wspólną dla wszystkich źródeł.</p>
 
 <div class="tablewrap">
 <table>
 <tr><th>Źródło</th><th><code>origin</code></th><th><code>status</code></th><th>Mechanizm</th></tr>
-<tr><td>Paczka organizatora: biblioteka innowacji społecznych, mapa wyzwań Małopolski, raporty i doświadczenia ROPS Kraków, przykładowe dane MVP</td><td><code>CURATED</code></td><td><code>PUBLISHED</code></td><td><code>scripts/ingest.py</code> z plików w <code>data/solutions/</code></td></tr>
+<tr><td><strong>Biblioteka Innowacji Społecznych ROPS</strong> (rops.krakow.pl, ~115 wpisów, 9 kategorii)</td><td><code>CURATED</code></td><td><code>PUBLISHED</code></td><td><code>scripts/scrapers/rops_biblioteka.py</code> → <code>data/solutions/rops-biblioteka.json</code> → <code>scripts/ingest.py</code> (sekcja 16)</td></tr>
+<tr><td>Pozostała paczka organizatora: mapa wyzwań Małopolski, raporty i doświadczenia ROPS Kraków</td><td><code>CURATED</code></td><td><code>PUBLISHED</code></td><td>Osobny adapter na źródło → <code>data/solutions/&lt;źródło&gt;.json</code> → <code>scripts/ingest.py</code></td></tr>
+<tr><td>Dane demonstracyjne uzupełniające luki taksonomii</td><td><code>CURATED</code></td><td><code>PUBLISHED</code></td><td><code>data/solutions/seed-demo.json</code>, <code>source_name = "SEED_DEMO"</code></td></tr>
 <tr><td>Rozwiązania zgłaszane na bieżąco przez użytkowników</td><td><code>USER_SUBMITTED</code></td><td><code>PENDING_REVIEW</code></td><td><code>POST /api/solutions</code>, ta sama ścieżka chunkowania i embeddingu</td></tr>
 <tr><td>Zgłoszenia awansowane po rozwiązaniu przez Hub</td><td><code>PROMOTED_FROM_REPORT</code></td><td><code>PENDING_REVIEW</code></td><td>Moduł 2 — <span class="badge b-todo">todo</span>, nie implementuj</td></tr>
 </table>
@@ -916,9 +962,17 @@ Accept: text/event-stream
     "contact": { "name": null, "email": null, "phone": null },
     "source_url": "https://...",
     "source_name": "Biblioteka Innowacji Społecznych",
-    "evidence_level": 4
+    "evidence_level": 4,
+
+    "external_id": "rops-bis:telefon-zyczliwosci",   // opcjonalne od tego miejsca (ADR-009)
+    "source_categories": ["dla-seniorow"],
+    "category_source": "KEYWORDS",
+    "authors": ["Jan Kowalski"],
+    "license": "CC-BY-4.0",
+    "resources": { "folder_pdf": null, "video": null, "materials": null }
   }
 ]</code></pre>
+<p>Plik może zaczynać się od obiektu nagłówka zamiast gołej listy: <code>{"source": "rops-bis", "fetched_at": "...", "complete": true, "solutions": [...]}</code>. Nagłówek <code>"complete": true</code> oznacza, że plik zawiera <strong>pełny</strong> stan źródła. Tylko wtedy ingest może archiwizować wpisy, których w pliku nie ma (krok 7 poniżej).</p>
 
 <h4><code>scripts/ingest.py</code> — idempotentny</h4>
 <pre><code>python -m scripts.ingest data/solutions/           # wszystkie pliki
@@ -928,16 +982,17 @@ python -m scripts.ingest --reembed-all              # po zmianie providera embed
 <ol>
 <li>Wczytaj i zwaliduj po schemacie Pydantic. Błędny rekord: pomiń, wypisz powód, <strong>nie przerywaj</strong> całej partii.</li>
 <li><code>content_hash = sha256(title + summary + body)</code>.</li>
-<li>Upsert po <code>source_url</code>, a przy jego braku po <code>content_hash</code>.</li>
+<li>Upsert po <code>external_id</code>; przy jego braku po <code>source_url</code>, a przy braku obu po <code>content_hash</code>.</li>
 <li>Hash niezmieniony ⇒ <strong>pomiń chunkowanie i embedding</strong>. To cała istota idempotencji — ponowne uruchomienie na 500 wpisach po dopisaniu jednego nie może kosztować 500 wywołań API.</li>
 <li>Hash zmieniony ⇒ usuń chunki rozwiązania, przechunkuj, policz embeddingi partiami po 64, zapisz.</li>
 <li>Zsynchronizuj <code>published</code> i <code>title</code> we wszystkich chunkach (<code>sync_chunk_denorm</code>).</li>
+<li>Ustaw <code>source_seen_at = now()</code> wszystkim wpisom obecnym w pliku. Jeśli plik ma <code>"complete": true</code>, wpisy tego samego źródła, których w nim nie ma, przejdź na <code>ARCHIVED</code> i uruchom dla nich <code>sync_chunk_denorm</code>. Wpis, który wrócił do źródła, wraca do <code>PUBLISHED</code>. Moduł 1 nie ma ręcznej archiwizacji, więc ta reguła jest kompletna (16.6).</li>
 <li>Zapisz <code>embedding_meta</code> (provider, model, dim, <code>indexed_at</code>).</li>
-<li>Podsumowanie: dodane / zaktualizowane / pominięte / błędne + liczba wywołań API.</li>
+<li>Podsumowanie: dodane / zaktualizowane / pominięte / zarchiwizowane / błędne + liczba wywołań API. To samo trafia do <code>import_runs.stats</code>.</li>
 </ol>
 
 <div class="note">
-<p><strong>Dane startowe na demo.</strong> Zanim przyjdzie paczka od organizatora, utwórz <code>data/solutions/seed-demo.json</code> z 30–50 realistycznymi wpisami pokrywającymi wszystkie osiem kodów taksonomii, po 3–6 na kod. Bez tego nie da się uruchomić ani ewaluacji, ani ręcznego sprawdzenia API. Wpisy oznaczone <code>"source_name": "SEED_DEMO"</code> — łatwo je potem usunąć jednym <code>DELETE</code>.</p>
+<p><strong>Dane startowe to realny korpus, a nie atrapa.</strong> Biblioteka ROPS jest publiczna i dostępna od pierwszego dnia, więc krok 4 kolejności prac (sekcja 13) ładuje od razu <code>rops-biblioteka.json</code>. <code>seed-demo.json</code> powstaje <strong>dopiero potem</strong> i tylko dla kodów taksonomii, które po imporcie mają mniej niż 3 wpisy. Biblioteka jest zorientowana na grupy docelowe, więc prawdopodobnie zabraknie <code>DEPOPULATION</code>, <code>SUBURBAN_GROWTH</code> i <code>COORDINATION</code>; sprawdź to raportem pokrycia z 16.7. Wpisy demonstracyjne mają <code>"source_name": "SEED_DEMO"</code>, więc łatwo je potem usunąć jednym <code>DELETE</code>.</p>
 </div>
 
 <h2 id="s10">10. Ewaluacja jakości <span class="badge b-draft">draft</span></h2>
@@ -945,12 +1000,14 @@ python -m scripts.ingest --reembed-all              # po zmianie providera embed
 <p>Bez tego kroku każda zmiana progu, <code>k</code> czy modelu jest zgadywaniem, a „wydaje mi się, że teraz lepiej" nie jest argumentem.</p>
 
 <h4><code>eval/queries.jsonl</code> — 25–30 par</h4>
-<pre><code>{"query": "starsi ludzie w mojej wsi są samotni, nie mają z kim rozmawiać",
- "relevant": [142, 207], "category": "LONELINESS", "note": "parafraza, zero wspólnych słów"}
-{"query": "Telefon Życzliwości jak uruchomić",
- "relevant": [142], "category": "LONELINESS", "note": "nazwa własna - test toru leksykalnego"}
+<p>Zestaw buduje się na <strong>realnym korpusie z biblioteki ROPS</strong>. Pole <code>relevant</code> zawiera <code>external_id</code>, a nie <code>solutions.id</code>: identyfikatory liczbowe zmieniają się po każdym odtworzeniu bazy, a <code>external_id</code> pozostaje stały. <code>scripts/evaluate.py</code> zamienia je na <code>id</code> przy starcie, a gdy któregoś nie ma w bazie, przerywa z błędem.</p>
+<pre><code>{"query": "mama ma demencję i coraz gorzej z pamięcią, czym ją zająć w domu",
+ "relevant": ["rops-bis:bawita"], "category": "AGING", "note": "parafraza, zero wspólnych słów"}
+{"query": "BaWita gdzie kupić",
+ "relevant": ["rops-bis:bawita"], "category": "AGING", "note": "nazwa własna - test toru leksykalnego"}
 {"query": "babcia nie umie obsługiwać aplikacji w telefonie",
- "relevant": [311], "category": "DIGITAL_EXCLUSION", "note": "potoczny język"}</code></pre>
+ "relevant": ["rops-bis:kody-qr-na-pomoc-seniorom"], "category": "DIGITAL_EXCLUSION", "note": "potoczny język"}</code></pre>
+<p>Przykładowe <code>relevant</code> powyżej trzeba sprawdzić z treścią wpisów po pierwszym imporcie, bo zostały dobrane po samych tytułach. Nazwy innowacji z biblioteki (BaWita, Merkury, Senior CUDER, Therapy Set, OBU) to gotowy materiał na zapytania z nazwą własną.</p>
 
 <p>Skład zestawu — <strong>nie</strong> same łatwe przypadki:</p>
 <ul>
@@ -1005,6 +1062,12 @@ no-match: 5 zapytań, poprawnie odrzucone 4/5, próg 0.35
 <tr><td><code>FTS_CONFIG</code></td><td><code>polish_simple</code></td><td>Punkt podmiany na hunspell (sekcja 5)</td></tr>
 <tr><td><code>RATE_LIMIT_CHAT</code></td><td><code>20/minute</code></td><td>Na adres IP — jedyna ochrona endpointów przy braku auth</td></tr>
 <tr><td><code>CORS_ORIGINS</code></td><td><code>http://localhost:5173</code></td><td>Origin modułu frontendowego, lista po przecinku</td></tr>
+<tr><td><code>ROPS_BASE_URL</code></td><td><code>https://rops.krakow.pl</code></td><td>Tylko dla scrapera (sekcja 16). API go nie czyta, bo działa wyłącznie na bazie</td></tr>
+<tr><td><code>ROPS_CATEGORIES_PATH</code></td><td><code>/innowacje-spoleczne/biblioteka-innowacji-spolecznych/kategorie</code></td><td>Strona startowa, z której scraper wykrywa kategorie</td></tr>
+<tr><td><code>SCRAPER_DELAY_S</code></td><td><code>1.0</code></td><td>Minimalny odstęp między żądaniami do ROPS. Serwer odpowiada w 2–5 s, więc nie skracaj go na siłę</td></tr>
+<tr><td><code>SCRAPER_CONCURRENCY</code></td><td><code>2</code></td><td>Równoległe żądania. Wyżej nie podnoś, bo to serwer urzędu, a nie CDN</td></tr>
+<tr><td><code>SCRAPER_TIMEOUT_S</code></td><td><code>30</code></td><td>Timeout żądania; 3 ponowienia z backoffem wykładniczym</td></tr>
+<tr><td><code>SCRAPER_MIN_EXPECTED</code></td><td><code>90</code></td><td>Bezpiecznik: mniej wpisów w snapshotcie ⇒ snapshot nie jest zapisywany (16.6)</td></tr>
 </table>
 </div>
 
@@ -1032,6 +1095,9 @@ LLM_ENABLED=false</code></pre>
 <tr><td>Dane wychodzące do zewnętrznych API</td><td>Przy <code>EMBEDDING_PROVIDER=openai</code> / <code>RERANK_PROVIDER=cohere</code> treść zgłoszenia opuszcza infrastrukturę. <strong>Udokumentuj to w polityce prywatności</strong>; tryb <code>local</code> istnieje właśnie jako wariant bez transferu</td></tr>
 <tr><td>Rate limiting</td><td><code>slowapi</code> na <code>/api/chat</code>, <code>/api/reports</code>, <code>/api/solutions</code></td></tr>
 <tr><td>Treść od użytkownika w korpusie</td><td><code>POST /api/solutions</code> nigdy nie publikuje od razu — <code>PENDING_REVIEW</code> jest zabezpieczeniem przed zatruciem wyników wyszukiwania</td></tr>
+<tr><td>Scraping witryny ROPS</td><td>Witryna jest publiczna i nie ma <code>robots.txt</code> (zwraca 404, stan z 2026-10-03). Mimo to scraper przedstawia się nagłówkiem <code>User-Agent: SplotBot/0.1 (+kontakt zespołu)</code>, trzyma się <code>SCRAPER_DELAY_S</code> i <code>SCRAPER_CONCURRENCY</code> i nie pobiera załączników PDF/ZIP (zapisuje tylko odnośniki). Uruchamiany ręcznie albo raz na dobę, nigdy w ścieżce żądania użytkownika</td></tr>
+<tr><td>Licencja treści z biblioteki</td><td>Innowacje są publikowane na CC BY 4.0 (ikona licencji przy każdym wpisie). Wymóg atrybucji realizują <code>authors</code>, <code>source_name</code> i <code>source_url</code> w każdej <code>SolutionCard</code> (sekcja 8). Wpis <strong>bez</strong> wykrytej licencji też jest importowany, ale z <code>license = null</code>. Przed wdrożeniem produkcyjnym potwierdź z ROPS (iws@rops.krakow.pl) zgodę na taki sposób wykorzystania; ROPS publikuje też dokument „Zasady wykorzystania innowacji MIIS”</td></tr>
+<tr><td>Dane osobowe w korpusie</td><td>Imiona i nazwiska autorów są publikowane przez ROPS jako atrybucja. Trzymamy je tylko w <code>authors</code>, poza chunkami i embeddingami (4.4), więc nie da się ich wyszukać ani nie trafią do promptu LLM. Pole <code>contact</code> zostaje puste: scraper nie wyciąga e-maili ani telefonów z treści</td></tr>
 <tr><td>Wstrzyknięcie przez prompt</td><td>Tekst zgłoszenia i treść rozwiązań wchodzą do promptu <strong>wyłącznie</strong> jako blok danych. Instrukcje w <code>SYSTEM</code>. Zasada „nie dodawaj informacji spoza kontekstu" ogranicza szkodę; walidacja cytowań (6.6) wykrywa odpłynięcie</td></tr>
 </table>
 </div>
@@ -1050,7 +1116,7 @@ LLM_ENABLED=false</code></pre>
 
 <pre><code>hackyeah-2026/
 ├── docker-compose.yml           # db (pgvector/pgvector:pg16) + api
-├── Makefile                     # up, migrate, ingest, eval, test, fmt
+├── Makefile                     # up, migrate, scrape-rops, ingest, eval, test, fmt
 ├── .env.example                 # wszystkie zmienne z sekcji 11
 ├── docs/
 │   └── module-1-matchmaking.html # ten dokument
@@ -1089,13 +1155,23 @@ LLM_ENABLED=false</code></pre>
 │   ├── taxonomy.json            # 4.2
 │   ├── gminy-malopolska.json    # 6.1
 │   ├── synonyms.json            # 5, 6.1
+│   ├── category-keywords.json   # 6.1 krok 5 i 16.5 — jeden słownik dla zapytań i importu
+│   ├── sources/
+│   │   └── rops-category-map.json # 16.5 — kategoria ROPS → domyślny kod taksonomii
+│   ├── raw/                     # .gitignore — cache HTML scrapera, 16.3
+│   │   └── rops-bis/
 │   └── solutions/
-│       └── seed-demo.json       # 9
+│       ├── rops-biblioteka.json # 16 — snapshot biblioteki ROPS, COMMITOWANY
+│       └── seed-demo.json       # 9 — tylko luki taksonomii
 ├── scripts/
+│   ├── scrapers/
+│   │   ├── http.py              # wspólny klient: limit, retry, cache, User-Agent
+│   │   └── rops_biblioteka.py   # 16 — fetch → parse → classify → snapshot
 │   ├── ingest.py                # 9
 │   ├── reembed.py               # zmiana providera
 │   ├── evaluate.py              # 10
 │   ├── cluster_report.py        # kalibracja progu z 6.7
+│   ├── coverage_report.py       # 16.7 — pokrycie taksonomii po imporcie
 │   └── retention.py             # 12
 ├── eval/
 │   ├── queries.jsonl            # 10
@@ -1103,6 +1179,8 @@ LLM_ENABLED=false</code></pre>
 └── tests/
     ├── test_fusion.py           # RRF na sztucznych listach - czysta funkcja, testuj ją
     ├── test_preprocess.py       # ekstrakcja gmin, zdejmowanie wstępów
+    ├── test_rops_parser.py      # 16.8 — parser na zapisanych stronach, bez sieci
+    ├── fixtures/rops/           # 3–4 strony HTML: lista kategorii, kategoria, 2 wpisy
     └── test_pipeline_e2e.py     # jeden przebieg na bazie testowej</code></pre>
 
 <h3>Kolejność implementacji</h3>
@@ -1114,7 +1192,9 @@ LLM_ENABLED=false</code></pre>
 <tr><td>1</td><td><code>docker-compose</code> + migracje + <code>polish_simple</code> + taksonomia</td><td><code>make up &amp;&amp; make migrate</code> przechodzi, <code>SELECT to_tsvector('polish_simple','starsi ludzie')</code> zwraca lekseny</td></tr>
 <tr><td>2</td><td>Modele, schematy, <code>/healthz</code></td><td><code>/healthz</code> zwraca <code>200</code> z informacją o providerach</td></tr>
 <tr><td>3</td><td>Providery embeddingów + <code>embedding_meta</code> + kontrola zgodności</td><td>Test jednostkowy: oba providery zwracają wektor długości 1024</td></tr>
-<tr><td>4</td><td>Chunkowanie + <code>scripts/ingest.py</code> + <code>seed-demo.json</code></td><td>Baza ma ~40 rozwiązań i chunki z niepustym <code>embedding</code> oraz <code>ts</code></td></tr>
+<tr><td>4a</td><td>Scraper biblioteki ROPS: parser na fixture'ach, potem pełny przebieg (sekcja 16)</td><td><code>make test</code> przechodzi <code>test_rops_parser.py</code>; <code>make scrape-rops</code> zapisuje <code>rops-biblioteka.json</code> z ≥ 90 wpisami, każdy z niepustym <code>summary</code> i <code>body</code></td></tr>
+<tr><td>4b</td><td>Chunkowanie + <code>scripts/ingest.py</code> na snapshotcie ROPS</td><td>Baza ma ~115 rozwiązań <code>PUBLISHED</code> z <code>external_id</code>; chunki mają niepusty <code>embedding</code>, <code>ts</code> i <code>heading</code>; drugi <code>make ingest</code> raportuje 0 wywołań embeddingów</td></tr>
+<tr><td>4c</td><td>Raport pokrycia + <code>seed-demo.json</code> tylko dla luk</td><td><code>coverage_report.py</code> pokazuje ≥ 3 wpisy na każdy kod taksonomii poza <code>OTHER</code></td></tr>
 <tr><td>5</td><td>Tor leksykalny + tor semantyczny osobno</td><td><code>GET /api/search</code> zwraca dwie niepuste listy; <code>EXPLAIN</code> pokazuje <code>Index Scan</code> na HNSW</td></tr>
 <tr><td>6</td><td>Fuzja RRF + reranking</td><td><code>make eval</code> działa i <code>rrf</code> bije oba pojedyncze tory</td></tr>
 <tr><td>7</td><td><code>POST /api/chat</code> ze SSE + generacja RAG + walidacja cytowań</td><td><code>curl -N</code> pokazuje strumień zdarzeń w kolejności z 7.1</td></tr>
@@ -1125,7 +1205,7 @@ LLM_ENABLED=false</code></pre>
 </div>
 
 <div class="note">
-<p><strong>Najkrótsza działająca ścieżka</strong>, jeśli czasu jest mało: kroki 1–6 z <code>RERANK_PROVIDER=noop</code> i <code>LLM_ENABLED=false</code>. Daje pełny hybrydowy pipeline zwracający trafne rozwiązania przez <code>GET /api/search</code> — moduł frontendowy ma już wtedy na czym pracować. Reranking, SSE i generacja to warstwy dodawane na wierzch, nie fundament.</p>
+<p><strong>Najkrótsza działająca ścieżka</strong>, jeśli czasu jest mało: kroki 1–6 (z 4a i 4b, bo bez realnego korpusu nie ma czego szukać; 4c można pominąć) z <code>RERANK_PROVIDER=noop</code> i <code>LLM_ENABLED=false</code>. Daje pełny hybrydowy pipeline zwracający trafne rozwiązania przez <code>GET /api/search</code> — moduł frontendowy ma już wtedy na czym pracować. Reranking, SSE i generacja to warstwy dodawane na wierzch, nie fundament.</p>
 </div>
 
 <h2 id="s14">14. Rejestr decyzji (ADR) <span class="badge b-stable">stable</span></h2>
@@ -1143,6 +1223,7 @@ LLM_ENABLED=false</code></pre>
 <tr><td><strong>006</strong></td><td>Skala problemu = przyrostowe klastrowanie semantyczne zgłoszeń, stały próg cosinusowy</td><td>Mapa wyzwań powstaje z realnych zgłoszeń, a nie z ankiety; wykrywa też wyzwania nienazwane w taksonomii</td><td><em>Tylko tagowanie LLM do taksonomii</em> — prostsze, ale niewidzi nowych zjawisk. <em>Oba naraz</em> — więcej pracy niż budżet Modułu 1 (wraca jako backlog)</td></tr>
 <tr><td><strong>007</strong></td><td>Moduł 1 nie zawiera żadnej warstwy tożsamości: brak kont, brak ról technicznych, brak uwierzytelniania i autoryzacji. Endpointy otwarte</td><td>Cały budżet modułu idzie w jakość wyszukiwania. Brak tabeli <code>users</code> i kolumn ról oznacza zero martwego kodu i zero fałszywego poczucia bezpieczeństwa</td><td><em>Role przez nagłówek demo</em> — wygląda jak kontrola dostępu, nią nie jest; mylące. <em>JWT + hasła</em> — pięć endpointów kosztem pipeline'u. <em>Magic link</em> — wymaga SMTP, zawodny offline</td></tr>
 <tr><td><strong>008</strong></td><td>Frontend w osobnym module; Moduł 1 kończy się na kontrakcie API</td><td>Dwie warstwy rozwijane równolegle bez blokowania się; definicja gotowości Modułu 1 to przechodzące <code>curl</code> i testy, nie wygląd ekranu</td><td><em>Backend i frontend w jednym module</em> — interfejs zawsze zjada czas przeznaczony na jakość wyszukiwania</td></tr>
+<tr><td><strong>009</strong></td><td>Korpus bazowy = Biblioteka Innowacji Społecznych ROPS, pobierana scraperem HTML do <strong>commitowanego snapshotu JSON</strong>, z którego ładuje ją zwykły <code>ingest.py</code>. Upsert po <code>external_id</code>; wpisy usunięte ze źródła są archiwizowane, a nie kasowane. Rozszerza 4.3 o pola importu i dodaje tabelę <code>import_runs</code> (4.8)</td><td>To jedyne publiczne, ustrukturyzowane i merytorycznie sprawdzone źródło rozwiązań z regionu, a wyzwanie ROPS wprost na nie wskazuje. Snapshot w repozytorium uniezależnia demo od dostępności witryny (strona jest „w przebudowie”, a serwer odpowiada w kilka sekund) i daje deterministyczny zestaw do ewaluacji. Rozdział fetch/parse pozwala testować parser bez sieci</td><td><em>Scraping w locie przy zapytaniu</em> — latencja 2–5 s na stronę i zależność od cudzego serwera. <em>Ręczne przepisanie</em> — 115 wpisów, nie do utrzymania przy zmianach. <em>Prośba o eksport z CMS ROPS</em> — dobra docelowo (backlog), ale nie zdąży na hackathon. <em>Kategoria ROPS jako <code>category</code></em> — to grupa docelowa, a nie wyzwanie; zgubiłaby wymiar raportowania z sekcji 1</td></tr>
 </table>
 </div>
 
@@ -1164,13 +1245,209 @@ LLM_ENABLED=false</code></pre>
 <tr><td>HyDE i rozszerzanie zapytań</td><td>LLM pisze hipotetyczne rozwiązanie, jego embedding idzie do wyszukiwania</td><td>Preprocessing jest osobnym krokiem z jawnym kontraktem</td></tr>
 <tr><td>Wielodzierżawność per gmina</td><td>Gmina widzi własne zgłoszenia, region widzi agregat</td><td><code>gmina</code> i <code>powiat</code> na zgłoszeniach, rozwiązaniach i klastrach</td></tr>
 <tr><td>Powiadomienia</td><td>„Pojawiło się rozwiązanie na Twój problem" na <code>contact_email</code></td><td><code>contact_email</code>, <code>cluster_id</code>, <code>reports.status</code></td></tr>
+<tr><td>Treść załączników biblioteki ROPS</td><td>Pobranie folderów PDF i paczek ZIP, ekstrakcja tekstu (koszty, kroki wdrożenia) do <code>body</code> i <code>implementation_steps</code></td><td>Odnośniki w <code>resources</code>; chunkowanie po nagłówkach przyjmie nowe sekcje bez zmian w kodzie</td></tr>
+<tr><td>Oficjalny eksport z ROPS</td><td>Feed JSON/CSV z CMS ROPS zamiast scrapingu HTML</td><td>Format pośredni z sekcji 9: nowy adapter zastępuje scraper, a ingest się nie zmienia</td></tr>
+<tr><td>Automatyczne odświeżanie</td><td>Cron/scheduler: nocny <code>scrape-rops</code> + <code>ingest</code> z alertem przy <code>ABORTED_GUARD</code></td><td><code>import_runs</code>, bezpieczniki z 16.6, <code>GET /api/sources</code></td></tr>
+<tr><td>Inne katalogi innowacji</td><td>Np. inkubatory innowacji społecznych z innych regionów, baza „Innowacje w małopolskich modelach”</td><td><code>external_id</code> z prefiksem źródła, <code>source_categories</code>, <code>import_runs.source</code></td></tr>
+</table>
+</div>
+
+<h2 id="s16">16. Import Biblioteki Innowacji Społecznych ROPS <span class="badge b-draft">draft</span></h2>
+
+<p>Ta sekcja opisuje, jak publiczna biblioteka innowacji ROPS Kraków trafia do tabeli <code>solutions</code>. Decyzja stoi w ADR-009, część wspólna z innymi źródłami w sekcji 9. Wszystkie liczby i selektory poniżej <strong>zweryfikowano na żywej witrynie 2026-10-03</strong>, pobierając wszystkie 115 stron wpisów. Witryna wyświetla komunikat „STRONA JEST W PRZEBUDOWIE”, więc jej struktura może się zmienić. Bezpieczniki z 16.6 wykrywają to, zanim zepsute dane trafią do bazy.</p>
+
+<h3>16.1 Struktura źródła</h3>
+<p>Trzy poziomy, wszystkie jako statyczny HTML renderowany po stronie serwera. Nie ma JavaScriptu do wykonania ani API, a <code>robots.txt</code> zwraca 404.</p>
+<div class="tablewrap">
+<table>
+<tr><th>Poziom</th><th>Adres</th><th>Co zawiera</th></tr>
+<tr><td>Lista kategorii</td><td><code>/innowacje-spoleczne/biblioteka-innowacji-spolecznych/kategorie</code></td><td>Odnośniki do 9 kategorii, wzorzec <code>…/biblioteka-innowacji-spolecznych/&lt;kategoria&gt;</code> (bez przecinka)</td></tr>
+<tr><td>Kategoria</td><td><code>…/biblioteka-innowacji-spolecznych/dla-seniorow</code></td><td>Wszystkie wpisy na <strong>jednej stronie</strong>, bez stronicowania. Każdy wpis to <code>.news-list__item</code> z <code>a.news-list__title</code> (tytuł i odnośnik) oraz <code>.news-list__desc</code>, którego pierwszy <code>&lt;p&gt;</code> zawiera jednozdaniowy lead</td></tr>
+<tr><td>Wpis</td><td><code>…/biblioteka-innowacji-spolecznych/dla-seniorow<strong>,bawita</strong></code></td><td><code>h2.page-title</code> z tytułem i <code>div.text-content</code> z: opcjonalną wstęgą „INNOWACJA WYBRANA DO UPOWSZECHNIANIA…”, tabelą ikon z odnośnikami (PDF, film, ZIP, licencja) oraz sekcjami treści pod nagłówkami <code>&lt;h4&gt;</code></td></tr>
+</table>
+</div>
+
+<div class="tablewrap">
+<table>
+<tr><th>Kategoria ROPS (slug)</th><th>Etykieta</th><th>Wpisów</th></tr>
+<tr><td><code>dla-cudzoziemcow</code></td><td>Dla cudzoziemców</td><td>6</td></tr>
+<tr><td><code>dla-dzieci-mlodziezy-i-rodziny</code></td><td>Dla dzieci, młodzieży i rodziny</td><td>21</td></tr>
+<tr><td><code>dla-osob-o-ograniczonej-mobilnosci</code></td><td>Dla osób o ograniczonej mobilności</td><td>18</td></tr>
+<tr><td><code>dla-osob-w-kryzysie-bezdomnosci</code></td><td>Dla osób w kryzysie bezdomności</td><td>2</td></tr>
+<tr><td><code>dla-osob-z-niepelnosprawnoscia-intelektualna</code></td><td>Dla osób z niepełnosprawnością intelektualną</td><td>14</td></tr>
+<tr><td><code>dla-osob-z-niepelnosprawnoscia-sensoryczna</code></td><td>Dla osób z niepełnosprawnością sensoryczną</td><td>20</td></tr>
+<tr><td><code>dla-rynku-pracy</code></td><td>Dla rynku pracy</td><td>5</td></tr>
+<tr><td><code>dla-seniorow</code></td><td>Dla seniorów</td><td>20</td></tr>
+<tr><td><code>dla-zdrowia-i-medycyny</code></td><td>Dla zdrowia i medycyny</td><td>9</td></tr>
+<tr><td colspan="2"><strong>Razem</strong></td><td><strong>115</strong></td></tr>
+</table>
+</div>
+
+<h4>Fakty o treści, które kształtują parser</h4>
+<ul>
+<li>Każdy wpis należy do <strong>dokładnie jednej</strong> kategorii (0 duplikatów slugów między kategoriami). Mimo to parser scala po slugu i zbiera <code>source_categories</code> jako listę, bo witryna jest w przebudowie.</li>
+<li>Sekcje mają stałe nazwy, ale <strong>nie stałą numerację</strong>: „Czy to działa?” występuje w 111 ze 115 wpisów, a gdy go brak, „Autorzy” mają numer 5 zamiast 6. <strong>Rozpoznawaj sekcje po tekście nagłówka, nigdy po numerze.</strong></li>
+<li>Nagłówek autorów ma 7 wariantów: <em>Autorzy</em> (85), <em>Autorka</em> (14), <em>Autor</em> (7), <em>Autorzy innowacji</em> (4), <em>Autorki</em> (3), <em>Autorki innowacji</em>, <em>Autorz</em> (literówka). Dopasowuj prefiksem <code>autor</code>.</li>
+<li>W nagłówkach występuje <code>&amp;nbsp;</code> („Kto może skorzystać z innowacji?&amp;nbsp;”). Normalizuj: <code>html.unescape</code> → NFC → zbicie białych znaków → <code>unaccent</code> + lowercase do porównań.</li>
+<li>Jeden wpis nie ma nagłówka „Na czym polega rozwiązanie?”, a jeden nie ma „Grupa docelowa”. Parser <strong>nie</strong> odrzuca takich wpisów; opis rozwiązania bierze wtedy z tekstu przed pierwszym rozpoznanym <code>&lt;h4&gt;</code>.</li>
+<li>Załączniki: ZIP z materiałami ma 115/115 wpisów, ikonę licencji CC BY 4.0 ma 100/115, folder PDF 33/115, film YouTube 26/115. Wstęgę „wybrana do upowszechniania” ma 27 wpisów.</li>
+<li>Stały baner „STRONA JEST W PRZEBUDOWIE…” w <code>.text-content</code> strony kategorii to szum. Odfiltruj go i nie wstawiaj do <code>summary</code>.</li>
+<li>Serwer odpowiada w 2–5 s na stronę, więc pełny przebieg (1 + 9 + 115 żądań) przy <code>SCRAPER_CONCURRENCY=2</code> trwa ok. 5 minut. Dlatego potrzebny jest cache (16.3) i dlatego scraping nie może być częścią startu aplikacji.</li>
+</ul>
+
+<h3>16.2 Przepływ</h3>
+<pre><code>  rops.krakow.pl                          scripts/scrapers/rops_biblioteka.py                         scripts/ingest.py
+ ┌──────────────┐   HTTP   ┌──────────┐   HTML   ┌──────────┐  RopsEntry  ┌────────────┐  JSON  ┌────────────────────┐
+ │ /kategorie   │ ───────► │ 1. FETCH │ ───────► │ 2. PARSE │ ──────────► │ 3. CLASSIFY│ ─────► │ 4. SNAPSHOT        │
+ │ /&lt;kategoria&gt; │  limit,  │  cache   │  data/   │ czysta   │             │ taksonomia │        │ data/solutions/    │
+ │ /&lt;kat&gt;,&lt;slug&gt; │  retry   │  na dysk │  raw/    │ funkcja  │             │ (16.5)     │        │ rops-biblioteka.json│
+ └──────────────┘          └──────────┘          └──────────┘             └────────────┘        └─────────┬──────────┘
+                                                                                                          │ git commit
+                                                     bezpieczniki (16.6) ── przerywają przed krokiem 4    │
+                                                                                                          ▼
+                                                                                  ┌──────────────────────────────────┐
+                                                                                  │ 5. INGEST (sekcja 9)             │
+                                                                                  │ upsert po external_id, hash,     │
+                                                                                  │ chunki po nagłówkach, embeddingi │
+                                                                                  │ archiwizacja + import_runs       │
+                                                                                  └──────────────────────────────────┘</code></pre>
+<p><strong>Snapshot jest granicą.</strong> Kroki 1–4 wymagają sieci (a krok 3 opcjonalnie LLM), krok 5 nie wymaga żadnego z nich. Na demo, w CI i na świeżej maszynie wystarczy <code>make ingest</code> na commitowanym pliku, bez dostępu do rops.krakow.pl. Zmiany w bibliotece widać jako diff tego pliku w PR.</p>
+
+<h3>16.3 Fetch</h3>
+<ol>
+<li><strong>Odkrywanie kategorii</strong>: pobierz stronę <code>ROPS_CATEGORIES_PATH</code> i zbierz unikalne odnośniki pasujące do <code>^/innowacje-spoleczne/biblioteka-innowacji-spolecznych/(dla-[a-z0-9-]+)$</code> (zarówno względne, jak i absolutne <code>http(s)://rops.krakow.pl</code>; obie formy występują). Lista kategorii <strong>nie</strong> jest wpisana w kod. Etykietę bierz z <code>h2.page-title</code> strony kategorii.</li>
+<li><strong>Kategoria</strong>: dla każdego <code>.news-list__item</code> zapisz <code>(slug, href, title, lead)</code>. Jeżeli na stronie pojawi się element <code>.pagination</code> lub parametr <code>page=</code>, przerwij z błędem <code>PAGINATION_APPEARED</code>. Lepiej zatrzymać import niż po cichu zgubić drugą stronę.</li>
+<li><strong>Wpis</strong>: pobierz stronę szczegółów; adres absolutny zbuduj z <code>ROPS_BASE_URL</code>.</li>
+<li><strong>Klient HTTP</strong> (<code>scripts/scrapers/http.py</code>, <code>httpx.AsyncClient</code>): <code>User-Agent</code> z sekcji 12, <code>SCRAPER_CONCURRENCY</code> przez semafor, <code>SCRAPER_DELAY_S</code> między żądaniami, <code>SCRAPER_TIMEOUT_S</code>, 3 ponowienia z backoffem przy 5xx i timeoutach (bez ponawiania 4xx), wymuszone dekodowanie UTF-8.</li>
+<li><strong>Cache</strong>: każda odpowiedź 200 trafia do <code>data/raw/rops-bis/&lt;sha1(url)&gt;.html</code> z sidecarem <code>.json</code> (<code>url</code>, <code>status</code>, <code>fetched_at</code>). Domyślnie cache jest używany, jeśli ma mniej niż 24 h. <code>--refresh</code> go pomija, a <code>--offline</code> czyta <strong>tylko</strong> z cache i kończy się błędem, gdy czegoś brakuje. Katalog jest w <code>.gitignore</code>.</li>
+</ol>
+
+<h3>16.4 Parse — mapowanie pól</h3>
+<p><code>parse_category(html) -&gt; list[ListItem]</code> i <code>parse_entry(html, list_item) -&gt; RopsEntry</code> to <strong>czyste funkcje</strong>: bez sieci, bez bazy, bez zegara. Właśnie je testuje <code>test_rops_parser.py</code>. Biblioteka do HTML: <code>selectolax</code> (szybka) albo <code>beautifulsoup4</code> + <code>lxml</code>; wybierz jedną.</p>
+<div class="tablewrap">
+<table>
+<tr><th>Pole formatu pośredniego (sekcja 9)</th><th>Skąd</th><th>Reguła</th></tr>
+<tr><td><code>external_id</code></td><td>adres wpisu</td><td><code>"rops-bis:" + slug</code>, gdzie slug to część ścieżki po pierwszym przecinku</td></tr>
+<tr><td><code>title</code></td><td><code>h2.page-title</code></td><td>Znormalizowany tekst; awaryjnie <code>a.news-list__title</code></td></tr>
+<tr><td><code>summary</code></td><td>lead z listy kategorii</td><td>Pierwszy <code>&lt;p&gt;</code> w <code>.news-list__desc</code>. Zdejmij powtórzony prefiks tytułu (<code>"BaWita - tablica…"</code> → <code>"Tablica…"</code>, z wielką literą na początku). Gdy lead jest pusty albo równy tytułowi: pierwsze ~300 znaków sekcji „Na czym polega rozwiązanie?”, ucięte na granicy zdania</td></tr>
+<tr><td><code>body</code></td><td>sekcje <code>&lt;h4&gt;</code></td><td>Markdown: <code>## &lt;nagłówek bez numeru&gt;\n\n&lt;treść&gt;</code> dla każdej sekcji <strong>poza</strong> autorami, w kolejności ze strony. Akapity rozdzielone pustą linią, listy <code>&lt;li&gt;</code> jako <code>- </code>. Nierozpoznane nagłówki trafiają do <code>body</code> bez zmian, bo nie wolno gubić treści. Chunkowanie po nagłówkach opisuje 4.4</td></tr>
+<tr><td><code>target_group</code></td><td>„Grupa docelowa”</td><td>Pierwsze zdanie sekcji, maks. 200 znaków; pełna treść i tak jest w <code>body</code>. Gdy brak sekcji: <code>null</code></td></tr>
+<tr><td><code>authors</code></td><td>sekcja z nagłówkiem <code>autor*</code></td><td>Elementy <code>&lt;li&gt;</code>, a gdy ich brak, podział po przecinkach i nowych liniach. Przycięte, bez pustych, kolejność zachowana</td></tr>
+<tr><td><code>source_categories</code></td><td>kategoria, z której przyszedł wpis</td><td>Lista slugów; etykiety API bierze z <code>GET /api/sources</code></td></tr>
+<tr><td><code>resources.folder_pdf</code></td><td>tabela ikon</td><td>Pierwszy <code>a[href$=".pdf"]</code> w <code>.text-content</code> poza dokumentem <code>Zasady_wykorzystania_innowacji_MIIS.pdf</code> (ten sam na każdej stronie)</td></tr>
+<tr><td><code>resources.video</code></td><td>tabela ikon</td><td>Pierwszy odnośnik do <code>youtube.com</code> / <code>youtu.be</code></td></tr>
+<tr><td><code>resources.materials</code></td><td>tabela ikon</td><td>Pierwszy <code>a[href$=".zip"]</code></td></tr>
+<tr><td><code>license</code></td><td>tabela ikon</td><td>Odnośnik <code>creativecommons.org/licenses/by/4.0</code> ⇒ <code>"CC-BY-4.0"</code>; inny wariant CC ⇒ jego kod; brak ⇒ <code>null</code></td></tr>
+<tr><td><code>tags</code></td><td>wyliczane</td><td>Etykiety kategorii ROPS w lowercase + <code>"upowszechniana"</code>, gdy jest wstęga. Bez słów kluczowych z treści, bo tę rolę pełnią tor leksykalny i <code>synonyms.json</code></td></tr>
+<tr><td><code>evidence_level</code></td><td>wyliczane</td><td>Każdy wpis biblioteki przeszedł test w inkubatorze ROPS, więc <strong>3</strong>; <strong>4</strong>, gdy jest wstęga „wybrana do upowszechniania”; <strong>2</strong>, gdy brak sekcji „Czy to działa?”</td></tr>
+<tr><td><code>source_url</code></td><td>adres wpisu</td><td>Absolutny, w kategorii, w której wpis znaleziono najpierw (alfabetycznie po slugu kategorii)</td></tr>
+<tr><td><code>source_name</code></td><td>stała</td><td><code>"Biblioteka Innowacji Społecznych ROPS Kraków"</code></td></tr>
+<tr><td><code>organization</code>, <code>gmina</code>, <code>powiat</code>, <code>cost_range</code></td><td>—</td><td><code>null</code>. Strona ich nie podaje, a autorzy to osoby, nie organizacje. <strong>Nie zgaduj</strong>; koszty są w PDF (backlog)</td></tr>
+<tr><td><code>implementation_steps</code>, <code>contact</code></td><td>—</td><td><code>[]</code>, <code>{}</code></td></tr>
+<tr><td><code>category</code>, <code>category_source</code></td><td>krok CLASSIFY</td><td>16.5</td></tr>
+</table>
+</div>
+
+<div class="note">
+<p><strong>„Kto może skorzystać z innowacji?” to najcenniejsza sekcja dla matchmakingu.</strong> Wymienia typy podmiotów, które mogą wdrożyć rozwiązanie („DPS, warsztaty terapii zajęciowej, osoby indywidualne”), czyli dokładnie to, o co pyta pracownik CUS albo NGO. Zostaje w <code>body</code> jako osobny chunk z własnym <code>heading</code>. Nie łącz jej z innymi sekcjami.</p>
+</div>
+
+<h3>16.5 Classify — przypisanie do taksonomii wyzwań</h3>
+<p>Kategorie ROPS to <em>grupy docelowe</em>, a <code>challenge_taxonomy</code> to <em>wyzwania</em> (4.3). Kod <code>category</code> wyznaczany jest dla każdego wpisu w tej kolejności. Pierwszy krok, który zwróci kod, wygrywa:</p>
+<ol>
+<li><strong><code>MANUAL</code></strong>: ręczne nadpisanie z <code>data/sources/rops-overrides.json</code> (<code>{"rops-bis:bawita": "AGING"}</code>). Służy do poprawek po przeglądzie raportu pokrycia.</li>
+<li><strong><code>KEYWORDS</code></strong>: ten sam słownik co w preprocessingu zapytań (6.1 krok 5, <code>data/category-keywords.json</code>), stosowany do <code>title</code> + „Jakich problemów dotyczy innowacja?” + „Grupa docelowa”. Wygrywa kod z największą liczbą trafień, ale tylko gdy ma ≥ 2 trafienia i przewagę ≥ 1 nad drugim. Remis lub słaby sygnał przechodzi do kroku 3. <strong>Jeden słownik dla zapytań i dokumentów</strong> zapewnia, że filtr po kategorii nie rozjedzie się między obiema stronami.</li>
+<li><strong><code>LLM</code></strong>: tylko gdy <code>LLM_ENABLED=true</code> i scraper uruchomiono bez <code>--no-llm</code>. Jedno wywołanie na wpis z tym samym klasyfikatorem co w 6.1; zwraca wyłącznie kod z taksonomii albo <code>OTHER</code>. Odpowiedź spoza listy kodów jest odrzucana.</li>
+<li><strong><code>SOURCE_MAP</code></strong>: domyślny kod dla kategorii ROPS z <code>data/sources/rops-category-map.json</code>:</li>
+</ol>
+<div class="tablewrap">
+<table>
+<tr><th>Kategoria ROPS</th><th>Domyślny kod</th><th>Uwagi</th></tr>
+<tr><td><code>dla-seniorow</code></td><td><code>AGING</code></td><td>Wiele wpisów trafi przez <code>KEYWORDS</code> do <code>LONELINESS</code> lub <code>MENTAL_HEALTH</code> (np. „Centrum antydepresyjne”)</td></tr>
+<tr><td><code>dla-zdrowia-i-medycyny</code></td><td><code>MENTAL_HEALTH</code></td><td>Do weryfikacji, bo część wpisów dotyczy zdrowia somatycznego</td></tr>
+<tr><td><code>dla-osob-z-niepelnosprawnoscia-sensoryczna</code></td><td><code>SERVICE_ACCESS</code></td><td>Aplikacje i nawigacja głosowa mogą trafić do <code>DIGITAL_EXCLUSION</code></td></tr>
+<tr><td><code>dla-osob-z-niepelnosprawnoscia-intelektualna</code></td><td><code>SERVICE_ACCESS</code></td><td></td></tr>
+<tr><td><code>dla-osob-o-ograniczonej-mobilnosci</code></td><td><code>SERVICE_ACCESS</code></td><td></td></tr>
+<tr><td><code>dla-cudzoziemcow</code></td><td><code>SERVICE_ACCESS</code></td><td></td></tr>
+<tr><td><code>dla-osob-w-kryzysie-bezdomnosci</code></td><td><code>SERVICE_ACCESS</code></td><td></td></tr>
+<tr><td><code>dla-dzieci-mlodziezy-i-rodziny</code></td><td><code>OTHER</code></td><td>Najbardziej zróżnicowana kategoria (21 wpisów). Bez sygnału z treści lepiej oddać ją operatorowi niż zgadywać</td></tr>
+<tr><td><code>dla-rynku-pracy</code></td><td><code>OTHER</code></td><td>Taksonomia nie ma kodu „rynek pracy”; kandydat do jej rozszerzenia (nowy ADR)</td></tr>
+</table>
+</div>
+<div class="warn">
+<p><strong>Klasyfikacja odbywa się w scraperze, a jej wynik ląduje w snapshotcie.</strong> Ingest nigdy nie woła LLM-a. Dzięki temu <code>category</code> jest deterministyczne między uruchomieniami, widoczne w diffie PR i możliwe do poprawienia ręcznie przez <code>rops-overrides.json</code>. Snapshot zawiera <code>category_source</code>, więc w przeglądzie od razu widać, które kody pochodzą z mapy domyślnej, czyli są najmniej pewne.</p>
+<p>Kategoria to filtr i wymiar raportowania, a <strong>nie</strong> mechanizm wyszukiwania (4.2). Błędny kod pogarsza statystyki w Module 2, ale nie trafność czatu.</p>
+</div>
+
+<h3>16.6 Snapshot, bezpieczniki i archiwizacja</h3>
+<p>Format pliku: obiekt z nagłówkiem z sekcji 9, czyli <code>{"source":"rops-bis","source_name":…,"base_url":…,"fetched_at":…,"complete":true,"categories":[{"slug","label_pl","count"}],"solutions":[…]}</code>.</p>
+<ul>
+<li><strong>Stabilny diff</strong>: <code>solutions</code> posortowane po <code>external_id</code>, klucze posortowane, <code>ensure_ascii=False</code>, wcięcie 2, <code>\n</code> na końcu. <code>fetched_at</code> występuje tylko w nagłówku, nie przy wpisach. Ponowny przebieg bez zmian w źródle zmienia więc w pliku <strong>jedną linię</strong>.</li>
+<li><strong>Zapis atomowy</strong>: najpierw <code>rops-biblioteka.json.tmp</code>, potem <code>os.replace</code>. Przerwany scraper nie zostawia połowy pliku.</li>
+<li><strong>Bezpieczniki</strong>. Każdy przerywa przebieg <strong>przed</strong> zapisem snapshotu, z kodem wyjścia ≠ 0 i komunikatem:
+  <ul>
+  <li>łącznie wpisów &lt; <code>SCRAPER_MIN_EXPECTED</code> (90) → <code>TOO_FEW_ENTRIES</code>,</li>
+  <li>którakolwiek kategoria ma 0 wpisów albo liczba kategorii spadła o więcej niż 2 → <code>CATEGORY_MISSING</code>,</li>
+  <li>&gt; 10% wpisów bez żadnego rozpoznanego nagłówka sekcji → <code>LAYOUT_CHANGED</code>,</li>
+  <li>pojawiło się stronicowanie → <code>PAGINATION_APPEARED</code>,</li>
+  <li>&gt; 5% stron szczegółów zakończonych błędem po ponowieniach → <code>FETCH_ERRORS</code>.</li>
+  </ul>
+  Bez bezpieczników witryna w przebudowie zwracająca puste kategorie oznaczałaby <code>"complete": true</code> z zerem wpisów, a ingest zarchiwizowałby cały korpus. Przerwany przebieg zapisuje <code>import_runs.status = 'ABORTED_GUARD'</code>.</li>
+<li><strong>Archiwizacja</strong> (sekcja 9, krok 7): wpis <code>rops-bis:*</code> nieobecny w kompletnym snapshotcie dostaje <code>ARCHIVED</code> i znika z wyszukiwania (<code>sync_chunk_denorm</code>), ale zostaje w bazie razem z historią zgłoszeń. Gdy wróci do źródła, wraca do <code>PUBLISHED</code>. Chunki i embeddingi pozostają, więc powrót nie kosztuje wywołań API, o ile nie zmienił się <code>content_hash</code>.</li>
+</ul>
+
+<h3>16.7 Uruchamianie</h3>
+<pre><code>python -m scripts.scrapers.rops_biblioteka                 # fetch (cache ≤ 24 h) → parse → classify → snapshot
+python -m scripts.scrapers.rops_biblioteka --offline       # tylko z data/raw/, bez sieci — iteracja nad parserem
+python -m scripts.scrapers.rops_biblioteka --refresh       # ignoruj cache
+python -m scripts.scrapers.rops_biblioteka --no-llm        # klasyfikacja bez kroku LLM
+python -m scripts.scrapers.rops_biblioteka --limit 5 --dry-run   # debug: wypisz 5 rekordów, nic nie zapisuj
+
+make scrape-rops        # = pierwsza linia
+make ingest             # = python -m scripts.ingest data/solutions/
+make refresh-rops       # = scrape-rops &amp;&amp; ingest &amp;&amp; coverage</code></pre>
+
+<p>Wyjście scrapera (przykład kształtu; liczby w kolumnie <code>category</code> są ilustracyjne):</p>
+<pre><code>rops-bis: 9 kategorii, 115 wpisów, 125 żądań (cache: 0), 5 min 12 s
+  sekcje:     opis 114/115  problem 115  grupa 114  kto 115  czy-działa 111  autorzy 115
+  zasoby:     zip 115  licencja 100  pdf 33  film 26  upowszechniana 27
+  category:   KEYWORDS 71  LLM 0  SOURCE_MAP 39  MANUAL 5
+  bezpieczniki: OK
+  zapisano data/solutions/rops-biblioteka.json (115 wpisów, +3 / ~1 / -0 względem poprzedniego)</code></pre>
+
+<p><code>scripts/coverage_report.py</code> (krok 4c w sekcji 13) wypisuje liczbę wpisów <code>PUBLISHED</code> na kod taksonomii i źródło oraz wskazuje kody poniżej 3 wpisów. To lista do uzupełnienia przez <code>seed-demo.json</code> albo przez kolejne źródło.</p>
+
+<h3>16.8 Testy</h3>
+<p><code>tests/fixtures/rops/</code> zawiera zapisane strony: listę kategorii, jedną kategorię i co najmniej trzy wpisy dobrane pod przypadki brzegowe: pełny wpis z wstęgą i PDF (<code>bawita</code>), wpis bez „Czy to działa?” (<code>therapy-set</code>) i wpis z nagłówkiem <code>Autorka</code>. Testy nie korzystają z sieci.</p>
+<ul>
+<li>Odkrywanie kategorii zbiera zarówno odnośniki względne, jak i absolutne, bez duplikatów; strona <code>/kategorie</code> nie jest traktowana jako kategoria.</li>
+<li>Sekcje rozpoznawane po tekście: wpis bez „Czy to działa?” ma autorów w <code>authors</code>, a nie w <code>body</code>.</li>
+<li><code>&amp;nbsp;</code> i warianty nagłówka autorów są rozpoznawane.</li>
+<li>Zdejmowanie prefiksu tytułu z leadu i fallback <code>summary</code> na „Na czym polega rozwiązanie?”.</li>
+<li>Wykrywanie <code>resources</code> i <code>license</code>; <code>Zasady_wykorzystania_innowacji_MIIS.pdf</code> <strong>nie</strong> staje się <code>folder_pdf</code>.</li>
+<li><code>evidence_level</code> 2 / 3 / 4 zgodnie z regułą z 16.4.</li>
+<li>Bezpieczniki: kategoria z pustą listą ⇒ wyjątek, snapshot niezapisany.</li>
+<li>Stabilność: dwukrotna serializacja tych samych wpisów daje identyczne bajty.</li>
+<li>Integracyjny (z bazą testową): ingest snapshotu z fixture'ów, potem ingest snapshotu bez jednego wpisu ⇒ wpis jest <code>ARCHIVED</code>, a jego chunki mają <code>published = false</code>; trzeci ingest z przywróconym wpisem ⇒ <code>PUBLISHED</code> i 0 wywołań embeddingów.</li>
+</ul>
+
+<h3>16.9 Ryzyka</h3>
+<div class="tablewrap">
+<table>
+<tr><th>Ryzyko</th><th>Skutek</th><th>Ograniczenie</th></tr>
+<tr><td>Przebudowa witryny ROPS zmienia adresy lub HTML</td><td>Scraper przestaje działać</td><td>Commitowany snapshot działa dalej; bezpieczniki zatrzymują zły import; parser ma testy na fixture'ach, więc naprawa to podmiana selektorów</td></tr>
+<tr><td>Zmiana slugów przy przebudowie</td><td>Stare <code>external_id</code> są archiwizowane, nowe dodawane jako nowe wpisy; historia zgłoszeń wskazuje na zarchiwizowane</td><td>Raport scrapera pokazuje jednoczesne <code>+N / -N</code>; przy dużym N sprawdź ręcznie i ewentualnie dodaj mapę aliasów slugów (backlog)</td></tr>
+<tr><td>Wolny serwer albo niedostępny podczas hackathonu</td><td>Brak świeżych danych</td><td>Snapshot w repo, cache w <code>data/raw/</code>, <code>--offline</code></td></tr>
+<tr><td>Treść merytoryczna częściowo tylko w PDF</td><td>Brak kosztów i kroków wdrożenia na kartach</td><td>Odnośniki w <code>resources</code>; parsowanie PDF w backlogu</td></tr>
+<tr><td>Słaba klasyfikacja do taksonomii</td><td>Zniekształcone statystyki per wyzwanie w Module 2</td><td><code>category_source</code> w snapshotcie, <code>rops-overrides.json</code>, raport pokrycia; wyszukiwanie od kategorii nie zależy</td></tr>
 </table>
 </div>
 
 <hr>
 
 <footer>
-<p><strong>Moduł 1 — Matchmaking społeczny</strong> · v0.2 · 2026-10-03 · Małopolski Hub Innowacji Społecznych.</p>
+<p><strong>Moduł 1 — Matchmaking społeczny</strong> · v0.3 · 2026-10-03 · Małopolski Hub Innowacji Społecznych.</p>
+<p><strong>v0.3</strong> — import Biblioteki Innowacji Społecznych ROPS jako korpusu bazowego: nowa sekcja 16 (scraper, mapowanie pól, klasyfikacja do taksonomii, bezpieczniki, testy), ADR-009, pola importu w <code>solutions</code>, tabela <code>import_runs</code>, endpoint <code>GET /api/sources</code>, atrybucja CC BY w <code>SolutionCard</code>; <code>seed-demo.json</code> zdegradowany do uzupełniania luk taksonomii; zestaw ewaluacyjny oparty na <code>external_id</code>.</p>
 <p><strong>v0.2</strong> — frontend wyjęty do osobnego modułu (sekcja 8 to teraz kontrakt, nie implementacja); warstwa tożsamości usunięta w całości: tabela <code>users</code>, typ <code>user_role</code>, nagłówek <code>X-Demo-Role</code> i powiązane klucze obce (ADR-007 przepisany, dodany ADR-008).</p>
 <p>Dokument iteracyjny. Zmiany: nowa sekcja na końcu, wpis w spisie treści, ADR w sekcji 14 przy zmianie decyzji. Podnieś wersję w nagłówku i w stopce.</p>
 </footer>
