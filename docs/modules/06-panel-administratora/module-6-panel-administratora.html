@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Moduł 6 — Panel administratora</title>
 <style>
-<style>
 :root{
   --bg:#fbfaf8; --surface:#ffffff; --surface-2:#f3f1ed; --border:#e0dcd4;
   --text:#1c1a17; --text-dim:#5f5a52; --accent:#8a4b1f; --accent-soft:#f6ece3;
@@ -92,18 +91,18 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 
 <header class="doc">
   <h1>Moduł 6 — Panel administratora</h1>
-  <div class="sub">Dokument implementacyjny dla Małopolskiego Hubu Innowacji Społecznych (<code>base.md</code>, funkcjonalność VI). <strong>Szkielet</strong> — sekcje do wypełnienia na sesji planowania. Odbiorca: agent lub programista implementujący moduł.</div>
+  <div class="sub">Dokument implementacyjny dla Małopolskiego Hubu Innowacji Społecznych (<code>base.md</code>, funkcjonalność VI). Odbiorca: agent lub programista implementujący moduł. Rdzeń modułu: <strong>edycja i dodawanie wiedzy w panelu z natychmiastowym ponownym embeddingiem</strong>, historia zmian oraz wspólna powłoka panelu dla modułów 2–5.</div>
   <div class="meta">
-    <span><strong>Wersja:</strong> v0.1</span>
-    <span><strong>Data:</strong> 2026-10-03</span>
-    <span><strong>Status:</strong> <span class="badge b-todo">szkielet</span></span>
-    <span><strong>Plik zadań:</strong> <code>docs/modules/06-panel-administratora/module-6-tasks.md</code></span>
+    <span><strong>Wersja:</strong> v0.2</span>
+    <span><strong>Data:</strong> 2026-10-04</span>
+    <span><strong>Status:</strong> <span class="badge b-draft">draft</span></span>
+    <span><strong>Plik zadań:</strong> <code>docs/modules/06-panel-administratora/module-6-tasks.md</code> (zadania <code>PA</code> — do rozpisania po akceptacji tej wersji)</span>
   </div>
 </header>
 
 <div class="note">
 <p><strong>Jak czytać ten dokument.</strong> Każda sekcja ma status: <span class="badge b-stable">stable</span> — ustalone, nie zmieniaj bez ADR; <span class="badge b-draft">draft</span> — kierunek ustalony, szczegóły do dopracowania w kodzie; <span class="badge b-todo">todo</span> — do zaplanowania, nie implementuj.</p>
-<p>Struktura i konwencje jak w <code>docs/modules/01-matchmaking/module-1-matchmaking.html</code>. Twarde reguły z <code>AGENTS.md</code> obowiązują także tutaj (progi w <code>settings</code>, <code>polish_simple</code>, brak treści w logach, jeden kształt <code>SolutionCard</code>, bez autoryzacji i bez testów automatycznych). Moduł 1 jest kontraktem zewnętrznym — zmiana jego tabel lub endpointów wymaga ADR i wpisu w „Uwagach między zadaniami” Modułu 1.</p>
+<p>Struktura i konwencje jak w <code>docs/modules/01-matchmaking/module-1-matchmaking.html</code>. Twarde reguły z <code>AGENTS.md</code> obowiązują także tutaj (progi w <code>settings</code>, <code>polish_simple</code>, brak treści w logach, jeden kształt <code>SolutionCard</code>, bez autoryzacji i bez testów automatycznych). Moduł 1 jest kontraktem zewnętrznym — zmiana jego tabel lub endpointów wymaga ADR i wpisu w „Uwagach między zadaniami” Modułu 1. Wszystkie takie zmiany wymienia sekcja <a href="#s5">5.3</a>.</p>
 </div>
 
 <nav class="toc">
@@ -115,7 +114,7 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
     <li><a href="#s4">Użytkownicy i scenariusze</a></li>
     <li><a href="#s5">Architektura i zależności od Modułu 1</a></li>
     <li><a href="#s6">Model danych</a></li>
-    <li><a href="#s7">Logika i AI</a></li>
+    <li><a href="#s7">Logika zapisu (bez AI)</a></li>
     <li><a href="#s8">Kontrakt API</a></li>
     <li><a href="#s9">Kontrakt dla frontendu (ekrany)</a></li>
     <li><a href="#s10">Konfiguracja i feature flagi</a></li>
@@ -124,7 +123,7 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
     <li><a href="#s13">Rejestr decyzji (ADR)</a></li>
     <li><a href="#s14">Backlog kolejnych iteracji</a></li>
     <li><a href="#s15">Koszt utrzymania i zasoby</a></li>
-    <li><a href="#s16">Pytania otwarte do sesji planowania</a></li>
+    <li><a href="#s16">Pytania otwarte</a></li>
   </ol>
 </nav>
 
@@ -136,153 +135,464 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 <p>Z <code>base.md</code> §3: pracownicy ROPS potrzebują przejrzystego panelu administratora do prezentowania zgromadzonej wiedzy, monitorowania zgłoszeń oraz prowadzenia dialogu z użytkownikami. Z §6: w jaki sposób system powiadamia administratora o nowym pomyśle i jak wygląda ścieżka odpowiedzi do autora?</p>
 </blockquote>
 
-<h4>Ocena w konkursie</h4>
-<p>Kryterium „Stopień spełnienia wyzwania” (40%): Matchmaking 10%, każda dodatkowa funkcjonalność +5%. Liczy się jakość działania — moduł ma być pokazywalny w demo, nie tylko obecny w nawigacji.</p>
+<h4>Cel w jednym zdaniu</h4>
+<p><strong>Pracownik ROPS w kilka minut poprawia, uzupełnia i publikuje wiedzę w panelu, a zmiana od razu działa w czacie Matchmakingu i w Zasobniku — bez plików JSON, bez <code>make ingest</code> i bez programisty.</strong></p>
 
-<div class="pending">
-<p><strong>Do uzupełnienia:</strong> cel modułu w jednym zdaniu, jak wspiera „cyfrowe serce” Hubu i czym wnosi „nową jakość” (kryterium pomysłowości z <code>base.md</code> §6).</p>
-</div>
+<h4>Nowa jakość</h4>
+<ul>
+<li><strong>Zapis = indeksowanie.</strong> Edycja treści przelicza chunki i embeddingi w tej samej transakcji. Po kliknięciu „Zapisz” to samo pytanie w czacie zwraca już poprawioną treść i cytat — to jest scenariusz demo (<a href="#s4">S1</a>).</li>
+<li><strong>Ślad zmian.</strong> Każda edycja zostawia rewizję: kto, kiedy, które pola, po co. ROPS może pokazać, skąd wzięła się dana treść, i bezpiecznie dzielić pracę między kilku kuratorów.</li>
+<li><strong>Jedno miejsce pracy.</strong> Skrzynka „Nowe” zbiera sygnały ze wszystkich modułów (zgłoszenia, rozwiązania do zatwierdzenia, pomysły, rozmowy), a nawigacja panelu ma wspólne konwencje — „cyfrowe serce” Hubu widziane od strony zespołu.</li>
+</ul>
+
+<h4>Ocena w konkursie</h4>
+<p>Kryterium „Stopień spełnienia wyzwania” (40%): Matchmaking 10%, każda dodatkowa funkcjonalność +5%. Monitorowanie zgłoszeń, powiadomienia i odpowiedzi do autora już działają (sekcja 2). Moduł 6 dopełnia brakującą literę wymagania — <em>modyfikować</em> — i robi z niej pokazywalny efekt w demo.</p>
 
 <h2 id="s2">2. Stan obecny — co już działa <span class="badge b-draft">draft</span></h2>
 
-<p>Stan na 2026-10-03 po Module 1 (backend T00–T26) i module frontendowym (F00–F21).</p>
+<p>Stan na 2026-10-04: Moduł 1 (backend T00–T26, frontend F00–F21) gotowy, Moduł 4 (TI00–TI07) gotowy, role frontendowe z <code>docs/changes/feature-2026-10-03-1</code> wdrożone. Moduły 2, 3, 5 mają rozpisane zadania, kodu panelu jeszcze nie.</p>
 <div class="tablewrap">
 <table>
 <tr><th>Wymaganie</th><th>Pokrycie</th><th>Gdzie / czego brakuje</th></tr>
-<tr><td>Monitorowanie zgłoszeń</td><td><span class="cov-yes">jest</span></td><td><code>/panel/zgloszenia</code> z filtrami, szczegóły, podobne, zmiana statusu (F15, F16; T20)</td></tr>
-<tr><td>Powiadomienie o nowym pomyśle/zgłoszeniu</td><td><span class="cov-yes">jest</span></td><td>Skrzynka „Nowe” + licznik w nawigacji (F14; T22)</td></tr>
-<tr><td>Ścieżka odpowiedzi do autora</td><td><span class="cov-yes">jest</span></td><td>Odpowiedź w panelu → „Moje zgłoszenia” (F12, F16)</td></tr>
-<tr><td>Weryfikacja i udostępnianie wiedzy</td><td><span class="cov-part">częściowo</span></td><td>Kolejka zatwierdzania: status, kategoria, poziom sprawdzenia (F17; <code>PATCH /api/solutions</code>)</td></tr>
-<tr><td>Modyfikacja wiedzy</td><td><span class="cov-no">brak</span></td><td><code>SolutionPatch</code> nie zmienia treści; brak edycji tytułu/opisu/kroków/mediów, brak ponownego chunkowania i embeddingu po edycji, brak dodawania <code>KNOWLEDGE</code></td></tr>
-<tr><td>Trendy</td><td><span class="cov-yes">jest</span></td><td><code>/panel/trendy</code> (F18)</td></tr>
-<tr><td>Obsługa bytów innych modułów</td><td><span class="cov-no">brak</span></td><td>Pomysły (III), testerzy i oceny (IV), wątki (V) — powstaną razem z tymi modułami</td></tr>
+<tr><td>Monitorowanie zgłoszeń</td><td><span class="cov-yes">jest</span></td><td><code>/panel/zgloszenia</code> z filtrami, szczegóły, podobne, zmiana statusu (F15, F16; <code>api/routers/reports.py</code>, T20)</td></tr>
+<tr><td>Powiadomienie o nowym zgłoszeniu / rozwiązaniu</td><td><span class="cov-yes">jest</span></td><td>Skrzynka „Nowe” + licznik w nawigacji, odpytywanie co 30 s (<code>useInboxCount</code>, F14; <code>GET /api/inbox</code>, T22)</td></tr>
+<tr><td>Powiadomienie o nowym pomyśle</td><td><span class="cov-part">zaplanowane</span></td><td>Moduł 3, K11: sekcja „Nowe pomysły” w <code>InboxPage</code> i licznik w nawigacji</td></tr>
+<tr><td>Ścieżka odpowiedzi do autora</td><td><span class="cov-yes">jest</span></td><td>Odpowiedź w panelu → „Moje zgłoszenia” (F12, F16; <code>POST /api/reports/{id}/replies</code>)</td></tr>
+<tr><td>Weryfikacja i udostępnianie wiedzy</td><td><span class="cov-yes">jest</span></td><td>Kolejka <code>/panel/rozwiazania</code>: status, kategoria, poziom sprawdzenia (F17; <code>PATCH /api/solutions/{id}</code>, <code>SolutionPatch</code>)</td></tr>
+<tr><td><strong>Modyfikacja wiedzy</strong></td><td><span class="cov-no">brak</span></td><td><code>SolutionPatch</code> nie zmienia treści; brak edycji tytułu, opisu, kroków, mediów; brak ponownego chunkowania po edycji; brak dodawania <code>KNOWLEDGE</code> z panelu. Moduł 2 oddaje to Modułowi 6 (ADR-M2-006). <strong>Główny zakres tego modułu.</strong></td></tr>
+<tr><td>Przegląd całej bazy wiedzy</td><td><span class="cov-no">brak</span></td><td>Panel widzi tylko kolejkę <code>PENDING_REVIEW</code>; <code>SolutionCard</code> nie ma pola <code>status</code> (<code>ReviewActions.tsx</code>: „API nie zwraca obecnego statusu”)</td></tr>
+<tr><td>Trendy</td><td><span class="cov-yes">jest</span></td><td><code>/panel/trendy</code> (F18); rozszerzenie o tygodnie, powiaty i luki w bibliotece — Moduł 2, Z05/Z09</td></tr>
+<tr><td>Testy innowacji (IV)</td><td><span class="cov-yes">jest</span></td><td><code>/panel/testy</code>, <code>/panel/testy/nowy</code>, <code>/panel/testy/:id</code> (Moduł 4)</td></tr>
+<tr><td>Pomysły (III), rozmowy (V)</td><td><span class="cov-part">zaplanowane</span></td><td><code>/panel/pomysly*</code> (M3, K07/K11), <code>/panel/rozmowy*</code> (M5, PK20/PK24)</td></tr>
+<tr><td>Dostęp do panelu</td><td><span class="cov-part">tylko UI</span></td><td>Rola <code>administrator</code> w <code>web/src/lib/auth.tsx</code>, strażnik <code>RequireRole</code>; backend nie zna ról (decyzja zespołu)</td></tr>
 </table>
 </div>
 
-<h2 id="s3">3. Zakres MVP i granice <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Co dokładnie wchodzi do PoC tego modułu, a co jest backlogiem (sekcja 14)?</li>
-<li>Zasada granicy: czego ten moduł <strong>nie</strong> robi i który moduł to przejmuje?</li>
-</ul>
+<h2 id="s3">3. Zakres MVP i granice <span class="badge b-draft">draft</span></h2>
+
+<h3>3.1. W zakresie</h3>
+<ol>
+<li><strong>Edycja treści i metadanych</strong> dowolnego wpisu w <code>solutions</code> (każdy <code>kind</code>, każdy <code>status</code>): tytuł, streszczenie, treść, organizacja, gmina, kategoria, tagi, grupa docelowa, koszt, kroki wdrożenia, źródło, media (jako URL), <code>knowledge_type</code>. Zapis treści przelicza chunki i embeddingi synchronicznie (ADR-M6-002).</li>
+<li><strong>Dodawanie wpisów z panelu:</strong> <code>KNOWLEDGE</code> (<code>REPORT</code> / <code>MATERIAL</code>) i rozwiązań kuratorskich (<code>SOLUTION</code>, <code>origin = CURATED</code>).</li>
+<li><strong>Historia zmian:</strong> tabela <code>solution_revisions</code> ze stanem „przed” i listą zmienionych pól; podgląd na ekranie edycji. Bez cofania wersji (backlog).</li>
+<li><strong>Baza wiedzy w panelu:</strong> lista wszystkich wpisów z filtrami <code>kind</code>, <code>knowledge_type</code>, <code>status</code>, kategoria, fraza w tytule, „edytowane w panelu”; widoczny status i data ostatniej zmiany.</li>
+<li><strong>Ochrona edycji przed ingestem:</strong> ponowny <code>make ingest</code> nie nadpisuje wpisów zmienionych w panelu (ADR-M6-004).</li>
+<li><strong>Powłoka panelu:</strong> kolejność nawigacji, konwencje tras, liczników i stanów ekranów, którymi kierują się moduły 2–5 (ADR-M6-006, sekcja <a href="#s9">9.1</a>).</li>
+</ol>
+
+<h3>3.2. Poza zakresem — kto przejmuje</h3>
+<div class="tablewrap">
+<table>
+<tr><th>Rzecz</th><th>Gdzie</th></tr>
+<tr><td>Ekrany pomysłów, decyzje o pomysłach</td><td>Moduł 3 (K07, K11) — według konwencji z 9.1</td></tr>
+<tr><td>Ekrany testów innowacji i moderacja ocen</td><td>Moduł 4 (gotowe)</td></tr>
+<tr><td>Ekrany rozmów, przypisanie eksperta</td><td>Moduł 5 (PK20, PK24)</td></tr>
+<tr><td>Trendy: tygodnie, powiaty, luki w bibliotece</td><td>Moduł 2 (Z05, Z09)</td></tr>
+<tr><td>Profile wyzwań (<code>challenge_profiles</code>), wskaźniki, nabory grantowe</td><td>Pliki JSON + ingest (M2, M3); edycja w panelu — backlog (sekcja 14)</td></tr>
+<tr><td>Zmiana statusu, kategorii, poziomu sprawdzenia</td><td>Bez zmian: istniejący <code>PATCH /api/solutions/{id}</code> (M1, T21)</td></tr>
+<tr><td>AI w panelu, eksport CSV, upload plików, cofanie wersji, twarde usuwanie</td><td>Backlog (sekcja 14); zamiast usuwania — <code>ARCHIVED</code></td></tr>
+<tr><td>Autoryzacja, konta, role po stronie API</td><td>Poza zakresem (decyzja zespołu, <code>AGENTS.md</code>)</td></tr>
+</table>
 </div>
 
-<h2 id="s4">4. Użytkownicy i scenariusze <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<h2 id="s4">4. Użytkownicy i scenariusze <span class="badge b-draft">draft</span></h2>
+
+<p>Jedyna grupa: <strong>pracownicy ROPS Kraków</strong> (rola <code>administrator</code> we frontendzie, konto demo <code>admin</code>). Mieszkańcy, NGO i JST korzystają z efektów pracy panelu pośrednio — przez czat i Zasobnik.</p>
+
+<h3>S1. Poprawka widoczna w czacie (scenariusz demo)</h3>
+<ol>
+<li>Prowadzący wpisuje w czacie „starsi ludzie są samotni”. Odpowiedź cytuje rozwiązanie X z nieaktualnym opisem.</li>
+<li>W panelu: <em>Baza wiedzy</em> → wyszukuje X → <em>Edytuj</em>. Zmienia streszczenie i akapit treści, wpisuje notatkę „aktualizacja 2026”.</li>
+<li><em>Zapisz</em> → komunikat „Zapisano. Wyszukiwanie zaktualizowane (4 fragmenty)”.</li>
+<li>To samo pytanie w czacie → odpowiedź i karta pokazują nową treść. Na ekranie X w sekcji „Historia zmian” widać wpis: <code>admin</code>, godzina, pola <code>summary, body</code>, notatka.</li>
+</ol>
+
+<h3>S2. Nowy raport do bazy wiedzy</h3>
+<ol>
+<li><em>Baza wiedzy</em> → <em>Dodaj wpis</em> → rodzaj „Raport / diagnoza” (<code>KNOWLEDGE</code> / <code>REPORT</code>).</li>
+<li>Tytuł, streszczenie, treść (wklejony fragment raportu), kategoria, link do źródła. Status startowy „Opublikowany”.</li>
+<li>Zapis → wpis od razu w <code>candidates.context</code> czatu dla pytań z tej kategorii i w Zasobniku (<code>/wiedza</code>, M2). Nie trafia na karty rozwiązań (ADR-011).</li>
+</ol>
+
+<h3>S3. Poprawa zgłoszonego rozwiązania przed publikacją</h3>
+<ol>
+<li>Skrzynka „Nowe” pokazuje rozwiązanie zgłoszone przez mieszkańca (<code>PENDING_REVIEW</code>).</li>
+<li><em>Do zatwierdzenia</em> → szczegóły → <em>Edytuj treść</em>: poprawia literówki, dzieli treść na kroki wdrożenia, dodaje tagi.</li>
+<li>Wraca do szczegółów → ustawia kategorię i poziom sprawdzenia → <em>Opublikuj</em> (istniejący <code>ReviewActions</code>).</li>
+</ol>
+
+<h3>S4. Kto to zmienił?</h3>
+<ol>
+<li>Koordynatorka widzi w czacie niespodziewany opis. Otwiera wpis w <em>Bazie wiedzy</em>.</li>
+<li>„Historia zmian”: lista rewizji od najnowszej; rozwinięcie rewizji pokazuje poprzednie wartości zmienionych pól.</li>
+<li>W razie potrzeby przepisuje poprzednią wartość ręcznie (cofanie jednym kliknięciem — backlog).</li>
+</ol>
+
+<h2 id="s5">5. Architektura i zależności od Modułu 1 <span class="badge b-draft">draft</span></h2>
+
+<h3>5.1. Nowe elementy</h3>
 <ul>
-<li>Które grupy z <code>base.md</code> §3 korzystają z modułu: mieszkańcy/NGO, JST, pracownicy ROPS, eksperci?</li>
-<li>2–4 scenariusze krok po kroku (kto, co wpisuje, co dostaje) — w tym jeden scenariusz do nagrania demo.</li>
+<li><strong>Router</strong> <code>api/routers/admin_solutions.py</code>, prefiks <code>/api/admin/solutions</code> (ADR-M6-001). Publiczny <code>POST /api/solutions</code> (formularz mieszkańca) i <code>PATCH /api/solutions/{id}</code> (decyzja o statusie) zostają bez zmian.</li>
+<li><strong>Logika zapisu</strong> w <code>api/admin_content.py</code>: diff pól, rewizja, decyzja o przebudowie chunków (sekcja 7). Router tylko waliduje i mapuje błędy.</li>
+<li><strong>Schematy</strong> w <code>api/schemas.py</code>: <code>SolutionAdminItem</code>, <code>SolutionAdminDetail</code>, <code>SolutionAdminCreate</code>, <code>SolutionContentPatch</code>, <code>SolutionRevision</code>. <code>SolutionCard</code> pozostaje jedynym kształtem karty — schematy admina go <strong>rozszerzają</strong>, nie zastępują.</li>
+<li><strong>Frontend:</strong> ekrany <code>/panel/wiedza*</code>, komponent formularza, lista rewizji, pozycja nawigacji (sekcja 9).</li>
 </ul>
+
+<h3>5.2. Co reużywamy</h3>
+<div class="tablewrap">
+<table>
+<tr><th>Element</th><th>Plik</th><th>Do czego</th></tr>
+<tr><td><code>content_hash(title, summary, body)</code></td><td><code>api/corpus.py</code></td><td>Wykrycie zmiany treści</td></tr>
+<tr><td><code>rebuild_chunks(session, solution, provider)</code></td><td><code>api/corpus.py</code></td><td>Przebudowa chunków i embeddingów; najpierw embeduje, potem podmienia, robi <code>flush</code> bez <code>commit</code> — błąd providera zostawia stare chunki</td></tr>
+<tr><td><code>get_embedding_provider()</code>, <code>ProviderError</code></td><td><code>api/providers/</code></td><td>Embeddingi (prefiks <code>passage:</code> dokleja provider)</td></tr>
+<tr><td><code>load_solutions</code>, <code>to_card</code>, <code>to_detail</code></td><td><code>api/cards.py</code></td><td>Budowa pól karty w odpowiedziach admina</td></tr>
+<tr><td>Walidacja gminy → powiat, kategorii z <code>challenge_taxonomy</code></td><td><code>api/routers/solutions.py</code> (<code>create_solution</code>)</td><td>Ten sam wzorzec i te same komunikaty 422; wspólną walidację wydzielić do funkcji, nie kopiować</td></tr>
+<tr><td><code>ApiError</code>, <code>Page[T]</code></td><td><code>api/errors.py</code>, <code>api/schemas.py</code></td><td>Kształt błędów i stronicowanie</td></tr>
+<tr><td><code>useInboxCount</code>, <code>refreshInbox</code>, <code>PanelLayout</code>, <code>ModuleLabel</code></td><td><code>web/src/hooks/</code>, <code>web/src/components/layout/</code></td><td>Powłoka panelu</td></tr>
+<tr><td>Limity pól <code>SolutionSubmit</code></td><td><code>api/schemas.py</code></td><td>Te same limity długości w formularzu admina</td></tr>
+</table>
 </div>
 
-<h2 id="s5">5. Architektura i zależności od Modułu 1 <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Nowe pliki w <code>api/</code> (router, pipeline, provider) i co reużywamy z Modułu 1 (providery, <code>SolutionCard</code>, <code>api.tasks.spawn</code>, taksonomia, gminy).</li>
-<li>Czy moduł zmienia istniejące tabele lub endpointy Modułu 1? Każda taka zmiana = ADR.</li>
-</ul>
+<h3>5.3. Zmiany w kontrakcie Modułu 1 (każda = ADR + wpis w „Uwagach” M1)</h3>
+<div class="tablewrap">
+<table>
+<tr><th>Zmiana</th><th>Plik M1</th><th>Charakter</th><th>ADR</th></tr>
+<tr><td>Kolumna <code>solutions.edited_at</code></td><td><code>db/init.sql</code>, <code>api/models.py</code></td><td>addytywna</td><td>ADR-M6-004</td></tr>
+<tr><td>Tabela <code>solution_revisions</code></td><td><code>db/init.sql</code>, <code>api/models.py</code></td><td>addytywna</td><td>ADR-M6-003</td></tr>
+<tr><td>Ingest pomija wpisy z <code>edited_at IS NOT NULL</code>; flaga <code>--overwrite-edited</code></td><td><code>scripts/ingest.py</code> (<code>ingest_record</code>)</td><td>zmiana zachowania (dotyczy tylko wpisów edytowanych w panelu)</td><td>ADR-M6-004</td></tr>
+<tr><td>Nowy router i schematy admina</td><td><code>api/main.py</code>, <code>api/schemas.py</code></td><td>addytywna</td><td>ADR-M6-001</td></tr>
+<tr><td>Link „Edytuj treść” na ekranie przeglądu rozwiązania</td><td><code>web/src/pages/panel/SolutionReviewPage.tsx</code></td><td>addytywna</td><td>—</td></tr>
+</table>
+</div>
+<p>Bez zmian: <code>SolutionCard</code>, wszystkie endpointy publiczne, strumień SSE, CORS (używamy tylko <code>GET</code>/<code>POST</code>/<code>PATCH</code>, które <code>api/main.py</code> już dopuszcza).</p>
+
+<div class="warn">
+<p><strong>Zależność od Modułu 2.</strong> Pole <code>knowledge_type</code> (<code>REPORT</code> / <code>MATERIAL</code>) i ograniczenie <code>(kind = 'KNOWLEDGE') = (knowledge_type IS NOT NULL)</code> wprowadza M2 (Z00, ADR-M2-001). Moduł 6 ich nie definiuje. Jeśli M6 startuje przed Z00, formularz tworzy <code>KNOWLEDGE</code> bez <code>knowledge_type</code>, a pole włącza się po Z00 — zadanie PA z tym polem zależy od Z00.</p>
 </div>
 
-<h2 id="s6">6. Model danych <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<h2 id="s6">6. Model danych <span class="badge b-draft">draft</span></h2>
+
+<pre><code>-- solutions: nowa kolumna (w init.sql dopisana w CREATE TABLE, nie ALTER)
+edited_at            TIMESTAMPTZ,                       -- ostatnia edycja w panelu; NULL = treść z ingestu/formularza
+
+-- historia zmian
+CREATE TABLE solution_revisions (
+    id              BIGSERIAL   PRIMARY KEY,
+    solution_id     BIGINT      NOT NULL REFERENCES solutions(id) ON DELETE CASCADE,
+    action          TEXT        NOT NULL CHECK (action IN ('CREATE', 'EDIT')),
+    author_label    TEXT        NOT NULL,               -- login z sesji frontendu, jak report_replies.author_label
+    note            TEXT,                               -- powód zmiany, ≤ ADMIN_NOTE_MAX_CHARS
+    changed_fields  TEXT[]      NOT NULL DEFAULT '{}',  -- nazwy pól API, np. {summary,body}
+    snapshot        JSONB       NOT NULL DEFAULT '{}',  -- wartości zmienionych pól PRZED zmianą
+    reembedded      BOOLEAN     NOT NULL,               -- czy przebudowano chunki
+    created_at      TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX solution_revisions_solution_idx ON solution_revisions (solution_id, created_at DESC);</code></pre>
+
 <ul>
-<li>DDL nowych tabel i typów (dopisywany do <code>db/init.sql</code>), klucze obce do <code>solutions</code> / <code>reports</code>.</li>
-<li>Które kolumny są treścią (RODO, sekcja 11), a które statystyką?</li>
+<li><strong>Snapshot „przed”, tylko zmienione pola.</strong> Wartość „po” to następna rewizja albo stan bieżący wpisu. Pozwala to później dodać cofanie bez zmiany schematu.</li>
+<li><code>action = 'CREATE'</code>: <code>changed_fields = '{}'</code>, <code>snapshot = '{}'</code>. Wpisy z ingestu i formularza mieszkańca nie mają rewizji <code>CREATE</code> — historia zaczyna się od pierwszej edycji w panelu.</li>
+<li>Pola objęte rewizją: wszystkie pola <code>SolutionContentPatch</code> (sekcja 8). Zmiany statusu, kategorii i poziomu sprawdzenia przez <code>PATCH /api/solutions/{id}</code> <strong>nie</strong> tworzą rewizji w MVP (kontrakt M1 bez zmian; backlog).</li>
+<li><code>contact</code> nigdy nie trafia do <code>snapshot</code>.</li>
+<li>Wszystkie kolumny to treść publiczna lub metadane pracy zespołu — brak danych osobowych mieszkańców. <code>author_label</code> to login pracownika (np. <code>admin</code>).</li>
 </ul>
+
+<h2 id="s7">7. Logika zapisu (bez AI) <span class="badge b-draft">draft</span></h2>
+
+<h3>7.1. Edycja — <code>PATCH /api/admin/solutions/{id}/content</code></h3>
+<p>Jedna transakcja, jedna sesja:</p>
+<ol>
+<li><code>SELECT … FROM solutions WHERE id = :id FOR UPDATE</code>. Brak → 404 <code>NOT_FOUND</code>.</li>
+<li>Porównaj <code>expected_updated_at</code> z <code>updated_at</code> wiersza. Różne → 409 <code>EDIT_CONFLICT</code> (ADR-M6-005).</li>
+<li>Normalizacja wejścia jak w <code>create_solution</code>: <code>strip()</code>, puste napisy → <code>NULL</code> w polach opcjonalnych, gmina → powiat, kategoria z taksonomii, <code>knowledge_type</code> zgodny z <code>kind</code>. Błąd → 422 <code>VALIDATION_ERROR</code>.</li>
+<li>Diff: pola z żądania, których wartość różni się od bieżącej. Pusty diff → 200 z bieżącym stanem, <code>reembedded = false</code>, bez rewizji i bez zmiany <code>updated_at</code>.</li>
+<li>Zbuduj <code>snapshot</code> ze starych wartości zmienionych pól, przypisz nowe wartości.</li>
+<li>Policz nowy <code>content_hash</code>. Jeśli różni się od starego <strong>lub</strong> zmienił się <code>title</code> (chunki przechowują kopię tytułu) → <code>rebuild_chunks(session, sol, get_embedding_provider())</code>, <code>reembedded = true</code>. Inaczej provider nie jest wołany.</li>
+<li><code>edited_at = updated_at = now()</code>, insert <code>solution_revisions</code> (<code>action = 'EDIT'</code>), <code>commit</code>.</li>
+<li><code>ProviderError</code> w kroku 6 → <code>rollback</code> całości, 503 <code>EMBEDDING_UNAVAILABLE</code>. Treść, chunki i historia bez zmian; frontend zachowuje formularz.</li>
+</ol>
+
+<div class="note">
+<p><strong>Dlaczego synchronicznie.</strong> Wpis ma typowo 1–6 chunków; jedno wywołanie embeddingów trwa ułamek sekundy do ~2 s. Treść i indeks nigdy się nie rozjeżdżają, a komunikat „Wyszukiwanie zaktualizowane” jest prawdziwy w chwili wyświetlenia (ADR-M6-002).</p>
 </div>
 
-<h2 id="s7">7. Logika i AI <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<h3>7.2. Tworzenie — <code>POST /api/admin/solutions</code></h3>
+<ol>
+<li>Walidacja jak w 7.1 krok 3. <code>source_url</code> zajęty przez inny wpis → 409 <code>SOURCE_URL_TAKEN</code> (unikalny indeks <code>solutions_source_url_uq</code>).</li>
+<li>Insert z <code>origin = 'CURATED'</code>, <code>status</code> z żądania (<code>PUBLISHED</code> albo <code>PENDING_REVIEW</code>), <code>evidence_level</code> z żądania (domyślnie 1), <code>contact = '{}'</code>, <code>edited_at = now()</code>, <code>content_hash</code>.</li>
+<li><code>rebuild_chunks</code>, insert rewizji <code>CREATE</code>, <code>commit</code>. <code>ProviderError</code> → rollback, 503.</li>
+</ol>
+
+<h3>7.3. Ingest a edycje z panelu</h3>
+<p><code>ingest_record</code> w <code>scripts/ingest.py</code> znajduje wpis po <code>source_url</code>. Jeśli <code>edited_at IS NOT NULL</code> i nie podano <code>--overwrite-edited</code>, rekord jest pomijany i liczony w statystyce jako <code>skipped_edited</code> (log: <code>solution_id</code>, bez treści). Z flagą — ingest nadpisuje treść, zeruje <code>edited_at</code> i zapisuje rewizję <code>EDIT</code> z <code>author_label = 'ingest'</code>, żeby nadpisanie było widać w historii (ADR-M6-004).</p>
+
+<h3>7.4. AI</h3>
+<p>Brak LLM w MVP. Moduł działa niezależnie od <code>LLM_ENABLED</code>. Jedyna zależność od AI to embeddingi przez istniejącego providera; ich niedostępność blokuje tylko zapis zmian treści (503), a edycja samych metadanych działa dalej. Podpowiedzi AI — backlog.</p>
+
+<h2 id="s8">8. Kontrakt API <span class="badge b-draft">draft</span></h2>
+
+<p>Wszystkie endpointy otwarte (decyzja zespołu), ukryte w UI za rolą <code>administrator</code>. Błędy w kształcie M1: <code>{"error": {"code": "…", "message": "…"}}</code> (<code>ApiError</code>, <code>api/errors.py</code>), komunikat po polsku.</p>
+
+<h3>8.1. Schematy</h3>
+<pre><code>class SolutionAdminItem(SolutionCard):          # karta + metadane pracy panelu
+    status: Literal["PUBLISHED", "PENDING_REVIEW", "REJECTED", "ARCHIVED"]
+    knowledge_type: Literal["REPORT", "MATERIAL"] | None   # po M2 Z00 także w SolutionCard
+    created_at: datetime
+    updated_at: datetime
+    edited_at: datetime | None
+    submitted_by_name: str | None
+    revision_count: int
+    # scores = None, rank = pozycja na stronie
+
+class SolutionAdminDetail(SolutionAdminItem):
+    body: str
+    reembedded: bool | None = None               # wypełnione tylko w odpowiedzi na POST / PATCH content
+    chunk_count: int
+
+class SolutionContentFields(BaseModel):          # wspólne pola, limity jak SolutionSubmit
+    title: str | None          # 3–200
+    summary: str | None        # 10–2000
+    body: str | None           # ≤ 20 000
+    organization: str | None
+    gmina: str | None          # nieznana → 422; powiat liczony z gminy
+    category: str | None       # kod z challenge_taxonomy
+    tags: list[str] | None     # ≤ 20
+    target_group: str | None
+    cost_range: str | None
+    implementation_steps: list[str] | None   # ≤ 30
+    source_url: str | None
+    source_name: str | None
+    media: list[MediaItem] | None            # ≤ 10, tylko URL
+    knowledge_type: Literal["REPORT", "MATERIAL"] | None
+
+class SolutionContentPatch(SolutionContentFields):   # extra="forbid"; pole pominięte = bez zmian
+    expected_updated_at: datetime             # wymagane
+    author_label: str                         # 1–100
+    note: str | None                          # ≤ ADMIN_NOTE_MAX_CHARS
+
+class SolutionAdminCreate(SolutionContentFields):    # extra="forbid"
+    kind: Literal["SOLUTION", "KNOWLEDGE"]
+    title: str; summary: str                  # wymagane
+    status: Literal["PUBLISHED", "PENDING_REVIEW"] = "PUBLISHED"
+    evidence_level: int = 1                   # 1–5
+    author_label: str
+    note: str | None
+
+class SolutionRevision(BaseModel):
+    id: int
+    action: Literal["CREATE", "EDIT"]
+    author_label: str
+    note: str | None
+    changed_fields: list[str]
+    previous: dict[str, Any]                  # = snapshot
+    reembedded: bool
+    created_at: datetime</code></pre>
+<p>W <code>SolutionContentPatch</code> rozróżniamy „pole pominięte” (bez zmian) od <code>null</code> (wyczyść pole opcjonalne) przez <code>model_fields_set</code>. <code>title</code>, <code>summary</code> i <code>kind</code> nie mogą być czyszczone; <code>kind</code> nie jest edytowalny.</p>
+
+<h3>8.2. Endpointy</h3>
+<div class="tablewrap">
+<table>
+<tr><th>Metoda i ścieżka</th><th>Wejście</th><th>Wyjście</th><th>Błędy</th></tr>
+<tr><td><code>GET /api/admin/solutions</code></td><td>query: <code>kind</code>, <code>knowledge_type</code>, <code>status</code>, <code>category</code>, <code>q</code> (trigram po tytule, jak <code>GET /api/solutions</code>), <code>edited</code> (bool), <code>sort</code> = <code>updated</code> (domyślnie) | <code>title</code>, <code>limit</code>, <code>offset</code></td><td><code>Page[SolutionAdminItem]</code>; bez filtra <code>status</code> — wszystkie statusy</td><td>422</td></tr>
+<tr><td><code>GET /api/admin/solutions/{id}</code></td><td>—</td><td><code>SolutionAdminDetail</code></td><td>404</td></tr>
+<tr><td><code>POST /api/admin/solutions</code></td><td><code>SolutionAdminCreate</code></td><td>201 <code>SolutionAdminDetail</code> (<code>reembedded = true</code>)</td><td>409 <code>SOURCE_URL_TAKEN</code>, 422, 503 <code>EMBEDDING_UNAVAILABLE</code></td></tr>
+<tr><td><code>PATCH /api/admin/solutions/{id}/content</code></td><td><code>SolutionContentPatch</code></td><td><code>SolutionAdminDetail</code> z <code>reembedded</code></td><td>404, 409 <code>EDIT_CONFLICT</code> / <code>SOURCE_URL_TAKEN</code>, 422, 503</td></tr>
+<tr><td><code>GET /api/admin/solutions/{id}/revisions</code></td><td>query: <code>limit</code> (domyślnie <code>ADMIN_REVISIONS_LIMIT</code>)</td><td><code>list[SolutionRevision]</code> od najnowszej</td><td>404</td></tr>
+</table>
+</div>
+<p>Zmiana statusu, kategorii i poziomu sprawdzenia — nadal <code>PATCH /api/solutions/{id}</code> (T21). Po 409 <code>EDIT_CONFLICT</code> frontend pobiera aktualną wersję przez <code>GET /api/admin/solutions/{id}</code> — kształt błędu M1 zostaje bez dodatkowych pól.</p>
+
+<h3>8.3. Przykład</h3>
+<pre><code>curl -X PATCH localhost:8000/api/admin/solutions/42/content \
+  -H 'Content-Type: application/json' \
+  -d '{"summary":"Nowy opis…","expected_updated_at":"2026-10-04T09:12:03.120Z",
+       "author_label":"admin","note":"aktualizacja 2026"}'
+# → 200 {"id":42, …, "edited_at":"2026-10-04T10:01:44Z", "reembedded":true, "chunk_count":4}</code></pre>
+
+<h2 id="s9">9. Kontrakt dla frontendu (ekrany) <span class="badge b-draft">draft</span></h2>
+
+<h3 id="s9-1">9.1. Powłoka panelu (własność Modułu 6)</h3>
+<p><code>PanelLayout</code> jest wspólny. Moduły 2–5 dopisują swoje pozycje, trzymając się poniższych reguł; konflikt kolejności rozstrzyga ta tabela.</p>
+<div class="tablewrap">
+<table>
+<tr><th>#</th><th>Pozycja nawigacji</th><th>Trasa</th><th>Właściciel</th><th>Licznik w nawigacji</th></tr>
+<tr><td>1</td><td>Nowe</td><td><code>/panel</code></td><td>M1 (F14), sekcje dokładają M3, M5</td><td>suma liczników skrzynki</td></tr>
+<tr><td>2</td><td>Zgłoszenia</td><td><code>/panel/zgloszenia</code></td><td>M1</td><td>—</td></tr>
+<tr><td>3</td><td>Do zatwierdzenia</td><td><code>/panel/rozwiazania</code></td><td>M1</td><td>—</td></tr>
+<tr><td>4</td><td><strong>Baza wiedzy</strong></td><td><code>/panel/wiedza</code></td><td><strong>M6</strong></td><td>—</td></tr>
+<tr><td>5</td><td>Pomysły</td><td><code>/panel/pomysly</code></td><td>M3 (K07, K11)</td><td>nowe pomysły</td></tr>
+<tr><td>6</td><td>Testerzy</td><td><code>/panel/testy</code></td><td>M4</td><td>—</td></tr>
+<tr><td>7</td><td>Rozmowy</td><td><code>/panel/rozmowy</code></td><td>M5 (PK20, PK24)</td><td>wątki bez odpowiedzi</td></tr>
+<tr><td>8</td><td>Trendy</td><td><code>/panel/trendy</code></td><td>M1 (F18), rozszerza M2 (Z09)</td><td>—</td></tr>
+<tr><td>—</td><td>Wróć do serwisu</td><td><code>/</code></td><td>M1</td><td>—</td></tr>
+</table>
+</div>
+<p><strong>Reguły dla ekranów panelu (wszystkie moduły):</strong></p>
 <ul>
-<li>Gdzie jest LLM / embeddingi, z jakim promptem i jakim kontraktem wejścia–wyjścia?</li>
-<li>Zachowanie przy wyłączonym LLM (<code>LLM_ENABLED=false</code>) i przy błędzie providera — moduł musi działać bez AI.</li>
+<li>Trasa <code>/panel/&lt;sekcja&gt;</code> i <code>/panel/&lt;sekcja&gt;/:id</code>, zagnieżdżona pod <code>&lt;RequireRole requiredRole="administrator" layout="panel"&gt;</code> w <code>App.tsx</code>.</li>
+<li>Nad <code>h1</code> etykieta <code>ModuleLabel</code> modułu, który jest właścicielem ekranu.</li>
+<li>Licznik sekcji w skrzynce „Nowe” — przez wspólny mechanizm <code>useInboxCount</code> / <code>refreshInbox()</code>; po każdej akcji zmieniającej licznik wywołaj <code>refreshInbox()</code>. Bez osobnych pętli odpytywania per moduł.</li>
+<li>Filtry list w URL (query string), żeby link z trendów i skrzynki otwierał przefiltrowany widok.</li>
+<li>Każda lista i szczegół ma trzy stany: ładowanie (<code>aria-busy</code>), pusto (komunikat + co zrobić), błąd (<code>ds-alert</code> + „Spróbuj ponownie”).</li>
+<li>Najwyżej jeden <code>ds-btn--cta</code> na ekran; stylowanie wyłącznie Tailwind + klasy <code>ds-*</code> (<code>AGENTS.md</code>); WCAG 2.1 AA, także w <code>data-contrast="high"</code>.</li>
 </ul>
+
+<h3>9.2. Ekrany Modułu 6</h3>
+<div class="tablewrap">
+<table>
+<tr><th>Trasa</th><th>Ekran</th><th>Zawartość</th></tr>
+<tr><td><code>/panel/wiedza</code></td><td><code>KnowledgeBasePage</code></td><td><code>h1</code> „Baza wiedzy”. Filtry: rodzaj (Rozwiązanie / Raport / Materiał), status, kategoria, fraza, „edytowane w panelu”. Tabela: tytuł (link), rodzaj, status (etykieta PL), kategoria, ostatnia zmiana (<code>edited_at</code> albo <code>updated_at</code>), liczba rewizji. Stronicowanie. CTA: „Dodaj wpis” → <code>/panel/wiedza/nowy</code>.</td></tr>
+<tr><td><code>/panel/wiedza/nowy</code></td><td><code>KnowledgeCreatePage</code></td><td>Najpierw wybór rodzaju (radio: Rozwiązanie, Raport / diagnoza, Materiał), potem <code>SolutionForm</code>, status startowy, poziom sprawdzenia, notatka. CTA „Dodaj”. Po sukcesie → <code>/panel/wiedza/:id</code> z komunikatem.</td></tr>
+<tr><td><code>/panel/wiedza/:id</code></td><td><code>KnowledgeEditPage</code></td><td>Nagłówek: tytuł, rodzaj, status, link „Zobacz publicznie” (dla <code>PUBLISHED</code>) i „Decyzja o publikacji” → <code>/panel/rozwiazania/:id</code>. <code>SolutionForm</code> wypełniony bieżącymi danymi, pole „Notatka do zmiany”, CTA „Zapisz zmiany”. Pod formularzem sekcja „Historia zmian” (<code>RevisionList</code>).</td></tr>
+<tr><td><code>/panel/rozwiazania/:id</code></td><td>(M1, F17)</td><td>Dochodzi link „Edytuj treść” → <code>/panel/wiedza/:id</code>.</td></tr>
+</table>
 </div>
 
-<h2 id="s8">8. Kontrakt API <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<h3>9.3. Formularz <code>SolutionForm</code></h3>
 <ul>
-<li>Lista endpointów z kształtem żądania i odpowiedzi (pydantic w <code>api/schemas.py</code>), kody błędów 404/422.</li>
-<li>Bez autoryzacji (decyzja zespołu) — wszystkie endpointy otwarte.</li>
+<li>Pola w kolejności: tytuł, streszczenie, treść (<code>textarea</code>), kroki wdrożenia (lista z „Dodaj krok” / „Usuń” / przesuń w górę–dół), kategoria (<code>select</code> z <code>/api/taxonomy</code>), gmina (<code>select</code> z <code>/api/gminy</code>, opcjonalna), organizacja, grupa docelowa, koszt, tagi (pole z przecinkami → lista), źródło (nazwa + URL), media (lista: typ, tytuł, URL), rodzaj wiedzy (tylko dla <code>KNOWLEDGE</code>).</li>
+<li>Licznik znaków przy polach z limitem; limity z sekcji 8.1.</li>
+<li>Przy polach tytuł, streszczenie i treść podpowiedź: „Zmiana tych pól odświeży wyszukiwanie”.</li>
+<li>Na edycji wysyłane są tylko zmienione pola + <code>expected_updated_at</code> + <code>author_label</code> (login z sesji <code>lib/auth.tsx</code>) + <code>note</code>.</li>
+<li>Przycisk zapisu zablokowany, gdy brak zmian; ostrzeżenie przy opuszczaniu strony z niezapisanymi zmianami.</li>
 </ul>
+
+<h4>Komunikaty</h4>
+<div class="tablewrap">
+<table>
+<tr><th>Sytuacja</th><th>Komunikat (<code>ds-alert</code>, fokus na komunikacie)</th></tr>
+<tr><td>200, <code>reembedded = true</code></td><td>„Zapisano. Wyszukiwanie zaktualizowane ({chunk_count} fragmentów).”</td></tr>
+<tr><td>200, <code>reembedded = false</code></td><td>„Zapisano zmiany w opisie wpisu.”</td></tr>
+<tr><td>422</td><td>Podsumowanie błędów nad formularzem z linkami do pól; przy polu <code>aria-invalid</code> i <code>aria-describedby</code>.</td></tr>
+<tr><td>409 <code>EDIT_CONFLICT</code></td><td>„Ktoś zmienił ten wpis w międzyczasie.” + przycisk „Wczytaj aktualną wersję” (twoje zmiany zostają w formularzu do skopiowania).</td></tr>
+<tr><td>503</td><td>„Nie udało się odświeżyć wyszukiwania, zmiany nie zostały zapisane. Spróbuj za chwilę.” Formularz zachowany.</td></tr>
+</table>
 </div>
 
-<h2 id="s9">9. Kontrakt dla frontendu (ekrany) <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Trasy w <code>web/</code>, ekrany i stany (ładowanie, pusto, błąd), elementy nawigacji.</li>
-<li>Wymogi WCAG 2.1 AA i design systemu (<code>DESIGN.md</code>, najwyżej jeden <code>ds-btn--cta</code> na ekran).</li>
-</ul>
-</div>
+<h3>9.4. <code>RevisionList</code></h3>
+<p>Lista od najnowszej: data i godzina, autor, etykiety zmienionych pól po polsku, notatka, znacznik „odświeżono wyszukiwanie”. Każda pozycja rozwijana (<code>details</code>/<code>summary</code>) — pokazuje poprzednie wartości pól; długie teksty przycięte z „Pokaż całość”. Pusto: „Ten wpis nie był jeszcze edytowany w panelu.”</p>
 
-<h2 id="s10">10. Konfiguracja i feature flagi <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Nowe zmienne w <code>api.config.settings</code> (progi, limity, flagi włączenia modułu) — zero literałów w kodzie.</li>
-</ul>
-</div>
+<h3>9.5. Klient API</h3>
+<p>W <code>web/src/api/client.ts</code>: <code>api.adminSolutions(params)</code>, <code>api.adminSolution(id)</code>, <code>api.createAdminSolution(body)</code>, <code>api.patchSolutionContent(id, body)</code>, <code>api.solutionRevisions(id)</code>; typy w <code>web/src/api/types.ts</code> lustrzane do sekcji 8.1. Mock w <code>make web-mock</code> — opcjonalnie.</p>
 
-<h2 id="s11">11. RODO i bezpieczeństwo <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Jakie dane osobowe zbiera moduł, co nie może wyjść z API i nie może trafić do logów?</li>
-</ul>
+<h2 id="s10">10. Konfiguracja i feature flagi <span class="badge b-draft">draft</span></h2>
+<div class="tablewrap">
+<table>
+<tr><th>Zmienna (<code>api.config.settings</code>)</th><th>Domyślnie</th><th>Znaczenie</th></tr>
+<tr><td><code>ADMIN_LIST_DEFAULT_LIMIT</code></td><td>25</td><td>Rozmiar strony listy bazy wiedzy</td></tr>
+<tr><td><code>ADMIN_LIST_MAX_LIMIT</code></td><td>100</td><td>Górny limit <code>limit</code></td></tr>
+<tr><td><code>ADMIN_REVISIONS_LIMIT</code></td><td>50</td><td>Domyślna liczba rewizji w odpowiedzi</td></tr>
+<tr><td><code>ADMIN_NOTE_MAX_CHARS</code></td><td>500</td><td>Limit notatki do zmiany</td></tr>
+</table>
 </div>
+<p>Limity pól treści — te same co w <code>SolutionSubmit</code> (stałe w schemacie, wspólne dla obu formularzy). Brak flag włączających moduł i flag LLM. Chunkowanie używa istniejących <code>CHUNK_*</code>.</p>
 
-<h2 id="s12">12. Struktura katalogów i kolejność prac <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<h2 id="s11">11. RODO i bezpieczeństwo <span class="badge b-draft">draft</span></h2>
 <ul>
-<li>Drzewo nowych plików i ścieżka krytyczna do demo (najkrótsza działająca ścieżka).</li>
+<li>Moduł przetwarza treść publiczną (opisy rozwiązań, wiedza) i loginy pracowników. Nie zbiera danych osobowych mieszkańców.</li>
+<li><code>contact</code> rozwiązań nie wychodzi z żadnego endpointu admina i nie trafia do <code>snapshot</code>. <code>contact_email</code> zgłoszeń moduł w ogóle nie czyta.</li>
+<li><code>submitted_by_name</code> (podpis autora zgłoszonego rozwiązania) jest widoczny w panelu — tylko do odczytu, nie edytowalny.</li>
+<li>Logi: <code>solution_id</code>, <code>action</code>, <code>changed_fields</code>, długości pól tekstowych, <code>reembedded</code>, czas embeddingu. Nigdy wartości pól ani notatki.</li>
 </ul>
+<div class="danger">
+<p><strong>Brak autoryzacji (świadoma decyzja zespołu).</strong> <code>/api/admin/*</code> pozwala każdemu, kto zna adres, edytować treści widoczne w czacie. Rola <code>administrator</code> ukrywa panel tylko w interfejsie. Akceptowalne na demo hackathonowe; przed jakimkolwiek wdrożeniem — autoryzacja jako pierwsza pozycja backlogu (sekcja 14). Historia zmian pozwala przynajmniej wykryć i ręcznie odwrócić niepożądaną edycję.</p>
 </div>
-
-<h2 id="s13">13. Rejestr decyzji (ADR) <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
 <ul>
-<li>Numeracja per moduł: <code>ADR-M6-001</code>… — żeby nie kolidować z ADR-001 – 019 Modułu 1.</li>
+<li>Media to wyłącznie URL-e; frontend renderuje je jak dotąd (linki, osadzenia z listy dozwolonych źródeł M1/M2). Bez uploadu plików — brak ryzyka złośliwych plików.</li>
+<li>Treść edytowana w panelu przechodzi przez ten sam filtr cytowań i ten sam renderer co treść z ingestu — bez HTML, tylko tekst.</li>
 </ul>
+
+<h2 id="s12">12. Struktura katalogów i kolejność prac <span class="badge b-draft">draft</span></h2>
+
+<pre><code>db/init.sql                              solutions.edited_at, solution_revisions
+api/models.py                            Solution.edited_at, SolutionRevision
+api/config.py                            ADMIN_* (sekcja 10)
+api/schemas.py                           SolutionAdmin*, SolutionContentPatch, SolutionRevision
+api/admin_content.py                     (nowy) diff, rewizja, decyzja o rebuild, walidacja wspólna z solutions.py
+api/routers/admin_solutions.py           (nowy) /api/admin/solutions
+api/main.py                              rejestracja routera
+scripts/ingest.py                        pomijanie edited_at, --overwrite-edited, statystyka skipped_edited
+web/src/api/client.ts, types.ts          funkcje i typy admina
+web/src/pages/panel/KnowledgeBasePage.tsx      (nowy)
+web/src/pages/panel/KnowledgeCreatePage.tsx    (nowy)
+web/src/pages/panel/KnowledgeEditPage.tsx      (nowy)
+web/src/components/panel/SolutionForm.tsx      (nowy)
+web/src/components/panel/RevisionList.tsx      (nowy)
+web/src/components/layout/PanelLayout.tsx      pozycja „Baza wiedzy”, kolejność z 9.1
+web/src/App.tsx                                trasy /panel/wiedza*
+web/src/pages/panel/SolutionReviewPage.tsx     link „Edytuj treść”</code></pre>
+
+<h3>Kolejność (ścieżka krytyczna do demo S1 pogrubiona)</h3>
+<div class="tablewrap">
+<table>
+<tr><th>Krok</th><th>Zakres</th><th>Zależy od</th></tr>
+<tr><td><strong>1</strong></td><td><strong>Schemat, modele, ustawienia</strong></td><td>—</td></tr>
+<tr><td><strong>2</strong></td><td><strong><code>admin_content.py</code> + <code>PATCH …/content</code> + <code>GET …/{id}</code></strong> — weryfikacja curl: edycja <code>summary</code> → <code>reembedded=true</code>, czat zwraca nową treść</td><td>1</td></tr>
+<tr><td>3</td><td><code>GET /api/admin/solutions</code>, <code>GET …/revisions</code>, <code>POST</code></td><td>2</td></tr>
+<tr><td>4</td><td>Ingest: ochrona edycji</td><td>1</td></tr>
+<tr><td><strong>5</strong></td><td><strong>Frontend: klient API, <code>SolutionForm</code>, <code>KnowledgeEditPage</code></strong></td><td>2</td></tr>
+<tr><td>6</td><td><code>KnowledgeBasePage</code>, <code>KnowledgeCreatePage</code>, <code>RevisionList</code>, nawigacja, link z przeglądu</td><td>3, 5</td></tr>
+<tr><td>7</td><td>Pole <code>knowledge_type</code> w formularzu i filtrach</td><td>6, M2 Z00</td></tr>
+</table>
+</div>
+<p>Weryfikacja ręczna, bez testów automatycznych: backend — curl i psql (<code>SELECT count(*) FROM solution_chunks WHERE solution_id = …</code> przed i po, porównanie <code>content_hash</code>); frontend — przejście S1–S4 w przeglądarce, także w <code>data-contrast="high"</code>.</p>
+
+<h2 id="s13">13. Rejestr decyzji (ADR) <span class="badge b-draft">draft</span></h2>
+<div class="tablewrap">
+<table>
+<tr><th>ADR</th><th>Decyzja</th><th>Uzasadnienie</th><th>Odrzucone</th></tr>
+<tr><td><strong>ADR-M6-001</strong></td><td>Osobny router <code>/api/admin/solutions</code> dla edycji i tworzenia; publiczne <code>POST</code>/<code>PATCH /api/solutions</code> bez zmian.</td><td>Kontrakt M1 nietknięty; czytelna granica „panel” vs „serwis” pod przyszłą autoryzację (jeden prefiks do zabezpieczenia).</td><td>Rozszerzenie <code>SolutionPatch</code> o treść — miesza decyzję o statusie z edycją, zmienia kontrakt T21.</td></tr>
+<tr><td><strong>ADR-M6-002</strong></td><td>Ponowny embedding synchronicznie, w transakcji zapisu; błąd providera = 503 i brak zmian.</td><td>Treść i indeks zawsze spójne; wzorzec już istnieje w <code>create_solution</code>; koszt czasu pomijalny przy 1–6 chunkach.</td><td>W tle przez <code>api.tasks.spawn</code> — wymaga stanu „indeksowanie”, okno rozjazdu treść/chunki, trudniejszy komunikat w UI.</td></tr>
+<tr><td><strong>ADR-M6-003</strong></td><td>Historia jako <code>solution_revisions</code> ze snapshotem „przed” zmienionych pól.</td><td>Mało danych, prosty diff w UI, umożliwia późniejsze cofanie.</td><td>Pełne kopie wersji (tabela <code>solution_versions</code>) — duplikacja i chunki per wersja; brak historii — brak śladu przy otwartym API.</td></tr>
+<tr><td><strong>ADR-M6-004</strong></td><td>Kolumna <code>solutions.edited_at</code>; ingest pomija wpisy edytowane w panelu, chyba że <code>--overwrite-edited</code>.</td><td>Bez tego <code>make ingest</code> po cichu kasuje pracę kuratorów (dopasowanie po <code>source_url</code>).</td><td>Panel jako jedyne źródło (porzucenie plików) — sprzeczne z ADR-M2-006; zapis edycji z powrotem do JSON — konflikty w repo.</td></tr>
+<tr><td><strong>ADR-M6-005</strong></td><td>Optymistyczna blokada przez <code>expected_updated_at</code>; konflikt = 409 <code>EDIT_CONFLICT</code>.</td><td>Kilku kuratorów naraz bez blokad w bazie i bez kont; jedna kolumna, która już istnieje.</td><td>„Ostatni wygrywa” — cicha utrata zmian; blokada pesymistyczna — wymaga sesji użytkownika.</td></tr>
+<tr><td><strong>ADR-M6-006</strong></td><td>Moduł 6 jest powłoką panelu: posiada <code>PanelLayout</code>, kolejność nawigacji i konwencje (9.1); ekrany pomysłów, testów i rozmów specyfikują i budują moduły 3, 4, 5.</td><td>Ekrany są blisko logiki swoich modułów (M4 już gotowy); M6 pilnuje spójności, nie dubluje specyfikacji.</td><td>Wszystkie ekrany panelu w M6 — dublowanie, blokowanie modułów 3/5 na M6.</td></tr>
+</table>
 </div>
 
 <h2 id="s14">14. Backlog kolejnych iteracji <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
 <ul>
-<li>Co świadomie odkładamy i co już przygotowujemy pod to w PoC.</li>
+<li><strong>Autoryzacja</strong> <code>/api/admin/*</code> i prawdziwy autor rewizji zamiast <code>author_label</code> z frontendu. Przygotowanie w PoC: jeden prefiks, kolumna <code>author_label</code> do zastąpienia FK.</li>
+<li><strong>Cofanie zmian</strong> z historii jednym kliknięciem. Przygotowanie: snapshot „przed”.</li>
+<li><strong>Rewizje dla zmian statusu/kategorii/poziomu sprawdzenia</strong> (<code>PATCH /api/solutions/{id}</code>) — wymaga zmiany T21.</li>
+<li><strong>AI w panelu:</strong> sugestia kategorii i tagów dla nowego wpisu, szkic odpowiedzi do autora zgłoszenia, wykrywanie duplikatów w kolejce (cosinus na istniejących embeddingach), asystent kuratora z PDF (M2, sekcja backlogu).</li>
+<li><strong>Eksport CSV</strong> zgłoszeń i statystyk dla ROPS.</li>
+<li><strong>Upload plików</strong> (PDF, obrazy) zamiast samych URL-i.</li>
+<li><strong>Edycja w panelu</strong> profili wyzwań, wskaźników (M2) i naborów (M3).</li>
+<li><strong>Podgląd „jak to zobaczy czat”</strong> — wywołanie wyszukiwania dla zapytania testowego przed zapisem.</li>
+<li><strong>Powiadomienia e-mail</strong> dla zespołu o nowych pozycjach skrzynki.</li>
 </ul>
-</div>
 
-<h2 id="s15">15. Koszt utrzymania i zasoby <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<h2 id="s15">15. Koszt utrzymania i zasoby <span class="badge b-draft">draft</span></h2>
 <ul>
-<li>Koszt zmienny (LLM, generacja obrazów itp.) na jedno użycie i przy 10 tys. / 100 tys. użyć miesięcznie; zasoby ludzkie po stronie ROPS.</li>
+<li><strong>Koszt zmienny:</strong> tylko embeddingi przy zmianie treści. Wpis ≈ 1–6 chunków × ~600 tokenów ≈ do 4 tys. tokenów <code>text-embedding-3-large</code> — ułamek grosza na edycję. Nawet 10 tys. edycji miesięcznie to pojedyncze dolary. Zmiany samych metadanych i odczyty — zero kosztów zewnętrznych. Brak LLM.</li>
+<li><strong>Infrastruktura:</strong> bez nowych usług; jedna tabela więcej w istniejącym PostgreSQL. Rewizje to kilobajty na edycję.</li>
+<li><strong>Zasoby ludzkie ROPS:</strong> kurator treści — przegląd kolejki i aktualizacje po publikacjach, rzędu kilku godzin miesięcznie (spójnie z oszacowaniem M2). Zastępuje dotychczasową ścieżkę „edycja JSON + programista + <code>make ingest</code>”.</li>
 </ul>
-</div>
 
-<h2 id="s16">16. Pytania otwarte do sesji planowania <span class="badge b-draft">draft</span></h2>
+<h2 id="s16">16. Pytania otwarte <span class="badge b-draft">draft</span></h2>
+
+<h4>Rozstrzygnięte na sesji planowania 2026-10-04</h4>
 <ol>
-<li>Edycja treści: zapis → ponowne chunkowanie i embedding synchronicznie czy w tle (<code>api.tasks.spawn</code>)? Wersjonowanie / historia zmian?</li>
-<li>Dodawanie wiedzy (<code>KNOWLEDGE</code>) i materiałów z panelu — formularz, upload PDF, import CSV?</li>
-<li>Eksport zgłoszeń i statystyk (CSV) dla ROPS — w PoC czy backlog?</li>
-<li>AI w panelu: sugestia kategorii i tagów dla nowego pomysłu, podpowiedź odpowiedzi do autora, wykrywanie duplikatów w kolejce?</li>
-<li>Czy panel jest wspólnym „kontenerem” dla widoków administracyjnych modułów 2–5 i 7 (wtedy te moduły dopisują sekcje tutaj)?</li>
+<li>Edycja treści: synchronicznie (ADR-M6-002); historia zmian tak, bez cofania (ADR-M6-003).</li>
+<li>Dodawanie wiedzy: formularz w panelu, bez uploadu PDF i importu CSV (sekcja 3, backlog).</li>
+<li>Eksport CSV: backlog.</li>
+<li>AI w panelu: backlog.</li>
+<li>Panel jako kontener: tak, Moduł 6 jest powłoką, ekrany zostają w modułach (ADR-M6-006).</li>
+</ol>
+
+<h4>Do rozstrzygnięcia przy rozpisywaniu zadań</h4>
+<ol>
+<li>Czy <code>source_url</code> wpisu z ingestu ma być edytowalny w panelu? Jest kluczem idempotencji — zmiana spowoduje, że następny ingest utworzy duplikat. Propozycja: tylko do odczytu, gdy <code>origin = 'CURATED'</code> i wpis pochodzi z ingestu.</li>
+<li>Czy istotna redakcja rozwiązania zgłoszonego przez mieszkańca (<code>USER_SUBMITTED</code>) powinna zmieniać <code>origin</code>? Propozycja: nie — <code>origin</code> mówi o pochodzeniu, a edycję widać w historii.</li>
+<li>Czy edycja opublikowanego wpisu ma wymagać ponownego zatwierdzenia (powrót do <code>PENDING_REVIEW</code>)? Propozycja: nie w MVP — edytuje ten sam zespół, który zatwierdza.</li>
 </ol>
 
 <hr>
 
 <footer>
-<p><strong>Moduł 6 — Panel administratora</strong> · v0.1 · 2026-10-03 · Małopolski Hub Innowacji Społecznych.</p>
+<p><strong>Moduł 6 — Panel administratora</strong> · v0.2 · 2026-10-04 · Małopolski Hub Innowacji Społecznych.</p>
+<p><strong>v0.2</strong> — draft po sesji planowania: zakres MVP (edycja treści z synchronicznym ponownym embeddingiem, dodawanie <code>KNOWLEDGE</code>, historia zmian, baza wiedzy w panelu, powłoka panelu), model danych, logika zapisu, kontrakt API i ekranów, ADR-M6-001–006.</p>
 <p><strong>v0.1</strong> — szkielet: wymaganie z <code>base.md</code>, ocena pokrycia przez istniejącą implementację, pytania do sesji planowania.</p>
 <p>Dokument iteracyjny. Zmiany: nowa sekcja na końcu, wpis w spisie treści, ADR w sekcji 13 przy zmianie decyzji. Podnieś wersję w nagłówku i w stopce.</p>
 </footer>
