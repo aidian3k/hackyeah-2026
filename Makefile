@@ -80,3 +80,7 @@ web-up:
 # schemat M5 na działającej bazie (idempotentny, bez utraty danych)
 db-m5:
 	docker compose exec -T db psql -U splot -d splot -v ON_ERROR_STOP=1 < db/m5-komunikacja.sql
+
+# dane demo M5 (eksperci, ogłoszenia, rozmowy) — idempotentnie, po make db-m5 i make ingest
+seed-comm:
+	$(PY) -m scripts.seed_comm

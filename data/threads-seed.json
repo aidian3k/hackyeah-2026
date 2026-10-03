@@ -1,0 +1,93 @@
+[
+  {
+    "seed_key": "thread-dowoz-seniorow",
+    "kind": "QUESTION",
+    "status": "WAITING_STAFF",
+    "subject": "Dowóz seniorów do lekarza w gminie wiejskiej",
+    "category": "SERVICE_ACCESS",
+    "reporter_type": "JST",
+    "author_label": "GOPS (przykład)",
+    "hours_ago": 30,
+    "messages": [
+      {
+        "role": "USER",
+        "body": "Dzień dobry, w naszej gminie wielu seniorów nie ma jak dojechać do przychodni w mieście powiatowym. Czy są sprawdzone sposoby na zorganizowanie dowozu?",
+        "minutes_after": 0
+      },
+      {
+        "role": "SYSTEM",
+        "body": "Nie mam gotowej odpowiedzi w Bibliotece Innowacji. Pytanie trafiło do zespołu Hubu — odpowiemy w tym wątku.",
+        "minutes_after": 1
+      }
+    ]
+  },
+  {
+    "seed_key": "thread-samotnosc-seniorow",
+    "kind": "QUESTION",
+    "status": "WAITING_USER",
+    "subject": "Samotni seniorzy w małej gminie",
+    "category": "AGING",
+    "reporter_type": "RESIDENT",
+    "author_label": null,
+    "hours_ago": 6,
+    "messages": [
+      {
+        "role": "USER",
+        "body": "U nas starsi ludzie siedzą sami w domach i nie mają z kim porozmawiać. Co można zrobić na początek?",
+        "minutes_after": 0
+      },
+      {
+        "role": "ASSISTANT",
+        "body": "W Bibliotece Innowacji są rozwiązania dla osób starszych, np. Mobilne centrum pomocy dla osób starszych [1] oraz Senior CUDER [2].",
+        "solution_titles": ["Mobilne centrum pomocy dla osób starszych", "Senior CUDER"],
+        "minutes_after": 1
+      }
+    ]
+  },
+  {
+    "seed_key": "thread-teleopieka-ekspert",
+    "kind": "MENTORING",
+    "status": "WAITING_USER",
+    "subject": "Konsultacja: jak wdrożyć teleopiekę w gminie",
+    "category": "AGING",
+    "reporter_type": "JST",
+    "author_label": "Urząd Gminy (przykład)",
+    "assigned_mentor_seed_key": "mentor-seniorzy",
+    "hours_ago": 50,
+    "messages": [
+      {
+        "role": "USER",
+        "body": "Planujemy wprowadzić teleopiekę dla osób starszych. Prosimy o rozmowę z ekspertem — od czego zacząć i jak dobrać dostawcę?",
+        "minutes_after": 0
+      },
+      {
+        "role": "SYSTEM",
+        "body": "Do rozmowy dołączył(a) ekspert: dr Anna Przykładowa.",
+        "minutes_after": 120
+      },
+      {
+        "role": "MENTOR",
+        "body": "Dzień dobry, proponuję zacząć od krótkiej diagnozy: ile osób mieszka samotnie i kto zareaguje na alarm w nocy. Dopiero potem wybór sprzętu. Chętnie przejrzę Państwa założenia.",
+        "minutes_after": 240
+      }
+    ]
+  },
+  {
+    "seed_key": "thread-partnerstwo-teleopieka",
+    "kind": "PARTNERSHIP",
+    "status": "WAITING_STAFF",
+    "subject": "Propozycja: lokal i transport do pilotażu teleopieki",
+    "category": "AGING",
+    "reporter_type": "JST",
+    "author_label": "Gmina Zielona Dolina (przykład)",
+    "partnership_seed_key": "offer-teleopieka-ngo",
+    "hours_ago": 3,
+    "messages": [
+      {
+        "role": "USER",
+        "body": "Chętnie dołączymy do pilotażu teleopieki. Możemy wskazać seniorów przez ośrodek pomocy i udostępnić salę na szkolenie wolontariuszy.",
+        "minutes_after": 0
+      }
+    ]
+  }
+]

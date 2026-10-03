@@ -31,9 +31,9 @@ Identyfikatory: `PK00`–`PK05` backend, `PK20`–`PK26` frontend.
 - [x] PK02 · Wątki: serwis `api/comm/threads.py` + router `api/routers/threads.py` (+ stub asystenta) · zależy: PK01 — zrobione: claude-m5, statusy, 409/422/404 i logi sprawdzone
 - [x] PK03 · Asystent pierwszego kontaktu `api/comm/assistant.py` · zależy: PK02 — zrobione: claude-m5, tryb bez LLM sprawdzony; ścieżka z LLM niezweryfikowana (brak klucza w .env)
 - [x] PK04 · Eksperci i partnerstwa: `api/routers/mentors.py`, `api/routers/partnerships.py` · zależy: PK01 — zrobione: claude-m5, lista/matches/PATCH/422/404 sprawdzone
-- [~] PK05 · Dane demo + `scripts/seed_comm.py` + `make seed-comm` · zależy: PK02, PK04 — agent: claude-m5, 2026-10-04 03:00
+- [x] PK05 · Dane demo + `scripts/seed_comm.py` + `make seed-comm` · zależy: PK02, PK04 — zrobione: claude-m5, seed idempotentny (6 ekspertów, 8 ogłoszeń, 4 rozmowy)
 - [x] PK20 · Frontend: fundament (klient `comm.ts`, etykiety, pamięć, rola `mentor`, trasy, nawigacja, zaślepki) · zależy: PK01 — zrobione: claude-m5, lint+build czyste; licznik panelu w hooks/useCommCount.ts
-- [ ] PK21 · Frontend: komponenty rozmowy (`Timeline`, `MessageForm`, `ThreadStatus`, `ThreadList`) + hook `useThread` · zależy: PK20
+- [~] PK21 · Frontend: komponenty rozmowy (`Timeline`, `MessageForm`, `ThreadStatus`, `ThreadList`) + hook `useThread` · zależy: PK20 — agent: claude-m5, 2026-10-04 03:15
 - [ ] PK22 · Frontend: Platforma komunikacji — moje rozmowy, nowe pytanie, widok wątku · zależy: PK21, PK03
 - [ ] PK23 · Frontend: Tablica partnerstw (lista, dodawanie, ogłoszenie z dopasowaniami) · zależy: PK21, PK04
 - [ ] PK24 · Frontend: Panel — Rozmowy (lista, wątek, odpowiedź, ekspert, zamknięcie) · zależy: PK21, PK02, PK04
@@ -586,3 +586,4 @@ _(dopisuj na końcu: `- [PKxx → PKyy] opis`)_
   - Schemat w osobnym `db/m5-komunikacja.sql` jest teraz konwencją wszystkich modułów (M2: `db/m2-zasobnik.sql`, M3: `db/m3-kreator.sql`); M4 zostaje w `db/init.sql` (już na masterze).
   - Wspólne pliki (`api/config.py`, `api/main.py`, `Makefile`, `App.tsx`, `PanelLayout.tsx`) — dopisuj blokiem z komentarzem `Moduł 5`, bez przestawiania cudzych linii.
 - [PK20 → PK21–PK25] Licznik „Rozmowy” w panelu jest w osobnym hooku `web/src/hooks/useCommCount.ts` (poza listą plików PK20 — dopisany, żeby nie rozbudowywać `PanelLayout`). Limit znaków wiadomości to `COMM_MESSAGE_MAX_CHARS` w `lib/comm.ts` (nazwa `MESSAGE_MAX_CHARS` jest już zajęta w `labels.ts` przez czat M1 = 2000). Pamięć „Moich rozmów” jest w `lib/comm.ts` (`listMyThreads`, `rememberThread`, `forgetThread`).
+- [PK05 → wszyscy] `make seed-comm` łączy się z bazą z `DATABASE_URL`. Jeśli na hoście działa lokalny Postgres na 5432 (tak jest na jednej z maszyn), uruchom seed w kontenerze: `docker compose exec api python -m scripts.seed_comm` (wymaga kodu M5 w obrazie albo zamontowanego `api/`, `scripts/`, `data/`). Konto demo `ekspert` ma `mentorId: 1` — na świeżej bazie to pierwszy ekspert z `data/mentors.json`.
