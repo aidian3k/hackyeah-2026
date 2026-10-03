@@ -1,12 +1,12 @@
 # Moduł 5 — Platforma aktywnej komunikacji: plan implementacji i zadania
 
-Plan na podstawie `docs/modules/05-platforma-komunikacji/module-5-platforma-komunikacji.html` (v0.3). Każde zadanie jest samowystarczalne: zawiera cel, pliki, wklejony kontekst ze specyfikacji, kroki i kryterium gotowości. Agent wykonujący zadanie **nie musi czytać specyfikacji HTML** — ale musi przeczytać `AGENTS.md` (twarde reguły) oraz sekcję „Wspólne kontrakty” poniżej.
+Plan na podstawie `docs/modules/05-platforma-komunikacji/module-5-platforma-komunikacji.html` (v0.4). Każde zadanie jest samowystarczalne: zawiera cel, pliki, wklejony kontekst ze specyfikacji, kroki i kryterium gotowości. Agent wykonujący zadanie **nie musi czytać specyfikacji HTML** — ale musi przeczytać `AGENTS.md` (twarde reguły) oraz sekcję „Wspólne kontrakty” poniżej.
 
 **Odstępstwa od specyfikacji (decyzja zespołu, 2026-10-03, jak w Module 1):**
 - **Bez autoryzacji.** Wszystkie endpointy są otwarte; bez tokenów, nagłówków dostępu i kodów 401/403. Role (`reporter`, `administrator`, `mentor`) istnieją tylko we frontendzie (`web/src/lib/auth.tsx`).
 - **Bez testów automatycznych.** Weryfikacja każdego zadania: curl, psql, `python -c`, ręczne uruchomienie.
 
-**Aktualizacja 2026-10-04 (zmiany na master):** schemat M5 w osobnym, idempotentnym pliku `db/m5-komunikacja.sql` + `make db-m5` (wzór Modułu 3, bez resetu bazy); frontend stylowany wyłącznie Tailwindem i klasami `ds-*` (`AGENTS.md`, „Stylowanie”); dostęp do ekranów przez komponent `RequireRole` (komunikat zamiast przekierowania) i nawigację zależną od roli (`docs/changes/feature-2026-10-03-1`); nowe zadanie PK11 — rozmowa o pomyśle z Modułu 3 (opcjonalne, po K04).
+**v0.4 — zakres uproszczony (2026-10-04).** 13 zadań zamiast 22. Bez embeddingów w M5, bez szkicu odpowiedzi AI, bez SLA, bez moderacji ogłoszeń, bez rozmów przy zgłoszeniach i pomysłach — wszystko to jest w backlogu (spec, sekcja 14). Jedyne AI w module to asystent pierwszego kontaktu, zbudowany z gotowego pipeline'u Modułu 1.
 
 ## Protokół pracy (obowiązkowy)
 
@@ -17,50 +17,39 @@ Plan na podstawie `docs/modules/05-platforma-komunikacji/module-5-platforma-komu
    - `- [x]` — zrobione; zamień dopisek na ` — zrobione: <nazwa>, <krótka notka lub hash commita>`.
 3. **Branie zadania:** wybierz zadanie `[ ]`, którego wszystkie zależności są `[x]`. Edytuj tylko jego linię na `[~]`, potem przeczytaj plik ponownie i sprawdź, czy linia nadal ma Twój dopisek (jeśli ktoś był szybszy — weź inne zadanie).
 4. Edytuj w tym pliku **wyłącznie linię swojego zadania** oraz (ewentualnie) dopisuj na końcu sekcji „Uwagi między zadaniami”. Nie przepisuj innych linii, nie formatuj pliku.
-5. Zmieniaj w repozytorium **tylko pliki wymienione w polu „Pliki” swojego zadania**. Potrzebujesz zmiany w cudzym pliku → wpis w „Uwagach między zadaniami” (`- [PKxx → PKyy] opis`), nie edycja. Zadania, które dopisują coś do plików Modułu 1 lub frontendu (wyliczone w ADR-M5-010), dodają też jednolinijkowy wpis w „Uwagach” odpowiedniego pliku zadań (`module-1-tasks.md` / `frontend-tasks.md`).
+5. Zmieniaj w repozytorium **tylko pliki wymienione w polu „Pliki” swojego zadania**. Potrzebujesz zmiany w cudzym pliku → wpis w „Uwagach między zadaniami” (`- [PKxx → PKyy] opis`), nie edycja. Zadania dopisujące do plików współdzielonych (tabela niżej) dodają też jednolinijkowy wpis w „Uwagach” `module-1-tasks.md` (backend) albo `frontend-tasks.md` (frontend).
 6. `[x]` dopiero, gdy spełnione jest „Gotowe, gdy” (ręczna weryfikacja opisana w zadaniu) i `ruff check .` (backend) albo `npm run lint && npm run build` w `web/` (frontend) jest czysty dla Twoich plików.
 7. Zablokowany (brak klucza API, błąd w zależności, sprzeczność ze specyfikacją) → przywróć `[ ]` i opisz przyczynę w „Uwagach między zadaniami”.
 8. Sygnatury z sekcji „Wspólne kontrakty” są wiążące. Jeśli musisz je zmienić — najpierw wpis w „Uwagach”, nie cicha zmiana.
 
 ## Status zadań
 
-Identyfikatory: `PK00`–`PK10` backend, `PK20`–`PK29` frontend (prefiks modułu — bez kolizji z `T` i `F`).
+Identyfikatory: `PK00`–`PK05` backend, `PK20`–`PK26` frontend.
 
-- [ ] PK00 · Schemat M5 w `db/m5-komunikacja.sql` + `make db-m5` + modele `api/comm/models.py` · zależy: —
-- [ ] PK01 · Ustawienia M5, rejestracja routerów, maskowanie logów, stuby routerów · zależy: PK00
-- [ ] PK02 · Kontrakty API: `api/comm/schemas.py` · zależy: PK00
-- [ ] PK03 · Dane demo: `data/mentors.json`, `data/partnerships-seed.json`, `data/threads-seed.json` · zależy: —
-- [ ] PK04 · Serwis wątków `api/comm/threads.py` (tworzenie, wiadomości, automat stanów, oś czasu, notify) · zależy: PK01, PK02
-- [ ] PK05 · Asystent `api/comm/assistant.py` (odpowiedź AI, szkic odpowiedzi) · zależy: PK04
-- [ ] PK06 · Dopasowania `api/comm/matching.py` (eksperci, partnerzy, teksty embeddingów) · zależy: PK01, PK02
-- [ ] PK07 · Router `api/routers/threads.py` (+ `/api/comm/inbox`) · zależy: PK04, PK05, PK06
-- [ ] PK08 · Routery `api/routers/mentors.py`, `api/routers/partnerships.py` · zależy: PK06
-- [ ] PK09 · `scripts/seed_comm.py` + `make seed-comm` · zależy: PK03, PK04, PK06
-- [ ] PK10 · Kalibracja progów M5 i próba generalna backendu · zależy: PK07, PK08, PK09
-- [ ] PK11 · (opcjonalne) Rozmowa o pomyśle z Modułu 3: wątek `IDEA` + oś czasu z `idea_replies` · zależy: PK07, K04 (M3)
-- [ ] PK20 · Frontend: kontrakty (`web/src/api/comm.ts`), stałe, pamięć „Moich rozmów”, rola `mentor` · zależy: PK02
-- [ ] PK21 · Frontend: trasy i nawigacja M5 (publiczna, panel, ekspert) · zależy: PK20
-- [ ] PK22 · Frontend: komponenty rozmowy (oś czasu, formularz, status) + hooki `useThread`, `useCommInbox` · zależy: PK20
-- [ ] PK23 · Frontend: „Platforma komunikacji” — Moje rozmowy, nowe pytanie, widok wątku · zależy: PK21, PK22, PK07
-- [ ] PK24 · Frontend: „Odpisz zespołowi” w „Moich zgłoszeniach” (+ migracja `my-reports.css` na Tailwind) + link w panelu zgłoszenia · zależy: PK23
-- [ ] PK25 · Frontend: Tablica partnerstw (lista, dodawanie, ogłoszenie z dopasowaniami) · zależy: PK21, PK22, PK08
-- [ ] PK26 · Frontend: Panel — Rozmowy (lista, wątek, szkic AI, ekspert, licznik) · zależy: PK21, PK22, PK07, PK08
-- [ ] PK27 · Frontend: Panel — moderacja partnerstw · zależy: PK21, PK08
-- [ ] PK28 · Frontend: widok eksperta „Moje konsultacje” · zależy: PK21, PK22, PK07
-- [ ] PK29 · Przegląd dostępności i próba generalna ścieżki demo M5 · zależy: PK10, PK23, PK24, PK25, PK26, PK27, PK28
+- [ ] PK00 · Schemat `db/m5-komunikacja.sql` + `make db-m5` + modele `api/comm/models.py` · zależy: —
+- [ ] PK01 · Wpięcie M5: ustawienia, schematy API, stuby routerów, maskowanie logów · zależy: PK00
+- [ ] PK02 · Wątki: serwis `api/comm/threads.py` + router `api/routers/threads.py` (+ stub asystenta) · zależy: PK01
+- [ ] PK03 · Asystent pierwszego kontaktu `api/comm/assistant.py` · zależy: PK02
+- [ ] PK04 · Eksperci i partnerstwa: `api/routers/mentors.py`, `api/routers/partnerships.py` · zależy: PK01
+- [ ] PK05 · Dane demo + `scripts/seed_comm.py` + `make seed-comm` · zależy: PK02, PK04
+- [ ] PK20 · Frontend: fundament (klient `comm.ts`, etykiety, pamięć, rola `mentor`, trasy, nawigacja, zaślepki) · zależy: PK01
+- [ ] PK21 · Frontend: komponenty rozmowy (`Timeline`, `MessageForm`, `ThreadStatus`, `ThreadList`) + hook `useThread` · zależy: PK20
+- [ ] PK22 · Frontend: Platforma komunikacji — moje rozmowy, nowe pytanie, widok wątku · zależy: PK21, PK03
+- [ ] PK23 · Frontend: Tablica partnerstw (lista, dodawanie, ogłoszenie z dopasowaniami) · zależy: PK21, PK04
+- [ ] PK24 · Frontend: Panel — Rozmowy (lista, wątek, odpowiedź, ekspert, zamknięcie) · zależy: PK21, PK02, PK04
+- [ ] PK25 · Frontend: widok eksperta „Moje konsultacje” · zależy: PK21, PK02, PK04
+- [ ] PK26 · Próba generalna demo M5 + przegląd dostępności · zależy: PK05, PK22, PK23, PK24, PK25
 
 ### Fale równoległości (orientacyjnie)
 
-- Fala 0: PK00, PK03
-- Fala 1: PK01, PK02
-- Fala 2: PK04, PK06, PK20
-- Fala 3: PK05, PK08, PK09, PK21, PK22
-- Fala 4: PK07, PK27
-- Fala 5: PK10, PK23, PK25, PK26, PK28
-- Fala 6: PK24 → PK29
-- Poza falami: PK11 (gdy M3 ma K04)
+- Fala 0: PK00
+- Fala 1: PK01
+- Fala 2: PK02, PK04, PK20
+- Fala 3: PK03, PK05, PK21
+- Fala 4: PK22, PK23, PK24, PK25
+- Fala 5: PK26
 
-**Najkrótsza działająca ścieżka** (gdy brakuje czasu): PK00–PK05, PK07 (bez endpointu `mentor-suggestions` — zwraca `[]`), PK09 tylko z wątkami, PK20–PK23, PK26 — scenariusz A z asystentem AI i odpowiedzią zespołu. Eksperci (PK06, PK08, PK28), partnerstwa (PK25, PK27) i odpis do zgłoszenia (PK24) dochodzą na wierzch.
+**Najkrótsza działająca ścieżka** (gdy brakuje czasu): PK00–PK03, PK20–PK22, PK24 — scenariusz A: pytanie → odpowiedź AI z kartami → „Chcę porozmawiać z zespołem” → odpowiedź z panelu. Eksperci (PK25) i partnerstwa (PK23) dochodzą na wierzch.
 
 ---
 
@@ -68,99 +57,75 @@ Identyfikatory: `PK00`–`PK10` backend, `PK20`–`PK29` frontend (prefiks modu�
 
 ### Konwencje
 
-- Konwencje Modułu 1 obowiązują bez zmian (`docs/modules/01-matchmaking/module-1-tasks.md`, „Wspólne kontrakty → Konwencje”): importy absolutne, async przy I/O, dane w `data/` przez `Path(settings.DATA_DIR)`, progi w `api.config.settings`.
-- Kod M5 w pakiecie `api/comm/` (`__init__.py` tworzy PK00). Routery w `api/routers/`.
-- Schemat M5 tylko w `db/m5-komunikacja.sql` (idempotentny, ładowany po `init.sql` i `m3-kreator.sql` — kolejność alfabetyczna w `docker-entrypoint-initdb.d`; na działającej bazie `make db-m5`). `db/init.sql` się nie zmienia.
-- Modele M5 dziedziczą po `api.models.Base`. Enumy Postgres tworzy plik SQL — w modelach `ENUM(..., create_type=False)` jak w M1 (`_pg_enum`). Docstring modeli: „Modele M5 1:1 z db/m5-komunikacja.sql. Schemat tworzy wyłącznie plik SQL.”
-- Zapytania wybierają **jawną listę kolumn** — `contact_email`, `embedding`, `session_id` nigdy nie trafiają do modeli odpowiedzi.
-- Logi: `log.info("…", extra={"thread_id": …, "kind": …, "role": …, "body_len": …})`. Nigdy `body`, `subject`, `description`, `author_label`, `contact_email`.
+- Konwencje Modułu 1 obowiązują bez zmian (`docs/modules/01-matchmaking/module-1-tasks.md`, „Wspólne kontrakty → Konwencje”): importy absolutne, async przy I/O, dane w `data/` przez `Path(settings.DATA_DIR)`, progi w `api.config.settings`, błędy przez `ApiError(status, code, message)`, komunikaty po polsku.
+- Kod M5 w pakiecie `api/comm/`, routery w `api/routers/`. Modele na `api.models.Base`, enumy przez `ENUM(..., create_type=False)` (wzór `_pg_enum` w `api/models.py`).
+- Schemat M5 tylko w `db/m5-komunikacja.sql` (idempotentny; ładuje się po `init.sql` przy pierwszym starcie bazy, na działającej bazie `make db-m5`). `db/init.sql` się nie zmienia.
+- **Bez danych kontaktowych.** M5 nie zbiera e-maili ani telefonów (jak czat M1, minimalizacja danych). Kontakt odbywa się w wątku.
+- Zapytania wybierają **jawną listę kolumn**; `session_id` nie wychodzi w odpowiedziach.
+- Logi: tylko identyfikatory, `kind`, `status`, `role` i długości (`body_len`). Nigdy `body`, `subject`, `title`, `description`, `author_label`.
 - Zadania w tle przez `api.tasks.spawn(...)` z **własną** sesją `async with SessionLocal() as session:`.
-- Metody HTTP tylko GET, POST, PATCH (CORS M1 nie przepuszcza PUT/DELETE).
-- Frontend: konwencje z `docs/modules/01-matchmaking/frontend-tasks.md` (alias `@/`, eksporty nazwane, teksty w tonie `DESIGN.md`, filtry w URL, `request` z `web/src/api/client.ts`, komponenty wspólne z F05, lista kontrolna dostępności). Typy i klient M5 w osobnym pliku `web/src/api/comm.ts` — `types.ts` i `client.ts` się nie zmieniają (mniej konfliktów z K10 Modułu 3).
-- **Stylowanie frontendu (`AGENTS.md`, „Stylowanie: Tailwind, bez własnego CSS”):** wyłącznie klasy Tailwinda z presetu design systemu (`text-navy`, `text-h1`, `bg-surface-muted`, `gap-3`, `rounded-md`, `shadow-card`…) i komponenty `ds-*` (`ds-btn`, `ds-field`, `ds-textarea`, `ds-alert`, `ds-page`, `ds-badge`…). Żadnych nowych plików `.css`, żadnych reguł dopisywanych do `web/src/styles/*.css`, żadnego `style={{…}}` i `<style>`. Bez domyślnej palety Tailwinda i wartości dowolnych z kolorem lub rozmiarem. Ekran, który zmieniasz, a który importuje dziedziczny arkusz strony, przenosisz na Tailwinda (wzorzec: `LoginPage.tsx`, `RequireRole.tsx`) i porównujesz wygląd przed i po, także w `data-contrast="high"`.
-- **Dostęp do ekranów:** wyłącznie przez `RequireRole` z `web/src/components/RequireRole.tsx` (niezalogowany widzi komunikat z „Zaloguj się” i wraca na ten sam ekran, zła rola — komunikat „Brak dostępu”). Ekrany publiczne nie są owinięte. Akcje wymagające roli na ekranach publicznych (np. „Odpowiedz” w wątku) pokazują zamiast formularza link `loginHref(pathname + search)` z `@/lib/auth`.
+- Metody HTTP tylko GET, POST, PATCH (CORS M1).
+- Frontend: konwencje z `docs/modules/01-matchmaking/frontend-tasks.md` (alias `@/`, eksporty nazwane, ton `DESIGN.md`, filtry w URL, lista kontrolna dostępności). Klient M5 w osobnym `web/src/api/comm.ts` (używa `request` z `client.ts`) — `types.ts` i `client.ts` się nie zmieniają.
+- **Stylowanie (`AGENTS.md`, „Stylowanie: Tailwind, bez własnego CSS”):** tylko klasy Tailwinda z presetu (`text-navy`, `text-h1`, `bg-surface-muted`, `gap-3`, `rounded-md`…) i komponenty `ds-*`. Żadnych nowych plików `.css`, reguł w `web/src/styles/*.css`, `style={{…}}`, domyślnej palety Tailwinda ani wartości dowolnych z kolorem/rozmiarem. Wzorzec: `LoginPage.tsx`, `RequireRole.tsx`.
+- **Dostęp:** ekrany chronione owijasz `RequireRole` (`web/src/components/RequireRole.tsx`). Na ekranach publicznych akcja wymagająca roli pokazuje link `loginHref(pathname + search)` zamiast formularza.
 
-### Zależności od Modułu 1 i frontendu (reużycie bez zmian)
+### Reużycie Modułu 1 (bez zmian)
 
 | Symbol | Skąd | Użycie w M5 |
 |---|---|---|
-| `preprocess(message, gmina) -> ProcessedQuery` | `api/pipeline/preprocess.py` | kategoria wątku, zapytanie asystenta (`gmina=None`) |
-| `run_search(q) -> SearchResult` | `api/pipeline/orchestrator.py` | asystent, szkic odpowiedzi |
-| `generate(query, cards, best_chunks, too_vague, llm)`, `CitationFilter(n_cards)` (`feed`, `flush`, `should_retract`) | `api/pipeline/answer.py` | odpowiedź asystenta |
-| `semantic_search(session, vec, kind, limit) -> list[Candidate]` | `api/pipeline/semantic.py` | rozwiązania przy ogłoszeniu |
-| `load_solutions(session, ids)`, `to_card(row, *, rank)` | `api/cards.py` | karty pod wiadomościami (`scores = None`) |
-| `get_embedding_provider()`, `get_llm_provider()`, `ProviderError` | `api/providers` | embeddingi, LLM |
-| `SessionLocal`, `get_session`, `to_pgvector` | `api/db.py` | sesje, wektory |
-| `ApiError(status, code, message)` | `api/errors.py` | błędy 404/409/422/503 |
-| `spawn(coro)` | `api/tasks.py` | prace w tle |
-| `Base`, `Report`, `ReportReply`, `Solution`, `Taxonomy`, `ReporterType` | `api/models.py` | FK, oś czasu `REPORT` |
+| `preprocess(message, None) -> ProcessedQuery` | `api/pipeline/preprocess.py` | kategoria wątku, zapytanie asystenta |
+| `run_search(q) -> SearchResult` (`.gate.passed`, `.solutions`, `.best_chunks`) | `api/pipeline/orchestrator.py` | asystent |
+| `generate(query, cards, best_chunks, too_vague, llm)`, `CitationFilter(n)` (`feed`, `flush`, `should_retract`) | `api/pipeline/answer.py` | tekst asystenta z cytowaniami |
+| `load_solutions(session, ids)`, `to_card(row, *, rank)` | `api/cards.py` | karty pod wiadomością asystenta |
+| `get_llm_provider()`, `ProviderError` | `api/providers` | LLM |
+| `SessionLocal`, `get_session` | `api/db.py` | sesje |
+| `ApiError`, `spawn` | `api/errors.py`, `api/tasks.py` | błędy, praca w tle |
 | `Page[T]`, `SolutionCard`, `ReporterTypeLiteral` | `api/schemas.py` | odpowiedzi |
-| `request<T>(method, path, opts)`, `ApiError` | `web/src/api/client.ts` | klient M5 |
-| `SolutionCard`, `Alert`, `EmptyState`, `LoadState`, `usePolling`, `useDocumentTitle`, `useTaxonomy`, `formatDateTime`, `plural` | `web/src/…` | UI M5 |
+| `request`, `SolutionCard`, `Alert`, `EmptyState`, `LoadState`, `Pagination`, `usePolling`, `useDocumentTitle`, `useTaxonomy`, `formatDateTime`, `ModuleLabel` | `web/src/…` | UI |
+| `GET /api/solutions?category=…&limit=3` | M1 | „Powiązane rozwiązania” przy ogłoszeniu (bez nowego backendu) |
 
-### Pliki współdzielone — kto dopisuje (ADR-M5-010)
+### Pliki współdzielone — kto dopisuje (tylko własny blok)
 
-| Plik | Właściciel w M5 | Co wolno |
+| Plik | Zadanie | Co |
 |---|---|---|
-| `db/m5-komunikacja.sql` | PK00 (nowy plik M5) | cały schemat M5; PK11 dopisuje blok warunkowy dla `ideas` |
-| `api/config.py` | PK01 | sekcja „Moduł 5 — Platforma komunikacji” na końcu pól `Settings` |
+| `Makefile` | PK00 (`db-m5`), PK05 (`seed-comm`) | cele M5 |
+| `api/config.py` | PK01 | sekcja „Moduł 5” na końcu pól `Settings` |
 | `api/main.py` | PK01 | import i 3 routery M5 w krotce `create_app()` |
-| `api/log.py` | PK01 | `REDACTED_KEYS` += `body`, `subject`, `description`, `author_label` |
-| `Makefile`, `.env.example` | PK00 (`db-m5`), PK01 (zmienne M5, zakomentowane), PK09 (`seed-comm`) | cele i zmienne M5 |
-| `web/src/lib/auth.tsx` | PK20 | rola `mentor`, konto `ekspert`, `mentorId`, `roleHome`, `isProtectedPath` |
-| `web/src/lib/modules.ts` | PK20 | `komunikacja: "Platforma komunikacji"` |
-| `web/src/App.tsx`, `web/src/components/layout/MainNav.tsx`, `web/src/components/layout/PanelLayout.tsx` | PK21 (PK26 — tylko licznik „Rozmowy”) | trasy i pozycje nawigacji |
-| `web/src/pages/MyReportsPage.tsx` (+ usunięcie `web/src/styles/my-reports.css`) | PK24 | „Odpisz zespołowi”, migracja strony na Tailwind |
-| `web/src/pages/panel/ReportPage.tsx` | PK24 | link „Rozmowa z autorem” (klasy Tailwinda) |
+| `api/log.py` | PK01 | `REDACTED_KEYS` += `body`, `subject`, `title`, `description`, `author_label` |
+| `web/src/lib/auth.tsx`, `web/src/lib/modules.ts` | PK20 | rola `mentor`, konto `ekspert`; nazwa modułu |
+| `web/src/App.tsx`, `web/src/components/layout/MainNav.tsx`, `web/src/components/layout/PanelLayout.tsx` | PK20 | trasy i pozycje nawigacji |
 
-**Kolizje z Modułem 3:** K10 dopisuje do tych samych plików `App.tsx`, `MainNav.tsx`, `PanelLayout.tsx`, a K17 do `ReportPage.tsx`; K01/K02 do `api/config.py`, `api/main.py`, `Makefile`, `.env.example`. Zasada: tylko dopisanie własnego bloku (nie przestawiaj ani nie formatuj cudzych linii); przy konflikcie git zachowaj obie wersje. Każde zadanie z tej tabeli dodaje jednolinijkowy wpis w „Uwagach” `module-1-tasks.md` (backend) albo `frontend-tasks.md` (frontend).
+Te same pliki dopisują inne moduły (np. M2, M3) — nie przestawiaj ani nie formatuj cudzych linii; przy konflikcie git zachowaj obie wersje.
 
-### Nazwy i sygnatury, z których korzystają inne zadania
+### Nazwy i sygnatury
 
 | Symbol | Moduł | Właściciel |
 |---|---|---|
-| Modele `Mentor`, `PartnershipOffer`, `Thread`, `ThreadMessage` + enumy `ThreadKind`, `ThreadStatus`, `MessageRole`, `OrgSector`, `PartnershipIntent`, `OfferStatus` | `api/comm/models.py` | PK00 |
-| Ustawienia M5 (lista w PK01) | `api/config.py` | PK01 |
-| Modele API (lista w „Kontraktach API” niżej) | `api/comm/schemas.py` | PK02 |
-| `async create_thread(session, payload: ThreadCreate) -> tuple[int, bool]` (id, created) | `api/comm/threads.py` | PK04 |
-| `async add_message(session, thread_id, payload: MessageCreate) -> TimelineMessage` | `api/comm/threads.py` | PK04 |
-| `async add_system_message(session, thread_id, body, *, meta=None) -> None` | `api/comm/threads.py` | PK04 |
-| `async patch_thread(session, thread_id, patch: ThreadPatch) -> None` | `api/comm/threads.py` | PK04 |
-| `async set_status(session, thread_id, status: ThreadStatus) -> None` (utrzymuje `waiting_since`) | `api/comm/threads.py` | PK04 |
-| `async load_thread_detail(session, thread_id) -> ThreadDetail` | `api/comm/threads.py` | PK04 |
-| `async list_threads(session, *, status, kind, mentor_id, session_id, ids, limit, offset) -> Page[ThreadListItem]` | `api/comm/threads.py` | PK04 |
-| `async mark_read(session, thread_id, side) -> None` | `api/comm/threads.py` | PK04 |
-| `async load_comm_inbox(session) -> CommInbox` | `api/comm/threads.py` | PK04 |
-| `async after_create(thread_id: int) -> None` (zadanie w tle: embedding, asystent, notify) | `api/comm/threads.py` | PK04 |
-| `notify(event: str, thread_id: int, **fields) -> None` | `api/comm/threads.py` | PK04 |
-| `async run_assistant(thread_id: int) -> None` | `api/comm/assistant.py` | PK05 |
-| `async draft_reply(session, thread_id) -> DraftReply` | `api/comm/assistant.py` | PK05 |
-| `thread_embedding_text(subject, body) -> str`, `mentor_embedding_text(m, labels) -> str`, `offer_embedding_text(title, description) -> str` | `api/comm/matching.py` | PK06 |
-| `async embed_thread(session, thread_id) -> bool`, `async embed_offer(session, offer_id) -> bool`, `async embed_mentor(session, mentor_id) -> bool` | `api/comm/matching.py` | PK06 |
-| `async suggest_mentors(session, thread_id) -> list[MentorSuggestion]` | `api/comm/matching.py` | PK06 |
-| `async match_partners(session, offer_id) -> PartnerMatches` | `api/comm/matching.py` | PK06 |
-| `async load_cards(session, solution_ids) -> list[SolutionCard]` (tylko `PUBLISHED` + `SOLUTION`, kolejność wejścia, `rank` 1..n) | `api/comm/threads.py` | PK04 |
+| `Mentor`, `PartnershipOffer`, `Thread`, `ThreadMessage` + enumy `ThreadKind`, `ThreadStatus`, `MessageRole`, `OrgSector`, `PartnershipIntent`, `OfferStatus` | `api/comm/models.py` | PK00 |
+| Modele API (niżej) | `api/comm/schemas.py` | PK01 |
+| `async create_thread(session, payload: ThreadCreate) -> int` | `api/comm/threads.py` | PK02 |
+| `async add_message(session, thread_id, *, role, body, author_label=None, mentor_id=None, solution_ids=(), meta=None) -> ThreadMessageOut` | `api/comm/threads.py` | PK02 |
+| `async set_status(session, thread_id, status: ThreadStatus) -> None` | `api/comm/threads.py` | PK02 |
+| `async load_thread(session, thread_id) -> ThreadDetail` | `api/comm/threads.py` | PK02 |
+| `async run_assistant(thread_id: int) -> None` (zadanie w tle; stub w PK02, implementacja w PK03) | `api/comm/assistant.py` | PK02 → PK03 |
 
-**Uwaga o cyklu importów:** `threads.after_create` importuje `assistant` i `matching` leniwie (wewnątrz funkcji), bo `assistant` importuje `threads`.
-
-### Automat stanów wątku (PK04 implementuje, wszyscy respektują)
+### Statusy wątku (PK02 implementuje)
 
 | Zdarzenie | Z | Na |
 |---|---|---|
-| utworzenie `QUESTION`, `settings.ASSISTANT_ENABLED` | — | `ASSISTANT_PENDING` |
+| utworzenie `QUESTION` przy `ASSISTANT_ENABLED` | — | `AI_PENDING` |
 | utworzenie innego rodzaju albo asystent wyłączony | — | `WAITING_STAFF` |
-| asystent: bramka przeszła i są karty | `ASSISTANT_PENDING` | `ANSWERED_BY_AI` |
-| asystent: „nie wiem” / brak kart / wyjątek | `ASSISTANT_PENDING` | `WAITING_STAFF` + wiadomość `SYSTEM` |
-| wiadomość `USER` | dowolny | `WAITING_STAFF` |
-| wiadomość `STAFF` / `MENTOR` | dowolny poza `CLOSED` | `WAITING_USER` (`CLOSED` → 409 `THREAD_CLOSED`) |
-| `PATCH {status: WAITING_STAFF}` | `ANSWERED_BY_AI`, `WAITING_USER`, `CLOSED` | `WAITING_STAFF` |
-| `PATCH {status: CLOSED}` | dowolny poza `ASSISTANT_PENDING` | `CLOSED` |
-| ten sam status w `PATCH` | — | 200 bez zmian |
-| inne przejście | — | 409 `INVALID_TRANSITION` |
+| asystent: bramka przeszła, są karty → wiadomość `ASSISTANT` | `AI_PENDING` | `WAITING_USER` |
+| asystent: „nie wiem” / brak kart / wyjątek → wiadomość `SYSTEM` | `AI_PENDING` | `WAITING_STAFF` |
+| wiadomość `USER` | dowolny (także `CLOSED`) | `WAITING_STAFF` |
+| wiadomość `STAFF` / `MENTOR` | dowolny poza `CLOSED` (inaczej 409 `THREAD_CLOSED`) | `WAITING_USER` |
+| `PATCH {status: WAITING_STAFF}` („Chcę porozmawiać z zespołem”) | `WAITING_USER`, `CLOSED` | `WAITING_STAFF` |
+| `PATCH {status: CLOSED}` | dowolny poza `AI_PENDING` | `CLOSED` |
+| ten sam status / inne przejście | — | 200 bez zmian / 409 `INVALID_TRANSITION` |
 
-`waiting_since = now()` przy wejściu w `WAITING_STAFF`, `NULL` przy wyjściu. Każda wiadomość ustawia `threads.last_message_at` i `updated_at`.
+„Nowa odpowiedź” dla autora: `has_reply = last_message_role ∈ {STAFF, MENTOR, ASSISTANT} AND (user_last_read_at IS NULL OR last_message_at > user_last_read_at)`. Licznik w panelu = `GET /api/threads?status=WAITING_STAFF&limit=1` → `total`.
 
-### Kontrakty API (`api/comm/schemas.py`, PK02 — dokładnie tak)
+### Kontrakty API (`api/comm/schemas.py`, PK01 — dokładnie tak)
 
 ```python
 from __future__ import annotations
@@ -169,77 +134,53 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 from api.schemas import ReporterTypeLiteral, SolutionCard
 
-ThreadKindLiteral = Literal["QUESTION", "REPORT", "MENTORING", "PARTNERSHIP"]
-ThreadStatusLiteral = Literal["ASSISTANT_PENDING", "ANSWERED_BY_AI", "WAITING_STAFF", "WAITING_USER", "CLOSED"]
+ThreadKindLiteral = Literal["QUESTION", "MENTORING", "PARTNERSHIP"]
+ThreadStatusLiteral = Literal["AI_PENDING", "WAITING_STAFF", "WAITING_USER", "CLOSED"]
 MessageRoleLiteral = Literal["USER", "STAFF", "MENTOR", "ASSISTANT", "SYSTEM"]
-WritableRoleLiteral = Literal["USER", "STAFF", "MENTOR"]
 OrgSectorLiteral = Literal["NGO", "JST", "PUBLIC", "BUSINESS", "SCIENCE", "RESIDENTS"]
 IntentLiteral = Literal["OFFER", "SEEK"]
-OfferStatusLiteral = Literal["PENDING_REVIEW", "PUBLISHED", "REJECTED", "CLOSED"]
-ReadSideLiteral = Literal["user", "staff", "mentor"]
-
-# walidator „nie same spacje” na body/subject/title/description jak ReplyCreate w M1
+# walidator „nie same białe znaki” na body/subject/title/description/organization (jak ReplyCreate w M1)
 
 class ThreadCreate(BaseModel):
     model_config = ConfigDict(extra="forbid")
     kind: ThreadKindLiteral
     body: str = Field(min_length=1, max_length=4000)
     subject: str | None = Field(default=None, max_length=200)   # None → pierwsze 80 znaków body
-    category: str | None = None
+    category: str | None = None                                 # None → preprocess(body).category
     reporter_type: ReporterTypeLiteral = "OTHER"
     author_label: str | None = Field(default=None, max_length=100)
-    contact_email: str | None = Field(default=None, max_length=254)
     session_id: str | None = Field(default=None, max_length=100)
-    report_id: int | None = None            # wymagany dla REPORT
-    solution_id: int | None = None          # opcjonalny kontekst MENTORING / QUESTION
-    partnership_id: int | None = None       # wymagany dla PARTNERSHIP (ogłoszenie PUBLISHED)
-    from_partnership_id: int | None = None  # własne ogłoszenie proponującego (opcjonalne)
+    partnership_id: int | None = None                           # wymagany dla PARTNERSHIP
 
 class MessageCreate(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    role: WritableRoleLiteral
+    role: Literal["USER", "STAFF", "MENTOR"]
     body: str = Field(min_length=1, max_length=4000)
     author_label: str | None = Field(default=None, max_length=100)
-    mentor_id: int | None = None            # wymagany dla MENTOR
-    solution_ids: list[int] = Field(default_factory=list)  # tylko STAFF/MENTOR; ≤ THREAD_MESSAGE_CARDS_MAX (walidacja w serwisie)
+    mentor_id: int | None = None                                # wymagany dla MENTOR
 
 class ThreadPatch(BaseModel):
+    """`assigned_mentor_id` podane jako null = usunięcie przydziału (sprawdź `model_fields_set`)."""
     model_config = ConfigDict(extra="forbid")
     status: Literal["WAITING_STAFF", "CLOSED"] | None = None
-    assigned_mentor_id: int | None = None   # odróżnij „brak pola” od null: model_fields_set
-
-class ReadMark(BaseModel):
-    side: ReadSideLiteral
+    assigned_mentor_id: int | None = None
 
 class MentorRef(BaseModel):
     id: int
     display_name: str
 
-class Mentor(BaseModel):
-    id: int
-    display_name: str
+class Mentor(MentorRef):
     organization: str | None
-    sector: OrgSectorLiteral | None
     expertise: str
-    bio: str
     categories: list[str]
-    active: bool
 
-class MentorSuggestion(BaseModel):
-    mentor: Mentor
-    category_match: bool
-    similarity: float | None
-
-class TimelineMessage(BaseModel):
-    id: str                                  # "m-<thread_messages.id>" | "r-<report_replies.id>"
-    source: Literal["thread", "report_reply"]
+class ThreadMessageOut(BaseModel):
+    id: int
     role: MessageRoleLiteral
     author_label: str | None
     mentor: MentorRef | None
     body: str
-    cards: list[SolutionCard] = Field(default_factory=list)
-    ai: bool                                 # role == ASSISTANT
-    author_verified: Literal[False] = False
+    cards: list[SolutionCard] = Field(default_factory=list)   # tylko ASSISTANT; [n] = pozycja n
     created_at: datetime
 
 class ThreadListItem(BaseModel):
@@ -251,37 +192,15 @@ class ThreadListItem(BaseModel):
     category_label_pl: str | None
     reporter_type: ReporterTypeLiteral
     author_label: str | None
-    report_id: int | None
     partnership_id: int | None
     assigned_mentor: MentorRef | None
-    message_count: int                       # thread_messages (+ report_replies dla REPORT)
-    last_message_at: datetime
     last_message_role: MessageRoleLiteral | None
-    waiting_since: datetime | None
-    waiting_hours: float | None              # now() - waiting_since, w godzinach, 1 miejsce po przecinku
-    over_sla: bool                           # waiting_hours >= THREAD_SLA_HOURS
-    unread_user: bool                        # wiadomość nie-USER nowsza niż user_last_read_at (NULL = wszystko nowe)
-    unread_staff: bool                       # wiadomość USER nowsza niż staff_last_read_at
-    unread_mentor: bool                      # wiadomość USER/STAFF nowsza niż mentor_last_read_at (tylko gdy jest ekspert)
+    last_message_at: datetime
+    has_reply: bool
     created_at: datetime
 
 class ThreadDetail(ThreadListItem):
-    solution_id: int | None
-    from_partnership_id: int | None
-    messages: list[TimelineMessage]
-
-class DraftReply(BaseModel):
-    body: str
-    solution_ids: list[int]
-    cards: list[SolutionCard]
-
-class CommInbox(BaseModel):
-    waiting_staff: int
-    over_sla: int
-    unassigned_mentoring: int                # kind=MENTORING, status != CLOSED, brak eksperta
-    pending_offers: int                      # partnership_offers PENDING_REVIEW
-    oldest_waiting_hours: float | None
-    latest_waiting: list[ThreadListItem]     # ≤ 10, WAITING_STAFF, najdłużej czekające pierwsze
+    messages: list[ThreadMessageOut]
 
 class PartnershipCreate(BaseModel):
     model_config = ConfigDict(extra="forbid")
@@ -291,16 +210,7 @@ class PartnershipCreate(BaseModel):
     title: str = Field(min_length=3, max_length=200)
     description: str = Field(min_length=10, max_length=4000)
     category: str | None = None
-    contact_email: str | None = Field(default=None, max_length=254)
     session_id: str | None = Field(default=None, max_length=100)
-
-class PartnershipCreated(BaseModel):
-    id: int
-    status: Literal["PENDING_REVIEW"] = "PENDING_REVIEW"
-
-class PartnershipPatch(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    status: Literal["PUBLISHED", "REJECTED", "CLOSED"]
 
 class PartnershipOffer(BaseModel):
     id: int
@@ -311,119 +221,57 @@ class PartnershipOffer(BaseModel):
     description: str
     category: str | None
     category_label_pl: str | None
-    status: OfferStatusLiteral
+    status: Literal["PUBLISHED", "CLOSED"]
     created_at: datetime
-
-class PartnerMatch(BaseModel):
-    offer: PartnershipOffer
-    similarity: float
-    cross_sector: bool
-
-class DemandGmina(BaseModel):
-    gmina: str
-    count: int
-
-class Demand(BaseModel):
-    similar_reports: int
-    gminy: list[DemandGmina]
-
-class PartnerMatches(BaseModel):
-    offers: list[PartnerMatch]
-    solutions: list[SolutionCard]
-    demand: Demand
 ```
 
-### Endpointy (PK07, PK08)
+### Endpointy
 
-| Endpoint | Odpowiedź / błędy |
-|---|---|
-| `POST /api/threads` | 201 `ThreadDetail`; 200 gdy `REPORT` i wątek zgłoszenia istniał (dopisana wiadomość); 404 brak `report_id`/`partnership_id`/`solution_id`; 422 `REPORT` bez `report_id`, `PARTNERSHIP` bez `partnership_id` albo ogłoszenie nie `PUBLISHED`, nieznana kategoria |
-| `GET /api/threads` | `Page[ThreadListItem]`; filtry `status`, `kind`, `mentor_id`, `session_id`, `ids` (CSV ≤ 50), `limit` (50, ≤200), `offset` |
-| `GET /api/threads/{id}` | `ThreadDetail`; 404 |
-| `POST /api/threads/{id}/messages` | 201 `TimelineMessage`; 404; 409 `THREAD_CLOSED`, `MENTOR_NOT_ASSIGNED`; 422 karty spoza `PUBLISHED`/`SOLUTION`, za dużo kart, `MENTOR` bez `mentor_id`, `solution_ids` od `USER` |
-| `PATCH /api/threads/{id}` | `ThreadDetail`; 409 `INVALID_TRANSITION`; 422 nieaktywny/nieistniejący ekspert |
-| `POST /api/threads/{id}/read` | 204 |
-| `POST /api/threads/{id}/draft-reply` | `DraftReply`; 503 `LLM_UNAVAILABLE` |
-| `GET /api/threads/{id}/mentor-suggestions` | `list[MentorSuggestion]` |
-| `GET /api/comm/inbox` | `CommInbox` |
-| `GET /api/mentors`, `GET /api/mentors/{id}` | `list[Mentor]` (filtr `category`, `active`=true), `Mentor`/404 |
-| `GET /api/partnerships` | `Page[PartnershipOffer]`; filtry `intent`, `sector`, `category`, `status` (domyślnie `PUBLISHED`), `limit`, `offset`; sort `created_at DESC, id DESC` |
-| `POST /api/partnerships` | 201 `PartnershipCreated` |
-| `GET /api/partnerships/{id}` | `PartnershipOffer`; 404 |
-| `PATCH /api/partnerships/{id}` | `PartnershipOffer` |
-| `GET /api/partnerships/{id}/matches` | `PartnerMatches` (ogłoszenie bez embeddingu → puste listy, `similar_reports = 0`) |
+| Endpoint | Zadanie | Odpowiedź / błędy |
+|---|---|---|
+| `POST /api/threads` | PK02 | 201 `ThreadDetail`; 404 brak ogłoszenia; 422 `PARTNERSHIP` bez `partnership_id`, ogłoszenie zamknięte, nieznana kategoria |
+| `GET /api/threads` | PK02 | `Page[ThreadListItem]`; filtry `status`, `kind`, `mentor_id`, `ids` (CSV ≤ 50), `limit` (50, ≤ 200), `offset`; sort `last_message_at DESC, id DESC` |
+| `GET /api/threads/{id}` | PK02 | `ThreadDetail` (wiadomości rosnąco); 404 |
+| `POST /api/threads/{id}/messages` | PK02 | 201 `ThreadMessageOut`; 409 `THREAD_CLOSED`, `MENTOR_NOT_ASSIGNED`; 422 `MENTOR` bez `mentor_id` |
+| `PATCH /api/threads/{id}` | PK02 | `ThreadDetail`; 409 `INVALID_TRANSITION`; 422 nieznany ekspert. Przydział dopisuje wiadomość `SYSTEM` „Do rozmowy dołączył(a) ekspert: {display_name}.” |
+| `POST /api/threads/{id}/read` | PK02 | 204; `user_last_read_at = now()` |
+| `GET /api/mentors?category=` | PK04 | `list[Mentor]`; z `category` — najpierw eksperci z tą kategorią, potem reszta; remis po `id` |
+| `GET /api/partnerships` | PK04 | `Page[PartnershipOffer]`; filtry `intent`, `sector`, `category`, `status` (domyślnie `PUBLISHED`), `limit`, `offset`; sort `created_at DESC, id DESC` |
+| `POST /api/partnerships` | PK04 | 201 `PartnershipOffer` (od razu `PUBLISHED`) |
+| `GET /api/partnerships/{id}` | PK04 | `PartnershipOffer`; 404 |
+| `PATCH /api/partnerships/{id}` | PK04 | `{status: "CLOSED" \| "PUBLISHED"}` → `PartnershipOffer` |
+| `GET /api/partnerships/{id}/matches` | PK04 | `list[PartnershipOffer]`: `PUBLISHED`, inne `id`, przeciwny `intent`, ta sama `category`; sort: najpierw inny `sector` (międzysektorowe), potem `created_at DESC`; limit `PARTNER_MATCH_N` |
 
-### Typy frontendu (`web/src/api/comm.ts`, PK20)
+### Frontend: klient, etykiety, pamięć (PK20)
 
-Lustro `api/comm/schemas.py` 1:1 (te same nazwy pól, `snake_case`), np.:
-
-```ts
-export type ThreadKind = "QUESTION" | "REPORT" | "MENTORING" | "PARTNERSHIP";
-export type ThreadStatus = "ASSISTANT_PENDING" | "ANSWERED_BY_AI" | "WAITING_STAFF" | "WAITING_USER" | "CLOSED";
-export type MessageRole = "USER" | "STAFF" | "MENTOR" | "ASSISTANT" | "SYSTEM";
-export type OrgSector = "NGO" | "JST" | "PUBLIC" | "BUSINESS" | "SCIENCE" | "RESIDENTS";
-export type Intent = "OFFER" | "SEEK";
-export type OfferStatus = "PENDING_REVIEW" | "PUBLISHED" | "REJECTED" | "CLOSED";
-// interfejsy: ThreadCreate, MessageCreate, ThreadPatch, MentorRef, Mentor, MentorSuggestion, TimelineMessage,
-// ThreadListItem, ThreadDetail, DraftReply, CommInbox, PartnershipCreate, PartnershipCreated, PartnershipOffer,
-// PartnerMatch, Demand, PartnerMatches
-
-export const commApi = {
-  createThread: (b: ThreadCreate) => request<ThreadDetail>("POST", "/api/threads", { body: b }),
-  listThreads: (q: Query) => request<Page<ThreadListItem>>("GET", "/api/threads", { query: q }),
-  getThread: (id: number) => request<ThreadDetail>("GET", `/api/threads/${id}`),
-  addMessage: (id: number, b: MessageCreate) => request<TimelineMessage>("POST", `/api/threads/${id}/messages`, { body: b }),
-  patchThread: (id: number, b: ThreadPatch) => request<ThreadDetail>("PATCH", `/api/threads/${id}`, { body: b }),
-  markRead: (id: number, side: "user" | "staff" | "mentor") => request<void>("POST", `/api/threads/${id}/read`, { body: { side } }),
-  draftReply: (id: number) => request<DraftReply>("POST", `/api/threads/${id}/draft-reply`),
-  mentorSuggestions: (id: number) => request<MentorSuggestion[]>("GET", `/api/threads/${id}/mentor-suggestions`),
-  inbox: () => request<CommInbox>("GET", "/api/comm/inbox"),
-  mentors: (q?: Query) => request<Mentor[]>("GET", "/api/mentors", { query: q }),
-  listOffers: (q: Query) => request<Page<PartnershipOffer>>("GET", "/api/partnerships", { query: q }),
-  createOffer: (b: PartnershipCreate) => request<PartnershipCreated>("POST", "/api/partnerships", { body: b }),
-  getOffer: (id: number) => request<PartnershipOffer>("GET", `/api/partnerships/${id}`),
-  patchOffer: (id: number, status: "PUBLISHED" | "REJECTED" | "CLOSED") => request<PartnershipOffer>("PATCH", `/api/partnerships/${id}`, { body: { status } }),
-  offerMatches: (id: number) => request<PartnerMatches>("GET", `/api/partnerships/${id}/matches`),
-};
-```
-
-(`request` zwraca `undefined` dla 204 — `markRead` działa bez zmian w `client.ts`.)
-
-### Stałe i etykiety frontendu (`web/src/lib/comm.ts`, PK20)
-
-- `THREAD_POLL_MS = 5_000`, `ASSISTANT_POLL_MS = 2_000`, `COMM_INBOX_POLL_MS = 30_000`, `MESSAGE_MAX_CHARS = 4000`.
-- `THREAD_KIND_LABELS`: QUESTION „Pytanie”, REPORT „Rozmowa o zgłoszeniu”, MENTORING „Konsultacja z ekspertem”, PARTNERSHIP „Propozycja partnerstwa”.
-- `THREAD_STATUS_LABELS` (dla autora / dla Hubu): ASSISTANT_PENDING „Asystent szuka odpowiedzi”, ANSWERED_BY_AI „Odpowiedź automatyczna”, WAITING_STAFF „Czeka na zespół Hubu”, WAITING_USER „Hub odpowiedział” / „Czeka na autora”, CLOSED „Zamknięta”.
-- `ROLE_LABELS`: USER „Ty” (autor) / „Autor” (panel, ekspert), STAFF „Zespół Hubu”, MENTOR „Ekspert: {display_name}”, ASSISTANT „Odpowiedź automatyczna (AI)”, SYSTEM „Informacja systemowa”.
-- `SECTOR_LABELS`: NGO „Organizacja pozarządowa”, JST „Samorząd”, PUBLIC „Instytucja publiczna”, BUSINESS „Firma”, SCIENCE „Uczelnia / nauka”, RESIDENTS „Grupa mieszkańców”. `INTENT_LABELS`: OFFER „Oferujemy”, SEEK „Szukamy”.
-
-### Pamięć przeglądarki (`web/src/lib/commStorage.ts`, PK20)
-
-Wzór: `web/src/lib/storage.ts`. Klucz `splot_threads`, maks. 20 wpisów `{thread_id, kind, created_at, excerpt (≤80 znaków)}`; `listMyThreads()`, `addMyThread()`, `removeMyThread()`. Każdy dostęp w `try/catch`. Treść pełna nigdy nie trafia do pamięci.
+- `web/src/api/comm.ts`: typy 1:1 z `api/comm/schemas.py` (`snake_case`) i obiekt `commApi` (`createThread`, `listThreads`, `getThread`, `addMessage`, `patchThread`, `markRead`, `mentors`, `listOffers`, `createOffer`, `getOffer`, `patchOffer`, `offerMatches`) na `request<T>()` z `client.ts` (204 → `undefined`).
+- `web/src/lib/comm.ts`: stałe `THREAD_POLL_MS = 5_000`, `AI_POLL_MS = 2_000`, `COMM_COUNT_POLL_MS = 30_000`, `MESSAGE_MAX_CHARS = 4000`; etykiety:
+  - rodzaje: QUESTION „Pytanie do Hubu”, MENTORING „Konsultacja z ekspertem”, PARTNERSHIP „Propozycja partnerstwa”;
+  - statusy: AI_PENDING „Asystent szuka odpowiedzi”, WAITING_STAFF „Czeka na zespół Hubu”, WAITING_USER „Jest odpowiedź” (autor) / „Czeka na autora” (panel), CLOSED „Zamknięta”;
+  - role: USER „Ty” (autor) / „Autor” (panel, ekspert), STAFF „Zespół Hubu”, MENTOR „Ekspert: {display_name}”, ASSISTANT „Odpowiedź automatyczna (AI)”, SYSTEM „Informacja”;
+  - sektory: NGO „Organizacja pozarządowa”, JST „Samorząd”, PUBLIC „Instytucja publiczna”, BUSINESS „Firma”, SCIENCE „Uczelnia / nauka”, RESIDENTS „Grupa mieszkańców”; intencje: OFFER „Oferujemy”, SEEK „Szukamy”;
+  - pamięć „Moich rozmów” (wzór `web/src/lib/storage.ts`): klucz `splot_threads`, maks. 20 wpisów `{thread_id, created_at, excerpt ≤ 80 znaków}`, `listMyThreads()`, `rememberThread()`, `forgetThread()`, każdy dostęp w `try/catch`.
 
 ---
 
 ## Zadania
 
-## PK00 — Schemat M5 (`db/m5-komunikacja.sql`), `make db-m5`, modele
+## PK00 — Schemat, `make db-m5`, modele
 
 **Zależy od:** —
 **Pliki:** `db/m5-komunikacja.sql` (nowy), `api/comm/__init__.py` (nowy, pusty), `api/comm/models.py` (nowy), `Makefile` (cel `db-m5`)
 
-**Cel:** tabele `mentors`, `partnership_offers`, `threads`, `thread_messages` bez resetu bazy i ich modele SQLAlchemy.
+**Cel:** 4 tabele M5 bez resetu bazy i ich modele.
 
-**Kontekst ze specyfikacji (sekcja 6, ADR-M5-012):**
-- Wzór Modułu 3 (ADR-M3-002): katalog `./db` jest montowany w `docker-entrypoint-initdb.d`, pliki ładują się alfabetycznie (`init.sql` < `m3-kreator.sql` < `m5-komunikacja.sql`). Plik jest idempotentny; na działającej bazie uruchamia go `make db-m5` bez utraty korpusu i zgłoszeń. Nie zależy od tabel M3.
-- Wartość `IDEA` w `thread_kind` jest od razu w enumie (używa jej dopiero PK11), żeby nie robić później `ALTER TYPE`.
+**Kontekst:** katalog `./db` jest montowany w `docker-entrypoint-initdb.d`; pliki ładują się alfabetycznie (`init.sql` < `m5-komunikacja.sql`). Plik musi być idempotentny.
 
 ```sql
--- Splot – Moduł 5 (Platforma aktywnej komunikacji). Idempotentny: bezpieczny do wielokrotnego uruchomienia.
--- Ładowany po init.sql (i m3-kreator.sql) przy pierwszym starcie bazy; na działającej bazie: make db-m5.
+-- Splot – Moduł 5 (Platforma aktywnej komunikacji). Idempotentny; na działającej bazie: make db-m5.
 DO $$ BEGIN
-  CREATE TYPE thread_kind AS ENUM ('QUESTION', 'REPORT', 'MENTORING', 'PARTNERSHIP', 'IDEA');
+  CREATE TYPE thread_kind AS ENUM ('QUESTION', 'MENTORING', 'PARTNERSHIP');
 EXCEPTION WHEN duplicate_object THEN NULL; END $$;
 DO $$ BEGIN
-  CREATE TYPE thread_status AS ENUM ('ASSISTANT_PENDING', 'ANSWERED_BY_AI', 'WAITING_STAFF', 'WAITING_USER', 'CLOSED');
+  CREATE TYPE thread_status AS ENUM ('AI_PENDING', 'WAITING_STAFF', 'WAITING_USER', 'CLOSED');
 EXCEPTION WHEN duplicate_object THEN NULL; END $$;
 DO $$ BEGIN
   CREATE TYPE message_role AS ENUM ('USER', 'STAFF', 'MENTOR', 'ASSISTANT', 'SYSTEM');
@@ -435,67 +283,52 @@ DO $$ BEGIN
   CREATE TYPE partnership_intent AS ENUM ('OFFER', 'SEEK');
 EXCEPTION WHEN duplicate_object THEN NULL; END $$;
 DO $$ BEGIN
-  CREATE TYPE offer_status AS ENUM ('PENDING_REVIEW', 'PUBLISHED', 'REJECTED', 'CLOSED');
+  CREATE TYPE offer_status AS ENUM ('PUBLISHED', 'CLOSED');
 EXCEPTION WHEN duplicate_object THEN NULL; END $$;
 
+-- Eksperci (dane fikcyjne z data/mentors.json).
 CREATE TABLE IF NOT EXISTS mentors (
     id           BIGSERIAL PRIMARY KEY,
     seed_key     TEXT UNIQUE,
-    display_name TEXT        NOT NULL,
+    display_name TEXT    NOT NULL,
     organization TEXT,
-    sector       org_sector,
-    expertise    TEXT        NOT NULL,
-    bio          TEXT        NOT NULL DEFAULT '',
-    categories   TEXT[]      NOT NULL DEFAULT '{}',
-    active       BOOLEAN     NOT NULL DEFAULT true,
-    embedding    vector(1024),
-    created_at   TIMESTAMPTZ NOT NULL DEFAULT now()
+    expertise    TEXT    NOT NULL,
+    categories   TEXT[]  NOT NULL DEFAULT '{}'      -- kody challenge_taxonomy
 );
 
+-- Tablica partnerstw „oferujemy / szukamy”.
 CREATE TABLE IF NOT EXISTS partnership_offers (
-    id            BIGSERIAL PRIMARY KEY,
-    seed_key      TEXT UNIQUE,
-    intent        partnership_intent NOT NULL,
-    organization  TEXT         NOT NULL,
-    sector        org_sector   NOT NULL,
-    title         TEXT         NOT NULL,
-    description   TEXT         NOT NULL,
-    category      TEXT         REFERENCES challenge_taxonomy(code),
-    contact_email TEXT,                    -- nigdy nie wychodzi z API ani do logów
-    session_id    TEXT,
-    status        offer_status NOT NULL DEFAULT 'PENDING_REVIEW',
-    embedding     vector(1024),
-    created_at    TIMESTAMPTZ  NOT NULL DEFAULT now(),
-    updated_at    TIMESTAMPTZ  NOT NULL DEFAULT now()
+    id           BIGSERIAL PRIMARY KEY,
+    seed_key     TEXT UNIQUE,
+    intent       partnership_intent NOT NULL,
+    organization TEXT         NOT NULL,
+    sector       org_sector   NOT NULL,
+    title        TEXT         NOT NULL,
+    description  TEXT         NOT NULL,
+    category     TEXT         REFERENCES challenge_taxonomy(code),
+    session_id   TEXT,
+    status       offer_status NOT NULL DEFAULT 'PUBLISHED',
+    created_at   TIMESTAMPTZ  NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS partnership_offers_status_idx ON partnership_offers (status, created_at DESC);
 
+-- Wątki rozmów.
 CREATE TABLE IF NOT EXISTS threads (
-    id                  BIGSERIAL PRIMARY KEY,
-    seed_key            TEXT UNIQUE,
-    kind                thread_kind   NOT NULL,
-    status              thread_status NOT NULL,
-    subject             TEXT          NOT NULL,
-    category            TEXT          REFERENCES challenge_taxonomy(code),
-    reporter_type       reporter_type NOT NULL DEFAULT 'OTHER',
-    author_label        TEXT,
-    contact_email       TEXT,              -- nigdy nie wychodzi z API ani do logów
-    session_id          TEXT,
-    report_id           BIGINT REFERENCES reports(id) ON DELETE SET NULL,
-    solution_id         BIGINT REFERENCES solutions(id) ON DELETE SET NULL,
-    partnership_id      BIGINT REFERENCES partnership_offers(id) ON DELETE SET NULL,
-    from_partnership_id BIGINT REFERENCES partnership_offers(id) ON DELETE SET NULL,
-    assigned_mentor_id  BIGINT REFERENCES mentors(id) ON DELETE SET NULL,
-    embedding           vector(1024),
-    last_message_at     TIMESTAMPTZ   NOT NULL DEFAULT now(),
-    waiting_since       TIMESTAMPTZ,
-    user_last_read_at   TIMESTAMPTZ,
-    staff_last_read_at  TIMESTAMPTZ,
-    mentor_last_read_at TIMESTAMPTZ,
-    created_at          TIMESTAMPTZ   NOT NULL DEFAULT now(),
-    updated_at          TIMESTAMPTZ   NOT NULL DEFAULT now()
+    id                 BIGSERIAL PRIMARY KEY,
+    seed_key           TEXT UNIQUE,
+    kind               thread_kind   NOT NULL,
+    status             thread_status NOT NULL,
+    subject            TEXT          NOT NULL,
+    category           TEXT          REFERENCES challenge_taxonomy(code),
+    reporter_type      reporter_type NOT NULL DEFAULT 'OTHER',
+    author_label       TEXT,                      -- podpis autora, niezweryfikowany
+    session_id         TEXT,
+    partnership_id     BIGINT REFERENCES partnership_offers(id) ON DELETE SET NULL,
+    assigned_mentor_id BIGINT REFERENCES mentors(id) ON DELETE SET NULL,
+    last_message_at    TIMESTAMPTZ   NOT NULL DEFAULT now(),
+    user_last_read_at  TIMESTAMPTZ,
+    created_at         TIMESTAMPTZ   NOT NULL DEFAULT now()
 );
-CREATE UNIQUE INDEX IF NOT EXISTS threads_report_uq ON threads (report_id) WHERE report_id IS NOT NULL AND kind = 'REPORT';
 CREATE INDEX IF NOT EXISTS threads_status_idx ON threads (status, last_message_at DESC);
 CREATE INDEX IF NOT EXISTS threads_mentor_idx ON threads (assigned_mentor_id, last_message_at DESC);
 
@@ -506,482 +339,233 @@ CREATE TABLE IF NOT EXISTS thread_messages (
     author_label TEXT,
     mentor_id    BIGINT       REFERENCES mentors(id) ON DELETE SET NULL,
     body         TEXT         NOT NULL,
-    solution_ids BIGINT[]     NOT NULL DEFAULT '{}',
-    meta         JSONB        NOT NULL DEFAULT '{}',
+    solution_ids BIGINT[]     NOT NULL DEFAULT '{}', -- karty asystenta; [n] = pozycja n
+    meta         JSONB        NOT NULL DEFAULT '{}', -- np. {"fallback": "no_llm"}
     created_at   TIMESTAMPTZ  NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS thread_messages_thread_idx ON thread_messages (thread_id, created_at);
 ```
 
 **Kroki:**
-1. `db/m5-komunikacja.sql` dokładnie jak wyżej.
-2. `Makefile`: cel `db-m5` → `docker compose exec -T db psql -U splot -d splot -v ON_ERROR_STOP=1 < db/m5-komunikacja.sql`; dopisz do `.PHONY`.
-3. `api/comm/models.py`: enumy `StrEnum` (`ThreadKind` z `IDEA`, `ThreadStatus`, `MessageRole`, `OrgSector`, `PartnershipIntent`, `OfferStatus`), modele `Mentor`, `PartnershipOffer`, `Thread`, `ThreadMessage` na `api.models.Base`; `Vector(EMBEDDING_DIM)` i `ENUM(..., create_type=False)` jak w `api/models.py`; `ARRAY(BigInteger)` dla `solution_ids`, `ARRAY(Text)` dla `categories`. Relacja `Thread.messages` (`order_by=created_at`, `cascade="all, delete-orphan"`, `passive_deletes=True`). Kolumny `idea_id` w modelu **nie ma** (dodaje ją PK11).
-4. Wpis w „Uwagach między zadaniami” `module-1-tasks.md`: „[PK00] nowy plik `db/m5-komunikacja.sql` + cel `make db-m5` (ADR-M5-012)”.
+1. Plik SQL jak wyżej.
+2. `Makefile`: `db-m5` → `docker compose exec -T db psql -U splot -d splot -v ON_ERROR_STOP=1 < db/m5-komunikacja.sql`; dopisz do `.PHONY`.
+3. `api/comm/models.py`: enumy `StrEnum` i 4 modele 1:1 z DDL (`ARRAY(Text)`, `ARRAY(BigInteger)`, `JSONB`, `server_default`), relacja `Thread.messages` (`order_by=created_at`). Docstring: „Modele M5 1:1 z db/m5-komunikacja.sql. Schemat tworzy wyłącznie plik SQL.”
 
-**Gotowe, gdy:** `make db-m5` dwa razy z rzędu kończy się bez błędu; `make psql` → `\dt` pokazuje 4 nowe tabele, `\dT` 6 nowych enumów, `\d threads` częściowy indeks unikalny; liczba wierszy `solutions` i `reports` bez zmian; `make reset-db` (świeża baza) ładuje plik automatycznie; `python -c "from api.comm.models import Thread, ThreadMessage, Mentor, PartnershipOffer; print('ok')"`; czat M1 działa jak wcześniej; `ruff check .` czysty.
+**Gotowe, gdy:** `make db-m5` dwa razy bez błędu; `\dt` pokazuje 4 nowe tabele; liczba wierszy `solutions` bez zmian; `python -c "from api.comm.models import Thread, ThreadMessage, Mentor, PartnershipOffer"` działa.
 
 ---
 
-## PK01 — Ustawienia, rejestracja routerów, maskowanie logów
+## PK01 — Wpięcie M5: ustawienia, schematy, stuby, logi
 
 **Zależy od:** PK00
-**Pliki:** `api/config.py` (dopisanie sekcji), `api/main.py` (dopisanie routerów), `api/log.py` (dopisanie kluczy), `.env.example` (dopisanie zakomentowanych zmiennych), `api/routers/threads.py` (nowy, stub), `api/routers/mentors.py` (nowy, stub), `api/routers/partnerships.py` (nowy, stub)
+**Pliki:** `api/config.py`, `api/main.py`, `api/log.py` (dopisanie), `api/comm/schemas.py` (nowy), `api/routers/threads.py`, `api/routers/mentors.py`, `api/routers/partnerships.py` (nowe — stuby)
 
-**Cel:** M5 jest wpięty w aplikację; kolejne zadania wypełniają tylko swoje pliki.
-
-**Kontekst:** blok ustawień (dokładnie te nazwy i wartości domyślne):
-
-```python
-    # --- Moduł 5: Platforma komunikacji ---
-    ASSISTANT_ENABLED: bool = True
-    ASSISTANT_TIMEOUT_SECONDS: float = 30.0
-    DRAFT_REPLY_ENABLED: bool = True
-    MENTOR_SUGGEST_N: int = 3
-    MENTOR_MIN_COSINE: float = 0.30
-    PARTNER_MATCH_N: int = 5
-    PARTNER_MIN_COSINE: float = 0.45
-    PARTNER_SOLUTIONS_N: int = 3
-    PARTNER_GMINY_N: int = 5
-    THREAD_SLA_HOURS: int = 48
-    THREAD_MESSAGE_CARDS_MAX: int = 5
-    COMM_INBOX_LATEST_N: int = 10
-```
+**Cel:** M5 wpięty w aplikację; PK02 i PK04 wypełniają tylko swoje pliki.
 
 **Kroki:**
-1. Sekcja na końcu pól `Settings` w `api/config.py` (po sekcji M3, jeśli już jest; nie przestawiaj istniejących pól). W `.env.example` te same zmienne zakomentowane z wartościami domyślnymi pod nagłówkiem `# --- Moduł 5 ---`.
-2. Stuby routerów: `router = APIRouter(prefix="/api", tags=["threads"|"mentors"|"partnerships"])` bez endpointów.
-3. `api/main.py`: import i dodanie trzech routerów do krotki `include_router` (przed `meta.router`).
-4. `api/log.py`: `REDACTED_KEYS` += `"body", "subject", "description", "author_label"`.
-5. Wpis w „Uwagach” `module-1-tasks.md` (ADR-M5-010).
+1. `api/config.py` — sekcja na końcu pól `Settings`:
+   ```python
+   # --- Moduł 5: Platforma komunikacji ---
+   ASSISTANT_ENABLED: bool = True          # automatyczna odpowiedź na pytanie
+   ASSISTANT_TIMEOUT_SECONDS: float = 30.0
+   PARTNER_MATCH_N: int = 5
+   ```
+2. `api/comm/schemas.py` — dokładnie jak „Kontrakty API”.
+3. Stuby: `router = APIRouter(prefix="/api", tags=["threads" | "mentors" | "partnerships"])`; `api/main.py`: import i 3 routery w krotce.
+4. `api/log.py`: `REDACTED_KEYS` += `body`, `subject`, `title`, `description`, `author_label`.
 
-**Gotowe, gdy:** `make dev` startuje; `curl localhost:8000/openapi.json | grep -c threads` ≥ 1 (tag); `python -c "from api.config import settings; print(settings.THREAD_SLA_HOURS)"` → 48; `python -c "import logging; from api.log import setup_logging; setup_logging(); logging.getLogger('x').info('t', extra={'body': 'tajne'})"` wypisuje `***`, nie `tajne`.
+**Gotowe, gdy:** API startuje; `/openapi.json` ma tagi M5; `ThreadCreate(kind="QUESTION", body="  ")` → `ValidationError`; log z `extra={"body": "x"}` wypisuje `***`.
 
 ---
 
-## PK02 — Kontrakty API
+## PK02 — Wątki: serwis i router
 
-**Zależy od:** PK00
-**Pliki:** `api/comm/schemas.py` (nowy)
+**Zależy od:** PK01
+**Pliki:** `api/comm/threads.py` (nowy), `api/comm/assistant.py` (nowy — **stub**), `api/routers/threads.py`
 
-**Cel:** modele pydantic M5 dokładnie jak w „Wspólnych kontraktach → Kontrakty API”.
+**Cel:** pełna obsługa wątków: tworzenie, wiadomości, statusy (tabela „Statusy wątku”), przydział eksperta, lista, szczegóły, odczyt.
 
 **Kroki:**
-1. Przepisz kontrakty; walidator „nie same białe znaki” dla `body`, `subject`, `title`, `description`, `organization` (komunikaty po polsku, jak `ReplyCreate`).
-2. `subject` w `ThreadCreate` przycinany `strip()`; puste po przycięciu → `None`.
-3. Żaden model odpowiedzi nie ma pól `contact_email`, `embedding`, `session_id`.
-
-**Gotowe, gdy:** `python -c "from api.comm.schemas import *; ThreadCreate(kind='QUESTION', body='x'); print('ok')"`; `ThreadCreate(kind='QUESTION', body='   ')` → `ValidationError`; `python -c "from api.comm.schemas import ThreadDetail; print('contact_email' in ThreadDetail.model_fields)"` → `False`.
-
----
-
-## PK03 — Dane demo
-
-**Zależy od:** —
-**Pliki:** `data/mentors.json`, `data/partnerships-seed.json`, `data/threads-seed.json` (nowe)
-
-**Cel:** fikcyjne dane do scenariuszy A–C. **Żadnych prawdziwych osób ani danych kontaktowych** (`base.md` §9) — imiona i nazwiska wymyślone, organizacje z dopiskiem typu „(przykład)” albo jednoznacznie fikcyjne.
-
-**Kontekst (formaty):**
-
-```jsonc
-// data/mentors.json — 8 ekspertów, każdy kod taksonomii (poza OTHER) pokryty co najmniej raz
-[{"seed_key": "mentor-gerontologia", "display_name": "dr Anna Przykładowa", "organization": "Uczelnia (przykład)",
-  "sector": "SCIENCE", "expertise": "Usługi dla seniorów, teleopieka, aktywizacja osób starszych.",
-  "bio": "…2–3 zdania…", "categories": ["AGING", "LONELINESS"], "active": true}]
-
-// data/partnerships-seed.json — 10 ogłoszeń: ≥4 OFFER, ≥4 SEEK, wszystkie sektory, status PUBLISHED (2 PENDING_REVIEW do moderacji)
-[{"seed_key": "offer-teleopieka-ngo", "intent": "SEEK", "organization": "Fundacja Pomocna Dłoń (przykład)",
-  "sector": "NGO", "title": "Szukamy gminy do pilotażu teleopieki", "description": "…",
-  "category": "AGING", "status": "PUBLISHED"}]
-
-// data/threads-seed.json — 5 wątków z wiadomościami (bez wywołań AI w seedzie)
-[{"seed_key": "thread-dowoz-seniorow", "kind": "QUESTION", "status": "WAITING_STAFF",
-  "subject": "Dowóz seniorów do lekarza", "reporter_type": "JST", "author_label": "GOPS (przykład)",
-  "hours_ago": 52,                          // created_at/waiting_since = now() - 52 h (pokazuje SLA)
-  "assigned_mentor_seed_key": null, "partnership_seed_key": null, "link_report": false,
-  "messages": [{"role": "USER", "body": "…", "minutes_after": 0},
-               {"role": "ASSISTANT", "body": "… [1]", "solution_titles": ["…"], "minutes_after": 1}]}]
-```
-
-**Wymagane wątki:** (1) `QUESTION` w `WAITING_STAFF` ponad SLA; (2) `QUESTION` w `ANSWERED_BY_AI`; (3) `MENTORING` z przydzielonym ekspertem i wiadomością `MENTOR`, status `WAITING_USER`; (4) `PARTNERSHIP` do jednego z ogłoszeń; (5) `REPORT` z `link_report: true` (seed wiąże z najstarszym zgłoszeniem w bazie). `solution_titles` muszą istnieć w `data/solutions/rops-biblioteka.json` (sprawdź `jq`).
-
-**Gotowe, gdy:** `python -c "import json; [json.load(open(f'data/{f}', encoding='utf-8')) for f in ['mentors.json','partnerships-seed.json','threads-seed.json']]; print('ok')"`; każdy `categories`/`category` jest kodem z `data/taxonomy.json`; każdy `solution_titles` istnieje w korpusie.
-
----
-
-## PK04 — Serwis wątków
-
-**Zależy od:** PK01, PK02
-**Pliki:** `api/comm/threads.py` (nowy)
-
-**Cel:** cała logika wątków poza AI i dopasowaniami: tworzenie, wiadomości, automat stanów, oś czasu, nieprzeczytane, skrzynka, `notify`, zadanie `after_create`.
-
-**Kontekst:** sygnatury z „Wspólnych kontraktów”; automat stanów z tabeli; oś czasu `REPORT` = `report_replies` (jako `role="STAFF"`, `source="report_reply"`, `id="r-<id>"`, `author_label` z odpowiedzi) + `thread_messages` (`id="m-<id>"`), rosnąco `created_at`, remis po `id`.
-
-**Kroki:**
-1. `create_thread`:
-   - walidacja rodzaju: `REPORT` → `report_id` wymagany i istniejący (422/404); istniejący wątek `REPORT` dla zgłoszenia → `add_message(role=USER)` i zwróć `(id, False)`. `PARTNERSHIP` → ogłoszenie istnieje (404) i `PUBLISHED` (422 `OFFER_NOT_PUBLISHED`). `solution_id` → istnieje (404). `category` → istnieje w `challenge_taxonomy` (422).
-   - `category` = podana albo `preprocess(body, None).category`; `subject` = podany albo `body.strip()[:80]`.
-   - status początkowy wg automatu; wiadomość `USER` z `author_label`; `waiting_since` gdy `WAITING_STAFF`.
-   - commit, potem `spawn(after_create(thread_id))`; log `thread created` (`thread_id`, `kind`, `body_len`).
-2. `add_message`: zasady z endpointu (`MENTOR` tylko przydzielony ekspert, `solution_ids` tylko `STAFF`/`MENTOR`, ≤ `THREAD_MESSAGE_CARDS_MAX`, każde id `PUBLISHED` + `SOLUTION`), zmiana statusu, `last_message_at`; `SELECT … FOR UPDATE` na wątku (jak `create_reply` w M1). Zwraca `TimelineMessage` z kartami. `notify("message_created", …, role=…)`.
-3. `add_system_message`, `set_status` (z utrzymaniem `waiting_since`), `patch_thread` (przejścia z tabeli, przydział eksperta → wiadomość `SYSTEM` „Do rozmowy dołączył(a) ekspert: {display_name}.”, `notify("mentor_assigned")`).
-4. `load_cards(session, ids)`: `load_solutions` + filtr `status == PUBLISHED and kind == SOLUTION`, kolejność wejścia, `to_card(row, rank=i)`.
-5. `load_thread_detail`, `list_threads`: jawne kolumny, `category_label_pl` z `challenge_taxonomy`, `assigned_mentor` jako `MentorRef`, `message_count`, `last_message_role`, `waiting_hours`, `over_sla`, flagi `unread_*` (podzapytania `EXISTS`). Filtr `ids` (CSV → `list[int]`, ≤ 50, inaczej 422).
-6. `mark_read`, `load_comm_inbox` (liczniki + `latest_waiting` sort `waiting_since ASC`).
-7. `notify(event, thread_id, **fields)`: `log.info("comm event", extra={"event": event, "thread_id": thread_id, **fields})` — tylko identyfikatory i liczby.
-8. `after_create(thread_id)`: własna sesja; `matching.embed_thread` (błąd → log warning, dalej); gdy status `ASSISTANT_PENDING` → `assistant.run_assistant(thread_id)`; `notify("thread_created")`. Importy `assistant`/`matching` leniwe.
-
-**Gotowe, gdy:** (przez `python -c` z `asyncio.run` albo po PK07 przez curl) utworzenie `MENTORING` → status `WAITING_STAFF`, `waiting_since` ustawione; wiadomość `STAFF` → `WAITING_USER`, `waiting_since` NULL; wiadomość `USER` w `CLOSED` → `WAITING_STAFF`; oś czasu wątku `REPORT` zawiera wcześniejszą odpowiedź z `report_replies`; `grep -n "body\b" ` w wywołaniach `log.` w pliku → tylko `body_len`.
-
----
-
-## PK05 — Asystent pierwszego kontaktu i szkic odpowiedzi
-
-**Zależy od:** PK04
-**Pliki:** `api/comm/assistant.py` (nowy)
-
-**Cel:** automatyczna odpowiedź AI na `QUESTION` oraz szkic odpowiedzi dla pracownika; oba działają bez LLM i bez rerankera.
-
-**Kontekst ze specyfikacji:**
-- `run_assistant(thread_id)`: `q = preprocess(first_user_body, None)` → `result = await run_search(q)`. Bramka nie przeszła (`result.gate.passed is False`) albo `result.solutions == []` → wiadomość `SYSTEM` „Nie mam gotowej odpowiedzi w Bibliotece Innowacji. Pytanie trafiło do zespołu Hubu — odpowiemy w tym wątku.” i `WAITING_STAFF`.
-- W przeciwnym razie karty = `result.solutions` (tylko `SOLUTION`, ≤ `ANSWER_TOP_N`, **nigdy** `result.context`). Gdy `settings.LLM_ENABLED`: zbierz `generate(q.normalized, cards, result.best_chunks, q.too_vague, llm)` przez `CitationFilter(len(cards))` (`feed` dla każdego fragmentu, na końcu `flush()`) z `asyncio.timeout(settings.ASSISTANT_TIMEOUT_SECONDS)`. `filter.should_retract` → odrzuć tekst.
-- Brak LLM / `ProviderError` / timeout / odrzucenie → treść „Te rozwiązania z Biblioteki Innowacji mogą pomóc:”, `meta.fallback` = `"no_llm" | "error" | "retracted"`.
-- Wiadomość `ASSISTANT`, `solution_ids` w kolejności kart (`[n]` = pozycja n), `meta.gate = {"source", "score", "threshold"}`; status `ANSWERED_BY_AI`.
-- Każdy wyjątek → `WAITING_STAFF` + `SYSTEM`; w `finally` upewnij się, że wątek nie został w `ASSISTANT_PENDING`.
-- `draft_reply(session, thread_id)`: `LLM_ENABLED and DRAFT_REPLY_ENABLED` albo 503 `LLM_UNAVAILABLE`. Zapytanie = ostatnia wiadomość `USER` (fallback `subject`). `run_search` → karty (mogą być puste) → LLM z `DRAFT_SYSTEM`; wynik przez `CitationFilter`; `ProviderError` → 503. Nic nie zapisuje.
-- `DRAFT_SYSTEM` (dokładnie):
-
-```text
-Piszesz szkic odpowiedzi pracownika Małopolskiego Hubu Innowacji Społecznych do mieszkańca,
-organizacji lub gminy. Szkic przeczyta i poprawi człowiek przed wysłaniem.
-
-Zasady:
-1. Opieraj się wyłącznie na rozwiązaniach z kontekstu; każde twierdzenie o nich opatrz [n].
-2. Nie dodawaj faktów, nazw, liczb ani terminów spoza kontekstu.
-3. Nie obiecuj finansowania, terminów ani decyzji urzędu.
-4. Maksymalnie 6 zdań, prosty, uprzejmy język, zwracaj się per „Pan/Pani” albo bezosobowo.
-5. Jeśli kontekst nie pasuje do pytania, napisz krótko, że Hub poszuka odpowiedzi,
-   i zadaj jedno pytanie doprecyzowujące.
-```
-
-- Użytkownik w prompcie: blok danych „Rozmowa (ostatnie wiadomości):” (≤ 6 ostatnich wiadomości USER/STAFF/MENTOR, każda przycięta do `ANSWER_FRAGMENT_CHARS`) + „Rozwiązania z bazy:” (`build_context(cards, best_chunks)` z M1).
-
-**Gotowe, gdy:** z `LLM_ENABLED=false`: nowe pytanie „starsi ludzie są samotni i nie mają z kim porozmawiać” → po kilku sekundach `ANSWERED_BY_AI`, wiadomość `ASSISTANT` z kartami i `meta.fallback="no_llm"`; pytanie „asdf qwer” → `WAITING_STAFF` + `SYSTEM`; z kluczem Anthropic: tekst z `[1]`; `draft-reply` przy `LLM_ENABLED=false` → 503; żadna wiadomość nie zawiera karty `KNOWLEDGE` (`psql`: `SELECT … FROM thread_messages m JOIN solutions s ON s.id = ANY(m.solution_ids) WHERE s.kind='KNOWLEDGE'` → 0 wierszy).
-
----
-
-## PK06 — Dopasowania: eksperci i partnerzy
-
-**Zależy od:** PK01, PK02
-**Pliki:** `api/comm/matching.py` (nowy)
-
-**Cel:** embeddingi encji M5, podpowiedź ekspertów, dopasowanie ogłoszeń partnerstw.
-
-**Kontekst ze specyfikacji:**
-- Teksty: `thread_embedding_text = subject + "\n" + body`; `mentor_embedding_text = expertise + "\n" + bio + "\nObszary: " + ", ".join(labels)`; `offer_embedding_text = title + "\n" + description`.
-- Wątek → `embed_query`; ekspert i ogłoszenie → `embed_passages([text])[0]`. Zapis przez `to_pgvector`. `ProviderError` → `False`, embedding zostaje `NULL`.
-- `suggest_mentors`: aktywni eksperci; `category_match = thread.category = ANY(categories)`; `similarity = 1 - (m.embedding <=> t.embedding)` gdy oba niepuste, inaczej `NULL`; filtr `category_match OR similarity >= MENTOR_MIN_COSINE`; sort `category_match DESC, similarity DESC NULLS LAST, id ASC`; limit `MENTOR_SUGGEST_N`. **Nie sumuj** kategorii z cosinusem.
-- `match_partners`: ogłoszenie nie istnieje → `ApiError(404)`. Bez embeddingu → puste `PartnerMatches`. Ogłoszenia: `PUBLISHED`, inne `id`, przeciwny `intent`, `similarity >= PARTNER_MIN_COSINE`, sort `similarity DESC, id ASC`, limit `PARTNER_MATCH_N`, `cross_sector = sector != offer.sector`. Rozwiązania: `semantic_search(session, vec, kind="SOLUTION", limit=PARTNER_SOLUTIONS_N)`, filtr `cosine_similarity >= MIN_COSINE_SCORE`, karty przez `threads.load_cards`. Zapotrzebowanie: `SELECT count(*)` i `GROUP BY gmina` z `reports` gdzie `embedding IS NOT NULL AND 1 - (embedding <=> :vec) >= SIMILAR_REPORT_THRESHOLD`; `gminy` tylko niepuste, sort `count DESC, gmina`, limit `PARTNER_GMINY_N`. Bez treści zgłoszeń.
-- Wektor w SQL: `CAST(:vec AS vector)` z `to_pgvector(...)`, jak w `api/pipeline/semantic.py`.
-
-**Gotowe, gdy:** po PK09: `python -c "…suggest_mentors(s, <id wątku o seniorach>)"` zwraca eksperta od `AGING` jako pierwszego; `match_partners` dla ogłoszenia SEEK teleopieki zwraca ≥ 1 OFFER z `cross_sector=True`, ≥ 1 kartę rozwiązania i `similar_reports ≥ 0`; z `EMBEDDING_PROVIDER=hash` brak wyjątków.
-
----
-
-## PK07 — Router wątków
-
-**Zależy od:** PK04, PK05, PK06
-**Pliki:** `api/routers/threads.py`
-
-**Cel:** endpointy `/api/threads…` i `/api/comm/inbox` z tabeli „Endpointy”.
-
-**Kroki:**
-1. Cienkie handlery nad serwisem (`threads.py`, `assistant.draft_reply`, `matching.suggest_mentors`); `SessionDep` jak w `api/routers/reports.py`.
-2. `POST /api/threads` → 201 albo 200 (gdy `created=False`) — ustaw `response.status_code`.
-3. `POST …/read` → `Response(status_code=204)`.
-4. Kody błędów i `code` dokładnie jak w tabeli; komunikaty po polsku.
+1. `create_thread`: `PARTNERSHIP` → ogłoszenie istnieje (404) i `PUBLISHED` (422 `OFFER_CLOSED`); `category` podana (istnieje w `challenge_taxonomy`, inaczej 422) albo `preprocess(body, None).category`; `subject` = podany albo `body.strip()[:80]`; status początkowy wg tabeli; wiadomość `USER`; commit; gdy `AI_PENDING` → `spawn(assistant.run_assistant(id))`. Log `thread created` (`thread_id`, `kind`, `body_len`).
+2. `add_message`: `SELECT … FOR UPDATE` na wątku; `MENTOR` tylko przydzielony ekspert (409 `MENTOR_NOT_ASSIGNED`); zmiana statusu wg tabeli; `last_message_at = now()`.
+3. `load_thread` / lista: jawne kolumny, `category_label_pl` z `challenge_taxonomy`, `assigned_mentor`, `last_message_role` (podzapytanie), `has_reply` (reguła z kontraktów); karty wiadomości `ASSISTANT` przez `load_solutions` + `to_card(rank=i)` w kolejności `solution_ids` (tylko `PUBLISHED` i `SOLUTION`).
+4. `PATCH`: przejścia z tabeli; `assigned_mentor_id` obecne w żądaniu → przydział / `null` usuwa; nowy przydział dopisuje wiadomość `SYSTEM`.
+5. `assistant.py` (stub): `run_assistant(thread_id)` w własnej sesji dopisuje `SYSTEM` „Pytanie trafiło do zespołu Hubu — odpowiemy w tym wątku.” i ustawia `WAITING_STAFF`. PK03 podmienia implementację, sygnatura zostaje.
 
 **Gotowe, gdy:**
 ```bash
-curl -s -XPOST localhost:8000/api/threads -H 'Content-Type: application/json' \
-  -d '{"kind":"QUESTION","body":"Jak zorganizować dowóz seniorów do lekarza w gminie wiejskiej?"}'   # 201, status ASSISTANT_PENDING
-sleep 5; curl -s localhost:8000/api/threads/<id>          # ANSWERED_BY_AI albo WAITING_STAFF, wiadomość ASSISTANT/SYSTEM
-curl -s -XPATCH localhost:8000/api/threads/<id> -H 'Content-Type: application/json' -d '{"status":"WAITING_STAFF"}'  # eskalacja
-curl -s -XPOST localhost:8000/api/threads/<id>/messages -H 'Content-Type: application/json' -d '{"role":"STAFF","body":"Dzień dobry…","solution_ids":[<id>]}'  # 201, karta w odpowiedzi
-curl -s localhost:8000/api/comm/inbox                      # liczniki
-curl -s -XPOST …/messages -d '{"role":"MENTOR","body":"x","mentor_id":1}'   # 409 MENTOR_NOT_ASSIGNED
+curl -s -XPOST localhost:8000/api/threads -H 'Content-Type: application/json' -d '{"kind":"MENTORING","body":"Szukamy kogoś, kto zna teleopiekę"}'   # 201, WAITING_STAFF
+curl -s -XPOST localhost:8000/api/threads/<id>/messages -H 'Content-Type: application/json' -d '{"role":"STAFF","body":"Dzień dobry"}'  # 201 → WAITING_USER
+curl -s -XPATCH localhost:8000/api/threads/<id> -H 'Content-Type: application/json' -d '{"status":"CLOSED"}'                           # CLOSED
+curl -s -XPOST localhost:8000/api/threads/<id>/messages -H 'Content-Type: application/json' -d '{"role":"STAFF","body":"x"}'            # 409 THREAD_CLOSED
+curl -s "localhost:8000/api/threads?status=WAITING_STAFF&limit=1"                                                                       # total
 ```
-`curl … | grep -c contact_email` = 0 na każdym endpoincie; w logach `make logs-dev` brak treści pytania.
+`QUESTION` → `AI_PENDING`, po chwili `WAITING_STAFF` z wiadomością `SYSTEM` (stub). W logach brak treści.
 
 ---
 
-## PK08 — Routery ekspertów i partnerstw
-
-**Zależy od:** PK06
-**Pliki:** `api/routers/mentors.py`, `api/routers/partnerships.py`
-
-**Cel:** `/api/mentors…` i `/api/partnerships…` z tabeli „Endpointy”.
-
-**Kroki:**
-1. `GET /api/mentors` (filtr `category` = `ANY(categories)`, `active` domyślnie `true`), `GET /api/mentors/{id}`.
-2. `POST /api/partnerships`: zapis `PENDING_REVIEW`, commit, `spawn` z własną sesją → `matching.embed_offer`; log `offer created` (`offer_id`, `intent`, `sector`, `description_len`).
-3. `GET` lista/szczegół, `PATCH` (dowolne przejście między `PUBLISHED`/`REJECTED`/`CLOSED`, ustawia `updated_at`), `GET …/matches` → `matching.match_partners`.
-4. Kategoria nieznana → 422; jawne kolumny bez `contact_email`.
-
-**Gotowe, gdy:** `POST` → 201 `PENDING_REVIEW`; `GET /api/partnerships` go nie pokazuje; `PATCH {status: PUBLISHED}` → pokazuje; po kilku sekundach `GET …/matches` zwraca dopasowania; `grep -c contact_email` = 0.
-
----
-
-## PK09 — Seed M5
-
-**Zależy od:** PK03, PK04, PK06
-**Pliki:** `scripts/seed_comm.py` (nowy), `Makefile` (cel `seed-comm`)
-
-**Cel:** idempotentny seed ekspertów, ogłoszeń i wątków demo (`python -m scripts.seed_comm`).
-
-**Kroki:**
-1. Upsert po `seed_key` (`INSERT … ON CONFLICT (seed_key) DO UPDATE`) dla ekspertów i ogłoszeń; embeddingi przez `matching.embed_mentor` / `embed_offer`.
-2. Wątki: gdy `seed_key` istnieje — pomiń (nie duplikuj wiadomości). `created_at`, `waiting_since`, `last_message_at` i czasy wiadomości z `hours_ago`/`minutes_after`. `solution_titles` → `solution_id` po tytule (brak → błąd z nazwą). `link_report: true` → najstarszy `reports.id` (brak zgłoszeń → pomiń wątek z ostrzeżeniem). Embedding wątku przez `matching.embed_thread`. **Bez wywołań LLM.**
-3. `Makefile`: `seed-comm:` → `python -m scripts.seed_comm` (wzór `ingest`); wpis w „Uwagach” M1.
-4. Na końcu wypisz podsumowanie: liczby rekordów (bez treści).
-
-**Gotowe, gdy:** `make seed-comm` dwa razy z rzędu daje te same liczby (`SELECT count(*)` w 4 tabelach się nie zmienia); `GET /api/comm/inbox` → `over_sla ≥ 1`, `pending_offers = 2`.
-
----
-
-## PK10 — Kalibracja progów i próba generalna backendu
-
-**Zależy od:** PK07, PK08, PK09
-**Pliki:** `docs/modules/05-platforma-komunikacji/module-5-calibration.md` (nowy)
-
-**Cel:** wartości `MENTOR_MIN_COSINE` i `PARTNER_MIN_COSINE` sensowne dla `hash` i `openai`; scenariusze A–C przechodzą curl-em.
-
-**Kroki:**
-1. Dla 6 pytań testowych (po jednym na kategorię) zapisz top-3 ekspertów i `similarity`; dla każdego ogłoszenia — liczbę dopasowań i rozkład `similarity`. Wzór tabel: `docs/modules/01-matchmaking/module-1-calibration.md`.
-2. Zaproponuj progi (zmiana wartości domyślnych w `api/config.py` → wpis w „Uwagach” do właściciela PK01, nie edycja).
-3. Przejdź curl-em scenariusze A, B, C ze specyfikacji (sekcja 4) i zapisz polecenia w pliku kalibracji jako „ścieżka demo backendu”.
-
-**Gotowe, gdy:** plik kalibracji zawiera tabele dla co najmniej trybu `hash` (dla `openai`, jeśli jest klucz), propozycję progów i 3 przeprowadzone scenariusze z wynikami.
-
----
-
-## PK11 — (opcjonalne) Rozmowa o pomyśle z Modułu 3
-
-**Zależy od:** PK07, K04 (Moduł 3 — tabele `ideas`, `idea_replies` i endpointy pomysłów istnieją)
-**Pliki:** `db/m5-komunikacja.sql` (dopisanie bloku na końcu), `api/comm/models.py`, `api/comm/schemas.py`, `api/comm/threads.py` (dopisanie)
-
-**Cel:** M3 ma jednokierunkową odpowiedź Hubu do autora pomysłu (`idea_replies`, wzór `report_replies`), a dialog wielostronny i mentoring zostawia M5 (spec M3, sekcja „Granice”). PK11 robi dla pomysłów to samo, co wątek `REPORT` robi dla zgłoszeń.
-
-**Kontekst:**
-- Blok SQL (warunkowy — plik M5 dalej działa bez M3):
-
-```sql
-DO $$ BEGIN
-  IF to_regclass('public.ideas') IS NOT NULL THEN
-    ALTER TABLE threads ADD COLUMN IF NOT EXISTS idea_id BIGINT REFERENCES ideas(id) ON DELETE SET NULL;
-    CREATE UNIQUE INDEX IF NOT EXISTS threads_idea_uq ON threads (idea_id) WHERE idea_id IS NOT NULL AND kind = 'IDEA';
-  END IF;
-END $$;
-```
-
-- `ThreadCreate.idea_id: int | None`, `ThreadKindLiteral` += `"IDEA"`, `ThreadListItem.idea_id: int | None`; kind `IDEA` wymaga `idea_id` (brak pomysłu → 404), get-or-create jak `REPORT` (200 przy istniejącym wątku).
-- Oś czasu `IDEA` = `idea_replies` pomysłu (`role="STAFF"`, `source="idea_reply"`, `id="i-<id>"`) + `thread_messages`. `TimelineMessage.source` += `"idea_reply"`.
-- Kategoria wątku = `ideas.category`; temat = `ideas.title`. Treść pomysłu nie trafia do logów (reguła M3).
-- Frontend (osobny wpis w „Uwagach” do właściciela K15 — „Moje pomysły”): przycisk „Porozmawiaj z Hubem o pomyśle” → `commApi.createThread({kind: "IDEA", idea_id, body})`. PK11 frontendu nie zmienia.
-
-**Gotowe, gdy:** po `make db-m3 && make db-m5` kolumna `threads.idea_id` istnieje; bez M3 `make db-m5` dalej przechodzi; `POST /api/threads {kind: "IDEA", idea_id, body}` → 201, drugi raz → 200 i ta sama oś czasu z odpowiedzią Hubu z `idea_replies`.
-
----
-
-## PK20 — Frontend: kontrakty, stałe, pamięć, rola `mentor`
+## PK03 — Asystent pierwszego kontaktu
 
 **Zależy od:** PK02
-**Pliki:** `web/src/api/comm.ts` (nowy), `web/src/lib/comm.ts` (nowy), `web/src/lib/commStorage.ts` (nowy), `web/src/lib/auth.tsx` (zmiana), `web/src/lib/modules.ts` (zmiana)
+**Pliki:** `api/comm/assistant.py`
 
-**Cel:** wszystko, czego potrzebują ekrany M5, bez UI.
+**Cel:** na nowe pytanie (`QUESTION`) w kilka sekund pojawia się odpowiedź z Biblioteki Innowacji — z AI albo bez niego.
 
-**Kroki:**
-1. `comm.ts` (api): typy i `commApi` jak w „Typy frontendu”.
-2. `lib/comm.ts`: stałe i etykiety jak w „Stałe i etykiety frontendu”; helper `roleLabel(msg, viewer: "author" | "staff" | "mentor")`.
-3. `commStorage.ts` jak w „Pamięć przeglądarki”.
-4. `auth.tsx` (stan po `docs/changes/feature-2026-10-03-1`): `Role = "administrator" | "reporter" | "mentor"`; `AuthAccount` i `AuthSession` z opcjonalnym `mentorId?: number` (kopiowanym w `login()` do sesji); konto `{ username: "ekspert", password: "ekspert123", role: "mentor", displayName: "Ekspert demo", mentorId: 1 }`; `ROLE_LABELS.mentor = "Ekspert"`; `isRole` i `readSession` akceptują `mentor` i `mentorId` (liczba albo brak); `roleHome("mentor") = "/ekspert"` (z niego korzysta `LoginPage` po zalogowaniu); `isProtectedPath` obejmuje też `rozmowy/nowa`, `partnerzy/nowe`, `ekspert` (po wylogowaniu z tych ekranów `Banner` wraca na stronę główną). `LoginPage` nie wymaga zmian (konta nie są na nim wypisane; sprawdza `AUTH_ACCOUNTS` przez `login()`).
-5. `modules.ts`: `komunikacja: "Platforma komunikacji"`.
-6. Wpis w „Uwagach” `frontend-tasks.md` (ADR-M5-010).
+**Kroki (`run_assistant(thread_id)`, własna sesja):**
+1. `q = preprocess(pierwsza_wiadomość_USER, None)`; `result = await run_search(q)`.
+2. `not result.gate.passed or not result.solutions` → `SYSTEM` „Nie mam gotowej odpowiedzi w Bibliotece Innowacji. Pytanie trafiło do zespołu Hubu — odpowiemy w tym wątku.”, `WAITING_STAFF`.
+3. Karty = `result.solutions` (nigdy `result.context`). Gdy `settings.LLM_ENABLED`: tekst = `generate(q.normalized, cards, result.best_chunks, q.too_vague, get_llm_provider())` przepuszczony przez `CitationFilter(len(cards))` (`feed` dla każdego fragmentu, na końcu `flush()`), w `asyncio.timeout(settings.ASSISTANT_TIMEOUT_SECONDS)`; `should_retract` → tekst odrzucony.
+4. Brak LLM / `ProviderError` / timeout / odrzucenie → treść „Te rozwiązania z Biblioteki Innowacji mogą pomóc:”, `meta.fallback` = `"no_llm" | "error" | "retracted"`.
+5. Wiadomość `ASSISTANT` z `solution_ids` w kolejności kart; status `WAITING_USER`.
+6. Każdy wyjątek → `SYSTEM` + `WAITING_STAFF`; wątek nie może zostać w `AI_PENDING`.
 
-**Gotowe, gdy:** `npm run lint && npm run build` czyste; logowanie `ekspert`/`ekspert123` przekierowuje na `/ekspert` (strona „Nie znaleziono” do PK21 jest OK); dotychczasowe konta działają; stara sesja w `localStorage` bez `mentorId` wczytuje się bez błędu.
+**Gotowe, gdy:** z `LLM_ENABLED=false`: pytanie „starsi ludzie w gminie są samotni i nie mają z kim porozmawiać” → po kilku sekundach `WAITING_USER`, wiadomość `ASSISTANT` z kartami i `fallback: no_llm`; pytanie „asdf qwer” → `WAITING_STAFF` + `SYSTEM`; z kluczem Anthropic tekst ma `[1]`; żadna karta nie jest `KNOWLEDGE`.
 
 ---
 
-## PK21 — Frontend: trasy i nawigacja
+## PK04 — Eksperci i partnerstwa
+
+**Zależy od:** PK01
+**Pliki:** `api/routers/mentors.py`, `api/routers/partnerships.py`
+
+**Cel:** endpointy `/api/mentors` i `/api/partnerships…` z tabeli „Endpointy”.
+
+**Kroki:**
+1. `GET /api/mentors`: z `category` sortuj `(:category = ANY(categories)) DESC, id`.
+2. Partnerstwa: lista z filtrami, `POST` (od razu `PUBLISHED`, nieznana kategoria → 422), szczegół, `PATCH` statusu, `matches` (SQL z tabeli). Log `offer created` (`offer_id`, `intent`, `sector`, `description_len`).
+
+**Gotowe, gdy:** `POST` ogłoszenia SEEK w kategorii `AGING` → widoczne na liście; `matches` zwraca ogłoszenia OFFER z `AGING`, najpierw z innego sektora; `PATCH {status: CLOSED}` → znika z listy domyślnej; `GET /api/mentors?category=AGING` → eksperci od `AGING` pierwsi.
+
+---
+
+## PK05 — Dane demo i seed
+
+**Zależy od:** PK02, PK04
+**Pliki:** `data/mentors.json`, `data/partnerships-seed.json`, `data/threads-seed.json`, `scripts/seed_comm.py` (nowe), `Makefile` (cel `seed-comm`)
+
+**Cel:** fikcyjne dane do demo. **Żadnych prawdziwych osób ani kontaktów** (`base.md` §9) — imiona wymyślone, organizacje z dopiskiem „(przykład)”.
+
+**Zawartość:**
+- `mentors.json`: 6 ekspertów `{seed_key, display_name, organization, expertise, categories}`; każda kategoria taksonomii poza `OTHER` pokryta co najmniej raz; pierwszy (id 1 na świeżej bazie) od `AGING` — konto demo `ekspert` ma `mentorId: 1`.
+- `partnerships-seed.json`: 8 ogłoszeń, ≥ 3 OFFER i ≥ 3 SEEK, różne sektory, co najmniej jedna para OFFER/SEEK w tej samej kategorii i z różnych sektorów (do pokazania dopasowania).
+- `threads-seed.json`: 4 wątki z wiadomościami (bez wywołań AI): `QUESTION` w `WAITING_STAFF`, `QUESTION` w `WAITING_USER` z odpowiedzią `ASSISTANT` (pole `solution_titles` → `solution_ids` po tytule z bazy), `MENTORING` z przydzielonym ekspertem (`assigned_mentor_seed_key`) i odpowiedzią `MENTOR`, `PARTNERSHIP` do ogłoszenia (`partnership_seed_key`). Czasy względne: `hours_ago`, `minutes_after`.
+
+**Kroki:** `scripts/seed_comm.py` (`python -m scripts.seed_comm`): upsert ekspertów i ogłoszeń po `seed_key`; wątki — pomiń, gdy `seed_key` istnieje; nieznany tytuł rozwiązania → błąd z nazwą. Na końcu liczby rekordów (bez treści). `Makefile`: `seed-comm`.
+
+**Gotowe, gdy:** `make seed-comm` dwa razy daje te same liczby wierszy; `GET /api/threads?status=WAITING_STAFF` niepuste; `GET /api/partnerships/<seed SEEK>/matches` niepuste.
+
+---
+
+## PK20 — Frontend: fundament
+
+**Zależy od:** PK01
+**Pliki:** `web/src/api/comm.ts`, `web/src/lib/comm.ts` (nowe); `web/src/lib/auth.tsx`, `web/src/lib/modules.ts`, `web/src/App.tsx`, `web/src/components/layout/MainNav.tsx`, `web/src/components/layout/PanelLayout.tsx` (zmiany); zaślepki stron z tabeli tras (nowe)
+
+**Cel:** klient, etykiety, rola `mentor`, trasy i nawigacja — żeby PK22–PK25 pracowały równolegle w swoich stronach. Po `[x]` pliki zaślepek należą do zadań PK22–PK25.
+
+**Trasy:**
+
+| Trasa | Strona (plik) | Gałąź w `App.tsx` | Właściciel |
+|---|---|---|---|
+| `/rozmowy`, `/rozmowy/:id` | `CommHomePage`, `ThreadPage` (`pages/comm/`) | `AppShell`, publiczne | PK22 |
+| `/rozmowy/nowa` | `NewThreadPage` (`pages/comm/`) | `AppShell` → `RequireRole requiredRole="reporter"` | PK22 |
+| `/partnerzy`, `/partnerzy/:id` | `PartnersPage`, `OfferPage` (`pages/comm/`) | `AppShell`, publiczne | PK23 |
+| `/partnerzy/nowe` | `NewOfferPage` (`pages/comm/`) | `AppShell` → `RequireRole requiredRole="reporter"` | PK23 |
+| `/panel/rozmowy`, `/panel/rozmowy/:id` | `CommThreadsPage`, `CommThreadPage` (`pages/panel/`) | dzieci trasy `panel` | PK24 |
+| `/ekspert`, `/ekspert/rozmowy/:id` | `ExpertHomePage`, `ExpertThreadPage` (`pages/expert/`) | `AppShell` → `RequireRole requiredRole="mentor"` | PK25 |
+
+**Kroki:**
+1. `comm.ts` i `lib/comm.ts` jak w „Frontend: klient, etykiety, pamięć”.
+2. `auth.tsx`: `Role` += `"mentor"`; `AuthAccount` i `AuthSession` z opcjonalnym `mentorId?: number` (kopiowanym w `login()`); konto `{ username: "ekspert", password: "ekspert123", role: "mentor", displayName: "Ekspert demo", mentorId: 1 }`; `ROLE_LABELS.mentor = "Ekspert"`; `isRole`/`readSession` przyjmują `mentor` i `mentorId`; `roleHome("mentor") = "/ekspert"`; `isProtectedPath` += `rozmowy/nowa`, `partnerzy/nowe`, `ekspert`.
+3. `modules.ts`: `komunikacja: "Platforma komunikacji"`.
+4. `MainNav`: gość i `reporter` — zakładka „Platforma komunikacji” → `/rozmowy` (aktywna też na `/partnerzy…`); `administrator` — bez zmian; `mentor` — Matchmaking, Zasobnik i „Moje konsultacje” → `/ekspert`.
+5. `PanelLayout`: „Rozmowy” przed „Trendy” z licznikiem (`total` z `listThreads({status: "WAITING_STAFF", limit: 1})`, co `COMM_COUNT_POLL_MS`, wzór licznika „Nowe” z `ds-sr-only`).
+6. Zaślepki: `ds-page` + `ModuleLabel` + `h1 tabIndex={-1}`, klasy Tailwinda.
+
+**Gotowe, gdy:** każda trasa pokazuje swoją zaślepkę; `/rozmowy/nowa` nie trafia do `ThreadPage`; niezalogowany na `/rozmowy/nowa` widzi komunikat z „Zaloguj się” i wraca po zalogowaniu; `ekspert`/`ekspert123` ląduje na `/ekspert`; stara sesja bez `mentorId` wczytuje się; build i lint czyste.
+
+---
+
+## PK21 — Frontend: komponenty rozmowy
 
 **Zależy od:** PK20
-**Pliki:** `web/src/App.tsx`, `web/src/components/layout/MainNav.tsx`, `web/src/components/layout/PanelLayout.tsx` (zmiany), `web/src/pages/comm/*.tsx`, `web/src/pages/panel/CommThreadsPage.tsx`, `web/src/pages/panel/CommThreadPage.tsx`, `web/src/pages/panel/PartnershipsReviewPage.tsx`, `web/src/pages/expert/*.tsx` (nowe — **zaślepki** z `h1` i `ModuleLabel`, klasy Tailwinda)
+**Pliki:** `web/src/components/comm/Timeline.tsx`, `web/src/components/comm/MessageForm.tsx`, `web/src/components/comm/ThreadStatus.tsx`, `web/src/components/comm/ThreadList.tsx`, `web/src/hooks/useThread.ts` (nowe)
 
-**Cel:** szkielet tras M5, żeby PK23–PK28 pracowały równolegle w swoich plikach. Po `[x]` PK21 pliki zaślepek przechodzą na własność zadań PK23–PK28 (każde zastępuje swoje).
-
-**Kontekst (mapa tras):**
-
-| Trasa | Komponent (plik) | Gałąź w `App.tsx` |
-|---|---|---|
-| `/rozmowy` | `CommHomePage` (`pages/comm/CommHomePage.tsx`) | `AppShell`, publiczna |
-| `/rozmowy/:id` | `ThreadPage` (`pages/comm/ThreadPage.tsx`) | `AppShell`, publiczna |
-| `/partnerzy` | `PartnersPage` (`pages/comm/PartnersPage.tsx`) | `AppShell`, publiczna |
-| `/partnerzy/:id` | `OfferPage` (`pages/comm/OfferPage.tsx`) | `AppShell`, publiczna |
-| `/rozmowy/nowa` | `NewThreadPage` (`pages/comm/NewThreadPage.tsx`) | `AppShell` → `<RequireRole requiredRole="reporter" />` (ta sama grupa co `mam-pomysl`) |
-| `/partnerzy/nowe` | `NewOfferPage` (`pages/comm/NewOfferPage.tsx`) | jw. |
-| `/ekspert`, `/ekspert/rozmowy/:id` | `ExpertHomePage`, `ExpertThreadPage` (`pages/expert/`) | `AppShell` → `<RequireRole requiredRole="mentor" />` |
-| `/panel/rozmowy`, `/panel/rozmowy/:id` | `CommThreadsPage`, `CommThreadPage` | dzieci trasy `panel` (`<RequireRole requiredRole="administrator" layout="panel" />`) |
-| `/panel/partnerstwa` | `PartnershipsReviewPage` | jw. |
-
-Trasy `rozmowy/nowa` i `partnerzy/nowe` muszą wygrać z `rozmowy/:id` i `partnerzy/:id` — React Router dopasowuje statyczny segment przed parametrem, więc wystarczy, że obie są zadeklarowane (sprawdź ręcznie).
-
-**Nawigacja wg roli (`MainNav`, stan po `feature-2026-10-03-1`):**
-
-| Rola | Zakładki |
-|---|---|
-| niezalogowany, `reporter` | dotychczasowe + `MODULE_NAMES.komunikacja` → `/rozmowy` (aktywna także na `/partnerzy…`, wzór `inZasobnik`) |
-| `administrator` | bez zmian (Panel administratora — rozmowy i partnerstwa są w panelu) |
-| `mentor` | Matchmaking, Zasobnik + „Moje konsultacje” → `/ekspert`; bez Kreatora i „Moich zgłoszeń” |
+**Cel:** wspólne klocki dla autora, panelu i eksperta.
 
 **Kroki:**
-1. Trasy w `App.tsx` jak w tabeli (dopisanie; nie przestawiaj tras M1 ani M3).
-2. `MainNav` wg tabeli ról (`session?.role`).
-3. `PanelLayout`: „Rozmowy” (`/panel/rozmowy`) i „Partnerstwa” (`/panel/partnerstwa`) przed „Trendy”; licznik dopina PK26.
-4. Zaślepki: `<div className="ds-page">` + `ModuleLabel` + `h1` z `tabIndex={-1}` (fokus po zmianie trasy robi `useRouteFocus`), bez arkuszy CSS.
-5. Wpis w „Uwagach” `frontend-tasks.md`.
+1. `Timeline({messages, viewer: "author" | "staff" | "mentor"})`: `<ol aria-label="Wiadomości">`; w każdej `<li>` najpierw rola słownie i data, potem treść (zwykły tekst, akapity zachowane), pod wiadomością asystenta karty `SolutionCard` z `id="karta-{n}"`, a `[n]` w treści jako link do karty. Wiadomość AI z widocznym podpisem „Odpowiedź automatyczna (AI) — sprawdź szczegóły w kartach rozwiązań.” Rozróżnienie ról słowem, nie tylko kolorem.
+2. `MessageForm({label, submitLabel, onSend})`: `ds-field` + `ds-textarea` z licznikiem do `MESSAGE_MAX_CHARS`, `ds-btn--primary`, stan wysyłania, błąd w `Alert`.
+3. `ThreadStatus({status, viewer})`: `ds-tag` ze słowem.
+4. `ThreadList({items, hrefFor, viewer})`: temat, rodzaj, status, data ostatniej wiadomości, „Nowa odpowiedź” gdy `has_reply` (widok autora).
+5. `useThread(id, {markRead})`: ładowanie + odpytywanie (`AI_POLL_MS` przy `AI_PENDING`, inaczej `THREAD_POLL_MS`), `refresh()`, komunikat do `aria-live` przy nowej wiadomości, `markRead` po wczytaniu (tylko autor).
 
-**Gotowe, gdy:** każda trasa renderuje zaślepkę z właściwym `h1`; niezalogowany na `/rozmowy/nowa` widzi komunikat „Ta funkcja wymaga zalogowania” z przyciskiem, a po zalogowaniu wraca na `/rozmowy/nowa`; `admin` na `/ekspert` widzi „Brak dostępu”; `/rozmowy/nowa` nie trafia do `ThreadPage`; nawigacja ma `aria-current` na aktywnej pozycji dla każdej roli; build i lint czyste.
+**Gotowe, gdy:** komponenty renderują wątek z seedu w zaślepce; czytnik ekranu czyta rolę przed treścią; build i lint czyste.
 
 ---
 
-## PK22 — Frontend: komponenty rozmowy i hooki
+## PK22 — Frontend: Platforma komunikacji (autor)
 
-**Zależy od:** PK20
-**Pliki:** `web/src/components/comm/Timeline.tsx`, `web/src/components/comm/MessageComposer.tsx`, `web/src/components/comm/ThreadStatusBadge.tsx`, `web/src/components/comm/ThreadList.tsx`, `web/src/hooks/useThread.ts`, `web/src/hooks/useCommInbox.ts` (nowe; bez arkuszy CSS — Tailwind + `ds-*`)
-
-**Cel:** wspólne klocki widoku wątku dla autora, panelu i eksperta.
-
-**Kroki:**
-1. `Timeline({messages, viewer})`: `<ol aria-label="Wiadomości">`; każda wiadomość = `<li>` z nagłówkiem (rola słownie z `roleLabel`, `author_label` jako dopisek „podpis niezweryfikowany” dla `USER`, data `formatDateTime`), treść z zachowaniem akapitów (bez HTML z danych), karty `SolutionCard` pod wiadomością. Układ klasami Tailwinda (np. `flex flex-col gap-4`, `rounded-md`, `bg-surface-muted` dla wiadomości autora, `border` z tokenem dla AI). Wiadomość AI: ramka z etykietą „Odpowiedź automatyczna (AI)” i zdaniem „Może zawierać błędy — sprawdź w karcie rozwiązania.” `[n]` w treści → link do karty n na stronie (`#karta-{id}`). `SYSTEM` — styl informacji (`ds-alert` info, bez koloru jako jedynego nośnika).
-2. `MessageComposer({label, onSend, maxChars, extra?})`: `ds-textarea` z etykietą, licznik znaków (ogłaszany przy przekroczeniu), `ds-btn--primary` „Wyślij”, stan wysyłania, błąd w `Alert`. Puste/za długie blokuje wysyłkę z komunikatem.
-3. `ThreadStatusBadge({status, viewer})`: słowo + ikona, nie sam kolor.
-4. `ThreadList({items, hrefFor, viewer})`: lista kart wątków (temat, rodzaj, status, „czeka {n} h” z wyróżnieniem SLA słownie, „Nowa odpowiedź” gdy `unread_*`).
-5. `useThread(id, side)`: ładowanie, odpytywanie (`ASSISTANT_POLL_MS` gdy `ASSISTANT_PENDING`, inaczej `THREAD_POLL_MS`), `markRead(side)` po wczytaniu nowych wiadomości, `newMessageAnnouncement` dla `aria-live`, `refresh()`.
-6. `useCommInbox()`: wzór `useInboxCount` (współdzielony stan, `COMM_INBOX_POLL_MS`).
-
-**Gotowe, gdy:** komponenty użyte w zaślepce (tymczasowo) renderują dane z prawdziwego API (wątek z seedu); czytnik ekranu (NVDA/VoiceOver lub inspekcja drzewa dostępności) czyta rolę przed treścią; build czysty.
-
----
-
-## PK23 — Frontend: Platforma komunikacji (autor)
-
-**Zależy od:** PK21, PK22, PK07
+**Zależy od:** PK21, PK03
 **Pliki:** `web/src/pages/comm/CommHomePage.tsx`, `web/src/pages/comm/NewThreadPage.tsx`, `web/src/pages/comm/ThreadPage.tsx`
 
-**Cel:** scenariusz A po stronie autora.
-
 **Kroki:**
-1. `CommHomePage`: `h1` „Platforma komunikacji”, krótki opis; kafelki: „Zadaj pytanie” (`ds-btn--cta`, jedyny na ekranie), „Poproś o eksperta” (`/rozmowy/nowa?rodzaj=ekspert`), „Tablica partnerstw”. Sekcja „Moje rozmowy”: `listMyThreads()` → `commApi.listThreads({ids})` → `ThreadList`; pusto → `EmptyState`.
-2. `NewThreadPage`: pole „Twoje pytanie” (`ds-textarea`, 4000), „Kim jesteś?” (`reporter_type`, radio jak w czacie M1), „Podpis (opcjonalnie)”, „E-mail do kontaktu (opcjonalnie)” z informacją, że nie będzie publiczny; dla `rodzaj=ekspert` `kind=MENTORING` i nagłówek „Poproś o eksperta”. Po sukcesie `addMyThread` i przejście do `/rozmowy/:id`.
-3. `ThreadPage`: `h1` = temat; status; `Timeline` (viewer `author`); gdy `ASSISTANT_PENDING` — `ds-spinner` + „Asystent szuka odpowiedzi w Bibliotece Innowacji…” (`role="status"`); gdy `ANSWERED_BY_AI` — dwa przyciski: „To mi pomogło” (`PATCH CLOSED`) i „Chcę porozmawiać z zespołem Hubu” (`PATCH WAITING_STAFF`); `MessageComposer` „Odpowiedz” dla roli `reporter` (niezalogowany: link do logowania). `aria-live` z `useThread`.
+1. `CommHomePage`: `h1` „Platforma komunikacji”, krótki opis; „Zadaj pytanie” (`ds-btn--cta`, jedyny na ekranie), „Poproś o eksperta” (`/rozmowy/nowa?rodzaj=ekspert`), „Tablica partnerstw” (`/partnerzy`); sekcja „Moje rozmowy”: `listMyThreads()` → `listThreads({ids})` → `ThreadList`, pusto → `EmptyState`.
+2. `NewThreadPage`: pole pytania, „Kim jesteś?” (`reporter_type`, radio jak w czacie M1), „Podpis (opcjonalnie)” z podpowiedzią „Nie podawaj nazwiska, jeśli nie chcesz”; `rodzaj=ekspert` → `kind: MENTORING` i nagłówek „Poproś o eksperta”. Po wysłaniu `rememberThread` i przejście do `/rozmowy/:id`.
+3. `ThreadPage`: `h1` temat, status, `Timeline`; przy `AI_PENDING` spinner i „Asystent szuka odpowiedzi w Bibliotece Innowacji…” (`role="status"`); przy `WAITING_USER` z ostatnią wiadomością `ASSISTANT` przyciski „To mi pomogło” (`CLOSED`) i „Chcę porozmawiać z zespołem Hubu” (`WAITING_STAFF`); `MessageForm` „Odpowiedz” dla `reporter`, dla gościa link do logowania.
 
-**Gotowe, gdy:** na prawdziwym API z `LLM_ENABLED=false`: pytanie o samotność seniorów → po kilku sekundach odpowiedź automatyczna z kartami bez przeładowania strony, komunikat ogłoszony; eskalacja zmienia status; odpowiedź zespołu wysłana curl-em pojawia się w ≤ 5 s i w „Moich rozmowach” oznaczenie „Nowa odpowiedź”; lista kontrolna dostępności OK.
+**Gotowe, gdy:** z `LLM_ENABLED=false` pytanie o samotność seniorów daje odpowiedź automatyczną z kartami bez przeładowania; eskalacja zmienia status; odpowiedź zespołu wysłana curl-em pojawia się w ≤ 5 s i w „Moich rozmowach” jest „Nowa odpowiedź”; lista kontrolna dostępności OK.
 
 ---
 
-## PK24 — Frontend: odpis do zgłoszenia
+## PK23 — Frontend: Tablica partnerstw
 
-**Zależy od:** PK23
-**Pliki:** `web/src/pages/MyReportsPage.tsx`, `web/src/pages/panel/ReportPage.tsx` (zmiany), `web/src/styles/my-reports.css` (usunięcie po migracji)
-
-**Cel:** scenariusz B — autor zgłoszenia z M1 odpisuje Hubowi; pracownik widzi rozmowę.
-
-**Kroki:**
-1. `MyReportsPage`: przy zgłoszeniu z co najmniej jedną odpowiedzią — `ds-btn` „Odpisz zespołowi” → rozwijany `MessageComposer`; wysłanie `commApi.createThread({kind: "REPORT", report_id, body})` → `addMyThread` → link „Przejdź do rozmowy” (`/rozmowy/:id`).
-2. `ReportPage` (panel): gdy istnieje wątek `REPORT` (`listThreads({kind: "REPORT"})` przefiltrowane po `report_id`, albo nowy parametr — **nie** zmieniaj backendu, filtruj po stronie klienta) — link „Rozmowa z autorem ({n} wiadomości)” do `/panel/rozmowy/:id`.
-3. **Migracja `MyReportsPage` na Tailwind** (`AGENTS.md`: zmieniasz ekran z dziedzicznym arkuszem → przenosisz go): przepisz klasy z `my-reports.css` na klasy Tailwinda z presetu, usuń import i plik (sprawdź `grep -r my-reports web/src`, że nikt inny go nie używa). `ReportPage` importuje współdzielony `solution.css` — tego arkusza nie ruszasz, nowy link stylujesz wyłącznie Tailwindem/`ds-*`. K17 (M3) też dopisuje do `ReportPage` — tylko dopisanie, bez przestawiania.
-4. Wpis w „Uwagach” `frontend-tasks.md`.
-
-**Gotowe, gdy:** wygląd „Moich zgłoszeń” po migracji jest taki sam jak przed nią (porównanie zrzutów, także `data-contrast="high"` i 360 px); odpowiedź z panelu (F16) → autor klika „Odpisz” → wątek z osią czasu zawierającą wcześniejszą odpowiedź Hubu i wiadomość autora; drugi odpis trafia do tego samego wątku; w panelu zgłoszenia widać link.
-
----
-
-## PK25 — Frontend: Tablica partnerstw
-
-**Zależy od:** PK21, PK22, PK08
+**Zależy od:** PK21, PK04
 **Pliki:** `web/src/pages/comm/PartnersPage.tsx`, `web/src/pages/comm/NewOfferPage.tsx`, `web/src/pages/comm/OfferPage.tsx`, `web/src/components/comm/OfferCard.tsx`
 
-**Cel:** scenariusz C.
+**Kroki:**
+1. `PartnersPage`: `h1` „Tablica partnerstw”, filtry w URL (`ds-select`: „Oferujemy / Szukamy”, sektor, wyzwanie) z wynikiem w `aria-live`, lista `OfferCard`, „Dodaj ogłoszenie” dla `reporter`.
+2. `NewOfferPage`: formularz `PartnershipCreate`; po wysłaniu przejście do ogłoszenia.
+3. `OfferPage`: szczegóły; „Pasujące ogłoszenia” (`matches`, z oznaczeniem słownym „Inny sektor” dla różnych sektorów); „Powiązane rozwiązania” (`GET /api/solutions?category=…&limit=3`, `SolutionCard`); „Zaproponuj współpracę” (`reporter`) → `MessageForm` → `createThread({kind: "PARTNERSHIP", partnership_id, body})` → `rememberThread` → wątek. Tekst: „Hub skontaktuje obie strony w tej rozmowie.” Dla `administrator` przycisk „Zamknij ogłoszenie”.
+
+**Gotowe, gdy:** na danych z seedu filtr SEEK zawęża listę; ogłoszenie z seedu pokazuje dopasowanie z innego sektora i rozwiązania; propozycja tworzy wątek widoczny w „Moich rozmowach” i w panelu; lista kontrolna dostępności OK.
+
+---
+
+## PK24 — Frontend: Panel — Rozmowy
+
+**Zależy od:** PK21, PK02, PK04
+**Pliki:** `web/src/pages/panel/CommThreadsPage.tsx`, `web/src/pages/panel/CommThreadPage.tsx`
 
 **Kroki:**
-1. `PartnersPage`: `h1` „Tablica partnerstw”, filtry (`ds-select`: „Oferujemy / Szukamy”, sektor, wyzwanie) z wynikiem w `aria-live` („Znaleziono {n} ogłoszeń”), lista `OfferCard` (intencja słownie, organizacja, sektor, wyzwanie, skrót opisu), `Pagination`; „Dodaj ogłoszenie” dla `reporter`.
-2. `NewOfferPage`: formularz `PartnershipCreate`; po wysłaniu komunikat „Ogłoszenie trafiło do moderacji Hubu. Pojawi się na tablicy po zatwierdzeniu.”
-3. `OfferPage`: szczegóły; `h2` „Pasujące ogłoszenia” (`OfferCard` + „podobieństwo {procent}%” + odznaka „międzysektorowe” słownie), `h2` „Powiązane rozwiązania z Biblioteki” (`SolutionCard`), `h2` „Zapotrzebowanie” („{n} podobnych zgłoszeń problemów” + gminy, gdy są); przycisk „Zaproponuj współpracę” (`reporter`) → `MessageComposer` → `createThread({kind: "PARTNERSHIP", partnership_id, body})` → przejście do wątku. Informacja: „Hub skontaktuje obie strony — dane kontaktowe nie są publiczne.”
+1. `CommThreadsPage`: filtry statusu (domyślnie „Czeka na zespół Hubu”) i rodzaju w URL, `ThreadList` (viewer `staff`), `Pagination`.
+2. `CommThreadPage`: okruszki, `h1` temat, rodzaj, wyzwanie, typ zgłaszającego, link do ogłoszenia (`PARTNERSHIP`); `Timeline` (viewer `staff`); `MessageForm` „Odpowiedź Hubu” z polem „Podpis” (domyślnie „Zespół Hubu”); „Zamknij rozmowę” / „Otwórz ponownie”; „Ekspert”: `ds-select` z `GET /api/mentors?category=…` (pierwsi pasujący, dopisek „ten sam obszar”), „Przydziel” / „Usuń przydział”.
 
-**Gotowe, gdy:** na danych z seedu: filtr SEEK zawęża listę; ogłoszenie teleopieki pokazuje ≥ 1 dopasowanie międzysektorowe i rozwiązania; propozycja tworzy wątek widoczny w „Moich rozmowach” i w panelu; lista kontrolna dostępności OK.
-
----
-
-## PK26 — Frontend: Panel — Rozmowy
-
-**Zależy od:** PK21, PK22, PK07, PK08
-**Pliki:** `web/src/pages/panel/CommThreadsPage.tsx`, `web/src/pages/panel/CommThreadPage.tsx`, `web/src/components/panel/MentorAssign.tsx`, `web/src/components/panel/DraftReplyButton.tsx`, `web/src/components/layout/PanelLayout.tsx` (licznik — tylko linia pozycji „Rozmowy”)
-
-**Cel:** scenariusz A po stronie pracownika ROPS.
-
-**Kroki:**
-1. Licznik przy „Rozmowy” = `useCommInbox().waiting_staff` (wzór licznika „Nowe”, z `aria-label` „Rozmowy, {n} czeka na odpowiedź”).
-2. `CommThreadsPage`: podsumowanie z `CommInbox` (czeka, po terminie SLA, konsultacje bez eksperta, ogłoszenia do moderacji z linkiem); filtry statusu i rodzaju (domyślnie `WAITING_STAFF`); `ThreadList` (viewer `staff`).
-3. `CommThreadPage`: okruszki, `h1` temat, metadane (rodzaj, kategoria, typ zgłaszającego, czas oczekiwania, link do zgłoszenia/ogłoszenia/rozwiązania); `Timeline` (viewer `staff`); `MessageComposer` „Odpowiedź Hubu” z polem „Podpis” i wyborem kart („Dołącz rozwiązanie” — wyszukiwarka `GET /api/solutions?q=` z M1, ≤ 5); `DraftReplyButton` „Podpowiedz odpowiedź (AI)” wstawia szkic do pola (nie wysyła), z informacją „Szkic AI — przeczytaj i popraw przed wysłaniem”; 503 → przycisk znika z komunikatem; `StatusControl`-podobne przyciski „Zamknij rozmowę” / „Otwórz ponownie”.
-4. `MentorAssign`: lista podpowiedzi (`mentor-suggestions`) z uzasadnieniem słownie („ten sam obszar wyzwania”, „podobieństwo {procent}%”), `ds-select` wszystkich ekspertów, „Przydziel” / „Usuń przydział”.
-
-**Gotowe, gdy:** wątek z seedu ponad SLA jest na górze listy z oznaczeniem; szkic AI (z kluczem) wypełnia pole, bez klucza przycisk znika z komunikatem; wysłana odpowiedź z kartą pojawia się u autora; przydział eksperta dodaje wiadomość systemową; lista kontrolna dostępności OK.
+**Gotowe, gdy:** licznik „Rozmowy” w nawigacji panelu pokazuje wątki z seedu; odpowiedź z panelu pojawia się u autora; przydział eksperta dodaje wiadomość systemową, a wątek pojawia się u eksperta; lista kontrolna dostępności OK.
 
 ---
 
-## PK27 — Frontend: Panel — moderacja partnerstw
+## PK25 — Frontend: widok eksperta
 
-**Zależy od:** PK21, PK08
-**Pliki:** `web/src/pages/panel/PartnershipsReviewPage.tsx`
-
-**Cel:** pracownik zatwierdza, odrzuca i zamyka ogłoszenia.
-
-**Kroki:** zakładki/filtr statusu (domyślnie `PENDING_REVIEW`), lista z pełnym opisem, przyciski „Opublikuj”, „Odrzuć”, „Zamknij” (dla `PUBLISHED`), wynik w `aria-live`, fokus po zniknięciu pozycji wraca na nagłówek listy (wzór F17).
-
-**Gotowe, gdy:** 2 ogłoszenia z seedu w moderacji; „Opublikuj” → pojawia się na `/partnerzy`; licznik `pending_offers` w panelu maleje.
-
----
-
-## PK28 — Frontend: widok eksperta
-
-**Zależy od:** PK21, PK22, PK07
+**Zależy od:** PK21, PK02, PK04
 **Pliki:** `web/src/pages/expert/ExpertHomePage.tsx`, `web/src/pages/expert/ExpertThreadPage.tsx`
 
-**Cel:** ekspert widzi przydzielone rozmowy i odpowiada.
-
 **Kroki:**
-1. `ExpertHomePage`: `h1` „Moje konsultacje”, profil eksperta (`GET /api/mentors/{mentorId}`), `ThreadList` z `listThreads({mentor_id})` (viewer `mentor`), pusto → `EmptyState` „Nie masz przydzielonych rozmów.”
-2. `ExpertThreadPage`: `Timeline` (viewer `mentor`), `MessageComposer` → `addMessage({role: "MENTOR", mentor_id, body})`; `markRead("mentor")`.
+1. `ExpertHomePage`: `h1` „Moje konsultacje”, `ThreadList` z `listThreads({mentor_id: session.mentorId})`; pusto → `EmptyState` „Nie masz przydzielonych rozmów.”
+2. `ExpertThreadPage`: `Timeline` (viewer `mentor`), `MessageForm` → `addMessage({role: "MENTOR", mentor_id, body})`; wątek nieprzydzielony → komunikat zamiast formularza.
 
-**Gotowe, gdy:** konto `ekspert` widzi wątek `MENTORING` z seedu; odpowiedź pojawia się u autora jako „Ekspert: {imię}”; wątek nieprzydzielony otwarty po URL nie pozwala odpisać (komunikat zamiast formularza).
+**Gotowe, gdy:** konto `ekspert` widzi wątek `MENTORING` z seedu; odpowiedź pojawia się u autora jako „Ekspert: {imię}”.
 
 ---
 
-## PK29 — Przegląd dostępności i próba generalna demo M5
+## PK26 — Próba generalna demo M5
 
-**Zależy od:** PK10, PK23, PK24, PK25, PK26, PK27, PK28
-**Pliki:** `docs/modules/05-platforma-komunikacji/module-5-demo.md` (nowy); poprawki tylko jako wpisy w „Uwagach” do właścicieli plików
+**Zależy od:** PK05, PK22, PK23, PK24, PK25
+**Pliki:** `docs/modules/05-platforma-komunikacji/module-5-demo.md` (nowy); poprawki tylko jako wpisy w „Uwagach”
 
-**Cel:** scenariusze A–C działają end-to-end w `make up`, ekrany M5 spełniają listę kontrolną dostępności (`frontend-tasks.md`).
+**Kroki:** `make db-m5 && make seed-comm`; przejdź scenariusze A (pytanie → AI → zespół → ekspert) i C (partnerstwo) ze specyfikacji na kontach `reporter`, `admin`, `ekspert`, z klawiatury i w `data-contrast="high"`; zapisz scenariusz demo (≤ 3 min) i wynik listy kontrolnej dostępności.
 
-**Kroki:**
-1. `make reset-db && make ingest && python -m scripts.seed_reports && make seed-comm`.
-2. Przejdź scenariusze A, B, C (spec, sekcja 4) na trzech kontach (`reporter`, `admin`, `ekspert`), w tym tryb wysokiego kontrastu i nawigację tylko klawiaturą; zapisz scenariusz demo (≤ 3 min) krok po kroku z hasłami kont w `module-5-demo.md`.
-3. Lista kontrolna dostępności dla każdej nowej trasy; usterki → „Uwagi”.
-
-**Gotowe, gdy:** `module-5-demo.md` zawiera przetestowany scenariusz i wypełnioną listę kontrolną; brak otwartych usterek blokujących demo.
+**Gotowe, gdy:** `module-5-demo.md` zawiera przetestowany scenariusz; brak usterek blokujących demo.
 
 ---
 
@@ -989,3 +573,4 @@ Trasy `rozmowy/nowa` i `partnerzy/nowe` muszą wygrać z `rozmowy/:id` i `partne
 
 _(dopisuj na końcu: `- [PKxx → PKyy] opis`)_
 - [M3 → PK11] Plan M3 jest teraz w v0.3 i ma przenumerowane zadania (K00–K13). Backend pomysłów (`ideas`, `idea_replies`, endpointy) to **K03** (było K04), a „Moje pomysły” to **K11** (było K15). Status pomysłu nie ma już `PROMOTED`, a statusy `SUBMITTED|IN_REVIEW|INVITED|REJECTED` Hub ustawia bez macierzy przejść. Kontrakt `idea_replies` jest bez zmian. Zależność PK11 czytaj jako „K03 (M3)”.
+- [PK → M3] W v0.4 planu M5 zadanie PK11 (rozmowa o pomyśle, wątek `IDEA`) przeszło do backlogu (spec M5, sekcja 14) — M5 nie zależy teraz od M3. Przy powrocie do tematu zależność to K03 (backend pomysłów), a przycisk w „Moich pomysłach” — K11.
