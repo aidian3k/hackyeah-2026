@@ -92,9 +92,9 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 
 <header class="doc">
   <h1>Moduł 5 — Platforma aktywnej komunikacji („Rozmowy Hubu”)</h1>
-  <div class="sub">Dokument implementacyjny dla Małopolskiego Hubu Innowacji Społecznych (<code>base.md</code>, funkcjonalność V). Odbiorca: agent lub programista implementujący moduł. Zadania: <code>module-5-tasks.md</code> (backend PK00–PK10, frontend PK20–PK29).</div>
+  <div class="sub">Dokument implementacyjny dla Małopolskiego Hubu Innowacji Społecznych (<code>base.md</code>, funkcjonalność V). Odbiorca: agent lub programista implementujący moduł. Zadania: <code>module-5-tasks.md</code> (backend PK00–PK11, frontend PK20–PK29).</div>
   <div class="meta">
-    <span><strong>Wersja:</strong> v0.2</span>
+    <span><strong>Wersja:</strong> v0.3</span>
     <span><strong>Data:</strong> 2026-10-04</span>
     <span><strong>Status:</strong> <span class="badge b-draft">draft</span></span>
     <span><strong>Plik zadań:</strong> <code>docs/modules/05-platforma-komunikacji/module-5-tasks.md</code></span>
@@ -103,7 +103,7 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 
 <div class="note">
 <p><strong>Jak czytać ten dokument.</strong> Każda sekcja ma status: <span class="badge b-stable">stable</span> — ustalone, nie zmieniaj bez ADR; <span class="badge b-draft">draft</span> — kierunek ustalony, szczegóły do dopracowania w kodzie; <span class="badge b-todo">todo</span> — do zaplanowania, nie implementuj.</p>
-<p>Struktura i konwencje jak w <code>docs/modules/01-matchmaking/module-1-matchmaking.html</code>. Twarde reguły z <code>AGENTS.md</code> obowiązują także tutaj (progi w <code>settings</code>, <code>polish_simple</code>, brak treści w logach, jeden kształt <code>SolutionCard</code>, <code>KNOWLEDGE</code> nigdy na kartach, bez autoryzacji i bez testów automatycznych). Moduł 1 jest kontraktem zewnętrznym — zmiany w jego plikach są wyliczone w ADR-M5-010 i nie wykraczają poza dopisanie.</p>
+<p>Struktura i konwencje jak w <code>docs/modules/01-matchmaking/module-1-matchmaking.html</code>. Twarde reguły z <code>AGENTS.md</code> obowiązują także tutaj (progi w <code>settings</code>, <code>polish_simple</code>, brak treści w logach, jeden kształt <code>SolutionCard</code>, <code>KNOWLEDGE</code> nigdy na kartach, bez autoryzacji i bez testów automatycznych). Moduł 1 jest kontraktem zewnętrznym — zmiany w jego plikach są wyliczone w ADR-M5-010 i nie wykraczają poza dopisanie. Frontend: tylko Tailwind z presetu design systemu i klasy <code>ds-*</code> (<code>AGENTS.md</code>, „Stylowanie”).</p>
 </div>
 
 <nav class="toc">
@@ -153,7 +153,7 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 
 <h2 id="s2">2. Stan obecny — co już działa <span class="badge b-stable">stable</span></h2>
 
-<p>Stan na 2026-10-04: Moduł 1 (backend T00–T26), frontend (F00–F21), role demo po stronie frontendu (<code>docs/changes/feature-2026-10-03-1/spec.md</code>: konta <code>reporter</code> i <code>admin</code>/<code>ops</code> w <code>web/src/lib/auth.tsx</code>, sesja w <code>localStorage</code>, bez backendu).</p>
+<p>Stan na 2026-10-04: Moduł 1 (backend T00–T26), frontend (F00–F21), role demo po stronie frontendu (<code>docs/changes/feature-2026-10-03-1/spec.md</code>: konta <code>reporter</code> i <code>admin</code>/<code>ops</code> w <code>web/src/lib/auth.tsx</code>, sesja w <code>localStorage</code>, bez backendu; ekrany chronione komponentem <code>RequireRole</code>, który pokazuje komunikat „Ta funkcja wymaga zalogowania” / „Brak dostępu” zamiast przekierowania; nawigacja zależna od roli — administrator widzi Panel zamiast Kreatora i „Moich zgłoszeń”). Frontend przeszedł na Tailwind CSS 3 z presetem design systemu — nowe arkusze CSS są zakazane. Moduł 3 (Kreator pomysłów) ma plan v0.2 z własnym, jednokierunkowym kanałem <code>idea_replies</code> i oddaje dialog wielostronny oraz mentoring do M5.</p>
 <div class="tablewrap">
 <table>
 <tr><th>Wymaganie</th><th>Pokrycie</th><th>Gdzie / czego brakuje</th></tr>
@@ -196,6 +196,7 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 <tr><td>Zgłaszanie problemu i wyszukiwanie rozwiązań</td><td>Moduł 1 (M5 tylko wywołuje jego pipeline)</td></tr>
 <tr><td>Edycja treści rozwiązań i wiedzy</td><td>Moduł 6 (Panel administratora)</td></tr>
 <tr><td>Oceny i opinie testerów o rozwiązaniach</td><td>Moduł 4</td></tr>
+<tr><td>Fiszka, kanwa, wnioski i jednokierunkowa odpowiedź Hubu do autora pomysłu (<code>idea_replies</code>)</td><td>Moduł 3; M5 dokłada rozmowę o pomyśle (wątek <code>IDEA</code>, PK11, opcjonalnie)</td></tr>
 <tr><td>Dostosowanie innowacji do usługi gminy</td><td>Moduł 7 (może linkować do tablicy partnerstw)</td></tr>
 <tr><td>Konta, logowanie, weryfikacja tożsamości, e-mail, webhook, czat w czasie rzeczywistym (WebSocket)</td><td>Backlog (sekcja 14)</td></tr>
 </table>
@@ -258,10 +259,10 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 
 <h2 id="s6">6. Model danych <span class="badge b-stable">stable</span></h2>
 
-<p>DDL dopisywany na końcu <code>db/init.sql</code> w sekcji „Moduł 5”. Wymiar embeddingów 1024 (ADR-004), bez indeksów wektorowych (ADR-019).</p>
+<p>Schemat w osobnym, idempotentnym pliku <code>db/m5-komunikacja.sql</code> (ADR-M5-012, wzór ADR-M3-002): ładuje się automatycznie po <code>init.sql</code> i <code>m3-kreator.sql</code> przy pierwszym starcie bazy, a na działającej bazie przez <code>make db-m5</code> — bez utraty korpusu. <code>db/init.sql</code> się nie zmienia. Poniżej struktura; w pliku typy są owinięte w <code>DO $$ … EXCEPTION WHEN duplicate_object</code>, a tabele i indeksy mają <code>IF NOT EXISTS</code> (pełny tekst w PK00). Wymiar embeddingów 1024 (ADR-004), bez indeksów wektorowych (ADR-019).</p>
 
 <pre><code>-- ===== Moduł 5 — Platforma aktywnej komunikacji =====
-CREATE TYPE thread_kind        AS ENUM ('QUESTION', 'REPORT', 'MENTORING', 'PARTNERSHIP');
+CREATE TYPE thread_kind        AS ENUM ('QUESTION', 'REPORT', 'MENTORING', 'PARTNERSHIP', 'IDEA'); -- IDEA: PK11
 CREATE TYPE thread_status      AS ENUM ('ASSISTANT_PENDING', 'ANSWERED_BY_AI', 'WAITING_STAFF', 'WAITING_USER', 'CLOSED');
 CREATE TYPE message_role       AS ENUM ('USER', 'STAFF', 'MENTOR', 'ASSISTANT', 'SYSTEM');
 CREATE TYPE org_sector         AS ENUM ('NGO', 'JST', 'PUBLIC', 'BUSINESS', 'SCIENCE', 'RESIDENTS');
@@ -343,7 +344,10 @@ CREATE TABLE thread_messages (
     meta         JSONB        NOT NULL DEFAULT '{}',-- np. {"gate": {...}, "retracted": true, "fallback": "no_llm"}
     created_at   TIMESTAMPTZ  NOT NULL DEFAULT now()
 );
-CREATE INDEX thread_messages_thread_idx ON thread_messages (thread_id, created_at);</code></pre>
+CREATE INDEX thread_messages_thread_idx ON thread_messages (thread_id, created_at);
+
+-- PK11 (opcjonalnie, tylko gdy istnieje tabela ideas z Modułu 3):
+-- ALTER TABLE threads ADD COLUMN IF NOT EXISTS idea_id BIGINT REFERENCES ideas(id) ON DELETE SET NULL;</code></pre>
 
 <h4>Treść a statystyka</h4>
 <ul>
@@ -457,6 +461,7 @@ MentorSuggestion {mentor: Mentor, category_match: bool, similarity: float|null}
 PartnershipOffer {id, intent, organization, sector, title, description, category, category_label_pl, status, created_at}
 PartnerMatch     {offer: PartnershipOffer, similarity: float, cross_sector: bool}
 DraftReply       {body, solution_ids, cards: list[SolutionCard]}</code></pre>
+<p>Po PK11: <code>ThreadCreate.idea_id</code>, rodzaj <code>IDEA</code> (get-or-create jak <code>REPORT</code>), oś czasu z <code>idea_replies</code> (<code>source = "idea_reply"</code>).</p>
 <p>Oś czasu wątku <code>REPORT</code> = <code>report_replies</code> zgłoszenia (jako <code>role = STAFF</code>, <code>source = "report_reply"</code>) + <code>thread_messages</code>, rosnąco po <code>created_at</code>. Flaga <code>unread_user</code> = istnieje wiadomość nie-<code>USER</code> nowsza niż <code>user_last_read_at</code>; analogicznie dla zespołu (wiadomości <code>USER</code>) i eksperta.</p>
 
 <h2 id="s9">9. Kontrakt dla frontendu (ekrany) <span class="badge b-draft">draft</span></h2>
@@ -479,7 +484,9 @@ DraftReply       {body, solution_ids, cards: list[SolutionCard]}</code></pre>
 </div>
 
 <ul>
-<li>Nawigacja publiczna: nowa zakładka „Platforma komunikacji” (<code>MODULE_NAMES.komunikacja</code>), z odznaką liczby rozmów z nową odpowiedzią. Panel: „Rozmowy” (z licznikiem <code>waiting_staff</code>) i „Partnerstwa”.</li>
+<li>Nawigacja wg roli (<code>MainNav</code>): niezalogowany i <code>reporter</code> — nowa zakładka „Platforma komunikacji” (<code>MODULE_NAMES.komunikacja</code>, aktywna też na <code>/partnerzy…</code>); <code>administrator</code> — bez zmian (rozmowy i partnerstwa są w Panelu: „Rozmowy” z licznikiem <code>waiting_staff</code>, „Partnerstwa”); <code>mentor</code> — „Moje konsultacje” zamiast Kreatora i „Moich zgłoszeń”.</li>
+<li>Dostęp: ekrany z kolumny „Dostęp” owinięte <code>RequireRole</code> (komunikat z „Zaloguj się” i powrotem na ten sam ekran). Na ekranach publicznych akcje wymagające roli (np. „Odpowiedz” w wątku) pokazują link do logowania zamiast formularza.</li>
+<li>Stylowanie: wyłącznie klasy Tailwinda z presetu i komponenty <code>ds-*</code>; bez nowych arkuszy, <code>style={{…}}</code> i domyślnej palety. Zmieniana strona z dziedzicznym arkuszem przechodzi na Tailwind (PK24: „Moje zgłoszenia”).</li>
 <li>Oś czasu jako <code>&lt;ol&gt;</code>; każda wiadomość ma nagłówek z rolą słownie („Ty”, „Zespół Hubu”, „Ekspert: …”, „Odpowiedź automatyczna (AI)”, „Informacja systemowa”) — rola nie tylko kolorem (WCAG 1.4.1).</li>
 <li>Nowe wiadomości z odpytywania ogłaszane w <code>aria-live="polite"</code> („Nowa odpowiedź od zespołu Hubu”), bez przenoszenia fokusu.</li>
 <li>Odpytywanie: wątek otwarty co 5 s, gdy <code>ASSISTANT_PENDING</code> — co 2 s; liczniki co 30 s (jak F14). Stałe w <code>web/src/lib/comm.ts</code>.</li>
@@ -514,8 +521,8 @@ THREAD_MESSAGE_CARDS_MAX: int = 5         # limit solution_ids w wiadomości</co
 </ul>
 
 <h2 id="s12">12. Struktura katalogów i kolejność prac <span class="badge b-draft">draft</span></h2>
-<pre><code>db/init.sql                         # + sekcja „Moduł 5” na końcu (PK00)
-api/config.py                       # + blok ustawień M5 (PK01)
+<pre><code>db/m5-komunikacja.sql  Makefile (db-m5)   # PK00 — idempotentny schemat M5; PK11 dopisuje blok dla ideas
+api/config.py  .env.example         # + sekcja ustawień M5 (PK01)
 api/main.py  api/log.py             # + routery M5, + REDACTED_KEYS (PK01)
 api/comm/__init__.py models.py      # PK00
 api/comm/schemas.py                 # PK02
@@ -529,7 +536,8 @@ scripts/seed_comm.py  Makefile (seed-comm)                     # PK09
 docs/modules/05-platforma-komunikacji/module-5-calibration.md # PK10
 web/src/api/comm.ts  web/src/lib/comm.ts  web/src/lib/commStorage.ts       # PK20
 web/src/components/comm/*  web/src/hooks/useThread.ts useCommInbox.ts     # PK22
-web/src/pages/comm/*  web/src/pages/panel/Comm*.tsx  web/src/pages/expert/* # PK23–PK28</code></pre>
+web/src/pages/comm/*  web/src/pages/panel/Comm*.tsx  web/src/pages/expert/* # PK23–PK28
+# frontend bez nowych plików .css — Tailwind + ds-*</code></pre>
 <p><strong>Najkrótsza ścieżka do demo</strong>: PK00–PK05, PK07, PK09 (backend, scenariusz A bez ekspertów i partnerstw) + PK20–PK23, PK26. Dalej: eksperci (PK06, PK08, PK28), partnerstwa (PK25, PK27), odpis do zgłoszenia (PK24).</p>
 
 <h2 id="s13">13. Rejestr decyzji (ADR) <span class="badge b-stable">stable</span></h2>
@@ -545,8 +553,10 @@ web/src/pages/comm/*  web/src/pages/panel/Comm*.tsx  web/src/pages/expert/* # PK
 <tr><td>ADR-M5-007</td><td>Partnerstwa jako moderowana tablica <code>OFFER</code>/<code>SEEK</code>; kontakt wyłącznie przez wątek pośredniczony przez Hub</td><td>RODO i rola Hubu jako brokera. Odrzucone: publiczne dane kontaktowe</td></tr>
 <tr><td>ADR-M5-008</td><td>Dopasowanie partnerstw: przeciwny <code>intent</code> + cosinus, flaga <code>cross_sector</code>; obok rozwiązania (<code>semantic_search</code>) i zapotrzebowanie ze zgłoszeń (agregat)</td><td>„Nowa jakość”: partnerstwo widzi realny popyt z Matchmakingu</td></tr>
 <tr><td>ADR-M5-009</td><td>Powiadomienia w aplikacji (liczniki, nieprzeczytane po <code>*_last_read_at</code>, polling); jeden punkt <code>notify()</code> pod przyszły e-mail/webhook</td><td>E-mail/webhook są w backlogu (sekcja 15 M1)</td></tr>
-<tr><td>ADR-M5-010</td><td>Zmiany w plikach M1 tylko przez dopisanie: <code>db/init.sql</code> (sekcja na końcu), <code>api/config.py</code> (blok), <code>api/main.py</code> (3 routery), <code>api/log.py</code> (4 klucze), <code>Makefile</code> (cel); frontend: <code>App.tsx</code>, <code>MainNav.tsx</code>, <code>PanelLayout.tsx</code>, <code>modules.ts</code>, <code>auth.tsx</code> (rola <code>mentor</code>), <code>MyReportsPage.tsx</code>, <code>panel/ReportPage.tsx</code> (link)</td><td>Każda zmiana wpisana w „Uwagach między zadaniami” M1 / frontendu przez zadanie, które ją robi</td></tr>
+<tr><td>ADR-M5-010</td><td>Zmiany w plikach współdzielonych tylko przez dopisanie: <code>api/config.py</code> (sekcja), <code>api/main.py</code> (3 routery), <code>api/log.py</code> (4 klucze), <code>Makefile</code> (<code>db-m5</code>, <code>seed-comm</code>), <code>.env.example</code>; frontend: <code>App.tsx</code>, <code>MainNav.tsx</code>, <code>PanelLayout.tsx</code>, <code>modules.ts</code>, <code>auth.tsx</code> (rola <code>mentor</code>), <code>MyReportsPage.tsx</code> (z migracją na Tailwind), <code>panel/ReportPage.tsx</code> (link). <code>db/init.sql</code> bez zmian</td><td>Te same pliki dopisuje Moduł 3 (K01, K02, K10, K17) — tylko własne bloki, przy konflikcie zachować obie wersje; wpis w „Uwagach” M1 / frontendu</td></tr>
 <tr><td>ADR-M5-011</td><td>Embeddingi wątków, ekspertów i ogłoszeń: <code>vector(1024)</code>, ten sam provider co korpus, bez indeksów wektorowych</td><td>ADR-004, ADR-015, ADR-019</td></tr>
+<tr><td>ADR-M5-012</td><td>Schemat M5 w osobnym, idempotentnym pliku <code>db/m5-komunikacja.sql</code> + <code>make db-m5</code></td><td>Wzór ADR-M3-002: bez resetu bazy i ponownego ingestu; kolejność ładowania alfabetyczna po <code>init.sql</code>. Odrzucone: dopisanie do <code>init.sql</code> (wymaga <code>make reset-db</code>)</td></tr>
+<tr><td>ADR-M5-013</td><td>Rozmowa o pomyśle z M3 jako wątek <code>IDEA</code> (PK11, opcjonalnie): oś czasu łączy <code>idea_replies</code> z wiadomościami M5; kolumna <code>idea_id</code> dodawana warunkowo, gdy istnieje tabela <code>ideas</code></td><td>M3 oddaje dialog i mentoring do M5; M5 działa bez M3</td></tr>
 </table>
 </div>
 
@@ -578,13 +588,15 @@ web/src/pages/comm/*  web/src/pages/panel/Comm*.tsx  web/src/pages/expert/* # PK
 <ol>
 <li>Czy pytanie bez dopasowania ma też tworzyć wiersz w <code>reports</code> (zasilić Trendy i licznik luk)? Dziś: nie (backlog) — rozstrzygnąć przed PK05, jeśli zespół chce.</li>
 <li>Czy ekspert ma widzieć dane kontaktowe autora? Dziś: nie — kontakt zawsze przez wątek.</li>
+<li>Komentarze ekspertów przy blokach kanwy M3 (spec M3, backlog) — w M5 jako wiadomość w wątku <code>IDEA</code> z odnośnikiem do bloku, czy osobny model? Do decyzji po PK11.</li>
 <li>Czy ogłoszenia partnerstw mają mieć gminę? Formularze M1 usunęły wybór gminy (<code>docs/changes/bugs-2026-10-03-1/spec.md</code>) — M5 trzyma się tej decyzji.</li>
 </ol>
 
 <hr>
 
 <footer>
-<p><strong>Moduł 5 — Platforma aktywnej komunikacji</strong> · v0.2 · 2026-10-04 · Małopolski Hub Innowacji Społecznych.</p>
+<p><strong>Moduł 5 — Platforma aktywnej komunikacji</strong> · v0.3 · 2026-10-04 · Małopolski Hub Innowacji Społecznych.</p>
+<p><strong>v0.3</strong> — dopasowanie do zmian na master: schemat w <code>db/m5-komunikacja.sql</code> + <code>make db-m5</code> (ADR-M5-012), Tailwind zamiast arkuszy CSS, <code>RequireRole</code> i nawigacja zależna od roli, pliki współdzielone z Modułem 3, rozmowa o pomyśle (PK11, ADR-M5-013).</p>
 <p><strong>v0.2</strong> — plan po sesji planowania: zakres, scenariusze, model danych, logika AI, kontrakt API i ekranów, konfiguracja, ADR-M5-001–011, koszty; zadania PK00–PK29 w <code>module-5-tasks.md</code>.</p>
 <p><strong>v0.1</strong> — szkielet: wymaganie z <code>base.md</code>, ocena pokrycia przez istniejącą implementację, pytania do sesji planowania.</p>
 <p>Dokument iteracyjny. Zmiany: nowa sekcja na końcu, wpis w spisie treści, ADR w sekcji 13 przy zmianie decyzji. Podnieś wersję w nagłówku i w stopce.</p>

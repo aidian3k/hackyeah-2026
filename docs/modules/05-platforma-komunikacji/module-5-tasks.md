@@ -1,10 +1,12 @@
 # Moduł 5 — Platforma aktywnej komunikacji: plan implementacji i zadania
 
-Plan na podstawie `docs/modules/05-platforma-komunikacji/module-5-platforma-komunikacji.html` (v0.2). Każde zadanie jest samowystarczalne: zawiera cel, pliki, wklejony kontekst ze specyfikacji, kroki i kryterium gotowości. Agent wykonujący zadanie **nie musi czytać specyfikacji HTML** — ale musi przeczytać `AGENTS.md` (twarde reguły) oraz sekcję „Wspólne kontrakty” poniżej.
+Plan na podstawie `docs/modules/05-platforma-komunikacji/module-5-platforma-komunikacji.html` (v0.3). Każde zadanie jest samowystarczalne: zawiera cel, pliki, wklejony kontekst ze specyfikacji, kroki i kryterium gotowości. Agent wykonujący zadanie **nie musi czytać specyfikacji HTML** — ale musi przeczytać `AGENTS.md` (twarde reguły) oraz sekcję „Wspólne kontrakty” poniżej.
 
 **Odstępstwa od specyfikacji (decyzja zespołu, 2026-10-03, jak w Module 1):**
 - **Bez autoryzacji.** Wszystkie endpointy są otwarte; bez tokenów, nagłówków dostępu i kodów 401/403. Role (`reporter`, `administrator`, `mentor`) istnieją tylko we frontendzie (`web/src/lib/auth.tsx`).
 - **Bez testów automatycznych.** Weryfikacja każdego zadania: curl, psql, `python -c`, ręczne uruchomienie.
+
+**Aktualizacja 2026-10-04 (zmiany na master):** schemat M5 w osobnym, idempotentnym pliku `db/m5-komunikacja.sql` + `make db-m5` (wzór Modułu 3, bez resetu bazy); frontend stylowany wyłącznie Tailwindem i klasami `ds-*` (`AGENTS.md`, „Stylowanie”); dostęp do ekranów przez komponent `RequireRole` (komunikat zamiast przekierowania) i nawigację zależną od roli (`docs/changes/feature-2026-10-03-1`); nowe zadanie PK11 — rozmowa o pomyśle z Modułu 3 (opcjonalne, po K04).
 
 ## Protokół pracy (obowiązkowy)
 
@@ -24,7 +26,7 @@ Plan na podstawie `docs/modules/05-platforma-komunikacji/module-5-platforma-komu
 
 Identyfikatory: `PK00`–`PK10` backend, `PK20`–`PK29` frontend (prefiks modułu — bez kolizji z `T` i `F`).
 
-- [ ] PK00 · Schemat M5 w `db/init.sql` + modele `api/comm/models.py` · zależy: —
+- [ ] PK00 · Schemat M5 w `db/m5-komunikacja.sql` + `make db-m5` + modele `api/comm/models.py` · zależy: —
 - [ ] PK01 · Ustawienia M5, rejestracja routerów, maskowanie logów, stuby routerów · zależy: PK00
 - [ ] PK02 · Kontrakty API: `api/comm/schemas.py` · zależy: PK00
 - [ ] PK03 · Dane demo: `data/mentors.json`, `data/partnerships-seed.json`, `data/threads-seed.json` · zależy: —
@@ -35,11 +37,12 @@ Identyfikatory: `PK00`–`PK10` backend, `PK20`–`PK29` frontend (prefiks modu�
 - [ ] PK08 · Routery `api/routers/mentors.py`, `api/routers/partnerships.py` · zależy: PK06
 - [ ] PK09 · `scripts/seed_comm.py` + `make seed-comm` · zależy: PK03, PK04, PK06
 - [ ] PK10 · Kalibracja progów M5 i próba generalna backendu · zależy: PK07, PK08, PK09
+- [ ] PK11 · (opcjonalne) Rozmowa o pomyśle z Modułu 3: wątek `IDEA` + oś czasu z `idea_replies` · zależy: PK07, K04 (M3)
 - [ ] PK20 · Frontend: kontrakty (`web/src/api/comm.ts`), stałe, pamięć „Moich rozmów”, rola `mentor` · zależy: PK02
 - [ ] PK21 · Frontend: trasy i nawigacja M5 (publiczna, panel, ekspert) · zależy: PK20
 - [ ] PK22 · Frontend: komponenty rozmowy (oś czasu, formularz, status) + hooki `useThread`, `useCommInbox` · zależy: PK20
 - [ ] PK23 · Frontend: „Platforma komunikacji” — Moje rozmowy, nowe pytanie, widok wątku · zależy: PK21, PK22, PK07
-- [ ] PK24 · Frontend: „Odpisz zespołowi” w „Moich zgłoszeniach” + link w panelu zgłoszenia · zależy: PK23
+- [ ] PK24 · Frontend: „Odpisz zespołowi” w „Moich zgłoszeniach” (+ migracja `my-reports.css` na Tailwind) + link w panelu zgłoszenia · zależy: PK23
 - [ ] PK25 · Frontend: Tablica partnerstw (lista, dodawanie, ogłoszenie z dopasowaniami) · zależy: PK21, PK22, PK08
 - [ ] PK26 · Frontend: Panel — Rozmowy (lista, wątek, szkic AI, ekspert, licznik) · zależy: PK21, PK22, PK07, PK08
 - [ ] PK27 · Frontend: Panel — moderacja partnerstw · zależy: PK21, PK08
@@ -55,6 +58,7 @@ Identyfikatory: `PK00`–`PK10` backend, `PK20`–`PK29` frontend (prefiks modu�
 - Fala 4: PK07, PK27
 - Fala 5: PK10, PK23, PK25, PK26, PK28
 - Fala 6: PK24 → PK29
+- Poza falami: PK11 (gdy M3 ma K04)
 
 **Najkrótsza działająca ścieżka** (gdy brakuje czasu): PK00–PK05, PK07 (bez endpointu `mentor-suggestions` — zwraca `[]`), PK09 tylko z wątkami, PK20–PK23, PK26 — scenariusz A z asystentem AI i odpowiedzią zespołu. Eksperci (PK06, PK08, PK28), partnerstwa (PK25, PK27) i odpis do zgłoszenia (PK24) dochodzą na wierzch.
 
@@ -66,11 +70,15 @@ Identyfikatory: `PK00`–`PK10` backend, `PK20`–`PK29` frontend (prefiks modu�
 
 - Konwencje Modułu 1 obowiązują bez zmian (`docs/modules/01-matchmaking/module-1-tasks.md`, „Wspólne kontrakty → Konwencje”): importy absolutne, async przy I/O, dane w `data/` przez `Path(settings.DATA_DIR)`, progi w `api.config.settings`.
 - Kod M5 w pakiecie `api/comm/` (`__init__.py` tworzy PK00). Routery w `api/routers/`.
-- Modele M5 dziedziczą po `api.models.Base`. Enumy Postgres istnieją w `init.sql` — `ENUM(..., create_type=False)` jak w M1 (`_pg_enum`).
+- Schemat M5 tylko w `db/m5-komunikacja.sql` (idempotentny, ładowany po `init.sql` i `m3-kreator.sql` — kolejność alfabetyczna w `docker-entrypoint-initdb.d`; na działającej bazie `make db-m5`). `db/init.sql` się nie zmienia.
+- Modele M5 dziedziczą po `api.models.Base`. Enumy Postgres tworzy plik SQL — w modelach `ENUM(..., create_type=False)` jak w M1 (`_pg_enum`). Docstring modeli: „Modele M5 1:1 z db/m5-komunikacja.sql. Schemat tworzy wyłącznie plik SQL.”
 - Zapytania wybierają **jawną listę kolumn** — `contact_email`, `embedding`, `session_id` nigdy nie trafiają do modeli odpowiedzi.
 - Logi: `log.info("…", extra={"thread_id": …, "kind": …, "role": …, "body_len": …})`. Nigdy `body`, `subject`, `description`, `author_label`, `contact_email`.
 - Zadania w tle przez `api.tasks.spawn(...)` z **własną** sesją `async with SessionLocal() as session:`.
-- Frontend: konwencje z `docs/modules/01-matchmaking/frontend-tasks.md` (design system, `request` z `web/src/api/client.ts`, komponenty wspólne z F05, lista kontrolna dostępności). Typy M5 w osobnym pliku `web/src/api/comm.ts` — `web/src/api/types.ts` się nie zmienia.
+- Metody HTTP tylko GET, POST, PATCH (CORS M1 nie przepuszcza PUT/DELETE).
+- Frontend: konwencje z `docs/modules/01-matchmaking/frontend-tasks.md` (alias `@/`, eksporty nazwane, teksty w tonie `DESIGN.md`, filtry w URL, `request` z `web/src/api/client.ts`, komponenty wspólne z F05, lista kontrolna dostępności). Typy i klient M5 w osobnym pliku `web/src/api/comm.ts` — `types.ts` i `client.ts` się nie zmieniają (mniej konfliktów z K10 Modułu 3).
+- **Stylowanie frontendu (`AGENTS.md`, „Stylowanie: Tailwind, bez własnego CSS”):** wyłącznie klasy Tailwinda z presetu design systemu (`text-navy`, `text-h1`, `bg-surface-muted`, `gap-3`, `rounded-md`, `shadow-card`…) i komponenty `ds-*` (`ds-btn`, `ds-field`, `ds-textarea`, `ds-alert`, `ds-page`, `ds-badge`…). Żadnych nowych plików `.css`, żadnych reguł dopisywanych do `web/src/styles/*.css`, żadnego `style={{…}}` i `<style>`. Bez domyślnej palety Tailwinda i wartości dowolnych z kolorem lub rozmiarem. Ekran, który zmieniasz, a który importuje dziedziczny arkusz strony, przenosisz na Tailwinda (wzorzec: `LoginPage.tsx`, `RequireRole.tsx`) i porównujesz wygląd przed i po, także w `data-contrast="high"`.
+- **Dostęp do ekranów:** wyłącznie przez `RequireRole` z `web/src/components/RequireRole.tsx` (niezalogowany widzi komunikat z „Zaloguj się” i wraca na ten sam ekran, zła rola — komunikat „Brak dostępu”). Ekrany publiczne nie są owinięte. Akcje wymagające roli na ekranach publicznych (np. „Odpowiedz” w wątku) pokazują zamiast formularza link `loginHref(pathname + search)` z `@/lib/auth`.
 
 ### Zależności od Modułu 1 i frontendu (reużycie bez zmian)
 
@@ -90,19 +98,22 @@ Identyfikatory: `PK00`–`PK10` backend, `PK20`–`PK29` frontend (prefiks modu�
 | `request<T>(method, path, opts)`, `ApiError` | `web/src/api/client.ts` | klient M5 |
 | `SolutionCard`, `Alert`, `EmptyState`, `LoadState`, `usePolling`, `useDocumentTitle`, `useTaxonomy`, `formatDateTime`, `plural` | `web/src/…` | UI M5 |
 
-### Zmiany w plikach Modułu 1 i frontendu (ADR-M5-010 — tylko dopisanie)
+### Pliki współdzielone — kto dopisuje (ADR-M5-010)
 
-| Plik | Zmiana | Zadanie |
+| Plik | Właściciel w M5 | Co wolno |
 |---|---|---|
-| `db/init.sql` | sekcja „Moduł 5” na końcu pliku | PK00 |
-| `api/config.py` | blok `# --- Moduł 5 ---` | PK01 |
-| `api/main.py` | `threads.router`, `mentors.router`, `partnerships.router` w pętli `include_router` | PK01 |
-| `api/log.py` | `REDACTED_KEYS` += `body`, `subject`, `description`, `author_label` | PK01 |
-| `Makefile` | cel `seed-comm` | PK09 |
-| `web/src/lib/auth.tsx` | rola `mentor`, konto `ekspert`/`ekspert123` z `mentorId` | PK20 |
-| `web/src/lib/modules.ts` | `komunikacja: "Platforma komunikacji"` | PK20 |
-| `web/src/App.tsx`, `web/src/components/layout/MainNav.tsx`, `web/src/components/layout/PanelLayout.tsx` | trasy i pozycje nawigacji | PK21 |
-| `web/src/pages/MyReportsPage.tsx`, `web/src/pages/panel/ReportPage.tsx` | „Odpisz zespołowi”, link „Rozmowa z autorem” | PK24 |
+| `db/m5-komunikacja.sql` | PK00 (nowy plik M5) | cały schemat M5; PK11 dopisuje blok warunkowy dla `ideas` |
+| `api/config.py` | PK01 | sekcja „Moduł 5 — Platforma komunikacji” na końcu pól `Settings` |
+| `api/main.py` | PK01 | import i 3 routery M5 w krotce `create_app()` |
+| `api/log.py` | PK01 | `REDACTED_KEYS` += `body`, `subject`, `description`, `author_label` |
+| `Makefile`, `.env.example` | PK00 (`db-m5`), PK01 (zmienne M5, zakomentowane), PK09 (`seed-comm`) | cele i zmienne M5 |
+| `web/src/lib/auth.tsx` | PK20 | rola `mentor`, konto `ekspert`, `mentorId`, `roleHome`, `isProtectedPath` |
+| `web/src/lib/modules.ts` | PK20 | `komunikacja: "Platforma komunikacji"` |
+| `web/src/App.tsx`, `web/src/components/layout/MainNav.tsx`, `web/src/components/layout/PanelLayout.tsx` | PK21 (PK26 — tylko licznik „Rozmowy”) | trasy i pozycje nawigacji |
+| `web/src/pages/MyReportsPage.tsx` (+ usunięcie `web/src/styles/my-reports.css`) | PK24 | „Odpisz zespołowi”, migracja strony na Tailwind |
+| `web/src/pages/panel/ReportPage.tsx` | PK24 | link „Rozmowa z autorem” (klasy Tailwinda) |
+
+**Kolizje z Modułem 3:** K10 dopisuje do tych samych plików `App.tsx`, `MainNav.tsx`, `PanelLayout.tsx`, a K17 do `ReportPage.tsx`; K01/K02 do `api/config.py`, `api/main.py`, `Makefile`, `.env.example`. Zasada: tylko dopisanie własnego bloku (nie przestawiaj ani nie formatuj cudzych linii); przy konflikcie git zachowaj obie wersje. Każde zadanie z tej tabeli dodaje jednolinijkowy wpis w „Uwagach” `module-1-tasks.md` (backend) albo `frontend-tasks.md` (frontend).
 
 ### Nazwy i sygnatury, z których korzystają inne zadania
 
@@ -394,25 +405,40 @@ Wzór: `web/src/lib/storage.ts`. Klucz `splot_threads`, maks. 20 wpisów `{threa
 
 ## Zadania
 
-## PK00 — Schemat M5 i modele
+## PK00 — Schemat M5 (`db/m5-komunikacja.sql`), `make db-m5`, modele
 
 **Zależy od:** —
-**Pliki:** `db/init.sql` (dopisanie na końcu), `api/comm/__init__.py` (nowy, pusty), `api/comm/models.py` (nowy)
+**Pliki:** `db/m5-komunikacja.sql` (nowy), `api/comm/__init__.py` (nowy, pusty), `api/comm/models.py` (nowy), `Makefile` (cel `db-m5`)
 
-**Cel:** tabele `mentors`, `partnership_offers`, `threads`, `thread_messages` i ich modele SQLAlchemy.
+**Cel:** tabele `mentors`, `partnership_offers`, `threads`, `thread_messages` bez resetu bazy i ich modele SQLAlchemy.
 
-**Kontekst ze specyfikacji (DDL — dopisz dokładnie):**
+**Kontekst ze specyfikacji (sekcja 6, ADR-M5-012):**
+- Wzór Modułu 3 (ADR-M3-002): katalog `./db` jest montowany w `docker-entrypoint-initdb.d`, pliki ładują się alfabetycznie (`init.sql` < `m3-kreator.sql` < `m5-komunikacja.sql`). Plik jest idempotentny; na działającej bazie uruchamia go `make db-m5` bez utraty korpusu i zgłoszeń. Nie zależy od tabel M3.
+- Wartość `IDEA` w `thread_kind` jest od razu w enumie (używa jej dopiero PK11), żeby nie robić później `ALTER TYPE`.
 
 ```sql
--- ===== Moduł 5 — Platforma aktywnej komunikacji (docs/modules/05-platforma-komunikacji) =====
-CREATE TYPE thread_kind        AS ENUM ('QUESTION', 'REPORT', 'MENTORING', 'PARTNERSHIP');
-CREATE TYPE thread_status      AS ENUM ('ASSISTANT_PENDING', 'ANSWERED_BY_AI', 'WAITING_STAFF', 'WAITING_USER', 'CLOSED');
-CREATE TYPE message_role       AS ENUM ('USER', 'STAFF', 'MENTOR', 'ASSISTANT', 'SYSTEM');
-CREATE TYPE org_sector         AS ENUM ('NGO', 'JST', 'PUBLIC', 'BUSINESS', 'SCIENCE', 'RESIDENTS');
-CREATE TYPE partnership_intent AS ENUM ('OFFER', 'SEEK');
-CREATE TYPE offer_status       AS ENUM ('PENDING_REVIEW', 'PUBLISHED', 'REJECTED', 'CLOSED');
+-- Splot – Moduł 5 (Platforma aktywnej komunikacji). Idempotentny: bezpieczny do wielokrotnego uruchomienia.
+-- Ładowany po init.sql (i m3-kreator.sql) przy pierwszym starcie bazy; na działającej bazie: make db-m5.
+DO $$ BEGIN
+  CREATE TYPE thread_kind AS ENUM ('QUESTION', 'REPORT', 'MENTORING', 'PARTNERSHIP', 'IDEA');
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+DO $$ BEGIN
+  CREATE TYPE thread_status AS ENUM ('ASSISTANT_PENDING', 'ANSWERED_BY_AI', 'WAITING_STAFF', 'WAITING_USER', 'CLOSED');
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+DO $$ BEGIN
+  CREATE TYPE message_role AS ENUM ('USER', 'STAFF', 'MENTOR', 'ASSISTANT', 'SYSTEM');
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+DO $$ BEGIN
+  CREATE TYPE org_sector AS ENUM ('NGO', 'JST', 'PUBLIC', 'BUSINESS', 'SCIENCE', 'RESIDENTS');
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+DO $$ BEGIN
+  CREATE TYPE partnership_intent AS ENUM ('OFFER', 'SEEK');
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+DO $$ BEGIN
+  CREATE TYPE offer_status AS ENUM ('PENDING_REVIEW', 'PUBLISHED', 'REJECTED', 'CLOSED');
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
 
-CREATE TABLE mentors (
+CREATE TABLE IF NOT EXISTS mentors (
     id           BIGSERIAL PRIMARY KEY,
     seed_key     TEXT UNIQUE,
     display_name TEXT        NOT NULL,
@@ -426,7 +452,7 @@ CREATE TABLE mentors (
     created_at   TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TABLE partnership_offers (
+CREATE TABLE IF NOT EXISTS partnership_offers (
     id            BIGSERIAL PRIMARY KEY,
     seed_key      TEXT UNIQUE,
     intent        partnership_intent NOT NULL,
@@ -442,9 +468,9 @@ CREATE TABLE partnership_offers (
     created_at    TIMESTAMPTZ  NOT NULL DEFAULT now(),
     updated_at    TIMESTAMPTZ  NOT NULL DEFAULT now()
 );
-CREATE INDEX partnership_offers_status_idx ON partnership_offers (status, created_at DESC);
+CREATE INDEX IF NOT EXISTS partnership_offers_status_idx ON partnership_offers (status, created_at DESC);
 
-CREATE TABLE threads (
+CREATE TABLE IF NOT EXISTS threads (
     id                  BIGSERIAL PRIMARY KEY,
     seed_key            TEXT UNIQUE,
     kind                thread_kind   NOT NULL,
@@ -469,11 +495,11 @@ CREATE TABLE threads (
     created_at          TIMESTAMPTZ   NOT NULL DEFAULT now(),
     updated_at          TIMESTAMPTZ   NOT NULL DEFAULT now()
 );
-CREATE UNIQUE INDEX threads_report_uq ON threads (report_id) WHERE report_id IS NOT NULL AND kind = 'REPORT';
-CREATE INDEX threads_status_idx ON threads (status, last_message_at DESC);
-CREATE INDEX threads_mentor_idx ON threads (assigned_mentor_id, last_message_at DESC);
+CREATE UNIQUE INDEX IF NOT EXISTS threads_report_uq ON threads (report_id) WHERE report_id IS NOT NULL AND kind = 'REPORT';
+CREATE INDEX IF NOT EXISTS threads_status_idx ON threads (status, last_message_at DESC);
+CREATE INDEX IF NOT EXISTS threads_mentor_idx ON threads (assigned_mentor_id, last_message_at DESC);
 
-CREATE TABLE thread_messages (
+CREATE TABLE IF NOT EXISTS thread_messages (
     id           BIGSERIAL PRIMARY KEY,
     thread_id    BIGINT       NOT NULL REFERENCES threads(id) ON DELETE CASCADE,
     role         message_role NOT NULL,
@@ -484,22 +510,23 @@ CREATE TABLE thread_messages (
     meta         JSONB        NOT NULL DEFAULT '{}',
     created_at   TIMESTAMPTZ  NOT NULL DEFAULT now()
 );
-CREATE INDEX thread_messages_thread_idx ON thread_messages (thread_id, created_at);
+CREATE INDEX IF NOT EXISTS thread_messages_thread_idx ON thread_messages (thread_id, created_at);
 ```
 
 **Kroki:**
-1. Dopisz DDL na końcu `db/init.sql` (po seedzie taksonomii — FK wymaga istniejących tabel M1).
-2. `api/comm/models.py`: enumy `StrEnum` (`ThreadKind`, `ThreadStatus`, `MessageRole`, `OrgSector`, `PartnershipIntent`, `OfferStatus`), modele `Mentor`, `PartnershipOffer`, `Thread`, `ThreadMessage` na `api.models.Base`; `Vector(EMBEDDING_DIM)` i `ENUM(..., create_type=False)` jak w `api/models.py`; `ARRAY(BigInteger)` dla `solution_ids`, `ARRAY(Text)` dla `categories`. Relacja `Thread.messages` (`order_by=created_at`, `cascade="all, delete-orphan"`, `passive_deletes=True`).
-3. Wpis w „Uwagach między zadaniami” `module-1-tasks.md`: „[PK00] dopisano sekcję Modułu 5 na końcu `db/init.sql` (ADR-M5-010)”.
+1. `db/m5-komunikacja.sql` dokładnie jak wyżej.
+2. `Makefile`: cel `db-m5` → `docker compose exec -T db psql -U splot -d splot -v ON_ERROR_STOP=1 < db/m5-komunikacja.sql`; dopisz do `.PHONY`.
+3. `api/comm/models.py`: enumy `StrEnum` (`ThreadKind` z `IDEA`, `ThreadStatus`, `MessageRole`, `OrgSector`, `PartnershipIntent`, `OfferStatus`), modele `Mentor`, `PartnershipOffer`, `Thread`, `ThreadMessage` na `api.models.Base`; `Vector(EMBEDDING_DIM)` i `ENUM(..., create_type=False)` jak w `api/models.py`; `ARRAY(BigInteger)` dla `solution_ids`, `ARRAY(Text)` dla `categories`. Relacja `Thread.messages` (`order_by=created_at`, `cascade="all, delete-orphan"`, `passive_deletes=True`). Kolumny `idea_id` w modelu **nie ma** (dodaje ją PK11).
+4. Wpis w „Uwagach między zadaniami” `module-1-tasks.md`: „[PK00] nowy plik `db/m5-komunikacja.sql` + cel `make db-m5` (ADR-M5-012)”.
 
-**Gotowe, gdy:** `make reset-db` przechodzi; `make psql` → `\dt` pokazuje 4 nowe tabele; `\d threads` pokazuje częściowy indeks unikalny; `python -c "from api.comm.models import Thread, ThreadMessage, Mentor, PartnershipOffer; print('ok')"`; `make ingest` i czat M1 działają jak wcześniej.
+**Gotowe, gdy:** `make db-m5` dwa razy z rzędu kończy się bez błędu; `make psql` → `\dt` pokazuje 4 nowe tabele, `\dT` 6 nowych enumów, `\d threads` częściowy indeks unikalny; liczba wierszy `solutions` i `reports` bez zmian; `make reset-db` (świeża baza) ładuje plik automatycznie; `python -c "from api.comm.models import Thread, ThreadMessage, Mentor, PartnershipOffer; print('ok')"`; czat M1 działa jak wcześniej; `ruff check .` czysty.
 
 ---
 
 ## PK01 — Ustawienia, rejestracja routerów, maskowanie logów
 
 **Zależy od:** PK00
-**Pliki:** `api/config.py` (dopisanie bloku), `api/main.py` (dopisanie routerów), `api/log.py` (dopisanie kluczy), `api/routers/threads.py` (nowy, stub), `api/routers/mentors.py` (nowy, stub), `api/routers/partnerships.py` (nowy, stub)
+**Pliki:** `api/config.py` (dopisanie sekcji), `api/main.py` (dopisanie routerów), `api/log.py` (dopisanie kluczy), `.env.example` (dopisanie zakomentowanych zmiennych), `api/routers/threads.py` (nowy, stub), `api/routers/mentors.py` (nowy, stub), `api/routers/partnerships.py` (nowy, stub)
 
 **Cel:** M5 jest wpięty w aplikację; kolejne zadania wypełniają tylko swoje pliki.
 
@@ -522,7 +549,7 @@ CREATE INDEX thread_messages_thread_idx ON thread_messages (thread_id, created_a
 ```
 
 **Kroki:**
-1. Blok przed sekcją `# --- HTTP ---` w `api/config.py`; dopisz zmienne do `.env.example`? — **nie** (plik M1; wartości domyślne wystarczą; wpis w „Uwagach” M1, jeśli zespół chce).
+1. Sekcja na końcu pól `Settings` w `api/config.py` (po sekcji M3, jeśli już jest; nie przestawiaj istniejących pól). W `.env.example` te same zmienne zakomentowane z wartościami domyślnymi pod nagłówkiem `# --- Moduł 5 ---`.
 2. Stuby routerów: `router = APIRouter(prefix="/api", tags=["threads"|"mentors"|"partnerships"])` bez endpointów.
 3. `api/main.py`: import i dodanie trzech routerów do krotki `include_router` (przed `meta.router`).
 4. `api/log.py`: `REDACTED_KEYS` += `"body", "subject", "description", "author_label"`.
@@ -740,6 +767,34 @@ curl -s -XPOST …/messages -d '{"role":"MENTOR","body":"x","mentor_id":1}'   # 
 
 ---
 
+## PK11 — (opcjonalne) Rozmowa o pomyśle z Modułu 3
+
+**Zależy od:** PK07, K04 (Moduł 3 — tabele `ideas`, `idea_replies` i endpointy pomysłów istnieją)
+**Pliki:** `db/m5-komunikacja.sql` (dopisanie bloku na końcu), `api/comm/models.py`, `api/comm/schemas.py`, `api/comm/threads.py` (dopisanie)
+
+**Cel:** M3 ma jednokierunkową odpowiedź Hubu do autora pomysłu (`idea_replies`, wzór `report_replies`), a dialog wielostronny i mentoring zostawia M5 (spec M3, sekcja „Granice”). PK11 robi dla pomysłów to samo, co wątek `REPORT` robi dla zgłoszeń.
+
+**Kontekst:**
+- Blok SQL (warunkowy — plik M5 dalej działa bez M3):
+
+```sql
+DO $$ BEGIN
+  IF to_regclass('public.ideas') IS NOT NULL THEN
+    ALTER TABLE threads ADD COLUMN IF NOT EXISTS idea_id BIGINT REFERENCES ideas(id) ON DELETE SET NULL;
+    CREATE UNIQUE INDEX IF NOT EXISTS threads_idea_uq ON threads (idea_id) WHERE idea_id IS NOT NULL AND kind = 'IDEA';
+  END IF;
+END $$;
+```
+
+- `ThreadCreate.idea_id: int | None`, `ThreadKindLiteral` += `"IDEA"`, `ThreadListItem.idea_id: int | None`; kind `IDEA` wymaga `idea_id` (brak pomysłu → 404), get-or-create jak `REPORT` (200 przy istniejącym wątku).
+- Oś czasu `IDEA` = `idea_replies` pomysłu (`role="STAFF"`, `source="idea_reply"`, `id="i-<id>"`) + `thread_messages`. `TimelineMessage.source` += `"idea_reply"`.
+- Kategoria wątku = `ideas.category`; temat = `ideas.title`. Treść pomysłu nie trafia do logów (reguła M3).
+- Frontend (osobny wpis w „Uwagach” do właściciela K15 — „Moje pomysły”): przycisk „Porozmawiaj z Hubem o pomyśle” → `commApi.createThread({kind: "IDEA", idea_id, body})`. PK11 frontendu nie zmienia.
+
+**Gotowe, gdy:** po `make db-m3 && make db-m5` kolumna `threads.idea_id` istnieje; bez M3 `make db-m5` dalej przechodzi; `POST /api/threads {kind: "IDEA", idea_id, body}` → 201, drugi raz → 200 i ta sama oś czasu z odpowiedzią Hubu z `idea_replies`.
+
+---
+
 ## PK20 — Frontend: kontrakty, stałe, pamięć, rola `mentor`
 
 **Zależy od:** PK02
@@ -751,54 +806,65 @@ curl -s -XPOST …/messages -d '{"role":"MENTOR","body":"x","mentor_id":1}'   # 
 1. `comm.ts` (api): typy i `commApi` jak w „Typy frontendu”.
 2. `lib/comm.ts`: stałe i etykiety jak w „Stałe i etykiety frontendu”; helper `roleLabel(msg, viewer: "author" | "staff" | "mentor")`.
 3. `commStorage.ts` jak w „Pamięć przeglądarki”.
-4. `auth.tsx`: `Role = "administrator" | "reporter" | "mentor"`; `AuthSession.mentorId?: number`; konto `{ username: "ekspert", password: "ekspert123", role: "mentor", displayName: "Ekspert demo", mentorId: 1 }`; `ROLE_LABELS.mentor = "Ekspert"`; `roleHome("mentor") = "/ekspert"`; `isRole`/`readSession` akceptują `mentor` i `mentorId`.
+4. `auth.tsx` (stan po `docs/changes/feature-2026-10-03-1`): `Role = "administrator" | "reporter" | "mentor"`; `AuthAccount` i `AuthSession` z opcjonalnym `mentorId?: number` (kopiowanym w `login()` do sesji); konto `{ username: "ekspert", password: "ekspert123", role: "mentor", displayName: "Ekspert demo", mentorId: 1 }`; `ROLE_LABELS.mentor = "Ekspert"`; `isRole` i `readSession` akceptują `mentor` i `mentorId` (liczba albo brak); `roleHome("mentor") = "/ekspert"` (z niego korzysta `LoginPage` po zalogowaniu); `isProtectedPath` obejmuje też `rozmowy/nowa`, `partnerzy/nowe`, `ekspert` (po wylogowaniu z tych ekranów `Banner` wraca na stronę główną). `LoginPage` nie wymaga zmian (konta nie są na nim wypisane; sprawdza `AUTH_ACCOUNTS` przez `login()`).
 5. `modules.ts`: `komunikacja: "Platforma komunikacji"`.
 6. Wpis w „Uwagach” `frontend-tasks.md` (ADR-M5-010).
 
-**Gotowe, gdy:** `npm run lint && npm run build` czyste; logowanie `ekspert`/`ekspert123` przekierowuje na `/ekspert` (pusta strona 404 do PK21 jest OK); dotychczasowe konta działają.
+**Gotowe, gdy:** `npm run lint && npm run build` czyste; logowanie `ekspert`/`ekspert123` przekierowuje na `/ekspert` (strona „Nie znaleziono” do PK21 jest OK); dotychczasowe konta działają; stara sesja w `localStorage` bez `mentorId` wczytuje się bez błędu.
 
 ---
 
 ## PK21 — Frontend: trasy i nawigacja
 
 **Zależy od:** PK20
-**Pliki:** `web/src/App.tsx`, `web/src/components/layout/MainNav.tsx`, `web/src/components/layout/PanelLayout.tsx` (zmiany), `web/src/pages/comm/*.tsx`, `web/src/pages/panel/CommThreadsPage.tsx`, `web/src/pages/panel/CommThreadPage.tsx`, `web/src/pages/panel/PartnershipsReviewPage.tsx`, `web/src/pages/expert/*.tsx` (nowe — **zaślepki** z `h1` i `ModuleLabel`)
+**Pliki:** `web/src/App.tsx`, `web/src/components/layout/MainNav.tsx`, `web/src/components/layout/PanelLayout.tsx` (zmiany), `web/src/pages/comm/*.tsx`, `web/src/pages/panel/CommThreadsPage.tsx`, `web/src/pages/panel/CommThreadPage.tsx`, `web/src/pages/panel/PartnershipsReviewPage.tsx`, `web/src/pages/expert/*.tsx` (nowe — **zaślepki** z `h1` i `ModuleLabel`, klasy Tailwinda)
 
 **Cel:** szkielet tras M5, żeby PK23–PK28 pracowały równolegle w swoich plikach. Po `[x]` PK21 pliki zaślepek przechodzą na własność zadań PK23–PK28 (każde zastępuje swoje).
 
 **Kontekst (mapa tras):**
 
-| Trasa | Komponent (plik) | Dostęp |
+| Trasa | Komponent (plik) | Gałąź w `App.tsx` |
 |---|---|---|
-| `/rozmowy` | `CommHomePage` (`pages/comm/CommHomePage.tsx`) | publiczny |
-| `/rozmowy/nowa` | `NewThreadPage` (`pages/comm/NewThreadPage.tsx`) | `reporter` |
-| `/rozmowy/:id` | `ThreadPage` (`pages/comm/ThreadPage.tsx`) | publiczny |
-| `/partnerzy` | `PartnersPage` (`pages/comm/PartnersPage.tsx`) | publiczny |
-| `/partnerzy/nowe` | `NewOfferPage` (`pages/comm/NewOfferPage.tsx`) | `reporter` |
-| `/partnerzy/:id` | `OfferPage` (`pages/comm/OfferPage.tsx`) | publiczny |
-| `/panel/rozmowy`, `/panel/rozmowy/:id` | `CommThreadsPage`, `CommThreadPage` | `administrator` |
-| `/panel/partnerstwa` | `PartnershipsReviewPage` | `administrator` |
-| `/ekspert`, `/ekspert/rozmowy/:id` | `ExpertHomePage`, `ExpertThreadPage` (`pages/expert/`) w `AppShell` | `mentor` |
+| `/rozmowy` | `CommHomePage` (`pages/comm/CommHomePage.tsx`) | `AppShell`, publiczna |
+| `/rozmowy/:id` | `ThreadPage` (`pages/comm/ThreadPage.tsx`) | `AppShell`, publiczna |
+| `/partnerzy` | `PartnersPage` (`pages/comm/PartnersPage.tsx`) | `AppShell`, publiczna |
+| `/partnerzy/:id` | `OfferPage` (`pages/comm/OfferPage.tsx`) | `AppShell`, publiczna |
+| `/rozmowy/nowa` | `NewThreadPage` (`pages/comm/NewThreadPage.tsx`) | `AppShell` → `<RequireRole requiredRole="reporter" />` (ta sama grupa co `mam-pomysl`) |
+| `/partnerzy/nowe` | `NewOfferPage` (`pages/comm/NewOfferPage.tsx`) | jw. |
+| `/ekspert`, `/ekspert/rozmowy/:id` | `ExpertHomePage`, `ExpertThreadPage` (`pages/expert/`) | `AppShell` → `<RequireRole requiredRole="mentor" />` |
+| `/panel/rozmowy`, `/panel/rozmowy/:id` | `CommThreadsPage`, `CommThreadPage` | dzieci trasy `panel` (`<RequireRole requiredRole="administrator" layout="panel" />`) |
+| `/panel/partnerstwa` | `PartnershipsReviewPage` | jw. |
+
+Trasy `rozmowy/nowa` i `partnerzy/nowe` muszą wygrać z `rozmowy/:id` i `partnerzy/:id` — React Router dopasowuje statyczny segment przed parametrem, więc wystarczy, że obie są zadeklarowane (sprawdź ręcznie).
+
+**Nawigacja wg roli (`MainNav`, stan po `feature-2026-10-03-1`):**
+
+| Rola | Zakładki |
+|---|---|
+| niezalogowany, `reporter` | dotychczasowe + `MODULE_NAMES.komunikacja` → `/rozmowy` (aktywna także na `/partnerzy…`, wzór `inZasobnik`) |
+| `administrator` | bez zmian (Panel administratora — rozmowy i partnerstwa są w panelu) |
+| `mentor` | Matchmaking, Zasobnik + „Moje konsultacje” → `/ekspert`; bez Kreatora i „Moich zgłoszeń” |
 
 **Kroki:**
-1. Trasy w `App.tsx` (`RequireRole` dla chronionych; `mentor` jako nowa gałąź).
-2. `MainNav`: pozycja `MODULE_NAMES.komunikacja` → `/rozmowy`, aktywna także na `/partnerzy…` (wzór `inZasobnik`). Dla roli `mentor` dodatkowo „Moje konsultacje” → `/ekspert`.
-3. `PanelLayout`: „Rozmowy” (licznik dopina PK26) i „Partnerstwa” przed „Trendy”.
-4. Wpis w „Uwagach” `frontend-tasks.md`.
+1. Trasy w `App.tsx` jak w tabeli (dopisanie; nie przestawiaj tras M1 ani M3).
+2. `MainNav` wg tabeli ról (`session?.role`).
+3. `PanelLayout`: „Rozmowy” (`/panel/rozmowy`) i „Partnerstwa” (`/panel/partnerstwa`) przed „Trendy”; licznik dopina PK26.
+4. Zaślepki: `<div className="ds-page">` + `ModuleLabel` + `h1` z `tabIndex={-1}` (fokus po zmianie trasy robi `useRouteFocus`), bez arkuszy CSS.
+5. Wpis w „Uwagach” `frontend-tasks.md`.
 
-**Gotowe, gdy:** każda trasa renderuje zaślepkę z właściwym `h1`; ochrona ról działa (niezalogowany na `/rozmowy/nowa` → `/login`); nawigacja ma `aria-current` na aktywnej pozycji; build czysty.
+**Gotowe, gdy:** każda trasa renderuje zaślepkę z właściwym `h1`; niezalogowany na `/rozmowy/nowa` widzi komunikat „Ta funkcja wymaga zalogowania” z przyciskiem, a po zalogowaniu wraca na `/rozmowy/nowa`; `admin` na `/ekspert` widzi „Brak dostępu”; `/rozmowy/nowa` nie trafia do `ThreadPage`; nawigacja ma `aria-current` na aktywnej pozycji dla każdej roli; build i lint czyste.
 
 ---
 
 ## PK22 — Frontend: komponenty rozmowy i hooki
 
 **Zależy od:** PK20
-**Pliki:** `web/src/components/comm/Timeline.tsx`, `web/src/components/comm/MessageComposer.tsx`, `web/src/components/comm/ThreadStatusBadge.tsx`, `web/src/components/comm/ThreadList.tsx`, `web/src/hooks/useThread.ts`, `web/src/hooks/useCommInbox.ts`, `web/src/styles/comm.css` (nowe)
+**Pliki:** `web/src/components/comm/Timeline.tsx`, `web/src/components/comm/MessageComposer.tsx`, `web/src/components/comm/ThreadStatusBadge.tsx`, `web/src/components/comm/ThreadList.tsx`, `web/src/hooks/useThread.ts`, `web/src/hooks/useCommInbox.ts` (nowe; bez arkuszy CSS — Tailwind + `ds-*`)
 
 **Cel:** wspólne klocki widoku wątku dla autora, panelu i eksperta.
 
 **Kroki:**
-1. `Timeline({messages, viewer})`: `<ol aria-label="Wiadomości">`; każda wiadomość = `<li>` z nagłówkiem (rola słownie z `roleLabel`, `author_label` jako dopisek „podpis niezweryfikowany” dla `USER`, data `formatDateTime`), treść z zachowaniem akapitów (bez HTML z danych), karty `SolutionCard` pod wiadomością. Wiadomość AI: ramka z etykietą „Odpowiedź automatyczna (AI)” i zdaniem „Może zawierać błędy — sprawdź w karcie rozwiązania.” `[n]` w treści → link do karty n na stronie (`#karta-{id}`). `SYSTEM` — styl informacji (`ds-alert` info, bez koloru jako jedynego nośnika).
+1. `Timeline({messages, viewer})`: `<ol aria-label="Wiadomości">`; każda wiadomość = `<li>` z nagłówkiem (rola słownie z `roleLabel`, `author_label` jako dopisek „podpis niezweryfikowany” dla `USER`, data `formatDateTime`), treść z zachowaniem akapitów (bez HTML z danych), karty `SolutionCard` pod wiadomością. Układ klasami Tailwinda (np. `flex flex-col gap-4`, `rounded-md`, `bg-surface-muted` dla wiadomości autora, `border` z tokenem dla AI). Wiadomość AI: ramka z etykietą „Odpowiedź automatyczna (AI)” i zdaniem „Może zawierać błędy — sprawdź w karcie rozwiązania.” `[n]` w treści → link do karty n na stronie (`#karta-{id}`). `SYSTEM` — styl informacji (`ds-alert` info, bez koloru jako jedynego nośnika).
 2. `MessageComposer({label, onSend, maxChars, extra?})`: `ds-textarea` z etykietą, licznik znaków (ogłaszany przy przekroczeniu), `ds-btn--primary` „Wyślij”, stan wysyłania, błąd w `Alert`. Puste/za długie blokuje wysyłkę z komunikatem.
 3. `ThreadStatusBadge({status, viewer})`: słowo + ikona, nie sam kolor.
 4. `ThreadList({items, hrefFor, viewer})`: lista kart wątków (temat, rodzaj, status, „czeka {n} h” z wyróżnieniem SLA słownie, „Nowa odpowiedź” gdy `unread_*`).
@@ -828,16 +894,17 @@ curl -s -XPOST …/messages -d '{"role":"MENTOR","body":"x","mentor_id":1}'   # 
 ## PK24 — Frontend: odpis do zgłoszenia
 
 **Zależy od:** PK23
-**Pliki:** `web/src/pages/MyReportsPage.tsx`, `web/src/pages/panel/ReportPage.tsx` (zmiany)
+**Pliki:** `web/src/pages/MyReportsPage.tsx`, `web/src/pages/panel/ReportPage.tsx` (zmiany), `web/src/styles/my-reports.css` (usunięcie po migracji)
 
 **Cel:** scenariusz B — autor zgłoszenia z M1 odpisuje Hubowi; pracownik widzi rozmowę.
 
 **Kroki:**
 1. `MyReportsPage`: przy zgłoszeniu z co najmniej jedną odpowiedzią — `ds-btn` „Odpisz zespołowi” → rozwijany `MessageComposer`; wysłanie `commApi.createThread({kind: "REPORT", report_id, body})` → `addMyThread` → link „Przejdź do rozmowy” (`/rozmowy/:id`).
 2. `ReportPage` (panel): gdy istnieje wątek `REPORT` (`listThreads({kind: "REPORT"})` przefiltrowane po `report_id`, albo nowy parametr — **nie** zmieniaj backendu, filtruj po stronie klienta) — link „Rozmowa z autorem ({n} wiadomości)” do `/panel/rozmowy/:id`.
-3. Wpis w „Uwagach” `frontend-tasks.md`.
+3. **Migracja `MyReportsPage` na Tailwind** (`AGENTS.md`: zmieniasz ekran z dziedzicznym arkuszem → przenosisz go): przepisz klasy z `my-reports.css` na klasy Tailwinda z presetu, usuń import i plik (sprawdź `grep -r my-reports web/src`, że nikt inny go nie używa). `ReportPage` importuje współdzielony `solution.css` — tego arkusza nie ruszasz, nowy link stylujesz wyłącznie Tailwindem/`ds-*`. K17 (M3) też dopisuje do `ReportPage` — tylko dopisanie, bez przestawiania.
+4. Wpis w „Uwagach” `frontend-tasks.md`.
 
-**Gotowe, gdy:** odpowiedź z panelu (F16) → autor klika „Odpisz” → wątek z osią czasu zawierającą wcześniejszą odpowiedź Hubu i wiadomość autora; drugi odpis trafia do tego samego wątku; w panelu zgłoszenia widać link.
+**Gotowe, gdy:** wygląd „Moich zgłoszeń” po migracji jest taki sam jak przed nią (porównanie zrzutów, także `data-contrast="high"` i 360 px); odpowiedź z panelu (F16) → autor klika „Odpisz” → wątek z osią czasu zawierającą wcześniejszą odpowiedź Hubu i wiadomość autora; drugi odpis trafia do tego samego wątku; w panelu zgłoszenia widać link.
 
 ---
 
