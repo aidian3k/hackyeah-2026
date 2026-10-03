@@ -26,13 +26,13 @@ Plan na podstawie `docs/modules/05-platforma-komunikacji/module-5-platforma-komu
 
 Identyfikatory: `PK00`–`PK05` backend, `PK20`–`PK26` frontend.
 
-- [ ] PK00 · Schemat `db/m5-komunikacja.sql` + `make db-m5` + modele `api/comm/models.py` · zależy: —
-- [ ] PK01 · Wpięcie M5: ustawienia, schematy API, stuby routerów, maskowanie logów · zależy: PK00
+- [x] PK00 · Schemat `db/m5-komunikacja.sql` + `make db-m5` + modele `api/comm/models.py` · zależy: — — zrobione: claude-m5, make db-m5 idempotentny, modele OK
+- [x] PK01 · Wpięcie M5: ustawienia, schematy API, stuby routerów, maskowanie logów · zależy: PK00 — zrobione: claude-m5, ruff czysty, maskowanie logów sprawdzone
 - [ ] PK02 · Wątki: serwis `api/comm/threads.py` + router `api/routers/threads.py` (+ stub asystenta) · zależy: PK01
 - [ ] PK03 · Asystent pierwszego kontaktu `api/comm/assistant.py` · zależy: PK02
 - [ ] PK04 · Eksperci i partnerstwa: `api/routers/mentors.py`, `api/routers/partnerships.py` · zależy: PK01
 - [ ] PK05 · Dane demo + `scripts/seed_comm.py` + `make seed-comm` · zależy: PK02, PK04
-- [ ] PK20 · Frontend: fundament (klient `comm.ts`, etykiety, pamięć, rola `mentor`, trasy, nawigacja, zaślepki) · zależy: PK01
+- [~] PK20 · Frontend: fundament (klient `comm.ts`, etykiety, pamięć, rola `mentor`, trasy, nawigacja, zaślepki) · zależy: PK01 — agent: claude-m5, 2026-10-04 02:00
 - [ ] PK21 · Frontend: komponenty rozmowy (`Timeline`, `MessageForm`, `ThreadStatus`, `ThreadList`) + hook `useThread` · zależy: PK20
 - [ ] PK22 · Frontend: Platforma komunikacji — moje rozmowy, nowe pytanie, widok wątku · zależy: PK21, PK03
 - [ ] PK23 · Frontend: Tablica partnerstw (lista, dodawanie, ogłoszenie z dopasowaniami) · zależy: PK21, PK04

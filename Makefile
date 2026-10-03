@@ -73,3 +73,10 @@ web-lint:
 # frontend produkcyjny (nginx) na :8080, proxy /api i /healthz → api
 web-up:
 	docker compose up -d --build web
+
+# ---------- Moduł 5: Platforma komunikacji ----------
+.PHONY: db-m5 seed-comm
+
+# schemat M5 na działającej bazie (idempotentny, bez utraty danych)
+db-m5:
+	docker compose exec -T db psql -U splot -d splot -v ON_ERROR_STOP=1 < db/m5-komunikacja.sql

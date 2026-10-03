@@ -84,6 +84,11 @@ class Settings(BaseSettings):
     M4_COMMENT_MAX_CHARS: int = 4000
     M4_REPORT_FEEDBACK_MAX: int = 100
 
+    # --- Moduł 5: Platforma komunikacji ---
+    M5_ASSISTANT_ENABLED: bool = True  # automatyczna odpowiedź na pytanie (QUESTION)
+    M5_ASSISTANT_TIMEOUT_SECONDS: float = 30.0
+    PARTNER_MATCH_N: int = 5
+
     @property
     def cors_origins_list(self) -> list[str]:
         return [o.strip() for o in self.CORS_ORIGINS.split(",") if o.strip()]
