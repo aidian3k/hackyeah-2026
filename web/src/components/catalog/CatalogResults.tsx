@@ -6,7 +6,6 @@ import { LoadState } from "@/components/LoadState";
 import { Pagination } from "@/components/Pagination";
 import { SolutionCard } from "@/components/SolutionCard";
 import { plural } from "@/lib/format";
-import "@/styles/catalog.css";
 
 interface Props {
   data: Page<SolutionCardData> | null;
@@ -39,18 +38,22 @@ export function CatalogResults({ data, loading, error, onRetry, onPageChange, on
   const pastEnd = ready && data.items.length === 0 && data.total > 0;
 
   return (
-    <section className="catalog-results ds-stack" aria-label="Wyniki">
+    <section className="flex min-w-0 flex-col gap-4" aria-label="Wyniki">
       {/* Region stale w DOM, żeby czytnik ogłosił nową liczbę wyników. */}
-      <p ref={countRef} className="catalog-results__count" aria-live="polite" tabIndex={-1}>
-        {ready
-          ? `Znaleziono ${data.total} ${plural(data.total, "rozwiązanie", "rozwiązania", "rozwiązań")}.`
-          : ""}
+      <p
+        ref={countRef}
+        className="m-0 scroll-mt-16 font-sans text-h3 text-ink"
+        aria-live="polite"
+        tabIndex={-1}
+      >
+        {ready ? `Znaleziono ${data.total} ${plural(data.total, "innowację", "innowacje", "innowacji")}.` : ""}
       </p>
-      <LoadState loading={loading} error={error} onRetry={onRetry} label="Wczytujemy rozwiązania…">
+      <LoadState loading={loading} error={error} onRetry={onRetry} label="Wczytujemy innowacje…">
         {ready && data.total === 0 && (
           <EmptyState title="Nic nie pasuje do wybranych filtrów.">
             <p>
-              <button type="button" className="ds-btn" onClick={onClear}>
+              Spróbuj innego słowa albo innej grupy.{" "}
+              <button type="button" className="ds-btn ds-btn--link px-0" onClick={onClear}>
                 Wyczyść filtry
               </button>
             </p>
@@ -67,10 +70,10 @@ export function CatalogResults({ data, loading, error, onRetry, onPageChange, on
         )}
         {ready && data.items.length > 0 && (
           <>
-            <ul className="ds-grid card-list">
+            <ul className="m-0 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
               {data.items.map((card) => (
-                <li key={card.id}>
-                  <SolutionCard card={card} headingLevel={2} />
+                <li key={card.id} className="flex min-w-0">
+                  <SolutionCard card={card} headingLevel={3} visual />
                 </li>
               ))}
             </ul>

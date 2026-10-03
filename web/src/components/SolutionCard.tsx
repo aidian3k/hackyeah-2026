@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import type { SolutionCard as SolutionCardData } from "@/api/types";
 import { CategoryTag } from "@/components/CategoryTag";
-import { EvidenceBadge } from "@/components/EvidenceBadge";
 import { firstVideo, youtubeThumbUrl } from "@/lib/media";
-import "@/styles/components.css";
+import { GroupIcon, NEUTRAL_VISUAL, ropsGroup } from "@/lib/ropsGroups";
 
 interface Props {
   card: SolutionCardData;
@@ -12,6 +11,8 @@ interface Props {
   showRank?: boolean;
   /** id elementu (cel odnośnika cytowania). */
   id?: string;
+  /** Katalog: karta bez filmu dostaje kolorowy pasek grupy z ikoną (Zasobnik). Czat i panel — bez paska. */
+  visual?: boolean;
 }
 
 function place(gmina: string | null, powiat: string | null): string | null {
@@ -21,65 +22,74 @@ function place(gmina: string | null, powiat: string | null): string | null {
   return null;
 }
 
-/** Jeden kształt karty w całym interfejsie (czat, biblioteka, panel). Puste pola są pomijane; scores nie są pokazywane. */
-export function SolutionCard({ card, headingLevel = 3, showRank = false, id }: Props) {
+/**
+ * Jeden kształt karty w całym interfejsie (czat, biblioteka, panel). Cała karta jest klikalna przez
+ * rozciągnięty link w tytule — jeden przystanek Tab. Puste pola są pomijane; scores nie są pokazywane.
+ */
+export function SolutionCard({ card, headingLevel = 3, showRank = false, id, visual = false }: Props) {
   const Heading = `h${headingLevel}` as const;
   const href = `/rozwiazania/${card.id}`;
   const video = firstVideo(card.media);
+  const group = ropsGroup(card.tags);
   const origin = [card.organization, place(card.gmina, card.powiat)].filter(Boolean).join(" · ");
+  // Wiedza i karty spoza Biblioteki ROPS pokazują wyzwanie; innowacje ROPS — grupę „dla kogo”.
+  const showCategory = card.kind === "KNOWLEDGE" || !group;
 
   return (
-    <article className="ds-card ds-stack solution-card" id={id}>
+    <article
+      id={id}
+      className="ds-card relative flex h-full flex-col gap-3 [overflow-wrap:anywhere] focus-within:shadow-card hover:shadow-card"
+    >
       {showRank && (
         <span className="ds-rank" role="img" aria-label={`Rozwiązanie numer ${card.rank}`}>
           {card.rank}
         </span>
       )}
-      {video && (
-        // Miniatura powtarza link z tytułu — poza kolejnością Tab i drzewem dostępności;
-        // informację o filmie dla czytników niesie tekst pod tytułem.
-        <Link to={href} className="ds-card__media" tabIndex={-1} aria-hidden="true">
+
+      {video ? (
+        <div className="ds-card__media" aria-hidden="true">
           <img src={youtubeThumbUrl(video.id)} alt="" loading="lazy" />
           <span className="ds-card__media-label">
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="M8 5.5v13l11-6.5z" />
             </svg>
-            Film o rozwiązaniu
+            Film
           </span>
-        </Link>
-      )}
-      {card.category && (
-        <div>
-          <CategoryTag code={card.category} label={card.category_label_pl} />
         </div>
+      ) : (
+        visual && (
+          <div
+            aria-hidden="true"
+            className={`flex aspect-[16/9] items-center justify-center rounded-md ${(group ?? NEUTRAL_VISUAL).surfaceClass}`}
+          >
+            <GroupIcon group={group ?? NEUTRAL_VISUAL} className="h-14 w-14" />
+          </div>
+        )
       )}
-      <Heading className="solution-card__title">
-        <Link to={href}>{card.title}</Link>
+
+      <div className="flex flex-wrap gap-2">
+        {group && card.kind === "SOLUTION" && <span className="ds-tag">{group.label}</span>}
+        {showCategory && <CategoryTag code={card.category} label={card.category_label_pl} />}
+      </div>
+
+      <Heading className="m-0 font-sans text-h3">
+        <Link
+          to={href}
+          className="text-navy after:absolute after:inset-0 after:rounded-lg after:content-[''] focus-visible:outline-none focus-visible:after:outline focus-visible:after:outline-[3px] focus-visible:after:outline-offset-2 focus-visible:after:outline-focus"
+        >
+          {card.title}
+        </Link>
       </Heading>
       {video && <p className="ds-sr-only">Na stronie rozwiązania jest film.</p>}
-      {origin && <p className="solution-card__origin">{origin}</p>}
-      {card.summary && <p className="solution-card__summary">{card.summary}</p>}
-      <dl className="ds-meta ds-meta--small">
-        {card.target_group && (
-          <div className="ds-meta__item">
-            <dt>Dla kogo</dt>
-            <dd>{card.target_group}</dd>
-          </div>
-        )}
-        {card.cost_range && (
-          <div className="ds-meta__item">
-            <dt>Koszt</dt>
-            <dd>{card.cost_range}</dd>
-          </div>
-        )}
-        <div className="ds-meta__item">
-          <dt>Poziom sprawdzenia</dt>
-          <dd>
-            <EvidenceBadge level={card.evidence_level} withLabel={false} />
-          </dd>
-        </div>
-      </dl>
-      {card.origin === "USER_SUBMITTED" && <p className="solution-card__note">Zgłoszone przez użytkownika</p>}
+      {origin && <p className="m-0 text-small text-ink-muted">{origin}</p>}
+      {card.summary && <p className="m-0 line-clamp-3 text-body text-ink">{card.summary}</p>}
+      {card.target_group && (
+        <p className="m-0 mt-auto line-clamp-2 text-small text-ink">
+          <span className="font-bold">Dla kogo: </span>
+          {card.target_group}
+        </p>
+      )}
+      {card.origin === "USER_SUBMITTED" && <p className="m-0 text-small text-ink-muted">Zgłoszone przez użytkownika</p>}
     </article>
   );
 }

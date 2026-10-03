@@ -1,40 +1,31 @@
-import { useEffect, useState, type FormEvent } from "react";
-import { GminaSelect } from "@/components/GminaSelect";
-import { useTaxonomy } from "@/hooks/useTaxonomy";
-import { EVIDENCE_LABELS } from "@/lib/labels";
-import "@/styles/catalog.css";
+import { useEffect, useId, useState, type FormEvent } from "react";
+import type { TaxonomyItem } from "@/api/types";
+import type { LibraryOverview } from "@/hooks/useLibraryOverview";
+import { ropsGroupByTag } from "@/lib/ropsGroups";
 
-export type CatalogSort = "recent" | "evidence";
-
-/** Stan katalogu trzymany w parametrach URL (nazwy jak w GET /api/solutions). */
+/** Stan katalogu w parametrach URL (q, tag, category jak w GET /api/solutions; has_video — filtr Biblioteki). */
 export interface CatalogParams {
   q: string;
+  tag: string | null;
   category: string | null;
-  gmina: string | null;
-  evidenceMin: number | null;
-  sort: CatalogSort;
+  hasVideo: boolean;
   offset: number;
 }
 
 const SEARCH_DEBOUNCE_MS = 300;
-const EVIDENCE_OPTIONS = [2, 3, 4, 5];
-/** Szerokość, od której filtry są od razu rozwinięte (próg ds-nav, w em — rośnie z powiększeniem tekstu). */
-const WIDE_QUERY = "(min-width: 56.25em)";
 
 function positiveInt(v: string | null): number | null {
   if (v === null || !/^\d+$/.test(v)) return null;
   return Number(v);
 }
 
-/** Czyta i porządkuje parametry z URL; wartości spoza zakresu API są pomijane (bez 422). */
+/** Czyta parametry z URL. Dawne parametry (gmina, evidence_min, sort) są ignorowane. */
 export function readCatalogParams(sp: URLSearchParams): CatalogParams {
-  const evidence = positiveInt(sp.get("evidence_min"));
   return {
     q: (sp.get("q") ?? "").trim(),
+    tag: sp.get("tag") || null,
     category: sp.get("category") || null,
-    gmina: sp.get("gmina") || null,
-    evidenceMin: evidence !== null && evidence >= 2 && evidence <= 5 ? evidence : null,
-    sort: sp.get("sort") === "evidence" ? "evidence" : "recent",
+    hasVideo: sp.get("has_video") === "true",
     offset: positiveInt(sp.get("offset")) ?? 0,
   };
 }
@@ -43,172 +34,155 @@ export function readCatalogParams(sp: URLSearchParams): CatalogParams {
 export function writeCatalogParams(p: CatalogParams): URLSearchParams {
   const sp = new URLSearchParams();
   if (p.q) sp.set("q", p.q);
+  if (p.tag) sp.set("tag", p.tag);
   if (p.category) sp.set("category", p.category);
-  if (p.gmina) sp.set("gmina", p.gmina);
-  if (p.evidenceMin !== null) sp.set("evidence_min", String(p.evidenceMin));
-  if (p.sort !== "recent") sp.set("sort", p.sort);
+  if (p.hasVideo) sp.set("has_video", "true");
   if (p.offset > 0) sp.set("offset", String(p.offset));
   return sp;
 }
 
-/** Liczba aktywnych filtrów (kolejność nie jest filtrem). */
 export function activeFilterCount(p: CatalogParams): number {
-  return [p.q, p.category, p.gmina, p.evidenceMin].filter((v) => v !== null && v !== "").length;
+  return [p.q, p.tag, p.category, p.hasVideo || null].filter((v) => v !== null && v !== "").length;
 }
 
-function evidenceOptionLabel(level: number): string {
-  const label = EVIDENCE_LABELS[level] ?? "";
-  return `Co najmniej ${label.charAt(0).toLowerCase()}${label.slice(1)} (${level})`;
-}
-
-function initiallyWide(): boolean {
-  try {
-    return window.matchMedia(WIDE_QUERY).matches;
-  } catch {
-    return true;
-  }
-}
-
-interface Props {
-  params: CatalogParams;
-  /** Zmiana filtra; strona sama wraca na pierwszą stronę wyników. */
-  onChange(patch: Partial<Omit<CatalogParams, "offset">>): void;
-  onClear(): void;
-}
-
-export function CatalogFilters({ params, onChange, onClear }: Props) {
-  const { items: taxonomy, error: taxonomyError } = useTaxonomy();
-  const categories = taxonomy.filter((t) => t.code !== "OTHER");
-  const active = activeFilterCount(params);
-  const [open] = useState(initiallyWide);
-
-  // Pole wyszukiwania: lokalny tekst, do URL po 300 ms bezczynności albo Enter.
+/** Wyszukiwarka na pierwszym planie: lokalny tekst, do URL po 300 ms bezczynności albo Enter. */
+export function CatalogSearch({ q, onChange }: { q: string; onChange(q: string): void }) {
+  const id = useId();
   // „Wstecz” zmienia q w URL → pole przyjmuje nową wartość (wzorzec „poprzedni prop” w renderze).
-  const [text, setText] = useState(params.q);
-  const [syncedQ, setSyncedQ] = useState(params.q);
-  if (syncedQ !== params.q) {
-    setSyncedQ(params.q);
-    if (text.trim() !== params.q) setText(params.q);
+  const [text, setText] = useState(q);
+  const [syncedQ, setSyncedQ] = useState(q);
+  if (syncedQ !== q) {
+    setSyncedQ(q);
+    if (text.trim() !== q) setText(q);
   }
 
   useEffect(() => {
     const next = text.trim();
-    if (next === params.q) return;
-    const timer = window.setTimeout(() => onChange({ q: next }), SEARCH_DEBOUNCE_MS);
+    if (next === q) return;
+    const timer = window.setTimeout(() => onChange(next), SEARCH_DEBOUNCE_MS);
     return () => window.clearTimeout(timer);
-  }, [text, params.q, onChange]);
+  }, [text, q, onChange]);
 
-  const submitSearch = (e: FormEvent) => {
+  const submit = (e: FormEvent) => {
     e.preventDefault();
     const next = text.trim();
-    if (next !== params.q) onChange({ q: next });
+    if (next !== q) onChange(next);
   };
 
   return (
-    <details className="catalog-filters" open={open}>
-      <summary className="catalog-filters__summary">
-        Filtry <span aria-hidden="true">({active})</span>
-        <span className="ds-sr-only">, aktywne: {active}</span>
-      </summary>
-      <div className="catalog-filters__body ds-stack">
-        <form role="search" className="catalog-filters__search" onSubmit={submitSearch}>
-          <div className="ds-field">
-            <label className="ds-label" htmlFor="catalog-q">
-              Szukaj w tytułach
-            </label>
-            <p className="ds-hint" id="catalog-q-hint">
-              Wyniki odświeżą się same, gdy przestaniesz pisać.
-            </p>
-            <input
-              id="catalog-q"
-              className="ds-input"
-              type="search"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              aria-describedby="catalog-q-hint"
-              autoComplete="off"
-            />
-          </div>
-        </form>
-
-        <fieldset className="catalog-filters__group">
-          <legend className="ds-label">Wyzwanie</legend>
-          {taxonomyError ? (
-            <p className="ds-error">Nie udało się wczytać listy wyzwań. Pozostałe filtry działają.</p>
-          ) : (
-            <div className="ds-cluster">
-              <button
-                type="button"
-                className="ds-chip"
-                aria-pressed={params.category === null}
-                onClick={() => onChange({ category: null })}
-              >
-                Wszystkie
-              </button>
-              {categories.map((t) => (
-                <button
-                  key={t.code}
-                  type="button"
-                  className="ds-chip"
-                  aria-pressed={params.category === t.code}
-                  onClick={() => onChange({ category: params.category === t.code ? null : t.code })}
-                >
-                  {t.label_pl}
-                </button>
-              ))}
-            </div>
-          )}
-        </fieldset>
-
-        <div className="catalog-filters__selects">
-          <GminaSelect
-            id="catalog-gmina"
-            label="Gmina"
-            value={params.gmina}
-            onChange={(gmina) => onChange({ gmina })}
-          />
-          <div className="ds-field">
-            <label className="ds-label" htmlFor="catalog-evidence">
-              Poziom sprawdzenia
-            </label>
-            <select
-              id="catalog-evidence"
-              className="ds-select"
-              value={params.evidenceMin ?? ""}
-              onChange={(e) => onChange({ evidenceMin: e.target.value ? Number(e.target.value) : null })}
-            >
-              <option value="">Dowolny</option>
-              {EVIDENCE_OPTIONS.map((n) => (
-                <option key={n} value={n}>
-                  {evidenceOptionLabel(n)}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="ds-field">
-            <label className="ds-label" htmlFor="catalog-sort">
-              Kolejność
-            </label>
-            <select
-              id="catalog-sort"
-              className="ds-select"
-              value={params.sort}
-              onChange={(e) => onChange({ sort: e.target.value === "evidence" ? "evidence" : "recent" })}
-            >
-              <option value="recent">Najnowsze</option>
-              <option value="evidence">Najlepiej sprawdzone</option>
-            </select>
-          </div>
-        </div>
-
-        {(active > 0 || params.sort !== "recent") && (
-          <div>
-            <button type="button" className="ds-btn" onClick={onClear}>
-              Wyczyść filtry
-            </button>
-          </div>
-        )}
+    <form role="search" onSubmit={submit} className="max-w-2xl">
+      <div className="ds-field">
+        <label className="ds-label" htmlFor={`${id}-q`}>
+          Szukaj innowacji
+        </label>
+        <p className="ds-hint" id={`${id}-hint`}>
+          Np. „samotność”, „niewidomi”, „opiekun”. Wyniki odświeżą się same, gdy przestaniesz pisać.
+        </p>
+        <input
+          id={`${id}-q`}
+          className="ds-input"
+          type="search"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          aria-describedby={`${id}-hint`}
+          autoComplete="off"
+        />
       </div>
-    </details>
+    </form>
+  );
+}
+
+/** „Dla kogo”: 9 grup ROPS jako przełączniki z licznikami; jedna grupa naraz. */
+export function GroupChips({
+  groups,
+  value,
+  onChange,
+}: {
+  groups: LibraryOverview["groups"];
+  value: string | null;
+  onChange(tag: string | null): void;
+}) {
+  const id = useId();
+  return (
+    <fieldset className="m-0 min-w-0 border-0 p-0">
+      <legend id={id} className="mb-2 p-0 font-sans text-h3 text-navy">
+        Dla kogo?
+      </legend>
+      <div className="flex flex-wrap gap-2">
+        <button type="button" className="ds-chip" aria-pressed={value === null} onClick={() => onChange(null)}>
+          Wszystkie
+        </button>
+        {groups.map((g) => {
+          const label = ropsGroupByTag(g.tag)?.label ?? g.tag;
+          return (
+            <button
+              key={g.tag}
+              type="button"
+              className="ds-chip"
+              aria-pressed={value === g.tag}
+              onClick={() => onChange(value === g.tag ? null : g.tag)}
+            >
+              {label} <span className="font-normal">({g.count})</span>
+            </button>
+          );
+        })}
+      </div>
+    </fieldset>
+  );
+}
+
+interface FiltersProps {
+  params: CatalogParams;
+  categories: TaxonomyItem[];
+  /** Kod wyzwania → liczba innowacji; wyzwania bez innowacji nie są proponowane. */
+  categoryCounts: Map<string, number> | null;
+  withVideo: number | null;
+  onChange(patch: Partial<Omit<CatalogParams, "offset">>): void;
+  onClear(): void;
+}
+
+/** Filtry dodatkowe: wyzwanie i „Tylko z filmem”. */
+export function CatalogFilters({ params, categories, categoryCounts, withVideo, onChange, onClear }: FiltersProps) {
+  const id = useId();
+  const available = categories.filter((t) => t.code !== "OTHER" && (categoryCounts?.get(t.code) ?? 0) > 0);
+  const active = activeFilterCount(params);
+
+  return (
+    <div className="flex flex-wrap items-end gap-x-8 gap-y-4">
+      <div className="ds-field min-w-[min(100%,18rem)]">
+        <label className="ds-label" htmlFor={`${id}-category`}>
+          Wyzwanie społeczne
+        </label>
+        <select
+          id={`${id}-category`}
+          className="ds-select"
+          value={params.category ?? ""}
+          onChange={(e) => onChange({ category: e.target.value || null })}
+        >
+          <option value="">Wszystkie wyzwania</option>
+          {available.map((t) => (
+            <option key={t.code} value={t.code}>
+              {t.label_pl} ({categoryCounts?.get(t.code)})
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <label className="flex min-h-[44px] cursor-pointer items-center gap-3 text-body text-ink">
+        <input
+          type="checkbox"
+          className="h-5 w-5 accent-navy"
+          checked={params.hasVideo}
+          onChange={(e) => onChange({ hasVideo: e.target.checked })}
+        />
+        Tylko z filmem{withVideo !== null && ` (${withVideo})`}
+      </label>
+
+      {active > 0 && (
+        <button type="button" className="ds-btn ds-btn--link px-0" onClick={onClear}>
+          Wyczyść filtry
+        </button>
+      )}
+    </div>
   );
 }
