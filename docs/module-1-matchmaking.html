@@ -84,12 +84,12 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 
 <header class="doc">
   <h1>Moduł 1 — Matchmaking społeczny</h1>
-  <div class="sub">Dokument implementacyjny dla Małopolskiego Hubu Innowacji Społecznych. Odbiorca: agent lub programista implementujący kod.</div>
+  <div class="sub">Dokument implementacyjny dla Małopolskiego Hubu Innowacji Społecznych. Odbiorca: agent lub programista implementujący backend. Interfejs użytkownika i warstwa tożsamości są poza zakresem tego modułu.</div>
   <div class="meta">
-    <span><strong>Wersja:</strong> v0.1</span>
+    <span><strong>Wersja:</strong> v0.2</span>
     <span><strong>Data:</strong> 2026-10-03</span>
     <span><strong>Status:</strong> <span class="badge b-draft">draft</span></span>
-    <span><strong>Zakres:</strong> czat + pipeline + zapis zgłoszeń + API agregacji</span>
+    <span><strong>Zakres:</strong> backend — pipeline, API, zapis zgłoszeń, klastrowanie</span>
   </div>
 </header>
 
@@ -108,7 +108,7 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
     <li><a href="#s5">Polski tor leksykalny</a></li>
     <li><a href="#s6">Pipeline krok po kroku</a></li>
     <li><a href="#s7">Kontrakt API</a></li>
-    <li><a href="#s8">Frontend — czat</a></li>
+    <li><a href="#s8">Kontrakt dla modułu frontendowego</a></li>
     <li><a href="#s9">Ingest korpusu</a></li>
     <li><a href="#s10">Ewaluacja jakości</a></li>
     <li><a href="#s11">Konfiguracja i feature flagi</a></li>
@@ -142,7 +142,7 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 </div>
 
 <h4>Typy użytkowników</h4>
-<p>W MVP są dwa. Podział „reszty" na dokładniejsze role czeka na kolejną iterację (sekcja 15).</p>
+<p>Dwa typy, rozumiane <strong>domenowo</strong>. Moduł 1 nie uwierzytelnia nikogo i nie egzekwuje uprawnień — podział opisuje, komu służy który endpoint, a nie mechanizm kontroli dostępu (ADR-007). Rozbicie „reszty" na dokładniejsze role to osobny temat (sekcja 15).</p>
 <div class="tablewrap">
 <table>
 <tr><th>Rola</th><th>Kto</th><th>Co robi w Module 1</th></tr>
@@ -155,7 +155,7 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 
 <h4>W zakresie Modułu 1</h4>
 <ul>
-<li>Interfejs czatu dla <code>REPORTER</code> — jedno pole tekstowe, język naturalny, polski.</li>
+<li>Endpoint czatu <code>POST /api/chat</code> ze strumieniowaniem SSE — przyjmuje opis problemu w języku naturalnym.</li>
 <li>Hybrydowy pipeline wyszukiwania: tor leksykalny ‖ tor semantyczny → RRF → reranking.</li>
 <li>Odpowiedź RAG: krótkie streszczenie z cytowaniami + karty rozwiązań.</li>
 <li>Trwały zapis <strong>każdego</strong> zgłoszenia, także gdy nic nie znaleziono.</li>
@@ -169,26 +169,26 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 <div class="tablewrap">
 <table>
 <tr><th>Rzecz</th><th>Gdzie trafia</th></tr>
+<tr><td><strong>Cały interfejs użytkownika</strong>: ekran czatu, karty rozwiązań, formularze</td><td>Moduł frontendowy (dostarczany osobno) — kontrakt w sekcji 8</td></tr>
 <tr><td>Interfejs operatora: dashboard, triage, mapa wyzwań, wykresy</td><td>Moduł 2 (osobny dokument)</td></tr>
 <tr><td>Matchmaking organizacja↔organizacja, budowanie partnerstw</td><td>Moduł 3</td></tr>
 <tr><td>Canvas Innowacji Społecznych jako narzędzie w aplikacji</td><td>Moduł 4</td></tr>
-<tr><td>Prawdziwe logowanie, rejestracja, hasła, zarządzanie kontami</td><td>Iteracja po hackathonie (ADR-007)</td></tr>
+<tr><td><strong>Uwierzytelnianie, konta, role, uprawnienia</strong></td><td>Poza zakresem projektu w tej iteracji (ADR-007)</td></tr>
 <tr><td>Powiadomienia e-mail, eksporty, raportowanie</td><td>Backlog (sekcja 15)</td></tr>
 </table>
 </div>
 
 <div class="warn">
-<p><strong>Zasada granicy.</strong> Moduł 1 nie rysuje żadnego ekranu dla operatora, ale <strong>musi</strong> wystawić dla niego kompletne, działające API z realnymi danymi. Jeśli Moduł 2 będzie musiał zmienić schemat bazy, żeby cokolwiek pokazać — Moduł 1 jest niedokończony.</p>
+<p><strong>Zasada granicy.</strong> Moduł 1 nie rysuje żadnego ekranu — ani dla mieszkańca, ani dla operatora. Ale <strong>musi</strong> wystawić dla obu kompletne, działające API z realnymi danymi. Jeśli moduł frontendowy albo Moduł 2 będzie musiał zmienić schemat bazy, żeby cokolwiek pokazać — Moduł 1 jest niedokończony. Weryfikacja odbywa się przez <code>curl</code> i testy, nie przez przeglądarkę.</p>
 </div>
 
 <h2 id="s3">3. Architektura <span class="badge b-stable">stable</span></h2>
 
-<p>Cztery komponenty, jedna baza danych. Brak brokera kolejek, brak osobnego silnika wyszukiwania — <em>wszystko</em> leksykalne i wektorowe żyje w PostgreSQL (ADR-002).</p>
+<p>Trzy komponenty, jedna baza danych. Brak brokera kolejek, brak osobnego silnika wyszukiwania — <em>wszystko</em> leksykalne i wektorowe żyje w PostgreSQL (ADR-002).</p>
 
 <div class="tablewrap">
 <table>
 <tr><th>Komponent</th><th>Technologia</th><th>Odpowiedzialność</th></tr>
-<tr><td><code>web</code></td><td>React 18 + Vite + TypeScript</td><td>Ekran czatu, karty rozwiązań, przełącznik roli</td></tr>
 <tr><td><code>api</code></td><td>Python 3.12 + FastAPI + SQLAlchemy 2.0 (async)</td><td>Pipeline, SSE, zapis zgłoszeń, klastrowanie, API agregacji</td></tr>
 <tr><td><code>db</code></td><td>PostgreSQL 16 + <code>pgvector</code> + <code>unaccent</code> + <code>pg_trgm</code></td><td>Korpus, wektory, indeks odwrócony, zgłoszenia, klastry</td></tr>
 <tr><td><code>scripts</code></td><td>Python CLI (ten sam venv co <code>api</code>)</td><td>Ingest korpusu, backfill embeddingów, ewaluacja</td></tr>
@@ -250,23 +250,9 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 
 CREATE TYPE solution_origin AS ENUM ('CURATED', 'USER_SUBMITTED', 'PROMOTED_FROM_REPORT');
 CREATE TYPE solution_status AS ENUM ('PUBLISHED', 'PENDING_REVIEW', 'REJECTED', 'ARCHIVED');
-CREATE TYPE report_status   AS ENUM ('NEW', 'TRIAGED', 'MATCHED', 'IN_PROGRESS', 'CLOSED');
-CREATE TYPE user_role       AS ENUM ('REPORTER', 'OPERATOR');</code></pre>
+CREATE TYPE report_status   AS ENUM ('NEW', 'TRIAGED', 'MATCHED', 'IN_PROGRESS', 'CLOSED');</code></pre>
 
-<h3>4.2 <code>users</code> — szkielet pod przyszły auth</h3>
-<p>W MVP tabela jest prawie pusta: seed z dwoma rekordami demo. Istnieje, żeby <code>submitted_by</code> i <code>operator_id</code> miały na co wskazywać i żeby włączenie prawdziwego logowania nie wymagało migracji danych.</p>
-<pre><code>CREATE TABLE users (
-    id            BIGSERIAL PRIMARY KEY,
-    email         TEXT UNIQUE,
-    display_name  TEXT        NOT NULL,
-    role          user_role   NOT NULL DEFAULT 'REPORTER',
-    organization  TEXT,
-    gmina         TEXT,
-    password_hash TEXT,                      -- NULL w MVP, patrz ADR-007
-    created_at    TIMESTAMPTZ NOT NULL DEFAULT now()
-);</code></pre>
-
-<h3>4.3 <code>challenge_taxonomy</code> — stała lista wyzwań</h3>
+<h3>4.2 <code>challenge_taxonomy</code> — stała lista wyzwań</h3>
 <pre><code>CREATE TABLE challenge_taxonomy (
     code        TEXT PRIMARY KEY,            -- AGING, MENTAL_HEALTH, ...
     label_pl    TEXT NOT NULL,
@@ -275,7 +261,7 @@ CREATE TYPE user_role       AS ENUM ('REPORTER', 'OPERATOR');</code></pre>
 );</code></pre>
 <p>Seed z tabeli w sekcji 1, plik <code>data/taxonomy.json</code>. Kategoria to <strong>filtr i wymiar raportowania</strong>, nie mechanizm wyszukiwania — wyszukiwanie działa na tekście i wektorach, nie na kategoriach.</p>
 
-<h3>4.4 <code>solutions</code> — korpus rozwiązań</h3>
+<h3>4.3 <code>solutions</code> — korpus rozwiązań</h3>
 <pre><code>CREATE TABLE solutions (
     id                   BIGSERIAL PRIMARY KEY,
     title                TEXT        NOT NULL,
@@ -297,7 +283,7 @@ CREATE TYPE user_role       AS ENUM ('REPORTER', 'OPERATOR');</code></pre>
     origin               solution_origin NOT NULL DEFAULT 'CURATED',
     status               solution_status NOT NULL DEFAULT 'PUBLISHED',
     content_hash         TEXT        NOT NULL,                  -- sha256 tytuł+summary+body
-    submitted_by         BIGINT      REFERENCES users(id),
+    submitted_by_name    TEXT,                                  -- nazwa osoby/organizacji, bez konta
     created_at           TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at           TIMESTAMPTZ NOT NULL DEFAULT now()
 );
@@ -318,7 +304,7 @@ CREATE INDEX solutions_title_trgm   ON solutions USING gin (title gin_trgm_ops);
 </table>
 </div>
 
-<h3>4.5 <code>solution_chunks</code> — jednostka wyszukiwania</h3>
+<h3>4.4 <code>solution_chunks</code> — jednostka wyszukiwania</h3>
 <p>Wyszukujemy po fragmentach, nie po całych rozwiązaniach. Dwa pola denormalizowane (<code>title</code>, <code>published</code>) — powody w ostrzeżeniu pod DDL, <strong>nie usuwaj ich</strong>.</p>
 <pre><code>CREATE TABLE solution_chunks (
     id          BIGSERIAL PRIMARY KEY,
@@ -356,7 +342,7 @@ CREATE INDEX solution_chunks_emb_idx ON solution_chunks
 <li>Krótkie rozwiązanie (<code>body</code> pusty lub poniżej 400 znaków) ma dokładnie jeden chunk. Nie wymuszaj sztucznego cięcia.</li>
 </ul>
 
-<h3>4.6 <code>report_clusters</code> — grupy problemów (skala zjawiska)</h3>
+<h3>4.5 <code>report_clusters</code> — grupy problemów (skala zjawiska)</h3>
 <pre><code>CREATE TABLE report_clusters (
     id               BIGSERIAL PRIMARY KEY,
     label            TEXT        NOT NULL,          -- tekst pierwszego zgłoszenia, skrócony
@@ -369,7 +355,6 @@ CREATE INDEX solution_chunks_emb_idx ON solution_chunks
     last_seen_at     TIMESTAMPTZ NOT NULL DEFAULT now(),
     operator_severity SMALLINT   CHECK (operator_severity BETWEEN 1 AND 5),
     operator_notes   TEXT,
-    operator_id      BIGINT      REFERENCES users(id),
     reviewed_at      TIMESTAMPTZ
 );
 
@@ -377,7 +362,7 @@ CREATE INDEX report_clusters_centroid_idx ON report_clusters
     USING hnsw (centroid vector_cosine_ops) WITH (m = 16, ef_construction = 64);
 CREATE INDEX report_clusters_count_idx ON report_clusters (member_count DESC);</code></pre>
 
-<h3>4.7 <code>reports</code> — zgłoszenia</h3>
+<h3>4.6 <code>reports</code> — zgłoszenia</h3>
 <pre><code>CREATE TABLE reports (
     id                BIGSERIAL PRIMARY KEY,
     raw_text          TEXT        NOT NULL,         -- dosłownie to, co wpisał użytkownik
@@ -396,7 +381,6 @@ CREATE INDEX report_clusters_count_idx ON report_clusters (member_count DESC);</
     top_solution_id   BIGINT      REFERENCES solutions(id),
     top_rerank_score  REAL,
     session_id        TEXT,                              -- losowy UUID z przeglądarki
-    submitted_by      BIGINT      REFERENCES users(id),
     status            report_status NOT NULL DEFAULT 'NEW',
     created_at        TIMESTAMPTZ NOT NULL DEFAULT now()
 );
@@ -411,7 +395,7 @@ CREATE INDEX reports_unmatched_idx ON reports (created_at DESC) WHERE NOT matche
 <p><strong><code>matched = false</code> to najcenniejsze dane w całym systemie.</strong> Zgłoszenie, dla którego pipeline <em>nie</em> znalazł rozwiązania, oznacza albo lukę w korpusie, albo realnie nieobsłużone wyzwanie regionu. Indeks <code>reports_unmatched_idx</code> istnieje właśnie po to, żeby Moduł 2 pokazał tę listę operatorowi na pierwszym ekranie.</p>
 </div>
 
-<h3>4.8 <code>search_events</code> — telemetria jakości</h3>
+<h3>4.7 <code>search_events</code> — telemetria jakości</h3>
 <pre><code>CREATE TABLE search_events (
     id                 BIGSERIAL PRIMARY KEY,
     report_id          BIGINT REFERENCES reports(id) ON DELETE SET NULL,
@@ -775,7 +759,7 @@ RETURNING id;</code></pre>
 
 <h2 id="s7">7. Kontrakt API <span class="badge b-stable">stable</span></h2>
 
-<p>Prefiks <code>/api</code>. Format błędów: <code>{"error": {"code": "...", "message": "..."}}</code>. Rola przez nagłówek <code>X-Demo-Role: REPORTER|OPERATOR</code> (ADR-007). Każda odpowiedź niesie <code>X-Request-Id</code>.</p>
+<p>Prefiks <code>/api</code>. Format błędów: <code>{"error": {"code": "...", "message": "..."}}</code>. Każda odpowiedź niesie <code>X-Request-Id</code>. <strong>Brak uwierzytelniania i autoryzacji</strong> — wszystkie endpointy są otwarte (ADR-007, konsekwencje w sekcji 12). CORS w <code>api/main.py</code> musi dopuszczać origin modułu frontendowego, w tym nagłówek <code>Accept: text/event-stream</code>.</p>
 
 <h3>7.1 <code>POST /api/chat</code> — główny endpoint, SSE</h3>
 
@@ -848,16 +832,16 @@ Accept: text/event-stream
 
 <div class="tablewrap">
 <table>
-<tr><th>Endpoint</th><th>Rola</th><th>Opis</th></tr>
-<tr><td><code>POST /api/reports</code></td><td>REPORTER</td><td>Zgłoszenie bez przechodzenia przez czat (formularz). To samo ciało co <code>/api/chat</code>, zwraca <code>{report_id, cluster_id, cluster_size}</code>, bez wyszukiwania</td></tr>
-<tr><td><code>GET /api/reports/{id}</code></td><td>REPORTER</td><td>Pojedyncze zgłoszenie. Bez <code>contact_email</code> dla roli <code>REPORTER</code></td></tr>
-<tr><td><code>POST /api/solutions</code></td><td>REPORTER</td><td>Nowe rozwiązanie do korpusu. Wymusza <code>origin=USER_SUBMITTED</code>, <code>status=PENDING_REVIEW</code>. Chunkowanie i embedding natychmiast, ale <code>published=false</code> — niewidoczne w wyszukiwaniu do zatwierdzenia</td></tr>
-<tr><td><code>GET /api/solutions/{id}</code></td><td>oba</td><td>Pełna karta rozwiązania</td></tr>
-<tr><td><code>GET /api/clusters</code></td><td>OPERATOR</td><td><strong>Kontrakt pod Moduł 2.</strong> Parametry: <code>sort=size|recent|unmatched</code>, <code>category</code>, <code>gmina</code>, <code>min_size</code>, <code>limit</code>, <code>offset</code>. Zwraca klaster + licznik + listę gmin + liczbę zgłoszeń bez dopasowania</td></tr>
-<tr><td><code>GET /api/clusters/{id}</code></td><td>OPERATOR</td><td>Klaster + do 20 zgłoszeń składowych (<code>raw_text</code>, gmina, data) + rozwiązania najczęściej dopasowywane w tym klastrze</td></tr>
-<tr><td><code>PATCH /api/clusters/{id}</code></td><td>OPERATOR</td><td><code>{label?, operator_severity?, operator_notes?, category?}</code> — <strong>ocena skali problemu przez pracownika Hubu</strong></td></tr>
-<tr><td><code>GET /api/taxonomy</code></td><td>oba</td><td>Lista wyzwań z etykietami polskimi — do filtrów w interfejsie</td></tr>
-<tr><td><code>POST /api/feedback</code></td><td>REPORTER</td><td><code>{search_event_id, solution_id?, helpful}</code> — kciuk w górę/dół, dopisuje do <code>search_events</code></td></tr>
+<tr><th>Endpoint</th><th>Odbiorca</th><th>Opis</th></tr>
+<tr><td><code>POST /api/reports</code></td><td>frontend</td><td>Zgłoszenie bez przechodzenia przez czat (formularz). To samo ciało co <code>/api/chat</code>, zwraca <code>{report_id, cluster_id, cluster_size}</code>, bez wyszukiwania</td></tr>
+<tr><td><code>GET /api/reports/{id}</code></td><td>frontend</td><td>Pojedyncze zgłoszenie. <code>contact_email</code> <strong>nigdy</strong> nie jest zwracany przez ten endpoint</td></tr>
+<tr><td><code>POST /api/solutions</code></td><td>frontend</td><td>Nowe rozwiązanie do korpusu. Wymusza <code>origin=USER_SUBMITTED</code>, <code>status=PENDING_REVIEW</code>. Chunkowanie i embedding natychmiast, ale <code>published=false</code> — niewidoczne w wyszukiwaniu do zatwierdzenia</td></tr>
+<tr><td><code>GET /api/solutions/{id}</code></td><td>frontend</td><td>Pełna karta rozwiązania</td></tr>
+<tr><td><code>GET /api/clusters</code></td><td>Moduł 2</td><td><strong>Kontrakt pod Moduł 2.</strong> Parametry: <code>sort=size|recent|unmatched</code>, <code>category</code>, <code>gmina</code>, <code>min_size</code>, <code>limit</code>, <code>offset</code>. Zwraca klaster + licznik + listę gmin + liczbę zgłoszeń bez dopasowania</td></tr>
+<tr><td><code>GET /api/clusters/{id}</code></td><td>Moduł 2</td><td>Klaster + do 20 zgłoszeń składowych (<code>raw_text</code>, gmina, data) + rozwiązania najczęściej dopasowywane w tym klastrze</td></tr>
+<tr><td><code>PATCH /api/clusters/{id}</code></td><td>Moduł 2</td><td><code>{label?, operator_severity?, operator_notes?, category?}</code> — <strong>ocena skali problemu przez pracownika Hubu</strong></td></tr>
+<tr><td><code>GET /api/taxonomy</code></td><td>oba</td><td>Lista wyzwań z etykietami polskimi — do filtrów i etykiet w interfejsie</td></tr>
+<tr><td><code>POST /api/feedback</code></td><td>frontend</td><td><code>{search_event_id, solution_id?, helpful}</code> — kciuk w górę/dół, dopisuje do <code>search_events</code></td></tr>
 <tr><td><code>GET /healthz</code></td><td>—</td><td><code>{db, embedding_provider, rerank_provider, embedding_meta_match}</code>. Status <code>503</code>, gdy metadane embeddingów nie zgadzają się z konfiguracją</td></tr>
 </table>
 </div>
@@ -866,77 +850,40 @@ Accept: text/event-stream
 <p><strong>Trzy endpointy klastrów to cały kontrakt Modułu 2.</strong> Zaimplementuj je i przetestuj na realnych danych, nawet jeśli nic ich jeszcze nie woła. To jedyna część Modułu 1, której poprawność sprawdzi dopiero ktoś inny — dlatego musi być gotowa, zanim Moduł 1 zostanie uznany za zamknięty.</p>
 </div>
 
-<h2 id="s8">8. Frontend — czat <span class="badge b-draft">draft</span></h2>
+<h2 id="s8">8. Kontrakt dla modułu frontendowego <span class="badge b-stable">stable</span></h2>
 
-<p>Jeden ekran. Bez routingu, bez biblioteki zarządzania stanem, bez frameworka komponentów — <code>useState</code> i CSS Modules wystarczą. Celem jest, by mieszkaniec bez wprawy cyfrowej umiał tego użyć <strong>bez instrukcji</strong>; wykluczenie cyfrowe jest jednym z wyzwań, które adresujemy, więc własny interfejs nie może go pogłębiać.</p>
+<p>Interfejs użytkownika powstaje w <strong>osobnym module</strong>. Moduł 1 nie dostarcza ani jednej linii kodu frontendowego, nie zawiera katalogu <code>web/</code> i nie jest weryfikowany w przeglądarce. Ta sekcja istnieje po to, żeby decyzje backendu nie zablokowały modułu frontendowego — spisuje, co backend gwarantuje i czego od frontendu wymaga.</p>
 
-<pre><code>┌──────────────────────────────────────────────────────────────┐
-│  Hub Innowacji Społecznych      [ REPORTER ▾ ]  (tryb demo)  │  &lt;- przełącznik roli
-├──────────────────────────────────────────────────────────────┤
-│                                                              │
-│   Opisz problem, który widzisz w swojej okolicy.             │  &lt;- stan pusty
-│   Zwykłymi słowami. Poszukamy rozwiązań, które gdzieś         │
-│   w Małopolsce już działają.                                 │
-│                                                              │
-│   [ Starsi sąsiedzi są samotni ]  [ Brak zajęć dla młodzieży ]│  &lt;- 3-4 przykłady
-│   [ Seniorzy nie radzą sobie z internetem ]                  │     jednym kliknięciem
-│                                                              │
-│  ─────────────────────────────────────────────────────────    │
-│                                                              │
-│                        ┌───────────────────────────────────┐ │
-│                        │ U nas starsi ludzie siedzą sami   │ │  &lt;- wiadomość użytkownika
-│                        └───────────────────────────────────┘ │
-│                                                              │
-│  ⠋ Szukam w bazie rozwiązań...                               │  &lt;- event: status
-│                                                              │
-│  W bazie są dwie inicjatywy wprost na ten problem.           │  &lt;- event: token (strumień)
-│  Telefon Życzliwości [1] działa w Wieliczce od 2023 roku,    │
-│  a Klub Seniora [2] prowadzi zajęcia stacjonarne.            │
-│                                                              │
-│  ┌─ [1] ────────────────────────────────── trafność 91% ─┐   │  &lt;- event: candidates
-│  │ Telefon Życzliwości dla seniorów                      │   │     (karty rysowane
-│  │ Fundacja Wspólna Sprawa · Wieliczka · Samotność       │   │      PRZED tekstem)
-│  │ Codzienne rozmowy wolontariuszy z osobami 65+...      │   │
-│  │ ▸ Kroki wdrożenia (4)        ↗ Źródło     👍  👎      │   │
-│  └───────────────────────────────────────────────────────┘   │
-│  ┌─ [2] ────────────────────────────────── trafność 74% ─┐   │
-│  │ Klub Seniora z programem międzygeneracyjnym           │   │
-│  └───────────────────────────────────────────────────────┘   │
-│                                                              │
-│  ℹ Ten problem zgłosiło już 9 osób z 4 gmin.                 │  &lt;- event: report_saved
-│                                                              │
-├──────────────────────────────────────────────────────────────┤
-│ [ Opisz problem...                                  ] [ → ]  │
-│ Gmina (opcjonalnie) ▾    Nie wpisuj danych osobowych         │
-└──────────────────────────────────────────────────────────────┘</code></pre>
-
-<h4>Komponenty</h4>
+<h4>Co Moduł 1 gwarantuje</h4>
 <div class="tablewrap">
 <table>
-<tr><th>Plik</th><th>Rola</th></tr>
-<tr><td><code>web/src/App.tsx</code></td><td>Układ, nagłówek, przełącznik roli, <code>session_id</code> w <code>localStorage</code></td></tr>
-<tr><td><code>web/src/components/ChatPanel.tsx</code></td><td>Lista wiadomości, autoscroll, stan pusty z przykładami</td></tr>
-<tr><td><code>web/src/components/Composer.tsx</code></td><td>Textarea (<code>Enter</code> wysyła, <code>Shift+Enter</code> nowa linia), wybór gminy, licznik znaków</td></tr>
-<tr><td><code>web/src/components/AssistantMessage.tsx</code></td><td>Strumieniowany tekst, znaczniki <code>[n]</code> jako klikalne odnośniki przewijające do karty</td></tr>
-<tr><td><code>web/src/components/SolutionCard.tsx</code></td><td>Karta, zwijane kroki wdrożenia, kciuki → <code>POST /api/feedback</code></td></tr>
-<tr><td><code>web/src/components/NoMatchMessage.tsx</code></td><td>Komunikat „nie mamy jeszcze rozwiązania" + potwierdzenie rejestracji zgłoszenia</td></tr>
-<tr><td><code>web/src/components/ClusterHint.tsx</code></td><td>Pasek „Ten problem zgłosiło już N osób z M gmin"</td></tr>
-<tr><td><code>web/src/lib/sse.ts</code></td><td>Klient SSE nad <code>fetch</code> + <code>ReadableStream</code></td></tr>
-<tr><td><code>web/src/lib/api.ts</code></td><td>Typy TS odbijające sekcję 7, jedno miejsce na <code>X-Demo-Role</code></td></tr>
+<tr><th>Gwarancja</th><th>Dlaczego to kontrakt, a nie szczegół</th></tr>
+<tr><td><code>candidates</code> przychodzi <strong>przed</strong> pierwszym <code>token</code></td><td>Frontend rysuje karty rozwiązań, nie czekając na streszczenie. Gdyby kolejność była odwrotna, interfejs musiałby buforować tekst — i czas do pierwszej treści wzrósłby o całą latencję LLM</td></tr>
+<tr><td>Numeracja <code>[n]</code> w streszczeniu == pozycja karty na liście <code>candidates</code></td><td>Pozwala zamienić <code>[2]</code> w klikalny odnośnik bez żadnego mapowania po stronie frontendu</td></tr>
+<tr><td>Każde <code>[n]</code> w strumieniu wskazuje istniejącą kartę</td><td>Walidacja cytowań po generacji (6.6) usuwa zmyślone odnośniki, zanim opuszczą backend. Frontend nie musi się przed nimi bronić</td></tr>
+<tr><td><code>no_match</code> zamiast <code>token</code> przy braku trafienia</td><td>Odrębne zdarzenie, nie puste streszczenie — frontend ma jawny sygnał do pokazania innego komunikatu</td></tr>
+<tr><td><code>report_saved</code> z <code>cluster_size</code> i listą gmin</td><td>Gotowe dane na komunikat „ten problem zgłosiło już N osób z M gmin". Najtańszy element demo o największym efekcie</td></tr>
+<tr><td><code>done</code> wysyłane <strong>zawsze</strong>, także po <code>error</code></td><td>Frontend może bezwarunkowo zamknąć wskaźnik ładowania na <code>done</code>, bez timeoutów</td></tr>
+<tr><td><code>SolutionCard</code> ma jeden kształt w całym API</td><td>Jeden typ TypeScript dla <code>/api/chat</code>, <code>/api/search</code> i <code>/api/solutions/{id}</code> — bez wariantów i pól warunkowych</td></tr>
+<tr><td><code>GET /api/taxonomy</code> z etykietami polskimi</td><td>Frontend nigdy nie hardkoduje nazw wyzwań; zmiana taksonomii nie wymaga jego przebudowy</td></tr>
 </table>
 </div>
 
 <div class="warn">
-<p><strong>SSE przez <code>POST</code>.</strong> Przeglądarkowe <code>EventSource</code> obsługuje wyłącznie <code>GET</code> i nie przyjmuje własnych nagłówków. Użyj <code>fetch</code> z <code>ReadableStream</code> i ręcznie parsuj ramki <code>event:</code> / <code>data:</code> rozdzielone <code>\n\n</code>. Nie przerabiaj <code>/api/chat</code> na <code>GET</code> z zapytaniem w query stringu — tekst zgłoszenia wylądowałby w logach serwera i historii przeglądarki (sekcja 12).</p>
+<p><strong>SSE przez <code>POST</code> — decyzja backendu z konsekwencją dla frontendu.</strong> Przeglądarkowe <code>EventSource</code> obsługuje wyłącznie <code>GET</code>, więc moduł frontendowy musi użyć <code>fetch</code> z <code>ReadableStream</code> i ręcznie parsować ramki <code>event:</code> / <code>data:</code> rozdzielone <code>\n\n</code>. <strong>Nie</strong> przerabiaj <code>/api/chat</code> na <code>GET</code> z tekstem w query stringu, żeby mu to uprościć — treść zgłoszenia wylądowałaby w logach serwera, historii przeglądarki i nagłówkach <code>Referer</code> (sekcja 12).</p>
 </div>
 
-<h4>Wymagania dostępności (nie opcjonalne)</h4>
+<h4>Czego Moduł 1 wymaga od modułu frontendowego</h4>
 <ul>
-<li><code>aria-live="polite"</code> na kontenerze odpowiedzi; strumieniowany tekst musi być czytany przez czytnik ekranu.</li>
-<li>Minimalny rozmiar tekstu 16 px, kontrast zgodny z WCAG AA, pola klikalne co najmniej 44×44 px.</li>
-<li>Pełna obsługa klawiaturą: <code>Tab</code> przez karty, <code>Enter</code> otwiera źródło.</li>
-<li>Działa na telefonie — spora część mieszkańców nie ma komputera.</li>
+<li><strong>Ostrzeżenie o danych osobowych</strong> trwale widoczne przy polu wpisywania: „Nie wpisuj imion, adresów ani danych o zdrowiu konkretnych osób". To wymóg z sekcji 12, nie sugestia — backend nie potrafi go wymusić.</li>
+<li><strong><code>session_id</code></strong> — losowy UUID generowany raz po stronie klienta i trzymany lokalnie. Backend go nie wydaje i nie waliduje; służy wyłącznie do grupowania zgłoszeń z jednej sesji w telemetrii.</li>
+<li><strong>Brak własnej logiki rankingu.</strong> Kolejność w <code>candidates</code> jest ostateczna. Frontend nie sortuje, nie filtruje i nie odcina wyników po <code>scores</code> — progi są skalibrowane na zestawie ewaluacyjnym (sekcja 10) i żyją w konfiguracji backendu.</li>
+<li><strong>Dostępność</strong> — wykluczenie cyfrowe jest jednym z wyzwań, które adresujemy, więc interfejs nie może go pogłębiać: <code>aria-live="polite"</code> na strumieniowanej odpowiedzi, kontrast WCAG AA, tekst od 16 px, pełna obsługa klawiaturą, działanie na telefonie.</li>
 </ul>
+
+<div class="note">
+<p><strong>Weryfikacja Modułu 1 bez frontendu.</strong> <code>curl -N -X POST localhost:8000/api/chat -H 'Content-Type: application/json' -d '{"message":"..."}'</code> musi pokazać pełny strumień zdarzeń w kolejności z sekcji 7.1. To jest definicja gotowości — nie „działa w przeglądarce".</p>
+</div>
 
 <h2 id="s9">9. Ingest korpusu <span class="badge b-draft">draft</span></h2>
 
@@ -990,7 +937,7 @@ python -m scripts.ingest --reembed-all              # po zmianie providera embed
 </ol>
 
 <div class="note">
-<p><strong>Dane startowe na demo.</strong> Zanim przyjdzie paczka od organizatora, utwórz <code>data/solutions/seed-demo.json</code> z 30–50 realistycznymi wpisami pokrywającymi wszystkie osiem kodów taksonomii, po 3–6 na kod. Bez tego nie da się uruchomić ani ewaluacji, ani frontendu. Wpisy oznaczone <code>"source_name": "SEED_DEMO"</code> — łatwo je potem usunąć jednym <code>DELETE</code>.</p>
+<p><strong>Dane startowe na demo.</strong> Zanim przyjdzie paczka od organizatora, utwórz <code>data/solutions/seed-demo.json</code> z 30–50 realistycznymi wpisami pokrywającymi wszystkie osiem kodów taksonomii, po 3–6 na kod. Bez tego nie da się uruchomić ani ewaluacji, ani ręcznego sprawdzenia API. Wpisy oznaczone <code>"source_name": "SEED_DEMO"</code> — łatwo je potem usunąć jednym <code>DELETE</code>.</p>
 </div>
 
 <h2 id="s10">10. Ewaluacja jakości <span class="badge b-draft">draft</span></h2>
@@ -1056,8 +1003,8 @@ no-match: 5 zapytań, poprawnie odrzucone 4/5, próg 0.35
 <tr><td><code>LLM_ENABLED</code></td><td><code>true</code></td><td><code>false</code> ⇒ same karty, bez streszczenia</td></tr>
 <tr><td><code>LLM_MODEL</code></td><td><code>claude-sonnet-5</code></td><td>Model generujący streszczenie</td></tr>
 <tr><td><code>FTS_CONFIG</code></td><td><code>polish_simple</code></td><td>Punkt podmiany na hunspell (sekcja 5)</td></tr>
-<tr><td><code>RATE_LIMIT_CHAT</code></td><td><code>20/minute</code></td><td>Na adres IP</td></tr>
-<tr><td><code>DEMO_ROLE_HEADER_ENABLED</code></td><td><code>true</code></td><td>Wyłączane razem z włączeniem prawdziwego auth</td></tr>
+<tr><td><code>RATE_LIMIT_CHAT</code></td><td><code>20/minute</code></td><td>Na adres IP — jedyna ochrona endpointów przy braku auth</td></tr>
+<tr><td><code>CORS_ORIGINS</code></td><td><code>http://localhost:5173</code></td><td>Origin modułu frontendowego, lista po przecinku</td></tr>
 </table>
 </div>
 
@@ -1077,8 +1024,8 @@ LLM_ENABLED=false</code></pre>
 <div class="tablewrap">
 <table>
 <tr><th>Zasada</th><th>Realizacja w kodzie</th></tr>
-<tr><td>Zgłoszenie domyślnie anonimowe</td><td><code>contact_email</code> i <code>submitted_by</code> dopuszczają <code>NULL</code>; interfejs nie prosi o dane</td></tr>
-<tr><td>Jawne ostrzeżenie przy polu wpisywania</td><td>„Nie wpisuj imion, adresów ani danych o zdrowiu konkretnych osób" — stale widoczne pod textarea, nie w regulaminie</td></tr>
+<tr><td>Zgłoszenie domyślnie anonimowe</td><td><code>contact_email</code> i <code>submitted_by_name</code> dopuszczają <code>NULL</code>; API nie wymaga żadnych danych identyfikujących, bo nie ma kont użytkowników</td></tr>
+<tr><td>Jawne ostrzeżenie przy polu wpisywania</td><td>Wymóg przekazany modułowi frontendowemu (sekcja 8): „Nie wpisuj imion, adresów ani danych o zdrowiu konkretnych osób" — stale widoczne, nie w regulaminie. Backend tego nie wymusi</td></tr>
 <tr><td>Brak treści zgłoszeń w logach</td><td>Logowany <code>report_id</code> i <code>len(text)</code>, nigdy <code>raw_text</code>. Filtr logów odrzucający klucze <code>raw_text</code>, <code>message</code>, <code>contact_email</code></td></tr>
 <tr><td>Brak treści w URL-ach</td><td><code>/api/chat</code> wyłącznie <code>POST</code>; <code>/api/search</code> z <code>GET</code> to <strong>narzędzie debugowania</strong> — wyłącz w konfiguracji produkcyjnej</td></tr>
 <tr><td>Retencja</td><td><code>raw_text</code> starszy niż 24 miesiące ⇒ czyszczony, embedding i klaster zostają (statystyka przeżywa treść). Skrypt <code>scripts/retention.py</code>, do uruchomienia z crona</td></tr>
@@ -1090,19 +1037,25 @@ LLM_ENABLED=false</code></pre>
 </div>
 
 <div class="danger">
-<p><strong><code>X-Demo-Role</code> nie jest zabezpieczeniem.</strong> Dowolny użytkownik może podać <code>OPERATOR</code> i odczytać wszystkie zgłoszenia wraz z adresami e-mail. Dopuszczalne na hackathonie z danymi testowymi; <strong>blokujące</strong> dla wdrożenia z danymi realnych mieszkańców. Flaga <code>DEMO_ROLE_HEADER_ENABLED</code> istnieje, żeby to wyłączyć jednym ruchem razem z włączeniem prawdziwego uwierzytelniania. Dopisz to wprost na slajdzie o dalszych krokach — jury to doceni bardziej niż przemilczenie.</p>
+<p><strong>Moduł 1 nie ma uwierzytelniania ani autoryzacji — i to jest świadoma decyzja (ADR-007), nie przeoczenie.</strong> Każdy, kto zna adres API, może odczytać wszystkie zgłoszenia i klastry oraz nadpisać ocenę skali przez <code>PATCH /api/clusters/{id}</code>. Dopuszczalne na hackathonie z danymi testowymi. <strong>Blokujące</strong> dla wdrożenia z danymi realnych mieszkańców.</p>
+<p>Dwie rzeczy, które to ograniczają już teraz i których <strong>nie wolno</strong> pominąć:</p>
+<ul>
+<li><code>contact_email</code> nie wychodzi z żadnego endpointu <code>GET</code> — zostaje w bazie, dostępny tylko bezpośrednio z <code>psql</code>.</li>
+<li><code>raw_text</code> nie trafia do logów ani do URL-i, więc otwarte API nie oznacza wycieku treści przez infrastrukturę.</li>
+</ul>
+<p>Dopisz brak warstwy tożsamości wprost na slajdzie o dalszych krokach — nazwana i ograniczona luka wypada lepiej niż przemilczana.</p>
 </div>
 
 <h2 id="s13">13. Struktura katalogów i kolejność prac <span class="badge b-stable">stable</span></h2>
 
 <pre><code>hackyeah-2026/
-├── docker-compose.yml           # db (pgvector/pgvector:pg16) + api + web
+├── docker-compose.yml           # db (pgvector/pgvector:pg16) + api
 ├── Makefile                     # up, migrate, ingest, eval, test, fmt
 ├── .env.example                 # wszystkie zmienne z sekcji 11
 ├── docs/
 │   └── module-1-matchmaking.html # ten dokument
 ├── api/
-│   ├── main.py                  # FastAPI, CORS, middleware roli, X-Request-Id
+│   ├── main.py                  # FastAPI, CORS, X-Request-Id, rate limiting
 │   ├── config.py                # pydantic-settings, sekcja 11
 │   ├── db.py                    # silnik async, sesje
 │   ├── models.py                # modele SQLAlchemy, sekcja 4
@@ -1112,7 +1065,7 @@ LLM_ENABLED=false</code></pre>
 │   │   ├── search.py            # GET  /api/search (debug)
 │   │   ├── reports.py           # POST/GET /api/reports
 │   │   ├── solutions.py         # POST/GET /api/solutions
-│   │   ├── clusters.py          # GET/PATCH /api/clusters  <- kontrakt Modułu 2
+│   │   ├── clusters.py          # GET/PATCH /api/clusters  &lt;- kontrakt Modułu 2
 │   │   └── meta.py              # /api/taxonomy, /api/feedback, /healthz
 │   ├── pipeline/
 │   │   ├── preprocess.py        # 6.1
@@ -1130,10 +1083,10 @@ LLM_ENABLED=false</code></pre>
 │   │   ├── rerank_cohere.py
 │   │   ├── rerank_local.py
 │   │   └── llm.py
-│   ├── chunking.py              # 4.5
+│   ├── chunking.py              # 4.4
 │   └── migrations/              # Alembic
 ├── data/
-│   ├── taxonomy.json            # 4.3
+│   ├── taxonomy.json            # 4.2
 │   ├── gminy-malopolska.json    # 6.1
 │   ├── synonyms.json            # 5, 6.1
 │   └── solutions/
@@ -1147,8 +1100,6 @@ LLM_ENABLED=false</code></pre>
 ├── eval/
 │   ├── queries.jsonl            # 10
 │   └── results.csv
-├── web/
-│   └── src/                     # 8
 └── tests/
     ├── test_fusion.py           # RRF na sztucznych listach - czysta funkcja, testuj ją
     ├── test_preprocess.py       # ekstrakcja gmin, zdejmowanie wstępów
@@ -1168,14 +1119,13 @@ LLM_ENABLED=false</code></pre>
 <tr><td>6</td><td>Fuzja RRF + reranking</td><td><code>make eval</code> działa i <code>rrf</code> bije oba pojedyncze tory</td></tr>
 <tr><td>7</td><td><code>POST /api/chat</code> ze SSE + generacja RAG + walidacja cytowań</td><td><code>curl -N</code> pokazuje strumień zdarzeń w kolejności z 7.1</td></tr>
 <tr><td>8</td><td>Zapis zgłoszeń + klastrowanie</td><td>Dwa podobne zgłoszenia trafiają do jednego klastra, trzecie odmienne do nowego</td></tr>
-<tr><td>9</td><td>Frontend czatu</td><td>Pełna ścieżka w przeglądarce: wpisanie problemu → karty → pasek klastra</td></tr>
-<tr><td>10</td><td>Endpointy <code>/api/clusters</code> (kontrakt Modułu 2)</td><td>Zwracają realne klastry z <code>member_count &gt; 1</code>; <code>PATCH</code> zapisuje ocenę skali</td></tr>
-<tr><td>11</td><td>Kalibracja: <code>MIN_RERANK_SCORE</code>, <code>CLUSTER_SIM_THRESHOLD</code>, <code>RRF_K</code></td><td>Wyniki zapisane w <code>eval/results.csv</code>, wartości w <code>.env</code></td></tr>
+<tr><td>9</td><td>Endpointy <code>/api/clusters</code> (kontrakt Modułu 2)</td><td>Zwracają realne klastry z <code>member_count &gt; 1</code>; <code>PATCH</code> zapisuje ocenę skali</td></tr>
+<tr><td>10</td><td>Kalibracja: <code>MIN_RERANK_SCORE</code>, <code>CLUSTER_SIM_THRESHOLD</code>, <code>RRF_K</code></td><td>Wyniki zapisane w <code>eval/results.csv</code>, wartości w <code>.env</code></td></tr>
 </table>
 </div>
 
 <div class="note">
-<p><strong>Najkrótsza działająca ścieżka</strong>, jeśli czasu jest mało: kroki 1–7 z <code>RERANK_PROVIDER=noop</code> i <code>LLM_ENABLED=false</code>. Daje pełny hybrydowy pipeline z kartami wyników — to już kompletny, demonstrowalny produkt. Reranking i generacja to warstwy dodawane na wierzch, nie fundament.</p>
+<p><strong>Najkrótsza działająca ścieżka</strong>, jeśli czasu jest mało: kroki 1–6 z <code>RERANK_PROVIDER=noop</code> i <code>LLM_ENABLED=false</code>. Daje pełny hybrydowy pipeline zwracający trafne rozwiązania przez <code>GET /api/search</code> — moduł frontendowy ma już wtedy na czym pracować. Reranking, SSE i generacja to warstwy dodawane na wierzch, nie fundament.</p>
 </div>
 
 <h2 id="s14">14. Rejestr decyzji (ADR) <span class="badge b-stable">stable</span></h2>
@@ -1185,13 +1135,14 @@ LLM_ENABLED=false</code></pre>
 <div class="tablewrap">
 <table>
 <tr><th>ADR</th><th>Decyzja</th><th>Dlaczego</th><th>Odrzucono</th></tr>
-<tr><td><strong>001</strong></td><td>Python 3.12 + FastAPI + SQLAlchemy 2.0 async; frontend React + Vite + TS</td><td>Biblioteki embeddingów i rerankerów są natywnie pythonowe; SSE w FastAPI to kilka linii</td><td><em>Next.js full-stack</em> — brak sensownego wsparcia lokalnych modeli. <em>Spring Boot</em> — najwięcej boilerplate'u, najdroższy pivot</td></tr>
+<tr><td><strong>001</strong></td><td>Python 3.12 + FastAPI + SQLAlchemy 2.0 async</td><td>Biblioteki embeddingów i rerankerów są natywnie pythonowe; SSE w FastAPI to kilka linii</td><td><em>Next.js full-stack</em> — brak sensownego wsparcia lokalnych modeli. <em>Spring Boot</em> — najwięcej boilerplate'u, najdroższy pivot</td></tr>
 <tr><td><strong>002</strong></td><td>Wyłącznie PostgreSQL 16: <code>pgvector</code> + wbudowany FTS</td><td>Jedna baza, jedno <code>docker-compose</code>, transakcyjny zapis zgłoszeń razem z wyszukiwaniem, RRF liczony bez sieci</td><td><em>Qdrant + Postgres</em> — lepszy hybrid out-of-the-box, ale drugi serwis i rozjazd spójności. <em>Elasticsearch</em> — najlepszy polski analizator, ale ciężki i wolny w setupie</td></tr>
 <tr><td><strong>003</strong></td><td>Abstrakcja <code>EmbeddingProvider</code> / <code>RerankProvider</code>: implementacja API (domyślna) + lokalna</td><td>Demo nie może zależeć od wifi na sali i od ważności klucza API</td><td><em>Tylko API</em> — ryzyko na prezentacji. <em>Tylko lokalnie</em> — kilka GB pobierania i wolne na CPU</td></tr>
 <tr><td><strong>004</strong></td><td>Jeden wymiar wektora dla wszystkich providerów: <strong>1024</strong></td><td><code>text-embedding-3-large</code> z parametrem <code>dimensions=1024</code> (Matryoshka) ma ten sam wymiar co <code>bge-m3</code>. Bez tego przełączenie providera to migracja kolumny, a nie zmiana zmiennej</td><td><em>Natywne 3072</em> — uniemożliwia fallback lokalny. <em>Dwie kolumny wektorowe</em> — podwójny indeks i podwójny koszt zapisu</td></tr>
 <tr><td><strong>005</strong></td><td>Odpowiedź = RAG: streszczenie PL + twarde cytowania <code>[n]</code>, streaming SSE, wyłącznie na podstawie kontekstu</td><td>Czat bez odpowiedzi tekstowej nie jest czatem; cytowania i próg odrzucenia blokują halucynacje</td><td><em>Same karty</em> — bezpieczniejsze, ale słabsze w demo. <em>LLM tylko do doprecyzowania</em> — nie wykorzystuje kontekstu, który i tak mamy</td></tr>
 <tr><td><strong>006</strong></td><td>Skala problemu = przyrostowe klastrowanie semantyczne zgłoszeń, stały próg cosinusowy</td><td>Mapa wyzwań powstaje z realnych zgłoszeń, a nie z ankiety; wykrywa też wyzwania nienazwane w taksonomii</td><td><em>Tylko tagowanie LLM do taksonomii</em> — prostsze, ale niewidzi nowych zjawisk. <em>Oba naraz</em> — więcej pracy niż budżet Modułu 1 (wraca jako backlog)</td></tr>
-<tr><td><strong>007</strong></td><td>Brak logowania w MVP: role przez <code>X-Demo-Role</code>, schemat gotowy na realny auth</td><td><code>users</code>, <code>submitted_by</code> i <code>operator_id</code> już istnieją — włączenie auth nie rusza modelu danych</td><td><em>JWT + hasła</em> — pięć endpointów i dwa ekrany kosztem pipeline'u. <em>Magic link</em> — wymaga SMTP, zawodny offline</td></tr>
+<tr><td><strong>007</strong></td><td>Moduł 1 nie zawiera żadnej warstwy tożsamości: brak kont, brak ról technicznych, brak uwierzytelniania i autoryzacji. Endpointy otwarte</td><td>Cały budżet modułu idzie w jakość wyszukiwania. Brak tabeli <code>users</code> i kolumn ról oznacza zero martwego kodu i zero fałszywego poczucia bezpieczeństwa</td><td><em>Role przez nagłówek demo</em> — wygląda jak kontrola dostępu, nią nie jest; mylące. <em>JWT + hasła</em> — pięć endpointów kosztem pipeline'u. <em>Magic link</em> — wymaga SMTP, zawodny offline</td></tr>
+<tr><td><strong>008</strong></td><td>Frontend w osobnym module; Moduł 1 kończy się na kontrakcie API</td><td>Dwie warstwy rozwijane równolegle bez blokowania się; definicja gotowości Modułu 1 to przechodzące <code>curl</code> i testy, nie wygląd ekranu</td><td><em>Backend i frontend w jednym module</em> — interfejs zawsze zjada czas przeznaczony na jakość wyszukiwania</td></tr>
 </table>
 </div>
 
@@ -1202,11 +1153,11 @@ LLM_ENABLED=false</code></pre>
 <div class="tablewrap">
 <table>
 <tr><th>Moduł / temat</th><th>Co</th><th>Co już jest przygotowane w Module 1</th></tr>
+<tr><td><strong>Moduł frontendowy</strong></td><td>Ekran czatu dla mieszkańca, karty rozwiązań, obsługa strumienia SSE</td><td>Cała sekcja 8: gwarancje kolejności zdarzeń, jeden kształt <code>SolutionCard</code>, <code>/api/taxonomy</code>, walidacja cytowań po stronie backendu</td></tr>
 <tr><td><strong>Moduł 2 — dashboard operatora</strong></td><td>Lista klastrów po skali, triage, mapa wyzwań po gminach, trendy czasowe, kolejka <code>PENDING_REVIEW</code>, lista zgłoszeń bez dopasowania</td><td><code>GET/PATCH /api/clusters</code>, <code>report_clusters.operator_*</code>, <code>reports_unmatched_idx</code></td></tr>
 <tr><td><strong>Moduł 3 — partnerstwa</strong></td><td>Kojarzenie organizacji między sobą: kto ma doświadczenie potrzebne komu</td><td><code>solutions.organization</code>, <code>contact</code>, embeddingi rozwiązań</td></tr>
 <tr><td><strong>Moduł 4 — Canvas Innowacji</strong></td><td>Plansze Canvas jako narzędzie w aplikacji, wypełniane dla klastra bez rozwiązania</td><td><code>implementation_steps</code> jako JSONB, klastry z <code>matched=false</code></td></tr>
-<tr><td>Rozbicie roli „reszta"</td><td><code>NGO</code>, <code>CUS</code>, <code>SAMORZAD</code>, <code>MENTOR</code>, <code>EXPERT</code> — różne uprawnienia i widoki</td><td><code>user_role</code> jako ENUM — rozszerzalny jedną migracją</td></tr>
-<tr><td>Prawdziwe uwierzytelnianie</td><td>JWT albo OIDC samorządowy, wyłączenie <code>X-Demo-Role</code></td><td><code>users.password_hash</code>, <code>DEMO_ROLE_HEADER_ENABLED</code></td></tr>
+<tr><td>Konta, role i uwierzytelnianie</td><td>Tabela użytkowników, uwierzytelnianie (JWT albo OIDC samorządowy), rozbicie „reszty" na <code>NGO</code> / <code>CUS</code> / <code>SAMORZAD</code> / <code>MENTOR</code> / <code>EXPERT</code> z osobnymi uprawnieniami</td><td>Celowo <strong>nic</strong> (ADR-007). <code>submitted_by_name</code> jest zwykłym tekstem, więc nie trzeba migrować fałszywych kluczy obcych. Dodanie tożsamości to nowa tabela i middleware, bez przebudowy pipeline'u</td></tr>
 <tr><td>Polski stemming</td><td>Słownik hunspell <code>pl_PL</code> lub <code>pg_search</code> (BM25)</td><td><code>FTS_CONFIG</code> jako zmienna, tor leksykalny odizolowany w <code>lexical.py</code></td></tr>
 <tr><td>Pętla samouczenia</td><td>Rozwiązane zgłoszenia awansują do korpusu jako <code>PROMOTED_FROM_REPORT</code></td><td>Wartość ENUM już istnieje, nieużywana</td></tr>
 <tr><td>Hybrydowe wektory rzadkie</td><td><code>bge-m3</code> zwraca też wektory rzadkie — trzeci tor fuzji</td><td>RRF przyjmuje dowolną liczbę torów (<code>tracks: dict</code>)</td></tr>
@@ -1219,7 +1170,8 @@ LLM_ENABLED=false</code></pre>
 <hr>
 
 <footer>
-<p><strong>Moduł 1 — Matchmaking społeczny</strong> · v0.1 · 2026-10-03 · Małopolski Hub Innowacji Społecznych.</p>
+<p><strong>Moduł 1 — Matchmaking społeczny</strong> · v0.2 · 2026-10-03 · Małopolski Hub Innowacji Społecznych.</p>
+<p><strong>v0.2</strong> — frontend wyjęty do osobnego modułu (sekcja 8 to teraz kontrakt, nie implementacja); warstwa tożsamości usunięta w całości: tabela <code>users</code>, typ <code>user_role</code>, nagłówek <code>X-Demo-Role</code> i powiązane klucze obce (ADR-007 przepisany, dodany ADR-008).</p>
 <p>Dokument iteracyjny. Zmiany: nowa sekcja na końcu, wpis w spisie treści, ADR w sekcji 14 przy zmianie decyzji. Podnieś wersję w nagłówku i w stopce.</p>
 </footer>
 
