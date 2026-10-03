@@ -22,6 +22,13 @@ import { ReportsPage } from "@/pages/panel/ReportsPage";
 import { SolutionReviewPage } from "@/pages/panel/SolutionReviewPage";
 import { SolutionsQueuePage } from "@/pages/panel/SolutionsQueuePage";
 import { TrendsPage } from "@/pages/panel/TrendsPage";
+// Moduł 3: Kreator pomysłów
+import { ApplicationPage } from "@/pages/ApplicationPage";
+import { CallsPage } from "@/pages/CallsPage";
+import { CanvasPage } from "@/pages/CanvasPage";
+import { MyIdeasPage } from "@/pages/MyIdeasPage";
+import { PanelIdeaReviewPage } from "@/pages/panel/IdeaReviewPage";
+import { PanelIdeasPage } from "@/pages/panel/IdeasPage";
 
 /**
  * Po zmianie ścieżki (nie przy pierwszym renderze) przenosi fokus na h1 nowej strony,
@@ -60,7 +67,14 @@ export function App() {
         <Route element={<RequireRole requiredRole="reporter" />}>
           <Route path="mam-pomysl" element={<IdeaPage />} />
           <Route path="moje-zgloszenia" element={<MyReportsPage />} />
+          {/* Moduł 3: Kreator pomysłów */}
+          <Route path="mam-pomysl/:id" element={<IdeaPage />} />
+          <Route path="mam-pomysl/:id/kanwa" element={<CanvasPage />} />
+          <Route path="moje-pomysly" element={<MyIdeasPage />} />
+          <Route path="wnioski/:id" element={<ApplicationPage />} />
         </Route>
+        {/* Moduł 3: lista naborów jest publiczna */}
+        <Route path="nabory" element={<CallsPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
       <Route path="panel" element={<RequireRole requiredRole="administrator" layout="panel" />}>
@@ -73,6 +87,9 @@ export function App() {
         <Route path="testy/nowy" element={<PanelInnovationTestCreatePage />} />
         <Route path="testy/:id" element={<PanelInnovationTestManagePage />} />
         <Route path="trendy" element={<TrendsPage />} />
+        {/* Moduł 3: Kreator pomysłów */}
+        <Route path="pomysly" element={<PanelIdeasPage />} />
+        <Route path="pomysly/:id" element={<PanelIdeaReviewPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

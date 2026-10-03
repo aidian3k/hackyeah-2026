@@ -3,11 +3,16 @@ import { useInboxCount } from "@/hooks/useInboxCount";
 import { plural } from "@/lib/format";
 import { MODULE_NAMES } from "@/lib/modules";
 import { Banner } from "./Banner";
+// Moduł 3: Kreator pomysłów
+import { useIdeasCount } from "@/hooks/useIdeasCount";
 
 /** Rama Panelu administratora: ten sam baner (paski raz na ekranie), nawigacja panelu z licznikiem „Nowe”. */
 export function PanelLayout() {
   const inboxCount = useInboxCount();
   const showBadge = inboxCount !== null && inboxCount > 0;
+  // Moduł 3: pomysły wysłane do Hubu (SUBMITTED), czekające na ocenę.
+  const ideasCount = useIdeasCount();
+  const showIdeasBadge = ideasCount !== null && ideasCount > 0;
 
   return (
     <>
@@ -39,6 +44,21 @@ export function PanelLayout() {
           </NavLink>
           <NavLink to="/panel/testy" className="ds-nav__item">
             Testerzy
+          </NavLink>
+          {/* Moduł 3: Kreator pomysłów */}
+          <NavLink to="/panel/pomysly" className="ds-nav__item">
+            Pomysły
+            {showIdeasBadge && (
+              <>
+                {" "}
+                <span className="ds-badge" aria-hidden="true">
+                  {ideasCount}
+                </span>
+                <span className="ds-sr-only">
+                  , {ideasCount} {plural(ideasCount, "nowy pomysł", "nowe pomysły", "nowych pomysłów")}
+                </span>
+              </>
+            )}
           </NavLink>
           <NavLink to="/panel/trendy" className="ds-nav__item">
             Trendy

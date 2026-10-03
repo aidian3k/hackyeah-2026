@@ -94,3 +94,84 @@ export function addMyReport(r: MyReport): void {
 export function removeMyReport(id: number): void {
   saveMyReports(listMyReports().filter((x) => x.report_id !== id));
 }
+
+// --- Moduł 3: Kreator pomysłów — „Moje pomysły” (wzór „Moich zgłoszeń”) ---
+// Pomysł czyta się po samym id (bez autoryzacji); w pamięci tylko id, data, skrót tytułu
+// i liczba przeczytanych odpowiedzi Hubu (porównywana z reply_count z API).
+
+const IDEAS_KEY = "splot_ideas";
+const MAX_IDEAS = 20;
+export const IDEA_TITLE_EXCERPT_CHARS = 80;
+
+export interface MyIdea {
+  idea_id: number;
+  created_at: string; // ISO
+  title_excerpt: string; // pierwsze 80 znaków tytułu
+  seen_replies: number;
+}
+
+/** Zdarzenie okna wysyłane po każdej zmianie listy — odświeża znacznik „Nowa odpowiedź”. */
+export const MY_IDEAS_EVENT = "splot:ideas";
+
+function isMyIdea(x: unknown): x is MyIdea {
+  if (!x || typeof x !== "object") return false;
+  const r = x as Record<string, unknown>;
+  return (
+    typeof r.idea_id === "number" &&
+    typeof r.created_at === "string" &&
+    typeof r.title_excerpt === "string" &&
+    typeof r.seen_replies === "number"
+  );
+}
+
+export function listMyIdeas(): MyIdea[] {
+  try {
+    const raw = localStorage.getItem(IDEAS_KEY);
+    if (!raw) return [];
+    const parsed: unknown = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed.filter(isMyIdea).slice(0, MAX_IDEAS) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveMyIdeas(list: MyIdea[]): void {
+  try {
+    localStorage.setItem(IDEAS_KEY, JSON.stringify(list.slice(0, MAX_IDEAS)));
+  } catch {
+    // pamięć niedostępna
+  }
+  try {
+    window.dispatchEvent(new Event(MY_IDEAS_EVENT));
+  } catch {
+    // brak okna (np. prerender) — nic do odświeżenia
+  }
+}
+
+/**
+ * Dodaje pomysł na początek listy albo aktualizuje skrót tytułu istniejącego wpisu
+ * (z zachowaniem `created_at` i `seen_replies`).
+ */
+export function rememberIdea(idea: { id: number; title: string; created_at: string }): void {
+  const list = listMyIdeas();
+  const existing = list.find((x) => x.idea_id === idea.id);
+  const entry: MyIdea = {
+    idea_id: idea.id,
+    created_at: existing?.created_at ?? idea.created_at,
+    title_excerpt: idea.title.trim().slice(0, IDEA_TITLE_EXCERPT_CHARS),
+    seen_replies: existing?.seen_replies ?? 0,
+  };
+  saveMyIdeas([entry, ...list.filter((x) => x.idea_id !== idea.id)]);
+}
+
+/** Zapamiętuje, że autor widział `count` odpowiedzi tego pomysłu. */
+export function markRepliesSeen(id: number, count: number): void {
+  const list = listMyIdeas();
+  const entry = list.find((x) => x.idea_id === id);
+  if (!entry || entry.seen_replies === count) return;
+  saveMyIdeas(list.map((x) => (x.idea_id === id ? { ...x, seen_replies: count } : x)));
+}
+
+export function forgetIdea(id: number): void {
+  saveMyIdeas(listMyIdeas().filter((x) => x.idea_id !== id));
+}

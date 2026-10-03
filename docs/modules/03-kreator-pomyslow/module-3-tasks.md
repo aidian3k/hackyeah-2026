@@ -35,14 +35,14 @@ Zadania K00–K13: backend K00–K06, frontend K07–K13. Generator wniosków (K
 
 - [x] K00 · Definicja Social Canvas `data/social-canvas.json` · zależy: — — zrobione: claude-K00, 26 bloków, 3 arkusze
 - [x] K01 · Fundament: SQL `db/m3-kreator.sql`, modele, schematy, konfiguracja, rejestracja routerów · zależy: — — zrobione: claude-K01, make db-m3 idempotentny
-- [~] K02 · Kanwa (backend): pełna walidacja, scalanie, postęp, synchronizacja etapu · zależy: K00, K01 — agent: claude-K02, 2026-10-04 01:34
-- [~] K03 · Pomysły (backend): CRUD, wysłanie, status, odpowiedzi · zależy: K01 — agent: claude-K03, 2026-10-04 01:34
-- [ ] K04 · Asystent i podobne innowacje (provider + `/assist` + `/similar`) · zależy: K02, K03
+- [x] K02 · Kanwa (backend): pełna walidacja, scalanie, postęp, synchronizacja etapu · zależy: K00, K01 — zrobione: claude-K02, walidacja 26 bloków, PATCH z blokadą FOR UPDATE
+- [x] K03 · Pomysły (backend): CRUD, wysłanie, status, odpowiedzi · zależy: K01 — zrobione: claude-K03, 8 endpointów, has_contact liczone w SQL
+- [~] K04 · Asystent i podobne innowacje (provider + `/assist` + `/similar`) · zależy: K02, K03 — agent: claude-K04, 2026-10-04 01:37
 - [ ] K05 · Nabory i wnioski (backend, SHOULD): 2 pliki naborów, wniosek z prefill, szkic AI · zależy: K02, K03, K04
-- [ ] K06 · Seed demo pomysłów · zależy: K02, K03
-- [~] K07 · Front: fundament (typy, klient, pamięć, trasy, nawigacja z licznikami) + komponenty asystenta · zależy: K01 — agent: claude-K07, 2026-10-04 01:34
+- [x] K06 · Seed demo pomysłów · zależy: K02, K03 — zrobione: claude-K06, 4 pomysły demo, docker compose exec -T api python -m scripts.seed_ideas
+- [x] K07 · Front: fundament (typy, klient, pamięć, trasy, nawigacja z licznikami) + komponenty asystenta · zależy: K01 — zrobione: claude-K07, typy/klient/trasy/nawigacja, stuby stron
 - [ ] K08 · Front: fiszka 2.0 + wejście z „nie wiem” · zależy: K07, K03, K04
-- [ ] K09 · Front: komponenty bloków kanwy (w tym Venn, serca, macierz wpływu) · zależy: K07
+- [~] K09 · Front: komponenty bloków kanwy (w tym Venn, serca, macierz wpływu) · zależy: K07 — agent: claude-K09, 2026-10-04 01:42
 - [ ] K10 · Front: mapa Social Canvas z autozapisem · zależy: K09, K02
 - [ ] K11 · Front: „Moje pomysły” + panel pomysłów + powiadomienia · zależy: K07, K10, K03
 - [ ] K12 · Front: nabory i edytor wniosku z drukiem (SHOULD) · zależy: K07, K05
@@ -878,3 +878,6 @@ _(dopisuj na końcu: `- [Kxx → Kyy] opis`)_
   - `api/providers/llm.py` jest zamrożony (M4 dodał `complete()`); asystent M3 zostaje w osobnym `api/providers/llm_assist.py`.
   - Wspólne pliki (`api/config.py`, `api/main.py`, `Makefile`, `.env.example`, `App.tsx`, `types.ts`, `client.ts`, `labels.ts`) — dopisuj blokiem z komentarzem `Moduł 3`. K01 i K07 wypchnij na master jak najwcześniej.
 - [K01 → K03, K05] Dodatkowe schematy żądań w `api/kreator/schemas.py`: `GrantApplicationCreate {call_id}` (POST `/api/ideas/{id}/applications`) i `DraftRequest {section_id}` (POST `/api/applications/{id}/draft`). Routery importowane w `api/main.py` jako `m3_ideas`, `m3_canvas`, `m3_assist`, `m3_applications`. Walidacja gminy (`GMINY`) i kategorii (`challenge_taxonomy`) należy do routerów (K03).
+- [K02 → K03, K04, K06, K10] Kanwa: `canvas_percent` = `progress(await load_canvas(session, id)).percent` (`api.kreator.canvas`). Usunięcie `solution_readiness` (`null`) cofa `ideas.stage` do `IDEA`. K04: kontekst z `describe_block(block_map()[id], value)`, puste bloki dają `""`. K06: walidacja seedu przez `merge_blocks({}, blocks)`. K10: autozapis nie wysyła niepełnych partnerów (bez nazwy albo roli → 422 `partners: partner N: …`); plansza bierze `blocks` z odpowiedzi PATCH (wartości znormalizowane). `multi` przyjmuje tylko klucze `selected` i `other`.
+- [K03 → K04, K06, K08, K11] Pomysły: `get_idea_or_404(session, id)` i `idea_detail(session, id)` w `api.routers.ideas` (K04 może ich użyć; wiersz `Idea` zawiera `contact_email` — nie do promptu). Odpowiedź Hubu przesuwa tylko `SUBMITTED → IN_REVIEW`, więc seed (K06) dla `INVITED`: najpierw odpowiedź, potem status. Kod błędu niepełnej fiszki `IDEA_INCOMPLETE`, komunikat wymienia brakujące pola. `stage` w POST/PATCH synchronizuje blok `solution_readiness` kanwy. Status ustawiony z `DRAFT` przez `/status` uzupełnia `submitted_at`.
+- [K07 → K08–K12] Fundament frontu: typy i metody klienta 1:1 z `api/kreator/schemas.py` (`createGrantApplication`, `grantApplication`, `patchGrantApplication`, `draftSection`); pamięć `splot_ideas` (`listMyIdeas`, `rememberIdea`, `markRepliesSeen`, `forgetIdea`, zdarzenie `MY_IDEAS_EVENT`); hooki `useIdeasCount`, `useNewReplies` (+ `refreshNewReplies`); komponenty `AssistPanel {ideaId, target, blockId?, blockType?, onAccept, headingLevel?}` (eksportuje też `IDEA_FIELD_LABELS`), `SimilarInnovations {ideaId, refreshKey?, headingLevel?}`, `KreatorNav`, `NewReplyBadge`. Trasa `mam-pomysl/:id` wskazuje tymczasowo na `IdeaPage` (K08). `/nabory` publiczne. W `MainNav` pozycja Kreatora jako `Link` z `aria-current` wg `KREATOR_PATH_RE` (wzór Zasobnika) — jedyna zmiana istniejącej linii.
