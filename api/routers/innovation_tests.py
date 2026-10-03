@@ -262,9 +262,7 @@ async def list_innovation_tests(
         )
         or 0
     )
-    rows = (
-        await session.execute(base.limit(limit).offset(offset))
-    ).scalars().all()
+    rows = (await session.execute(base.limit(limit).offset(offset))).scalars().all()
     items = [await _to_test_read(session, row) for row in rows]
     return Page(items=items, total=total, limit=limit, offset=offset)
 
@@ -459,15 +457,19 @@ async def list_applications(
         or 0
     )
     rows = (
-        await session.execute(
-            select(InnovationTestApplication)
-            .options(selectinload(InnovationTestApplication.feedback))
-            .where(*conds)
-            .order_by(InnovationTestApplication.created_at.desc())
-            .limit(limit)
-            .offset(offset)
+        (
+            await session.execute(
+                select(InnovationTestApplication)
+                .options(selectinload(InnovationTestApplication.feedback))
+                .where(*conds)
+                .order_by(InnovationTestApplication.created_at.desc())
+                .limit(limit)
+                .offset(offset)
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
     return Page(
         items=[_application_read(row) for row in rows],
         total=total,

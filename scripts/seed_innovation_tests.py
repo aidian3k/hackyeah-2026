@@ -58,17 +58,19 @@ def load_seed(path: Path) -> dict[str, Any]:
 
 async def purge() -> tuple[int, int]:
     async with SessionLocal() as session:
-        solution = await session.scalar(
-            select(Solution).where(Solution.content_hash == SEED_HASH)
-        )
+        solution = await session.scalar(select(Solution).where(Solution.content_hash == SEED_HASH))
         tests_deleted = 0
         solutions_deleted = 0
         if solution is not None:
             tests = (
-                await session.execute(
-                    select(InnovationTest).where(InnovationTest.solution_id == solution.id)
+                (
+                    await session.execute(
+                        select(InnovationTest).where(InnovationTest.solution_id == solution.id)
+                    )
                 )
-            ).scalars().all()
+                .scalars()
+                .all()
+            )
             tests_deleted = len(tests)
             for test in tests:
                 await session.delete(test)
@@ -89,9 +91,7 @@ async def seed(path: Path) -> None:
             select(Solution).where(Solution.content_hash == sol["content_hash"])
         )
         if existing is not None:
-            raise SystemExit(
-                "Seed już istnieje. Uruchom z --purge, żeby podmienić dane demo."
-            )
+            raise SystemExit("Seed już istnieje. Uruchom z --purge, żeby podmienić dane demo.")
 
         solution = Solution(
             kind=SolutionKind.SOLUTION,
