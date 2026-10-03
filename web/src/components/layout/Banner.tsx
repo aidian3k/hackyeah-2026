@@ -1,5 +1,5 @@
 import { ContrastToggle } from "./ContrastToggle";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth, roleLabel } from "@/lib/auth";
 
 /** Baner z nazwą i paskami marki. Paski występują tylko tutaj, raz na ekranie. */
@@ -22,7 +22,7 @@ export function Banner() {
         <polygon className="s-y" points="700,0 712,0 712,176 662,176" />
       </svg>
       <div className="ds-banner__tools">
-        {session && (
+        {session ? (
           <div className="ds-cluster">
             <span className="ds-tag">
               {session.displayName} · {roleLabel(session.role)}
@@ -38,6 +38,10 @@ export function Banner() {
               Wyloguj się
             </button>
           </div>
+        ) : (
+          <Link className="ds-btn ds-btn--small" to="/login">
+            Zaloguj się
+          </Link>
         )}
         <ContrastToggle />
       </div>

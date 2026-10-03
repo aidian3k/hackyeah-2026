@@ -51,15 +51,17 @@ export function App() {
   return (
     <Routes>
       <Route path="login" element={<LoginPage />} />
+      <Route element={<AppShell />}>
+        <Route index element={<FindPage />} />
+        <Route path="rozwiazania" element={<LibraryPage />} />
+        <Route path="rozwiazania/:id" element={<SolutionPage />} />
+        <Route path="wiedza" element={<KnowledgePage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
       <Route element={<RequireRole requiredRole="reporter" />}>
         <Route element={<AppShell />}>
-          <Route index element={<FindPage />} />
-          <Route path="rozwiazania" element={<LibraryPage />} />
-          <Route path="rozwiazania/:id" element={<SolutionPage />} />
-          <Route path="wiedza" element={<KnowledgePage />} />
           <Route path="mam-pomysl" element={<IdeaPage />} />
           <Route path="moje-zgloszenia" element={<MyReportsPage />} />
-          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>
       <Route element={<RequireRole requiredRole="administrator" />}>
