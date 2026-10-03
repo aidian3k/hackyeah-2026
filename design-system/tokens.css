@@ -1,0 +1,107 @@
+/*
+ * Splot – design system (motyw jasny + wysoki kontrast)
+ * Źródło: zrzut nagłówka malopolska.pl (kolory pasków i nawigacji zmierzone z pikseli).
+ * Zasady użycia: /DESIGN.md
+ *
+ * Wysoki kontrast włączasz atrybutem na <html>: <html data-contrast="high">
+ * Fonty: <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap">
+ */
+:root {
+  color-scheme: light;
+
+  /* Kolory */
+  --surface: #FFFFFF;
+  --surface-muted: #F9F8F8;
+  --surface-sunken: #EDF0F4;
+  --line: #D9DEE7;
+  --line-strong: #8792A6;
+  --ink: #181818;
+  --ink-muted: #5A6478;
+  --navy: #294375;
+  --on-navy: #FFFFFF;
+  --accent: #C8007A;
+  --on-accent: #FFFFFF;
+  --focus: #294375;
+  --stripe-magenta: #EC008C;
+  --stripe-blue: #426AB3;
+  --stripe-overlap: #314F88;
+  --stripe-cyan: #00B9F1;
+  --stripe-green: #8CC63F;
+  --stripe-yellow: #FFC20E;
+  --violet: #5C2E91;
+  --cat-magenta: #C8007A;
+  --cat-blue: #3D62A8;
+  --cat-cyan: #006F91;
+  --cat-green: #4E7020;
+  --cat-yellow: #835F00;
+  --soft-magenta: #FDE7F3;
+  --soft-blue: #E7EDF8;
+  --soft-cyan: #E2F6FD;
+  --soft-green: #EEF6E3;
+  --soft-yellow: #FFF4D4;
+  --soft-violet: #EFE8F6;
+  --danger: #C00519;
+  --success: var(--cat-green);
+  --warning: var(--cat-yellow);
+  --info: var(--cat-cyan);
+
+  /* Typografia (skrót `font`) */
+  --font-sans: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --text-display: 700 40px/48px var(--font-sans);
+  --text-h1: 700 32px/40px var(--font-sans);
+  --text-h2: 700 24px/32px var(--font-sans);
+  --text-h3: 700 20px/28px var(--font-sans);
+  --text-nav: 700 18px/26px var(--font-sans);
+  --text-body-lg: 400 18px/28px var(--font-sans);
+  --text-body: 400 16px/24px var(--font-sans);
+  --text-label: 700 14px/20px var(--font-sans);
+  --text-small: 400 14px/20px var(--font-sans);
+
+  /* Odstępy, promienie, cienie */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+  --shadow-header: 0 4px 10px rgba(24, 24, 24, 0.18);
+  --shadow-card: 0 1px 3px rgba(24, 24, 24, 0.12);
+}
+
+/* Wysoki kontrast: żółty tekst na czerni (min. 7:1) */
+:root[data-contrast="high"] {
+  color-scheme: dark;
+  --surface: #000000;
+  --surface-muted: #000000;
+  --surface-sunken: #111111;
+  --line: #FFF200;
+  --line-strong: #FFF200;
+  --ink: #FFF200;
+  --ink-muted: #FFF200;
+  --navy: #FFF200;
+  --on-navy: #000000;
+  --accent: #FFF200;
+  --on-accent: #000000;
+  --focus: #00E5FF;
+  --violet: #FFF200;
+  --cat-magenta: #FFF200;
+  --cat-blue: #FFF200;
+  --cat-cyan: #FFF200;
+  --cat-green: #FFF200;
+  --cat-yellow: #FFF200;
+  --soft-magenta: #000000;
+  --soft-blue: #000000;
+  --soft-cyan: #000000;
+  --soft-green: #000000;
+  --soft-yellow: #000000;
+  --soft-violet: #000000;
+  --danger: #FFF200;
+  --shadow-header: none;
+  --shadow-card: none;
+}

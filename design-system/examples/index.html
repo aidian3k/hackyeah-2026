@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Splot – przykłady komponentów</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap">
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <style>
+    main { max-width: 1100px; margin: 0 auto; padding: var(--space-8) var(--space-4); display: grid; gap: var(--space-8); }
+    .row { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
+    .stack { display: grid; gap: var(--space-4); }
+  </style>
+</head>
+<body>
+  <header class="ds-header">
+    <div class="ds-banner">
+      <div class="ds-banner__brand">
+        <span class="ds-banner__name">Splot</span>
+        <span class="ds-banner__sub">Hub Innowacji Społecznych · ROPS Kraków</span>
+      </div>
+      <svg class="ds-banner__stripes" viewBox="0 0 712 176" aria-hidden="true">
+        <polygon class="s-m" points="47,0 171,0 124,176 0,176"/>
+        <polygon class="s-b" points="177,0 286,0 320,176 211,176"/>
+        <polygon class="s-c" points="289,0 385,0 350,176 255,176"/>
+        <polygon class="s-o" points="287.5,7.8 320,176 255,176"/>
+        <polygon class="s-g" points="503,0 583,0 625,176 545,176"/>
+        <polygon class="s-y" points="700,0 712,0 712,176 662,176"/>
+      </svg>
+      <div class="ds-banner__tools">
+        <button class="ds-btn ds-btn--small" type="button" id="contrast" aria-pressed="false">Wysoki kontrast</button>
+      </div>
+    </div>
+    <nav class="ds-nav" aria-label="Główna">
+      <a class="ds-nav__item ds-nav__home" href="#" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 12h3v9h5v-6h4v6h5v-9h3z"/></svg>Znajdź rozwiązanie</a>
+      <a class="ds-nav__item" href="#">Wiedza</a>
+      <a class="ds-nav__item" href="#">Mam pomysł</a>
+      <a class="ds-nav__item" href="#">Testuj</a>
+      <a class="ds-nav__item" href="#">Rozmowy</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="stack">
+      <h1>Opisz problem</h1>
+      <div class="ds-field">
+        <label class="ds-label" for="q">Co się dzieje w Twojej okolicy?</label>
+        <textarea class="ds-textarea" id="q" rows="3" placeholder="Np. starsi sąsiedzi zostają sami, bo dzieci wyjechały."></textarea>
+      </div>
+      <div class="row">
+        <button class="ds-btn ds-btn--cta" type="button">Znajdź rozwiązania</button>
+        <button class="ds-chip" type="button">Samotni seniorzy</button>
+        <button class="ds-chip" type="button">Młodzież w kryzysie</button>
+      </div>
+    </section>
+
+    <section class="stack">
+      <h2>Przyciski</h2>
+      <div class="row">
+        <button class="ds-btn ds-btn--primary" type="button">Wyślij do Hubu</button>
+        <button class="ds-btn" type="button">Szukaj</button>
+        <button class="ds-btn ds-btn--link" type="button">Pokaż wszystkie</button>
+        <button class="ds-btn ds-btn--primary" type="button" disabled>Wyłączony</button>
+      </div>
+    </section>
+
+    <section class="stack">
+      <h2>Kategorie wyzwań</h2>
+      <div class="row">
+        <span class="ds-tag ds-tag--starzenie">Starzenie się</span>
+        <span class="ds-tag ds-tag--psych">Zdrowie psychiczne</span>
+        <span class="ds-tag ds-tag--samotnosc">Samotność</span>
+        <span class="ds-tag ds-tag--cyfrowe">Wykluczenie cyfrowe</span>
+        <span class="ds-tag ds-tag--dostep">Dostęp do usług</span>
+        <span class="ds-tag ds-tag--osadnictwo">Struktura osadnicza</span>
+        <span class="ds-tag ds-tag--koordynacja">Koordynacja</span>
+      </div>
+    </section>
+
+    <section class="stack">
+      <h2>Karta innowacji</h2>
+      <article class="ds-card stack" style="max-width:360px">
+        <span><span class="ds-tag ds-tag--samotnosc">Samotność</span></span>
+        <h3>Srebrna Linia Sąsiedzka</h3>
+        <p>Codzienne telefony i cotygodniowe odwiedziny wolontariuszy u samotnych seniorów.</p>
+        <div><a class="ds-btn ds-btn--small" href="#">Szczegóły</a></div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const b = document.getElementById('contrast');
+    b.addEventListener('click', () => {
+      const on = document.documentElement.toggleAttribute('data-contrast');
+      if (on) document.documentElement.setAttribute('data-contrast', 'high');
+      b.setAttribute('aria-pressed', String(on));
+    });
+  </script>
+</body>
+</html>

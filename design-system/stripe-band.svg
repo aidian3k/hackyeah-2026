@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 712 176" aria-hidden="true">
+  <!-- Paski banera Splot: kreski litery M z logotypu Małopolski. Kolejność i kształty są stałe. -->
+  <polygon fill="#EC008C" points="47,0 171,0 124,176 0,176"/>
+  <polygon fill="#426AB3" points="177,0 286,0 320,176 211,176"/>
+  <polygon fill="#00B9F1" points="289,0 385,0 350,176 255,176"/>
+  <polygon fill="#314F88" points="287.5,7.8 320,176 255,176"/>
+  <polygon fill="#8CC63F" points="503,0 583,0 625,176 545,176"/>
+  <polygon fill="#FFC20E" points="700,0 712,0 712,176 662,176"/>
+</svg>
