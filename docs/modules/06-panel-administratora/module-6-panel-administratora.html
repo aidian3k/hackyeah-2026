@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moduł 6 — Panel administratora</title>
+<style>
+<style>
+:root{
+  --bg:#fbfaf8; --surface:#ffffff; --surface-2:#f3f1ed; --border:#e0dcd4;
+  --text:#1c1a17; --text-dim:#5f5a52; --accent:#8a4b1f; --accent-soft:#f6ece3;
+  --ok:#2f6b3f; --ok-soft:#e8f2ea; --warn:#8a6a14; --warn-soft:#f8f0d8;
+  --todo:#6b4f8a; --todo-soft:#efe8f6; --danger:#9b2c2c; --danger-soft:#fbeaea;
+  --code-bg:#f5f3ef; --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#16151a; --surface:#1d1c22; --surface-2:#25242b; --border:#35333d;
+    --text:#eceaf0; --text-dim:#a39fae; --accent:#e0a071; --accent-soft:#2b2219;
+    --ok:#7fc295; --ok-soft:#1b2a20; --warn:#dcb963; --warn-soft:#2a2416;
+    --todo:#b9a0dc; --todo-soft:#241e2e; --danger:#e58b8b; --danger-soft:#2d1c1c;
+    --code-bg:#131217;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16151a; --surface:#1d1c22; --surface-2:#25242b; --border:#35333d;
+  --text:#eceaf0; --text-dim:#a39fae; --accent:#e0a071; --accent-soft:#2b2219;
+  --ok:#7fc295; --ok-soft:#1b2a20; --warn:#dcb963; --warn-soft:#2a2416;
+  --todo:#b9a0dc; --todo-soft:#241e2e; --danger:#e58b8b; --danger-soft:#2d1c1c;
+  --code-bg:#131217;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  overflow-x:hidden;
+}
+.wrap{max-width:62rem; margin:0 auto; padding:2.5rem 1.25rem 6rem}
+header.doc{border-bottom:2px solid var(--accent); padding-bottom:1.25rem; margin-bottom:2rem}
+header.doc h1{font-size:1.9rem; line-height:1.2; margin:0 0 .4rem}
+header.doc .sub{color:var(--text-dim); font-size:.95rem}
+.meta{display:flex; flex-wrap:wrap; gap:.5rem 1.25rem; margin-top:.9rem; font-size:.85rem; color:var(--text-dim)}
+.meta code{font-size:.85rem}
+h2{font-size:1.3rem; margin:3rem 0 .75rem; padding-top:.5rem; display:flex; flex-wrap:wrap; align-items:center; gap:.6rem}
+h3{font-size:1.05rem; margin:1.9rem 0 .5rem}
+h4{font-size:.95rem; margin:1.3rem 0 .4rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:.04em}
+p,li{max-width:62ch}
+table p,table li{max-width:none}
+a{color:var(--accent)}
+.badge{
+  font:600 .68rem/1 var(--mono); letter-spacing:.08em; text-transform:uppercase;
+  padding:.3rem .5rem; border-radius:.25rem; white-space:nowrap;
+}
+.b-stable{background:var(--ok-soft); color:var(--ok)}
+.b-draft{background:var(--warn-soft); color:var(--warn)}
+.b-todo{background:var(--todo-soft); color:var(--todo)}
+nav.toc{background:var(--surface); border:1px solid var(--border); border-radius:.5rem; padding:1.1rem 1.4rem}
+nav.toc h2{margin:0 0 .6rem; font-size:.95rem; text-transform:uppercase; letter-spacing:.06em; color:var(--text-dim)}
+nav.toc ol{margin:0; padding-left:1.4rem; columns:2; column-gap:2rem}
+@media(max-width:46rem){nav.toc ol{columns:1}}
+nav.toc li{margin:.18rem 0; max-width:none}
+pre{
+  background:var(--code-bg); border:1px solid var(--border); border-radius:.4rem;
+  padding:.9rem 1rem; overflow-x:auto; font:13px/1.55 var(--mono); margin:.9rem 0;
+}
+code{font-family:var(--mono); font-size:.88em; background:var(--surface-2); padding:.1rem .3rem; border-radius:.2rem}
+pre code{background:none; padding:0; font-size:inherit}
+.tablewrap{overflow-x:auto; margin:1rem 0}
+table{border-collapse:collapse; width:100%; font-size:.9rem; min-width:34rem}
+th,td{border:1px solid var(--border); padding:.5rem .65rem; text-align:left; vertical-align:top}
+th{background:var(--surface-2); font-weight:600}
+.note,.warn,.danger{border-left:3px solid; padding:.75rem 1rem; margin:1rem 0; border-radius:0 .3rem .3rem 0; font-size:.93rem}
+.note{border-color:var(--accent); background:var(--accent-soft)}
+.warn{border-color:var(--warn); background:var(--warn-soft)}
+.danger{border-color:var(--danger); background:var(--danger-soft)}
+.note>:first-child,.warn>:first-child,.danger>:first-child{margin-top:0}
+.note>:last-child,.warn>:last-child,.danger>:last-child{margin-bottom:0}
+hr{border:0; border-top:1px solid var(--border); margin:2.5rem 0}
+.kv{font:600 .8rem var(--mono); color:var(--accent)}
+footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border); color:var(--text-dim); font-size:.85rem}
+.pending{border:1px dashed var(--todo); background:var(--todo-soft); border-radius:.4rem; padding:.75rem 1rem; margin:1rem 0; font-size:.93rem}
+.pending>:first-child{margin-top:0}
+.pending>:last-child{margin-bottom:0}
+.cov-yes{color:var(--ok); font-weight:600}
+.cov-part{color:var(--warn); font-weight:600}
+.cov-no{color:var(--danger); font-weight:600}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="doc">
+  <h1>Moduł 6 — Panel administratora</h1>
+  <div class="sub">Dokument implementacyjny dla Małopolskiego Hubu Innowacji Społecznych (<code>base.md</code>, funkcjonalność VI). <strong>Szkielet</strong> — sekcje do wypełnienia na sesji planowania. Odbiorca: agent lub programista implementujący moduł.</div>
+  <div class="meta">
+    <span><strong>Wersja:</strong> v0.1</span>
+    <span><strong>Data:</strong> 2026-10-03</span>
+    <span><strong>Status:</strong> <span class="badge b-todo">szkielet</span></span>
+    <span><strong>Plik zadań:</strong> <code>docs/modules/06-panel-administratora/module-6-tasks.md</code></span>
+  </div>
+</header>
+
+<div class="note">
+<p><strong>Jak czytać ten dokument.</strong> Każda sekcja ma status: <span class="badge b-stable">stable</span> — ustalone, nie zmieniaj bez ADR; <span class="badge b-draft">draft</span> — kierunek ustalony, szczegóły do dopracowania w kodzie; <span class="badge b-todo">todo</span> — do zaplanowania, nie implementuj.</p>
+<p>Struktura i konwencje jak w <code>docs/modules/01-matchmaking/module-1-matchmaking.html</code>. Twarde reguły z <code>CLAUDE.md</code> obowiązują także tutaj (progi w <code>settings</code>, <code>polish_simple</code>, brak treści w logach, jeden kształt <code>SolutionCard</code>, bez autoryzacji i bez testów automatycznych). Moduł 1 jest kontraktem zewnętrznym — zmiana jego tabel lub endpointów wymaga ADR i wpisu w „Uwagach między zadaniami” Modułu 1.</p>
+</div>
+
+<nav class="toc">
+  <h2>Spis treści</h2>
+  <ol>
+    <li><a href="#s1">Cel i kontekst biznesowy</a></li>
+    <li><a href="#s2">Stan obecny — co już działa</a></li>
+    <li><a href="#s3">Zakres MVP i granice</a></li>
+    <li><a href="#s4">Użytkownicy i scenariusze</a></li>
+    <li><a href="#s5">Architektura i zależności od Modułu 1</a></li>
+    <li><a href="#s6">Model danych</a></li>
+    <li><a href="#s7">Logika i AI</a></li>
+    <li><a href="#s8">Kontrakt API</a></li>
+    <li><a href="#s9">Kontrakt dla frontendu (ekrany)</a></li>
+    <li><a href="#s10">Konfiguracja i feature flagi</a></li>
+    <li><a href="#s11">RODO i bezpieczeństwo</a></li>
+    <li><a href="#s12">Struktura katalogów i kolejność prac</a></li>
+    <li><a href="#s13">Rejestr decyzji (ADR)</a></li>
+    <li><a href="#s14">Backlog kolejnych iteracji</a></li>
+    <li><a href="#s15">Koszt utrzymania i zasoby</a></li>
+    <li><a href="#s16">Pytania otwarte do sesji planowania</a></li>
+  </ol>
+</nav>
+
+<h2 id="s1">1. Cel i kontekst biznesowy <span class="badge b-draft">draft</span></h2>
+
+<h4>Wymaganie z <code>base.md</code> (VI)</h4>
+<blockquote>
+<p>Pozwalający w szybki sposób modyfikować, weryfikować i udostępniać wiedzę.</p>
+<p>Z <code>base.md</code> §3: pracownicy ROPS potrzebują przejrzystego panelu administratora do prezentowania zgromadzonej wiedzy, monitorowania zgłoszeń oraz prowadzenia dialogu z użytkownikami. Z §6: w jaki sposób system powiadamia administratora o nowym pomyśle i jak wygląda ścieżka odpowiedzi do autora?</p>
+</blockquote>
+
+<h4>Ocena w konkursie</h4>
+<p>Kryterium „Stopień spełnienia wyzwania” (40%): Matchmaking 10%, każda dodatkowa funkcjonalność +5%. Liczy się jakość działania — moduł ma być pokazywalny w demo, nie tylko obecny w nawigacji.</p>
+
+<div class="pending">
+<p><strong>Do uzupełnienia:</strong> cel modułu w jednym zdaniu, jak wspiera „cyfrowe serce” Hubu i czym wnosi „nową jakość” (kryterium pomysłowości z <code>base.md</code> §6).</p>
+</div>
+
+<h2 id="s2">2. Stan obecny — co już działa <span class="badge b-draft">draft</span></h2>
+
+<p>Stan na 2026-10-03 po Module 1 (backend T00–T26) i module frontendowym (F00–F21).</p>
+<div class="tablewrap">
+<table>
+<tr><th>Wymaganie</th><th>Pokrycie</th><th>Gdzie / czego brakuje</th></tr>
+<tr><td>Monitorowanie zgłoszeń</td><td><span class="cov-yes">jest</span></td><td><code>/panel/zgloszenia</code> z filtrami, szczegóły, podobne, zmiana statusu (F15, F16; T20)</td></tr>
+<tr><td>Powiadomienie o nowym pomyśle/zgłoszeniu</td><td><span class="cov-yes">jest</span></td><td>Skrzynka „Nowe” + licznik w nawigacji (F14; T22)</td></tr>
+<tr><td>Ścieżka odpowiedzi do autora</td><td><span class="cov-yes">jest</span></td><td>Odpowiedź w panelu → „Moje zgłoszenia” (F12, F16)</td></tr>
+<tr><td>Weryfikacja i udostępnianie wiedzy</td><td><span class="cov-part">częściowo</span></td><td>Kolejka zatwierdzania: status, kategoria, poziom sprawdzenia (F17; <code>PATCH /api/solutions</code>)</td></tr>
+<tr><td>Modyfikacja wiedzy</td><td><span class="cov-no">brak</span></td><td><code>SolutionPatch</code> nie zmienia treści; brak edycji tytułu/opisu/kroków/mediów, brak ponownego chunkowania i embeddingu po edycji, brak dodawania <code>KNOWLEDGE</code></td></tr>
+<tr><td>Trendy</td><td><span class="cov-yes">jest</span></td><td><code>/panel/trendy</code> (F18)</td></tr>
+<tr><td>Obsługa bytów innych modułów</td><td><span class="cov-no">brak</span></td><td>Pomysły (III), testerzy i oceny (IV), wątki (V) — powstaną razem z tymi modułami</td></tr>
+</table>
+</div>
+
+<h2 id="s3">3. Zakres MVP i granice <span class="badge b-todo">todo</span></h2>
+<div class="pending">
+<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<ul>
+<li>Co dokładnie wchodzi do PoC tego modułu, a co jest backlogiem (sekcja 14)?</li>
+<li>Zasada granicy: czego ten moduł <strong>nie</strong> robi i który moduł to przejmuje?</li>
+</ul>
+</div>
+
+<h2 id="s4">4. Użytkownicy i scenariusze <span class="badge b-todo">todo</span></h2>
+<div class="pending">
+<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<ul>
+<li>Które grupy z <code>base.md</code> §3 korzystają z modułu: mieszkańcy/NGO, JST, pracownicy ROPS, eksperci?</li>
+<li>2–4 scenariusze krok po kroku (kto, co wpisuje, co dostaje) — w tym jeden scenariusz do nagrania demo.</li>
+</ul>
+</div>
+
+<h2 id="s5">5. Architektura i zależności od Modułu 1 <span class="badge b-todo">todo</span></h2>
+<div class="pending">
+<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<ul>
+<li>Nowe pliki w <code>api/</code> (router, pipeline, provider) i co reużywamy z Modułu 1 (providery, <code>SolutionCard</code>, <code>api.tasks.spawn</code>, taksonomia, gminy).</li>
+<li>Czy moduł zmienia istniejące tabele lub endpointy Modułu 1? Każda taka zmiana = ADR.</li>
+</ul>
+</div>
+
+<h2 id="s6">6. Model danych <span class="badge b-todo">todo</span></h2>
+<div class="pending">
+<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<ul>
+<li>DDL nowych tabel i typów (dopisywany do <code>db/init.sql</code>), klucze obce do <code>solutions</code> / <code>reports</code>.</li>
+<li>Które kolumny są treścią (RODO, sekcja 11), a które statystyką?</li>
+</ul>
+</div>
+
+<h2 id="s7">7. Logika i AI <span class="badge b-todo">todo</span></h2>
+<div class="pending">
+<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<ul>
+<li>Gdzie jest LLM / embeddingi, z jakim promptem i jakim kontraktem wejścia–wyjścia?</li>
+<li>Zachowanie przy wyłączonym LLM (<code>LLM_ENABLED=false</code>) i przy błędzie providera — moduł musi działać bez AI.</li>
+</ul>
+</div>
+
+<h2 id="s8">8. Kontrakt API <span class="badge b-todo">todo</span></h2>
+<div class="pending">
+<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<ul>
+<li>Lista endpointów z kształtem żądania i odpowiedzi (pydantic w <code>api/schemas.py</code>), kody błędów 404/422.</li>
+<li>Bez autoryzacji (decyzja zespołu) — wszystkie endpointy otwarte.</li>
+</ul>
+</div>
+
+<h2 id="s9">9. Kontrakt dla frontendu (ekrany) <span class="badge b-todo">todo</span></h2>
+<div class="pending">
+<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<ul>
+<li>Trasy w <code>web/</code>, ekrany i stany (ładowanie, pusto, błąd), elementy nawigacji.</li>
+<li>Wymogi WCAG 2.1 AA i design systemu (<code>DESIGN.md</code>, najwyżej jeden <code>ds-btn--cta</code> na ekran).</li>
+</ul>
+</div>
+
+<h2 id="s10">10. Konfiguracja i feature flagi <span class="badge b-todo">todo</span></h2>
+<div class="pending">
+<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<ul>
+<li>Nowe zmienne w <code>api.config.settings</code> (progi, limity, flagi włączenia modułu) — zero literałów w kodzie.</li>
+</ul>
+</div>
+
+<h2 id="s11">11. RODO i bezpieczeństwo <span class="badge b-todo">todo</span></h2>
+<div class="pending">
+<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<ul>
+<li>Jakie dane osobowe zbiera moduł, co nie może wyjść z API i nie może trafić do logów?</li>
+</ul>
+</div>
+
+<h2 id="s12">12. Struktura katalogów i kolejność prac <span class="badge b-todo">todo</span></h2>
+<div class="pending">
+<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<ul>
+<li>Drzewo nowych plików i ścieżka krytyczna do demo (najkrótsza działająca ścieżka).</li>
+</ul>
+</div>
+
+<h2 id="s13">13. Rejestr decyzji (ADR) <span class="badge b-todo">todo</span></h2>
+<div class="pending">
+<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<ul>
+<li>Numeracja per moduł: <code>ADR-M6-001</code>… — żeby nie kolidować z ADR-001 – 019 Modułu 1.</li>
+</ul>
+</div>
+
+<h2 id="s14">14. Backlog kolejnych iteracji <span class="badge b-todo">todo</span></h2>
+<div class="pending">
+<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<ul>
+<li>Co świadomie odkładamy i co już przygotowujemy pod to w PoC.</li>
+</ul>
+</div>
+
+<h2 id="s15">15. Koszt utrzymania i zasoby <span class="badge b-todo">todo</span></h2>
+<div class="pending">
+<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<ul>
+<li>Koszt zmienny (LLM, generacja obrazów itp.) na jedno użycie i przy 10 tys. / 100 tys. użyć miesięcznie; zasoby ludzkie po stronie ROPS.</li>
+</ul>
+</div>
+
+<h2 id="s16">16. Pytania otwarte do sesji planowania <span class="badge b-draft">draft</span></h2>
+<ol>
+<li>Edycja treści: zapis → ponowne chunkowanie i embedding synchronicznie czy w tle (<code>api.tasks.spawn</code>)? Wersjonowanie / historia zmian?</li>
+<li>Dodawanie wiedzy (<code>KNOWLEDGE</code>) i materiałów z panelu — formularz, upload PDF, import CSV?</li>
+<li>Eksport zgłoszeń i statystyk (CSV) dla ROPS — w PoC czy backlog?</li>
+<li>AI w panelu: sugestia kategorii i tagów dla nowego pomysłu, podpowiedź odpowiedzi do autora, wykrywanie duplikatów w kolejce?</li>
+<li>Czy panel jest wspólnym „kontenerem” dla widoków administracyjnych modułów 2–5 i 7 (wtedy te moduły dopisują sekcje tutaj)?</li>
+</ol>
+
+<hr>
+
+<footer>
+<p><strong>Moduł 6 — Panel administratora</strong> · v0.1 · 2026-10-03 · Małopolski Hub Innowacji Społecznych.</p>
+<p><strong>v0.1</strong> — szkielet: wymaganie z <code>base.md</code>, ocena pokrycia przez istniejącą implementację, pytania do sesji planowania.</p>
+<p>Dokument iteracyjny. Zmiany: nowa sekcja na końcu, wpis w spisie treści, ADR w sekcji 13 przy zmianie decyzji. Podnieś wersję w nagłówku i w stopce.</p>
+</footer>
+
+</div>
+</body>
+</html>

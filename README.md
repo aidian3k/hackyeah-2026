@@ -51,9 +51,11 @@ Startują trzy serwisy:
 | `api` | http://localhost:8000 | FastAPI; dokumentacja: http://localhost:8000/docs |
 | `web` | http://localhost:8080 | Frontend (nginx), proxy `/api` i `/healthz` do serwisu `api` |
 
+**Praca nad kodem (hot reload):** `make up-dev` zamiast `make up`. API restartuje się samo po zmianie w `api/` (kod montowany z dysku, `uvicorn --reload`), a frontend działa na serwerze Vite z HMR pod http://localhost:5173 (serwis `web-dev`; nginx na `:8080` jest wtedy zatrzymany). Logi: `make logs-dev`. Tryb produkcyjny (`make up`, `:8080`) zostaje do demo — tam zmiany widać dopiero po przebudowie (`make web-up`).
+
 ### 3. Załadowanie danych
 
-Baza startuje pusta (poza taksonomią). Załaduj korpus rozwiązań (Biblioteka ROPS + dane demo):
+Baza startuje pusta (poza taksonomią). Załaduj korpus rozwiązań (115 innowacji z Biblioteki Innowacji Społecznych ROPS Kraków):
 
 ```bash
 docker compose exec api python -m scripts.ingest data/solutions/
@@ -113,8 +115,8 @@ make web-mock                   # frontend na mocku SSE (docs/mocks) — bez bac
 
 ## Dokumentacja
 
-- `docs/module-1-matchmaking.html` — specyfikacja Modułu 1,
-- `docs/module-1-tasks.md` — plan i status backendu, `docs/frontend-tasks.md` — plan i status frontendu,
-- `docs/frontend-a11y.md` — przegląd dostępności i scenariusz demo,
+- `docs/modules/01-matchmaking/module-1-matchmaking.html` — specyfikacja Modułu 1,
+- `docs/modules/01-matchmaking/module-1-tasks.md` — plan i status backendu, `docs/modules/01-matchmaking/frontend-tasks.md` — plan i status frontendu,
+- `docs/modules/01-matchmaking/frontend-a11y.md` — przegląd dostępności i scenariusz demo,
 - `DESIGN.md`, `design-system/` — design system interfejsu,
 - `docs/base.md` — kontekst biznesowy wyzwania.

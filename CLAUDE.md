@@ -6,10 +6,11 @@ Obecnie budujemy **Moduł 1 — Matchmaking społeczny**: backend PoC, który pr
 
 **Poza zakresem (decyzja zespołu, nadpisuje specyfikację):** autoryzacja (token STAFF, `report_token`, nagłówki `X-Access-Token` / `X-Report-Token`, 401/403, `api/auth.py`) oraz testy automatyczne (pytest, `tests/`, fake providery). Nie dodawaj ich — to projekt hackathonowy, wszystkie endpointy są otwarte.
 
-- Specyfikacja (źródło prawdy): `docs/module-1-matchmaking.html` (v0.5).
-- Plan implementacji i status zadań: `docs/module-1-tasks.md` — **zanim zaczniesz pracę, przeczytaj protokół na górze tego pliku**.
-- Frontend (osobny moduł w `web/`): plan i status zadań w `docs/frontend-tasks.md` — ten sam protokół pracy, zadania F00–F21.
+- Specyfikacja (źródło prawdy): `docs/modules/01-matchmaking/module-1-matchmaking.html` (v0.5).
+- Plan implementacji i status zadań: `docs/modules/01-matchmaking/module-1-tasks.md` — **zanim zaczniesz pracę, przeczytaj protokół na górze tego pliku**.
+- Frontend (osobny moduł w `web/`): plan i status zadań w `docs/modules/01-matchmaking/frontend-tasks.md` — ten sam protokół pracy, zadania F00–F21.
 - Kontekst biznesowy wyzwania: `docs/base.md`.
+- Moduły 2–7 (szkielety do sesji planowania, nie implementuj): `docs/modules/README.md` — indeks, konwencje i ocena pokrycia.
 
 ## Stack (ADR-001, ADR-002)
 
@@ -30,7 +31,7 @@ api/routers/   chat.py search.py reports.py solutions.py staff.py meta.py
 api/pipeline/  types.py text.py preprocess.py lexical.py semantic.py fusion.py rerank.py answer.py reports.py orchestrator.py
 api/providers/ __init__.py base.py embeddings_openai.py rerank_cohere.py rerank_noop.py llm.py
 data/          taxonomy.json gminy-malopolska.json synonyms.json stopwords-pl.txt category-keywords.json rops-category-map.json reports-seed.json
-data/solutions/ seed-demo.json rops-biblioteka.json   # format pośredni dla ingestu
+data/solutions/ rops-biblioteka.json   # format pośredni dla ingestu (wyłącznie dane z Biblioteki ROPS)
 data/raw/      rops-biblioteka.raw.json (surowy zrzut scrapera), html-cache/ (gitignore)
 scripts/       ingest.py seed_reports.py scrape_rops.py
 docs/mocks/    przykładowe strumienie SSE dla frontendu (+ replay.py)
@@ -39,7 +40,8 @@ docs/mocks/    przykładowe strumienie SSE dla frontendu (+ replay.py)
 ## Komendy
 
 ```bash
-make up        # docker compose up -d --build (db + api na :8000)
+make up        # docker compose up -d --build (db + api na :8000, web/nginx na :8080 — bez hot reloadu)
+make up-dev    # tryb deweloperski: api z --reload na :8000, Vite z HMR na :5173 (docker-compose.dev.yml)
 make ingest    # python -m scripts.ingest data/solutions/
 make fmt       # ruff format + ruff check --fix
 make dev       # uvicorn api.main:app --reload (lokalnie, baza z docker compose)
@@ -73,18 +75,18 @@ curl -N -X POST localhost:8000/api/chat -H 'Content-Type: application/json' \
 
 ## Specyfikacja a zmiany decyzji
 
-Sekcje specyfikacji mają statusy: `stable` (nie zmieniaj bez ADR), `draft` (kierunek ustalony, szczegóły w kodzie), `todo` (nie implementuj). Wszystko z sekcji 15 (backlog) jest poza zakresem: konta, lokalne modele, klastrowanie, HNSW, webhook/e-mail, retencja, rate limiting, ewaluacja automatyczna, ekstrakcja gminy z tekstu. Jeśli implementacja wymaga odejścia od decyzji `stable`, nie zmieniaj jej po cichu — opisz problem w sekcji „Uwagi między zadaniami” w `docs/module-1-tasks.md`.
+Sekcje specyfikacji mają statusy: `stable` (nie zmieniaj bez ADR), `draft` (kierunek ustalony, szczegóły w kodzie), `todo` (nie implementuj). Wszystko z sekcji 15 (backlog) jest poza zakresem: konta, lokalne modele, klastrowanie, HNSW, webhook/e-mail, retencja, rate limiting, ewaluacja automatyczna, ekstrakcja gminy z tekstu. Jeśli implementacja wymaga odejścia od decyzji `stable`, nie zmieniaj jej po cichu — opisz problem w sekcji „Uwagi między zadaniami” w `docs/modules/01-matchmaking/module-1-tasks.md`.
 
 ## Praca wielu agentów
 
-- Zadania i ich status są w `docs/module-1-tasks.md` (backend) i `docs/frontend-tasks.md` (frontend). Każde zadanie zawiera cały potrzebny kontekst — nie musisz czytać HTML specyfikacji.
+- Zadania i ich status są w `docs/modules/01-matchmaking/module-1-tasks.md` (backend) i `docs/modules/01-matchmaking/frontend-tasks.md` (frontend). Każde zadanie zawiera cały potrzebny kontekst — nie musisz czytać HTML specyfikacji.
 - Bierz tylko zadanie, którego wszystkie zależności są `[x]`. Oznacz je `[~]` przed rozpoczęciem pracy, `[x]` po spełnieniu kryteriów „Gotowe, gdy”.
 - Zmieniaj wyłącznie pliki wymienione w swoim zadaniu. Potrzebna zmiana w cudzym pliku = wpis w „Uwagach między zadaniami”, nie edycja.
 - Nazwy modułów, funkcji i typów z sekcji „Wspólne kontrakty” w pliku zadań są wiążące — nie zmieniaj sygnatur, z których korzystają inne zadania.
 
 ## Interfejs
 
-Frontend: Vite + React + TypeScript w `web/` (`make web-dev`, `make web-mock`), zadania i wspólne kontrakty w `docs/frontend-tasks.md`. Bez autoryzacji i bez testów automatycznych — to samo co w backendzie.
+Frontend: Vite + React + TypeScript w `web/` (`make web-dev`, `make web-mock`), zadania i wspólne kontrakty w `docs/modules/01-matchmaking/frontend-tasks.md`. Bez autoryzacji i bez testów automatycznych — to samo co w backendzie.
 
 Każdy element interfejsu buduj według `DESIGN.md` i plików w `design-system/`:
 - importuj `design-system/tokens.css` i `design-system/components.css`, nie wpisuj kolorów na sztywno,

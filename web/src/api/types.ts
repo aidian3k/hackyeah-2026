@@ -1,4 +1,4 @@
-// Lustro api/schemas.py (kontrakt F01 w docs/frontend-tasks.md). Daty przychodzą jako ciągi ISO.
+// Lustro api/schemas.py (kontrakt F01 w docs/modules/01-matchmaking/frontend-tasks.md). Daty przychodzą jako ciągi ISO.
 
 export type ReporterType = "RESIDENT" | "NGO" | "JST" | "OTHER";
 export type ReportStatus = "NEW" | "TRIAGED" | "MATCHED" | "IN_PROGRESS" | "CLOSED";
