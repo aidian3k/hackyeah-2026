@@ -988,3 +988,4 @@ Trasy `rozmowy/nowa` i `partnerzy/nowe` muszą wygrać z `rozmowy/:id` i `partne
 ## Uwagi między zadaniami
 
 _(dopisuj na końcu: `- [PKxx → PKyy] opis`)_
+- [M3 → PK11] Plan M3 jest teraz w v0.3 i ma przenumerowane zadania (K00–K13). Backend pomysłów (`ideas`, `idea_replies`, endpointy) to **K03** (było K04), a „Moje pomysły” to **K11** (było K15). Status pomysłu nie ma już `PROMOTED`, a statusy `SUBMITTED|IN_REVIEW|INVITED|REJECTED` Hub ustawia bez macierzy przejść. Kontrakt `idea_replies` jest bez zmian. Zależność PK11 czytaj jako „K03 (M3)”.

@@ -867,3 +867,4 @@ Na szerokości `md` 2 kolumny w kolejności czytania, poniżej 1 kolumna w kolej
 ## Uwagi między zadaniami
 
 _(dopisuj na końcu: `- [Kxx → Kyy] opis`)_
+- [M5 PK11 → K03, K11] Moduł 5 (zadanie PK11, opcjonalne) zbuduje dialog o pomyśle jako wątek `IDEA`, którego oś czasu łączy `idea_replies` z wiadomościami M5. Nie zmieniaj więc kształtu `idea_replies` ani `IdeaReply` bez wpisu w „Uwagach” M5. K11 może dostać od M5 prośbę o przycisk „Porozmawiaj z Hubem o pomyśle” w „Moich pomysłach”.
