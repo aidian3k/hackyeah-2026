@@ -7,6 +7,8 @@ import { SolutionCard } from "@/components/SolutionCard";
 import { useApi } from "@/hooks/useApi";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { useTaxonomy } from "@/hooks/useTaxonomy";
+import { ModuleLabel } from "@/components/layout/ModuleLabel";
+import { ZasobnikNav } from "@/components/layout/ZasobnikNav";
 import "@/styles/catalog.css";
 
 const KNOWLEDGE_LIMIT = 100;
@@ -35,11 +37,13 @@ export function KnowledgePage() {
   return (
     <div className="ds-page">
       <div className="ds-stack">
+        <ModuleLabel module="zasobnik" />
         <h1 tabIndex={-1}>Wiedza o wyzwaniach Małopolski</h1>
         <p className="catalog-lead">
           Diagnozy i opracowania o najważniejszych wyzwaniach społecznych regionu, uporządkowane według wyzwań.
         </p>
       </div>
+      <ZasobnikNav />
 
       <LoadState
         loading={loading || waitingForTaxonomy}

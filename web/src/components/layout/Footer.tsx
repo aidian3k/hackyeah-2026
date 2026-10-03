@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { MODULE_NAMES } from "@/lib/modules";
 
 export function Footer() {
   return (
@@ -6,7 +7,7 @@ export function Footer() {
       <div className="ds-footer__inner">
         <ul className="ds-footer__links">
           <li>
-            <Link to="/panel">Panel Hubu</Link>
+            <Link to="/panel">{MODULE_NAMES.panel}</Link>
           </li>
         </ul>
         <p className="ds-footer__note">

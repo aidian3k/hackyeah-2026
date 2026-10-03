@@ -10,6 +10,8 @@ import {
 import { CatalogResults } from "@/components/catalog/CatalogResults";
 import { useApi } from "@/hooks/useApi";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+import { ModuleLabel } from "@/components/layout/ModuleLabel";
+import { ZasobnikNav } from "@/components/layout/ZasobnikNav";
 import "@/styles/catalog.css";
 
 const PAGE_SIZE = 20;
@@ -52,11 +54,13 @@ export function LibraryPage() {
   return (
     <div className="ds-page">
       <div className="ds-stack">
+        <ModuleLabel module="zasobnik" />
         <h1 tabIndex={-1}>Biblioteka innowacji społecznych</h1>
         <p className="catalog-lead">
           Sprawdzone rozwiązania z Biblioteki Innowacji Społecznych ROPS Kraków i od organizacji z regionu.
         </p>
       </div>
+      <ZasobnikNav />
       <div className="catalog-layout">
         <CatalogFilters params={params} onChange={changeFilters} onClear={clear} />
         <CatalogResults

@@ -69,7 +69,7 @@ export function MyReportsPage() {
       {reports.length === 0 ? (
         <EmptyState title="Nie masz jeszcze zgłoszeń na tym urządzeniu.">
           <p>
-            Opisz problem na stronie <Link to="/">Znajdź rozwiązanie</Link>.
+            Opisz problem w module <Link to="/">Matchmaking społeczny</Link>.
             Zgłoszenie pojawi się tutaj, a z nim odpowiedzi zespołu Hubu.
           </p>
         </EmptyState>

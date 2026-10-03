@@ -8,6 +8,7 @@ import { LoadState } from "@/components/LoadState";
 import { useApi } from "@/hooks/useApi";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { formatDate, plural } from "@/lib/format";
+import { ModuleLabel } from "@/components/layout/ModuleLabel";
 import "@/styles/panel.css";
 
 // Zakres trzymamy w URL (?range=…), żeby działał „Wstecz” i dało się wkleić link.
@@ -209,6 +210,7 @@ export function TrendsPage() {
   return (
     <div className="ds-page">
       <div className="ds-stack">
+        <ModuleLabel module="panel" />
         <h1 tabIndex={-1}>Trendy</h1>
         <p>
           Jakie wyzwania zgłaszają gminy i mieszkańcy oraz czego brakuje w bibliotece rozwiązań. Kliknij nazwę wyzwania

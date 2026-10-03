@@ -17,6 +17,7 @@ import { useApi } from "@/hooks/useApi";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { useTaxonomy } from "@/hooks/useTaxonomy";
 import { plural } from "@/lib/format";
+import { ModuleLabel } from "@/components/layout/ModuleLabel";
 import "@/styles/panel-reports.css";
 
 const PAGE_SIZE = 50;
@@ -75,6 +76,7 @@ export function ReportsPage() {
   return (
     <div className="ds-page">
       <div className="ds-stack">
+        <ModuleLabel module="panel" />
         <h1 tabIndex={-1}>Zgłoszenia</h1>
         <p className="reports-lead">
           Zgłoszenia bez dopasowania pokazują luki w bazie rozwiązań albo wyzwania, którymi nikt się jeszcze nie
