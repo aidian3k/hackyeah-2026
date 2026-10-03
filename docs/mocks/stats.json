@@ -1,0 +1,154 @@
+{
+  "from": "2026-07-05",
+  "to": "2026-10-03",
+  "total": 120,
+  "matched": 80,
+  "unmatched": 40,
+  "by_category": [
+    {
+      "category": "LONELINESS",
+      "label_pl": "Samotność i izolacja społeczna",
+      "total": 30,
+      "matched": 24,
+      "unmatched": 6
+    },
+    {
+      "category": "AGING",
+      "label_pl": "Starzenie się społeczeństwa",
+      "total": 22,
+      "matched": 17,
+      "unmatched": 5
+    },
+    {
+      "category": "MENTAL_HEALTH",
+      "label_pl": "Kryzys zdrowia psychicznego",
+      "total": 19,
+      "matched": 12,
+      "unmatched": 7
+    },
+    {
+      "category": "DIGITAL_EXCLUSION",
+      "label_pl": "Wykluczenie cyfrowe",
+      "total": 15,
+      "matched": 11,
+      "unmatched": 4
+    },
+    {
+      "category": "SERVICE_ACCESS",
+      "label_pl": "Ograniczony dostęp do usług społecznych",
+      "total": 14,
+      "matched": 8,
+      "unmatched": 6
+    },
+    {
+      "category": "DEPOPULATION",
+      "label_pl": "Depopulacja obszarów regionu",
+      "total": 8,
+      "matched": 4,
+      "unmatched": 4
+    },
+    {
+      "category": "SUBURBAN_GROWTH",
+      "label_pl": "Gwałtowny wzrost ludności gmin okołokrakowskich",
+      "total": 6,
+      "matched": 3,
+      "unmatched": 3
+    },
+    {
+      "category": "OTHER",
+      "label_pl": "Poza taksonomią — do przeglądu przez operatora",
+      "total": 6,
+      "matched": 1,
+      "unmatched": 5
+    }
+  ],
+  "by_gmina": [
+    {
+      "gmina": "Wieliczka",
+      "powiat": "wielicki",
+      "total": 9,
+      "matched": 5,
+      "unmatched": 4
+    },
+    {
+      "gmina": "Kraków",
+      "powiat": "Kraków",
+      "total": 21,
+      "matched": 16,
+      "unmatched": 5
+    },
+    {
+      "gmina": "Nowy Sącz",
+      "powiat": "Nowy Sącz",
+      "total": 11,
+      "matched": 8,
+      "unmatched": 3
+    },
+    {
+      "gmina": "Uście Gorlickie",
+      "powiat": "gorlicki",
+      "total": 4,
+      "matched": 1,
+      "unmatched": 3
+    },
+    {
+      "gmina": null,
+      "powiat": null,
+      "total": 75,
+      "matched": 50,
+      "unmatched": 25
+    }
+  ],
+  "by_week": [
+    {
+      "week": "2026-09-07",
+      "total": 18,
+      "matched": 12,
+      "unmatched": 6
+    },
+    {
+      "week": "2026-09-14",
+      "total": 22,
+      "matched": 15,
+      "unmatched": 7
+    },
+    {
+      "week": "2026-09-21",
+      "total": 31,
+      "matched": 20,
+      "unmatched": 11
+    },
+    {
+      "week": "2026-09-28",
+      "total": 49,
+      "matched": 33,
+      "unmatched": 16
+    }
+  ],
+  "by_reporter_type": [
+    {
+      "reporter_type": "RESIDENT",
+      "total": 58,
+      "matched": 38,
+      "unmatched": 20
+    },
+    {
+      "reporter_type": "NGO",
+      "total": 32,
+      "matched": 22,
+      "unmatched": 10
+    },
+    {
+      "reporter_type": "JST",
+      "total": 20,
+      "matched": 14,
+      "unmatched": 6
+    },
+    {
+      "reporter_type": "OTHER",
+      "total": 10,
+      "matched": 6,
+      "unmatched": 4
+    }
+  ]
+}

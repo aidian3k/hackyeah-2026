@@ -1,0 +1,37 @@
+[project]
+name = "splot"
+version = "0.1.0"
+description = "Splot – Moduł 1: Matchmaking społeczny (HackYeah 2026, ROPS Kraków)"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "sqlalchemy[asyncio]>=2.0",
+    "asyncpg",
+    "pgvector",
+    "pydantic>=2",
+    "pydantic-settings",
+    "openai",
+    "cohere",
+    "anthropic",
+    "httpx",
+    "beautifulsoup4",
+]
+
+[project.optional-dependencies]
+dev = ["ruff"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["api*", "scripts*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = [".venv", "data", "docs", "design-system"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]

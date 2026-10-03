@@ -1,0 +1,107 @@
+[
+  {
+    "message": "U nas w gminie starsi ludzie siedzą sami w domach i nie mają z kim porozmawiać. Seniorzy są samotni, dzieci wyjechały.",
+    "session_id": "seed-demo-01",
+    "gmina": "Wieliczka",
+    "reporter_type": "RESIDENT",
+    "severity_self": 4
+  },
+  {
+    "message": "Coraz więcej samotnych seniorów w naszej wsi, starsze osoby całymi dniami są same i nikt ich nie odwiedza.",
+    "session_id": "seed-demo-02",
+    "gmina": "Myślenice",
+    "reporter_type": "NGO",
+    "severity_self": 4
+  },
+  {
+    "message": "Samotność osób starszych to u nas duży problem — seniorzy po śmierci współmałżonka zostają sami w domu.",
+    "session_id": "seed-demo-03",
+    "gmina": "Bochnia",
+    "reporter_type": "JST",
+    "severity_self": 3
+  },
+  {
+    "message": "Starsi mieszkańcy są samotni i odizolowani, brakuje miejsca, gdzie seniorzy mogliby się spotkać i porozmawiać.",
+    "session_id": "seed-demo-04",
+    "gmina": "Nowy Targ",
+    "reporter_type": "RESIDENT",
+    "severity_self": 3
+  },
+  {
+    "message": "Seniorzy w naszej gminie czują się samotni, starsze osoby mieszkają same i nie mają z kim porozmawiać.",
+    "session_id": "seed-demo-05",
+    "gmina": "Limanowa",
+    "reporter_type": "OTHER",
+    "severity_self": 4
+  },
+  {
+    "message": "Seniorzy nie radzą sobie z internetem i smartfonem, nie umieją założyć profilu zaufanego ani umówić wizyty u lekarza przez internet.",
+    "session_id": "seed-demo-06",
+    "gmina": "Tarnów",
+    "reporter_type": "JST",
+    "severity_self": 3
+  },
+  {
+    "message": "Starsze osoby są wykluczone cyfrowo — nie potrafią korzystać z komputera i internetu, a coraz więcej spraw załatwia się online.",
+    "session_id": "seed-demo-07",
+    "gmina": "Gorlice",
+    "reporter_type": "NGO",
+    "severity_self": 3
+  },
+  {
+    "message": "Babcia nie umie obsłużyć smartfona, a seniorzy u nas potrzebują pomocy z internetem i e-usługami.",
+    "session_id": "seed-demo-08",
+    "gmina": "Olkusz",
+    "reporter_type": "RESIDENT",
+    "severity_self": 2
+  },
+  {
+    "message": "Z naszej wsi nie da się dojechać do lekarza ani do urzędu, autobus przestał kursować i nie ma żadnej komunikacji.",
+    "session_id": "seed-demo-09",
+    "gmina": "Miechów",
+    "reporter_type": "RESIDENT",
+    "severity_self": 4
+  },
+  {
+    "message": "Mieszkańcy wsi bez samochodu nie mają jak dojechać do przychodni, transport publiczny praktycznie nie istnieje, brak autobusów.",
+    "session_id": "seed-demo-10",
+    "gmina": "Dąbrowa Tarnowska",
+    "reporter_type": "JST",
+    "severity_self": 4
+  },
+  {
+    "message": "Nastolatki w naszej szkole mają depresję i myśli samobójcze, a na psychologa czeka się kilka miesięcy.",
+    "session_id": "seed-demo-11",
+    "gmina": "Skawina",
+    "reporter_type": "OTHER",
+    "severity_self": 5
+  },
+  {
+    "message": "Na nowych osiedlach pod Krakowem szybko przybywa mieszkańców, brakuje przedszkoli i żłobków, a gmina nie nadąża z budową infrastruktury.",
+    "session_id": "seed-demo-12",
+    "gmina": "Zielonki",
+    "reporter_type": "RESIDENT",
+    "severity_self": 3
+  },
+  {
+    "message": "Opiekuję się mamą z demencją i jestem wykończona, nie mam nikogo, kto by mnie zastąpił choć na kilka godzin.",
+    "session_id": "seed-demo-13",
+    "gmina": "Wadowice",
+    "reporter_type": "RESIDENT",
+    "severity_self": 5
+  },
+  {
+    "message": "Bezpańskie psy biegają stadami po wsi i straszą przechodniów, nikt nie chce ich wyłapać.",
+    "session_id": "seed-demo-14",
+    "gmina": "Proszowice",
+    "reporter_type": "RESIDENT",
+    "severity_self": 3
+  },
+  {
+    "message": "Latem wysychają studnie i rolnicy nie mają czym podlewać upraw, potrzebny jest wodociąg.",
+    "session_id": "seed-demo-15",
+    "gmina": "Niepołomice",
+    "reporter_type": "RESIDENT",
+    "severity_self": 3
+  }
+]

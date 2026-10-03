@@ -1,0 +1,21 @@
+event: status
+data: {"stage": "preprocess", "label_pl": "Analizuję opis problemu..."}
+
+event: status
+data: {"stage": "search", "label_pl": "Szukam w bazie rozwiązań..."}
+
+event: status
+data: {"stage": "rerank", "label_pl": "Wybieram najlepiej pasujące..."}
+
+event: candidates
+data: {"solutions": [], "also_see": [], "context": [{"id": 45, "kind": "KNOWLEDGE", "rank": 1, "title": "Wyludnianie się gmin peryferyjnych – diagnoza", "summary": "Charakterystyka gmin tracących mieszkańców, mechanizmu „spirali” zamykania usług i możliwych interwencji.", "organization": "Regionalny Ośrodek Polityki Społecznej (opracowanie ilustracyjne)", "gmina": "Kraków", "powiat": "Kraków", "category": "DEPOPULATION", "category_label_pl": "Depopulacja obszarów regionu", "tags": ["diagnoza", "depopulacja", "wieś", "migracje"], "target_group": "mieszkańcy gmin wiejskich", "cost_range": null, "implementation_steps": [], "source_url": "https://example.org/seed-demo/diagnoza-depopulacja-gmin-wiejskich", "source_name": "SEED_DEMO", "evidence_level": 1, "media": [], "origin": "CURATED", "scores": {"rerank": null, "rrf": null, "lex_rank": null, "vec_rank": 1, "cosine": 0.53}}]}
+
+event: no_match
+data: {"reason": "below_threshold", "best_score": 0.21, "gate": "rerank", "message_pl": "Nie znalazłem w bazie rozwiązania, które pasuje do tego opisu. Zgłoszenie zostało zapisane — zespół Hubu je zobaczy."}
+
+event: report_saved
+data: {"report_id": 413, "similar_count": 0, "gmina_count": 1}
+
+event: done
+data: {"search_event_id": 989, "latency_ms": {"total": 1210}}
+

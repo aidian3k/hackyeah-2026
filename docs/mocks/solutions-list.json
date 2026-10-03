@@ -1,0 +1,110 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "kind": "SOLUTION",
+      "rank": 1,
+      "title": "Telefon Życzliwości dla seniorów",
+      "summary": "Codzienne rozmowy telefoniczne przeszkolonych wolontariuszy z samotnymi osobami 65+, które rzadko wychodzą z domu i nie mają z kim porozmawiać.",
+      "organization": "Fundacja Wspólna Sprawa",
+      "gmina": "Wieliczka",
+      "powiat": "wielicki",
+      "category": "LONELINESS",
+      "category_label_pl": "Samotność i izolacja społeczna",
+      "tags": [
+        "seniorzy",
+        "samotność",
+        "wolontariat",
+        "telefon",
+        "rozmowa"
+      ],
+      "target_group": "osoby 65+",
+      "cost_range": "do 10 tys. zł",
+      "implementation_steps": [
+        "Rekrutacja wolontariuszy",
+        "Szkolenie z komunikacji i rozpoznawania sygnałów kryzysu",
+        "Zbieranie zgłoszeń od OPS, parafii i rodzin",
+        "Uruchomienie dyżurów telefonicznych",
+        "Comiesięczne spotkania superwizyjne wolontariuszy"
+      ],
+      "source_url": "https://example.org/seed-demo/telefon-zyczliwosci-wieliczka",
+      "source_name": "SEED_DEMO",
+      "evidence_level": 4,
+      "media": [],
+      "origin": "CURATED",
+      "scores": null
+    },
+    {
+      "id": 2,
+      "kind": "SOLUTION",
+      "rank": 2,
+      "title": "Klub Seniora „Pod Lipami” w remizie OSP",
+      "summary": "Wiejski klub seniora działający dwa razy w tygodniu w remizie strażackiej: wspólne gotowanie, gimnastyka, wycieczki i rozmowy przy kawie.",
+      "organization": "Koło Gospodyń Wiejskich w Książu Wielkim",
+      "gmina": "Książ Wielki",
+      "powiat": "miechowski",
+      "category": "LONELINESS",
+      "category_label_pl": "Samotność i izolacja społeczna",
+      "tags": [
+        "klub seniora",
+        "seniorzy",
+        "samotność",
+        "KGW",
+        "OSP",
+        "wieś"
+      ],
+      "target_group": "osoby starsze z terenów wiejskich",
+      "cost_range": "do 20 tys. zł rocznie",
+      "implementation_steps": [
+        "Znalezienie bezpłatnej sali (remiza, świetlica, szkoła)",
+        "Zebranie grupy inicjatywnej seniorów",
+        "Ustalenie stałego harmonogramu spotkań",
+        "Zorganizowanie podwózki dla osób z ograniczoną mobilnością",
+        "Złożenie wniosku o mały grant gminny"
+      ],
+      "source_url": "https://example.org/seed-demo/klub-seniora-pod-lipami",
+      "source_name": "SEED_DEMO",
+      "evidence_level": 3,
+      "media": [],
+      "origin": "CURATED",
+      "scores": null
+    },
+    {
+      "id": 7,
+      "kind": "SOLUTION",
+      "rank": 3,
+      "title": "Teleopieka – opaski SOS dla osób starszych",
+      "summary": "Seniorzy mieszkający samotnie otrzymują opaskę z przyciskiem alarmowym i czujnikiem upadku połączoną z całodobowym centrum monitoringu.",
+      "organization": "Urząd Miasta i Gminy",
+      "gmina": "Skawina",
+      "powiat": "krakowski",
+      "category": "AGING",
+      "category_label_pl": "Starzenie się społeczeństwa",
+      "tags": [
+        "teleopieka",
+        "opaska SOS",
+        "bezpieczeństwo",
+        "seniorzy",
+        "upadki"
+      ],
+      "target_group": "osoby 65+ mieszkające samotnie",
+      "cost_range": "50–100 tys. zł rocznie",
+      "implementation_steps": [
+        "Wybór operatora w zapytaniu ofertowym",
+        "Ustalenie kryteriów kwalifikacji",
+        "Nabór uczestników przez OPS",
+        "Instalacja i instruktaż",
+        "Ocena po 12 miesiącach"
+      ],
+      "source_url": "https://example.org/seed-demo/teleopieka-opaski-sos-skawina",
+      "source_name": "SEED_DEMO",
+      "evidence_level": 3,
+      "media": [],
+      "origin": "CURATED",
+      "scores": null
+    }
+  ],
+  "total": 47,
+  "limit": 20,
+  "offset": 0
+}
