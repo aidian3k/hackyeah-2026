@@ -1,0 +1,160 @@
+{
+  "id": "iws2-demo",
+  "title": "Przykładowy nabór na wzór Inkubatora Włączenia Społecznego 2.0",
+  "short_pl": "Grant do 120 000 zł na opracowanie i przetestowanie nowej innowacji społecznej w obszarze włączenia społecznego. Mogą startować osoby fizyczne, podmioty i grupy nieformalne. Nabór przykładowy — pytania wniosku pochodzą z formularza IWS 2.0, terminy są umowne.",
+  "program": "Inkubator Włączenia Społecznego 2.0 (FERS 2021–2027, Działanie 5.1 „Innowacje społeczne”) — wzór",
+  "demo": true,
+  "based_on": [
+    {
+      "title": "Wzór formularza aplikacyjnego IWS 2.0 (PDF)",
+      "url": "https://rops.krakow.pl/pliki-do-pobrania/artykul,wzor-formularza-aplikacyjnego,1049"
+    },
+    {
+      "title": "Ogłoszenie o naborze innowacji społecznych IWS 2.0 (PDF)",
+      "url": "https://rops.krakow.pl/pliki-do-pobrania/artykul,ogloszenie-o-naborze-innowacji-spolecznych,1046"
+    }
+  ],
+  "opens_at": "2026-09-15",
+  "closes_at": "2026-12-31",
+  "max_amount": 120000,
+  "applicant_types": [
+    "osoba fizyczna",
+    "podmiot (np. fundacja, stowarzyszenie, spółdzielnia socjalna, jednostka samorządu)",
+    "grupa nieformalna"
+  ],
+  "sections": [
+    {
+      "id": "title",
+      "title": "Tytuł innowacji",
+      "kind": "text",
+      "prompt": "Zastanów się nad tytułem, by był on krótki i kojarzący się z przedmiotem innowacji.",
+      "hints": [],
+      "required": true,
+      "max_chars": 200,
+      "prefill": ["idea.title"]
+    },
+    {
+      "id": "applicant",
+      "title": "Dane pomysłodawcy",
+      "kind": "info",
+      "prompt": "W prawdziwym naborze podasz tu dane osoby fizycznej, podmiotu albo grupy nieformalnej. W Kreatorze ich nie zbieramy.",
+      "hints": [],
+      "required": false,
+      "max_chars": null,
+      "prefill": []
+    },
+    {
+      "id": "description",
+      "title": "Opis innowacji",
+      "kind": "text",
+      "prompt": "Na czym polega innowacja? Jaki jest jej charakter np. produkt, aplikacja, model pracy, rozwiązanie technologiczne? Jak można krótko ją określić, opisać? Jak rozwiązanie realizuje cel projektu: wsparcie procesu włączenia społecznego/przeciwdziałanie wykluczeniu społecznemu? Jak rozwiązanie wpisuje się w ideę deinstytucjonalizacji?",
+      "hints": [],
+      "required": true,
+      "max_chars": null,
+      "prefill": ["idea.summary", "idea.essence", "canvas.solution_readiness"]
+    },
+    {
+      "id": "innovation",
+      "title": "Innowacyjność rozwiązania",
+      "kind": "text",
+      "prompt": "Pomóż nam lepiej zrozumieć wyjątkowość pomysłu. Czy podobne rozwiązania są stosowane w Polsce albo na świecie? W jaki sposób proponowany projekt wnosi nową wartość w rozwiązanie zdefiniowanego problemu? Czym projekt wyróżnia się na tle innych, realizowanych w tym zakresie?",
+      "hints": [
+        "Sprawdź podobne innowacje w Bibliotece rozwiązań i napisz, czym Twój pomysł się od nich różni."
+      ],
+      "required": true,
+      "max_chars": null,
+      "prefill": []
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnoza problemu, na który odpowiada Twoja innowacja",
+      "kind": "text",
+      "prompt": "Na jaki problem odpowiada innowacja – wskaż dane statystyczne obrazujące skalę problemu? Jakie są podstawy tej diagnozy np. raporty, badania? Czy problem, który zamierzasz rozwiązać, jest zgodny z tematem wskazanym w Mapie Wyzwań Społecznych – jeśli tak, to jakim?",
+      "hints": [
+        "Sprawdź, czy Twój problem pasuje do jednego z 8 obszarów Mapy Wyzwań Społecznych ROPS (PDF): https://rops.krakow.pl/pliki-do-pobrania/artykul,mapa-wyzwan-spolecznych,1048",
+        "Podaj źródła danych, np. raport GUS, diagnozę gminy albo dane ośrodka pomocy społecznej."
+      ],
+      "required": true,
+      "max_chars": null,
+      "prefill": ["canvas.problem_intensity", "canvas.problem_frequency", "canvas.problem_scale"]
+    },
+    {
+      "id": "recipients",
+      "title": "Opis odbiorców innowacji",
+      "kind": "text",
+      "prompt": "Do kogo jest skierowana Twoja innowacja? Co tą grupę wyróżnia? Jakie ma potrzeby? Z jakiego powodu są to osoby wykluczone lub zagrożone wykluczeniem?",
+      "hints": [],
+      "required": true,
+      "max_chars": null,
+      "prefill": ["idea.audience", "canvas.recipients_users"]
+    },
+    {
+      "id": "change",
+      "title": "Zmiana jaką wprowadza innowacja",
+      "kind": "text",
+      "prompt": "Jak proponowane rozwiązanie wpłynie na opisany wyżej problem? Co zmieni w życiu grupy odbiorców? Jak wpłynie na włączenie społeczne adresatów? Dzięki czemu zapobiegnie procesowi wykluczenia społecznego?",
+      "hints": [],
+      "required": true,
+      "max_chars": null,
+      "prefill": [
+        "canvas.value_emotional",
+        "canvas.value_functional",
+        "canvas.impact_person",
+        "canvas.impact_community",
+        "canvas.impact_environment"
+      ]
+    },
+    {
+      "id": "vision",
+      "title": "Wizja przyszłości innowacji",
+      "kind": "text",
+      "prompt": "Czy innowacja ma potencjał do bycia zastosowaną w przyszłości na dużą skalę, dla szerokiej grupy odbiorców? Czy wypracowane rozwiązanie może zostać rozszerzone na inne grupy docelowe, być stosowane w innym kontekście lub miejscu? W jaki sposób? Jakie jej cechy pozwalają na takie rozszerzenie? Opisz łatwość stosowania i wdrażalność rozwiązania.",
+      "hints": [],
+      "required": true,
+      "max_chars": null,
+      "prefill": ["canvas.revenue_scaling", "canvas.channels_direct", "canvas.channels_partners"]
+    },
+    {
+      "id": "testing",
+      "title": "Plan testowania",
+      "kind": "text",
+      "prompt": "Jak będzie przebiegał proces testowania? Ile osób będzie testowało innowację? (minimum 4)",
+      "hints": [
+        "Okres przygotowawczy trwa najwyżej 3 miesiące, a dwie fazy testu łącznie najwyżej 9 miesięcy.",
+        "Testerzy nie mogą ponosić opłat za udział w teście.",
+        "Koszty działań wpisz w planie działania i koszty poniżej."
+      ],
+      "required": true,
+      "max_chars": null,
+      "prefill": []
+    },
+    {
+      "id": "team",
+      "title": "Zespół projektowy i jego doświadczenie",
+      "kind": "text",
+      "prompt": "Kto będzie odpowiedzialny za realizację zadań w projekcie? Jakie doświadczenie w pracy z odbiorcami innowacji, planowaniu i wdrażaniu innowacji społecznych mają te osoby, instytucje, organizacje?",
+      "hints": [],
+      "required": false,
+      "max_chars": null,
+      "prefill": ["canvas.partners"]
+    },
+    {
+      "id": "statements",
+      "title": "Oświadczenia",
+      "kind": "info",
+      "prompt": "W prawdziwym naborze zaznaczysz oświadczenia i dołączysz podpisany dokument. Najważniejsze z nich znajdziesz poniżej — sprawdź, czy Twój pomysł je spełnia.",
+      "hints": [],
+      "required": false,
+      "max_chars": null,
+      "prefill": []
+    }
+  ],
+  "statements": [
+    "Nie byłem/byłam karany/karana i nie zalegam z podatkami ani składkami.",
+    "Akceptuję Procedury realizacji projektu.",
+    "Innowacja nie powiela standardowych form wsparcia ani innowacji już wdrożonych lub inkubowanych.",
+    "Testerzy nie poniosą żadnych opłat za udział w teście innowacji.",
+    "Pomysł nie ma charakteru wdrożeniowego — grant służy opracowaniu i przetestowaniu innowacji.",
+    "Zgadzam się na udostępnienie wniosku osobom oceniającym innowacje (KOI i RIS)."
+  ]
+}
