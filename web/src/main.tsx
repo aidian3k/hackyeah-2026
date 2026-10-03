@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import "../../design-system/tokens.css";
 import "../../design-system/components.css";
 import "./styles/app.css";
+import "./styles/tailwind.css";
 import { App } from "./App";
 import { AuthProvider } from "@/lib/auth";
 

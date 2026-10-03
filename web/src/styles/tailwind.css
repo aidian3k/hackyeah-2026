@@ -1,0 +1,4 @@
+/* Tailwind bez preflightu (patrz tailwind.config.cjs). Importowany w main.tsx po arkuszach design systemu. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
