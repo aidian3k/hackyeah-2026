@@ -1,10 +1,10 @@
 # Moduł frontendowy — plan implementacji i zadania
 
-Plan interfejsu Splot zbudowanego na API Modułu 1 (`docs/modules/01-matchmaking/module-1-tasks.md`, T00–T26) i design systemie (`DESIGN.md`, `design-system/`). Każde zadanie jest samowystarczalne: zawiera cel, pliki, wklejony kontekst, kroki i kryterium gotowości. Agent wykonujący zadanie **nie musi czytać specyfikacji HTML ani kodu backendu**. Musi przeczytać `CLAUDE.md`, `DESIGN.md` oraz sekcję „Wspólne kontrakty” poniżej.
+Plan interfejsu Splot zbudowanego na API Modułu 1 (`docs/modules/01-matchmaking/module-1-tasks.md`, T00–T26) i design systemie (`DESIGN.md`, `design-system/`). Każde zadanie jest samowystarczalne: zawiera cel, pliki, wklejony kontekst, kroki i kryterium gotowości. Agent wykonujący zadanie **nie musi czytać specyfikacji HTML ani kodu backendu**. Musi przeczytać `AGENTS.md`, `DESIGN.md` oraz sekcję „Wspólne kontrakty” poniżej.
 
 **Decyzje dla frontendu (2026-10-03):**
-- **Osobny moduł w `web/`.** Frontend powstaje w `web/` i nie zmienia plików w `api/`, `db/` ani `scripts/` (zob. `CLAUDE.md`).
-- **Stack:** Vite + React + TypeScript + React Router. Bez bibliotek komponentów UI, bez Tailwinda, bez bibliotek wykresów i bez menedżera stanu. Wygląd pochodzi wyłącznie z `design-system/tokens.css` i `design-system/components.css` oraz z cienkich arkuszy w `web/src/styles/`, które używają tylko tokenów.
+- **Osobny moduł w `web/`.** Frontend powstaje w `web/` i nie zmienia plików w `api/`, `db/` ani `scripts/` (zob. `AGENTS.md`).
+- **Stack:** Vite + React + TypeScript + React Router + Tailwind CSS 3 (preset `design-system/tailwind.preset.js`, bez preflightu). Bez bibliotek komponentów UI, bez bibliotek wykresów i bez menedżera stanu. Wygląd pochodzi z `design-system/tokens.css` i `design-system/components.css` (klasy `ds-*`) oraz z klas Tailwinda w `className`. **Zmiana z 2026-10-03:** nowych arkuszy w `web/src/styles/` nie tworzymy; istniejące są dziedzictwem do stopniowej migracji — zasady w `AGENTS.md`, sekcja „Stylowanie: Tailwind, bez własnego CSS”.
 - **Bez autoryzacji** (jak backend). Panel administratora `/panel` jest otwarty. Nie ma pola tokenu, logowania ani nagłówków `X-Access-Token` / `X-Report-Token`. Autor czyta odpowiedzi po samym `report_id`.
 - **Bez testów automatycznych** (jak backend). Nie ma Vitest, Jest, Playwright ani katalogów `__tests__`. Zadanie weryfikujesz tak: `npm run build` i `npm run lint` są czyste, przechodzisz scenariusz ręcznie w przeglądarce (mock albo prawdziwe API), a dla czystej logiki uruchamiasz skrypt sprawdzający w `web/scripts/` (`npx tsx …`).
 - **Nie zbieramy e-maila** w czacie. `ChatRequest.contact_email` istnieje, ale PoC niczego nie wysyła (ADR-018), więc pole tylko obiecywałoby kontakt, którego nie ma. To też minimalizacja danych.
@@ -91,7 +91,7 @@ web/
                 MyReportsPage.tsx NotFoundPage.tsx
                 panel/ InboxPage.tsx ReportsPage.tsx ReportPage.tsx SolutionsQueuePage.tsx
                        SolutionReviewPage.tsx TrendsPage.tsx
-    styles/     app.css (+ pliki per obszar; tylko var(--…))
+    styles/     tailwind.css, app.css (+ dziedziczne pliki per obszar — bez nowych)
 ```
 
 ### Konwencje
@@ -99,7 +99,7 @@ web/
 - TypeScript `strict`. Importy względne w obrębie `src/` przez alias `@/` (np. `import { api } from "@/api/client"`).
 - Komponenty funkcyjne. Pliki `PascalCase.tsx` dla komponentów, `camelCase.ts` dla reszty. Eksporty nazwane, bez `default` (wyjątek: nic).
 - Teksty dla użytkownika są po polsku i piszesz je w kodzie zgodnie z „Tonem i treścią” z `DESIGN.md`: druga osoba, wielka litera tylko na początku zdania, bez emoji, przyciski mówią, co się stanie. Teksty używane w więcej niż jednym miejscu żyją w `src/lib/labels.ts`.
-- **Zero kolorów, odstępów i rozmiarów pisma wpisanych na sztywno.** W CSS i w `style={{…}}` tylko `var(--…)`. Sprawdzenie: `grep -rnE '#[0-9a-fA-F]{3,8}\b|rgba?\(|[0-9]+px' web/src --include=*.css --include=*.tsx` zwraca wyłącznie wyjątki opisane komentarzem (np. `min-height: 44px` jest już w klasach DS, więc nie powinno go być w `web/src`).
+- **Zero kolorów, odstępów i rozmiarów pisma wpisanych na sztywno.** W klasach Tailwinda tylko tokeny z presetu (bez `[#…]`, `[13px]`, domyślnej palety); w dziedzicznym CSS tylko `var(--…)`; `style={{…}}` wyłącznie dla zmiennych CSS liczonych w runtime. Sprawdzenie: `grep -rnE '#[0-9a-fA-F]{3,8}\b|rgba?\(|[0-9]+px' web/src --include=*.css --include=*.tsx` zwraca wyłącznie wyjątki opisane komentarzem (np. `min-height: 44px` jest już w klasach DS, więc nie powinno go być w `web/src`).
 - Klasy komponentów pochodzą z design systemu (`ds-…`). Brakuje klasy → wpis do F03 w „Uwagach”, nie lokalna kopia stylu.
 - Stan filtrów list (katalog, panel) trzymasz w parametrach URL (`useSearchParams`), żeby działał przycisk „Wstecz” i dało się wkleić link.
 - Frontend **nie sortuje, nie filtruje i nie odcina** wyników czatu. Kolejność `candidates` jest ostateczna, `scores` nie wpływają na wyświetlanie.
@@ -633,7 +633,7 @@ Nawigacja publiczna (`MainNav`): „Znajdź rozwiązanie” (ikona domu w `accen
 3. Po `submit` fokus przechodzi na nagłówek sekcji wyników (z F09), żeby czytnik i lupa poszli za treścią.
 4. W trybie DEV pod formularzem jest mały przełącznik scenariusza mocka (`match | no-match | retracted | error`), który ustawia `?scenario=`. W buildzie produkcyjnym go nie ma.
 
-**Gotowe, gdy:** na mocku każdy z 4 scenariuszy daje poprawny widok (F09); na prawdziwym API zapytanie z `CLAUDE.md` („U nas w gminie starsi ludzie…”) pokazuje karty przed tekstem, streszczenie z klikalnymi `[n]` i licznik skali; gmina „Gotham” jest niemożliwa do wybrania (select), a sztucznie wysłana daje błąd przy polu gminy; ekran przechodzi listę kontrolną dostępności; na 360 px formularz i wyniki mieszczą się bez poziomego przewijania; na ekranie jest dokładnie jeden `ds-btn--cta`.
+**Gotowe, gdy:** na mocku każdy z 4 scenariuszy daje poprawny widok (F09); na prawdziwym API zapytanie z `AGENTS.md` („U nas w gminie starsi ludzie…”) pokazuje karty przed tekstem, streszczenie z klikalnymi `[n]` i licznik skali; gmina „Gotham” jest niemożliwa do wybrania (select), a sztucznie wysłana daje błąd przy polu gminy; ekran przechodzi listę kontrolną dostępności; na 360 px formularz i wyniki mieszczą się bez poziomego przewijania; na ekranie jest dokładnie jeden `ds-btn--cta`.
 
 ---
 

@@ -18,5 +18,5 @@ Mocki strumieni SSE zostają w `docs/mocks/` — korzystają z nich `Makefile` (
 
 - Prefiksy zadań: `Z` (2), `K` (3), `TI` (4), `PK` (5), `PA` (6), `MI` (7) — bez kolizji z `T` (Moduł 1) i `F` (frontend).
 - ADR numerowane per moduł: `ADR-M2-001`, … — ADR-001 – 019 należą do Modułu 1.
-- Twarde reguły z `CLAUDE.md` obowiązują wszystkie moduły. Moduł 1 jest kontraktem zewnętrznym: zmiana jego tabel lub endpointów = ADR + wpis w „Uwagach między zadaniami” `docs/modules/01-matchmaking/module-1-tasks.md`.
+- Twarde reguły z `AGENTS.md` obowiązują wszystkie moduły. Moduł 1 jest kontraktem zewnętrznym: zmiana jego tabel lub endpointów = ADR + wpis w „Uwagach między zadaniami” `docs/modules/01-matchmaking/module-1-tasks.md`.
 - Specyfikacja przechodzi z `szkielet` do `draft` po sesji planowania; zadania rozpisujemy dopiero wtedy.

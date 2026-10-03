@@ -11,3 +11,10 @@ data/raw/html-cache/
 # Frontend (web/)
 web/node_modules/
 web/dist/
+
+# IDE (JetBrains)
+.idea/
+*.iml
+
+# Agenci — lokalne ustawienia osobiste
+.claude/settings.local.json

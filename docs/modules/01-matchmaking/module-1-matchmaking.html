@@ -981,7 +981,7 @@ Accept: text/event-stream
 <li><strong>Token <code>STAFF</code></strong> nie trafia do kodu ani do bundla interfejsu mieszkańca. Interfejs publiczny nigdy go nie zna; wpisują go pracownicy w interfejsie Panelu administratora i trzymają w pamięci sesji, nie w <code>localStorage</code>.</li>
 <li><strong>Brak własnej logiki rankingu.</strong> Kolejność w <code>candidates</code> jest ostateczna. Frontend nie sortuje, nie filtruje i nie odcina wyników po <code>scores</code> — progi żyją w konfiguracji backendu (sekcja 11).</li>
 <li><strong>Dostępność</strong> — wykluczenie cyfrowe jest jednym z wyzwań, które adresujemy, więc interfejs nie może go pogłębiać: <code>aria-live="polite"</code> na strumieniowanej odpowiedzi, zgodność z WCAG 2.1 na poziomie AA (wymóg <code>base.md</code>, sekcja 3), tekst od 16 px, pełna obsługa klawiaturą, działanie na telefonie.</li>
-<li><strong>Design system</strong> — interfejs budowany według <code>DESIGN.md</code> i <code>design-system/</code> (tokeny i komponenty, motyw jasny + tryb wysokiego kontrastu), zgodnie z <code>CLAUDE.md</code> repozytorium.</li>
+<li><strong>Design system</strong> — interfejs budowany według <code>DESIGN.md</code> i <code>design-system/</code> (tokeny i komponenty, motyw jasny + tryb wysokiego kontrastu), zgodnie z <code>AGENTS.md</code> repozytorium.</li>
 </ul>
 
 <div class="note">

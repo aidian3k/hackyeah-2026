@@ -2,7 +2,7 @@
 
 > **Szkielet.** Zadania powstaną po sesji planowania i wypełnieniu specyfikacji `docs/modules/02-zasobnik-wiedzy/module-2-zasobnik-wiedzy.html`. Do tego czasu nie bierz zadań z tego pliku.
 
-Plan na podstawie `docs/modules/02-zasobnik-wiedzy/module-2-zasobnik-wiedzy.html` (v0.1). Każde zadanie jest samowystarczalne: zawiera cel, pliki, wklejony kontekst ze specyfikacji, kroki i kryterium gotowości. Agent wykonujący zadanie **nie musi czytać specyfikacji HTML** — ale musi przeczytać `CLAUDE.md` (twarde reguły) oraz sekcję „Wspólne kontrakty” poniżej.
+Plan na podstawie `docs/modules/02-zasobnik-wiedzy/module-2-zasobnik-wiedzy.html` (v0.1). Każde zadanie jest samowystarczalne: zawiera cel, pliki, wklejony kontekst ze specyfikacji, kroki i kryterium gotowości. Agent wykonujący zadanie **nie musi czytać specyfikacji HTML** — ale musi przeczytać `AGENTS.md` (twarde reguły) oraz sekcję „Wspólne kontrakty” poniżej.
 
 **Odstępstwa od specyfikacji (decyzja zespołu, 2026-10-03, jak w Module 1):**
 - **Bez autoryzacji.** Wszystkie endpointy są otwarte; bez tokenów, nagłówków dostępu i kodów 401/403.
