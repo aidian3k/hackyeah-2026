@@ -33,8 +33,8 @@ Identyfikatory: `PK00`–`PK05` backend, `PK20`–`PK26` frontend.
 - [x] PK04 · Eksperci i partnerstwa: `api/routers/mentors.py`, `api/routers/partnerships.py` · zależy: PK01 — zrobione: claude-m5, lista/matches/PATCH/422/404 sprawdzone
 - [x] PK05 · Dane demo + `scripts/seed_comm.py` + `make seed-comm` · zależy: PK02, PK04 — zrobione: claude-m5, seed idempotentny (6 ekspertów, 8 ogłoszeń, 4 rozmowy)
 - [x] PK20 · Frontend: fundament (klient `comm.ts`, etykiety, pamięć, rola `mentor`, trasy, nawigacja, zaślepki) · zależy: PK01 — zrobione: claude-m5, lint+build czyste; licznik panelu w hooks/useCommCount.ts
-- [~] PK21 · Frontend: komponenty rozmowy (`Timeline`, `MessageForm`, `ThreadStatus`, `ThreadList`) + hook `useThread` · zależy: PK20 — agent: claude-m5, 2026-10-04 03:15
-- [ ] PK22 · Frontend: Platforma komunikacji — moje rozmowy, nowe pytanie, widok wątku · zależy: PK21, PK03
+- [x] PK21 · Frontend: komponenty rozmowy (`Timeline`, `MessageForm`, `ThreadStatus`, `ThreadList`) + hook `useThread` · zależy: PK20 — zrobione: claude-m5, tsc+lint czyste; render sprawdzony w PK22–PK25
+- [~] PK22 · Frontend: Platforma komunikacji — moje rozmowy, nowe pytanie, widok wątku · zależy: PK21, PK03 — agent: claude-m5, 2026-10-04 03:30
 - [ ] PK23 · Frontend: Tablica partnerstw (lista, dodawanie, ogłoszenie z dopasowaniami) · zależy: PK21, PK04
 - [ ] PK24 · Frontend: Panel — Rozmowy (lista, wątek, odpowiedź, ekspert, zamknięcie) · zależy: PK21, PK02, PK04
 - [ ] PK25 · Frontend: widok eksperta „Moje konsultacje” · zależy: PK21, PK02, PK04
