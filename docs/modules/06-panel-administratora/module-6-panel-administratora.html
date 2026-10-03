@@ -96,7 +96,7 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
     <span><strong>Wersja:</strong> v0.2</span>
     <span><strong>Data:</strong> 2026-10-04</span>
     <span><strong>Status:</strong> <span class="badge b-draft">draft</span></span>
-    <span><strong>Plik zadań:</strong> <code>docs/modules/06-panel-administratora/module-6-tasks.md</code> (zadania <code>PA</code> — do rozpisania po akceptacji tej wersji)</span>
+    <span><strong>Plik zadań:</strong> <code>docs/modules/06-panel-administratora/module-6-tasks.md</code> (zadania <code>PA00</code>–<code>PA11</code>)</span>
   </div>
 </header>
 
@@ -234,7 +234,7 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 <ul>
 <li><strong>Router</strong> <code>api/routers/admin_solutions.py</code>, prefiks <code>/api/admin/solutions</code> (ADR-M6-001). Publiczny <code>POST /api/solutions</code> (formularz mieszkańca) i <code>PATCH /api/solutions/{id}</code> (decyzja o statusie) zostają bez zmian.</li>
 <li><strong>Logika zapisu</strong> w <code>api/admin_content.py</code>: diff pól, rewizja, decyzja o przebudowie chunków (sekcja 7). Router tylko waliduje i mapuje błędy.</li>
-<li><strong>Schematy</strong> w <code>api/schemas.py</code>: <code>SolutionAdminItem</code>, <code>SolutionAdminDetail</code>, <code>SolutionAdminCreate</code>, <code>SolutionContentPatch</code>, <code>SolutionRevision</code>. <code>SolutionCard</code> pozostaje jedynym kształtem karty — schematy admina go <strong>rozszerzają</strong>, nie zastępują.</li>
+<li><strong>Schematy</strong> w <code>api/schemas.py</code>: <code>SolutionAdminItem</code>, <code>SolutionAdminDetail</code>, <code>SolutionAdminCreate</code>, <code>SolutionContentPatch</code>, <code>SolutionRevisionOut</code>. <code>SolutionCard</code> pozostaje jedynym kształtem karty — schematy admina go <strong>rozszerzają</strong>, nie zastępują.</li>
 <li><strong>Frontend:</strong> ekrany <code>/panel/wiedza*</code>, komponent formularza, lista rewizji, pozycja nawigacji (sekcja 9).</li>
 </ul>
 
@@ -336,7 +336,7 @@ CREATE INDEX solution_revisions_solution_idx ON solution_revisions (solution_id,
 <h3>8.1. Schematy</h3>
 <pre><code>class SolutionAdminItem(SolutionCard):          # karta + metadane pracy panelu
     status: Literal["PUBLISHED", "PENDING_REVIEW", "REJECTED", "ARCHIVED"]
-    knowledge_type: Literal["REPORT", "MATERIAL"] | None   # po M2 Z00 także w SolutionCard
+    # knowledge_type dziedziczony z SolutionCard po M2 Z00 (ADR-M2-001)
     created_at: datetime
     updated_at: datetime
     edited_at: datetime | None
@@ -378,7 +378,7 @@ class SolutionAdminCreate(SolutionContentFields):    # extra="forbid"
     author_label: str
     note: str | None
 
-class SolutionRevision(BaseModel):
+class SolutionRevisionOut(BaseModel):     # SolutionRevision to nazwa modelu ORM
     id: int
     action: Literal["CREATE", "EDIT"]
     author_label: str
@@ -397,7 +397,7 @@ class SolutionRevision(BaseModel):
 <tr><td><code>GET /api/admin/solutions/{id}</code></td><td>—</td><td><code>SolutionAdminDetail</code></td><td>404</td></tr>
 <tr><td><code>POST /api/admin/solutions</code></td><td><code>SolutionAdminCreate</code></td><td>201 <code>SolutionAdminDetail</code> (<code>reembedded = true</code>)</td><td>409 <code>SOURCE_URL_TAKEN</code>, 422, 503 <code>EMBEDDING_UNAVAILABLE</code></td></tr>
 <tr><td><code>PATCH /api/admin/solutions/{id}/content</code></td><td><code>SolutionContentPatch</code></td><td><code>SolutionAdminDetail</code> z <code>reembedded</code></td><td>404, 409 <code>EDIT_CONFLICT</code> / <code>SOURCE_URL_TAKEN</code>, 422, 503</td></tr>
-<tr><td><code>GET /api/admin/solutions/{id}/revisions</code></td><td>query: <code>limit</code> (domyślnie <code>ADMIN_REVISIONS_LIMIT</code>)</td><td><code>list[SolutionRevision]</code> od najnowszej</td><td>404</td></tr>
+<tr><td><code>GET /api/admin/solutions/{id}/revisions</code></td><td>query: <code>limit</code> (domyślnie <code>ADMIN_REVISIONS_LIMIT</code>)</td><td><code>list[SolutionRevisionOut]</code> od najnowszej</td><td>404</td></tr>
 </table>
 </div>
 <p>Zmiana statusu, kategorii i poziomu sprawdzenia — nadal <code>PATCH /api/solutions/{id}</code> (T21). Po 409 <code>EDIT_CONFLICT</code> frontend pobiera aktualną wersję przez <code>GET /api/admin/solutions/{id}</code> — kształt błędu M1 zostaje bez dodatkowych pól.</p>
@@ -507,7 +507,7 @@ class SolutionRevision(BaseModel):
 <pre><code>db/init.sql                              solutions.edited_at, solution_revisions
 api/models.py                            Solution.edited_at, SolutionRevision
 api/config.py                            ADMIN_* (sekcja 10)
-api/schemas.py                           SolutionAdmin*, SolutionContentPatch, SolutionRevision
+api/schemas.py                           SolutionAdmin*, SolutionContentPatch, SolutionRevisionOut
 api/admin_content.py                     (nowy) diff, rewizja, decyzja o rebuild, walidacja wspólna z solutions.py
 api/routers/admin_solutions.py           (nowy) /api/admin/solutions
 api/main.py                              rejestracja routera
