@@ -19,7 +19,7 @@ export const RANGES = [
 ] as const;
 type Range = (typeof RANGES)[number];
 const DEFAULT_RANGE = RANGES[1];
-const TOP_GMINY = 10;
+const TOP_POWIATY = 10;
 
 /** Data lokalna jako RRRR-MM-DD (format parametru from/to w /api/stats). */
 function isoDay(d: Date): string {
@@ -38,6 +38,12 @@ function rangeDates(range: Range): { from: string; to: string } {
 const percentFmt = new Intl.NumberFormat("pl-PL", { style: "percent", maximumFractionDigits: 0 });
 function percent(part: number, total: number): string | null {
   return total > 0 ? percentFmt.format(part / total) : null;
+}
+
+const weekFmt = new Intl.DateTimeFormat("pl-PL", { day: "2-digit", month: "2-digit" });
+function weekLabel(iso: string): string {
+  const d = new Date(iso);
+  return `Tydzień od ${Number.isNaN(d.getTime()) ? iso : weekFmt.format(d)}`;
 }
 
 function reportsCount(n: number): string {
@@ -63,8 +69,8 @@ function categoryHref(code: string): string {
   return `/panel/zgloszenia?${new URLSearchParams({ category: code }).toString()}`;
 }
 
-function gminaHref(name: string): string {
-  return `/panel/zgloszenia?${new URLSearchParams({ gmina: name }).toString()}`;
+function gapHref(code: string): string {
+  return `/panel/zgloszenia?${new URLSearchParams({ category: code, matched: "false" }).toString()}`;
 }
 
 export function TrendsContent({ stats, range }: { stats: Stats; range: Range }) {
@@ -88,7 +94,15 @@ export function TrendsContent({ stats, range }: { stats: Stats; range: Range }) 
     unmatched: c.unmatched,
     colorClass: c.category ? CATEGORY_BAR_CLASS[c.category] : null,
   }));
-  const gminy = stats.by_gmina.slice(0, TOP_GMINY);
+  const weeks: BarItem[] = stats.by_week.map((w) => ({
+    key: w.week,
+    label: weekLabel(w.week),
+    total: w.total,
+    matched: w.matched,
+    unmatched: w.unmatched,
+    colorClass: "ds-bar--navy",
+  }));
+  const powiaty = stats.by_powiat.slice(0, TOP_POWIATY);
 
   return (
     <>
@@ -105,6 +119,14 @@ export function TrendsContent({ stats, range }: { stats: Stats; range: Range }) 
           </Tile>
         </ul>
       </section>
+
+      {weeks.length > 0 && (
+        <section aria-labelledby="trends-weeks" className="ds-stack">
+          <h2 id="trends-weeks">Zgłoszenia w czasie</h2>
+          <p>Liczba zgłoszeń w kolejnych tygodniach. Część wypełniona to zgłoszenia z dopasowaniem.</p>
+          <BarList items={weeks} labelledBy="trends-weeks" />
+        </section>
+      )}
 
       <section aria-labelledby="trends-categories" className="ds-stack">
         <h2 id="trends-categories">Wyzwania</h2>
@@ -149,23 +171,20 @@ export function TrendsContent({ stats, range }: { stats: Stats; range: Range }) 
         </details>
       </section>
 
-      <section aria-labelledby="trends-gminy" className="ds-stack">
-        <h2 id="trends-gminy">Gminy z największą liczbą zgłoszeń</h2>
-        {stats.by_gmina.length > TOP_GMINY && (
+      <section aria-labelledby="trends-powiaty" className="ds-stack">
+        <h2 id="trends-powiaty">Powiaty z największą liczbą zgłoszeń</h2>
+        {stats.by_powiat.length > TOP_POWIATY && (
           <p>
-            Pokazujemy {TOP_GMINY} z {stats.by_gmina.length} pozycji.
+            Pokazujemy {TOP_POWIATY} z {stats.by_powiat.length} pozycji.
           </p>
         )}
         {/* Przewijany region musi być osiągalny klawiaturą (wzorzec ds-table-wrap z design systemu). */}
         {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
-        <div className="ds-table-wrap" role="region" aria-labelledby="trends-gminy-caption" tabIndex={0}>
+        <div className="ds-table-wrap" role="region" aria-labelledby="trends-powiaty-caption" tabIndex={0}>
           <table className="ds-table">
-            <caption id="trends-gminy-caption">
-              Gminy według liczby zgłoszeń {range.phrase}
-            </caption>
+            <caption id="trends-powiaty-caption">Powiaty według liczby zgłoszeń {range.phrase}</caption>
             <thead>
               <tr>
-                <th scope="col">Gmina</th>
                 <th scope="col">Powiat</th>
                 <th scope="col" className="ds-table__num">
                   Razem
@@ -176,12 +195,11 @@ export function TrendsContent({ stats, range }: { stats: Stats; range: Range }) 
               </tr>
             </thead>
             <tbody>
-              {gminy.map((g) => (
-                <tr key={g.gmina ?? "__none"}>
-                  <th scope="row">{g.gmina ? <Link to={gminaHref(g.gmina)}>{g.gmina}</Link> : "Gmina nie podana"}</th>
-                  <td>{g.powiat ?? ""}</td>
-                  <td className="ds-table__num">{g.total}</td>
-                  <td className="ds-table__num">{g.unmatched}</td>
+              {powiaty.map((p) => (
+                <tr key={p.powiat ?? "__none"}>
+                  <th scope="row">{p.powiat ?? "Powiat nie podany"}</th>
+                  <td className="ds-table__num">{p.total}</td>
+                  <td className="ds-table__num">{p.unmatched}</td>
                 </tr>
               ))}
             </tbody>
@@ -192,7 +210,87 @@ export function TrendsContent({ stats, range }: { stats: Stats; range: Range }) 
   );
 }
 
-// F18: agregaty potrzeb regionu (tylko panel). Grupy by_week i by_reporter_type w PoC pomijamy.
+function GapMark() {
+  return (
+    <span className="ds-tag inline-flex items-center gap-1">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" className="h-4 w-4 fill-none stroke-current stroke-2">
+        <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" />
+        <line x1="12" y1="9" x2="12" y2="13" />
+        <line x1="12" y1="17" x2="12.01" y2="17" />
+      </svg>
+      Luka
+    </span>
+  );
+}
+
+/** „Zgłoszenia a biblioteka”: gdzie mieszkańcy zgłaszają problemy, a biblioteka ma mało rozwiązań (ADR-M2-005). */
+export function CoverageSection({ from, to }: { from: string; to: string }) {
+  const { data, error, loading, reload } = useApi(() => api.coverage({ from, to }), [from, to]);
+  return (
+    <section aria-labelledby="trends-coverage" className="ds-stack">
+      <h2 id="trends-coverage">Zgłoszenia a biblioteka</h2>
+      <p>
+        Luka oznacza wyzwanie z wieloma zgłoszeniami bez dopasowania i z małą liczbą rozwiązań w bibliotece. Liczby
+        rozwiązań i wiedzy to stan na dziś.
+      </p>
+      <LoadState loading={loading} error={error} onRetry={reload} label="Wczytujemy zestawienie…">
+        {data && (
+          // Przewijany region musi być osiągalny klawiaturą (wzorzec ds-table-wrap z design systemu).
+          // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+          <div className="ds-table-wrap" role="region" aria-labelledby="trends-coverage-caption" tabIndex={0}>
+            <table className="ds-table">
+              <caption id="trends-coverage-caption">Zgłoszenia i zasoby biblioteki według wyzwań</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Wyzwanie</th>
+                  <th scope="col" className="ds-table__num">
+                    Zgłoszenia
+                  </th>
+                  <th scope="col" className="ds-table__num">
+                    Bez dopasowania
+                  </th>
+                  <th scope="col" className="ds-table__num">
+                    Rozwiązania w bibliotece
+                  </th>
+                  <th scope="col" className="ds-table__num">
+                    Wiedza
+                  </th>
+                  <th scope="col">Stan</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((row) => (
+                  <tr key={row.category}>
+                    <th scope="row">{row.label_pl}</th>
+                    <td className="ds-table__num">{row.reports_total}</td>
+                    <td className="ds-table__num">{row.reports_unmatched}</td>
+                    <td className="ds-table__num">{row.solutions_published}</td>
+                    <td className="ds-table__num">{row.knowledge_published}</td>
+                    <td>
+                      {row.is_gap ? (
+                        <span className="flex flex-col items-start gap-1">
+                          <GapMark />
+                          <Link to={gapHref(row.category)}>
+                            Zobacz zgłoszenia<span className="ds-sr-only">: {row.label_pl}</span>
+                          </Link>
+                        </span>
+                      ) : (
+                        "Bez luki"
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </LoadState>
+    </section>
+  );
+}
+
+// F18 + Z09: agregaty potrzeb regionu (tylko panel): w czasie, po powiatach i zestawienie z biblioteką.
+// Grupa by_reporter_type w PoC pomijana; gmina zniknęła z UI (docs/changes/bugs-2026-10-03-1).
 export function TrendsPage() {
   useDocumentTitle("Panel: Trendy");
   const [searchParams, setSearchParams] = useSearchParams();
@@ -245,6 +343,8 @@ export function TrendsPage() {
           </>
         )}
       </LoadState>
+
+      <CoverageSection from={from} to={to} />
     </div>
   );
 }
