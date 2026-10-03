@@ -6,7 +6,7 @@ Siedem funkcjonalności z `docs/base.md` §2. Każdy moduł ma specyfikację HTM
 |---|---|---|---|---|
 | 1 | I. Matchmaking społeczny (obligatoryjny) | `01-matchmaking/module-1-matchmaking.html` | `01-matchmaking/module-1-tasks.md`, frontend: `01-matchmaking/frontend-tasks.md` (+ `module-1-calibration.md`, `frontend-a11y.md`) | gotowy (T00–T26, F00–F21) |
 | 2 | II. Zasobnik wiedzy | `02-zasobnik-wiedzy/module-2-zasobnik-wiedzy.html` | `02-zasobnik-wiedzy/module-2-tasks.md` | draft v0.4 (zakres, model, API, ekrany, odświeżenie Biblioteki, ADR-M2-001–008, źródła: `02-zasobnik-wiedzy/rops-zasoby-kontekst.md`); zadania Z00–Z14 rozpisane |
-| 3 | III. Kreator pomysłów | `03-kreator-pomyslow/module-3-kreator-pomyslow.html` | `03-kreator-pomyslow/module-3-tasks.md` (materiały: `docs/resources/rops/`) | draft v0.2; zadania K00–K19 do wzięcia |
+| 3 | III. Kreator pomysłów | `03-kreator-pomyslow/module-3-kreator-pomyslow.html` | `03-kreator-pomyslow/module-3-tasks.md` (materiały: `docs/resources/rops/`) | draft v0.3 (zakres pod hackathon); zadania K00–K13 do wzięcia |
 | 4 | IV. Tester innowacji | `04-tester-innowacji/module-4-tester-innowacji.html` | `04-tester-innowacji/module-4-tasks.md` | szkielet; brak |
 | 5 | V. Platforma aktywnej komunikacji | `05-platforma-komunikacji/module-5-platforma-komunikacji.html` | `05-platforma-komunikacji/module-5-tasks.md` | draft v0.3; zadania PK00–PK11 (backend), PK20–PK29 (frontend) do wzięcia; zalążek: odpowiedzi do autora |
 | 6 | VI. Panel administratora | `06-panel-administratora/module-6-panel-administratora.html` | `06-panel-administratora/module-6-tasks.md` | szkielet; w dużej części pokryty przez M1 |
