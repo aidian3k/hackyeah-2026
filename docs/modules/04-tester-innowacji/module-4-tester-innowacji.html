@@ -92,11 +92,11 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 
 <header class="doc">
   <h1>Moduł 4 — Tester innowacji</h1>
-  <div class="sub">Dokument implementacyjny dla Małopolskiego Hubu Innowacji Społecznych (<code>base.md</code>, funkcjonalność IV). <strong>Szkielet</strong> — sekcje do wypełnienia na sesji planowania. Odbiorca: agent lub programista implementujący moduł.</div>
+  <div class="sub">Dokument implementacyjny dla Małopolskiego Hubu Innowacji Społecznych (<code>base.md</code>, funkcjonalność IV). <strong>Draft implementacyjny</strong> — zakres i kontrakty MVP ustalone, szczegóły zadań są w pliku zadań. Odbiorca: agent lub programista implementujący moduł.</div>
   <div class="meta">
-    <span><strong>Wersja:</strong> v0.1</span>
+    <span><strong>Wersja:</strong> v0.2</span>
     <span><strong>Data:</strong> 2026-10-03</span>
-    <span><strong>Status:</strong> <span class="badge b-todo">szkielet</span></span>
+    <span><strong>Status:</strong> <span class="badge b-draft">draft</span></span>
     <span><strong>Plik zadań:</strong> <code>docs/modules/04-tester-innowacji/module-4-tasks.md</code></span>
   </div>
 </header>
@@ -138,8 +138,8 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 <h4>Ocena w konkursie</h4>
 <p>Kryterium „Stopień spełnienia wyzwania” (40%): Matchmaking 10%, każda dodatkowa funkcjonalność +5%. Liczy się jakość działania — moduł ma być pokazywalny w demo, nie tylko obecny w nawigacji.</p>
 
-<div class="pending">
-<p><strong>Do uzupełnienia:</strong> cel modułu w jednym zdaniu, jak wspiera „cyfrowe serce” Hubu i czym wnosi „nową jakość” (kryterium pomysłowości z <code>base.md</code> §6).</p>
+<div class="note">
+<p><strong>Ustalenie z sesji planowania:</strong> Moduł umożliwia Hubowi organizowanie kontrolowanych, otwartych naborów testerów dla konkretnych innowacji społecznych, zebranie ustrukturyzowanych opinii po teście oraz przygotowanie dla Hubu i autora informacji o użyteczności, barierach i możliwych usprawnieniach rozwiązania.</p>
 </div>
 
 <h2 id="s2">2. Stan obecny — co już działa <span class="badge b-draft">draft</span></h2>
@@ -155,22 +155,23 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 </table>
 </div>
 
-<h2 id="s3">3. Zakres MVP i granice <span class="badge b-todo">todo</span></h2>
+<h2 id="s3">3. Zakres MVP i granice <span class="badge b-draft">draft</span></h2>
+<div class="note">
+<p><strong>Ustalenia z sesji planowania:</strong> MVP obejmuje pełny cykl testu: Hub wybiera innowację, definiuje i publikuje nabór, tester zgłasza udział, Hub akceptuje lub odrzuca zgłoszenie, zaakceptowany tester otrzymuje materiały i instrukcję, wykonuje test, a następnie wypełnia ankietę z oceną i propozycjami usprawnień.</p>
+<p>Przedmiotem testu może być dowolny uniwersalny artefakt innowacji społecznej: opis rozwiązania, instrukcja, pliki do pobrania, link zewnętrzny, aplikacja lub demo, a także usługa albo metoda pracy testowana offline.</p>
+<p>W MVP nabory tworzy i publikuje wyłącznie Hub. Autor innowacji może dostarczać dane i materiały, ale nie publikuje naboru samodzielnie.</p>
+</div>
 <div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Co dokładnie wchodzi do PoC tego modułu, a co jest backlogiem (sekcja 14)?</li>
-<li>Zasada granicy: czego ten moduł <strong>nie</strong> robi i który moduł to przejmuje?</li>
-</ul>
+<p><strong>Do doprecyzowania:</strong> granice MVP oraz statusy samego naboru.</p>
 </div>
 
-<h2 id="s4">4. Użytkownicy i scenariusze <span class="badge b-todo">todo</span></h2>
+<h2 id="s4">4. Użytkownicy i scenariusze <span class="badge b-draft">draft</span></h2>
+<div class="note">
+<p><strong>Ustalenia z sesji planowania:</strong> Testerem może być osoba indywidualna albo instytucja: mieszkaniec, osoba z grupy docelowej, opiekun, pracownik NGO, pracownik JST, pracownik instytucji społecznej albo przedstawiciel innego podmiotu.</p>
+<p>Podstawowy scenariusz obejmuje: otwarty nabór Hubu → zgłoszenie testera → weryfikację i decyzję Hubu → przekazanie materiałów i instrukcji → test online lub offline → ankietę → agregację wyników i rekomendacji.</p>
+</div>
 <div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Które grupy z <code>base.md</code> §3 korzystają z modułu: mieszkańcy/NGO, JST, pracownicy ROPS, eksperci?</li>
-<li>2–4 scenariusze krok po kroku (kto, co wpisuje, co dostaje) — w tym jeden scenariusz do nagrania demo.</li>
-</ul>
+<p><strong>Do doprecyzowania:</strong> szczegółowe scenariusze dla osoby indywidualnej, instytucji oraz autora/Hubu.</p>
 </div>
 
 <h2 id="s5">5. Architektura i zależności od Modułu 1 <span class="badge b-todo">todo</span></h2>
@@ -182,13 +183,13 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 </ul>
 </div>
 
-<h2 id="s6">6. Model danych <span class="badge b-todo">todo</span></h2>
+<h2 id="s6">6. Model danych <span class="badge b-draft">draft</span></h2>
+<div class="note">
+<p>Model musi rozdzielać co najmniej: innowację, nabór/test, zgłoszenie testera, sesję testową oraz ankietę/feedback. Innowacja może mieć wiele materiałów i artefaktów różnych typów (plik, link, aplikacja/demo, instrukcja, usługa/metoda offline).</p>
+<p>Minimalne dane testera: imię lub nazwa organizacji, e-mail, typ testera, województwo/powiat/gmina, informacja o przynależności do grupy docelowej oraz krótkie uzasadnienie „dlaczego chcesz przetestować rozwiązanie?”.</p>
+</div>
 <div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>DDL nowych tabel i typów (dopisywany do <code>db/init.sql</code>), klucze obce do <code>solutions</code> / <code>reports</code>.</li>
-<li>Które kolumny są treścią (RODO, sekcja 11), a które statystyką?</li>
-</ul>
+<p><strong>Do doprecyzowania:</strong> dokładne kolumny, statusy i relacje DDL.</p>
 </div>
 
 <h2 id="s7">7. Logika i AI <span class="badge b-todo">todo</span></h2>
@@ -268,8 +269,67 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 
 <h2 id="s16">16. Pytania otwarte do sesji planowania <span class="badge b-draft">draft</span></h2>
 <ol>
-<li>Kto testuje: mieszkańcy, JST, NGO? Jakie dane o testerze zbieramy (RODO — kontakt, gmina, grupa docelowa)?</li>
-<li>Cykl testu: rozwiązanie ogłasza nabór testerów → zgłoszenia → test → ankieta? Czy w PoC wystarczy „chcę przetestować” + ocena?</li>
+<li><strong>Ustalone:</strong> testerami mogą być osoby indywidualne i instytucje, w tym mieszkańcy, osoby z grupy docelowej, opiekunowie, NGO, JST i instytucje społeczne. Minimalne dane: imię/nazwa organizacji, e-mail, typ testera, województwo/powiat/gmina, przynależność do grupy docelowej i uzasadnienie udziału.</li>
+<li><strong>Ustalone:</strong> pełny cykl: Hub publikuje nabór → zgłoszenia → akceptacja/odrzucenie przez Hub → materiały i instrukcja → test → ankieta z oceną i usprawnieniami. Przedmiotem testu może być plik, link, aplikacja/demo albo usługa/metoda offline.</li>
+<li><strong>Ustalone:</strong> dane kontaktowe testera widzi wyłącznie Hub. Autor innowacji otrzymuje tylko zagregowane wyniki i komentarze, bez danych kontaktowych testera.</li>
+<li><strong>Ustalone:</strong> status udziału testera jest prosty: <code>ZŁOŻONO</code>, <code>ZAAKCEPTOWANO</code>, <code>ODRZUCONO</code>, <code>UKOŃCZONO</code> albo <code>PRZERWANO</code>. Statusy naboru są odrębną kwestią.</li>
+<li><strong>Ustalone:</strong> ankieta po teście zawiera oceny 1–5 dla przydatności, łatwości użycia, dostępności i dopasowania do potrzeb, a także komentarz i propozycję usprawnienia.</li>
+<li><strong>Ustalone:</strong> AI może anonimowo agregować i streszczać odpowiedzi oraz wskazywać powtarzające się bariery i usprawnienia. AI nie podejmuje decyzji za Hub i nie przyznaje końcowej oceny innowacji.</li>
+<li><strong>Ustalone:</strong> Hub widzi pełne odpowiedzi wraz z danymi testera. Autor innowacji otrzymuje wyłącznie anonimowe komentarze i agregaty.</li>
+<li><strong>Ustalone:</strong> nabór testerów ma dwa statusy: <code>OPEN</code> i <code>CLOSED</code>.</li>
+<li><strong>Ustalone:</strong> Hub ręcznie decyduje o akceptacji testerów. AI może jedynie pokazać sugestię dopasowania kandydata do grupy docelowej; sugestia nie jest automatyczną decyzją.</li>
+<li><strong>Ustalone:</strong> do sugestii dopasowania AI otrzymuje pełny formularz testera, w tym imię lub nazwę organizacji, e-mail, typ testera, lokalizację, przynależność do grupy docelowej i uzasadnienie. Zespół wybrał brak osobnej zgody na przekazanie tych danych do AI; decyzja wymaga przeglądu RODO przed wdrożeniem produkcyjnym.</li>
+<li><strong>Ustalone:</strong> providerem AI jest Anthropic Claude, taki sam jak w Module 1. Sugestie dopasowania i streszczenia można wyłączyć flagą konfiguracyjną; brak klucza nie może blokować obsługi testów.</li>
+<li><strong>Ustalone:</strong> gdy AI jest wyłączone albo provider zwróci błąd, Hub nadal ręcznie przegląda i filtruje zgłoszenia. Raport wyników pokazuje statystyki i surowe anonimowe komentarze bez sugestii AI.</li>
+<li><strong>Ustalone:</strong> tester wysyła ankietę po teście, a system automatycznie zmienia status jego udziału na <code>COMPLETED</code> po poprawnym zapisaniu ankiety.</li>
+<li><strong>Ustalone:</strong> tester albo Hub może oznaczyć udział jako <code>CANCELED</code>; powód jest wymagany i widoczny dla Hubu, a w raporcie wyników prezentowany wyłącznie zbiorczo.</li>
+<li><strong>Ustalone:</strong> jeden tester może mieć maksymalnie trzy aktywne zgłoszenia do naborów jednocześnie; każde zgłoszenie ma osobny status i osobny feedback.</li>
+<li><strong>Ustalone:</strong> tester może wycofać zgłoszenie przed decyzją Hubu, ale nie może go edytować; zmiana danych wymaga złożenia nowego zgłoszenia.</li>
+<li><strong>Ustalone:</strong> w otwartym MVP e-mail jest identyfikatorem testera; limit trzech aktywnych zgłoszeń egzekwujemy po znormalizowanym adresie e-mail.</li>
+<li><strong>Ustalone:</strong> w MVP Hub przekazuje zaakceptowanemu testerowi materiały poza platformą. Platforma przechowuje zgłoszenie udziału i feedback, ale nie organizuje jeszcze chronionego repozytorium materiałów.</li>
+<li><strong>Ustalone:</strong> Hub przekazuje testerowi jednorazowy link do formularza feedbacku. Link zawiera losowy token, którego w bazie przechowywany jest wyłącznie hash.</li>
+<li><strong>Ustalone:</strong> link jest ważny do zamknięcia naboru albo wysłania ankiety; Hub może wygenerować nowy link.</li>
+<li><strong>Ustalone:</strong> ten sam bezpieczny link pozwala testerowi sprawdzić status zgłoszenia: <code>SUBMITTED</code>, <code>ACCEPTED</code>, <code>REJECTED</code>, <code>COMPLETED</code> albo <code>CANCELED</code>, a po akceptacji także wysłać ankietę.</li>
+<li><strong>Ustalone:</strong> przy odrzuceniu Hub podaje krótkie, wymagane uzasadnienie widoczne testerowi przez bezpieczny link.</li>
+<li><strong>Ustalone:</strong> raport zawiera liczbę zgłoszeń, zaakceptowanych, ukończonych i przerwanych, średnie oraz rozkład czterech ocen, anonimowe komentarze, a także najczęstsze bariery i propozycje usprawnień wygenerowane przez AI.</li>
+<li><strong>Ustalone:</strong> podsumowanie AI może powstać niezależnie od liczby ukończonych ankiet.</li>
+<li><strong>Ustalone:</strong> raport zawsze pokazuje liczbę odpowiedzi i ostrzeżenie, gdy próba jest mała.</li>
+<li><strong>Ustalone:</strong> za małą próbę uznajemy mniej niż trzy ukończone ankiety.</li>
+<li><strong>Ustalone:</strong> wszystkie cztery oceny 1–5 są wymagane do ukończenia ankiety. Komentarz i propozycja usprawnienia są opcjonalne.</li>
+<li><strong>Ustalone:</strong> skala ocen ma wspólne opisy: <code>1 = bardzo słabo</code>, <code>2 = słabo</code>, <code>3 = średnio</code>, <code>4 = dobrze</code>, <code>5 = bardzo dobrze</code>.</li>
+<li><strong>Ustalone:</strong> po wysłaniu ankieta jest nieedytowalna dla testera. Hub może wyjątkowo odblokować lub skorygować ankietę.</li>
+<li><strong>Ustalone:</strong> w MVP Hub może skorygować ankietę bez osobnego śladu historii zmian.</li>
+<li><strong>Ustalone:</strong> anonimowe komentarze są widoczne dla autora dopiero po moderacji Hubu. Hub może ukryć komentarz naruszający zasady.</li>
+<li><strong>Ustalone:</strong> każdy użytkownik platformy może zobaczyć i zgłosić się do naboru oznaczonego <code>OPEN</code>; dopasowanie do kryteriów odbywa się po zgłoszeniu.</li>
+<li><strong>Ustalone:</strong> nabór definiuje grupę docelową, typ testera, lokalizację, liczbę miejsc, sposób testu online/offline, przewidywany czas i termin zakończenia.</li>
+<li><strong>Ustalone:</strong> zamknięcie naboru jest nieodwracalne.</li>
+<li><strong>Ustalone:</strong> po osiągnięciu limitu zaakceptowanych testerów nabór automatycznie przechodzi na <code>CLOSED</code>, a nierozpatrzone zgłoszenia pozostają do decyzji Hubu.</li>
+<li><strong>Ustalone:</strong> Hub ręcznie akceptuje albo odrzuca każde nierozpatrzone zgłoszenie; system nie odrzuca ich automatycznie.</li>
+<li><strong>Ustalone:</strong> w MVP nie ma automatycznych e-maili. Hub kopiuje status i jednorazowy link z panelu i przekazuje je testerowi ręcznie.</li>
+<li><strong>Ustalone:</strong> formularz naboru przechowuje instrukcję testu oraz listę materiałów i linków jako kontekst dla Hubu; tester otrzymuje je ręcznie poza platformą.</li>
+<li><strong>Ustalone:</strong> materiał ma tytuł, typ (<code>FILE</code>, <code>LINK</code>, <code>APP</code>, <code>INSTRUCTION</code>, <code>OFFLINE_SERVICE</code>), adres lub identyfikator, krótki opis i kolejność wyświetlania.</li>
+<li><strong>Ustalone:</strong> platforma nie przyjmuje uploadu plików w MVP. Materiał typu <code>FILE</code> przechowuje tylko zewnętrzny adres lub identyfikator.</li>
+<li><strong>Ustalone:</strong> każdy nabór jest powiązany z istniejącym rozwiązaniem w tabeli <code>solutions</code>. Nowa innowacja musi najpierw trafić do katalogu jako <code>PENDING_REVIEW</code>.</li>
+<li><strong>Ustalone:</strong> publiczny nabór <code>OPEN</code> wymaga rozwiązania <code>PUBLISHED</code>. Rozwiązanie <code>PENDING_REVIEW</code> może być testowane wyłącznie wewnętrznie przez Hub.</li>
+<li><strong>Ustalone:</strong> w naborze wewnętrznym dla <code>PENDING_REVIEW</code> testerem może być pracownik Hubu albo osoba zaproszona przez Hub; nabór nie jest publicznie listowany.</li>
+<li><strong>Ustalone:</strong> autor otrzymuje anonimowy raport dopiero po zamknięciu naboru; wcześniej Hub moderuje komentarze i publikuje raport.</li>
+<li><strong>Ustalone:</strong> zgłoszenie testera wymaga obowiązkowej zgody na kontakt i obsługę udziału w konkretnym naborze. Bez zgody formularz nie może zostać wysłany.</li>
+<li><strong>Ustalone:</strong> przy zgłoszeniu zapisujemy <code>consent=true</code>, wersję tekstu zgody oraz <code>consented_at</code>.</li>
+<li><strong>Ustalone:</strong> w MVP obowiązuje jeden stały tekst i numer wersji zgody dla całego Modułu 4; Hub nie edytuje go per nabór.</li>
+<li><strong>Ustalone:</strong> publikowany nabór wymaga tytułu, opisu celu testu, instrukcji testu, grupy docelowej, typu testera, lokalizacji, liczby miejsc, trybu online/offline, przewidywanego czasu, terminu zakończenia i co najmniej jednego materiału.</li>
+<li><strong>Ustalone:</strong> po ustawieniu naboru na <code>OPEN</code> jego pola są nieedytowalne. Zmiana wymaga zamknięcia naboru i utworzenia nowego.</li>
+<li><strong>Ustalone:</strong> MVP nie ma wersji roboczej naboru. Utworzenie naboru od razu nadaje mu status <code>OPEN</code>, po uprzedniej walidacji kompletu wymaganych pól.</li>
+<li><strong>Ustalone:</strong> tester może poprosić o usunięcie danych kontaktowych i zgłoszenia. Anonimowe statystyki mogą pozostać w raporcie.</li>
+<li><strong>Ustalone:</strong> model danych używa osobnych tabel <code>innovation_tests</code>, <code>innovation_test_materials</code>, <code>innovation_test_applications</code> i <code>innovation_test_feedback</code>. Relacje mają FK do <code>solutions</code> oraz kaskadowe usuwanie danych zgłoszenia.</li>
+<li><strong>Ustalone:</strong> raport AI jest przechowywany w <code>innovation_tests</code> jako JSONB z wersją promptu/modelu i czasem generacji. Hub może regenerować raport po zmianie feedbacku.</li>
+<li><strong>Ustalone:</strong> raport AI ma kontrakt JSON: <code>summary_pl</code>, <code>barriers_pl[]</code>, <code>improvements_pl[]</code>, <code>evidence_feedback_ids[]</code> i <code>disclaimer_pl</code>. Nie zawiera końcowej rekomendacji decyzji.</li>
+<li><strong>Ustalone:</strong> <code>evidence_feedback_ids[]</code> jest widoczne tylko dla Hubu. Autor otrzymuje anonimowy raport i komentarze bez identyfikatorów rekordów.</li>
+<li><strong>Ustalone:</strong> API MVP obejmuje publiczną listę i szczegóły naborów <code>OPEN</code>, publiczne złożenie zgłoszenia, status i ankietę przez token oraz panel Hubu: CRUD naborów, listę zgłoszeń, akceptację, odrzucenie, anulowanie, raport i moderację.</li>
+<li><strong>Ustalone:</strong> głównym zasobem API jest <code>/api/innovation-tests</code>.</li>
+<li><strong>Ustalone:</strong> dostęp testera korzysta ze ścieżki <code>/api/innovation-tests/access/{token}</code>; <code>GET</code> zwraca status, a <code>POST</code> zapisuje ankietę.</li>
+<li><strong>Ustalone:</strong> token pozostaje ważny do zamknięcia naboru, ale zapis ankiety przez <code>POST</code> jest możliwy tylko raz. Po wysłaniu ankiety <code>GET</code> nadal pokazuje status <code>COMPLETED</code>.</li>
+<li><strong>Ustalone:</strong> raport nie ma osobnego endpointu ani tokenu autora. Hub widzi raport w panelu i przekazuje go autorowi poza platformą.</li>
+<li><strong>Ustalone:</strong> panel Hubu filtruje zgłoszenia po statusie udziału, typie testera, grupie docelowej i lokalizacji oraz wyszukuje po e-mailu lub nazwie. Dane kontaktowe są dostępne wyłącznie w panelu.</li>
 <li>Skala ocen i wymiary (przydatność, łatwość wdrożenia, koszt)? Czy oceny wpływają na <code>evidence_level</code> lub ranking w Module 1?</li>
 <li>Czy LLM streszcza opinie i propozycje usprawnień dla autora rozwiązania i dla Hubu?</li>
 <li>Gdzie w UI: przycisk na stronie rozwiązania <code>/rozwiazania/:id</code>, osobna lista „Szukamy testerów”?</li>
@@ -278,8 +338,8 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 <hr>
 
 <footer>
-<p><strong>Moduł 4 — Tester innowacji</strong> · v0.1 · 2026-10-03 · Małopolski Hub Innowacji Społecznych.</p>
-<p><strong>v0.1</strong> — szkielet: wymaganie z <code>base.md</code>, ocena pokrycia przez istniejącą implementację, pytania do sesji planowania.</p>
+<p><strong>Moduł 4 — Tester innowacji</strong> · v0.2 · 2026-10-03 · Małopolski Hub Innowacji Społecznych.</p>
+<p><strong>v0.2</strong> — zapisane ustalenia: pełny cykl testu, uniwersalny artefakt innowacji, nabór publikowany wyłącznie przez Hub, testerzy indywidualni i instytucjonalni oraz minimalny formularz testera.</p>
 <p>Dokument iteracyjny. Zmiany: nowa sekcja na końcu, wpis w spisie treści, ADR w sekcji 13 przy zmianie decyzji. Podnieś wersję w nagłówku i w stopce.</p>
 </footer>
 

@@ -1,83 +1,288 @@
 # Moduł 4 — Tester innowacji: plan implementacji i zadania
 
-> **Szkielet.** Zadania powstaną po sesji planowania i wypełnieniu specyfikacji `docs/modules/04-tester-innowacji/module-4-tester-innowacji.html`. Do tego czasu nie bierz zadań z tego pliku.
+Plan na podstawie `docs/modules/04-tester-innowacji/module-4-tester-innowacji.html` (v0.2) oraz ustaleń sesji planowania. Zadania są samowystarczalne: zawierają cel, pliki, kontrakty, kroki i kryterium gotowości. Agent wykonujący zadanie musi przeczytać `CLAUDE.md`, ten plik oraz sekcję „Wspólne kontrakty”.
 
-Plan na podstawie `docs/modules/04-tester-innowacji/module-4-tester-innowacji.html` (v0.1). Każde zadanie jest samowystarczalne: zawiera cel, pliki, wklejony kontekst ze specyfikacji, kroki i kryterium gotowości. Agent wykonujący zadanie **nie musi czytać specyfikacji HTML** — ale musi przeczytać `AGENTS.md` (twarde reguły) oraz sekcję „Wspólne kontrakty” poniżej.
+## Ustalenia z sesji planowania
 
-**Odstępstwa od specyfikacji (decyzja zespołu, 2026-10-03, jak w Module 1):**
-- **Bez autoryzacji.** Wszystkie endpointy są otwarte; bez tokenów, nagłówków dostępu i kodów 401/403.
-- **Bez testów automatycznych.** Weryfikacja każdego zadania: curl, psql, `python -c`, ręczne uruchomienie.
+- Moduł obsługuje pełny cykl testu: Hub publikuje nabór, tester zgłasza udział, Hub akceptuje lub odrzuca zgłoszenie, zaakceptowany tester otrzymuje materiały i instrukcję, wykonuje test, a następnie wypełnia ankietę.
+- Przedmiotem testu jest uniwersalny artefakt: opis, instrukcja, zewnętrzny plik, link, aplikacja/demo, usługa albo metoda pracy testowana offline.
+- Nabory tworzy i publikuje wyłącznie Hub. Autor innowacji może dostarczać dane i materiały, ale nie publikuje naboru.
+- Testerem może być osoba indywidualna albo instytucja. Minimalne dane: imię lub nazwa organizacji, e-mail, typ testera, województwo/powiat/gmina, przynależność do grupy docelowej i uzasadnienie udziału.
+- Dane kontaktowe widzi wyłącznie Hub. Autor otrzymuje anonimowe agregaty i moderowane komentarze.
+- Nabór ma status `OPEN` albo `CLOSED`; zamknięcie jest nieodwracalne. Po osiągnięciu limitu miejsc nabór zamyka się automatycznie.
+- Udział testera ma status `SUBMITTED`, `ACCEPTED`, `REJECTED`, `COMPLETED` albo `CANCELED`.
+- Hub ręcznie akceptuje testerów. AI tylko sugeruje dopasowanie do grupy docelowej i nie podejmuje decyzji.
+- Jeden tester może mieć najwyżej trzy aktywne zgłoszenia; identyfikatorem w MVP jest znormalizowany e-mail.
+- Tester może wycofać zgłoszenie przed decyzją, ale nie może go edytować; zmiana danych wymaga nowego zgłoszenia.
+- Ankieta wymaga czterech ocen 1–5: przydatność, łatwość użycia, dostępność i dopasowanie do potrzeb. Komentarz i propozycja usprawnienia są opcjonalne.
+- Skala: `1 = bardzo słabo`, `2 = słabo`, `3 = średnio`, `4 = dobrze`, `5 = bardzo dobrze`.
+- Po zapisaniu ankiety system ustawia `COMPLETED`; `POST` ankiety działa tylko raz. Tester albo Hub może ustawić `CANCELED`, ale powód jest wymagany.
+- Hub przekazuje materiały ręcznie poza platformą. Brak uploadu i repozytorium plików w MVP.
+- Tester otrzymuje jednorazowy link z losowym tokenem; w bazie jest tylko hash. Token działa do zamknięcia naboru, a `GET` pokazuje status także po ankiecie.
+- W MVP nie ma automatycznych e-maili. Hub kopiuje status i link z panelu.
+- Komentarze są widoczne dla autora dopiero po moderacji Hubu. Autor otrzymuje raport dopiero po zamknięciu naboru.
+- AI używa Anthropic Claude jak w Module 1. Raport może powstać przy dowolnej liczbie odpowiedzi, ale przy mniej niż 3 ankietach pokazuje ostrzeżenie o małej próbie.
+- Raport AI ma JSON: `summary_pl`, `barriers_pl[]`, `improvements_pl[]`, `evidence_feedback_ids[]`, `disclaimer_pl`; bez końcowej rekomendacji.
+- AI otrzymuje pełny formularz testera do sugestii dopasowania. Brak osobnej zgody na ten transfer wymaga przeglądu RODO przed produkcją.
+- Przy wyłączonym lub niedostępnym AI działają ręczne decyzje Hubu, statystyki i anonimowe komentarze.
+- Zgłoszenie wymaga `consent=true`, wersji tekstu zgody i `consented_at`; obowiązuje jeden stały tekst zgody dla Modułu 4.
+- Publiczny `OPEN` wymaga `solutions.status = PUBLISHED`. `PENDING_REVIEW` jest tylko dla Hubu lub zaproszonych testerów i nie jest listowany publicznie.
+- Model danych używa tabel `innovation_tests`, `innovation_test_materials`, `innovation_test_applications` i `innovation_test_feedback`, z FK do `solutions` i kaskadowym usuwaniem zgłoszeń.
+- Raport AI jest JSONB w `innovation_tests`, z wersją promptu/modelu i czasem generacji; Hub może go regenerować.
+- Główny zasób API to `/api/innovation-tests`. Dostęp testera: `/api/innovation-tests/access/{token}`.
+- API obejmuje publiczną listę/szczegóły `OPEN`, publiczne zgłoszenie, status i ankietę przez token oraz panel Hubu: CRUD naborów, zgłoszenia, decyzje, anulowanie, raport i moderację.
 
-## Protokół pracy (obowiązkowy)
+## Odstępstwa i zasady wspólne
 
-1. **Jedyne źródło statusu** to lista „Status zadań” poniżej. Treść zadań nie zawiera statusu.
-2. Stany:
-   - `- [ ]` — wolne,
-   - `- [~]` — w toku; dopisz na końcu linii ` — agent: <nazwa>, <RRRR-MM-DD GG:MM>`,
-   - `- [x]` — zrobione; zamień dopisek na ` — zrobione: <nazwa>, <krótka notka lub hash commita>`.
-3. **Branie zadania:** wybierz zadanie `[ ]`, którego wszystkie zależności są `[x]`. Edytuj tylko jego linię na `[~]`, potem przeczytaj plik ponownie i sprawdź, czy linia nadal ma Twój dopisek (jeśli ktoś był szybszy — weź inne zadanie).
-4. Edytuj w tym pliku **wyłącznie linię swojego zadania** oraz (ewentualnie) dopisuj na końcu sekcji „Uwagi między zadaniami”. Nie przepisuj innych linii, nie formatuj pliku.
-5. Zmieniaj w repozytorium **tylko pliki wymienione w polu „Pliki” swojego zadania**. Potrzebujesz zmiany w cudzym pliku → wpis w „Uwagach między zadaniami” (`- [TIxx → TIyy] opis`), nie edycja. Zmiana w plikach Modułu 1 (`api/`, `db/init.sql`) lub frontendu → wpis w „Uwagach” odpowiedniego pliku zadań.
-6. `[x]` dopiero, gdy spełnione jest „Gotowe, gdy” (ręczna weryfikacja opisana w zadaniu) i `ruff check .` (backend) albo `npm run lint && npm run build` (frontend) jest czysty dla Twoich plików.
-7. Zablokowany (brak klucza API, błąd w zależności, sprzeczność ze specyfikacją) → przywróć `[ ]` i opisz przyczynę w „Uwagach między zadaniami”.
-8. Sygnatury z sekcji „Wspólne kontrakty” są wiążące. Jeśli musisz je zmienić — najpierw wpis w „Uwagach”, nie cicha zmiana.
+- Bez autoryzacji: endpointy panelu są otwarte, zgodnie z decyzją zespołu dla całego PoC. Token dotyczy wyłącznie dostępu testera do jego udziału.
+- Bez testów automatycznych. Weryfikacja: `curl`, `psql`, `python -c`, ręczne przejście w przeglądarce, `ruff check .`, `npm run lint`, `npm run build`.
+- Zmiana `db/init.sql`, `api/models.py`, `api/schemas.py` lub istniejących routerów Modułu 1 wymaga wpisu w „Uwagach między zadaniami” tego pliku i nie może zmieniać kontraktów Modułu 1 po cichu.
+
+## Protokół pracy
+
+1. Jedyne źródło statusu to lista „Status zadań”.
+2. `[ ]` oznacza zadanie wolne, `[~]` zadanie w toku, `[x]` zadanie ukończone.
+3. Przed rozpoczęciem zmień wyłącznie linię swojego zadania na `[~]` i dopisz agenta oraz czas.
+4. Zmieniaj tylko pliki wymienione w swoim zadaniu. Potrzebną zmianę w cudzym zadaniu wpisz w „Uwagach między zadaniami”.
+5. `[x]` dopiero po spełnieniu „Gotowe, gdy” i przejściu właściwego lint/build.
+6. Zablokowane zadanie wróć do `[ ]` i opisz przyczynę w „Uwagach”.
 
 ## Status zadań
 
-Identyfikatory: `TI00`, `TI01`, … (prefiks modułu, żeby nie kolidować z `T` Modułu 1 i `F` frontendu).
+- [x] TI00 · DDL i modele cyklu testowego · zależy: T01, T02 — zmiana `db/init.sql` wymaga wpisu w uwagach Modułu 1 · agent: Auto · 2026-10-04
+- [~] TI01 · Kontrakty Pydantic, statusy i walidacja domenowa · zależy: TI00, T08 · agent: Auto · 2026-10-04
+- [ ] TI02 · Tokeny dostępu testera i operacje udziału · zależy: TI00, TI01, T15
+- [ ] TI03 · API publiczne i panelu Hubu · zależy: TI01, TI02, T15
+- [ ] TI04 · Pipeline AI: dopasowanie, agregacja i raport · zależy: TI01, T05, TI03
+- [ ] TI05 · Frontend publiczny: lista naborów, zgłoszenie i dostęp tokenowy · zależy: TI03, F04, F05
+- [ ] TI06 · Frontend panelu Hubu: nabory, zgłoszenia, moderacja i raport · zależy: TI03, TI04, F04, F05
+- [ ] TI07 · Dane demo, integracja i ścieżka demonstracyjna · zależy: TI02, TI03, TI04, TI05, TI06
 
-<!-- Format linii: - [ ] TI00 · Opis · zależy: — / TIxx, T.., F.. -->
+### Fale równoległości
 
-_(brak zadań — do rozpisania po sesji planowania)_
+- Fala 0: TI00
+- Fala 1: TI01
+- Fala 2: TI02, TI04
+- Fala 3: TI03
+- Fala 4: TI05, TI06
+- Fala 5: TI07
 
-### Fale równoległości (orientacyjnie)
+**Najkrótsza działająca ścieżka demo:** TI00–TI03, TI05, TI06, TI07 z `M4_AI_ENABLED=false`. Pokazuje: Hub tworzy `OPEN`, użytkownik widzi nabór, składa zgłoszenie, Hub akceptuje, tester otwiera tokenowy status, wysyła ankietę, a Hub widzi statystyki i moderuje komentarz. TI04 dochodzi z sugestią AI i raportem.
 
-_(do ustalenia)_
-
-**Najkrótsza działająca ścieżka** (gdy brakuje czasu): _(do ustalenia — minimalny zestaw zadań pokazywalny w demo)_
-
----
-
-## Wspólne kontrakty (wiążące dla wszystkich zadań)
+## Wspólne kontrakty
 
 ### Konwencje
 
-- Konwencje Modułu 1 obowiązują bez zmian (`docs/modules/01-matchmaking/module-1-tasks.md`, „Wspólne kontrakty → Konwencje”): pakiety `api.*`, importy absolutne, async przy I/O, dane w `data/`, ustawienia w `api.config.settings`.
-- Frontend: konwencje z `docs/modules/01-matchmaking/frontend-tasks.md` (klient `web/src/api/client.ts`, komponenty wspólne z F05, design system).
+- Backend: pakiety `api`, `api.routers`, `api.pipeline`, `api.providers`; importy absolutne; async przy I/O; ustawienia przez `api.config.settings`.
+- Frontend: konwencje z `docs/modules/01-matchmaking/frontend-tasks.md`, React/TypeScript strict, design system, WCAG 2.1 AA, teksty po polsku.
+- Statusy Python/SQL używają wartości ASCII: `OPEN`, `CLOSED`, `SUBMITTED`, `ACCEPTED`, `REJECTED`, `COMPLETED`, `CANCELED`.
+- E-mail normalizuj przez `strip().casefold()` i przechowuj do limitu oraz wyszukiwania; nie loguj jego wartości.
+- W logach nie ma e-maila, imienia, nazwy organizacji, uzasadnienia, komentarza ani tokenu. Loguj identyfikator rekordu i długości tekstów.
+- Token generuj kryptograficznie, przechowuj wyłącznie hash, porównuj stałoczasowo i nigdy nie zwracaj go w API panelu poza jednorazowym wygenerowaniem linku.
 
-### Zależności od Modułu 1 i frontendu
+### Nazwy i sygnatury
 
-_(do ustalenia: które tabele, endpointy, typy i komponenty reużywamy; które zmieniamy — każda zmiana z ADR)_
+| Symbol | Moduł | Właściciel |
+|---|---|---|
+| `InnovationTestStatus`, `ApplicationStatus`, `MaterialType` | `api/models.py` | TI00 |
+| `InnovationTest`, `InnovationTestMaterial`, `InnovationTestApplication`, `InnovationTestFeedback` | `api/models.py` | TI00 |
+| `InnovationTestCreate`, `InnovationTestRead`, `InnovationTestMaterialIn`, `InnovationTestApplicationCreate`, `InnovationTestApplicationRead`, `InnovationTestDecision`, `InnovationTestCancel`, `InnovationTestFeedbackCreate`, `InnovationTestReport` | `api/schemas.py` | TI01 |
+| `normalize_tester_email(email) -> str` | `api/innovation_tests.py` | TI01 |
+| `create_access_token() -> tuple[str, str]` | `api/innovation_tests.py` | TI02 |
+| `hash_access_token(token: str) -> str` | `api/innovation_tests.py` | TI02 |
+| `async verify_access_token(session, token: str) -> InnovationTestApplication` | `api/innovation_tests.py` | TI02 |
+| `async create_application(...) -> tuple[InnovationTestApplication, str]` | `api/innovation_tests.py` | TI02 |
+| `async submit_feedback(...) -> InnovationTestFeedback` | `api/innovation_tests.py` | TI02 |
+| `async build_test_report(session, test_id: int) -> InnovationTestReport` | `api/pipeline/innovation_tests.py` | TI04 |
+| `async suggest_tester_fit(application, test) -> TesterFitSuggestion` | `api/pipeline/innovation_tests.py` | TI04 |
+| `async summarize_test_feedback(test, feedback) -> AiTestReport` | `api/pipeline/innovation_tests.py` | TI04 |
+| `router` | `api/routers/innovation_tests.py` | TI03 |
 
-### Nazwy i sygnatury, z których korzystają inne zadania
+### Model danych
 
-_(do ustalenia)_
+- `innovation_tests`: `id`, `solution_id`, wymagane pola naboru, `status`, `created_at`, `closed_at`, `ai_report JSONB`, `ai_model`, `ai_prompt_version`, `ai_generated_at`.
+- `innovation_test_materials`: `id`, `test_id`, `title`, `type`, `locator`, `description`, `sort_order`.
+- `innovation_test_applications`: `id`, `test_id`, dane testera, `email_normalized`, `status`, `consent`, `consent_version`, `consented_at`, `rejection_reason`, `cancel_reason`, `access_token_hash`, `access_token_created_at`, `access_token_used_at`, timestamps, opcjonalna sugestia dopasowania AI.
+- `innovation_test_feedback`: `id`, `application_id`, cztery oceny 1–5, `comment`, `improvement`, `comment_visible_to_author`, `submitted_at`, timestamps.
+- Dane kontaktowe i pełny feedback są widoczne tylko w panelu Hubu; API publiczne tokenowe zwraca wyłącznie dane własnego udziału.
+- Usunięcie zgłoszenia testera usuwa jego feedback i token. Statystyki raportu mogą pozostać jako dane anonimowe.
 
----
+### Kontrakt raportu AI
+
+```json
+{
+  "summary_pl": "string",
+  "barriers_pl": ["string"],
+  "improvements_pl": ["string"],
+  "evidence_feedback_ids": [123],
+  "disclaimer_pl": "Wynik pomocniczy; decyzję podejmuje Hub."
+}
+```
+
+Prompt przyjmuje dane feedbacku bez danych kontaktowych testera. Sugestia dopasowania może przyjąć pełny formularz zgodnie z decyzją zespołu, ale musi mieć wynik opisowy, uzasadnienie i wyraźne oznaczenie „sugestia, nie decyzja”.
 
 ## Zadania
 
-_(do rozpisania — szablon jednego zadania poniżej)_
+### TI00 · DDL i modele cyklu testowego
 
-<!--
-### TI00 · Tytuł
+**Cel:** dodać schemat i modele SQLAlchemy dla naborów, materiałów, zgłoszeń i feedbacku bez naruszania istniejących tabel Modułu 1.
 
-**Cel:** jedno zdanie.
-**Zależy od:** —
-**Pliki:** `ścieżka/plik.py` (nowy), `ścieżka/inny.py` (zmiana)
+**Zależy od:** T01, T02
 
-**Kontekst ze specyfikacji:**
-- wklejone fragmenty sekcji spec potrzebne do zadania
+**Pliki:** `db/init.sql`, `api/models.py`
+
+**Kontekst:**
+- Każdy nabór wskazuje `solutions.id`; publiczny `OPEN` wymaga `solutions.status = PUBLISHED`.
+- Nabór ma `OPEN`/`CLOSED`; udział ma `SUBMITTED`/`ACCEPTED`/`REJECTED`/`COMPLETED`/`CANCELED`.
+- `CLOSED` jest nieodwracalne. FK do `solutions` i kaskady dotyczą dzieci naboru.
+- Tokeny i dane kontaktowe nie mogą mieć indeksów ujawniających ich treść; indeksuj hash i e-mail znormalizowany.
 
 **Kroki:**
-1. …
+1. Dopisz enumy i cztery tabele do `db/init.sql`, z ograniczeniami `CHECK` dla ocen 1–5 i wymaganych statusów.
+2. Dodaj indeksy dla `status`, `solution_id`, `email_normalized`, `test_id` oraz `application_id`.
+3. W `api/models.py` odwzoruj DDL 1:1, bez `create_all`.
+4. Dodaj relacje z cascade delete-orphan i odczyt JSONB raportu.
 
-**Gotowe, gdy:**
-- konkretne polecenie curl / psql / python -c i oczekiwany wynik
--->
+**Nie rób:** uploadu plików, osobnych kont użytkowników, zmian istniejących tabel bez notatki, autoryzacji STAFF.
 
----
+**Gotowe, gdy:** po resecie bazy `psql` pokazuje cztery tabele, ograniczenia ocen odrzucają `0` i `6`, insert naboru z `solution_id` działa, usunięcie naboru usuwa materiały/zgłoszenia/feedback, a `ruff check api/models.py` jest czysty.
+
+### TI01 · Kontrakty Pydantic, statusy i walidacja domenowa
+
+**Cel:** zdefiniować stabilne wejścia/wyjścia API i walidatory niezależne od routera.
+
+**Zależy od:** TI00, T08
+
+**Pliki:** `api/schemas.py`, `api/innovation_tests.py`
+
+**Kroki:**
+1. Dodaj schematy wskazane w tabeli kontraktów.
+2. Waliduj komplet wymaganych pól naboru, co najmniej jeden materiał, dodatni limit miejsc i termin zakończenia.
+3. Waliduj e-mail, typ testera, lokalizację, cztery oceny 1–5, zgodę i długości tekstów.
+4. Zaimplementuj `normalize_tester_email`; nie zwracaj e-maila w schematach publicznych.
+5. Zdefiniuj odpowiedzi dla statusu, odrzucenia, anulowania, raportu i jednorazowego linku.
+
+**Gotowe, gdy:** `python -c` potwierdza odrzucenie niepełnego naboru, oceny poza 1–5, braku zgody i pustego uzasadnienia; poprawne dane przechodzą; schemat autora nie zawiera kontaktu testera.
+
+### TI02 · Tokeny dostępu testera i operacje udziału
+
+**Cel:** obsłużyć zgłoszenie, limit trzech aktywnych udziałów, decyzje statusowe, token i zapis ankiety.
+
+**Zależy od:** TI00, TI01, T15
+
+**Pliki:** `api/innovation_tests.py`
+
+**Kroki:**
+1. Generuj token przez bezpieczny generator, zapisuj tylko hash.
+2. Zaimplementuj zgłoszenie tylko dla `OPEN`, limit po `email_normalized` i `SUBMITTED`/`ACCEPTED`.
+3. Zaimplementuj akceptację, odrzucenie z wymaganym powodem, wycofanie przed decyzją oraz anulowanie z wymaganym powodem.
+4. Przy akceptacji generuj nowy link; `GET` po tokenie zwraca status i dozwolone dane.
+5. `POST` feedbacku sprawdza token, `ACCEPTED`, komplet ocen i brak wcześniejszego feedbacku, po czym ustawia `COMPLETED`.
+6. Odrzucenie, anulowanie i usunięcie danych nie może ujawnić tokenu ani kontaktu w logach.
+
+**Gotowe, gdy:** ręczny skrypt przechodzi ścieżkę submit → accept → token GET → feedback POST → COMPLETED; drugi POST zwraca błąd domenowy; limit czterech zgłoszeń odrzuca czwarte; token w bazie różni się od tokenu w linku.
+
+### TI03 · API publiczne i panelu Hubu
+
+**Cel:** wystawić endpointy Modułu 4 i podłączyć router do aplikacji.
+
+**Zależy od:** TI01, TI02, T15
+
+**Pliki:** `api/routers/innovation_tests.py`, `api/main.py`, `api/errors.py`, `api/schemas.py`
+
+**Endpointy:**
+
+- `GET /api/innovation-tests` — publiczne `OPEN`; panel może filtrować także `CLOSED`.
+- `POST /api/innovation-tests` — utworzenie kompletnego naboru jako `OPEN`.
+- `GET /api/innovation-tests/{test_id}` — szczegóły publiczne dla `OPEN`, pełne dla panelu.
+- `POST /api/innovation-tests/{test_id}/close` — nieodwracalne zamknięcie.
+- `GET /api/innovation-tests/{test_id}/applications` — panel, status/typ/grupa/lokalizacja/q.
+- `POST /api/innovation-tests/{test_id}/applications/{application_id}/accept`.
+- `POST /api/innovation-tests/{test_id}/applications/{application_id}/reject`.
+- `POST /api/innovation-tests/{test_id}/applications/{application_id}/cancel`.
+- `GET /api/innovation-tests/access/{token}` — status testera.
+- `POST /api/innovation-tests/access/{token}` — jednorazowy feedback.
+- `GET /api/innovation-tests/{test_id}/report` — panel Hubu, pełny raport.
+- `POST /api/innovation-tests/{test_id}/report/regenerate` — panel, raport AI.
+- `POST /api/innovation-tests/{test_id}/feedback/{feedback_id}/moderate` — widoczność komentarza dla autora.
+
+**Gotowe, gdy:** `curl` potwierdza 200/201 dla ścieżki demo, 404 dla nieistniejącego tokenu, 409 dla zamkniętego naboru i drugiego feedbacku, 422 dla niepoprawnych ocen; publiczny endpoint nie zwraca e-maila, tokenu ani pełnych danych testera.
+
+### TI04 · Pipeline AI: dopasowanie, agregacja i raport
+
+**Cel:** dodać deterministyczny kontrakt AI z bezpiecznym fallbackiem.
+
+**Zależy od:** TI01, T05, TI03
+
+**Pliki:** `api/pipeline/innovation_tests.py`, `api/config.py`, `api/providers/llm.py`
+
+**Kroki:**
+1. Dodaj flagę `M4_AI_ENABLED` oraz limity tekstu przez `settings`.
+2. Zaimplementuj sugestię dopasowania pełnego formularza do grupy docelowej; wynik nie może zmieniać statusu.
+3. Zbuduj prompt raportu wyłącznie z feedbacku bez danych kontaktowych.
+4. Wymuś JSON Schema i waliduj pola raportu, listy oraz `evidence_feedback_ids`.
+5. Zapisuj model, wersję promptu i czas generacji.
+6. Przy wyłączonym/błędnym AI zwracaj statystyki i anonimowe komentarze, bez sukcesu udającego wygenerowany raport.
+
+**Gotowe, gdy:** z `M4_AI_ENABLED=false` raport ma statystyki bez raportu AI; z providerem działającym wynik przechodzi walidację; błędny JSON lub błąd providera jest jawnie oznaczony, a decyzja Hubu nadal działa.
+
+### TI05 · Frontend publiczny: lista naborów, zgłoszenie i dostęp tokenowy
+
+**Cel:** umożliwić użytkownikowi znalezienie naboru, wysłanie zgłoszenia i obsługę tokenowego statusu/ankiety.
+
+**Zależy od:** TI03, F04, F05
+
+**Pliki:** `web/src/api/types.ts`, `web/src/api/client.ts`, `web/src/pages/InnovationTestsPage.tsx`, `web/src/pages/InnovationTestPage.tsx`, `web/src/pages/InnovationTestAccessPage.tsx`, `web/src/components/innovation-tests/`, `web/src/styles/`
+
+**Kroki:**
+1. Dodaj listę publicznych naborów i szczegóły z rozwiązaniem, celem, kryteriami, materiałami oraz terminem.
+2. Dodaj formularz testera z wymaganymi polami i zgodą.
+3. Po zgłoszeniu pokaż status oraz instrukcję ręcznego kontaktu Hubu, bez pokazywania tokenu poza linkiem.
+4. Dodaj stronę dostępu tokenowego: status, powód odrzucenia/anulowania i ankieta.
+5. Po zapisaniu ankiety pokaż `COMPLETED`; obsłuż wygasły token, zamknięty nabór i błędy 404/409/422.
+6. Spełnij WCAG i zasady design systemu; nie dodawaj drugiego CTA na ekranie.
+
+**Gotowe, gdy:** ręczne przejście w przeglądarce pokrywa OPEN → zgłoszenie → status → akceptacja → token → cztery oceny → COMPLETED, a `npm run lint` i `npm run build` są czyste.
+
+### TI06 · Frontend panelu Hubu: nabory, zgłoszenia, moderacja i raport
+
+**Cel:** dać Hubowi pełną obsługę naborów, decyzji i wyników.
+
+**Zależy od:** TI03, TI04, F04, F05
+
+**Pliki:** `web/src/pages/panel/InnovationTestsPage.tsx`, `web/src/pages/panel/InnovationTestManagePage.tsx`, `web/src/components/innovation-tests/`, `web/src/api/`, `web/src/styles/`, `web/src/App.tsx`
+
+**Kroki:**
+1. Dodaj listę naborów z filtrami `OPEN`/`CLOSED`.
+2. Dodaj formularz tworzenia kompletnego naboru powiązanego z `PUBLISHED` albo wewnętrznego `PENDING_REVIEW`.
+3. Dodaj listę zgłoszeń z filtrami i danymi kontaktowymi wyłącznie w panelu.
+4. Dodaj ręczną akceptację, odrzucenie z powodem, anulowanie z powodem oraz kopiowanie linku.
+5. Dodaj statystyki, średnie, rozkłady, ostrzeżenie próby `< 3`, komentarze do moderacji i raport AI.
+6. Nie pokazuj autorowi żadnego ekranu ani endpointu; raport Hub przekazuje poza platformą.
+
+**Gotowe, gdy:** ręcznie utworzony nabór, decyzja testera, moderacja komentarza, zamknięcie i raport są widoczne w panelu; `npm run lint` i `npm run build` są czyste.
+
+### TI07 · Dane demo, integracja i ścieżka demonstracyjna
+
+**Cel:** przygotować deterministyczny scenariusz demo i dokumentację uruchomienia.
+
+**Zależy od:** TI02, TI03, TI04, TI05, TI06
+
+**Pliki:** `data/innovation-tests-seed.json`, `scripts/seed_innovation_tests.py`, `docs/modules/04-tester-innowacji/module-4-calibration.md`, `README.md`, `Makefile`
+
+**Kroki:**
+1. Dodaj co najmniej jeden opublikowany `solution` i nabór `OPEN` z materiałami oraz kryteriami.
+2. Dodaj dane testowe pozwalające pokazać `SUBMITTED`, `ACCEPTED`, `REJECTED`, `COMPLETED` i `CANCELED`.
+3. Udokumentuj komendy startu, resetu, seedowania i ręczną ścieżkę demo.
+4. Sprawdź tryb `M4_AI_ENABLED=false` oraz tryb z Anthropic.
+
+**Gotowe, gdy:** nowa osoba uruchamia Compose, seeduje dane, przechodzi pełny scenariusz bez ręcznej modyfikacji SQL, a `ruff check .`, `npm run lint` i `npm run build` są czyste.
 
 ## Uwagi między zadaniami
 
-_(dopisuj na końcu: `- [TIxx → TIyy] opis`)_
+- [TI00 → Moduł 1 T01/T02] dopisanie tabel i enumów do `db/init.sql` oraz modeli do `api/models.py` wymaga zachowania istniejącego schematu.
+- [TI01 → T08] nowe schematy dopisać do `api/schemas.py`; nie zmieniać kształtu istniejących odpowiedzi.
+- [TI03 → F05] użyć istniejącego klienta API i komponentów design systemu; nie kopiować kart ani hooków.
+- [TI04 → T05] użyć istniejącego `LLMProvider` Anthropic; nie tworzyć drugiego klienta HTTP.
+- [TI04 → TI06] raport autora jest tylko widokiem Hubu i nie ma publicznego endpointu.
+- [TI07 → wszystkie] brak automatycznych testów; weryfikacja pozostaje ręczna zgodnie z decyzją zespołu.
