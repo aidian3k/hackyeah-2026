@@ -1,0 +1,182 @@
+{
+  "_comment": "Seed demo Modułu 3 (K06): 4 fikcyjne pomysły, bez danych osobowych. Klucz idempotencji: title. source_report_session wskazuje zgłoszenie z data/reports-seed.json po session_id (brak zgłoszenia = pomysł bez powiązania). Daty liczone wstecz od chwili seedu.",
+  "ideas": [
+    {
+      "title": "Telefon od sąsiada — codzienna rozmowa z samotnym seniorem",
+      "summary": "Wolontariusze z parafii, szkoły i koła gospodyń dzwonią codziennie o stałej porze do samotnych seniorów z gminy. Raz w tygodniu wszyscy spotykają się w świetlicy przy herbacie.",
+      "essence": "Stały, krótki kontakt telefoniczny z tą samą osobą buduje zaufanie i pozwala szybko zauważyć, że senior potrzebuje pomocy. Cotygodniowe spotkanie w świetlicy zamienia rozmowy przez telefon w znajomości na żywo.",
+      "audience": "Seniorzy mieszkający samotnie w sołectwach gminy Wieliczka, zwłaszcza osoby po 75. roku życia, które rzadko wychodzą z domu.",
+      "stage": "TESTED",
+      "category": "LONELINESS",
+      "gmina": "Wieliczka",
+      "author_name": "Zespół „Telefon od sąsiada” (demo)",
+      "contact_email": "telefon-od-sasiada@example.org",
+      "source_report_session": "seed-demo-01",
+      "status": "INVITED",
+      "created_days_ago": 21,
+      "submitted_days_ago": 18,
+      "replies": [
+        {
+          "author_label": "Hub Innowacji Społecznych",
+          "body": "Dziękujemy za zgłoszenie. Pomysł bardzo nam się podoba. Czy mogą Państwo napisać, ilu seniorów i wolontariuszy brało udział w pilotażu i jak długo trwał?",
+          "days_ago": 14
+        },
+        {
+          "author_label": "Hub Innowacji Społecznych",
+          "body": "Zapraszamy do naboru. Wyniki pilotażu są przekonujące, a kanwa jest kompletna. Zapraszamy do złożenia wniosku w otwartym naborze Hubu — w zakładce „Nabory” wniosek wypełni się danymi z fiszki i kanwy. Chętnie umówimy się też na konsultację z mentorem.",
+          "days_ago": 3
+        }
+      ],
+      "canvas": {
+        "problem_intensity": "VERY_SERIOUS",
+        "problem_frequency": "VERY_OFTEN",
+        "problem_scale": "LARGE",
+        "actors_support": [
+          "Ośrodek Pomocy Społecznej",
+          "parafia i koło gospodyń wiejskich",
+          "szkoła podstawowa (wolontariat uczniowski)",
+          "sołtysi"
+        ],
+        "actors_block": [
+          "część rodzin obawiająca się obcych osób przy seniorze",
+          "seniorzy nieufni wobec telefonów (obawa przed oszustwami „na wnuczka”)"
+        ],
+        "solution_value": "HIGH_VALUE",
+        "solution_readiness": "TESTED",
+        "solution_clarity": "SELF_EXPLAINING",
+        "costs_fixed": {"selected": ["koordynacja_projektu", "promocja_podstawowa"], "other": ["abonament telefoniczny dla koordynatora"]},
+        "costs_variable": {"selected": ["catering", "dojazdy"], "other": []},
+        "recipients_users": {"selected": ["seniorzy"], "other": ["osoby samotnie mieszkające"]},
+        "recipients_payers": {"selected": ["urzad_miasta_gmina", "grantodawca"], "other": []},
+        "recipients_deciders": {"selected": ["pracownik_socjalny", "lider_lokalny", "urzad"], "other": []},
+        "revenue_main": "CONFIRMED",
+        "revenue_main_note": "Gmina zadeklarowała finansowanie koordynatora w ramach programu senioralnego na kolejny rok.",
+        "revenue_scaling": "REPLICABLE",
+        "revenue_scaling_note": "Pakiet startowy (scenariusz rozmów, szkolenie wolontariuszy, grafik dyżurów) dla innych gmin powiatu wielickiego.",
+        "value_emotional": {"selected": ["zmniejszenie_samotnosci", "bezpieczenstwo", "poczucie_bycia_widzianym"], "other": []},
+        "value_functional": {"selected": ["zwieksza_zasieg_pomocy", "zwieksza_dostepnosc", "obniza_koszty"], "other": []},
+        "channels_direct": {"selected": ["kontakt_telefoniczny_lub_mailowy", "spotkania_bezposrednie"], "other": []},
+        "channels_partners": {"selected": ["pracownik_socjalny", "lider_lokalny", "organizacja_spoleczna"], "other": ["parafia"]},
+        "channels_extra": {"selected": ["lokalne_wydarzenia", "wspolpraca_z_instytucjami"], "other": []},
+        "partners": [
+          {"name": "Ośrodek Pomocy Społecznej", "how": "Wskazuje seniorów potrzebujących kontaktu i reaguje na sygnały od wolontariuszy.", "roles": ["REACH", "VALUE"], "status": "CONFIRMED"},
+          {"name": "Szkoła podstawowa", "how": "Uczniowie z koła wolontariatu prowadzą część rozmów.", "roles": ["CHEAPER", "VALUE"], "status": "CONFIRMED"},
+          {"name": "Koło gospodyń wiejskich", "how": "Udostępnia świetlicę i przygotowuje poczęstunek na spotkania.", "roles": ["CHEAPER"], "status": "CONFIRMED"},
+          {"name": "Lokalny operator telekomunikacyjny", "how": "Rozmowa o bezpłatnym pakiecie minut dla wolontariuszy.", "roles": ["CHEAPER"], "status": "TALKING"}
+        ],
+        "impact_person": "STRONG",
+        "impact_community": "CLEAR",
+        "impact_environment": "SMALL"
+      }
+    },
+    {
+      "title": "Cyfrowy dyżur w bibliotece",
+      "summary": "Dwa razy w tygodniu w bibliotece miejskiej dyżurują licealiści, którzy pomagają mieszkańcom założyć profil zaufany, umówić wizytę u lekarza przez internet i bezpiecznie korzystać z bankowości.",
+      "essence": "Pomoc „przy stole” w znanym, bezpiecznym miejscu, od młodych ludzi z tej samej miejscowości. Każdy przychodzi ze swoją sprawą i wychodzi z nią załatwioną, a przy okazji uczy się, jak zrobić to następnym razem samodzielnie.",
+      "audience": "Mieszkańcy Gorlic, którzy nie radzą sobie z e-usługami: głównie seniorzy, ale też osoby z niepełnosprawnościami i dorośli bez doświadczenia z komputerem.",
+      "stage": "PROTOTYPE",
+      "category": "DIGITAL_EXCLUSION",
+      "gmina": "Gorlice",
+      "author_name": "Grupa inicjatywna przy bibliotece (demo)",
+      "contact_email": null,
+      "source_report_session": "seed-demo-07",
+      "status": "IN_REVIEW",
+      "created_days_ago": 12,
+      "submitted_days_ago": 9,
+      "replies": [
+        {
+          "author_label": "Hub Innowacji Społecznych",
+          "body": "Dziękujemy, analizujemy pomysł. Prosimy o uzupełnienie kanwy o bloki dotyczące skalowania dochodu i wpływu na środowisko — to pomoże nam ocenić, czy pomysł pasuje do najbliższego naboru.",
+          "days_ago": 5
+        }
+      ],
+      "canvas": {
+        "problem_intensity": "STRONG",
+        "problem_frequency": "OFTEN",
+        "problem_scale": "LARGE",
+        "actors_support": [
+          "biblioteka miejska",
+          "liceum ogólnokształcące (wolontariat)",
+          "Uniwersytet Trzeciego Wieku"
+        ],
+        "solution_value": "HIGH_VALUE",
+        "solution_readiness": "PROTOTYPE",
+        "solution_clarity": "CLEAR",
+        "costs_fixed": {"selected": ["koordynacja_projektu", "sprzet_potrzebny_na_start"], "other": []},
+        "costs_variable": {"selected": ["wydruk_materialow", "wsparcie_techniczne_dla_kolejnej_osoby"], "other": []},
+        "recipients_users": {"selected": ["seniorzy", "osoby_z_niepelnosprawnosciami"], "other": []},
+        "recipients_payers": {"selected": ["urzad_miasta_gmina", "fundacja_organizacja_spoleczna"], "other": []},
+        "recipients_deciders": {"selected": ["dyrektor_szkoly", "urzad"], "other": ["dyrektor biblioteki"]},
+        "revenue_main": "OFFER",
+        "revenue_main_note": "Dotacja gminy na zadanie publiczne z zakresu aktywizacji seniorów; sprzęt z programu bibliotecznego.",
+        "value_emotional": {"selected": ["wieksza_sprawczosc", "niezaleznosc", "pewnosc"], "other": []},
+        "value_functional": {"selected": ["oszczedza_czas", "zwieksza_dostepnosc", "poprawia_bezpieczenstwo"], "other": []},
+        "channels_direct": {"selected": ["spotkania_bezposrednie", "kontakt_telefoniczny_lub_mailowy"], "other": ["plakaty w bibliotece i przychodni"]},
+        "channels_partners": {"selected": ["szkola", "urzad_gmina", "organizacja_spoleczna"], "other": []},
+        "partners": [
+          {"name": "Biblioteka miejska", "how": "Udostępnia salę, komputery i internet w godzinach dyżuru.", "roles": ["CHEAPER", "REACH"], "status": "CONFIRMED"},
+          {"name": "Liceum ogólnokształcące", "how": "Wolontariusze z klas drugich; dyżur zaliczany do wolontariatu szkolnego.", "roles": ["VALUE"], "status": "CONFIRMED"},
+          {"name": "Lokalny bank spółdzielczy", "how": "Krótkie szkolenie z bezpiecznej bankowości dla wolontariuszy.", "roles": ["VALUE"], "status": "POTENTIAL"}
+        ],
+        "impact_person": "CLEAR",
+        "impact_community": "POSSIBLE"
+      }
+    },
+    {
+      "title": "Bus na telefon dla sołectw gminy Gołcza",
+      "summary": "Gminny bus jeździ po wcześniejszym zgłoszeniu telefonicznym: zabiera mieszkańców sołectw bez komunikacji publicznej do przychodni, apteki i urzędu w Miechowie.",
+      "essence": "Zamiast stałego rozkładu, którego nie da się utrzymać na wsi, przejazd zamawiany dzień wcześniej i łączony w trasy. Ten sam bus i kierowca, którego mieszkańcy znają.",
+      "audience": "Mieszkańcy sołectw gminy Gołcza bez własnego samochodu: seniorzy, osoby z niepełnosprawnościami i rodzice z małymi dziećmi.",
+      "stage": "IDEA",
+      "category": "SERVICE_ACCESS",
+      "gmina": "Gołcza",
+      "author_name": "Rada sołectwa (demo)",
+      "contact_email": "bus-na-telefon@example.org",
+      "source_report_session": "seed-demo-09",
+      "status": "SUBMITTED",
+      "created_days_ago": 4,
+      "submitted_days_ago": 2,
+      "replies": [],
+      "canvas": {
+        "problem_intensity": "VERY_SERIOUS",
+        "problem_frequency": "OFTEN",
+        "problem_scale": "NARROW",
+        "actors_support": [
+          "sołtysi",
+          "Gminny Ośrodek Pomocy Społecznej",
+          "przychodnia w Miechowie"
+        ],
+        "actors_block": [
+          "przewoźnicy prywatni obawiający się konkurencji"
+        ],
+        "solution_readiness": "IDEA",
+        "solution_clarity": "CLEAR",
+        "recipients_users": {"selected": ["seniorzy", "osoby_z_niepelnosprawnosciami", "mieszkancy_konkretnego_miejsca"], "other": []},
+        "recipients_payers": {"selected": ["urzad_miasta_gmina"], "other": []},
+        "value_functional": {"selected": ["zwieksza_dostepnosc", "oszczedza_czas"], "other": []},
+        "impact_person": "POSSIBLE"
+      }
+    },
+    {
+      "title": "Kącik spokoju w szkole",
+      "summary": "W szkole podstawowej powstaje ciche pomieszczenie, do którego uczeń może przyjść na przerwie, gdy czuje napięcie lub smutek. Dyżur pełnią na zmianę pedagog i przeszkoleni nauczyciele.",
+      "essence": "Bezpieczne miejsce i zaufany dorosły na wyciągnięcie ręki, bez zapisów i bez kolejki do specjalisty.",
+      "audience": "",
+      "stage": "IDEA",
+      "category": "MENTAL_HEALTH",
+      "gmina": "Skawina",
+      "author_name": null,
+      "contact_email": null,
+      "source_report_session": "seed-demo-11",
+      "status": "DRAFT",
+      "created_days_ago": 1,
+      "submitted_days_ago": null,
+      "replies": [],
+      "canvas": {
+        "problem_intensity": "STRONG",
+        "problem_frequency": "VERY_OFTEN",
+        "recipients_users": {"selected": ["dzieci", "mlodziez"], "other": []}
+      }
+    }
+  ]
+}
