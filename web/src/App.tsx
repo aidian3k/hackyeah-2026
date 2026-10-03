@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AppShell } from "@/components/layout/AppShell";
 import { RequireRole } from "@/components/RequireRole";
+import { ChallengePage } from "@/pages/ChallengePage";
 import { FindPage } from "@/pages/FindPage";
 import { IdeaPage } from "@/pages/IdeaPage";
 import { InnovationTestAccessPage } from "@/pages/InnovationTestAccessPage";
@@ -10,6 +11,7 @@ import { InnovationTestsPage } from "@/pages/InnovationTestsPage";
 import { KnowledgePage } from "@/pages/KnowledgePage";
 import { LibraryPage } from "@/pages/LibraryPage";
 import { LoginPage } from "@/pages/LoginPage";
+import { MaterialsPage } from "@/pages/MaterialsPage";
 import { MyReportsPage } from "@/pages/MyReportsPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { SolutionPage } from "@/pages/SolutionPage";
@@ -55,16 +57,24 @@ function useRouteFocus(): void {
   }, [pathname]);
 }
 
+/** Strona główna z kluczem nawigacji: klik w logo na `/` zaczyna od nowa (czysty czat), a nie zostawia wyników. */
+function HomeRoute() {
+  const { key } = useLocation();
+  return <FindPage key={key} />;
+}
+
 export function App() {
   useRouteFocus();
   return (
     <Routes>
       <Route element={<AppShell />}>
-        <Route index element={<FindPage />} />
+        <Route index element={<HomeRoute />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="rozwiazania" element={<LibraryPage />} />
         <Route path="rozwiazania/:id" element={<SolutionPage />} />
         <Route path="wiedza" element={<KnowledgePage />} />
+        <Route path="wiedza/wyzwania/:code" element={<ChallengePage />} />
+        <Route path="wiedza/materialy" element={<MaterialsPage />} />
         <Route path="testy" element={<InnovationTestsPage />} />
         <Route path="testy/dostep/:token" element={<InnovationTestAccessPage />} />
         <Route path="testy/:id" element={<InnovationTestPage />} />
