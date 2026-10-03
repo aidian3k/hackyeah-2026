@@ -20,6 +20,7 @@ from api.log import request_id_var, setup_logging
 from api.routers import (
     chat,
     innovation_tests,
+    knowledge,
     mentors,
     meta,
     partnerships,
@@ -97,6 +98,7 @@ def create_app() -> FastAPI:
         search.router,
         reports.router,
         solutions.router,
+        knowledge.router,
         staff.router,
         innovation_tests.router,
         # Moduł 5: Platforma komunikacji
