@@ -91,19 +91,19 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 <div class="wrap">
 
 <header class="doc">
-  <h1>Moduł 5 — Platforma aktywnej komunikacji</h1>
-  <div class="sub">Dokument implementacyjny dla Małopolskiego Hubu Innowacji Społecznych (<code>base.md</code>, funkcjonalność V). <strong>Szkielet</strong> — sekcje do wypełnienia na sesji planowania. Odbiorca: agent lub programista implementujący moduł.</div>
+  <h1>Moduł 5 — Platforma aktywnej komunikacji („Rozmowy Hubu”)</h1>
+  <div class="sub">Dokument implementacyjny dla Małopolskiego Hubu Innowacji Społecznych (<code>base.md</code>, funkcjonalność V). Odbiorca: agent lub programista implementujący moduł. Zadania: <code>module-5-tasks.md</code> (backend PK00–PK10, frontend PK20–PK29).</div>
   <div class="meta">
-    <span><strong>Wersja:</strong> v0.1</span>
-    <span><strong>Data:</strong> 2026-10-03</span>
-    <span><strong>Status:</strong> <span class="badge b-todo">szkielet</span></span>
+    <span><strong>Wersja:</strong> v0.2</span>
+    <span><strong>Data:</strong> 2026-10-04</span>
+    <span><strong>Status:</strong> <span class="badge b-draft">draft</span></span>
     <span><strong>Plik zadań:</strong> <code>docs/modules/05-platforma-komunikacji/module-5-tasks.md</code></span>
   </div>
 </header>
 
 <div class="note">
 <p><strong>Jak czytać ten dokument.</strong> Każda sekcja ma status: <span class="badge b-stable">stable</span> — ustalone, nie zmieniaj bez ADR; <span class="badge b-draft">draft</span> — kierunek ustalony, szczegóły do dopracowania w kodzie; <span class="badge b-todo">todo</span> — do zaplanowania, nie implementuj.</p>
-<p>Struktura i konwencje jak w <code>docs/modules/01-matchmaking/module-1-matchmaking.html</code>. Twarde reguły z <code>AGENTS.md</code> obowiązują także tutaj (progi w <code>settings</code>, <code>polish_simple</code>, brak treści w logach, jeden kształt <code>SolutionCard</code>, bez autoryzacji i bez testów automatycznych). Moduł 1 jest kontraktem zewnętrznym — zmiana jego tabel lub endpointów wymaga ADR i wpisu w „Uwagach między zadaniami” Modułu 1.</p>
+<p>Struktura i konwencje jak w <code>docs/modules/01-matchmaking/module-1-matchmaking.html</code>. Twarde reguły z <code>AGENTS.md</code> obowiązują także tutaj (progi w <code>settings</code>, <code>polish_simple</code>, brak treści w logach, jeden kształt <code>SolutionCard</code>, <code>KNOWLEDGE</code> nigdy na kartach, bez autoryzacji i bez testów automatycznych). Moduł 1 jest kontraktem zewnętrznym — zmiany w jego plikach są wyliczone w ADR-M5-010 i nie wykraczają poza dopisanie.</p>
 </div>
 
 <nav class="toc">
@@ -124,163 +124,468 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
     <li><a href="#s13">Rejestr decyzji (ADR)</a></li>
     <li><a href="#s14">Backlog kolejnych iteracji</a></li>
     <li><a href="#s15">Koszt utrzymania i zasoby</a></li>
-    <li><a href="#s16">Pytania otwarte do sesji planowania</a></li>
+    <li><a href="#s16">Pytania otwarte</a></li>
   </ol>
 </nav>
 
-<h2 id="s1">1. Cel i kontekst biznesowy <span class="badge b-draft">draft</span></h2>
+<h2 id="s1">1. Cel i kontekst biznesowy <span class="badge b-stable">stable</span></h2>
 
 <h4>Wymaganie z <code>base.md</code> (V)</h4>
 <blockquote>
 <p>Zintegrowany system pozwalający na bezpośredni dialog między ROPS Kraków a użytkownikami, ułatwiający szybkie zadawanie pytań, otrzymywanie wsparcia od mentorów oraz budowanie międzysektorowych partnerstw.</p>
 </blockquote>
 
-<h4>Ocena w konkursie</h4>
-<p>Kryterium „Stopień spełnienia wyzwania” (40%): Matchmaking 10%, każda dodatkowa funkcjonalność +5%. Liczy się jakość działania — moduł ma być pokazywalny w demo, nie tylko obecny w nawigacji.</p>
+<h4>Cel w jednym zdaniu</h4>
+<p><strong>Każda rozmowa z Hubem — pytanie, zgłoszenie, prośba o eksperta, propozycja partnerstwa — toczy się w jednym wątku, w którym AI odpowiada od razu z bazy rozwiązań, a człowiek (pracownik Hubu albo mentor) przejmuje rozmowę, gdy AI nie wystarcza.</strong></p>
 
-<div class="pending">
-<p><strong>Do uzupełnienia:</strong> cel modułu w jednym zdaniu, jak wspiera „cyfrowe serce” Hubu i czym wnosi „nową jakość” (kryterium pomysłowości z <code>base.md</code> §6).</p>
-</div>
-
-<h2 id="s2">2. Stan obecny — co już działa <span class="badge b-draft">draft</span></h2>
-
-<p>Stan na 2026-10-03 po Module 1 (backend T00–T26) i module frontendowym (F00–F21).</p>
+<h4>Trzy filary (mapowanie na wymaganie)</h4>
 <div class="tablewrap">
 <table>
-<tr><th>Wymaganie</th><th>Pokrycie</th><th>Gdzie / czego brakuje</th></tr>
-<tr><td>Dialog ROPS ↔ użytkownik</td><td><span class="cov-part">częściowo</span></td><td>Jednokierunkowe odpowiedzi zespołu do autora zgłoszenia (<code>report_replies</code>, F12, F16); autor nie może odpisać</td></tr>
-<tr><td>Szybkie zadawanie pytań</td><td><span class="cov-no">brak</span></td><td>Jedyną drogą jest zgłoszenie problemu przez czat Modułu 1</td></tr>
-<tr><td>Wsparcie mentorów / ekspertów</td><td><span class="cov-no">brak</span></td><td>Brak roli eksperta i przydziału</td></tr>
-<tr><td>Budowanie partnerstw międzysektorowych</td><td><span class="cov-no">brak</span></td><td>Jest <code>solutions.organization</code> i embeddingi rozwiązań — brak kojarzenia organizacji</td></tr>
-<tr><td>Powiadomienia (base.md §6 „szybkość komunikacji”)</td><td><span class="cov-part">częściowo</span></td><td>Skrzynka „Nowe” z pollingiem 30 s (F14); brak e-maila i webhooka (backlog Modułu 1)</td></tr>
+<tr><th>Fragment wymagania</th><th>Funkcja w PoC</th><th>„Nowa jakość” (kryterium pomysłowości, <code>base.md</code> §6)</th></tr>
+<tr><td>bezpośredni dialog ROPS ↔ użytkownik, szybkie zadawanie pytań</td><td>Wątki dwukierunkowe + <strong>Asystent pierwszego kontaktu</strong>: odpowiedź AI z cytowaniami w kilka sekund, eskalacja do zespołu jednym przyciskiem</td><td>Pytanie nie czeka w kolejce — AI odpowiada z Biblioteki Innowacji (ten sam silnik co Matchmaking), a pracownik dostaje gotowy kontekst i <strong>szkic odpowiedzi</strong> (human in the loop)</td></tr>
+<tr><td>wsparcie od mentorów</td><td>Katalog ekspertów, przydział eksperta do wątku z <strong>podpowiedzią AI</strong> (kategoria + podobieństwo semantyczne), widok eksperta</td><td>System sam proponuje, kto zna temat — ekspert dostaje tylko rozmowy ze swojej dziedziny</td></tr>
+<tr><td>międzysektorowe partnerstwa</td><td><strong>Tablica partnerstw</strong> (oferuję / szukam), dopasowanie komplementarnych ogłoszeń z oznaczeniem „międzysektorowe”, kontakt pośredniczony przez Hub</td><td>Dopasowanie zasilane realnym popytem: przy ogłoszeniu widać, ile podobnych zgłoszeń problemów przyszło przez Matchmaking i jakie rozwiązania już istnieją</td></tr>
 </table>
 </div>
 
-<h2 id="s3">3. Zakres MVP i granice <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Co dokładnie wchodzi do PoC tego modułu, a co jest backlogiem (sekcja 14)?</li>
-<li>Zasada granicy: czego ten moduł <strong>nie</strong> robi i który moduł to przejmuje?</li>
-</ul>
+<h4>Ocena w konkursie</h4>
+<p>Kryterium „Stopień spełnienia wyzwania” (40%): każda dodatkowa funkcjonalność +5%. Moduł bezpośrednio odpowiada też na kryteria walidacji §6: <em>„szybkość komunikacji: jak system powiadamia administratora i jak wygląda ścieżka odpowiedzi do autora”</em> oraz <em>„jakość komunikacji pomiędzy użytkownikami”</em>.</p>
+
+<h2 id="s2">2. Stan obecny — co już działa <span class="badge b-stable">stable</span></h2>
+
+<p>Stan na 2026-10-04: Moduł 1 (backend T00–T26), frontend (F00–F21), role demo po stronie frontendu (<code>docs/changes/feature-2026-10-03-1/spec.md</code>: konta <code>reporter</code> i <code>admin</code>/<code>ops</code> w <code>web/src/lib/auth.tsx</code>, sesja w <code>localStorage</code>, bez backendu).</p>
+<div class="tablewrap">
+<table>
+<tr><th>Wymaganie</th><th>Pokrycie</th><th>Gdzie / czego brakuje</th></tr>
+<tr><td>Dialog ROPS ↔ użytkownik</td><td><span class="cov-part">częściowo</span></td><td><code>report_replies</code> + <code>POST/GET /api/reports/{id}/replies</code> (T20), panel F16, „Moje zgłoszenia” F12. Jednokierunkowo: autor nie może odpisać</td></tr>
+<tr><td>Szybkie zadawanie pytań</td><td><span class="cov-no">brak</span></td><td>Jedyną drogą jest zgłoszenie problemu przez czat Modułu 1</td></tr>
+<tr><td>Wsparcie mentorów / ekspertów</td><td><span class="cov-no">brak</span></td><td>Brak roli eksperta, katalogu i przydziału</td></tr>
+<tr><td>Partnerstwa międzysektorowe</td><td><span class="cov-no">brak</span></td><td>Są <code>solutions.organization</code>, embeddingi rozwiązań i zgłoszeń — brak kojarzenia organizacji</td></tr>
+<tr><td>Powiadomienia</td><td><span class="cov-part">częściowo</span></td><td>Skrzynka „Nowe” z pollingiem 30 s (F14, <code>useInboxCount</code>). E-mail i webhook to backlog Modułu 1</td></tr>
+</table>
 </div>
 
-<h2 id="s4">4. Użytkownicy i scenariusze <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<h4>Co reużywamy bez zmian</h4>
 <ul>
-<li>Które grupy z <code>base.md</code> §3 korzystają z modułu: mieszkańcy/NGO, JST, pracownicy ROPS, eksperci?</li>
-<li>2–4 scenariusze krok po kroku (kto, co wpisuje, co dostaje) — w tym jeden scenariusz do nagrania demo.</li>
+<li><code>api.pipeline.preprocess.preprocess</code> — kategoria pytania (słowa kluczowe, bez LLM).</li>
+<li><code>api.pipeline.orchestrator.run_search</code> + bramka „nie wiem” — wyszukiwanie odpowiedzi asystenta.</li>
+<li><code>api.pipeline.answer.generate</code> + <code>CitationFilter</code> — odpowiedź z cytowaniami <code>[n]</code>.</li>
+<li><code>api.pipeline.semantic.semantic_search</code> — rozwiązania powiązane z ogłoszeniem partnerstwa.</li>
+<li><code>api.cards.load_solutions</code> / <code>to_card</code> — jeden kształt <code>SolutionCard</code> (<code>scores = null</code>).</li>
+<li><code>api.providers.*</code>, <code>api.tasks.spawn</code>, <code>api.db.SessionLocal</code> / <code>to_pgvector</code>, <code>api.errors.ApiError</code>.</li>
+<li>Frontend: <code>request</code> z <code>web/src/api/client.ts</code>, <code>SolutionCard</code>, <code>Alert</code>, <code>EmptyState</code>, <code>LoadState</code>, <code>usePolling</code>, <code>useDocumentTitle</code>, design system.</li>
 </ul>
+
+<h2 id="s3">3. Zakres MVP i granice <span class="badge b-stable">stable</span></h2>
+
+<h4>W PoC</h4>
+<ol>
+<li><strong>Wątki</strong> czterech rodzajów: <code>QUESTION</code> (pytanie do Hubu), <code>REPORT</code> (rozmowa przy zgłoszeniu z Modułu 1), <code>MENTORING</code> (prośba o eksperta), <code>PARTNERSHIP</code> (propozycja współpracy do ogłoszenia).</li>
+<li><strong>Asystent pierwszego kontaktu</strong> — automatyczna odpowiedź AI na nowe pytanie (<code>QUESTION</code>), z kartami rozwiązań; „To mi pomogło” / „Chcę porozmawiać z zespołem Hubu”.</li>
+<li><strong>Odpowiedzi zespołu i ekspertów</strong>, zmiana statusu, przydział eksperta z podpowiedzią AI.</li>
+<li><strong>Szkic odpowiedzi AI</strong> dla pracownika Hubu (nie zapisywany, nie wysyłany bez akceptacji).</li>
+<li><strong>Tablica partnerstw</strong>: ogłoszenia „oferuję / szukam”, moderacja, dopasowania, kontakt przez Hub.</li>
+<li><strong>Powiadomienia w aplikacji</strong>: liczniki w panelu, „nowa odpowiedź” w „Moich rozmowach”, SLA (czas oczekiwania).</li>
+<li>Seed fikcyjnych ekspertów, ogłoszeń i rozmów do demo.</li>
+</ol>
+
+<h4>Granice — czego moduł nie robi</h4>
+<div class="tablewrap">
+<table>
+<tr><th>Poza M5</th><th>Kto przejmuje</th></tr>
+<tr><td>Zgłaszanie problemu i wyszukiwanie rozwiązań</td><td>Moduł 1 (M5 tylko wywołuje jego pipeline)</td></tr>
+<tr><td>Edycja treści rozwiązań i wiedzy</td><td>Moduł 6 (Panel administratora)</td></tr>
+<tr><td>Oceny i opinie testerów o rozwiązaniach</td><td>Moduł 4</td></tr>
+<tr><td>Dostosowanie innowacji do usługi gminy</td><td>Moduł 7 (może linkować do tablicy partnerstw)</td></tr>
+<tr><td>Konta, logowanie, weryfikacja tożsamości, e-mail, webhook, czat w czasie rzeczywistym (WebSocket)</td><td>Backlog (sekcja 14)</td></tr>
+</table>
 </div>
 
-<h2 id="s5">5. Architektura i zależności od Modułu 1 <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Nowe pliki w <code>api/</code> (router, pipeline, provider) i co reużywamy z Modułu 1 (providery, <code>SolutionCard</code>, <code>api.tasks.spawn</code>, taksonomia, gminy).</li>
-<li>Czy moduł zmienia istniejące tabele lub endpointy Modułu 1? Każda taka zmiana = ADR.</li>
-</ul>
+<h2 id="s4">4. Użytkownicy i scenariusze <span class="badge b-stable">stable</span></h2>
+
+<div class="tablewrap">
+<table>
+<tr><th>Grupa (<code>base.md</code> §3)</th><th>Rola demo (frontend)</th><th>Co robi w M5</th></tr>
+<tr><td>Mieszkańcy, NGO</td><td><code>reporter</code></td><td>Zadaje pytania, odpisuje przy zgłoszeniu, prosi o eksperta, publikuje ogłoszenie partnerstwa, proponuje współpracę</td></tr>
+<tr><td>JST</td><td><code>reporter</code> (<code>reporter_type = JST</code>)</td><td>Jak wyżej; typowo „szukam partnera do wdrożenia”</td></tr>
+<tr><td>Pracownicy ROPS</td><td><code>administrator</code></td><td>Odpowiada w wątkach (ze szkicem AI), przydziela ekspertów, moderuje ogłoszenia, pośredniczy w partnerstwach</td></tr>
+<tr><td>Eksperci branżowi</td><td><code>mentor</code> (nowa rola demo, konto <code>ekspert</code>)</td><td>Widzi przydzielone rozmowy, odpowiada jako ekspert</td></tr>
+</table>
 </div>
 
-<h2 id="s6">6. Model danych <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<h3>Scenariusz A — pytanie z natychmiastową odpowiedzią (scenariusz demo, ~60 s)</h3>
+<ol>
+<li>Pani Ewa z GOPS (konto <code>reporter</code>) wchodzi w „Platforma komunikacji” → „Zadaj pytanie”: <em>„Jak zorganizować dowóz seniorów do lekarza w gminie wiejskiej?”</em>.</li>
+<li>Widzi swój wątek i komunikat „Asystent szuka odpowiedzi w Bibliotece Innowacji…”. Po kilku sekundach pojawia się wiadomość oznaczona <strong>„Odpowiedź automatyczna (AI)”</strong> z cytowaniami <code>[1]</code>, <code>[2]</code> i kartami rozwiązań.</li>
+<li>Klika „Chcę porozmawiać z zespołem Hubu” → status „Czeka na zespół Hubu”.</li>
+<li>Pracownik ROPS (konto <code>admin</code>) widzi licznik w panelu („Rozmowy 1”), otwiera wątek, klika „Podpowiedz odpowiedź (AI)”, poprawia szkic, przypina kartę rozwiązania i wysyła. Przydziela eksperta z listy podpowiedzi („Kategoria: Dostęp do usług · podobieństwo 71%”).</li>
+<li>Ekspert (konto <code>ekspert</code>) widzi rozmowę w „Moje konsultacje” i dopisuje radę.</li>
+<li>Pani Ewa w „Moich rozmowach” widzi oznaczenie „Nowa odpowiedź” i czyta obie wiadomości.</li>
+</ol>
+
+<h3>Scenariusz B — autor zgłoszenia odpisuje Hubowi</h3>
+<ol>
+<li>Autor zgłoszenia z Modułu 1 w „Moich zgłoszeniach” widzi odpowiedź zespołu (F12) i klika „Odpisz”.</li>
+<li>Powstaje (albo otwiera się istniejący) wątek <code>REPORT</code>; oś czasu pokazuje dotychczasowe odpowiedzi z <code>report_replies</code> i nową wiadomość autora.</li>
+<li>Pracownik widzi wątek w „Rozmowach” i w szczegółach zgłoszenia (link „Rozmowa z autorem”).</li>
+</ol>
+
+<h3>Scenariusz C — partnerstwo międzysektorowe</h3>
+<ol>
+<li>Fundacja (NGO) publikuje ogłoszenie „Szukamy gminy do pilotażu teleopieki”. Trafia do moderacji; pracownik zatwierdza.</li>
+<li>Na stronie ogłoszenia: „Pasujące ogłoszenia” (np. gmina oferująca lokal i kadrę — oznaczenie „międzysektorowe”), „Powiązane rozwiązania z Biblioteki”, „Zapotrzebowanie: 7 podobnych zgłoszeń problemów”.</li>
+<li>Gmina klika „Zaproponuj współpracę” → wątek <code>PARTNERSHIP</code>; Hub pośredniczy i przekazuje kontakt obu stronom poza platformą.</li>
+</ol>
+
+<h2 id="s5">5. Architektura i zależności od Modułu 1 <span class="badge b-stable">stable</span></h2>
+
+<pre><code>web/  ──HTTP JSON (polling)──▶  api/routers/threads.py ─┐
+                               api/routers/mentors.py  ├─▶ api/comm/threads.py   (wątki, statusy, oś czasu, notify)
+                               api/routers/partnerships.py   api/comm/assistant.py (odpowiedź AI, szkic)
+                                                        └─▶ api/comm/matching.py  (eksperci, partnerzy, embeddingi)
+                                                                │
+                              Moduł 1 (bez zmian): preprocess · run_search · answer.generate · CitationFilter
+                                                  semantic_search · cards · providers · tasks.spawn
+                                                                │
+                                              PostgreSQL: tabele M1 + mentors, threads,
+                                                          thread_messages, partnership_offers</code></pre>
+
 <ul>
-<li>DDL nowych tabel i typów (dopisywany do <code>db/init.sql</code>), klucze obce do <code>solutions</code> / <code>reports</code>.</li>
-<li>Które kolumny są treścią (RODO, sekcja 11), a które statystyką?</li>
+<li>Komunikacja frontend ↔ backend wyłącznie JSON + odpytywanie (polling). Bez SSE i WebSocketów w M5 — odpowiedź asystenta jest liczona w tle (<code>spawn</code>) i zapisywana jako wiadomość (ADR-M5-004).</li>
+<li>Nowy pakiet <code>api/comm/</code> (modele, schematy, logika) — pliki Modułu 1 zmieniają się tylko przez dopisanie (ADR-M5-010).</li>
+<li>Modele SQLAlchemy M5 dziedziczą po <code>api.models.Base</code> i importują <code>Report</code>, <code>ReportReply</code>, <code>Solution</code> tylko do odczytu.</li>
 </ul>
+
+<h2 id="s6">6. Model danych <span class="badge b-stable">stable</span></h2>
+
+<p>DDL dopisywany na końcu <code>db/init.sql</code> w sekcji „Moduł 5”. Wymiar embeddingów 1024 (ADR-004), bez indeksów wektorowych (ADR-019).</p>
+
+<pre><code>-- ===== Moduł 5 — Platforma aktywnej komunikacji =====
+CREATE TYPE thread_kind        AS ENUM ('QUESTION', 'REPORT', 'MENTORING', 'PARTNERSHIP');
+CREATE TYPE thread_status      AS ENUM ('ASSISTANT_PENDING', 'ANSWERED_BY_AI', 'WAITING_STAFF', 'WAITING_USER', 'CLOSED');
+CREATE TYPE message_role       AS ENUM ('USER', 'STAFF', 'MENTOR', 'ASSISTANT', 'SYSTEM');
+CREATE TYPE org_sector         AS ENUM ('NGO', 'JST', 'PUBLIC', 'BUSINESS', 'SCIENCE', 'RESIDENTS');
+CREATE TYPE partnership_intent AS ENUM ('OFFER', 'SEEK');
+CREATE TYPE offer_status       AS ENUM ('PENDING_REVIEW', 'PUBLISHED', 'REJECTED', 'CLOSED');
+
+-- Eksperci / mentorzy (dane fikcyjne z data/mentors.json).
+CREATE TABLE mentors (
+    id           BIGSERIAL PRIMARY KEY,
+    seed_key     TEXT UNIQUE,                      -- idempotencja seeda
+    display_name TEXT        NOT NULL,
+    organization TEXT,
+    sector       org_sector,
+    expertise    TEXT        NOT NULL,             -- 1–2 zdania: w czym pomaga
+    bio          TEXT        NOT NULL DEFAULT '',
+    categories   TEXT[]      NOT NULL DEFAULT '{}',-- kody challenge_taxonomy
+    active       BOOLEAN     NOT NULL DEFAULT true,
+    embedding    vector(1024),                     -- expertise + bio + etykiety kategorii
+    created_at   TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+-- Ogłoszenia partnerstw (tablica „oferuję / szukam”).
+CREATE TABLE partnership_offers (
+    id            BIGSERIAL PRIMARY KEY,
+    seed_key      TEXT UNIQUE,
+    intent        partnership_intent NOT NULL,
+    organization  TEXT         NOT NULL,
+    sector        org_sector   NOT NULL,
+    title         TEXT         NOT NULL,
+    description   TEXT         NOT NULL,
+    category      TEXT         REFERENCES challenge_taxonomy(code),
+    contact_email TEXT,                             -- nigdy nie wychodzi z API ani do logów
+    session_id    TEXT,
+    status        offer_status NOT NULL DEFAULT 'PENDING_REVIEW',
+    embedding     vector(1024),                     -- title + description
+    created_at    TIMESTAMPTZ  NOT NULL DEFAULT now(),
+    updated_at    TIMESTAMPTZ  NOT NULL DEFAULT now()
+);
+CREATE INDEX partnership_offers_status_idx ON partnership_offers (status, created_at DESC);
+
+-- Wątki rozmów (jeden model dla pytań, zgłoszeń, mentoringu i partnerstw).
+CREATE TABLE threads (
+    id                  BIGSERIAL PRIMARY KEY,
+    seed_key            TEXT UNIQUE,
+    kind                thread_kind   NOT NULL,
+    status              thread_status NOT NULL,
+    subject             TEXT          NOT NULL,     -- treść (RODO): nigdy w logach
+    category            TEXT          REFERENCES challenge_taxonomy(code),
+    reporter_type       reporter_type NOT NULL DEFAULT 'OTHER',
+    author_label        TEXT,                       -- podpis autora, niezweryfikowany
+    contact_email       TEXT,                       -- nigdy nie wychodzi z API ani do logów
+    session_id          TEXT,
+    report_id           BIGINT REFERENCES reports(id) ON DELETE SET NULL,
+    solution_id         BIGINT REFERENCES solutions(id) ON DELETE SET NULL,
+    partnership_id      BIGINT REFERENCES partnership_offers(id) ON DELETE SET NULL, -- ogłoszenie docelowe
+    from_partnership_id BIGINT REFERENCES partnership_offers(id) ON DELETE SET NULL, -- własne ogłoszenie proponującego
+    assigned_mentor_id  BIGINT REFERENCES mentors(id) ON DELETE SET NULL,
+    embedding           vector(1024),               -- subject + pierwsza wiadomość
+    last_message_at     TIMESTAMPTZ   NOT NULL DEFAULT now(),
+    waiting_since       TIMESTAMPTZ,                -- ustawiane przy wejściu w WAITING_STAFF (SLA)
+    user_last_read_at   TIMESTAMPTZ,
+    staff_last_read_at  TIMESTAMPTZ,
+    mentor_last_read_at TIMESTAMPTZ,
+    created_at          TIMESTAMPTZ   NOT NULL DEFAULT now(),
+    updated_at          TIMESTAMPTZ   NOT NULL DEFAULT now()
+);
+CREATE UNIQUE INDEX threads_report_uq ON threads (report_id) WHERE report_id IS NOT NULL AND kind = 'REPORT';
+CREATE INDEX threads_status_idx ON threads (status, last_message_at DESC);
+CREATE INDEX threads_mentor_idx ON threads (assigned_mentor_id, last_message_at DESC);
+
+CREATE TABLE thread_messages (
+    id           BIGSERIAL PRIMARY KEY,
+    thread_id    BIGINT       NOT NULL REFERENCES threads(id) ON DELETE CASCADE,
+    role         message_role NOT NULL,
+    author_label TEXT,
+    mentor_id    BIGINT       REFERENCES mentors(id) ON DELETE SET NULL,
+    body         TEXT         NOT NULL,             -- treść (RODO): nigdy w logach
+    solution_ids BIGINT[]     NOT NULL DEFAULT '{}',-- karty pod wiadomością; [n] = pozycja n
+    meta         JSONB        NOT NULL DEFAULT '{}',-- np. {"gate": {...}, "retracted": true, "fallback": "no_llm"}
+    created_at   TIMESTAMPTZ  NOT NULL DEFAULT now()
+);
+CREATE INDEX thread_messages_thread_idx ON thread_messages (thread_id, created_at);</code></pre>
+
+<h4>Treść a statystyka</h4>
+<ul>
+<li><strong>Treść</strong> (nigdy w logach): <code>threads.subject</code>, <code>thread_messages.body</code>, <code>partnership_offers.title/description</code>, <code>author_label</code>.</li>
+<li><strong>Nigdy z API</strong>: <code>threads.contact_email</code>, <code>partnership_offers.contact_email</code>, kolumny <code>embedding</code>, <code>session_id</code> w odpowiedziach list (tylko jako filtr).</li>
+<li><strong>Statystyka</strong>: <code>kind</code>, <code>status</code>, <code>category</code>, <code>reporter_type</code>, znaczniki czasu, liczniki.</li>
+</ul>
+
+<h4>Automat stanów wątku</h4>
+<div class="tablewrap">
+<table>
+<tr><th>Zdarzenie</th><th>Z</th><th>Na</th></tr>
+<tr><td>Utworzenie <code>QUESTION</code> przy <code>ASSISTANT_ENABLED=true</code></td><td>—</td><td><code>ASSISTANT_PENDING</code></td></tr>
+<tr><td>Utworzenie pozostałych rodzajów (lub asystent wyłączony)</td><td>—</td><td><code>WAITING_STAFF</code></td></tr>
+<tr><td>Asystent: bramka przeszła, są karty</td><td><code>ASSISTANT_PENDING</code></td><td><code>ANSWERED_BY_AI</code></td></tr>
+<tr><td>Asystent: „nie wiem”, brak kart, błąd</td><td><code>ASSISTANT_PENDING</code></td><td><code>WAITING_STAFF</code> (+ wiadomość <code>SYSTEM</code>)</td></tr>
+<tr><td>Wiadomość <code>USER</code></td><td>dowolny (także <code>CLOSED</code> = ponowne otwarcie)</td><td><code>WAITING_STAFF</code></td></tr>
+<tr><td>Wiadomość <code>STAFF</code> lub <code>MENTOR</code></td><td>dowolny poza <code>CLOSED</code></td><td><code>WAITING_USER</code></td></tr>
+<tr><td><code>PATCH {status: WAITING_STAFF}</code> (eskalacja „Chcę porozmawiać z zespołem”)</td><td><code>ANSWERED_BY_AI</code>, <code>WAITING_USER</code>, <code>CLOSED</code></td><td><code>WAITING_STAFF</code></td></tr>
+<tr><td><code>PATCH {status: CLOSED}</code> („To mi pomogło” / zamknięcie przez Hub)</td><td>dowolny poza <code>ASSISTANT_PENDING</code></td><td><code>CLOSED</code></td></tr>
+<tr><td>Inne przejście przez <code>PATCH</code></td><td colspan="2">409 <code>INVALID_TRANSITION</code></td></tr>
+</table>
+</div>
+<p><code>waiting_since</code> = czas wejścia w <code>WAITING_STAFF</code>, zerowane przy wyjściu. Wiadomość <code>STAFF</code>/<code>MENTOR</code> w <code>CLOSED</code> → 409 <code>THREAD_CLOSED</code>.</p>
+
+<h2 id="s7">7. Logika i AI <span class="badge b-draft">draft</span></h2>
+
+<h3>7.1 Po utworzeniu wątku (<code>api.comm.threads.after_create</code>, w tle przez <code>spawn</code>)</h3>
+<ol>
+<li>Własna sesja z <code>SessionLocal()</code> (zadanie odpięte od żądania, jak zapis zgłoszenia w M1).</li>
+<li>Embedding <code>subject + "\n" + body</code> przez <code>embed_query</code> → <code>threads.embedding</code>. Błąd providera → <code>NULL</code> (sugestie ekspertów działają wtedy po samej kategorii).</li>
+<li>Gdy <code>kind = QUESTION</code> i status <code>ASSISTANT_PENDING</code> → <code>run_assistant(thread_id)</code>.</li>
+<li><code>notify("thread_created", thread_id)</code>.</li>
+</ol>
+<p>Kategoria wątku liczona synchronicznie przy tworzeniu: <code>preprocess(body, None).category</code> (słowa kluczowe M1, bez LLM), chyba że klient podał <code>category</code>.</p>
+
+<h3>7.2 Asystent pierwszego kontaktu (<code>api.comm.assistant.run_assistant</code>)</h3>
+<ol>
+<li><code>q = preprocess(first_user_body, None)</code>; <code>result = await run_search(q)</code> (reranker opcjonalny, bramka „nie wiem” działa na cosinusie).</li>
+<li>Bramka nie przeszła albo <code>result.solutions</code> puste → wiadomość <code>SYSTEM</code> „Nie mam gotowej odpowiedzi w Bibliotece Innowacji. Pytanie trafiło do zespołu Hubu — odpowiemy w tym wątku.”, status <code>WAITING_STAFF</code>.</li>
+<li>Karty = <code>result.solutions</code> (≤ <code>ANSWER_TOP_N</code>, tylko <code>SOLUTION</code>; <code>KNOWLEDGE</code> nigdy). Gdy <code>LLM_ENABLED</code>: zbierz <code>generate(q.normalized, cards, result.best_chunks, q.too_vague, llm)</code> przez <code>CitationFilter(len(cards))</code>, limit czasu <code>ASSISTANT_TIMEOUT_SECONDS</code>. <code>filter.should_retract</code> → tekst odrzucony (<code>meta.retracted = true</code>).</li>
+<li>Brak LLM / błąd / odrzucenie → treść zastępcza <em>„Te rozwiązania z Biblioteki Innowacji mogą pomóc:”</em> (<code>meta.fallback = "no_llm" | "error" | "retracted"</code>). Moduł działa bez AI.</li>
+<li>Zapis wiadomości <code>ASSISTANT</code> z <code>solution_ids</code> w kolejności kart (cytowanie <code>[n]</code> = pozycja n), <code>meta.gate = {source, score, threshold}</code>; status <code>ANSWERED_BY_AI</code>.</li>
+<li>Wyjątek w zadaniu → status <code>WAITING_STAFF</code> + wiadomość <code>SYSTEM</code>; wątek nigdy nie zostaje w <code>ASSISTANT_PENDING</code> (zabezpieczenie w <code>finally</code>).</li>
+</ol>
+
+<h3>7.3 Szkic odpowiedzi dla pracownika (<code>api.comm.assistant.draft_reply</code>)</h3>
+<ul>
+<li>Zapytanie = ostatnia wiadomość <code>USER</code> (albo <code>subject</code>). <code>run_search</code> → karty → LLM z promptem <code>DRAFT_SYSTEM</code>.</li>
+<li><code>DRAFT_SYSTEM</code> (instrukcje tylko w system, treść użytkownika jako blok danych): <em>„Piszesz szkic odpowiedzi pracownika Małopolskiego Hubu Innowacji Społecznych do mieszkańca lub instytucji. Opieraj się wyłącznie na rozwiązaniach z kontekstu, każde twierdzenie opatrz [n]. Maks. 6 zdań, uprzejmie, prostym językiem. Nie obiecuj terminów, finansowania ani decyzji. Jeśli kontekst nie pasuje — zaproponuj jedno pytanie doprecyzowujące.”</em></li>
+<li>Wynik: <code>DraftReply {body, solution_ids, cards}</code>. <strong>Nie zapisywany</strong>; pracownik edytuje i wysyła zwykłą wiadomością <code>STAFF</code> (może dołączyć <code>solution_ids</code>).</li>
+<li><code>LLM_ENABLED=false</code> lub <code>DRAFT_REPLY_ENABLED=false</code> → 503 <code>LLM_UNAVAILABLE</code>; interfejs ukrywa wtedy przycisk po pierwszym 503.</li>
+</ul>
+
+<h3>7.4 Podpowiedź eksperta (<code>api.comm.matching.suggest_mentors</code>)</h3>
+<ul>
+<li>Kandydaci: <code>mentors.active</code>. Dla każdego: <code>category_match = thread.category = ANY(mentor.categories)</code>, <code>similarity = 1 - (mentor.embedding &lt;=&gt; thread.embedding)</code> (gdy oba niepuste).</li>
+<li>Filtr: <code>category_match OR similarity ≥ MENTOR_MIN_COSINE</code>. Sortowanie: <code>category_match DESC, similarity DESC NULLS LAST, id ASC</code>. Limit <code>MENTOR_SUGGEST_N</code>. Nie sumujemy kategorii i cosinusa w jeden wynik.</li>
+<li>Embedding eksperta: <code>embed_passages</code> na <code>expertise + bio + etykiety kategorii</code> (przy seedzie).</li>
+</ul>
+
+<h3>7.5 Dopasowanie partnerstw (<code>api.comm.matching.match_partners</code>)</h3>
+<ul>
+<li><strong>Ogłoszenia</strong>: <code>status = PUBLISHED</code>, <code>id ≠ offer.id</code>, <code>intent ≠ offer.intent</code> (oferta ↔ poszukiwanie), <code>similarity ≥ PARTNER_MIN_COSINE</code>; sort <code>similarity DESC, id ASC</code>; limit <code>PARTNER_MATCH_N</code>; <code>cross_sector = sector ≠ offer.sector</code>.</li>
+<li><strong>Rozwiązania</strong>: <code>semantic_search(session, offer.embedding, kind="SOLUTION", limit=PARTNER_SOLUTIONS_N)</code>, filtr <code>cosine ≥ MIN_COSINE_SCORE</code> → karty.</li>
+<li><strong>Zapotrzebowanie</strong>: liczba zgłoszeń z <code>reports</code> o <code>1 - (embedding &lt;=&gt; offer.embedding) ≥ SIMILAR_REPORT_THRESHOLD</code> + top <code>PARTNER_GMINY_N</code> gmin (tylko niepuste). Agregat — bez treści zgłoszeń.</li>
+<li>Embedding ogłoszenia liczony przy tworzeniu (<code>embed_passages</code>, w tle przez <code>spawn</code>); bez embeddingu → puste dopasowania, nie błąd.</li>
+</ul>
+
+<h3>7.6 Powiadomienia (<code>api.comm.threads.notify</code>)</h3>
+<p>Punkt integracji: <code>notify(event, thread_id)</code> loguje zdarzenie (<code>thread_created</code>, <code>message_created</code>, <code>status_changed</code>, <code>mentor_assigned</code>) z identyfikatorami, rolą i długością treści — <strong>bez treści</strong>. W PoC powiadomienie „widzi” użytkownik przez liczniki i znaczniki „nowa odpowiedź” (polling). E-mail i webhook podłączamy później w tym jednym miejscu (backlog).</p>
+
+<h2 id="s8">8. Kontrakt API <span class="badge b-draft">draft</span></h2>
+
+<p>Wszystkie endpointy otwarte (bez autoryzacji). Błędy w kształcie <code>ErrorBody</code> M1 (<code>ApiError</code>). Modele w <code>api/comm/schemas.py</code>.</p>
+
+<div class="tablewrap">
+<table>
+<tr><th>Endpoint</th><th>Żądanie</th><th>Odpowiedź / uwagi</th></tr>
+<tr><td><code>POST /api/threads</code></td><td><code>ThreadCreate {kind, body (1–4000), subject? (≤200, domyślnie pierwsze 80 znaków body), category?, reporter_type?, author_label?, contact_email?, session_id?, report_id?, solution_id?, partnership_id?, from_partnership_id?}</code></td><td>201 <code>ThreadDetail</code>. <code>REPORT</code> wymaga <code>report_id</code> (brak → 404); gdy wątek zgłoszenia już istnieje — dopisuje wiadomość i zwraca 200. <code>PARTNERSHIP</code> wymaga opublikowanego <code>partnership_id</code>. Nieznana kategoria → 422</td></tr>
+<tr><td><code>GET /api/threads</code></td><td><code>status?, kind?, mentor_id?, session_id?, ids? (lista po przecinku, ≤50), limit (50, ≤200), offset</code></td><td><code>Page[ThreadListItem]</code>, sort <code>last_message_at DESC, id DESC</code>. <code>ids</code> służy „Moim rozmowom” (lista z localStorage)</td></tr>
+<tr><td><code>GET /api/threads/{id}</code></td><td>—</td><td><code>ThreadDetail</code> z osią czasu (<code>messages</code>), kartami, ekspertem, flagami nieprzeczytania; 404</td></tr>
+<tr><td><code>POST /api/threads/{id}/messages</code></td><td><code>MessageCreate {role: USER|STAFF|MENTOR, body (1–4000), author_label?, mentor_id? (wymagany dla MENTOR), solution_ids? (≤5, tylko STAFF/MENTOR)}</code></td><td>201 <code>TimelineMessage</code>; zmiana statusu wg automatu; <code>MENTOR</code> spoza przydziału → 409 <code>MENTOR_NOT_ASSIGNED</code>; nieopublikowane / <code>KNOWLEDGE</code> w <code>solution_ids</code> → 422</td></tr>
+<tr><td><code>PATCH /api/threads/{id}</code></td><td><code>ThreadPatch {status?: WAITING_STAFF|CLOSED, assigned_mentor_id?: int|null}</code></td><td><code>ThreadDetail</code>; 409 <code>INVALID_TRANSITION</code>; nieaktywny ekspert → 422. Przydział dopisuje wiadomość <code>SYSTEM</code> „Do rozmowy dołączył(a) ekspert: …”</td></tr>
+<tr><td><code>POST /api/threads/{id}/read</code></td><td><code>{side: user|staff|mentor}</code></td><td>204; ustawia <code>*_last_read_at = now()</code></td></tr>
+<tr><td><code>POST /api/threads/{id}/draft-reply</code></td><td>—</td><td><code>DraftReply</code>; 503 <code>LLM_UNAVAILABLE</code></td></tr>
+<tr><td><code>GET /api/threads/{id}/mentor-suggestions</code></td><td>—</td><td><code>list[MentorSuggestion]</code></td></tr>
+<tr><td><code>GET /api/comm/inbox</code></td><td>—</td><td><code>CommInbox {waiting_staff, over_sla, unassigned_mentoring, pending_offers, oldest_waiting_hours, latest_waiting: list[ThreadListItem] (≤10)}</code></td></tr>
+<tr><td><code>GET /api/mentors</code></td><td><code>category?, active? (true)</code></td><td><code>list[Mentor]</code></td></tr>
+<tr><td><code>GET /api/mentors/{id}</code></td><td>—</td><td><code>Mentor</code>; 404</td></tr>
+<tr><td><code>GET /api/partnerships</code></td><td><code>intent?, sector?, category?, status? (PUBLISHED), limit, offset</code></td><td><code>Page[PartnershipOffer]</code></td></tr>
+<tr><td><code>POST /api/partnerships</code></td><td><code>PartnershipCreate {intent, organization (≤300), sector, title (3–200), description (10–4000), category?, contact_email?, session_id?}</code></td><td>201 <code>{id, status: "PENDING_REVIEW"}</code></td></tr>
+<tr><td><code>GET /api/partnerships/{id}</code></td><td>—</td><td><code>PartnershipOffer</code> (dowolny status — po <code>id</code>, jak w M1); 404</td></tr>
+<tr><td><code>PATCH /api/partnerships/{id}</code></td><td><code>{status: PUBLISHED|REJECTED|CLOSED}</code></td><td><code>PartnershipOffer</code>; moderacja</td></tr>
+<tr><td><code>GET /api/partnerships/{id}/matches</code></td><td>—</td><td><code>PartnerMatches {offers: [PartnerMatch], solutions: [SolutionCard], demand: {similar_reports, gminy: [{gmina, count}]}}</code></td></tr>
+</table>
 </div>
 
-<h2 id="s7">7. Logika i AI <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Gdzie jest LLM / embeddingi, z jakim promptem i jakim kontraktem wejścia–wyjścia?</li>
-<li>Zachowanie przy wyłączonym LLM (<code>LLM_ENABLED=false</code>) i przy błędzie providera — moduł musi działać bez AI.</li>
-</ul>
+<h4>Kształty odpowiedzi (skrót, pełne w <code>module-5-tasks.md</code>)</h4>
+<pre><code>ThreadListItem   {id, kind, status, subject, category, category_label_pl, reporter_type, author_label,
+                  report_id, partnership_id, assigned_mentor: MentorRef|null, message_count,
+                  last_message_at, last_message_role, waiting_since, waiting_hours, over_sla,
+                  unread_user, unread_staff, unread_mentor, created_at}
+ThreadDetail     ThreadListItem + {solution_id, from_partnership_id, messages: list[TimelineMessage]}
+TimelineMessage  {id: "m-12" | "r-5", source: "thread" | "report_reply", role, author_label,
+                  mentor: MentorRef|null, body, cards: list[SolutionCard], ai: bool,
+                  author_verified: false, created_at}
+MentorRef        {id, display_name}
+Mentor           {id, display_name, organization, sector, expertise, bio, categories, active}
+MentorSuggestion {mentor: Mentor, category_match: bool, similarity: float|null}
+PartnershipOffer {id, intent, organization, sector, title, description, category, category_label_pl, status, created_at}
+PartnerMatch     {offer: PartnershipOffer, similarity: float, cross_sector: bool}
+DraftReply       {body, solution_ids, cards: list[SolutionCard]}</code></pre>
+<p>Oś czasu wątku <code>REPORT</code> = <code>report_replies</code> zgłoszenia (jako <code>role = STAFF</code>, <code>source = "report_reply"</code>) + <code>thread_messages</code>, rosnąco po <code>created_at</code>. Flaga <code>unread_user</code> = istnieje wiadomość nie-<code>USER</code> nowsza niż <code>user_last_read_at</code>; analogicznie dla zespołu (wiadomości <code>USER</code>) i eksperta.</p>
+
+<h2 id="s9">9. Kontrakt dla frontendu (ekrany) <span class="badge b-draft">draft</span></h2>
+
+<div class="tablewrap">
+<table>
+<tr><th>Trasa</th><th>Ekran</th><th>Dostęp (rola demo)</th><th>Endpointy</th></tr>
+<tr><td><code>/rozmowy</code></td><td>Platforma komunikacji: „Moje rozmowy” + wejścia „Zadaj pytanie”, „Poproś o eksperta”, „Tablica partnerstw”</td><td>publiczny (lista z tego urządzenia)</td><td><code>GET /api/threads?ids=…</code></td></tr>
+<tr><td><code>/rozmowy/nowa</code></td><td>Nowe pytanie / prośba o eksperta (<code>?rodzaj=ekspert</code>)</td><td><code>reporter</code></td><td><code>POST /api/threads</code>, <code>/api/taxonomy</code></td></tr>
+<tr><td><code>/rozmowy/:id</code></td><td>Wątek (oś czasu, odpowiedź, „To mi pomogło”, „Chcę porozmawiać z zespołem”)</td><td>publiczny po <code>id</code>; pisanie: <code>reporter</code></td><td><code>GET /api/threads/{id}</code>, <code>POST …/messages</code>, <code>PATCH</code>, <code>POST …/read</code></td></tr>
+<tr><td><code>/partnerzy</code></td><td>Tablica partnerstw (filtry: oferuję/szukam, sektor, wyzwanie)</td><td>publiczny</td><td><code>GET /api/partnerships</code></td></tr>
+<tr><td><code>/partnerzy/nowe</code></td><td>Dodaj ogłoszenie</td><td><code>reporter</code></td><td><code>POST /api/partnerships</code></td></tr>
+<tr><td><code>/partnerzy/:id</code></td><td>Ogłoszenie + dopasowania + „Zaproponuj współpracę”</td><td>publiczny; propozycja: <code>reporter</code></td><td><code>GET …/{id}</code>, <code>…/matches</code>, <code>POST /api/threads</code></td></tr>
+<tr><td><code>/moje-zgloszenia</code> (zmiana F12)</td><td>Przycisk „Odpisz zespołowi” przy zgłoszeniu z odpowiedzią</td><td><code>reporter</code></td><td><code>POST /api/threads {kind: REPORT}</code></td></tr>
+<tr><td><code>/panel/rozmowy</code></td><td>Panel: lista rozmów (filtry statusu i rodzaju, SLA)</td><td><code>administrator</code></td><td><code>GET /api/threads</code>, <code>/api/comm/inbox</code></td></tr>
+<tr><td><code>/panel/rozmowy/:id</code></td><td>Panel: wątek, odpowiedź, szkic AI, ekspert, status</td><td><code>administrator</code></td><td>wątek + <code>draft-reply</code>, <code>mentor-suggestions</code>, <code>/api/mentors</code></td></tr>
+<tr><td><code>/panel/partnerstwa</code></td><td>Panel: moderacja ogłoszeń</td><td><code>administrator</code></td><td><code>GET/PATCH /api/partnerships</code></td></tr>
+<tr><td><code>/ekspert</code>, <code>/ekspert/rozmowy/:id</code></td><td>Moje konsultacje (eksperta)</td><td><code>mentor</code></td><td><code>GET /api/threads?mentor_id=</code>, wątek, <code>POST …/messages {role: MENTOR}</code></td></tr>
+</table>
 </div>
 
-<h2 id="s8">8. Kontrakt API <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
 <ul>
-<li>Lista endpointów z kształtem żądania i odpowiedzi (pydantic w <code>api/schemas.py</code>), kody błędów 404/422.</li>
-<li>Bez autoryzacji (decyzja zespołu) — wszystkie endpointy otwarte.</li>
+<li>Nawigacja publiczna: nowa zakładka „Platforma komunikacji” (<code>MODULE_NAMES.komunikacja</code>), z odznaką liczby rozmów z nową odpowiedzią. Panel: „Rozmowy” (z licznikiem <code>waiting_staff</code>) i „Partnerstwa”.</li>
+<li>Oś czasu jako <code>&lt;ol&gt;</code>; każda wiadomość ma nagłówek z rolą słownie („Ty”, „Zespół Hubu”, „Ekspert: …”, „Odpowiedź automatyczna (AI)”, „Informacja systemowa”) — rola nie tylko kolorem (WCAG 1.4.1).</li>
+<li>Nowe wiadomości z odpytywania ogłaszane w <code>aria-live="polite"</code> („Nowa odpowiedź od zespołu Hubu”), bez przenoszenia fokusu.</li>
+<li>Odpytywanie: wątek otwarty co 5 s, gdy <code>ASSISTANT_PENDING</code> — co 2 s; liczniki co 30 s (jak F14). Stałe w <code>web/src/lib/comm.ts</code>.</li>
+<li>Stany ładowania / pusto / błąd przez <code>LoadState</code>, <code>EmptyState</code>, <code>Alert</code>. Najwyżej jeden <code>ds-btn--cta</code> na ekran („Zadaj pytanie” na <code>/rozmowy</code>, „Wyślij” w wątku jako <code>ds-btn--primary</code>).</li>
 </ul>
-</div>
 
-<h2 id="s9">9. Kontrakt dla frontendu (ekrany) <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Trasy w <code>web/</code>, ekrany i stany (ładowanie, pusto, błąd), elementy nawigacji.</li>
-<li>Wymogi WCAG 2.1 AA i design systemu (<code>DESIGN.md</code>, najwyżej jeden <code>ds-btn--cta</code> na ekran).</li>
-</ul>
-</div>
+<h2 id="s10">10. Konfiguracja i feature flagi <span class="badge b-draft">draft</span></h2>
 
-<h2 id="s10">10. Konfiguracja i feature flagi <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Nowe zmienne w <code>api.config.settings</code> (progi, limity, flagi włączenia modułu) — zero literałów w kodzie.</li>
-</ul>
-</div>
+<p>Nowy blok w <code>api.config.Settings</code> (zero literałów progów w kodzie M5):</p>
+<pre><code># --- Moduł 5: Platforma komunikacji ---
+ASSISTANT_ENABLED: bool = True            # automatyczna odpowiedź na QUESTION
+ASSISTANT_TIMEOUT_SECONDS: float = 30.0
+DRAFT_REPLY_ENABLED: bool = True          # szkic odpowiedzi dla pracownika (wymaga LLM_ENABLED)
+MENTOR_SUGGEST_N: int = 3
+MENTOR_MIN_COSINE: float = 0.30
+PARTNER_MATCH_N: int = 5
+PARTNER_MIN_COSINE: float = 0.45
+PARTNER_SOLUTIONS_N: int = 3
+PARTNER_GMINY_N: int = 5
+THREAD_SLA_HOURS: int = 48                # „over_sla” w panelu
+THREAD_MESSAGE_CARDS_MAX: int = 5         # limit solution_ids w wiadomości</code></pre>
+<p>Progi cosinusowe do kalibracji w PK10 (osobno dla <code>EMBEDDING_PROVIDER=hash</code> i <code>openai</code>), wynik w <code>module-5-calibration.md</code>. Reużywane: <code>LLM_ENABLED</code>, <code>ANSWER_TOP_N</code>, <code>MIN_COSINE_SCORE</code>, <code>SIMILAR_REPORT_THRESHOLD</code>.</p>
 
-<h2 id="s11">11. RODO i bezpieczeństwo <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
+<h2 id="s11">11. RODO i bezpieczeństwo <span class="badge b-stable">stable</span></h2>
 <ul>
-<li>Jakie dane osobowe zbiera moduł, co nie może wyjść z API i nie może trafić do logów?</li>
+<li><strong>Dane osobowe</strong>: <code>contact_email</code> (wątki, ogłoszenia) — opcjonalne, nigdy w odpowiedziach API ani w logach; serializacja z jawnej listy kolumn. <code>author_label</code> — wolny tekst, w interfejsie podpowiedź „Nie podawaj nazwiska, jeśli nie chcesz”.</li>
+<li><strong>Logi</strong>: tylko identyfikatory, rodzaj, status, rola, długości (<code>body_len</code>). <code>api/log.py</code> dostaje w <code>REDACTED_KEYS</code> także <code>body</code>, <code>subject</code>, <code>description</code>, <code>author_label</code> (ADR-M5-010).</li>
+<li><strong>Kontakt w partnerstwach pośredniczony</strong>: ogłoszenie pokazuje organizację i sektor, nie osobę; kontakt przekazuje Hub w wątku <code>PARTNERSHIP</code> (ADR-M5-007).</li>
+<li><strong>Przejrzystość AI</strong>: wiadomości AI zawsze <code>role = ASSISTANT</code> i podpis „Odpowiedź automatyczna (AI)”; szkic pracownika nigdy nie wychodzi bez jego akcji (ADR-M5-005).</li>
+<li><strong>Prompt injection</strong>: treść użytkownika tylko jako blok danych w wiadomości <code>user</code>, instrukcje wyłącznie w system; zmyślone <code>[n]</code> wycina <code>CitationFilter</code>.</li>
+<li><strong>Bez autoryzacji (PoC)</strong>: wątki są czytelne po <code>id</code>, role wybiera klient. Ryzyko opisane w ADR-M5-003; dane demo są fikcyjne (<code>base.md</code> §9).</li>
 </ul>
-</div>
 
-<h2 id="s12">12. Struktura katalogów i kolejność prac <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Drzewo nowych plików i ścieżka krytyczna do demo (najkrótsza działająca ścieżka).</li>
-</ul>
-</div>
+<h2 id="s12">12. Struktura katalogów i kolejność prac <span class="badge b-draft">draft</span></h2>
+<pre><code>db/init.sql                         # + sekcja „Moduł 5” na końcu (PK00)
+api/config.py                       # + blok ustawień M5 (PK01)
+api/main.py  api/log.py             # + routery M5, + REDACTED_KEYS (PK01)
+api/comm/__init__.py models.py      # PK00
+api/comm/schemas.py                 # PK02
+api/comm/threads.py                 # PK04 — serwis wątków, automat stanów, oś czasu, notify
+api/comm/assistant.py               # PK05 — asystent, szkic odpowiedzi
+api/comm/matching.py                # PK06 — eksperci, partnerzy, teksty embeddingów
+api/routers/threads.py              # PK07 (+ /api/comm/inbox)
+api/routers/mentors.py partnerships.py   # PK08
+data/mentors.json partnerships-seed.json threads-seed.json   # PK03
+scripts/seed_comm.py  Makefile (seed-comm)                     # PK09
+docs/modules/05-platforma-komunikacji/module-5-calibration.md # PK10
+web/src/api/comm.ts  web/src/lib/comm.ts  web/src/lib/commStorage.ts       # PK20
+web/src/components/comm/*  web/src/hooks/useThread.ts useCommInbox.ts     # PK22
+web/src/pages/comm/*  web/src/pages/panel/Comm*.tsx  web/src/pages/expert/* # PK23–PK28</code></pre>
+<p><strong>Najkrótsza ścieżka do demo</strong>: PK00–PK05, PK07, PK09 (backend, scenariusz A bez ekspertów i partnerstw) + PK20–PK23, PK26. Dalej: eksperci (PK06, PK08, PK28), partnerstwa (PK25, PK27), odpis do zgłoszenia (PK24).</p>
 
-<h2 id="s13">13. Rejestr decyzji (ADR) <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Numeracja per moduł: <code>ADR-M5-001</code>… — żeby nie kolidować z ADR-001 – 019 Modułu 1.</li>
-</ul>
+<h2 id="s13">13. Rejestr decyzji (ADR) <span class="badge b-stable">stable</span></h2>
+<div class="tablewrap">
+<table>
+<tr><th>ADR</th><th>Decyzja</th><th>Uzasadnienie / alternatywa odrzucona</th></tr>
+<tr><td>ADR-M5-001</td><td>Jeden model <code>threads</code> + <code>thread_messages</code> dla pytań, zgłoszeń, mentoringu i partnerstw</td><td>Jedna skrzynka dla Hubu i jeden komponent osi czasu. Odrzucone: osobne tabele per rodzaj (4× kod), rozszerzanie <code>report_replies</code> (zmiana kontraktu M1)</td></tr>
+<tr><td>ADR-M5-002</td><td><code>report_replies</code> zostaje bez zmian; wątek <code>REPORT</code> czyta je w osi czasu (UNION), nowe wiadomości trafiają do <code>thread_messages</code></td><td>Zero zmian w API M1 i F12/F16. Koszt: <code>reply_count</code> M1 nie liczy wiadomości M5 — panel pokazuje link do rozmowy</td></tr>
+<tr><td>ADR-M5-003</td><td>Bez kont: dostęp do wątku po <code>id</code>, „Moje rozmowy” w <code>localStorage</code> (jak „Moje zgłoszenia”); rola autora wiadomości deklarowana przez klienta; <code>author_verified = false</code></td><td>Decyzja zespołu „bez autoryzacji”. Backlog: link z sekretem / konta</td></tr>
+<tr><td>ADR-M5-004</td><td>Odpowiedź asystenta liczona w tle (<code>spawn</code>) i zapisywana jako wiadomość; frontend odpytuje. Bez SSE w M5</td><td>Wątek jest trwały — odpowiedź musi przetrwać zamknięcie karty. Odrzucone: SSE jak w M1 (wynik ginie przy rozłączeniu)</td></tr>
+<tr><td>ADR-M5-005</td><td>AI zawsze jawnie oznaczone; szkic odpowiedzi pracownika nie jest zapisywany ani wysyłany automatycznie</td><td>Przejrzystość wobec mieszkańców, odpowiedzialność urzędu za treść (human in the loop)</td></tr>
+<tr><td>ADR-M5-006</td><td>Eksperci w tabeli <code>mentors</code> (seed fikcyjny), przydział przez pracownika, podpowiedź: kategoria, potem cosinus (bez sumowania)</td><td>Prosto, deterministycznie, działa z <code>EMBEDDING_PROVIDER=hash</code></td></tr>
+<tr><td>ADR-M5-007</td><td>Partnerstwa jako moderowana tablica <code>OFFER</code>/<code>SEEK</code>; kontakt wyłącznie przez wątek pośredniczony przez Hub</td><td>RODO i rola Hubu jako brokera. Odrzucone: publiczne dane kontaktowe</td></tr>
+<tr><td>ADR-M5-008</td><td>Dopasowanie partnerstw: przeciwny <code>intent</code> + cosinus, flaga <code>cross_sector</code>; obok rozwiązania (<code>semantic_search</code>) i zapotrzebowanie ze zgłoszeń (agregat)</td><td>„Nowa jakość”: partnerstwo widzi realny popyt z Matchmakingu</td></tr>
+<tr><td>ADR-M5-009</td><td>Powiadomienia w aplikacji (liczniki, nieprzeczytane po <code>*_last_read_at</code>, polling); jeden punkt <code>notify()</code> pod przyszły e-mail/webhook</td><td>E-mail/webhook są w backlogu (sekcja 15 M1)</td></tr>
+<tr><td>ADR-M5-010</td><td>Zmiany w plikach M1 tylko przez dopisanie: <code>db/init.sql</code> (sekcja na końcu), <code>api/config.py</code> (blok), <code>api/main.py</code> (3 routery), <code>api/log.py</code> (4 klucze), <code>Makefile</code> (cel); frontend: <code>App.tsx</code>, <code>MainNav.tsx</code>, <code>PanelLayout.tsx</code>, <code>modules.ts</code>, <code>auth.tsx</code> (rola <code>mentor</code>), <code>MyReportsPage.tsx</code>, <code>panel/ReportPage.tsx</code> (link)</td><td>Każda zmiana wpisana w „Uwagach między zadaniami” M1 / frontendu przez zadanie, które ją robi</td></tr>
+<tr><td>ADR-M5-011</td><td>Embeddingi wątków, ekspertów i ogłoszeń: <code>vector(1024)</code>, ten sam provider co korpus, bez indeksów wektorowych</td><td>ADR-004, ADR-015, ADR-019</td></tr>
+</table>
 </div>
 
 <h2 id="s14">14. Backlog kolejnych iteracji <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
 <ul>
-<li>Co świadomie odkładamy i co już przygotowujemy pod to w PoC.</li>
+<li>Powiadomienia e-mail (Mailpit w dev) i webhook do systemów Hubu — podpięte w <code>notify()</code>; zgoda na kontakt.</li>
+<li>Tożsamość: link z sekretem do wątku albo konta (wymaga zmiany decyzji „bez autoryzacji”).</li>
+<li>Czas rzeczywisty (SSE/WebSocket na wątek) zamiast odpytywania.</li>
+<li>Streszczenie długiego wątku dla eksperta przy przydziale (LLM).</li>
+<li>Kalendarz dyżurów ekspertów, umawianie konsultacji wideo.</li>
+<li>Pytania publiczne (FAQ z zamkniętych wątków, za zgodą) zasilające Zasobnik wiedzy (M2).</li>
+<li>Retencja i anonimizacja wątków; eksport rozmów.</li>
+<li>Zamiana pytania bez dopasowania w zgłoszenie (<code>reports</code>) — luka w bibliotece widoczna w Trendach.</li>
 </ul>
-</div>
 
-<h2 id="s15">15. Koszt utrzymania i zasoby <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Koszt zmienny (LLM, generacja obrazów itp.) na jedno użycie i przy 10 tys. / 100 tys. użyć miesięcznie; zasoby ludzkie po stronie ROPS.</li>
-</ul>
+<h2 id="s15">15. Koszt utrzymania i zasoby <span class="badge b-draft">draft</span></h2>
+<p>Cennik: Claude Haiku 4.5 — 1 USD / 1 mln tokenów wejścia, 5 USD / 1 mln tokenów wyjścia; OpenAI <code>text-embedding-3-large</code> — ok. 0,13 USD / 1 mln tokenów; Cohere Rerank 3.5 — ok. 2 USD / 1000 wyszukiwań (opcjonalny). Szacunek, do potwierdzenia na fakturach.</p>
+<div class="tablewrap">
+<table>
+<tr><th>Operacja</th><th>Tokeny (szac.)</th><th>Koszt / szt.</th><th>10 tys. / mies.</th><th>100 tys. / mies.</th></tr>
+<tr><td>Odpowiedź asystenta (embedding + rerank + LLM)</td><td>~3 000 we / ~300 wy</td><td>~0,007 USD</td><td>~70 USD</td><td>~700 USD</td></tr>
+<tr><td>Szkic odpowiedzi dla pracownika</td><td>~3 500 we / ~400 wy</td><td>~0,008 USD</td><td>~80 USD</td><td>—</td></tr>
+<tr><td>Embedding wątku / ogłoszenia</td><td>~200</td><td>&lt; 0,0001 USD</td><td>&lt; 1 USD</td><td>&lt; 3 USD</td></tr>
+</table>
 </div>
+<p>Bez rerankera koszt odpowiedzi spada o ~0,002 USD. Infrastruktura: ta sama baza i kontener API co M1 (bez nowych usług). Zasoby ludzkie ROPS: dyżur odpowiadający w wątkach (cel SLA 48 h), moderacja ogłoszeń partnerstw (kilka minut dziennie), utrzymanie listy ekspertów.</p>
 
-<h2 id="s16">16. Pytania otwarte do sesji planowania <span class="badge b-draft">draft</span></h2>
+<h2 id="s16">16. Pytania otwarte <span class="badge b-draft">draft</span></h2>
 <ol>
-<li>Wątki: rozszerzamy <code>report_replies</code> o odpowiedzi autora, czy osobny model <code>threads</code> / <code>messages</code> obejmujący zgłoszenia, pomysły i pytania?</li>
-<li>Tożsamość bez kont: link z sekretem w URL? Czy to łamie decyzję „bez autoryzacji” i wymaga ADR?</li>
-<li>Mentorzy: czy w PoC mentor = pracownik Hubu w panelu z polem „przypisany ekspert”?</li>
-<li>Partnerstwa: kojarzenie organizacji po podobieństwie embeddingów rozwiązań i zgłoszeń (np. „ta gmina ma ten sam problem co Twoja”)?</li>
-<li>Powiadomienia: czy w PoC pokazujemy e-mail (np. Mailpit w docker compose), czy zostajemy przy skrzynce w aplikacji?</li>
-<li>AI: podpowiedź odpowiedzi dla pracownika Hubu (draft z bazy rozwiązań) — w tym module czy w Panelu?</li>
+<li>Czy pytanie bez dopasowania ma też tworzyć wiersz w <code>reports</code> (zasilić Trendy i licznik luk)? Dziś: nie (backlog) — rozstrzygnąć przed PK05, jeśli zespół chce.</li>
+<li>Czy ekspert ma widzieć dane kontaktowe autora? Dziś: nie — kontakt zawsze przez wątek.</li>
+<li>Czy ogłoszenia partnerstw mają mieć gminę? Formularze M1 usunęły wybór gminy (<code>docs/changes/bugs-2026-10-03-1/spec.md</code>) — M5 trzyma się tej decyzji.</li>
 </ol>
 
 <hr>
 
 <footer>
-<p><strong>Moduł 5 — Platforma aktywnej komunikacji</strong> · v0.1 · 2026-10-03 · Małopolski Hub Innowacji Społecznych.</p>
+<p><strong>Moduł 5 — Platforma aktywnej komunikacji</strong> · v0.2 · 2026-10-04 · Małopolski Hub Innowacji Społecznych.</p>
+<p><strong>v0.2</strong> — plan po sesji planowania: zakres, scenariusze, model danych, logika AI, kontrakt API i ekranów, konfiguracja, ADR-M5-001–011, koszty; zadania PK00–PK29 w <code>module-5-tasks.md</code>.</p>
 <p><strong>v0.1</strong> — szkielet: wymaganie z <code>base.md</code>, ocena pokrycia przez istniejącą implementację, pytania do sesji planowania.</p>
 <p>Dokument iteracyjny. Zmiany: nowa sekcja na końcu, wpis w spisie treści, ADR w sekcji 13 przy zmianie decyzji. Podnieś wersję w nagłówku i w stopce.</p>
 </footer>
