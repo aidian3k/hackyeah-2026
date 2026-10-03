@@ -1,8 +1,19 @@
 import type {
+  ConsentMeta,
   FeedbackCreate,
   GminaItem,
   Health,
   Inbox,
+  InnovationTest,
+  InnovationTestAccessLink,
+  InnovationTestAccessStatus,
+  InnovationTestApplication,
+  InnovationTestApplicationCreate,
+  InnovationTestApplicationPublic,
+  InnovationTestCreate,
+  InnovationTestFeedback,
+  InnovationTestFeedbackCreate,
+  InnovationTestReport,
   Page,
   Reply,
   ReplyCreate,
@@ -126,4 +137,58 @@ export const api = {
   stats: (q?: Query) => request<Stats>("GET", "/api/stats", { query: q }),
   feedback: (body: FeedbackCreate) => request<void>("POST", "/api/feedback", { body }),
   health: () => request<Health>("GET", "/healthz", { acceptStatus: [503] }),
+
+  innovationTests: (q?: Query) =>
+    request<Page<InnovationTest>>("GET", "/api/innovation-tests", { query: q }),
+  innovationTest: (id: number, q?: Query) =>
+    request<InnovationTest>("GET", `/api/innovation-tests/${id}`, { query: q }),
+  createInnovationTest: (body: InnovationTestCreate) =>
+    request<InnovationTest>("POST", "/api/innovation-tests", { body }),
+  closeInnovationTest: (id: number) =>
+    request<InnovationTest>("POST", `/api/innovation-tests/${id}/close`),
+  applyInnovationTest: (id: number, body: InnovationTestApplicationCreate) =>
+    request<InnovationTestApplicationPublic>("POST", `/api/innovation-tests/${id}/applications`, {
+      body,
+    }),
+  innovationTestApplications: (id: number, q?: Query) =>
+    request<Page<InnovationTestApplication>>("GET", `/api/innovation-tests/${id}/applications`, {
+      query: q,
+    }),
+  acceptInnovationApplication: (testId: number, applicationId: number) =>
+    request<InnovationTestAccessLink>(
+      "POST",
+      `/api/innovation-tests/${testId}/applications/${applicationId}/accept`,
+    ),
+  rejectInnovationApplication: (testId: number, applicationId: number, reason: string) =>
+    request<InnovationTestApplication>(
+      "POST",
+      `/api/innovation-tests/${testId}/applications/${applicationId}/reject`,
+      { body: { reason } },
+    ),
+  cancelInnovationApplication: (
+    testId: number,
+    applicationId: number,
+    reason: string,
+    byTester = false,
+  ) =>
+    request<InnovationTestApplication>(
+      "POST",
+      `/api/innovation-tests/${testId}/applications/${applicationId}/cancel`,
+      { body: { reason }, query: { by_tester: byTester } },
+    ),
+  innovationTestAccess: (token: string) =>
+    request<InnovationTestAccessStatus>("GET", `/api/innovation-tests/access/${token}`),
+  submitInnovationFeedback: (token: string, body: InnovationTestFeedbackCreate) =>
+    request<InnovationTestFeedback>("POST", `/api/innovation-tests/access/${token}`, { body }),
+  innovationTestReport: (id: number) =>
+    request<InnovationTestReport>("GET", `/api/innovation-tests/${id}/report`),
+  regenerateInnovationTestReport: (id: number) =>
+    request<InnovationTestReport>("POST", `/api/innovation-tests/${id}/report/regenerate`),
+  moderateInnovationFeedback: (testId: number, feedbackId: number, visible: boolean) =>
+    request<InnovationTestFeedback>(
+      "POST",
+      `/api/innovation-tests/${testId}/feedback/${feedbackId}/moderate`,
+      { body: { comment_visible_to_author: visible } },
+    ),
+  innovationConsent: () => request<ConsentMeta>("GET", "/api/innovation-tests/meta/consent"),
 };

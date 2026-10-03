@@ -62,6 +62,43 @@ class ReporterType(enum.StrEnum):
     OTHER = "OTHER"
 
 
+class InnovationTestStatus(enum.StrEnum):
+    OPEN = "OPEN"
+    CLOSED = "CLOSED"
+
+
+class ApplicationStatus(enum.StrEnum):
+    SUBMITTED = "SUBMITTED"
+    ACCEPTED = "ACCEPTED"
+    REJECTED = "REJECTED"
+    COMPLETED = "COMPLETED"
+    CANCELED = "CANCELED"
+
+
+class MaterialType(enum.StrEnum):
+    FILE = "FILE"
+    LINK = "LINK"
+    APP = "APP"
+    INSTRUCTION = "INSTRUCTION"
+    OFFLINE_SERVICE = "OFFLINE_SERVICE"
+
+
+class TesterType(enum.StrEnum):
+    RESIDENT = "RESIDENT"
+    TARGET_MEMBER = "TARGET_MEMBER"
+    CAREGIVER = "CAREGIVER"
+    NGO = "NGO"
+    JST = "JST"
+    SOCIAL_INSTITUTION = "SOCIAL_INSTITUTION"
+    OTHER = "OTHER"
+
+
+class TestMode(enum.StrEnum):
+    ONLINE = "ONLINE"
+    OFFLINE = "OFFLINE"
+    HYBRID = "HYBRID"
+
+
 def _pg_enum(py_enum: type[enum.Enum], name: str) -> ENUM:
     # Typy istnieją już w bazie (init.sql) — nie tworzymy ich z poziomu SQLAlchemy.
     return ENUM(py_enum, name=name, create_type=False)
@@ -263,3 +300,173 @@ class ReportReply(Base):
     )
 
     report: Mapped[Report] = relationship(back_populates="replies")
+
+
+class InnovationTest(Base):
+    __tablename__ = "innovation_tests"
+    __table_args__ = (
+        CheckConstraint("seats_limit > 0"),
+        CheckConstraint(
+            "(status = 'OPEN' AND closed_at IS NULL) OR "
+            "(status = 'CLOSED' AND closed_at IS NOT NULL)"
+        ),
+    )
+
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    solution_id: Mapped[int] = mapped_column(
+        BigInteger, ForeignKey("solutions.id"), nullable=False
+    )
+    title: Mapped[str] = mapped_column(Text, nullable=False)
+    goal_description: Mapped[str] = mapped_column(Text, nullable=False)
+    instruction: Mapped[str] = mapped_column(Text, nullable=False)
+    target_group: Mapped[str] = mapped_column(Text, nullable=False)
+    tester_type: Mapped[str] = mapped_column(Text, nullable=False)
+    location: Mapped[str] = mapped_column(Text, nullable=False)
+    seats_limit: Mapped[int] = mapped_column(Integer, nullable=False)
+    mode: Mapped[TestMode] = mapped_column(_pg_enum(TestMode, "test_mode"), nullable=False)
+    estimated_duration: Mapped[str] = mapped_column(Text, nullable=False)
+    ends_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    status: Mapped[InnovationTestStatus] = mapped_column(
+        _pg_enum(InnovationTestStatus, "innovation_test_status"),
+        nullable=False,
+        default=InnovationTestStatus.OPEN,
+        server_default=InnovationTestStatus.OPEN.value,
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+    closed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    ai_report: Mapped[dict[str, Any] | None] = mapped_column(JSONB)
+    ai_model: Mapped[str | None] = mapped_column(Text)
+    ai_prompt_version: Mapped[str | None] = mapped_column(Text)
+    ai_generated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+    solution: Mapped[Solution] = relationship()
+    materials: Mapped[list[InnovationTestMaterial]] = relationship(
+        back_populates="test",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
+        order_by="InnovationTestMaterial.sort_order",
+    )
+    applications: Mapped[list[InnovationTestApplication]] = relationship(
+        back_populates="test",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
+        order_by="InnovationTestApplication.created_at",
+    )
+
+
+class InnovationTestMaterial(Base):
+    __tablename__ = "innovation_test_materials"
+
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    test_id: Mapped[int] = mapped_column(
+        BigInteger, ForeignKey("innovation_tests.id", ondelete="CASCADE"), nullable=False
+    )
+    title: Mapped[str] = mapped_column(Text, nullable=False)
+    type: Mapped[MaterialType] = mapped_column(
+        _pg_enum(MaterialType, "material_type"), nullable=False
+    )
+    locator: Mapped[str] = mapped_column(Text, nullable=False)
+    description: Mapped[str] = mapped_column(Text, nullable=False, default="", server_default="")
+    sort_order: Mapped[int] = mapped_column(Integer, nullable=False, default=0, server_default="0")
+
+    test: Mapped[InnovationTest] = relationship(back_populates="materials")
+
+
+class InnovationTestApplication(Base):
+    __tablename__ = "innovation_test_applications"
+    __table_args__ = (
+        CheckConstraint("consent = true"),
+        CheckConstraint(
+            "(status = 'REJECTED' AND rejection_reason IS NOT NULL "
+            "AND length(trim(rejection_reason)) > 0) OR (status <> 'REJECTED')"
+        ),
+        CheckConstraint(
+            "(status = 'CANCELED' AND cancel_reason IS NOT NULL "
+            "AND length(trim(cancel_reason)) > 0) OR (status <> 'CANCELED')"
+        ),
+    )
+
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    test_id: Mapped[int] = mapped_column(
+        BigInteger, ForeignKey("innovation_tests.id", ondelete="CASCADE"), nullable=False
+    )
+    display_name: Mapped[str] = mapped_column(Text, nullable=False)
+    email: Mapped[str] = mapped_column(Text, nullable=False)  # nigdy w logach ani API publicznym
+    email_normalized: Mapped[str] = mapped_column(Text, nullable=False)
+    tester_type: Mapped[TesterType] = mapped_column(
+        _pg_enum(TesterType, "tester_type"), nullable=False
+    )
+    wojewodztwo: Mapped[str] = mapped_column(Text, nullable=False)
+    powiat: Mapped[str] = mapped_column(Text, nullable=False)
+    gmina: Mapped[str] = mapped_column(Text, nullable=False)
+    is_target_group_member: Mapped[bool] = mapped_column(Boolean, nullable=False)
+    motivation: Mapped[str] = mapped_column(Text, nullable=False)  # nigdy w logach
+    status: Mapped[ApplicationStatus] = mapped_column(
+        _pg_enum(ApplicationStatus, "application_status"),
+        nullable=False,
+        default=ApplicationStatus.SUBMITTED,
+        server_default=ApplicationStatus.SUBMITTED.value,
+    )
+    consent: Mapped[bool] = mapped_column(Boolean, nullable=False)
+    consent_version: Mapped[str] = mapped_column(Text, nullable=False)
+    consented_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    rejection_reason: Mapped[str | None] = mapped_column(Text)
+    cancel_reason: Mapped[str | None] = mapped_column(Text)
+    access_token_hash: Mapped[str | None] = mapped_column(Text)
+    access_token_created_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    access_token_used_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    ai_fit_suggestion: Mapped[dict[str, Any] | None] = mapped_column(JSONB)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+
+    test: Mapped[InnovationTest] = relationship(back_populates="applications")
+    feedback: Mapped[InnovationTestFeedback | None] = relationship(
+        back_populates="application",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
+        uselist=False,
+    )
+
+
+class InnovationTestFeedback(Base):
+    __tablename__ = "innovation_test_feedback"
+    __table_args__ = (
+        CheckConstraint("usefulness BETWEEN 1 AND 5"),
+        CheckConstraint("ease_of_use BETWEEN 1 AND 5"),
+        CheckConstraint("accessibility BETWEEN 1 AND 5"),
+        CheckConstraint("fit_to_needs BETWEEN 1 AND 5"),
+    )
+
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    application_id: Mapped[int] = mapped_column(
+        BigInteger,
+        ForeignKey("innovation_test_applications.id", ondelete="CASCADE"),
+        nullable=False,
+        unique=True,
+    )
+    usefulness: Mapped[int] = mapped_column(SmallInteger, nullable=False)
+    ease_of_use: Mapped[int] = mapped_column(SmallInteger, nullable=False)
+    accessibility: Mapped[int] = mapped_column(SmallInteger, nullable=False)
+    fit_to_needs: Mapped[int] = mapped_column(SmallInteger, nullable=False)
+    comment: Mapped[str | None] = mapped_column(Text)
+    improvement: Mapped[str | None] = mapped_column(Text)
+    comment_visible_to_author: Mapped[bool] = mapped_column(
+        Boolean, nullable=False, default=False, server_default="false"
+    )
+    submitted_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+
+    application: Mapped[InnovationTestApplication] = relationship(back_populates="feedback")

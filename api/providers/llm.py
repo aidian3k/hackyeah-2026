@@ -40,3 +40,24 @@ class AnthropicLLMProvider:
             raise
         except Exception as exc:
             raise ProviderError(self.name, CODE) from exc
+
+    async def complete(self, system: str, user: str, *, max_tokens: int | None = None) -> str:
+        """Jednorazowa odpowiedź tekstowa (Moduł 4: JSON raportu / sugestii)."""
+        client = self._get_client()
+        try:
+            message = await client.messages.create(
+                model=settings.LLM_MODEL,
+                max_tokens=max_tokens or settings.LLM_MAX_TOKENS,
+                system=system,
+                messages=[{"role": "user", "content": user}],
+            )
+        except ProviderError:
+            raise
+        except Exception as exc:
+            raise ProviderError(self.name, CODE) from exc
+        parts: list[str] = []
+        for block in message.content:
+            text = getattr(block, "text", None)
+            if text:
+                parts.append(text)
+        return "".join(parts)

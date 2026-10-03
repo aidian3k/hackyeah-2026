@@ -8,7 +8,7 @@ from __future__ import annotations
 from datetime import date, datetime
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, ValidationInfo, field_validator
 
 ReporterTypeLiteral = Literal["RESIDENT", "NGO", "JST", "OTHER"]
 ReportStatusLiteral = Literal["NEW", "TRIAGED", "MATCHED", "IN_PROGRESS", "CLOSED"]
@@ -332,3 +332,310 @@ class ErrorDetail(BaseModel):
 
 class ErrorBody(BaseModel):
     error: ErrorDetail
+
+
+# --- Moduł 4: Tester innowacji ----------------------------------------------------
+
+
+MaterialTypeLiteral = Literal["FILE", "LINK", "APP", "INSTRUCTION", "OFFLINE_SERVICE"]
+TesterTypeLiteral = Literal[
+    "RESIDENT",
+    "TARGET_MEMBER",
+    "CAREGIVER",
+    "NGO",
+    "JST",
+    "SOCIAL_INSTITUTION",
+    "OTHER",
+]
+TestModeLiteral = Literal["ONLINE", "OFFLINE", "HYBRID"]
+InnovationTestStatusLiteral = Literal["OPEN", "CLOSED"]
+ApplicationStatusLiteral = Literal[
+    "SUBMITTED", "ACCEPTED", "REJECTED", "COMPLETED", "CANCELED"
+]
+
+
+def _require_nonblank(value: str, label: str) -> str:
+    cleaned = value.strip()
+    if not cleaned:
+        raise ValueError(f"{label} nie może być puste.")
+    return cleaned
+
+
+class InnovationTestMaterialIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    title: str = Field(min_length=1, max_length=300)
+    type: MaterialTypeLiteral
+    locator: str = Field(min_length=1, max_length=2000)
+    description: str = Field(default="", max_length=2000)
+    sort_order: int = Field(default=0, ge=0, le=10_000)
+
+    @field_validator("title", "locator")
+    @classmethod
+    def _required_text(cls, v: str, info: ValidationInfo) -> str:
+        return _require_nonblank(v, str(info.field_name))
+
+
+class InnovationTestMaterialRead(BaseModel):
+    id: int
+    title: str
+    type: MaterialTypeLiteral
+    locator: str
+    description: str
+    sort_order: int
+
+
+class InnovationTestCreate(BaseModel):
+    """Kompletny nabór — utworzenie od razu ustawia status OPEN."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    solution_id: int = Field(gt=0)
+    title: str = Field(min_length=3, max_length=300)
+    goal_description: str = Field(min_length=10, max_length=5000)
+    instruction: str = Field(min_length=10, max_length=10_000)
+    target_group: str = Field(min_length=2, max_length=500)
+    tester_type: str = Field(min_length=2, max_length=500)
+    location: str = Field(min_length=2, max_length=500)
+    seats_limit: int = Field(gt=0, le=10_000)
+    mode: TestModeLiteral
+    estimated_duration: str = Field(min_length=1, max_length=200)
+    ends_at: datetime
+    materials: list[InnovationTestMaterialIn] = Field(min_length=1, max_length=50)
+
+    @field_validator(
+        "title",
+        "goal_description",
+        "instruction",
+        "target_group",
+        "tester_type",
+        "location",
+        "estimated_duration",
+    )
+    @classmethod
+    def _required_fields(cls, v: str, info: ValidationInfo) -> str:
+        return _require_nonblank(v, str(info.field_name))
+
+
+class InnovationTestRead(BaseModel):
+    id: int
+    solution_id: int
+    solution_title: str | None = None
+    solution_status: str | None = None
+    title: str
+    goal_description: str
+    instruction: str
+    target_group: str
+    tester_type: str
+    location: str
+    seats_limit: int
+    seats_accepted: int = 0
+    mode: TestModeLiteral
+    estimated_duration: str
+    ends_at: datetime
+    status: InnovationTestStatusLiteral
+    created_at: datetime
+    closed_at: datetime | None = None
+    materials: list[InnovationTestMaterialRead] = Field(default_factory=list)
+
+
+class InnovationTestApplicationCreate(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    display_name: str = Field(min_length=2, max_length=300)
+    email: str = Field(max_length=320, pattern=_EMAIL_RE)
+    tester_type: TesterTypeLiteral
+    wojewodztwo: str = Field(min_length=2, max_length=100)
+    powiat: str = Field(min_length=2, max_length=100)
+    gmina: str = Field(min_length=2, max_length=100)
+    is_target_group_member: bool
+    motivation: str = Field(min_length=10, max_length=4000)
+    consent: Literal[True]
+
+    @field_validator("display_name", "wojewodztwo", "powiat", "gmina", "motivation")
+    @classmethod
+    def _required_app_fields(cls, v: str, info: ValidationInfo) -> str:
+        return _require_nonblank(v, str(info.field_name))
+
+
+class TesterFitSuggestion(BaseModel):
+    label_pl: str
+    rationale_pl: str
+    disclaimer_pl: str = "Sugestia AI, nie decyzja Hubu."
+
+
+class InnovationTestApplicationRead(BaseModel):
+    """Pełny rekord dla panelu Hubu (z kontaktem). Bez plaintext tokenu."""
+
+    id: int
+    test_id: int
+    display_name: str
+    email: str
+    tester_type: TesterTypeLiteral
+    wojewodztwo: str
+    powiat: str
+    gmina: str
+    is_target_group_member: bool
+    motivation: str
+    status: ApplicationStatusLiteral
+    consent: bool
+    consent_version: str
+    consented_at: datetime
+    rejection_reason: str | None = None
+    cancel_reason: str | None = None
+    has_access_token: bool = False
+    ai_fit_suggestion: TesterFitSuggestion | None = None
+    created_at: datetime
+    updated_at: datetime
+    feedback_id: int | None = None
+
+
+class InnovationTestApplicationPublic(BaseModel):
+    """Potwierdzenie zgłoszenia — bez e-maila i tokenu."""
+
+    id: int
+    test_id: int
+    status: ApplicationStatusLiteral
+    consent_version: str
+    message_pl: str = (
+        "Zgłoszenie zostało przyjęte. Hub skontaktuje się z Tobą, jeśli zakwalifikuje "
+        "Cię do testu."
+    )
+
+
+class InnovationTestDecision(BaseModel):
+    """Powód wymagany przy odrzuceniu."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    reason: str = Field(min_length=3, max_length=2000)
+
+    @field_validator("reason")
+    @classmethod
+    def _reason_not_blank(cls, v: str) -> str:
+        return _require_nonblank(v, "reason")
+
+
+class InnovationTestCancel(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    reason: str = Field(min_length=3, max_length=2000)
+
+    @field_validator("reason")
+    @classmethod
+    def _reason_not_blank(cls, v: str) -> str:
+        return _require_nonblank(v, "reason")
+
+
+class InnovationTestAccessLink(BaseModel):
+    """Jednorazowy plaintext token — tylko w odpowiedzi akceptacji / regeneracji."""
+
+    application_id: int
+    status: ApplicationStatusLiteral
+    access_token: str
+    access_path: str
+
+
+class InnovationTestFeedbackCreate(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    usefulness: int = Field(ge=1, le=5)
+    ease_of_use: int = Field(ge=1, le=5)
+    accessibility: int = Field(ge=1, le=5)
+    fit_to_needs: int = Field(ge=1, le=5)
+    comment: str | None = Field(default=None, max_length=4000)
+    improvement: str | None = Field(default=None, max_length=4000)
+
+    @field_validator("comment", "improvement")
+    @classmethod
+    def _optional_text(cls, v: str | None) -> str | None:
+        if v is None:
+            return None
+        cleaned = v.strip()
+        return cleaned or None
+
+
+class InnovationTestFeedbackRead(BaseModel):
+    id: int
+    application_id: int
+    usefulness: int
+    ease_of_use: int
+    accessibility: int
+    fit_to_needs: int
+    comment: str | None = None
+    improvement: str | None = None
+    comment_visible_to_author: bool
+    submitted_at: datetime
+
+
+class InnovationTestAccessStatus(BaseModel):
+    """GET /access/{token} — status udziału bez danych kontaktowych."""
+
+    application_id: int
+    test_id: int
+    test_title: str
+    test_status: InnovationTestStatusLiteral
+    status: ApplicationStatusLiteral
+    rejection_reason: str | None = None
+    cancel_reason: str | None = None
+    can_submit_feedback: bool
+    feedback: InnovationTestFeedbackRead | None = None
+
+
+class FeedbackModerate(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    comment_visible_to_author: bool
+
+
+class RatingDistribution(BaseModel):
+    score: int
+    count: int
+
+
+class RatingStats(BaseModel):
+    average: float | None
+    distribution: list[RatingDistribution]
+
+
+class AnonymousFeedbackComment(BaseModel):
+    feedback_id: int
+    comment: str | None = None
+    improvement: str | None = None
+    comment_visible_to_author: bool
+    usefulness: int
+    ease_of_use: int
+    accessibility: int
+    fit_to_needs: int
+
+
+class AiTestReport(BaseModel):
+    summary_pl: str
+    barriers_pl: list[str] = Field(default_factory=list)
+    improvements_pl: list[str] = Field(default_factory=list)
+    evidence_feedback_ids: list[int] = Field(default_factory=list)
+    disclaimer_pl: str = "Wynik pomocniczy; decyzję podejmuje Hub."
+
+
+class InnovationTestReport(BaseModel):
+    test_id: int
+    test_status: InnovationTestStatusLiteral
+    applications_total: int
+    applications_accepted: int
+    applications_completed: int
+    applications_canceled: int
+    applications_rejected: int
+    applications_submitted: int
+    feedback_count: int
+    small_sample_warning: bool
+    usefulness: RatingStats
+    ease_of_use: RatingStats
+    accessibility: RatingStats
+    fit_to_needs: RatingStats
+    anonymous_comments: list[AnonymousFeedbackComment] = Field(default_factory=list)
+    ai_report: AiTestReport | None = None
+    ai_available: bool = False
+    ai_error_pl: str | None = None
+    ai_model: str | None = None
+    ai_prompt_version: str | None = None
+    ai_generated_at: datetime | None = None

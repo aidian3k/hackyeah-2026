@@ -3,6 +3,7 @@ export const MODULE_NAMES = {
   matchmaking: "Matchmaking społeczny",
   zasobnik: "Zasobnik wiedzy",
   kreator: "Kreator pomysłów",
+  tester: "Tester innowacji",
   panel: "Panel administratora",
 } as const;
 

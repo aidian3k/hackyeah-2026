@@ -21,6 +21,9 @@ export function MainNav() {
       <Link to="/wiedza" className="ds-nav__item" aria-current={inZasobnik ? "page" : undefined}>
         {MODULE_NAMES.zasobnik}
       </Link>
+      <NavLink to="/testy" className="ds-nav__item">
+        {MODULE_NAMES.tester}
+      </NavLink>
       {isAdmin ? (
         <NavLink to="/panel" className="ds-nav__item">
           {MODULE_NAMES.panel}

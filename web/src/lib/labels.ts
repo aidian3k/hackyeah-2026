@@ -1,4 +1,12 @@
-import type { ReportStatus, ReporterType } from "@/api/types";
+import type {
+  ApplicationStatus,
+  InnovationTestStatus,
+  MaterialType,
+  ReportStatus,
+  ReporterType,
+  TesterType,
+  TestMode,
+} from "@/api/types";
 
 export const PRIVACY_WARNING = "Nie wpisuj imion, adresów ani danych o zdrowiu konkretnych osób.";
 export const MESSAGE_MAX_CHARS = 2000; // backend i tak przycina zapytanie do MAX_QUERY_CHARS = 2000
@@ -16,6 +24,51 @@ export const REPORT_STATUS_LABELS: Record<ReportStatus, string> = {
   MATCHED: "Dopasowane",
   IN_PROGRESS: "W toku",
   CLOSED: "Zamknięte",
+};
+
+export const TESTER_TYPE_LABELS: Record<TesterType, string> = {
+  RESIDENT: "Mieszkaniec lub mieszkanka",
+  TARGET_MEMBER: "Osoba z grupy docelowej",
+  CAREGIVER: "Opiekun lub opiekunka",
+  NGO: "Organizacja społeczna",
+  JST: "Samorząd",
+  SOCIAL_INSTITUTION: "Instytucja społeczna",
+  OTHER: "Inny typ",
+};
+
+export const APPLICATION_STATUS_LABELS: Record<ApplicationStatus, string> = {
+  SUBMITTED: "Złożono",
+  ACCEPTED: "Zaakceptowano",
+  REJECTED: "Odrzucono",
+  COMPLETED: "Ukończono",
+  CANCELED: "Anulowano",
+};
+
+export const TEST_STATUS_LABELS: Record<InnovationTestStatus, string> = {
+  OPEN: "Otwarty",
+  CLOSED: "Zamknięty",
+};
+
+export const TEST_MODE_LABELS: Record<TestMode, string> = {
+  ONLINE: "Online",
+  OFFLINE: "Offline",
+  HYBRID: "Hybrydowy",
+};
+
+export const MATERIAL_TYPE_LABELS: Record<MaterialType, string> = {
+  FILE: "Plik",
+  LINK: "Link",
+  APP: "Aplikacja lub demo",
+  INSTRUCTION: "Instrukcja",
+  OFFLINE_SERVICE: "Usługa offline",
+};
+
+export const RATING_SCALE_LABELS: Record<number, string> = {
+  1: "bardzo słabo",
+  2: "słabo",
+  3: "średnio",
+  4: "dobrze",
+  5: "bardzo dobrze",
 };
 
 // Lustro reguł backendu (409 INVALID_TRANSITION).

@@ -2,7 +2,7 @@ PY ?= $(if $(wildcard .venv/bin/python),.venv/bin/python,python)
 RUFF ?= $(if $(wildcard .venv/bin/ruff),.venv/bin/ruff,ruff)
 Q ?= starsi ludzie są samotni
 
-.PHONY: up up-dev logs-dev down db dev ingest fmt lint psql reset-db chat
+.PHONY: up up-dev logs-dev down db dev ingest seed-m4 fmt lint psql reset-db chat
 
 up:
 	docker compose up -d --build
@@ -28,6 +28,9 @@ dev:
 
 ingest:
 	$(PY) -m scripts.ingest data/solutions/
+
+seed-m4:
+	$(PY) -m scripts.seed_innovation_tests
 
 fmt:
 	$(RUFF) format . && $(RUFF) check --fix .
