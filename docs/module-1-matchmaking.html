@@ -84,12 +84,12 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 
 <header class="doc">
   <h1>Moduł 1 — Matchmaking społeczny</h1>
-  <div class="sub">Dokument implementacyjny dla Małopolskiego Hubu Innowacji Społecznych. Odbiorca: agent lub programista implementujący backend. Interfejs użytkownika i konta indywidualne są poza zakresem tego modułu; dostęp uprzywilejowany realizują dwa współdzielone tokeny (ADR-009).</div>
+  <div class="sub">Dokument implementacyjny dla Małopolskiego Hubu Innowacji Społecznych. Odbiorca: agent lub programista implementujący backend. Interfejs użytkownika i konta indywidualne są poza zakresem tego modułu; dostęp uprzywilejowany realizuje jeden współdzielony token <code>STAFF</code> (ADR-017).</div>
   <div class="meta">
-    <span><strong>Wersja:</strong> v0.3</span>
+    <span><strong>Wersja:</strong> v0.5</span>
     <span><strong>Data:</strong> 2026-10-03</span>
     <span><strong>Status:</strong> <span class="badge b-draft">draft</span></span>
-    <span><strong>Zakres:</strong> backend — pipeline, API, zapis zgłoszeń, klastrowanie, poziomy dostępu, odpowiedzi do autorów, webhook</span>
+    <span><strong>Zakres:</strong> backend (PoC) — pipeline, API, zapis zgłoszeń, licznik podobnych, dostęp <code>STAFF</code>, odpowiedzi do autorów, skrzynka „Nowe”</span>
   </div>
 </header>
 
@@ -110,7 +110,7 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
     <li><a href="#s7">Kontrakt API</a></li>
     <li><a href="#s8">Kontrakt dla modułu frontendowego</a></li>
     <li><a href="#s9">Ingest korpusu</a></li>
-    <li><a href="#s10">Ewaluacja jakości</a></li>
+    <li><a href="#s10">Ewaluacja jakości (usunięta)</a></li>
     <li><a href="#s11">Konfiguracja i feature flagi</a></li>
     <li><a href="#s12">RODO i bezpieczeństwo</a></li>
     <li><a href="#s13">Struktura katalogów i kolejność prac</a></li>
@@ -124,7 +124,7 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 
 <p>Małopolska ma dwa równoległe problemy. Pierwszy: realne wyzwania społeczne rosną. Drugi: rozwiązania na te wyzwania <em>już istnieją</em> — tworzą je organizacje pozarządowe, Centra Usług Społecznych, jednostki publiczne i grupy mieszkańców — ale są rozproszone, nieudokumentowane i nieskalowalne. Gmina A rozwiązuje w 2026 problem, który gmina B rozwiązała w 2023, i nigdy się o tym nie dowie.</p>
 
-<p>Moduł 1 zasypuje tę lukę: <strong>mieszkaniec opisuje problem po polsku, system znajduje istniejące rozwiązania</strong> i jednocześnie rejestruje zgłoszenie, żeby Hub widział skalę zjawiska.</p>
+<p>Moduł 1 zasypuje tę lukę: <strong>mieszkaniec, organizacja albo samorząd opisuje problem po polsku, system znajduje istniejące rozwiązania</strong> i jednocześnie rejestruje zgłoszenie, żeby Hub widział skalę zjawiska.</p>
 
 <h4>Wyzwania regionu (taksonomia bazowa)</h4>
 <div class="tablewrap">
@@ -143,33 +143,31 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 </div>
 
 <h4>Role domenowe i poziomy dostępu</h4>
-<p>Cztery role domenowe odpowiadają grupom użytkowników z opisu wyzwania (<code>base.md</code>, sekcja 3). Strona zgłaszająca ma dwie role, strona odbierająca zgłoszenia — dwie. Moduł 1 nie ma kont indywidualnych: endpointy uprzywilejowane otwiera jeden z dwóch <strong>współdzielonych tokenów</strong> z konfiguracji (ADR-009). Token potwierdza <em>poziom</em> dostępu, nie tożsamość osoby.</p>
+<p>Cztery role domenowe odpowiadają grupom użytkowników z opisu wyzwania (<code>base.md</code>, sekcja 3). Strona zgłaszająca ma dwie role, strona odbierająca zgłoszenia — dwie. Moduł 1 nie ma kont indywidualnych: endpointy uprzywilejowane otwiera jeden <strong>współdzielony token <code>STAFF</code></strong> z konfiguracji (ADR-017). Token potwierdza <em>poziom</em> dostępu, nie tożsamość osoby.</p>
 <div class="tablewrap">
 <table>
 <tr><th>Rola</th><th>Kto</th><th>Poziom dostępu</th><th>Co robi w Module 1</th></tr>
-<tr><td><code>RESIDENT</code> / <code>NGO</code></td><td>Mieszkaniec, aktywista, organizacja pozarządowa</td><td><code>PUBLIC</code></td><td>Opisuje problem w czacie, czyta zaproponowane rozwiązania, śledzi odpowiedzi na swoje zgłoszenie (<code>report_token</code>), może dorzucić własne rozwiązanie do korpusu</td></tr>
+<tr><td><code>RESIDENT</code> / <code>NGO</code></td><td>Mieszkaniec, aktywista, organizacja pozarządowa</td><td><code>PUBLIC</code></td><td>Opisuje problem w czacie, czyta zaproponowane rozwiązania i wiedzę o problemie, śledzi odpowiedzi na swoje zgłoszenie (<code>report_token</code>), może dorzucić własne rozwiązanie do korpusu</td></tr>
 <tr><td><code>JST</code></td><td>Jednostka samorządu terytorialnego, w tym CUS i jednostki gminne</td><td><code>PUBLIC</code></td><td>Zgłasza lokalne wyzwania oraz <strong>przegląda katalog rozwiązań</strong> z filtrami (<code>GET /api/solutions</code>): koszt, kroki wdrożenia, poziom dowodów, wdrożenia w innych gminach</td></tr>
-<tr><td><code>EXPERT</code></td><td>Ekspert branżowy, mentor</td><td><code>EXPERT</code></td><td>Czyta klastry i zgłoszenia, dodaje notatki z rekomendowanym rozwiązaniem, odpowiada autorowi zgłoszenia. Nie ocenia skali problemu i nie zatwierdza rozwiązań</td></tr>
-<tr><td><code>ROPS_ADMIN</code></td><td>Pracownik ROPS Kraków — administrator, koordynator</td><td><code>ADMIN</code></td><td>Wszystko co <code>EXPERT</code> oraz: ocena skali klastra, zatwierdzanie rozwiązań z kolejki <code>PENDING_REVIEW</code>, zmiana statusu zgłoszeń, odbiór powiadomień (webhook)</td></tr>
+<tr><td><code>EXPERT</code></td><td>Ekspert branżowy, mentor</td><td><code>STAFF</code></td><td>Czyta zgłoszenia i podobne zgłoszenia, odpowiada autorowi zgłoszenia</td></tr>
+<tr><td><code>ROPS_ADMIN</code></td><td>Pracownik ROPS Kraków — administrator, koordynator</td><td><code>STAFF</code></td><td>Wszystko co <code>EXPERT</code> oraz: skrzynka „Nowe”, trendy, zatwierdzanie rozwiązań z kolejki <code>PENDING_REVIEW</code>, zmiana statusu zgłoszeń</td></tr>
 </table>
 </div>
-<p>Rola <code>RESIDENT</code> / <code>NGO</code> / <code>JST</code> trafia do zgłoszenia jako pole <code>reporter_type</code> (<code>RESIDENT | NGO | JST | OTHER</code>) i jest <strong>deklaratywna, niezweryfikowana</strong>. Służy do cięcia statystyk („co zgłaszają samorządy, a co mieszkańcy"), nigdy do uprawnień. Interfejsy dla <code>EXPERT</code> i <code>ROPS_ADMIN</code> to Moduł 2. Rozbicie na konta indywidualne to sekcja 15.</p>
+<p>W PoC ekspert i administrator używają tego samego tokenu — podział ich zadań jest organizacyjny, nie techniczny (osobne poziomy: sekcja 15). Rola <code>RESIDENT</code> / <code>NGO</code> / <code>JST</code> trafia do zgłoszenia jako pole <code>reporter_type</code> (<code>RESIDENT | NGO | JST | OTHER</code>) i jest <strong>deklaratywna, niezweryfikowana</strong>. Służy do cięcia statystyk („co zgłaszają samorządy, a co mieszkańcy"), nigdy do uprawnień. Interfejs dla <code>EXPERT</code> i <code>ROPS_ADMIN</code> to Panel administratora.</p>
 
 <h2 id="s2">2. Zakres MVP i granice <span class="badge b-stable">stable</span></h2>
 
 <h4>W zakresie Modułu 1</h4>
 <ul>
-<li>Endpoint czatu <code>POST /api/chat</code> ze strumieniowaniem SSE — przyjmuje opis problemu w języku naturalnym.</li>
-<li>Hybrydowy pipeline wyszukiwania: tor leksykalny ‖ tor semantyczny → RRF → reranking.</li>
+<li>Endpoint czatu <code>POST /api/chat</code> ze strumieniowaniem SSE — przyjmuje opis problemu w języku naturalnym. Jedyna droga zgłoszenia problemu (ADR-012).</li>
+<li>Hybrydowy pipeline wyszukiwania rozwiązań: tor leksykalny ‖ tor semantyczny → RRF → reranking (Cohere).</li>
+<li>Wiedza o problemie (<code>kind = KNOWLEDGE</code>: Mapa Wyzwań, raporty ROPS) w osobnej liście odpowiedzi — w PoC sam tor semantyczny (ADR-011).</li>
 <li>Odpowiedź RAG: krótkie streszczenie z cytowaniami + karty rozwiązań.</li>
-<li>Trwały zapis <strong>każdego</strong> zgłoszenia, także gdy nic nie znaleziono.</li>
-<li>Klastrowanie semantyczne zgłoszeń — podstawa oceny skali problemu.</li>
-<li>Przyjmowanie nowych rozwiązań od użytkowników do kolejki <code>PENDING_REVIEW</code>.</li>
-<li>Endpointy agregacji (<code>/api/clusters</code>) — kontrakt, na którym zbuduje się Moduł 2.</li>
-<li>Trzy poziomy dostępu (<code>PUBLIC</code> / <code>EXPERT</code> / <code>ADMIN</code>) przez współdzielone tokeny; dostęp autora do własnego zgłoszenia przez <code>report_token</code> (sekcja 7.0).</li>
-<li>Obieg po stronie odbierającej: zatwierdzanie rozwiązań, notatki ekspertów do klastrów, odpowiedzi do autorów zgłoszeń (7.4), webhook z powiadomieniami (7.5).</li>
+<li>Trwały zapis <strong>każdego</strong> zgłoszenia, także gdy nic nie znaleziono, oraz licznik podobnych zgłoszeń („N osób z M gmin”, ADR-016).</li>
+<li>Przyjmowanie nowych rozwiązań od użytkowników do kolejki <code>PENDING_REVIEW</code> i ich zatwierdzanie.</li>
+<li>Poziom <code>STAFF</code> przez współdzielony token; dostęp autora do własnego zgłoszenia przez <code>report_token</code> (7.0).</li>
+<li>Obieg po stronie odbierającej: lista zgłoszeń, podobne zgłoszenia, skrzynka „Nowe” (7.5), trendy (<code>GET /api/stats</code>), odpowiedzi do autorów (7.4) — cały kontrakt Panelu administratora.</li>
 <li>Katalog rozwiązań z filtrami (<code>GET /api/solutions</code>) dla JST i mieszkańców.</li>
-<li>Zestaw ewaluacyjny i metryki trafności.</li>
 </ul>
 
 <h4>Poza zakresem — nie implementuj</h4>
@@ -177,16 +175,16 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 <table>
 <tr><th>Rzecz</th><th>Gdzie trafia</th></tr>
 <tr><td><strong>Cały interfejs użytkownika</strong>: ekran czatu, karty rozwiązań, formularze</td><td>Moduł frontendowy (dostarczany osobno) — kontrakt w sekcji 8</td></tr>
-<tr><td>Interfejs operatora: dashboard, triage, mapa wyzwań, wykresy</td><td>Moduł 2 (osobny dokument)</td></tr>
+<tr><td>Interfejs operatora: dashboard, triage, mapa wyzwań, wykresy</td><td>Panel administratora (<code>base.md</code> VI, osobny dokument)</td></tr>
 <tr><td>Dialog ROPS ↔ użytkownicy, mentorzy, budowanie partnerstw</td><td>Platforma aktywnej komunikacji (<code>base.md</code> V), sekcja 15</td></tr>
-<tr><td>Canvas Innowacji Społecznych jako narzędzie w aplikacji</td><td>Moduł 3</td></tr>
-<tr><td><strong>Konta indywidualne, logowanie, SSO, odzyskiwanie dostępu</strong></td><td>Poza zakresem w tej iteracji; dostęp tokenowy (ADR-009), konta — sekcja 15</td></tr>
-<tr><td>Powiadomienia e-mail, eksporty, raportowanie</td><td>Backlog (sekcja 15)</td></tr>
+<tr><td>Canvas Innowacji Społecznych jako narzędzie w aplikacji</td><td>Kreator pomysłów (<code>base.md</code> III), sekcja 15</td></tr>
+<tr><td><strong>Konta indywidualne, logowanie, SSO, odzyskiwanie dostępu</strong>, osobne poziomy <code>EXPERT</code>/<code>ADMIN</code></td><td>Poza zakresem w tej iteracji; jeden token <code>STAFF</code> (ADR-017), konta — sekcja 15</td></tr>
+<tr><td>Lokalne modele, tryb offline, klastrowanie zgłoszeń, indeksy wektorowe, webhook i e-mail, retencja automatyczna, eksporty</td><td>Backlog (sekcja 15) — wycięte z PoC (ADR-015 – 019)</td></tr>
 </table>
 </div>
 
 <div class="warn">
-<p><strong>Zasada granicy.</strong> Moduł 1 nie rysuje żadnego ekranu — ani dla mieszkańca, ani dla operatora. Ale <strong>musi</strong> wystawić dla obu kompletne, działające API z realnymi danymi. Jeśli moduł frontendowy albo Moduł 2 będzie musiał zmienić schemat bazy, żeby cokolwiek pokazać — Moduł 1 jest niedokończony. Weryfikacja odbywa się przez <code>curl</code> i testy, nie przez przeglądarkę.</p>
+<p><strong>Zasada granicy.</strong> Moduł 1 nie rysuje żadnego ekranu — ani dla mieszkańca, ani dla operatora. Ale <strong>musi</strong> wystawić dla obu kompletne, działające API z realnymi danymi. Jeśli moduł frontendowy albo Panel administratora będzie musiał zmienić schemat bazy, żeby cokolwiek pokazać — Moduł 1 jest niedokończony. Weryfikacja odbywa się przez <code>curl</code> i testy, nie przez przeglądarkę.</p>
 </div>
 
 <h2 id="s3">3. Architektura <span class="badge b-stable">stable</span></h2>
@@ -196,9 +194,9 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 <div class="tablewrap">
 <table>
 <tr><th>Komponent</th><th>Technologia</th><th>Odpowiedzialność</th></tr>
-<tr><td><code>api</code></td><td>Python 3.12 + FastAPI + SQLAlchemy 2.0 (async)</td><td>Pipeline, SSE, zapis zgłoszeń, klastrowanie, API agregacji</td></tr>
-<tr><td><code>db</code></td><td>PostgreSQL 16 + <code>pgvector</code> + <code>unaccent</code> + <code>pg_trgm</code></td><td>Korpus, wektory, indeks odwrócony, zgłoszenia, klastry</td></tr>
-<tr><td><code>scripts</code></td><td>Python CLI (ten sam venv co <code>api</code>)</td><td>Ingest korpusu, backfill embeddingów, ewaluacja</td></tr>
+<tr><td><code>api</code></td><td>Python 3.12 + FastAPI + SQLAlchemy 2.0 (async)</td><td>Pipeline, SSE, zapis zgłoszeń, licznik podobnych, API Panelu administratora</td></tr>
+<tr><td><code>db</code></td><td>PostgreSQL 16 + <code>pgvector</code> + <code>unaccent</code> + <code>pg_trgm</code></td><td>Korpus, wektory, indeks odwrócony, zgłoszenia, odpowiedzi</td></tr>
+<tr><td><code>scripts</code></td><td>Python CLI (ten sam venv co <code>api</code>)</td><td>Ingest korpusu i ponowne liczenie embeddingów</td></tr>
 </table>
 </div>
 
@@ -206,14 +204,14 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 <pre><code>                                      ┌───────────────────────────────┐
   użytkownik (PUBLIC)                 │  1. PREPROCESSING             │
   "U nas w gminie starsi ludzie   ───►│  czyszczenie + ekstrakcja     │
-   siedzą sami w domach i nie        │  gmina / kategoria / grupa    │
+   siedzą sami w domach i nie        │  kategoria / identyfikatory   │
    mają z kim pogadać"                └──────────────┬────────────────┘
                                                      │
                       ┌──────────────────────────────┴──────────────────────────────┐
                       │                                                             │
          ┌────────────▼─────────────┐                              ┌────────────────▼───────────┐
          │ 2a. TOR LEKSYKALNY       │                              │ 2b. TOR SEMANTYCZNY        │
-         │ PostgreSQL FTS           │                              │ pgvector HNSW              │
+         │ PostgreSQL FTS           │                              │ pgvector (pełny skan)      │
          │ to_tsquery, OR (6.2)     │                              │ embedding 1024-dim         │
          │ ts_rank_cd, wagi A/B/C   │                              │ odległość cosinusowa       │
          │ ──► Top 20               │                              │ ──► Top 20                 │
@@ -230,41 +228,42 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
                                      ┌───────────────▼────────────────┐
                                      │ 4. RERANKING — cross-encoder   │
                                      │ pary (zapytanie, dokument)     │
-                                     │ ──► Top 3 + score 0..1         │
+                                     │ ──► Top 3 + also_see 5, 0..1   │
                                      └───────────────┬────────────────┘
                                                      │
                       ┌──────────────────────────────┴──────────────────────────────┐
                       │                                                             │
          ┌────────────▼─────────────┐                              ┌────────────────▼───────────┐
-         │ 5. GENERACJA RAG         │                              │ 6. ZAPIS + KLASTROWANIE    │
-         │ streszczenie PL          │                              │ reports + report_clusters  │
+         │ 5. GENERACJA RAG         │                              │ 6. ZAPIS + LICZNIK         │
+         │ streszczenie PL          │                              │ reports + similar_count    │
          │ cytowania [1][2][3]      │                              │ (zawsze, także gdy pusto)  │
-         │ ──► SSE do przeglądarki  │                              │ ──► dane dla Modułu 2      │
+         │ ──► SSE do przeglądarki  │                              │ ──► dane dla panelu ROPS   │
          └──────────────────────────┘                              └────────────────────────────┘</code></pre>
 
 <div class="note">
-<p><strong>Dlaczego dwa tory, a nie tylko wektory.</strong> Tor semantyczny gubi dokładne identyfikatory: nazwę programu, nazwę organizacji, numer uchwały, kod wyzwania. Tor leksykalny gubi kontekst: „siedzą sami w domach" nie ma wspólnych słów z „przeciwdziałanie izolacji osób starszych". Każdy tor ratuje drugiego w przypadkach, w których tamten jest bezradny — i dlatego fuzja bije oba pojedyncze tory na zestawie ewaluacyjnym.</p>
+<p><strong>Dlaczego dwa tory, a nie tylko wektory.</strong> Tor semantyczny gubi dokładne identyfikatory: nazwę programu, nazwę organizacji, numer uchwały, kod wyzwania. Tor leksykalny gubi kontekst: „siedzą sami w domach" nie ma wspólnych słów z „przeciwdziałanie izolacji osób starszych". Każdy tor ratuje drugiego w przypadkach, w których tamten jest bezradny — i dlatego fuzja jest trafniejsza niż każdy tor osobno.</p>
 </div>
 
 <h4>Skalowanie i integracje</h4>
+<p>W PoC żaden z poniższych mechanizmów nie jest implementowany — to opis ścieżki rozwoju na slajd o potencjale wdrożeniowym (<code>base.md</code>, sekcje 3 i 5).</p>
 <ul>
-<li>API jest bezstanowe — skaluje się poziomo za load balancerem, stan żyje wyłącznie w PostgreSQL. Przed bazą PgBouncer w trybie <code>transaction</code>; w tym trybie ustawienia sesyjne nie działają, więc <code>hnsw.ef_search</code> ustawiaj przez <code>SET LOCAL</code> wewnątrz transakcji.</li>
-<li>Rozmiar danych: wektor 1024 × 4 B ≈ 4 KB. 500 rozwiązań × ~5 chunków to ok. 10 MB wektorów; 100 tys. zgłoszeń to ok. 400 MB. Całość mieści się w RAM niewielkiej instancji, więc HNSW nie jest wąskim gardłem w skali województwa.</li>
-<li>Wąskie gardła w kolejności: limity zewnętrznych API (embedding, rerank, LLM) → globalna blokada klastrowania (6.7) → liczba połączeń do bazy.</li>
-<li>Klastrowanie jest w MVP synchroniczne i szereguje zapisy zgłoszeń blokadą globalną. Orientacyjnie powyżej kilkudziesięciu zgłoszeń na sekundę: <code>cluster_id</code> dopisuje jeden worker (lider wybierany przez <code>pg_try_advisory_lock</code>). Zmiana dotyka wyłącznie <code>clustering.py</code>.</li>
-<li>Odczyty <code>/api/clusters</code> można przenieść na replikę odczytową bez zmian w kodzie poza <code>db.py</code>.</li>
-<li>Integracje: wyjściowe — webhook (7.5), bez treści zgłoszeń; wejściowe — ingest z formatu pośredniego (sekcja 9). Baza grantowa Hubu to adapter w <code>scripts/</code> produkujący <code>data/solutions/*.json</code>, bez zmian w API.</li>
+<li>API jest bezstanowe — skaluje się poziomo za load balancerem, stan żyje wyłącznie w PostgreSQL.</li>
+<li>Rozmiar danych: wektor 1024 × 4 B ≈ 4 KB. 500 rozwiązań × ~5 chunków to ok. 10 MB wektorów; 100 tys. zgłoszeń to ok. 400 MB. Całość mieści się w RAM niewielkiej instancji.</li>
+<li>W PoC zapytania wektorowe robią pełny skan (ADR-019). Przy ok. 10 tys. chunków lub 50 tys. zgłoszeń dochodzą indeksy HNSW, PgBouncer i replika odczytowa (sekcja 15) — bez zmian w kontrakcie API.</li>
+<li>Wąskie gardło w kolejności: limity zewnętrznych API (embedding, rerank, LLM) → pełne skany wektorów → liczba połączeń do bazy.</li>
+<li>Integracje: wejściowe — ingest z formatu pośredniego (sekcja 9); baza grantowa Hubu to adapter w <code>scripts/</code> produkujący <code>data/solutions/*.json</code>, bez zmian w API. Wyjściowe (webhook) — sekcja 15.</li>
 </ul>
 
 <h2 id="s4">4. Model danych <span class="badge b-stable">stable</span></h2>
 
-<p>Dziewięć tabel. DDL poniżej jest kompletny i do wklejenia — kolejność tworzenia odpowiada zależnościom kluczy obcych. Migracje przez Alembic, ale pierwsza migracja może być dosłownie tym plikiem.</p>
+<p>Sześć tabel. DDL poniżej jest kompletny i do wklejenia — kolejność tworzenia odpowiada zależnościom kluczy obcych. W PoC schemat ładuje jeden plik <code>db/init.sql</code> (montowany do <code>docker-entrypoint-initdb.d</code>); migracje Alembic dopiero po PoC (ADR-019).</p>
 
 <h3>4.1 Rozszerzenia i typy</h3>
 <pre><code>CREATE EXTENSION IF NOT EXISTS vector;
 CREATE EXTENSION IF NOT EXISTS unaccent;
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
 
+CREATE TYPE solution_kind   AS ENUM ('SOLUTION', 'KNOWLEDGE');   -- innowacja vs. wiedza o problemie (ADR-011)
 CREATE TYPE solution_origin AS ENUM ('CURATED', 'USER_SUBMITTED', 'PROMOTED_FROM_REPORT');
 CREATE TYPE solution_status AS ENUM ('PUBLISHED', 'PENDING_REVIEW', 'REJECTED', 'ARCHIVED');
 CREATE TYPE report_status   AS ENUM ('NEW', 'TRIAGED', 'MATCHED', 'IN_PROGRESS', 'CLOSED');
@@ -282,6 +281,7 @@ CREATE TYPE reporter_type   AS ENUM ('RESIDENT', 'NGO', 'JST', 'OTHER');   -- de
 <h3>4.3 <code>solutions</code> — korpus rozwiązań</h3>
 <pre><code>CREATE TABLE solutions (
     id                   BIGSERIAL PRIMARY KEY,
+    kind                 solution_kind NOT NULL DEFAULT 'SOLUTION',
     title                TEXT        NOT NULL,
     summary              TEXT        NOT NULL,
     body                 TEXT        NOT NULL DEFAULT '',
@@ -310,22 +310,23 @@ CREATE TYPE reporter_type   AS ENUM ('RESIDENT', 'NGO', 'JST', 'OTHER');   -- de
 CREATE UNIQUE INDEX solutions_source_url_uq ON solutions (source_url) WHERE source_url IS NOT NULL;
 CREATE INDEX solutions_category_idx ON solutions (category);
 CREATE INDEX solutions_gmina_idx    ON solutions (gmina);
-CREATE INDEX solutions_status_idx   ON solutions (status);
+CREATE INDEX solutions_status_idx   ON solutions (status, kind);
 CREATE INDEX solutions_title_trgm   ON solutions USING gin (title gin_trgm_ops);</code></pre>
 
 <div class="tablewrap">
 <table>
 <tr><th>Pole</th><th>Uwaga implementacyjna</th></tr>
+<tr><td><code>kind</code></td><td><code>SOLUTION</code> to innowacja z Biblioteki lub zgłoszona przez użytkownika: trafia na karty i do cytowań. <code>KNOWLEDGE</code> to wiedza o problemie (Mapa Wyzwań, raporty i doświadczenia ROPS): zwracana wyłącznie w osobnej liście <code>candidates.context</code>. Nigdy nie trafia na karty rozwiązań, do streszczenia ani do <code>reports.matched</code> (ADR-011). Pola <code>cost_range</code>, <code>implementation_steps</code> i <code>evidence_level</code> są dla niej puste lub domyślne</td></tr>
 <tr><td><code>origin</code></td><td><code>CURATED</code> — paczka danych od organizatora. <code>USER_SUBMITTED</code> — dorzucone przez użytkownika przez <code>POST /api/solutions</code>. <code>PROMOTED_FROM_REPORT</code> — zgłoszenie, które Hub rozwiązał i awansował na wpis w korpusie (pętla samouczenia, sekcja 15).</td></tr>
-<tr><td><code>status</code></td><td>Wyszukiwanie <strong>widzi tylko</strong> <code>PUBLISHED</code>. <code>USER_SUBMITTED</code> startuje jako <code>PENDING_REVIEW</code> i nie zanieczyszcza wyników, dopóki operator nie zatwierdzi.</td></tr>
-<tr><td><code>evidence_level</code></td><td>1 = pomysł, 3 = wdrożone w jednej gminie, 5 = wdrożone wielokrotnie z ewaluacją. Wyświetlane na karcie, docelowo lekki mnożnik w rankingu (nie w v0.1).</td></tr>
+<tr><td><code>status</code></td><td>Wyszukiwanie <strong>widzi tylko</strong> <code>PUBLISHED</code>. <code>USER_SUBMITTED</code> startuje jako <code>PENDING_REVIEW</code> i nie zanieczyszcza wyników, dopóki pracownik Hubu nie zatwierdzi.</td></tr>
+<tr><td><code>evidence_level</code></td><td>1 = pomysł, 3 = wdrożone w jednej gminie, 5 = wdrożone wielokrotnie z ewaluacją. Wyświetlane na karcie, docelowo lekki mnożnik w rankingu (nie w MVP).</td></tr>
 <tr><td><code>content_hash</code></td><td>Klucz idempotencji ingestu: ten sam hash ⇒ pomiń re-embedding (sekcja 9).</td></tr>
 <tr><td><code>media</code></td><td>Filmy i materiały do prezentacji w Bibliotece Innowacji (wymóg modułu „Zasobnik wiedzy"). Tylko odnośniki — pliki nie są przechowywane w bazie. Nie wchodzi do <code>content_hash</code> ani do embeddingu.</td></tr>
 </table>
 </div>
 
 <h3>4.4 <code>solution_chunks</code> — jednostka wyszukiwania</h3>
-<p>Wyszukujemy po fragmentach, nie po całych rozwiązaniach. Dwa pola denormalizowane (<code>title</code>, <code>published</code>) — powody w ostrzeżeniu pod DDL, <strong>nie usuwaj ich</strong>.</p>
+<p>Wyszukujemy po fragmentach, nie po całych rozwiązaniach. Jedno pole denormalizowane (<code>title</code>) — powód w ostrzeżeniu pod DDL, <strong>nie usuwaj go</strong>.</p>
 <pre><code>CREATE TABLE solution_chunks (
     id          BIGSERIAL PRIMARY KEY,
     solution_id BIGINT NOT NULL REFERENCES solutions(id) ON DELETE CASCADE,
@@ -333,7 +334,6 @@ CREATE INDEX solutions_title_trgm   ON solutions USING gin (title gin_trgm_ops);
     title       TEXT   NOT NULL,              -- kopia solutions.title (denormalizacja)
     heading     TEXT,                         -- nagłówek sekcji wewnątrz dokumentu
     content     TEXT   NOT NULL,
-    published   BOOLEAN NOT NULL DEFAULT true,-- kopia (solutions.status = 'PUBLISHED')
     embedding   vector(1024),                 -- NULL dopóki nie policzony
     ts          tsvector GENERATED ALWAYS AS (
                     setweight(to_tsvector('polish_simple', coalesce(title, '')),   'A') ||
@@ -343,63 +343,37 @@ CREATE INDEX solutions_title_trgm   ON solutions USING gin (title gin_trgm_ops);
     UNIQUE (solution_id, chunk_index)
 );
 
-CREATE INDEX solution_chunks_ts_idx ON solution_chunks USING gin (ts);
-
-CREATE INDEX solution_chunks_emb_idx ON solution_chunks
-    USING hnsw (embedding vector_cosine_ops)
-    WITH (m = 16, ef_construction = 64)
-    WHERE published AND embedding IS NOT NULL;</code></pre>
+CREATE INDEX solution_chunks_ts_idx       ON solution_chunks USING gin (ts);
+CREATE INDEX solution_chunks_solution_idx ON solution_chunks (solution_id);
+-- Brak indeksu wektorowego w PoC (ADR-019): przy kilkuset chunkach pełny skan trwa milisekundy.</code></pre>
 
 <div class="warn">
-<p><strong>Dlaczego <code>title</code> jest kopiowane do chunku.</strong> Kolumna <code>GENERATED ALWAYS AS</code> może czytać wyłącznie kolumny tego samego wiersza — nie wolno jej sięgnąć do <code>solutions</code> joinem. Bez kopii tytułu tracisz wagę <code>A</code>, a tytuł jest najsilniejszym sygnałem leksykalnym w całym korpusie.</p>
-<p><strong>Dlaczego <code>published</code> jest kopiowane.</strong> Indeks HNSW działa tylko wtedy, gdy zapytanie ma postać <code>ORDER BY embedding &lt;=&gt; $1 LIMIT n</code> bez joinów. Filtr <code>solutions.status</code> w <code>WHERE</code> wymusiłby pełny skan. Indeks częściowy <code>WHERE published AND embedding IS NOT NULL</code> rozwiązuje to w całości; zapytanie wektorowe musi mieć dokładnie te dwa warunki i żadnych innych. Oba pola aktualizuje ingest oraz zmiana statusu rozwiązania — spakuj to w jedną funkcję <code>sync_chunk_denorm(solution_id)</code>, nie rozsiewaj po kodzie.</p>
+<p><strong>Dlaczego <code>title</code> jest kopiowane do chunku.</strong> Kolumna <code>GENERATED ALWAYS AS</code> może czytać wyłącznie kolumny tego samego wiersza — nie wolno jej sięgnąć do <code>solutions</code> joinem. Bez kopii tytułu tracisz wagę <code>A</code>, a tytuł jest najsilniejszym sygnałem leksykalnym w całym korpusie. Tytuł wchodzi do <code>content_hash</code>, więc jego zmiana i tak powoduje przechunkowanie (sekcja 9) — osobna synchronizacja nie jest potrzebna.</p>
+<p><strong>Status i rodzaj wpisu</strong> nie są kopiowane: oba tory filtrują je przez <code>JOIN solutions</code> (6.2, 6.3). Zmiana statusu w <code>PATCH /api/solutions/{id}</code> działa więc natychmiast, bez dotykania chunków. Gdy korpus urośnie i wróci indeks HNSW (sekcja 15), filtr musi znów stać się kolumną chunku — inaczej indeks częściowy nie zadziała.</p>
 </div>
 
 <h4>Strategia chunkowania</h4>
 <ul>
 <li><code>chunk_index = 0</code> — zawsze <code>title + "\n" + summary</code>. To jest chunk, który trafia w większość zapytań.</li>
-<li><code>chunk_index &gt;= 1</code> — <code>body</code> pocięte po akapitach do ~1200 znaków, z zakładką ~150 znaków, granice na końcach zdań.</li>
+<li><code>chunk_index &gt;= 1</code> — <code>body</code> pocięte po akapitach do ~1200 znaków, z zakładką ~150 znaków, granice na końcach zdań. Ma znaczenie głównie dla długich wpisów <code>KNOWLEDGE</code> (raporty).</li>
 <li>Krótkie rozwiązanie (<code>body</code> pusty lub poniżej 400 znaków) ma dokładnie jeden chunk. Nie wymuszaj sztucznego cięcia.</li>
 </ul>
 
-<h3>4.5 <code>report_clusters</code> — grupy problemów (skala zjawiska)</h3>
-<pre><code>CREATE TABLE report_clusters (
-    id               BIGSERIAL PRIMARY KEY,
-    label            TEXT        NOT NULL,          -- tekst pierwszego zgłoszenia, skrócony
-    label_source     TEXT        NOT NULL DEFAULT 'FIRST_REPORT',  -- FIRST_REPORT | ADMIN | LLM
-    category         TEXT        REFERENCES challenge_taxonomy(code),
-    centroid         vector(1024) NOT NULL,         -- znormalizowany L2
-    member_count     INT         NOT NULL DEFAULT 1,
-    gminas           TEXT[]      NOT NULL DEFAULT '{}',
-    first_seen_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
-    last_seen_at     TIMESTAMPTZ NOT NULL DEFAULT now(),
-    operator_severity SMALLINT   CHECK (operator_severity BETWEEN 1 AND 5),
-    operator_notes   TEXT,
-    reviewed_at      TIMESTAMPTZ
-);
-
-CREATE INDEX report_clusters_centroid_idx ON report_clusters
-    USING hnsw (centroid vector_cosine_ops) WITH (m = 16, ef_construction = 64);
-CREATE INDEX report_clusters_count_idx ON report_clusters (member_count DESC);</code></pre>
-
-<h3>4.6 <code>reports</code> — zgłoszenia</h3>
+<h3>4.5 <code>reports</code> — zgłoszenia</h3>
 <pre><code>CREATE TABLE reports (
     id                BIGSERIAL PRIMARY KEY,
-    raw_text          TEXT,                         -- dosłownie to, co wpisał użytkownik; NULL po retencji
-    normalized_text   TEXT,                         -- po preprocessingu, idzie do embeddingu; NULL po retencji
-    embedding         vector(1024),
+    raw_text          TEXT        NOT NULL,          -- dosłownie to, co wpisał użytkownik
+    normalized_text   TEXT        NOT NULL,          -- po preprocessingu, idzie do embeddingu
+    embedding         vector(1024),                  -- do licznika podobnych zgłoszeń (6.7)
     category          TEXT        REFERENCES challenge_taxonomy(code),
-    gmina             TEXT,
+    gmina             TEXT,                          -- z listy wyboru w UI (6.1)
     powiat            TEXT,
     target_group      TEXT,
-    extracted         JSONB       NOT NULL DEFAULT '{}',  -- pełny wynik ekstrakcji encji
+    extracted         JSONB       NOT NULL DEFAULT '{}',  -- pełny wynik preprocessingu
     severity_self     SMALLINT    CHECK (severity_self BETWEEN 1 AND 5),
     contact_email     TEXT,                              -- opcjonalny, patrz sekcja 12
     reporter_type     reporter_type NOT NULL DEFAULT 'OTHER',  -- deklaratywny, nie daje uprawnień
     report_token_hash TEXT,                              -- sha256 tokenu autora (7.0); sam token nie jest zapisywany
-    text_purged_at    TIMESTAMPTZ,                       -- ustawiane przez scripts/retention.py
-    cluster_id        BIGINT      REFERENCES report_clusters(id),
-    cluster_similarity REAL,                            -- podobieństwo do centroidu przy wpięciu
     matched           BOOLEAN     NOT NULL DEFAULT false,-- czy pipeline zwrócił rozwiązanie
     top_solution_id   BIGINT      REFERENCES solutions(id),
     top_rerank_score  REAL,
@@ -408,69 +382,43 @@ CREATE INDEX report_clusters_count_idx ON report_clusters (member_count DESC);</
     created_at        TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE INDEX reports_cluster_idx  ON reports (cluster_id);
 CREATE INDEX reports_created_idx  ON reports (created_at DESC);
+CREATE INDEX reports_status_idx   ON reports (status, created_at DESC);
 CREATE INDEX reports_category_idx ON reports (category);
 CREATE INDEX reports_gmina_idx    ON reports (gmina);
 CREATE INDEX reports_unmatched_idx ON reports (created_at DESC) WHERE NOT matched;</code></pre>
 
 <div class="note">
-<p><strong><code>matched = false</code> to najcenniejsze dane w całym systemie.</strong> Zgłoszenie, dla którego pipeline <em>nie</em> znalazł rozwiązania, oznacza albo lukę w korpusie, albo realnie nieobsłużone wyzwanie regionu. Indeks <code>reports_unmatched_idx</code> istnieje właśnie po to, żeby Moduł 2 pokazał tę listę operatorowi na pierwszym ekranie.</p>
+<p><strong><code>matched = false</code> to najcenniejsze dane w całym systemie.</strong> Zgłoszenie, dla którego pipeline <em>nie</em> znalazł rozwiązania, oznacza albo lukę w korpusie, albo realnie nieobsłużone wyzwanie regionu. Indeks <code>reports_unmatched_idx</code> istnieje właśnie po to, żeby Panel administratora pokazał tę listę na pierwszym ekranie (<code>GET /api/reports?matched=false</code>).</p>
 </div>
 
-<h3>4.7 <code>search_events</code> — telemetria jakości</h3>
+<h3>4.6 <code>search_events</code> — telemetria jakości</h3>
 <pre><code>CREATE TABLE search_events (
     id                 BIGSERIAL PRIMARY KEY,
     report_id          BIGINT REFERENCES reports(id) ON DELETE SET NULL,
-    query              TEXT,                  -- NULL po retencji
-    normalized_query   TEXT,                  -- NULL po retencji
+    query              TEXT   NOT NULL,
+    normalized_query   TEXT   NOT NULL,
     results            JSONB  NOT NULL,   -- [{solution_id, lex_rank, vec_rank, rrf, rerank}, ...]
     lexical_count      INT    NOT NULL DEFAULT 0,
     vector_count       INT    NOT NULL DEFAULT 0,
     latency_ms         JSONB  NOT NULL DEFAULT '{}', -- {"embed":..,"lex":..,"vec":..,"rerank":..,"llm":..}
     clicked_solution_id BIGINT REFERENCES solutions(id),
     helpful            BOOLEAN,
-    flags              JSONB  NOT NULL DEFAULT '{}', -- {"citation_hallucination":true,"gate":"cosine",...}
+    flags              JSONB  NOT NULL DEFAULT '{}', -- {"citation_hallucination":true,"gate":"cosine","answer_retracted":true}
     created_at         TIMESTAMPTZ NOT NULL DEFAULT now()
 );</code></pre>
-<p>Zapisywane przy każdym przejściu pipeline'u. <code>clicked_solution_id</code> i <code>helpful</code> dopisywane później przez <code>POST /api/feedback</code>. Bez tej tabeli nie da się stwierdzić, czy zmiana progu poprawiła, czy zepsuła system.</p>
+<p>Zapisywane przy każdym przejściu pipeline'u <code>/api/chat</code> (nie przy <code>/api/search</code>). <code>clicked_solution_id</code> i <code>helpful</code> dopisywane później przez <code>POST /api/feedback</code>. Bez tej tabeli nie da się stwierdzić, czy zmiana progu poprawiła, czy zepsuła system.</p>
 
-<h3>4.8 <code>embedding_meta</code> — zgodność indeksu z konfiguracją</h3>
-<pre><code>CREATE TABLE embedding_meta (
-    id             BOOLEAN PRIMARY KEY DEFAULT true CHECK (id),   -- dokładnie jeden wiersz
-    provider       TEXT NOT NULL,
-    model          TEXT NOT NULL,
-    dim            INT  NOT NULL,
-    query_prefix   TEXT NOT NULL DEFAULT '',
-    passage_prefix TEXT NOT NULL DEFAULT '',
-    indexed_at     TIMESTAMPTZ NOT NULL DEFAULT now()
-);</code></pre>
-<p>Zapisywana przez ingest, porównywana z konfiguracją przy starcie API (6.3).</p>
-
-<h3>4.9 <code>cluster_notes</code> — notatki ekspertów i administratora</h3>
-<pre><code>CREATE TABLE cluster_notes (
-    id                      BIGSERIAL PRIMARY KEY,
-    cluster_id              BIGINT NOT NULL REFERENCES report_clusters(id) ON DELETE CASCADE,
-    author_role             TEXT   NOT NULL CHECK (author_role IN ('EXPERT', 'ADMIN')),  -- z poziomu tokenu
-    author_label            TEXT,                  -- wolny tekst podany przez wołającego, NIEZWERYFIKOWANY
-    body                    TEXT   NOT NULL,
-    recommended_solution_id BIGINT REFERENCES solutions(id),
-    created_at              TIMESTAMPTZ NOT NULL DEFAULT now()
-);
-CREATE INDEX cluster_notes_cluster_idx ON cluster_notes (cluster_id, created_at DESC);</code></pre>
-
-<h3>4.10 <code>report_replies</code> — odpowiedzi do autora zgłoszenia</h3>
+<h3>4.7 <code>report_replies</code> — odpowiedzi do autora zgłoszenia</h3>
 <pre><code>CREATE TABLE report_replies (
     id           BIGSERIAL PRIMARY KEY,
     report_id    BIGINT NOT NULL REFERENCES reports(id) ON DELETE CASCADE,
-    author_role  TEXT   NOT NULL CHECK (author_role IN ('EXPERT', 'ADMIN')),
-    author_label TEXT,                           -- niezweryfikowany, jak w cluster_notes
-    body         TEXT,                           -- NULL po retencji
-    created_at   TIMESTAMPTZ NOT NULL DEFAULT now(),
-    read_at      TIMESTAMPTZ                     -- ustawiane przy odczycie z X-Report-Token
+    author_label TEXT,                           -- wolny tekst podany przez wołającego, NIEZWERYFIKOWANY
+    body         TEXT   NOT NULL,
+    created_at   TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 CREATE INDEX report_replies_report_idx ON report_replies (report_id, created_at);</code></pre>
-<p><code>author_role</code> wynika z poziomu użytego tokenu, więc jest wiarygodny co do <em>poziomu</em>. <code>author_label</code> jest zwykłym tekstem i nie jest dowodem tożsamości — interfejs nie może go prezentować jako zweryfikowanego.</p>
+<p>Odpowiedź może dodać wyłącznie wołający z tokenem <code>STAFF</code> (7.0), więc każda odpowiedź pochodzi od zespołu Hubu. <code>author_label</code> („Anna, ROPS”, „ekspert ds. senioralnych”) jest zwykłym tekstem i nie jest dowodem tożsamości — interfejs nie może go prezentować jako zweryfikowanego.</p>
 
 <h2 id="s5">5. Polski tor leksykalny <span class="badge b-stable">stable</span></h2>
 
@@ -478,7 +426,7 @@ CREATE INDEX report_replies_report_idx ON report_replies (report_id, created_at)
 <p><strong>Przeczytaj przed napisaniem pierwszego <code>to_tsvector</code>.</strong> PostgreSQL <strong>nie ma</strong> konfiguracji <code>polish</code> w standardowej instalacji ani w obrazie <code>pgvector/pgvector:pg16</code>. Zapis <code>to_tsvector('polish', ...)</code> wywali się błędem <code>text search configuration "polish" does not exist</code>. Nie obchodź tego przez <code>'english'</code> — angielski stemmer na polszczyźnie psuje więcej, niż naprawia.</p>
 </div>
 
-<p>Rozwiązanie w v0.1: własna konfiguracja <code>polish_simple</code> — <code>simple</code> (bez stemmingu) plus <code>unaccent</code> (usuwa ogonki, więc „dzieci" i „dzięci" czy brak polskich znaków w zapytaniu przestają mieć znaczenie).</p>
+<p>Rozwiązanie w MVP: własna konfiguracja <code>polish_simple</code> — <code>simple</code> (bez stemmingu) plus <code>unaccent</code> (usuwa ogonki, więc „dzieci" i „dzięci" czy brak polskich znaków w zapytaniu przestają mieć znaczenie).</p>
 
 <pre><code>CREATE TEXT SEARCH CONFIGURATION polish_simple ( COPY = simple );
 
@@ -514,7 +462,11 @@ ALTER TEXT SEARCH CONFIGURATION polish_simple
 
 <h2 id="s6">6. Pipeline krok po kroku <span class="badge b-draft">draft</span></h2>
 
-<p>Siedem kroków. Każdy ma jawne wejście, wyjście, miejsce w kodzie i pułapki. Kolejność w kodzie: kroki 2a i 2b <strong>równolegle</strong> (<code>asyncio.gather</code>), krok 6 też równolegle z 5 — użytkownik nie czeka na zapis do bazy.</p>
+<p>Siedem kroków. Każdy ma jawne wejście, wyjście, miejsce w kodzie i pułapki. Kolejność w kodzie: kroki 2a i 2b <strong>równolegle</strong> (<code>asyncio.gather</code>); zapis (krok 6) startuje równolegle z generacją (krok 5), a strumień czeka na jego wynik dopiero przed zdarzeniem <code>report_saved</code> (6.7).</p>
+
+<div class="note">
+<p><strong>Rozwiązania i wiedza (ADR-011).</strong> Pełny pipeline 2a–4 dotyczy wyłącznie <code>kind = 'SOLUTION'</code>. Wiedza (<code>kind = 'KNOWLEDGE'</code>) w PoC to <strong>jedno dodatkowe zapytanie wektorowe</strong> (6.3 z filtrem <code>KNOWLEDGE</code>) z tym samym embeddingiem, wykonywane w tym samym <code>asyncio.gather</code>: do <code>KNOWLEDGE_TOP_N</code> wpisów z cosinusem ≥ <code>MIN_COSINE_SCORE</code>, bez fuzji i rerankingu (te — sekcja 15). Krok 5 (generacja) i <code>reports.matched</code> widzą wyłącznie rozwiązania.</p>
+</div>
 
 <div class="tablewrap">
 <table>
@@ -525,7 +477,7 @@ ALTER TEXT SEARCH CONFIGURATION polish_simple
 <tr><td>3. Fuzja RRF</td><td><code>api/pipeline/fusion.py</code></td><td>&lt; 5 ms</td></tr>
 <tr><td>4. Reranking</td><td><code>api/pipeline/rerank.py</code></td><td>&lt; 400 ms</td></tr>
 <tr><td>5. Generacja RAG</td><td><code>api/pipeline/answer.py</code></td><td>pierwszy token &lt; 1,5 s</td></tr>
-<tr><td>6. Zapis + klastrowanie</td><td><code>api/pipeline/clustering.py</code></td><td>&lt; 50 ms, poza ścieżką krytyczną</td></tr>
+<tr><td>6. Zapis + licznik podobnych</td><td><code>api/pipeline/reports.py</code></td><td>&lt; 50 ms, równolegle z generacją</td></tr>
 </table>
 </div>
 
@@ -537,19 +489,19 @@ ALTER TEXT SEARCH CONFIGURATION polish_simple
 class ProcessedQuery:
     raw: str                      # zachowane dosłownie, idzie do reports.raw_text
     normalized: str               # do embeddingu i tsquery
-    gmina: str | None
-    powiat: str | None
+    gmina: str | None             # z żądania (lista wyboru w UI), nie z tekstu
+    powiat: str | None            # wyliczony z gminy (data/gminy-malopolska.json)
     category: str | None          # kod z challenge_taxonomy
     target_group: str | None
     identifiers: list[str]        # nazwy własne, akronimy, numery uchwał
     expanded_terms: list[str]     # synonimy domenowe dla toru leksykalnego
-    too_vague: bool               # poniżej 4 słów treściowych lub brak czasownika</code></pre>
+    too_vague: bool               # poniżej 4 słów treściowych (krok 7 niżej)</code></pre>
 
 <p>Kolejność operacji:</p>
 <ol>
 <li><strong>Normalizacja</strong> — <code>NFC</code>, zbicie białych znaków, obcięcie do 2000 znaków.</li>
 <li><strong>Zdjęcie wstępów grzecznościowych</strong> — regex na <code>^(cześć|dzień dobry|witam|hej|dobry wieczór|szanowni państwo)[,!.\s]*</code>, rekurencyjnie. Zdejmowane <strong>tylko</strong> z <code>normalized</code>; <code>raw</code> zostaje nietknięty.</li>
-<li><strong>Ekstrakcja gminy i powiatu</strong> — dopasowanie do słownika <code>data/gminy-malopolska.json</code> (182 gminy, 22 powiaty, w tym formy odmienione: <code>Zakopane / w Zakopanem</code>, <code>Nowy Sącz / w Nowym Sączu</code>). Dopasowanie po tekście <code>unaccent</code>-owanym i lowercase. Zbudowany raz jako automat Aho-Corasick lub prosty zbiór n-gramów — nie regex per gmina.</li>
+<li><strong>Gmina i powiat</strong> — gmina przychodzi w polu <code>gmina</code> żądania, wybrana z listy (<code>GET /api/gminy</code>, 182 gminy). Lista wyboru jest prostsza i bardziej dostępna niż wpisywanie; preprocessing <strong>nie</strong> wyciąga gminy z tekstu (sekcja 15). Nieznana nazwa = <code>422</code>. Powiat wyliczany ze słownika <code>data/gminy-malopolska.json</code>.</li>
 <li><strong>Ekstrakcja identyfikatorów</strong> — wyrazy w <code>CAPS</code> (3+ znaki), ciągi alfanumeryczne z cyfrą, nazwy w cudzysłowie, frazy wielkolitrowe wielowyrazowe. Trafiają do <code>tsquery</code> z operatorem frazowym, żeby tor leksykalny ich <em>nie</em> zgubił.</li>
 <li><strong>Kategoria</strong> — słownik słów kluczowych per kod taksonomii (<code>samotn*, izolacj*, sam w domu → LONELINESS</code>). Gdy <code>LLM_ENABLED=true</code> i słownik nie trafia: jedno wywołanie klasyfikatora zwracającego wyłącznie kod. Gdy nic — <code>OTHER</code>, nie wymyślaj.</li>
 <li><strong>Rozszerzenie synonimami</strong> — <code>data/synonyms.json</code>, tylko dla toru leksykalnego.</li>
@@ -593,8 +545,10 @@ hits AS (
            c.id                                  AS chunk_id,
            ts_rank_cd(c.ts, q.tsq, 32)           AS score
     FROM solution_chunks c
+    JOIN solutions s ON s.id = c.solution_id
     CROSS JOIN q
-    WHERE c.published
+    WHERE s.status = 'PUBLISHED'
+      AND s.kind = 'SOLUTION'                   -- wiedza nie przechodzi toru leksykalnego w PoC
       AND c.ts @@ q.tsq
     ORDER BY c.solution_id, score DESC          -- najlepszy chunk na rozwiązanie
 )
@@ -610,12 +564,12 @@ LIMIT :candidates_per_track;                     -- 20</code></pre>
 <p><strong>Pułapka.</strong> <code>DISTINCT ON</code> wymaga, by <code>ORDER BY</code> zaczynał się od kolumny wyrażenia <code>DISTINCT ON</code>. Dlatego kolaps per rozwiązanie i ranking globalny muszą być w <strong>dwóch osobnych</strong> poziomach zapytania, jak wyżej. Jedno zapytanie nie zrobi obu rzeczy.</p>
 </div>
 
-<h3>6.3 Tor semantyczny — pgvector HNSW</h3>
+<h3>6.3 Tor semantyczny — pgvector</h3>
 
-<p><strong>Wejście:</strong> <code>normalized</code>. <strong>Wyjście:</strong> do 20 par <code>(solution_id, best_chunk_id)</code> po odległości cosinusowej.</p>
+<p><strong>Wejście:</strong> <code>normalized</code>. <strong>Wyjście:</strong> do 20 par <code>(solution_id, best_chunk_id)</code> po odległości cosinusowej. Ten sam embedding zapytania obsługuje też listę wiedzy (6.5, <code>candidates.context</code>).</p>
 
-<h4>Prefiksy zapytań — pole konfiguracji, nie stała w kodzie</h4>
-<p>Modele z rodziny E5 (np. <code>multilingual-e5-large</code>) były trenowane z asymetrycznymi prefiksami: zapytanie <code>query: ...</code>, dokument <code>passage: ...</code>. Modele OpenAI oraz <code>BAAI/bge-m3</code> prefiksów <strong>nie wymagają</strong>, a doklejenie ich może pogorszyć wyniki. Prefiks zależy więc od <em>modelu</em>, nie od rodziny: domyślnie jest pusty (<code>EMBEDDING_QUERY_PREFIX</code>, <code>EMBEDDING_PASSAGE_PREFIX</code>) i ustawia się go tylko dla E5. Wartość należy do providera:</p>
+<h4>Provider embeddingów — interfejs na wiele, implementacja jedna</h4>
+<p>W PoC jest <strong>jedna</strong> implementacja: <code>OpenAIEmbeddingProvider</code> (<code>text-embedding-3-large</code>, <code>dimensions=1024</code>). Interfejs zostaje, żeby lokalny model (np. <code>BAAI/bge-m3</code>) można było dodać później bez zmian w pipelinie (ADR-015, sekcja 15):</p>
 
 <pre><code>class EmbeddingProvider(Protocol):
     dim: int                 # MUSI być 1024 dla każdej implementacji, patrz ADR-004
@@ -625,12 +579,8 @@ LIMIT :candidates_per_track;                     -- 20</code></pre>
     async def embed_query(self, text: str) -> list[float]: ...
     async def embed_passages(self, texts: list[str]) -> list[list[float]]: ...</code></pre>
 
-<div class="danger">
-<p><strong>Najkosztowniejszy możliwy błąd w tym module:</strong> zaindeksować korpus jednym providerem, a zapytania liczyć drugim, albo doklejać prefiks tylko w jednym miejscu. Wyniki nie wywalą błędu — po prostu będą ciche i bezsensowne. Zabezpieczenia, oba obowiązkowe:</p>
-<ul>
-<li>Tabela <code>embedding_meta</code> (4.8; jeden wiersz: <code>provider</code>, <code>model</code>, <code>dim</code>, oba prefiksy, <code>indexed_at</code>). Start API porównuje ją z konfiguracją i <strong>odmawia startu</strong> przy rozbieżności, z komunikatem „uruchom <code>scripts/reembed.py</code>".</li>
-<li>Prefiksy doklejane <strong>wyłącznie</strong> wewnątrz implementacji providera. Żaden kod pipeline'u nie zna słowa <code>"query: "</code>.</li>
-</ul>
+<div class="warn">
+<p><strong>Zasada na przyszłość.</strong> Korpus i zapytania muszą być liczone tym samym providerem, modelem i prefiksami — rozjazd nie wywala błędu, tylko po cichu psuje wyniki. Prefiksy dokleja <strong>wyłącznie</strong> implementacja providera; żaden kod pipeline'u nie zna słowa <code>"query: "</code>. Po zmianie modelu: <code>python -m scripts.ingest --reembed-all</code>. Automatyczna kontrola zgodności (tabela <code>embedding_meta</code>) wraca razem z drugim providerem (sekcja 15).</p>
 </div>
 
 <h4>Zapytanie</h4>
@@ -640,9 +590,11 @@ WITH raw AS (
     SELECT c.id AS chunk_id, c.solution_id,
            c.embedding &lt;=&gt; CAST(:query_vec AS vector(1024)) AS dist
     FROM solution_chunks c
-    WHERE c.published
+    JOIN solutions s ON s.id = c.solution_id
+    WHERE s.status = 'PUBLISHED'
+      AND s.kind = 'SOLUTION'                    -- lista wiedzy: 'KNOWLEDGE' (6.5)
       AND c.embedding IS NOT NULL
-    ORDER BY c.embedding &lt;=&gt; CAST(:query_vec AS vector(1024))
+    ORDER BY dist
     LIMIT :vector_overfetch                      -- 60 = 3 x candidates_per_track
 ),
 best AS (
@@ -661,9 +613,7 @@ LIMIT :candidates_per_track;                      -- 20</code></pre>
 <p><strong>Pułapki toru wektorowego.</strong></p>
 <ul>
 <li><code>&lt;=&gt;</code> to <strong>odległość</strong> cosinusowa (0 = identyczne). Podobieństwo to <code>1 - dist</code>. Sortowanie zawsze <code>ASC</code> po <code>dist</code>.</li>
-<li><code>ORDER BY</code> w <code>raw</code> musi być <strong>dosłownie identycznym</strong> wyrażeniem co w <code>SELECT</code>, inaczej planer nie użyje HNSW. Sprawdź <code>EXPLAIN</code> — ma pokazać <code>Index Scan using solution_chunks_emb_idx</code>, nie <code>Seq Scan</code>.</li>
-<li><code>SET hnsw.ef_search = 100;</code> na połączeniu przed zapytaniem (domyślne 40 jest niskie dla małego korpusu). Ustawiaj per sesja w kodzie, nie globalnie.</li>
-<li>Żadnych dodatkowych warunków <code>WHERE</code> w <code>raw</code> poza tymi z indeksu częściowego — każdy dodatkowy filtr psuje użycie indeksu.</li>
+<li>Bez indeksu wektorowego zapytanie robi pełny skan chunków — przy korpusie PoC (kilkaset chunków) to milisekundy. Nie dodawaj HNSW „na zapas”: indeks przybliżony z filtrem przez <code>JOIN</code> potrafi zwrócić mniej wyników niż <code>LIMIT</code>. Warunki powrotu indeksu — sekcja 15.</li>
 </ul>
 </div>
 
@@ -703,7 +653,7 @@ LIMIT :candidates_per_track;                      -- 20</code></pre>
         FusedCandidate(
             solution_id=sid, chunk_id=chunks[sid],
             rrf_score=score, ranks=ranks[sid],
-            cosine_similarity=cosines.get(sid),             # None, gdy kandydat tylko z toru leksykalnego
+            cosine_similarity=cosines.get(sid),             # None, gdy kandydat tylko z toru leksykalnego — uzupełniane niżej
         )
         for sid, score in ordered[:top_n]
     ]</code></pre>
@@ -714,14 +664,21 @@ LIMIT :candidates_per_track;                      -- 20</code></pre>
 <p>Rozwiązanie widoczne tylko w jednym torze, nawet na pozycji 1, dostaje <code>0.01639</code>. <strong>Zgoda dwóch torów bije świetny wynik w jednym</strong> — to cała istota RRF.</p>
 
 <div class="note">
-<p><strong>Dlaczego <code>k = 60</code> i kiedy to zmieniać.</strong> Duże <code>k</code> wygładza różnice między pozycjami (pozycja 1 i 5 dostają podobnie), małe <code>k</code> mocno premiuje czoło listy. 60 to wartość z oryginalnej pracy i dobry punkt startu. Zmieniaj <strong>tylko</strong> na podstawie <code>make eval</code> (sekcja 10), nigdy na podstawie pojedynczego zapytania, które „wygląda źle".</p>
+<p><strong>Dlaczego <code>k = 60</code> i kiedy to zmieniać.</strong> Duże <code>k</code> wygładza różnice między pozycjami (pozycja 1 i 5 dostają podobnie), małe <code>k</code> mocno premiuje czoło listy. 60 to wartość z oryginalnej pracy i dobry punkt startu. W PoC nie zmieniaj go (brak ewaluacji, sekcja 10) — pojedyncze zapytanie, które „wygląda źle”, nie jest powodem do zmiany.</p>
 </div>
 
-<p>Determinizm: przy identycznym <code>rrf_score</code> sortuj po <code>solution_id</code> rosnąco. Bez tego kolejność wyników skacze między wywołaniami, a zestaw ewaluacyjny przestaje być powtarzalny.</p>
+<h4>Uzupełnienie cosinusa dla kandydatów z toru leksykalnego</h4>
+<p>Kandydat znaleziony wyłącznie torem leksykalnym (nazwa własna, akronim, numer uchwały) nie ma cosinusa. Bez niego bramka cosinusowa (6.5) odrzucałaby dokładnie te zapytania, dla których tor leksykalny istnieje. Po fuzji jedno zapytanie dolicza brakujące wartości dla wybranych chunków:</p>
+<pre><code>SELECT id AS chunk_id, 1.0 - (embedding &lt;=&gt; CAST(:query_vec AS vector(1024))) AS cosine_similarity
+FROM solution_chunks
+WHERE id = ANY(:chunk_ids_without_cosine);</code></pre>
+<p>Po tym kroku każdy kandydat ma <code>cosine_similarity</code> (trafia też do <code>scores.cosine</code> w <code>SolutionCard</code>).</p>
+
+<p>Determinizm: przy identycznym <code>rrf_score</code> sortuj po <code>solution_id</code> rosnąco. Bez tego kolejność wyników skacze między wywołaniami i demo przestaje być powtarzalne.</p>
 
 <h3>6.5 Reranking — cross-encoder</h3>
 
-<p><strong>Wejście:</strong> 10 kandydatów + zapytanie. <strong>Wyjście:</strong> 1–3 pozycje ze score 0–1.</p>
+<p><strong>Wejście:</strong> 10 kandydatów-rozwiązań + zapytanie. <strong>Wyjście:</strong> do <code>ANSWER_TOP_N + ALSO_SEE_N</code> (3 + 5) rozwiązań ze score 0–1, każde powyżej progu; pierwsze <code>ANSWER_TOP_N</code> to karty główne, reszta to <code>also_see</code>.</p>
 
 <p>RRF zna tylko pozycje, nie treść. Cross-encoder czyta parę <code>(zapytanie, dokument)</code> razem i ocenia realną relację semantyczną — jest znacznie dokładniejszy niż niezależne embeddingi, ale zbyt kosztowny dla całego korpusu. Dlatego jest na końcu, na dziesięciu pozycjach.</p>
 
@@ -733,12 +690,12 @@ LIMIT :candidates_per_track;                      -- 20</code></pre>
 <div class="tablewrap">
 <table>
 <tr><th>Implementacja</th><th>Model</th><th>Kiedy</th></tr>
-<tr><td><code>CohereRerankProvider</code></td><td><code>rerank-v3.5</code> (multilingual)</td><td>Domyślna. Jedno wywołanie HTTP, bez GPU</td></tr>
-<tr><td><code>LocalRerankProvider</code></td><td><code>BAAI/bge-reranker-v2-m3</code></td><td>Demo offline. ~2,2 GB, CPU ~300 ms na 10 par</td></tr>
+<tr><td><code>CohereRerankProvider</code></td><td><code>rerank-v3.5</code> (multilingual)</td><td>Domyślna, od pierwszego etapu prac. Jedno wywołanie HTTP, bez GPU</td></tr>
 <tr><td><code>NoopRerankProvider</code></td><td>—</td><td><code>RERANK_ENABLED=false</code>; zwraca kolejność RRF ze score <code>None</code></td></tr>
 </table>
 </div>
 
+<p>Reranker lokalny (<code>bge-reranker-v2-m3</code>, tryb offline) — sekcja 15. Wiedza (<code>KNOWLEDGE</code>) nie przechodzi przez reranker w PoC (6, ADR-011).</p>
 <p>Tekst dokumentu podawany rerankerowi: <code>f"{title}\n{summary}\n{best_chunk_content}"</code>, obcięty do ~2000 znaków. Nie podawaj całego <code>body</code> — cross-encodery mają limit kontekstu i rozmywają sygnał na długich tekstach.</p>
 
 <h4>Próg odrzucenia</h4>
@@ -747,7 +704,7 @@ LIMIT :candidates_per_track;                      -- 20</code></pre>
     if reranked and reranked[0].score is not None:                  # reranker aktywny
         return reranked[0].score, settings.MIN_RERANK_SCORE, "rerank"       # 0.35
     # noop / RERANK_ENABLED=false: score == None, porównanie None &lt; 0.35 rzuciłoby TypeError.
-    # Bramka na cosinusie najlepszego kandydata, który trafił w torze semantycznym.
+    # Bramka na cosinusie najlepszego kandydata (cosinus uzupełniony po fuzji, 6.4).
     sims = [c.cosine_similarity for c in fused if c.cosine_similarity is not None]
     return (max(sims) if sims else None), settings.MIN_COSINE_SCORE, "cosine"   # 0.50
 
@@ -755,10 +712,11 @@ score, threshold, source = gate(fused, reranked)
 if score is None or score &lt; threshold:
     # brak trafienia: zgłoszenie i tak zapisane, odpowiedź to jawne "nie wiem"
     return NoMatch(reason="below_threshold", best_score=score, gate=source)</code></pre>
-<p>Źródło bramki (<code>rerank</code> / <code>cosine</code>) trafia do <code>search_events.flags</code>. Bez tego „nie wiem" znikałoby po cichu przy <code>RERANK_PROVIDER=noop</code> — a to dokładnie konfiguracja „najkrótszej działającej ścieżki" (sekcja 13) i trybu demo offline. Kandydat znaleziony wyłącznie torem leksykalnym nie ma cosinusa; jeśli żaden kandydat nie trafił w torze semantycznym, wynik to <code>None</code> i zapytanie kończy się <code>no_match</code>.</p>
+<p><strong>Bramka per pozycja.</strong> Powyższy warunek rozstrzyga o <code>no_match</code> (najlepszy wynik poniżej progu). Ten sam próg i to samo źródło stosuje się potem do <strong>każdej</strong> pozycji osobno: na kartach głównych, w <code>also_see</code> i w <code>context</code> zostają tylko pozycje powyżej progu  Lista może więc mieć mniej niż 3 + 5 pozycji, a to poprawny wynik.</p>
+<p>Źródło bramki (<code>rerank</code> / <code>cosine</code>) trafia do <code>search_events.flags</code>. Bez tego „nie wiem" znikałoby po cichu przy <code>RERANK_PROVIDER=noop</code> — a to konfiguracja „najkrótszej działającej ścieżki" (sekcja 13). <code>None</code> zostaje tylko przy pustej liście kandydatów i kończy się <code>no_match</code>.</p>
 
 <div class="note">
-<p><strong>„Nie wiem" jest funkcjonalnością, nie porażką.</strong> Hub potrzebuje wiedzieć, na które problemy region <em>nie ma</em> odpowiedzi — to wejście do procesu tworzenia nowej innowacji. Wciskanie użytkownikowi losowego rozwiązania o trafności 0,2 niszczy zaufanie i zanieczyszcza telemetrię. Próg <code>0.35</code> jest wartością startową do skalibrowania na zestawie ewaluacyjnym.</p>
+<p><strong>„Nie wiem" jest funkcjonalnością, nie porażką.</strong> Hub potrzebuje wiedzieć, na które problemy region <em>nie ma</em> odpowiedzi — to wejście do procesu tworzenia nowej innowacji. Wciskanie użytkownikowi losowego rozwiązania o trafności 0,2 niszczy zaufanie i zanieczyszcza telemetrię. Próg <code>0.35</code> jest wartością startową, korygowaną ręcznie przez <code>/api/search</code> (sekcja 10).</p>
 </div>
 
 <h3>6.6 Generacja odpowiedzi (RAG)</h3>
@@ -780,7 +738,7 @@ Zasady bezwzględne:
 5. Polski, prosty język urzędowo-ludzki. Bez zwrotów grzecznościowych na początku.
 """
 
-USER = """Problem zgłoszony przez mieszkańca:
+USER = """Problem zgłoszony przez użytkownika:
 {query}
 
 Rozwiązania z bazy:
@@ -794,87 +752,74 @@ Organizacja: Fundacja Wspólna Sprawa | Gmina: Wieliczka | Kategoria: LONELINESS
 Opis: Codzienne rozmowy telefoniczne wolontariuszy z osobami 65+ ...
 Fragment: ...</code></pre>
 
-<p><code>vague_hint</code> — dopisywane tylko gdy <code>too_vague</code>: <code>"Zapytanie jest ogólne. Dopisz na końcu jedno krótkie pytanie doprecyzowujące."</code></p>
+<p><code>vague_hint</code> — dopisywane tylko gdy <code>too_vague</code>: <code>"Zapytanie jest ogólne. Dopisz na końcu jedno krótkie pytanie doprecyzowujące."</code> <code>/api/chat</code> nie ma historii rozmowy: odpowiedź na to pytanie frontend wysyła jako nowe wywołanie z <strong>pełnym tekstem</strong> (poprzednia wiadomość + doprecyzowanie) i tym samym <code>session_id</code>. Powstaje nowe zgłoszenie, ale licznik podobnych liczy sesje, nie wiadomości (6.7), więc skala nie rośnie. Przy <code>LLM_ENABLED=false</code> tę samą prośbę o doprecyzowanie frontend pokazuje na podstawie <code>no_match</code> lub małej liczby kart.</p>
 
-<h4>Walidacja po generacji (obowiązkowa)</h4>
+<h4>Walidacja cytowań w strumieniu (obowiązkowa)</h4>
+<p>Tokeny już wysłane nie dają się cofnąć, więc walidacja działa <strong>na strumieniu</strong>, a nie po nim:</p>
 <ol>
-<li>Wyciągnij wszystkie <code>[n]</code> z odpowiedzi. Każde <code>n</code> musi istnieć w kontekście — nieistniejące usuń z tekstu i zaloguj jako <code>citation_hallucination</code> w <code>search_events.flags</code>.</li>
-<li>Odpowiedź bez ani jednego cytowania, przy niepustym kontekście: nie wyświetlaj jej — pokaż same karty. Jedno zepsute streszczenie nie może zabrać użytkownikowi poprawnych wyników.</li>
-<li><code>LLM_ENABLED=false</code>: pomiń krok 6 w całości. Karty rozwiązań to pełna, sensowna odpowiedź. <strong>System musi być użyteczny bez LLM</strong> — generacja jest warstwą prezentacji, nie rdzeniem.</li>
+<li><strong>Filtr strumieniowy.</strong> Tekst z LLM przechodzi przez filtr, który wstrzymuje fragment od <code>[</code> do <code>]</code> (najwyżej 4 znaki; dłuższy fragment jest zwykłym tekstem i wychodzi od razu). Domknięte <code>[n]</code> z <code>n</code> spoza listy <code>solutions</code> jest wycinane, zanim trafi do zdarzenia <code>token</code>, i logowane jako <code>citation_hallucination</code> w <code>search_events.flags</code>. Opóźnienie dla użytkownika: kilka znaków.</li>
+<li><strong>Odpowiedź bez ani jednego poprawnego cytowania</strong> przy niepustym kontekście: po ostatnim tokenie backend wysyła <code>answer_retracted</code> (7.1), a frontend usuwa wyświetlony tekst i zostawia same karty. Jedno zepsute streszczenie nie może zabrać użytkownikowi poprawnych wyników. Flaga <code>answer_retracted</code> w <code>search_events.flags</code>.</li>
+<li><code>LLM_ENABLED=false</code>: pomiń krok 5 (generację) w całości. Karty rozwiązań to pełna, sensowna odpowiedź. <strong>System musi być użyteczny bez LLM</strong> — generacja jest warstwą prezentacji, nie rdzeniem.</li>
 </ol>
 
-<h3>6.7 Zapis zgłoszenia i klastrowanie</h3>
+<h3>6.7 Zapis zgłoszenia i licznik podobnych zgłoszeń</h3>
 
-<p><strong>Wejście:</strong> <code>ProcessedQuery</code> + embedding + wynik dopasowania. <strong>Wyjście:</strong> <code>report_id</code>, <code>cluster_id</code>.</p>
+<p><strong>Wejście:</strong> <code>ProcessedQuery</code> + embedding zapytania + wynik dopasowania. <strong>Wyjście:</strong> <code>report_id</code>, <code>report_token</code>, <code>similar_count</code>, <code>gmina_count</code>.</p>
 
-<p>Zapis jest <strong>bezwarunkowy</strong> — także gdy nie znaleziono rozwiązania, i także gdy użytkownik zamknie kartę w połowie strumienia. Uruchamiany jako zadanie w tle, równolegle z generacją; porażka zapisu nie może przerwać odpowiedzi (log + metryka, nie wyjątek do użytkownika).</p>
+<h4>Zapis — bezwarunkowy i odpięty od żądania</h4>
+<p>Zapis jest <strong>bezwarunkowy</strong> — także gdy nie znaleziono rozwiązania i także gdy użytkownik zamknie kartę w połowie strumienia. Dlatego:</p>
+<ol>
+<li>Zadanie zapisu startuje zaraz po kroku 4, równolegle z generacją, jako <code>asyncio.create_task(...)</code> trzymane w zbiorze zadań aplikacji (nie w zakresie żądania). Rozłączenie klienta anuluje generator strumienia, ale <strong>nie</strong> zadanie zapisu.</li>
+<li>Generator strumienia czeka na wynik zadania (<code>asyncio.wait_for(asyncio.shield(task), 2 s)</code>) dopiero po generacji, tuż przed <code>report_saved</code>. Użytkownik dostaje karty i tekst bez czekania na bazę; na zapis czeka wyłącznie zdarzenie <code>report_saved</code>.</li>
+<li>Porażka lub przekroczenie czasu: <code>report_saved</code> nie jest wysyłane, <code>done</code> — zawsze. Log + metryka, nie wyjątek do użytkownika.</li>
+</ol>
 
-<h4>Klastrowanie przyrostowe (single-pass, próg stały)</h4>
-<pre><code>-- 1. najbliższy klaster
-SELECT id, member_count, 1.0 - (centroid &lt;=&gt; CAST(:vec AS vector(1024))) AS similarity
-FROM report_clusters
-ORDER BY centroid &lt;=&gt; CAST(:vec AS vector(1024))
-LIMIT 1;</code></pre>
-
-<pre><code>-- 2a. similarity &gt;= CLUSTER_SIM_THRESHOLD (0.82) -> zablokuj wiersz, centroid policz W PYTHONIE
-SELECT centroid, member_count FROM report_clusters WHERE id = :cluster_id FOR UPDATE;
-
--- Python (numpy):  new = l2_normalize((old * n + vec) / (n + 1))
--- pgvector nie ma mnożenia ani dzielenia wektora przez skalar, więc tego nie da się zapisać w SQL.
-
-UPDATE report_clusters
-SET centroid     = CAST(:new_centroid AS vector(1024)),
-    member_count = member_count + 1,
-    gminas       = CASE WHEN :gmina IS NULL OR :gmina = ANY(gminas)
-                        THEN gminas ELSE array_append(gminas, :gmina) END,
-    last_seen_at = now()
-WHERE id = :cluster_id
-RETURNING id;
-
--- 2b. w przeciwnym razie -> nowy klaster
-INSERT INTO report_clusters (label, category, centroid, member_count, gminas)
-VALUES (left(:normalized_text, 160), :category,
-        CAST(:vec AS vector(1024)), 1,
-        CASE WHEN :gmina IS NULL THEN '{}' ELSE ARRAY[:gmina] END)
-RETURNING id;</code></pre>
+<h4>Licznik podobnych zgłoszeń — skala problemu (ADR-016)</h4>
+<p>Zamiast klastrowania: przy zapisie jedno zapytanie liczy, ile <em>innych osób</em> zgłosiło podobny problem. Zasila komunikat „Ten problem zgłosiło już 9 osób z 4 gmin”.</p>
+<pre><code>SELECT count(DISTINCT coalesce(r.session_id, r.id::text)) AS similar_count,   -- osoby, nie wiadomości
+       count(DISTINCT r.gmina)                            AS gmina_count
+FROM reports r
+WHERE r.id &lt;&gt; :report_id
+  AND r.embedding IS NOT NULL
+  AND r.session_id IS DISTINCT FROM :session_id                -- własne wiadomości się nie liczą
+  AND 1.0 - (r.embedding &lt;=&gt; CAST(:vec AS vector(1024))) &gt;= :similar_report_threshold;   -- 0.82</code></pre>
 
 <div class="warn">
 <p><strong>Trzy rzeczy, które trzeba zrobić dobrze.</strong></p>
 <ul>
-<li><strong>Normalizacja L2.</strong> Centroid po średniej arytmetycznej nie ma długości 1. Przy odległości cosinusowej pgvector normalizuje wewnętrznie, więc <em>ranking</em> jest poprawny, ale wartość <code>1 - dist</code> przestaje być porównywalna z progiem w kolejnych aktualizacjach. Normalizuj wektory zgłoszeń przed zapisem <strong>i</strong> centroid po każdej aktualizacji — w Pythonie, patrz kod wyżej.</li>
-<li><strong>Wyścig.</strong> Dwa równoległe zgłoszenia o tym samym problemie przy pustej bazie utworzą dwa klastry. Owiń odczyt i zapis w transakcję z <code>SELECT ... FOR UPDATE</code> na znalezionym klastrze, a przy jego braku użyj blokady doradczej <code>pg_advisory_xact_lock</code> na stałym kluczu. Blokada globalna szereguje zapisy wszystkich zgłoszeń (przy większej skali — sekcja 3, „Skalowanie"). Dla hackathonu wystarczy, ale nie pomijaj — demo z dwoma osobami klikającymi równocześnie to realny scenariusz.</li>
-<li><strong>Próg <code>0.82</code> jest zgadywany.</strong> Skalibruj na realnych zgłoszeniach: za nisko — wszystko zlewa się w jeden klaster „problemy społeczne"; za wysoko — każde zgłoszenie jest własnym klastrem i licznik skali traci sens. Skrypt <code>scripts/cluster_report.py</code> wypisujący rozkład rozmiarów klastrów dla kilku progów to 30 linii kodu i ratuje całą sekcję.</li>
+<li><strong>Licz sesje, nie wiersze.</strong> Odpowiedź na pytanie doprecyzowujące (6.6) jest nowym zgłoszeniem z tym samym <code>session_id</code>. <code>count(DISTINCT session_id)</code> i wykluczenie własnej sesji sprawiają, że rozmowa jednej osoby nie zawyża skali.</li>
+<li><strong>Próg <code>0.82</code> jest zgadywany.</strong> Za nisko — „9 osób” przy każdym zapytaniu; za wysoko — zawsze 0. Sprawdź na zgłoszeniach z seedu demo (kilka parafraz tego samego problemu + kilka różnych) przed prezentacją; wartość w <code>SIMILAR_REPORT_THRESHOLD</code>.</li>
+<li><strong>Brak indeksu na <code>reports.embedding</code>.</strong> Pełny skan wystarcza do kilkudziesięciu tysięcy zgłoszeń. Powyżej — indeks HNSW na <code>reports.embedding</code> albo klastrowanie (sekcja 15).</li>
 </ul>
 </div>
 
-<p><strong>Nazwa klastra.</strong> W v0.1 — obcięty tekst pierwszego zgłoszenia (<code>label_source = 'FIRST_REPORT'</code>). Administrator może nadpisać (<code>'ADMIN'</code>, <code>PATCH /api/clusters/{id}</code>). Generowanie nazwy przez LLM z kilku zgłoszeń: Moduł 2.</p>
+<p>Ten sam warunek podobieństwa obsługuje <code>GET /api/reports/{id}/similar</code> (do 20 najbliższych zgłoszeń dla pracownika Hubu, 7.3) — to zastępuje widok klastra w Panelu administratora.</p>
 
 <h2 id="s7">7. Kontrakt API <span class="badge b-stable">stable</span></h2>
 
-<p>Prefiks <code>/api</code>. Format błędów: <code>{"error": {"code": "...", "message": "..."}}</code>. Każda odpowiedź niesie <code>X-Request-Id</code>. Dostęp — trzy poziomy bez kont indywidualnych (7.0, ADR-009, konsekwencje w sekcji 12). CORS w <code>api/main.py</code> musi dopuszczać origin modułu frontendowego, w tym nagłówki <code>Accept: text/event-stream</code>, <code>X-Access-Token</code> i <code>X-Report-Token</code>.</p>
+<p>Prefiks <code>/api</code>. Format błędów: <code>{"error": {"code": "...", "message": "..."}}</code>. Każda odpowiedź niesie <code>X-Request-Id</code>. Dostęp — poziom publiczny i jeden poziom uprzywilejowany bez kont indywidualnych (7.0, ADR-017, konsekwencje w sekcji 12). CORS w <code>api/main.py</code> musi dopuszczać origin modułu frontendowego, w tym nagłówki <code>Accept: text/event-stream</code>, <code>X-Access-Token</code> i <code>X-Report-Token</code>.</p>
 
 <h3>7.0 Poziomy dostępu</h3>
 
 <div class="tablewrap">
 <table>
 <tr><th>Poziom</th><th>Jak uzyskać</th><th>Co daje</th></tr>
-<tr><td><code>PUBLIC</code></td><td>Brak nagłówka</td><td>Czat, zgłoszenia, katalog rozwiązań (tylko <code>PUBLISHED</code>), zgłaszanie rozwiązań, feedback, taksonomia</td></tr>
-<tr><td><code>EXPERT</code></td><td>Nagłówek <code>X-Access-Token</code> równy <code>EXPERT_TOKEN</code></td><td><code>PUBLIC</code> + odczyt klastrów i zgłoszeń, notatki do klastrów, odpowiedzi do autorów</td></tr>
-<tr><td><code>ADMIN</code></td><td>Nagłówek <code>X-Access-Token</code> równy <code>ADMIN_TOKEN</code></td><td><code>EXPERT</code> + ocena klastrów, zatwierdzanie rozwiązań, zmiana statusu zgłoszeń, odczyt rozwiązań w każdym statusie</td></tr>
+<tr><td><code>PUBLIC</code></td><td>Brak nagłówka</td><td>Czat (jedyna droga zgłoszenia problemu, ADR-012), katalog rozwiązań (tylko <code>PUBLISHED</code>), zgłaszanie rozwiązań, feedback, taksonomia, lista gmin</td></tr>
+<tr><td><code>STAFF</code></td><td>Nagłówek <code>X-Access-Token</code> równy <code>STAFF_TOKEN</code></td><td><code>PUBLIC</code> + zgłoszenia i ich treść, podobne zgłoszenia, skrzynka „Nowe”, statystyki (trendy), odpowiedzi do autorów, zmiana statusu zgłoszeń, zatwierdzanie rozwiązań, odczyt rozwiązań w każdym statusie. Używają go zarówno pracownicy ROPS, jak i eksperci — podział ról jest organizacyjny, nie techniczny</td></tr>
 <tr><td>Autor zgłoszenia</td><td>Nagłówek <code>X-Report-Token</code> (token z <code>report_saved</code>)</td><td>Odczyt <strong>własnego</strong> zgłoszenia i odpowiedzi na nie. Nic więcej</td></tr>
 </table>
 </div>
 
 <ul>
-<li><strong>Brak nagłówka = <code>PUBLIC</code>.</strong> Nagłówek z nieznanym tokenem = <code>401</code>, nie ciche zejście do <code>PUBLIC</code> — literówka w tokenie nie może wyglądać jak „brak danych".</li>
-<li><strong>Fail closed.</strong> Pusty <code>EXPERT_TOKEN</code> lub <code>ADMIN_TOKEN</code> w konfiguracji wyłącza dany poziom (endpointy zwracają <code>403</code>). Domyślnej wartości nie ma.</li>
+<li><strong>Brak nagłówka = <code>PUBLIC</code>.</strong> Endpoint <code>STAFF</code> bez nagłówka = <code>403</code>. Nagłówek z nieznanym tokenem = <code>401</code>, nie ciche zejście do <code>PUBLIC</code> — literówka w tokenie nie może wyglądać jak „brak danych".</li>
+<li><strong>Fail closed.</strong> Pusty <code>STAFF_TOKEN</code> w konfiguracji wyłącza poziom (endpointy <code>STAFF</code> zwracają <code>403</code>). Domyślnej wartości nie ma.</li>
 <li>Porównanie przez <code>hmac.compare_digest</code>. Tokeny tylko w nagłówku, nigdy w URL. Nagłówki <code>X-Access-Token</code> i <code>X-Report-Token</code> są wycinane z logów. Poza <code>localhost</code> wymagane HTTPS.</li>
-<li><code>report_token</code> to <code>secrets.token_urlsafe(32)</code>, zwracany <strong>raz</strong> (w zdarzeniu <code>report_saved</code> i w odpowiedzi <code>POST /api/reports</code>). W bazie leży wyłącznie jego <code>sha256</code> (<code>reports.report_token_hash</code>). Utrata tokenu = utrata dostępu do odpowiedzi; to świadome, bo zgłoszenie jest anonimowe.</li>
-<li>Logika poziomów mieszka w jednym module, <code>api/auth.py</code> (zależność FastAPI <code>require_level(...)</code>). Żaden router nie czyta nagłówków sam.</li>
+<li><code>report_token</code> to <code>secrets.token_urlsafe(32)</code>, zwracany <strong>raz</strong>, wyłącznie w zdarzeniu <code>report_saved</code> strumienia <code>/api/chat</code>. W bazie leży wyłącznie jego <code>sha256</code> (<code>reports.report_token_hash</code>). Utrata tokenu = utrata dostępu do odpowiedzi; to świadome, bo zgłoszenie jest anonimowe.</li>
+<li>Logika poziomów mieszka w jednym module, <code>api/auth.py</code> (zależności FastAPI <code>require_staff</code>, <code>require_report_access</code>). Żaden router nie czyta nagłówków sam.</li>
 </ul>
 
 <div class="warn">
-<p><strong>Czego ten mechanizm nie robi.</strong> Token potwierdza poziom, nie osobę: nie ma śladu audytowego „kto zatwierdził", nie da się odebrać dostępu jednej osobie bez rotacji tokenu dla wszystkich. <code>author_label</code> w notatkach i odpowiedziach to wolny tekst. Wystarczy na hackathon i pilotaż z danymi testowymi; konta indywidualne to sekcja 15.</p>
+<p><strong>Czego ten mechanizm nie robi.</strong> Token potwierdza poziom, nie osobę: nie ma śladu audytowego „kto zatwierdził”, nie da się odebrać dostępu jednej osobie bez rotacji tokenu dla wszystkich, ekspert technicznie może zatwierdzać rozwiązania. <code>author_label</code> w odpowiedziach to wolny tekst. Wystarczy na PoC z danymi testowymi; osobne poziomy i konta indywidualne to sekcja 15.</p>
 </div>
 
 <h3>7.1 <code>POST /api/chat</code> — główny endpoint, SSE</h3>
@@ -885,33 +830,35 @@ Accept: text/event-stream
 
 {
   "message": "U nas w gminie starsi ludzie siedzą sami w domach i nie mają z kim pogadać",
-  "session_id": "b3f1...",        // UUID z przeglądarki, opcjonalny
-  "gmina": "Wieliczka",           // opcjonalny, nadpisuje ekstrakcję
+  "session_id": "b3f1...",        // UUID z przeglądarki, opcjonalny (licznik podobnych liczy sesje)
+  "gmina": "Wieliczka",           // opcjonalny, z listy GET /api/gminy (6.1)
   "severity_self": 3,             // opcjonalny, 1-5
   "reporter_type": "RESIDENT",    // opcjonalny: RESIDENT | NGO | JST | OTHER (domyślnie OTHER)
   "contact_email": null           // opcjonalny, patrz sekcja 12
 }</code></pre>
 
-<p>Odpowiedź: <code>text/event-stream</code>. Kolejność zdarzeń jest gwarantowana.</p>
+<p>Odpowiedź: <code>text/event-stream</code>. Kolejność zdarzeń jest gwarantowana: <code>status</code>* → <code>candidates</code> → (<code>token</code>* [→ <code>answer_retracted</code>] | <code>no_match</code>) → <code>report_saved</code>? → <code>done</code>. <code>error</code> może pojawić się w dowolnym miejscu i zawsze po nim przychodzi <code>done</code>.</p>
 
 <div class="tablewrap">
 <table>
 <tr><th><code>event</code></th><th>Kiedy</th><th><code>data</code></th></tr>
 <tr><td><code>status</code></td><td>Po każdym kroku pipeline'u — napędza wskaźnik postępu</td><td><code>{"stage":"preprocess|search|rerank|answer","label_pl":"Szukam w bazie rozwiązań..."}</code></td></tr>
-<tr><td><code>candidates</code></td><td>Raz, po reranku, <strong>przed</strong> pierwszym tokenem</td><td><code>{"solutions":[SolutionCard, ...],"also_see":[SolutionCard, ...]}</code> — interfejs rysuje karty od razu, nie czeka na tekst. <code>also_see</code>: do <code>ALSO_SEE_N</code> kolejnych wyników po rerankingu, które przeszły bramkę — „podobne przypadki", czyli wdrożenia w innych gminach. Nie są cytowane w streszczeniu</td></tr>
-<tr><td><code>token</code></td><td>Wielokrotnie, podczas generacji</td><td><code>{"text":"Fundacja "}</code></td></tr>
-<tr><td><code>no_match</code></td><td>Zamiast <code>token</code>, gdy poniżej progu</td><td><code>{"reason":"below_threshold","best_score":0.21,"message_pl":"..."}</code></td></tr>
-<tr><td><code>report_saved</code></td><td>Po zapisie zgłoszenia</td><td><code>{"report_id":412,"cluster_id":37,"cluster_size":9,"gmina_count":4,"report_token":"..."}</code> — <code>report_token</code> pojawia się tylko tutaj i tylko raz (7.0)</td></tr>
+<tr><td><code>candidates</code></td><td>Raz, po reranku, <strong>przed</strong> pierwszym tokenem. Wysyłane <strong>zawsze</strong>, także przed <code>no_match</code></td><td><code>{"solutions":[SolutionCard, ...],"also_see":[SolutionCard, ...],"context":[SolutionCard, ...]}</code> — interfejs rysuje karty od razu, nie czeka na tekst. <code>also_see</code>: pozycje od <code>ANSWER_TOP_N + 1</code> do <code>ANSWER_TOP_N + ALSO_SEE_N</code> po rerankingu, z których <strong>każda</strong> osobno przeszła bramkę (6.5). <code>context</code>: do <code>KNOWLEDGE_TOP_N</code> wpisów <code>kind = KNOWLEDGE</code> — „co wiemy o tym problemie” (Mapa Wyzwań, raporty ROPS). Ani <code>also_see</code>, ani <code>context</code> nie są cytowane w streszczeniu. Przy <code>no_match</code> <code>solutions</code> i <code>also_see</code> są puste, <code>context</code> może nie być</td></tr>
+<tr><td><code>token</code></td><td>Wielokrotnie, podczas generacji</td><td><code>{"text":"Fundacja "}</code> — po filtrze cytowań (6.6), więc nie zawiera <code>[n]</code> spoza listy <code>solutions</code></td></tr>
+<tr><td><code>answer_retracted</code></td><td>Najwyżej raz, po ostatnim <code>token</code>, gdy streszczenie nie zawiera żadnego poprawnego cytowania (6.6)</td><td><code>{"reason":"no_citations"}</code> — frontend usuwa wyświetlony tekst streszczenia i zostawia karty</td></tr>
+<tr><td><code>no_match</code></td><td>Zamiast <code>token</code>, gdy poniżej progu</td><td><code>{"reason":"below_threshold","best_score":0.21,"gate":"rerank","message_pl":"..."}</code></td></tr>
+<tr><td><code>report_saved</code></td><td>Po zapisie zgłoszenia (6.7). Brak tego zdarzenia = zapis się nie udał</td><td><code>{"report_id":412,"similar_count":9,"gmina_count":4,"report_token":"..."}</code> — <code>report_token</code> pojawia się tylko tutaj i tylko raz (7.0)</td></tr>
 <tr><td><code>done</code></td><td>Zawsze na końcu, także po błędzie</td><td><code>{"search_event_id":988,"latency_ms":{"total":1840}}</code></td></tr>
 <tr><td><code>error</code></td><td>Awaria w trakcie strumienia</td><td><code>{"code":"RERANK_UNAVAILABLE","message_pl":"..."}</code></td></tr>
 </table>
 </div>
 
-<p><code>cluster_size</code> w <code>report_saved</code> zasila komunikat budujący poczucie wspólnoty: <em>„Ten problem zgłosiło już 9 osób z 4 gmin"</em>. To najtańszy element demo o największym efekcie — nie pomijaj go.</p>
+<p><code>similar_count</code> i <code>gmina_count</code> w <code>report_saved</code> zasilają komunikat budujący poczucie wspólnoty: <em>„Ten problem zgłosiło już 9 osób z 4 gmin"</em>. To najtańszy element demo o największym efekcie — nie pomijaj go.</p>
 
 <pre><code>// SolutionCard — jeden kształt dla całego API, bez wariantów
 {
   "id": 142,
+  "kind": "SOLUTION",            // SOLUTION | KNOWLEDGE (ADR-011)
   "rank": 1,
   "title": "Telefon Życzliwości dla seniorów",
   "summary": "Codzienne rozmowy telefoniczne wolontariuszy z osobami 65+...",
@@ -929,20 +876,22 @@ Accept: text/event-stream
   "evidence_level": 4,
   "media": [{ "type": "video", "url": "https://...", "title": "..." }],
   "origin": "CURATED",
-  "scores": { "rerank": 0.91, "rrf": 0.0320, "lex_rank": 1, "vec_rank": 4 }
+  "scores": { "rerank": 0.91, "rrf": 0.0320, "lex_rank": 1, "vec_rank": 4, "cosine": 0.78 }   // null poza wynikami wyszukiwania
 }</code></pre>
 
 <h3>7.2 <code>GET /api/search</code> — tryb debugowania</h3>
-<p>Ten sam pipeline, bez LLM, bez zapisu zgłoszenia, odpowiedź JSON zamiast strumienia. Zwraca <strong>surowe listy z obu torów osobno</strong> plus wyniki po fuzji i po reranku. Narzędzie do kalibracji progów i do demonstrowania jury, że hybryda realnie działa.</p>
-<pre><code>GET /api/search?q=starsi+ludzie+sami+w+domu&amp;k=60&amp;candidates=20&amp;rerank=true
+<p>Ten sam pipeline, bez LLM, bez zapisu zgłoszenia i bez <code>search_events</code>, odpowiedź JSON zamiast strumienia. Zwraca <strong>surowe listy z obu torów osobno</strong> plus wyniki po fuzji, po reranku i decyzję bramki. Narzędzie do ręcznego ustawiania progów (sekcja 10) i do pokazania jury, że hybryda realnie działa. <strong>Nie jest źródłem kart dla interfejsu</strong> — frontend zawsze pracuje na <code>/api/chat</code>. Wymaga <code>STAFF</code> (treść zapytania w URL, sekcja 12).</p>
+<pre><code>GET /api/search?q=starsi+ludzie+sami+w+domu&amp;rerank=true
 
 {
   "normalized_query": "starsi ludzie sami w domu",
-  "extracted": { "gmina": null, "category": "LONELINESS", "identifiers": [] },
-  "lexical":  [ { "solution_id": 142, "rank": 1, "score": 0.44 }, ... ],
-  "semantic": [ { "solution_id": 207, "rank": 1, "cosine_similarity": 0.81 }, ... ],
-  "fused":    [ { "solution_id": 142, "rrf": 0.0320, "ranks": {"lexical":1,"semantic":4} }, ... ],
+  "extracted": { "category": "LONELINESS", "identifiers": [], "too_vague": false },
+  "lexical":  [ { "solution_id": 142, "title": "...", "rank": 1, "score": 0.44 }, ... ],
+  "semantic": [ { "solution_id": 207, "title": "...", "rank": 1, "cosine_similarity": 0.81 }, ... ],
+  "fused":    [ { "solution_id": 142, "rrf": 0.0320, "ranks": {"lexical":1,"semantic":4}, "cosine": 0.78 }, ... ],
   "reranked": [ { "solution_id": 142, "score": 0.91 }, ... ],
+  "knowledge":[ { "solution_id": 501, "title": "...", "cosine_similarity": 0.66 }, ... ],
+  "gate":     { "source": "rerank", "score": 0.91, "threshold": 0.35, "passed": true },
   "latency_ms": { "embed": 180, "lexical": 12, "semantic": 23, "rerank": 310 }
 }</code></pre>
 
@@ -951,62 +900,48 @@ Accept: text/event-stream
 <div class="tablewrap">
 <table>
 <tr><th>Endpoint</th><th>Dostęp</th><th>Opis</th></tr>
-<tr><td><code>POST /api/reports</code></td><td><code>PUBLIC</code></td><td>Zgłoszenie bez przechodzenia przez czat (formularz). To samo ciało co <code>/api/chat</code>, zwraca <code>{report_id, cluster_id, cluster_size, gmina_count, report_token}</code>, bez wyszukiwania</td></tr>
-<tr><td><code>GET /api/reports/{id}</code></td><td>autor (<code>X-Report-Token</code>) lub <code>EXPERT</code>+</td><td>Pojedyncze zgłoszenie. <code>contact_email</code> <strong>nigdy</strong> nie jest zwracany przez ten endpoint, także dla <code>ADMIN</code>. Token innego zgłoszenia = <code>404</code>, nie <code>403</code></td></tr>
-<tr><td><code>GET /api/solutions</code></td><td><code>PUBLIC</code> (tylko <code>PUBLISHED</code>); inny <code>status</code> — <code>ADMIN</code></td><td><strong>Katalog dla JST i mieszkańców.</strong> Parametry: <code>category</code>, <code>gmina</code>, <code>powiat</code>, <code>tag</code>, <code>evidence_min</code>, <code>q</code> (trigram po tytule), <code>status</code>, <code>sort=recent|evidence</code>, <code>limit</code>, <code>offset</code>. Zwraca <code>SolutionCard</code> bez pola <code>scores</code></td></tr>
-<tr><td><code>PATCH /api/solutions/{id}</code></td><td><code>ADMIN</code></td><td><strong>Zatwierdzanie.</strong> <code>{status: PUBLISHED|REJECTED|ARCHIVED, evidence_level?, category?}</code>. Zmiana statusu woła <code>sync_chunk_denorm(solution_id)</code>, więc <code>published</code> w chunkach zmienia się w tej samej transakcji</td></tr>
-<tr><td><code>PATCH /api/reports/{id}</code></td><td><code>ADMIN</code></td><td><code>{status}</code> — przejścia <code>NEW → TRIAGED → MATCHED / IN_PROGRESS → CLOSED</code></td></tr>
-<tr><td><code>POST /api/reports/{id}/replies</code></td><td><code>EXPERT</code>+</td><td>Odpowiedź do autora zgłoszenia (7.4). <code>{body, author_label?}</code>, do 4000 znaków</td></tr>
-<tr><td><code>GET /api/reports/{id}/replies</code></td><td>autor (<code>X-Report-Token</code>) lub <code>EXPERT</code>+</td><td>Lista odpowiedzi. Odczyt przez autora ustawia <code>read_at</code></td></tr>
-<tr><td><code>POST /api/clusters/{id}/notes</code></td><td><code>EXPERT</code>+</td><td>Notatka do klastra: <code>{body, recommended_solution_id?, author_label?}</code></td></tr>
-<tr><td><code>POST /api/solutions</code></td><td><code>PUBLIC</code></td><td>Nowe rozwiązanie do korpusu. Wymusza <code>origin=USER_SUBMITTED</code>, <code>status=PENDING_REVIEW</code>. Chunkowanie i embedding natychmiast, ale <code>published=false</code> — niewidoczne w wyszukiwaniu do zatwierdzenia</td></tr>
-<tr><td><code>GET /api/solutions/{id}</code></td><td><code>PUBLIC</code> (<code>PUBLISHED</code>); inny status — <code>ADMIN</code></td><td>Pełna karta rozwiązania</td></tr>
-<tr><td><code>GET /api/clusters</code></td><td><code>EXPERT</code>+</td><td><strong>Kontrakt pod Moduł 2.</strong> Nigdy publiczny: <code>label</code> klastra to fragment pierwszego zgłoszenia. Parametry: <code>sort=size|recent|unmatched</code>, <code>category</code>, <code>gmina</code>, <code>min_size</code>, <code>limit</code>, <code>offset</code>. Zwraca klaster + licznik + listę gmin + liczbę zgłoszeń bez dopasowania</td></tr>
-<tr><td><code>GET /api/clusters/{id}</code></td><td><code>EXPERT</code>+</td><td>Klaster + do 20 zgłoszeń składowych (<code>raw_text</code>, gmina, data) + rozwiązania najczęściej dopasowywane w tym klastrze + notatki ekspertów i administratora</td></tr>
-<tr><td><code>PATCH /api/clusters/{id}</code></td><td><code>ADMIN</code></td><td><code>{label?, operator_severity?, operator_notes?, category?}</code> — <strong>ocena skali problemu przez pracownika Hubu</strong></td></tr>
+<tr><td><code>GET /api/reports</code></td><td><code>STAFF</code></td><td><strong>Lista zgłoszeń dla Panelu administratora</strong>, w tym lista „bez dopasowania” (<code>reports_unmatched_idx</code>). Parametry: <code>matched</code>, <code>status</code>, <code>category</code>, <code>gmina</code>, <code>reporter_type</code>, <code>limit</code>, <code>offset</code>; sortowanie po <code>created_at DESC</code>. Bez <code>contact_email</code></td></tr>
+<tr><td><code>GET /api/reports/{id}</code></td><td>autor (<code>X-Report-Token</code>) lub <code>STAFF</code></td><td>Pojedyncze zgłoszenie. <code>contact_email</code> <strong>nigdy</strong> nie jest zwracany. Token innego zgłoszenia = <code>404</code>, nie <code>403</code></td></tr>
+<tr><td><code>GET /api/reports/{id}/similar</code></td><td><code>STAFF</code></td><td>Do 20 najbliższych zgłoszeń powyżej <code>SIMILAR_REPORT_THRESHOLD</code> (treść, gmina, data, <code>matched</code>) — skala problemu w panelu (6.7)</td></tr>
+<tr><td><code>PATCH /api/reports/{id}</code></td><td><code>STAFF</code></td><td><code>{status}</code> — <code>NEW → TRIAGED → MATCHED | IN_PROGRESS → CLOSED</code>; z <code>MATCHED</code> wolno przejść do <code>IN_PROGRESS</code></td></tr>
+<tr><td><code>POST /api/reports/{id}/replies</code></td><td><code>STAFF</code></td><td>Odpowiedź do autora zgłoszenia (7.4). <code>{body, author_label?}</code>, do 4000 znaków</td></tr>
+<tr><td><code>GET /api/reports/{id}/replies</code></td><td>autor (<code>X-Report-Token</code>) lub <code>STAFF</code></td><td>Lista odpowiedzi</td></tr>
+<tr><td><code>GET /api/inbox</code></td><td><code>STAFF</code></td><td><strong>Skrzynka „Nowe”</strong> (7.5): <code>{new_reports, new_unmatched, pending_solutions, latest_reports:[...], latest_pending:[...]}</code></td></tr>
+<tr><td><code>GET /api/stats</code></td><td><code>STAFF</code></td><td><strong>Trendy, tylko dla pracowników Hubu</strong> (<code>base.md</code> II). Liczby zgłoszeń <code>GROUP BY category, gmina, date_trunc('week', created_at)</code>, z podziałem na <code>matched</code> / bez dopasowania. Parametry: <code>from</code>, <code>to</code>, <code>category</code>, <code>gmina</code></td></tr>
+<tr><td><code>GET /api/solutions</code></td><td><code>PUBLIC</code> (tylko <code>PUBLISHED</code>); inny <code>status</code> — <code>STAFF</code></td><td><strong>Katalog dla JST i mieszkańców.</strong> Parametry: <code>kind</code> (domyślnie <code>SOLUTION</code>), <code>category</code>, <code>gmina</code>, <code>powiat</code>, <code>tag</code>, <code>evidence_min</code>, <code>q</code> (trigram po tytule), <code>status</code>, <code>sort=recent|evidence</code>, <code>limit</code>, <code>offset</code>. Zwraca <code>SolutionCard</code> ze <code>scores: null</code> (kształt bez zmian, sekcja 8)</td></tr>
+<tr><td><code>GET /api/solutions/{id}</code></td><td><code>PUBLIC</code> (<code>PUBLISHED</code>); inny status — <code>STAFF</code></td><td>Pełna karta rozwiązania: <code>SolutionCard</code> (<code>scores: null</code>) + pole <code>body</code>. Pole <code>contact</code> nie jest zwracane (zerowane przy imporcie, sekcja 9)</td></tr>
+<tr><td><code>POST /api/solutions</code></td><td><code>PUBLIC</code></td><td>Nowe rozwiązanie do korpusu. Wymusza <code>kind=SOLUTION</code>, <code>origin=USER_SUBMITTED</code>, <code>status=PENDING_REVIEW</code>. Chunkowanie i embedding natychmiast, ale wyszukiwanie go nie widzi do zatwierdzenia (filtr statusu, 6.2/6.3)</td></tr>
+<tr><td><code>PATCH /api/solutions/{id}</code></td><td><code>STAFF</code></td><td><strong>Zatwierdzanie.</strong> <code>{status: PUBLISHED|REJECTED|ARCHIVED, evidence_level?, category?}</code>. Działa od razu — chunki nie mają kopii statusu (4.4)</td></tr>
 <tr><td><code>GET /api/taxonomy</code></td><td><code>PUBLIC</code></td><td>Lista wyzwań z etykietami polskimi — do filtrów i etykiet w interfejsie</td></tr>
+<tr><td><code>GET /api/gminy</code></td><td><code>PUBLIC</code></td><td>Lista gmin Małopolski z powiatami (z <code>data/gminy-malopolska.json</code>) — do listy wyboru przy polu zgłoszenia</td></tr>
 <tr><td><code>POST /api/feedback</code></td><td><code>PUBLIC</code></td><td><code>{search_event_id, solution_id?, helpful}</code> — kciuk w górę/dół, dopisuje do <code>search_events</code></td></tr>
-<tr><td><code>GET /healthz</code></td><td><code>PUBLIC</code></td><td><code>{db, embedding_provider, rerank_provider, embedding_meta_match}</code>. Status <code>503</code>, gdy metadane embeddingów nie zgadzają się z konfiguracją</td></tr>
+<tr><td><code>GET /healthz</code></td><td><code>PUBLIC</code></td><td><code>{db, embedding_provider, rerank_provider, llm_enabled}</code></td></tr>
 </table>
 </div>
 
 <div class="note">
-<p><strong>Endpointy klastrów, notatek, zatwierdzania rozwiązań, statusów zgłoszeń i odpowiedzi do autorów to cały kontrakt Modułu 2.</strong> Zaimplementuj je i przetestuj na realnych danych oraz na obu tokenach, nawet jeśli nic ich jeszcze nie woła. To jedyna część Modułu 1, której poprawność sprawdzi dopiero ktoś inny — dlatego musi być gotowa, zanim Moduł 1 zostanie uznany za zamknięty.</p>
+<p><strong>Endpointy <code>STAFF</code> to cały kontrakt Panelu administratora.</strong> Zaimplementuj je i przetestuj na realnych danych i z tokenem, nawet jeśli nic ich jeszcze nie woła. To jedyna część Modułu 1, której poprawność sprawdzi dopiero ktoś inny — dlatego musi być gotowa, zanim Moduł 1 zostanie uznany za zamknięty.</p>
 </div>
 
 <h3>7.4 Ścieżka odpowiedzi do autora zgłoszenia</h3>
 <p>Autor jest anonimowy i nie ma konta, więc odpowiedź nie idzie e-mailem, tylko czeka pod tokenem (ADR-010):</p>
 <ol>
 <li>Zgłoszenie zapisane ⇒ autor dostaje <code>report_token</code> (raz) i frontend trzyma go lokalnie razem z <code>report_id</code>.</li>
-<li><code>EXPERT</code> lub <code>ADMIN</code> woła <code>POST /api/reports/{id}/replies</code>. Zgłoszenie w statusie <code>NEW</code>, <code>TRIAGED</code> albo <code>MATCHED</code> przechodzi na <code>IN_PROGRESS</code>.</li>
-<li>Frontend autora odpytuje <code>GET /api/reports/{id}/replies</code> z <code>X-Report-Token</code> (przy wejściu na stronę, bez websocketów). <code>read_at</code> mówi pracownikowi, że odpowiedź została odczytana.</li>
-<li>Autor widzi <code>author_role</code> (<code>EXPERT</code> / <code>ADMIN</code>) i opcjonalny <code>author_label</code>; ten drugi nie jest weryfikowany i interfejs nie może go przedstawiać jako potwierdzonej tożsamości.</li>
+<li>Pracownik Hubu lub ekspert (token <code>STAFF</code>) woła <code>POST /api/reports/{id}/replies</code>. Zgłoszenie w statusie <code>NEW</code>, <code>TRIAGED</code> albo <code>MATCHED</code> przechodzi na <code>IN_PROGRESS</code>.</li>
+<li>Frontend autora odpytuje <code>GET /api/reports/{id}/replies</code> z <code>X-Report-Token</code> (przy wejściu na stronę, bez websocketów).</li>
+<li>Autor widzi, że odpowiedź pochodzi od zespołu Hubu, oraz opcjonalny <code>author_label</code>; ten drugi nie jest weryfikowany i interfejs nie może go przedstawiać jako potwierdzonej tożsamości.</li>
 </ol>
 <p>Zgłoszenie bez zachowanego tokenu nie ma ścieżki odpowiedzi. To świadoma cena anonimowości; kto chce być powiadomiony, podaje <code>contact_email</code>, a wysyłka (backlog, sekcja 15) użyje go wyłącznie po stronie serwera.</p>
 
-<h3>7.5 Powiadomienia dla strony odbierającej (webhook)</h3>
-<p>Wymaganie z <code>base.md</code>: system powiadamia administratora o nowym zgłoszeniu. Moduł 1 nie wysyła e-maili ani nie ma kolejki — wysyła <strong>jeden typ zdarzenia HTTP</strong> na adres z <code>NOTIFY_WEBHOOK_URL</code>, po drugiej stronie może stać Slack, przekaźnik e-mail albo system grantowy Hubu. Puste <code>NOTIFY_WEBHOOK_URL</code> = wyłączone.</p>
-
-<div class="tablewrap">
-<table>
-<tr><th><code>event</code></th><th>Kiedy</th></tr>
-<tr><td><code>report.unmatched</code></td><td>Po zapisie zgłoszenia z <code>matched = false</code> — najcenniejszy sygnał (sekcja 4.6)</td></tr>
-<tr><td><code>solution.pending</code></td><td>Nowe rozwiązanie z <code>POST /api/solutions</code> czeka na zatwierdzenie</td></tr>
-<tr><td><code>cluster.grew</code></td><td><code>member_count</code> klastra osiąga dokładnie <code>CLUSTER_ALERT_SIZE</code> (domyślnie 5) — raz na klaster</td></tr>
-</table>
-</div>
-
-<pre><code>POST {NOTIFY_WEBHOOK_URL}
-X-Splot-Signature: sha256=&lt;hmac z NOTIFY_WEBHOOK_SECRET nad ciałem&gt;
-
-{"event":"report.unmatched","id":412,"cluster_id":37,"category":"LONELINESS",
- "gmina":"Wieliczka","reporter_type":"JST","at":"2026-10-03T10:15:00Z"}</code></pre>
-
+<h3>7.5 Powiadomienia dla Hubu — skrzynka „Nowe”</h3>
+<p>Wymaganie z <code>base.md</code> (sekcje 5 i 6): system powiadamia administratora o <strong>nowym pomyśle</strong> i pozwala odpowiedzieć autorowi. W PoC powiadomienie jest <strong>widoczne w Panelu administratora</strong>, a nie wysyłane na zewnątrz (ADR-018):</p>
 <ul>
-<li><strong>Payload nie zawiera treści zgłoszenia, e-maila ani etykiety klastra</strong> — wyłącznie identyfikatory i metadane. Odbiorca, który ma token <code>ADMIN</code>, dociąga treść przez <code>GET /api/reports/{id}</code>. Dzięki temu webhook może bezpiecznie trafić do zewnętrznego komunikatora.</li>
-<li>Wysyłka w tle: 3 próby z odstępami 1 s / 4 s / 16 s. Porażka jest logowana i liczona w metryce, nigdy nie wpływa na odpowiedź dla użytkownika.</li>
-<li>Gwarancja to „co najmniej raz, jeśli proces żyje". Trwała kolejka (tabela <code>outbox</code>) jest w backlogu.</li>
+<li><code>GET /api/inbox</code> zwraca liczniki i ostatnie pozycje: nowe zgłoszenia (<code>status = NEW</code>), w tym bez dopasowania, oraz nowe pomysły czekające na zatwierdzenie (<code>solutions.status = PENDING_REVIEW</code>).</li>
+<li>Panel odpytuje endpoint co 30 s i pokazuje licznik przy zakładce „Nowe”. Pozycja znika ze skrzynki, gdy pracownik zmieni status zgłoszenia (<code>PATCH /api/reports/{id}</code>) albo zatwierdzi/odrzuci rozwiązanie.</li>
+<li>Ścieżka „nowe zgłoszenie → administrator → odpowiedź do autora” jest w całości widoczna w demo: skrzynka → szczegóły → <code>POST /api/reports/{id}/replies</code> → autor odczytuje odpowiedź tokenem (7.4).</li>
+<li>Autor <em>pomysłu</em> (<code>POST /api/solutions</code>) w PoC dostaje tylko informację o zatwierdzeniu przez widoczność w katalogu; odpowiedź do autora pomysłu powstanie razem z Kreatorem pomysłów (sekcja 15) na tym samym mechanizmie tokenu.</li>
 </ul>
+<p>Powiadomienia wychodzące (webhook do Slacka, e-mail, system grantowy) — sekcja 15.</p>
 
 <h2 id="s8">8. Kontrakt dla modułu frontendowego <span class="badge b-stable">stable</span></h2>
 
@@ -1018,14 +953,17 @@ X-Splot-Signature: sha256=&lt;hmac z NOTIFY_WEBHOOK_SECRET nad ciałem&gt;
 <tr><th>Gwarancja</th><th>Dlaczego to kontrakt, a nie szczegół</th></tr>
 <tr><td><code>candidates</code> przychodzi <strong>przed</strong> pierwszym <code>token</code></td><td>Frontend rysuje karty rozwiązań, nie czekając na streszczenie. Gdyby kolejność była odwrotna, interfejs musiałby buforować tekst — i czas do pierwszej treści wzrósłby o całą latencję LLM</td></tr>
 <tr><td>Numeracja <code>[n]</code> w streszczeniu == pozycja karty na liście <code>candidates</code></td><td>Pozwala zamienić <code>[2]</code> w klikalny odnośnik bez żadnego mapowania po stronie frontendu</td></tr>
-<tr><td>Każde <code>[n]</code> w strumieniu wskazuje istniejącą kartę</td><td>Walidacja cytowań po generacji (6.6) usuwa zmyślone odnośniki, zanim opuszczą backend. Frontend nie musi się przed nimi bronić</td></tr>
+<tr><td>Każde <code>[n]</code> w strumieniu wskazuje istniejącą kartę</td><td>Filtr strumieniowy (6.6) wycina zmyślone odnośniki, zanim trafią do zdarzenia <code>token</code>. Frontend nie musi się przed nimi bronić</td></tr>
+<tr><td><code>answer_retracted</code> unieważnia wyświetlone streszczenie</td><td>Streszczenie bez żadnego poprawnego cytowania jest wycofywane po fakcie (6.6). Frontend usuwa tekst i zostawia karty; czytnik ekranu dostaje krótki komunikat przez <code>aria-live</code></td></tr>
 <tr><td><code>no_match</code> zamiast <code>token</code> przy braku trafienia</td><td>Odrębne zdarzenie, nie puste streszczenie — frontend ma jawny sygnał do pokazania innego komunikatu</td></tr>
-<tr><td><code>report_saved</code> z <code>cluster_size</code> i <code>gmina_count</code></td><td>Gotowe dane na komunikat „ten problem zgłosiło już N osób z M gmin". Najtańszy element demo o największym efekcie</td></tr>
+<tr><td><code>report_saved</code> z <code>similar_count</code> i <code>gmina_count</code></td><td>Gotowe dane na komunikat „ten problem zgłosiło już N osób z M gmin". Najtańszy element demo o największym efekcie. Brak <code>report_saved</code> przed <code>done</code> = zapis się nie udał; frontend pokazuje karty bez komunikatu i bez śledzenia odpowiedzi</td></tr>
 <tr><td><code>report_token</code> tylko w <code>report_saved</code> i tylko raz</td><td>Frontend musi go zapisać lokalnie od razu; backend trzyma wyłącznie hash i nie odtworzy go. To jedyny sposób, w jaki autor odczyta odpowiedź od eksperta (7.4)</td></tr>
-<tr><td><code>candidates.also_see</code> — „podobne przypadki"</td><td>Osobna lista wdrożeń w innych gminach, poza cytowanymi w streszczeniu. Frontend pokazuje ją pod kartami głównymi, bez własnego sortowania</td></tr>
+<tr><td><code>candidates.also_see</code> — „zobacz też”</td><td>Kolejne trafne rozwiązania (każde powyżej progu), poza cytowanymi w streszczeniu. Frontend pokazuje je pod kartami głównymi, bez własnego sortowania. Numeracja <code>rank</code> kontynuuje listę główną</td></tr>
+<tr><td><code>candidates.context</code> — „co wiemy o tym problemie”</td><td>Wpisy wiedzy (<code>kind = KNOWLEDGE</code>) w osobnej liście, wizualnie odróżnionej od rozwiązań. Nigdy nie mają numeru <code>[n]</code>. Może przyjść niepusta także przy <code>no_match</code> — wtedy to jedyna treść odpowiedzi poza komunikatem</td></tr>
+<tr><td><code>candidates</code> wysyłane <strong>zawsze</strong>, także przed <code>no_match</code></td><td>Frontend ma jedną ścieżkę rysowania: najpierw <code>candidates</code>, potem tekst albo <code>no_match</code></td></tr>
 <tr><td><code>done</code> wysyłane <strong>zawsze</strong>, także po <code>error</code></td><td>Frontend może bezwarunkowo zamknąć wskaźnik ładowania na <code>done</code>, bez timeoutów</td></tr>
-<tr><td><code>SolutionCard</code> ma jeden kształt w całym API</td><td>Jeden typ TypeScript dla <code>/api/chat</code>, <code>/api/search</code> i <code>/api/solutions/{id}</code> — bez wariantów i pól warunkowych</td></tr>
-<tr><td><code>GET /api/taxonomy</code> z etykietami polskimi</td><td>Frontend nigdy nie hardkoduje nazw wyzwań; zmiana taksonomii nie wymaga jego przebudowy</td></tr>
+<tr><td><code>SolutionCard</code> ma jeden kształt w całym API</td><td>Jeden typ TypeScript dla <code>/api/chat</code> (<code>candidates</code>), <code>GET /api/solutions</code> i <code>GET /api/solutions/{id}</code> — bez wariantów. Poza wyszukiwaniem <code>scores</code> jest <code>null</code>, a <code>rank</code> to pozycja na liście. <code>GET /api/solutions/{id}</code> dokłada jedno pole <code>body</code>. <code>/api/search</code> to narzędzie debugowania z własnym kształtem (7.2), nie źródło kart</td></tr>
+<tr><td><code>GET /api/taxonomy</code> i <code>GET /api/gminy</code></td><td>Frontend nigdy nie hardkoduje nazw wyzwań ani listy gmin; zmiana słowników nie wymaga jego przebudowy</td></tr>
 </table>
 </div>
 
@@ -1036,27 +974,30 @@ X-Splot-Signature: sha256=&lt;hmac z NOTIFY_WEBHOOK_SECRET nad ciałem&gt;
 <h4>Czego Moduł 1 wymaga od modułu frontendowego</h4>
 <ul>
 <li><strong>Ostrzeżenie o danych osobowych</strong> trwale widoczne przy polu wpisywania: „Nie wpisuj imion, adresów ani danych o zdrowiu konkretnych osób". To wymóg z sekcji 12, nie sugestia — backend nie potrafi go wymusić.</li>
-<li><strong><code>session_id</code></strong> — losowy UUID generowany raz po stronie klienta i trzymany lokalnie. Backend go nie wydaje i nie waliduje; służy wyłącznie do grupowania zgłoszeń z jednej sesji w telemetrii.</li>
+<li><strong><code>session_id</code></strong> — losowy UUID generowany raz po stronie klienta i trzymany lokalnie. Backend go nie wydaje i nie waliduje; służy do grupowania zgłoszeń z jednej sesji i do tego, żeby licznik podobnych liczył osoby, a nie wiadomości (6.7).</li>
+<li><strong>Gmina z listy wyboru</strong> — pole przy zgłoszeniu z listą z <code>GET /api/gminy</code> (z wyszukiwaniem po wpisanych literach), opcjonalne. Backend nie wyciąga gminy z tekstu.</li>
+<li><strong>Pytanie doprecyzowujące</strong> — gdy streszczenie kończy się pytaniem, odpowiedź użytkownika frontend wysyła jako nowe <code>/api/chat</code> z pełnym tekstem (poprzednia wiadomość + odpowiedź) i tym samym <code>session_id</code> (6.6).</li>
 <li><strong><code>reporter_type</code></strong> — interfejs pyta jednym prostym wyborem („Zgłaszam jako: mieszkaniec / organizacja / samorząd") i wysyła wartość w <code>/api/chat</code>. Pole opcjonalne, domyślnie <code>OTHER</code>; nie daje żadnych uprawnień.</li>
-<li><strong>Tokeny <code>EXPERT</code> i <code>ADMIN</code></strong> nie trafiają do kodu ani do bundla interfejsu mieszkańca. Interfejs publiczny nigdy ich nie zna; wpisują je pracownicy w interfejsie Modułu 2 i trzymają w pamięci sesji, nie w <code>localStorage</code>.</li>
-<li><strong>Brak własnej logiki rankingu.</strong> Kolejność w <code>candidates</code> jest ostateczna. Frontend nie sortuje, nie filtruje i nie odcina wyników po <code>scores</code> — progi są skalibrowane na zestawie ewaluacyjnym (sekcja 10) i żyją w konfiguracji backendu.</li>
-<li><strong>Dostępność</strong> — wykluczenie cyfrowe jest jednym z wyzwań, które adresujemy, więc interfejs nie może go pogłębiać: <code>aria-live="polite"</code> na strumieniowanej odpowiedzi, kontrast WCAG AA, tekst od 16 px, pełna obsługa klawiaturą, działanie na telefonie.</li>
+<li><strong>Token <code>STAFF</code></strong> nie trafia do kodu ani do bundla interfejsu mieszkańca. Interfejs publiczny nigdy go nie zna; wpisują go pracownicy w interfejsie Panelu administratora i trzymają w pamięci sesji, nie w <code>localStorage</code>.</li>
+<li><strong>Brak własnej logiki rankingu.</strong> Kolejność w <code>candidates</code> jest ostateczna. Frontend nie sortuje, nie filtruje i nie odcina wyników po <code>scores</code> — progi żyją w konfiguracji backendu (sekcja 11).</li>
+<li><strong>Dostępność</strong> — wykluczenie cyfrowe jest jednym z wyzwań, które adresujemy, więc interfejs nie może go pogłębiać: <code>aria-live="polite"</code> na strumieniowanej odpowiedzi, zgodność z WCAG 2.1 na poziomie AA (wymóg <code>base.md</code>, sekcja 3), tekst od 16 px, pełna obsługa klawiaturą, działanie na telefonie.</li>
+<li><strong>Design system</strong> — interfejs budowany według <code>DESIGN.md</code> i <code>design-system/</code> (tokeny i komponenty, motyw jasny + tryb wysokiego kontrastu), zgodnie z <code>CLAUDE.md</code> repozytorium.</li>
 </ul>
 
 <div class="note">
-<p><strong>Weryfikacja Modułu 1 bez frontendu.</strong> <code>curl -N -X POST localhost:8000/api/chat -H 'Content-Type: application/json' -d '{"message":"..."}'</code> musi pokazać pełny strumień zdarzeń w kolejności z sekcji 7.1. To jest definicja gotowości — nie „działa w przeglądarce".</p>
+<p><strong>Weryfikacja Modułu 1 bez frontendu.</strong> <code>curl -N -X POST localhost:8000/api/chat -H 'Content-Type: application/json' -d '{"message":"..."}'</code> musi pokazać pełny strumień zdarzeń w kolejności z sekcji 7.1. Do pracy frontendu przed gotowym backendem służy mock z przykładowymi strumieniami (sekcja 13, godzina 0), nie <code>/api/search</code>. To jest definicja gotowości — nie „działa w przeglądarce".</p>
 </div>
 
 <h2 id="s9">9. Ingest korpusu <span class="badge b-draft">draft</span></h2>
 
-<p>Dwa źródła wpływają do <strong>jednej</strong> tabeli <code>solutions</code>, rozróżniane polem <code>origin</code>:</p>
+<p>Trzy źródła wpływają do <strong>jednej</strong> tabeli <code>solutions</code>, rozróżniane polem <code>origin</code>:</p>
 
 <div class="tablewrap">
 <table>
 <tr><th>Źródło</th><th><code>origin</code></th><th><code>status</code></th><th>Mechanizm</th></tr>
-<tr><td>Paczka organizatora: biblioteka innowacji społecznych, mapa wyzwań Małopolski, raporty i doświadczenia ROPS Kraków, przykładowe dane MVP</td><td><code>CURATED</code></td><td><code>PUBLISHED</code></td><td><code>scripts/ingest.py</code> z plików w <code>data/solutions/</code></td></tr>
-<tr><td>Rozwiązania zgłaszane na bieżąco przez użytkowników</td><td><code>USER_SUBMITTED</code></td><td><code>PENDING_REVIEW</code></td><td><code>POST /api/solutions</code>, ta sama ścieżka chunkowania i embeddingu; publikacja przez <code>PATCH /api/solutions/{id}</code> (<code>ADMIN</code>)</td></tr>
-<tr><td>Zgłoszenia awansowane po rozwiązaniu przez Hub</td><td><code>PROMOTED_FROM_REPORT</code></td><td><code>PENDING_REVIEW</code></td><td>Moduł 2 — <span class="badge b-todo">todo</span>, nie implementuj</td></tr>
+<tr><td>Paczka organizatora: Biblioteka Innowacji Społecznych, przykładowe dane MVP (<code>kind = SOLUTION</code>) oraz Mapa Wyzwań Małopolski, raporty i doświadczenia ROPS Kraków (<code>kind = KNOWLEDGE</code>)</td><td><code>CURATED</code></td><td><code>PUBLISHED</code></td><td><code>scripts/ingest.py</code> z plików w <code>data/solutions/</code></td></tr>
+<tr><td>Rozwiązania zgłaszane na bieżąco przez użytkowników</td><td><code>USER_SUBMITTED</code></td><td><code>PENDING_REVIEW</code></td><td><code>POST /api/solutions</code>, ta sama ścieżka chunkowania i embeddingu; publikacja przez <code>PATCH /api/solutions/{id}</code> (<code>STAFF</code>)</td></tr>
+<tr><td>Zgłoszenia awansowane po rozwiązaniu przez Hub</td><td><code>PROMOTED_FROM_REPORT</code></td><td><code>PENDING_REVIEW</code></td><td>Panel administratora — <span class="badge b-todo">todo</span>, nie implementuj</td></tr>
 </table>
 </div>
 
@@ -1064,6 +1005,7 @@ X-Splot-Signature: sha256=&lt;hmac z NOTIFY_WEBHOOK_SECRET nad ciałem&gt;
 <p>Każdy plik to lista obiektów. Wszystkie adaptery źródeł (ręczne przepisanie, parser PDF-a, scraper) produkują <strong>ten</strong> format i nic więcej. Dzięki temu dodanie nowego źródła nigdy nie dotyka kodu ingestu.</p>
 <pre><code>[
   {
+    "kind": "SOLUTION",            // opcjonalne, domyślnie SOLUTION; Mapa Wyzwań i raporty: KNOWLEDGE
     "title": "Telefon Życzliwości dla seniorów",
     "summary": "Codzienne rozmowy telefoniczne wolontariuszy z osobami 65+ ...",
     "body": "Pełny opis, może zawierać akapity i nagłówki markdown...",
@@ -1086,61 +1028,26 @@ X-Splot-Signature: sha256=&lt;hmac z NOTIFY_WEBHOOK_SECRET nad ciałem&gt;
 <h4><code>scripts/ingest.py</code> — idempotentny</h4>
 <pre><code>python -m scripts.ingest data/solutions/           # wszystkie pliki
 python -m scripts.ingest data/solutions/rops.json --dry-run
-python -m scripts.ingest --reembed-all              # po zmianie providera embeddingów</code></pre>
+python -m scripts.ingest --reembed-all              # po zmianie modelu lub prefiksów embeddingów</code></pre>
 
 <ol>
 <li>Wczytaj i zwaliduj po schemacie Pydantic. Błędny rekord: pomiń, wypisz powód, <strong>nie przerywaj</strong> całej partii.</li>
-<li><strong>Dane osobowe (<code>base.md</code>, sekcja 9).</strong> Pole <code>contact</code> jest <strong>zerowane przy imporcie</strong> — domyślnie, flagą <code>--strip-contact</code>. Zespół nie może wnosić prawdziwych danych osobowych z materiałów ROPS; kontakt do wdrożenia daje <code>organization</code> i <code>source_url</code>. Wyłączyć można tylko jawnym <code>--keep-contact</code>, i tylko dla danych, które organizator potwierdził jako publiczne.</li>
+<li><strong>Dane osobowe (<code>base.md</code>, sekcja 9).</strong> Pole <code>contact</code> jest <strong>zerowane przy imporcie</strong> domyślnie, bez żadnej flagi. Zespół nie może wnosić prawdziwych danych osobowych z materiałów ROPS; kontakt do wdrożenia daje <code>organization</code> i <code>source_url</code>. Wyłączyć można tylko jawnym <code>--keep-contact</code>, i tylko dla danych, które organizator potwierdził jako publiczne.</li>
 <li><code>content_hash = sha256(title + summary + body)</code>.</li>
 <li>Upsert po <code>source_url</code>, a przy jego braku po <code>content_hash</code>.</li>
 <li>Hash niezmieniony ⇒ <strong>pomiń chunkowanie i embedding</strong>. To cała istota idempotencji — ponowne uruchomienie na 500 wpisach po dopisaniu jednego nie może kosztować 500 wywołań API.</li>
 <li>Hash zmieniony ⇒ usuń chunki rozwiązania, przechunkuj, policz embeddingi partiami po 64, zapisz.</li>
-<li>Zsynchronizuj <code>published</code> i <code>title</code> we wszystkich chunkach (<code>sync_chunk_denorm</code>).</li>
-<li>Zapisz <code>embedding_meta</code> (provider, model, dim, <code>indexed_at</code>).</li>
 <li>Podsumowanie: dodane / zaktualizowane / pominięte / błędne + liczba wywołań API.</li>
 </ol>
 
 <div class="note">
-<p><strong>Dane startowe na demo.</strong> Zanim przyjdzie paczka od organizatora, utwórz <code>data/solutions/seed-demo.json</code> z 30–50 realistycznymi wpisami pokrywającymi wszystkie osiem kodów taksonomii, po 3–6 na kod. Bez tego nie da się uruchomić ani ewaluacji, ani ręcznego sprawdzenia API. Wpisy oznaczone <code>"source_name": "SEED_DEMO"</code> — łatwo je potem usunąć jednym <code>DELETE</code>.</p>
+<p><strong>Dane startowe na demo.</strong> Zanim przyjdzie paczka od organizatora, utwórz <code>data/solutions/seed-demo.json</code> z 30–50 realistycznymi wpisami pokrywającymi wszystkie osiem merytorycznych kodów taksonomii (bez <code>OTHER</code>), po 3–6 na kod. Bez tego nie da się ręcznie sprawdzić API ani przygotować demo. Dołóż też kilka wpisów <code>kind = KNOWLEDGE</code> (fragmenty Mapy Wyzwań), żeby <code>candidates.context</code> nie był zawsze pusty. Dołóż też 10–15 przykładowych zgłoszeń (kilka parafraz tego samego problemu z różnych sesji i gmin), żeby licznik podobnych pokazał coś na demo i dało się sprawdzić próg <code>SIMILAR_REPORT_THRESHOLD</code> (6.7). Wpisy oznaczone <code>"source_name": "SEED_DEMO"</code> — łatwo je potem usunąć jednym <code>DELETE</code>.</p>
 </div>
 
-<h2 id="s10">10. Ewaluacja jakości <span class="badge b-draft">draft</span></h2>
+<h2 id="s10">10. Ewaluacja jakości <span class="badge b-todo">usunięta</span></h2>
 
-<p>Bez tego kroku każda zmiana progu, <code>k</code> czy modelu jest zgadywaniem, a „wydaje mi się, że teraz lepiej" nie jest argumentem.</p>
-
-<h4><code>eval/queries.jsonl</code> — 25–30 par</h4>
-<pre><code>{"query": "starsi ludzie w mojej wsi są samotni, nie mają z kim rozmawiać",
- "relevant": [142, 207], "category": "LONELINESS", "note": "parafraza, zero wspólnych słów"}
-{"query": "Telefon Życzliwości jak uruchomić",
- "relevant": [142], "category": "LONELINESS", "note": "nazwa własna - test toru leksykalnego"}
-{"query": "babcia nie umie obsługiwać aplikacji w telefonie",
- "relevant": [311], "category": "DIGITAL_EXCLUSION", "note": "potoczny język"}</code></pre>
-
-<p>Skład zestawu — <strong>nie</strong> same łatwe przypadki:</p>
-<ul>
-<li>~10 parafraz bez wspólnych słów z dokumentem (mierzy tor semantyczny),</li>
-<li>~8 zapytań z nazwą własną, akronimem lub nazwą organizacji (mierzy tor leksykalny),</li>
-<li>~7 zapytań potocznych, z literówkami, bez polskich znaków (mierzy <code>unaccent</code> i <code>pg_trgm</code>),</li>
-<li>~5 zapytań, na które <strong>nie ma</strong> rozwiązania w korpusie, <code>"relevant": []</code> (kalibruje <code>MIN_RERANK_SCORE</code>).</li>
-</ul>
-
-<h4><code>make eval</code></h4>
-<pre><code>$ make eval
-
-tor            recall@10   MRR@10   nDCG@10
-lexical           0.61      0.44      0.52
-semantic          0.78      0.58      0.66
-rrf               0.89      0.71      0.79     &lt;- fuzja musi bić oba pojedyncze tory
-rrf + rerank      0.89      0.86      0.88     &lt;- rerank nie zmienia recall, poprawia kolejność
-
-no-match: 5 zapytań, poprawnie odrzucone 4/5, próg 0.35
-średnia latencja: 1,84 s   p95: 2,91 s</code></pre>
-
-<div class="warn">
-<p><strong>Dwa warunki poprawności implementacji.</strong> Jeśli <code>rrf</code> nie bije obu pojedynczych torów — fuzja jest zepsuta (najczęściej: pozycje liczone od 0 zamiast od 1, albo jedna z list wraca pusta i nikt tego nie zauważył). Jeśli <code>rerank</code> podnosi <code>recall@10</code> — masz błąd w logice, reranker tylko przestawia kolejność istniejących dziesięciu kandydatów i <strong>nie może</strong> dodać nowych.</p>
-</div>
-
-<p>Każdy przebieg dopisuje wiersz do <code>eval/results.csv</code> (data, commit, konfiguracja, metryki) — regresja jakości staje się widoczna, zamiast być odkrywana na demo.</p>
+<p>Automatyczna ewaluacja (zestaw zapytań, <code>make eval</code>, metryki recall/MRR/nDCG) <strong>nie wchodzi do PoC</strong> (ADR-014). Numer sekcji zostaje, żeby nie przesuwać odwołań.</p>
+<p>Zamiast niej — <strong>ręczny przegląd</strong> przez <code>GET /api/search</code> (7.2) na kilkunastu zapytaniach przygotowanych przed demo: parafrazy bez wspólnych słów, nazwy własne, zapytania bez polskich znaków i kilka problemów, na które w korpusie nie ma rozwiązania (te muszą kończyć się <code>no_match</code>). <code>/api/search</code> pokazuje oba tory osobno, więc widać, czy leksykalny nie wraca pusty i czy fuzja ma sens. Progi (<code>MIN_RERANK_SCORE</code>, <code>MIN_COSINE_SCORE</code>) ustawia się na tej podstawie; to szacunek, nie pomiar.</p>
 
 <h2 id="s11">11. Konfiguracja i feature flagi <span class="badge b-stable">stable</span></h2>
 
@@ -1150,13 +1057,13 @@ no-match: 5 zapytań, poprawnie odrzucone 4/5, próg 0.35
 <table>
 <tr><th>Zmienna</th><th>Domyślna</th><th>Znaczenie</th></tr>
 <tr><td><code>DATABASE_URL</code></td><td><code>postgresql+asyncpg://...</code></td><td>Połączenie</td></tr>
-<tr><td><code>EMBEDDING_PROVIDER</code></td><td><code>openai</code></td><td><code>openai</code> | <code>local</code></td></tr>
-<tr><td><code>EMBEDDING_MODEL</code></td><td><code>text-embedding-3-large</code></td><td>Lokalnie: <code>BAAI/bge-m3</code></td></tr>
+<tr><td><code>EMBEDDING_PROVIDER</code></td><td><code>openai</code></td><td>Jedyna implementacja w PoC; interfejs gotowy na kolejne (ADR-015)</td></tr>
+<tr><td><code>EMBEDDING_MODEL</code></td><td><code>text-embedding-3-large</code></td><td>Wywoływany z <code>dimensions=1024</code> (ADR-004)</td></tr>
 <tr><td><code>EMBEDDING_DIM</code></td><td><code>1024</code></td><td><strong>Nie zmieniaj</strong> bez migracji kolumn i pełnego re-embeddingu (ADR-004)</td></tr>
 <tr><td><code>EMBEDDING_BATCH_SIZE</code></td><td><code>64</code></td><td>Rozmiar partii w ingeście</td></tr>
 <tr><td><code>EMBEDDING_QUERY_PREFIX</code></td><td><em>(pusty)</em></td><td><code>query: </code> wyłącznie dla modeli E5. Pusty dla OpenAI i <code>bge-m3</code></td></tr>
 <tr><td><code>EMBEDDING_PASSAGE_PREFIX</code></td><td><em>(pusty)</em></td><td><code>passage: </code> wyłącznie dla modeli E5. Zmiana = pełny re-embedding</td></tr>
-<tr><td><code>RERANK_PROVIDER</code></td><td><code>cohere</code></td><td><code>cohere</code> | <code>local</code> | <code>noop</code></td></tr>
+<tr><td><code>RERANK_PROVIDER</code></td><td><code>cohere</code></td><td><code>cohere</code> | <code>noop</code></td></tr>
 <tr><td><code>RERANK_ENABLED</code></td><td><code>true</code></td><td><code>false</code> ⇒ kolejność RRF jest ostateczna</td></tr>
 <tr><td><code>RRF_K</code></td><td><code>60</code></td><td>Stała wygładzająca fuzji</td></tr>
 <tr><td><code>CANDIDATES_PER_TRACK</code></td><td><code>20</code></td><td>Wielkość listy z każdego toru</td></tr>
@@ -1164,32 +1071,20 @@ no-match: 5 zapytań, poprawnie odrzucone 4/5, próg 0.35
 <tr><td><code>RERANK_TOP_N</code></td><td><code>10</code></td><td>Ile kandydatów po fuzji trafia do rerankera</td></tr>
 <tr><td><code>ANSWER_TOP_N</code></td><td><code>3</code></td><td>Ile kart pokazuje interfejs</td></tr>
 <tr><td><code>MIN_RERANK_SCORE</code></td><td><code>0.35</code></td><td>Poniżej ⇒ jawne „nie wiem" (gdy reranker aktywny)</td></tr>
-<tr><td><code>MIN_COSINE_SCORE</code></td><td><code>0.50</code></td><td>Bramka „nie wiem" zamiast rerankera (<code>noop</code>, <code>RERANK_ENABLED=false</code>). Wartość startowa do kalibracji na <code>make eval</code></td></tr>
-<tr><td><code>ALSO_SEE_N</code></td><td><code>5</code></td><td>Ile dodatkowych wyników po rerankingu trafia do <code>candidates.also_see</code></td></tr>
-<tr><td><code>CLUSTER_SIM_THRESHOLD</code></td><td><code>0.82</code></td><td>Próg przypięcia zgłoszenia do klastra</td></tr>
-<tr><td><code>HNSW_EF_SEARCH</code></td><td><code>100</code></td><td><code>SET</code> per sesja przed zapytaniem wektorowym</td></tr>
+<tr><td><code>MIN_COSINE_SCORE</code></td><td><code>0.50</code></td><td>Bramka „nie wiem" zamiast rerankera (<code>noop</code>, <code>RERANK_ENABLED=false</code>) oraz próg wpisów wiedzy w <code>candidates.context</code>. Wartość startowa, korygowana ręcznie (sekcja 10)</td></tr>
+<tr><td><code>KNOWLEDGE_TOP_N</code></td><td><code>2</code></td><td>Maks. liczba wpisów w <code>candidates.context</code>; <code>0</code> wyłącza wiedzę w odpowiedzi</td></tr>
+<tr><td><code>ALSO_SEE_N</code></td><td><code>5</code></td><td>Ile dodatkowych wyników po rerankingu trafia do <code>candidates.also_see</code>. Reranker zwraca <code>ANSWER_TOP_N + ALSO_SEE_N</code> pozycji; suma nie może przekroczyć <code>RERANK_TOP_N</code></td></tr>
+<tr><td><code>SIMILAR_REPORT_THRESHOLD</code></td><td><code>0.82</code></td><td>Cosinus, od którego zgłoszenie liczy się jako podobne (6.7). Sprawdź ręcznie na seedzie przed demo</td></tr>
 <tr><td><code>LLM_ENABLED</code></td><td><code>true</code></td><td><code>false</code> ⇒ same karty, bez streszczenia</td></tr>
-<tr><td><code>LLM_MODEL</code></td><td><code>claude-sonnet-5-5</code></td><td>Model generujący streszczenie. Dla tak wąskiego zadania wystarczy też <code>claude-haiku-4-5-20251001</code> (taniej, sekcja 16)</td></tr>
+<tr><td><code>LLM_MODEL</code></td><td><code>claude-haiku-4-5-20251001</code></td><td>Model generujący streszczenie. Wąskie zadanie (2–4 zdania z cytowaniami) — Haiku wystarcza i jest podstawą kosztów w sekcji 16. Alternatywa do porównania jakości: <code>claude-sonnet-5-5</code></td></tr>
 <tr><td><code>FTS_CONFIG</code></td><td><code>polish_simple</code></td><td>Punkt podmiany na hunspell (sekcja 5)</td></tr>
-<tr><td><code>RATE_LIMIT_CHAT</code></td><td><code>60/minute</code></td><td>Klucz: <code>session_id</code>, a gdy go brak — adres IP. Samo IP blokowałoby demo przy wspólnym Wi-Fi na sali i urzędy za jednym NAT-em</td></tr>
-<tr><td><code>RATE_LIMIT_BYPASS_IPS</code></td><td><em>(pusty)</em></td><td>Lista adresów wyłączonych z limitu, np. stanowisko demo. Lista po przecinku</td></tr>
 <tr><td><code>CORS_ORIGINS</code></td><td><code>http://localhost:5173</code></td><td>Origin modułu frontendowego, lista po przecinku</td></tr>
-<tr><td><code>EXPERT_TOKEN</code></td><td><em>(brak)</em></td><td>Współdzielony sekret poziomu <code>EXPERT</code>. Pusty = poziom wyłączony (fail closed). Min. 32 losowe bajty</td></tr>
-<tr><td><code>ADMIN_TOKEN</code></td><td><em>(brak)</em></td><td>Współdzielony sekret poziomu <code>ADMIN</code>. Pusty = poziom wyłączony. Rotacja przez zmianę zmiennej i restart</td></tr>
-<tr><td><code>NOTIFY_WEBHOOK_URL</code></td><td><em>(pusty)</em></td><td>Adres odbiorcy powiadomień (7.5). Pusty = wyłączone</td></tr>
-<tr><td><code>NOTIFY_WEBHOOK_SECRET</code></td><td><em>(brak)</em></td><td>Klucz HMAC podpisu <code>X-Splot-Signature</code></td></tr>
-<tr><td><code>CLUSTER_ALERT_SIZE</code></td><td><code>5</code></td><td>Przy tej liczbie zgłoszeń klaster wysyła <code>cluster.grew</code></td></tr>
-<tr><td><code>RETENTION_MONTHS</code></td><td><code>24</code></td><td>Po tylu miesiącach <code>scripts/retention.py</code> czyści treści (sekcja 12)</td></tr>
+<tr><td><code>STAFF_TOKEN</code></td><td><em>(brak)</em></td><td>Współdzielony sekret poziomu <code>STAFF</code> (ADR-017). Pusty = poziom wyłączony (fail closed). Min. 32 losowe bajty. Rotacja przez zmianę zmiennej i restart</td></tr>
 </table>
 </div>
 
 <div class="note">
-<p><strong>Tryb „demo offline"</strong> — jeden komplet zmiennych do przetestowania <em>przed</em> prezentacją, nie w jej trakcie:</p>
-<pre><code>EMBEDDING_PROVIDER=local
-EMBEDDING_MODEL=BAAI/bge-m3
-RERANK_PROVIDER=local
-LLM_ENABLED=false</code></pre>
-<p>Przełączenie providera embeddingów wymaga <strong>pełnego re-embeddingu korpusu</strong> (<code>scripts/ingest.py --reembed-all</code>). Nie da się tego zrobić w minutę przed wejściem na scenę — przygotuj dwa wolumeny bazy albo zdecyduj się na jeden provider i trzymaj go.</p>
+<p><strong>Awaria sieci na demo.</strong> PoC zależy od trzech zewnętrznych API (OpenAI, Cohere, Anthropic) — trybu offline nie ma (ADR-015). Zabezpieczenia, w kolejności: hotspot z telefonu; <code>RERANK_ENABLED=false</code> i <code>LLM_ENABLED=false</code>, jeśli zawodzi tylko jeden dostawca (zostaje embedding i karty); nagrany film z pełną ścieżką demo (sekcja 13, krok 7).</p>
 </div>
 
 <h2 id="s12">12. RODO i bezpieczeństwo <span class="badge b-draft">draft</span></h2>
@@ -1202,29 +1097,27 @@ LLM_ENABLED=false</code></pre>
 <tr><td>Zgłoszenie domyślnie anonimowe</td><td><code>contact_email</code> i <code>submitted_by_name</code> dopuszczają <code>NULL</code>; API nie wymaga żadnych danych identyfikujących, bo nie ma kont użytkowników</td></tr>
 <tr><td>Jawne ostrzeżenie przy polu wpisywania</td><td>Wymóg przekazany modułowi frontendowemu (sekcja 8): „Nie wpisuj imion, adresów ani danych o zdrowiu konkretnych osób" — stale widoczne, nie w regulaminie. Backend tego nie wymusi</td></tr>
 <tr><td>Brak treści zgłoszeń w logach</td><td>Logowany <code>report_id</code> i <code>len(text)</code>, nigdy <code>raw_text</code>. Filtr logów odrzucający klucze <code>raw_text</code>, <code>message</code>, <code>contact_email</code></td></tr>
-<tr><td>Brak treści w URL-ach</td><td><code>/api/chat</code> wyłącznie <code>POST</code>; <code>/api/search</code> z <code>GET</code> to <strong>narzędzie debugowania</strong> — wyłącz w konfiguracji produkcyjnej</td></tr>
-<tr><td>Retencja</td><td>Po <code>RETENTION_MONTHS</code> (24) skrypt <code>scripts/retention.py</code> (cron) ustawia <code>NULL</code> w <strong>wszystkich</strong> kopiach treści: <code>reports.raw_text</code>, <code>reports.normalized_text</code>, <code>report_replies.body</code>, <code>search_events.query</code>, <code>search_events.normalized_query</code>; zeruje <code>reports.extracted</code> (<code>'{}'</code>) i <code>reports.embedding</code>, ustawia <code>text_purged_at</code>. Zostają kolumny statystyczne (<code>category</code>, <code>gmina</code>, <code>reporter_type</code>, <code>cluster_id</code>) oraz centroidy klastrów — skala problemu przeżywa treść. Czyszczenie samego <code>raw_text</code> byłoby pozorne, bo ta sama treść leży w <code>normalized_text</code></td></tr>
-<tr><td>Etykieta klastra</td><td><code>report_clusters.label</code> to fragment pierwszego zgłoszenia, więc endpointy klastrów są co najmniej <code>EXPERT</code> (7.0). Po retencji pierwszego zgłoszenia etykieta jest zastępowana przez <code>category</code> lub nazwę nadaną przez operatora</td></tr>
-<tr><td>Powiadomienia wychodzące</td><td>Webhook (7.5) niesie wyłącznie identyfikatory i metadane, nigdy treść, e-mail ani etykietę klastra</td></tr>
-<tr><td>Dane wychodzące do zewnętrznych API</td><td>Przy <code>EMBEDDING_PROVIDER=openai</code> / <code>RERANK_PROVIDER=cohere</code> treść zgłoszenia opuszcza infrastrukturę. <strong>Udokumentuj to w polityce prywatności</strong>; tryb <code>local</code> istnieje właśnie jako wariant bez transferu</td></tr>
-<tr><td>Rate limiting</td><td><code>slowapi</code> na <code>/api/chat</code>, <code>/api/reports</code>, <code>/api/solutions</code></td></tr>
+<tr><td>Brak treści w URL-ach</td><td><code>/api/chat</code> wyłącznie <code>POST</code>; <code>/api/search</code> z <code>GET</code> to <strong>narzędzie debugowania</strong> dostępne tylko z tokenem <code>STAFF</code> — wyłącz w konfiguracji produkcyjnej</td></tr>
+<tr><td>Retencja</td><td><strong>Brak automatycznej w PoC</strong> — dane są testowe (<code>base.md</code>, sekcja 9). Przed wdrożeniem: <code>scripts/retention.py</code> czyszczący wszystkie kopie treści po 24 miesiącach (sekcja 15)</td></tr>
+<tr><td>Dane wychodzące do zewnętrznych API</td><td>Przy <code>EMBEDDING_PROVIDER=openai</code> / <code>RERANK_PROVIDER=cohere</code> treść zgłoszenia opuszcza infrastrukturę (także do Anthropic przy <code>LLM_ENABLED=true</code>). <strong>Udokumentuj to w polityce prywatności</strong>; wariant bez transferu to lokalne modele z sekcji 15</td></tr>
+<tr><td>Rate limiting</td><td><strong>Brak w PoC</strong> (ADR-013). Każdy, kto zna adres API, może generować koszty u dostawców embeddingu, rerankera i LLM. Nie wystawiaj API publicznie bez limitu po stronie proxy (np. limit per IP w nginx/Caddy) — backlog, sekcja 15</td></tr>
 <tr><td>Treść od użytkownika w korpusie</td><td><code>POST /api/solutions</code> nigdy nie publikuje od razu — <code>PENDING_REVIEW</code> jest zabezpieczeniem przed zatruciem wyników wyszukiwania</td></tr>
-<tr><td>Wstrzyknięcie przez prompt</td><td>Tekst zgłoszenia i treść rozwiązań wchodzą do promptu <strong>wyłącznie</strong> jako blok danych. Instrukcje w <code>SYSTEM</code>. Zasada „nie dodawaj informacji spoza kontekstu" ogranicza szkodę; walidacja cytowań (6.6) wykrywa odpłynięcie</td></tr>
+<tr><td>Wstrzyknięcie przez prompt</td><td>Tekst zgłoszenia i treść rozwiązań wchodzą do promptu <strong>wyłącznie</strong> jako blok danych. Instrukcje w <code>SYSTEM</code>. Zasada „nie dodawaj informacji spoza kontekstu" ogranicza szkodę; filtr cytowań (6.6) wykrywa odpłynięcie</td></tr>
 </table>
 </div>
 
 <div class="danger">
-<p><strong>Moduł 1 nie ma kont indywidualnych — dostęp daje jeden z dwóch współdzielonych tokenów (ADR-009).</strong> To świadoma decyzja, nie przeoczenie, i wystarcza na hackathon oraz pilotaż z danymi testowymi: trendy, klastry i treści zgłoszeń są niedostępne bez tokenu <code>EXPERT</code> lub <code>ADMIN</code>, zgodnie z wymogiem, że agregaty widzi tylko administrator. Ale token potwierdza <em>poziom</em>, nie <em>osobę</em>:</p>
+<p><strong>Moduł 1 nie ma kont indywidualnych — dostęp daje jeden współdzielony token <code>STAFF</code> (ADR-017).</strong> To świadoma decyzja, nie przeoczenie, i wystarcza na hackathon oraz pilotaż z danymi testowymi: trendy, statystyki i treści zgłoszeń są niedostępne bez tokenu, zgodnie z wymogiem, że agregaty widzi tylko administrator. Ale token potwierdza <em>poziom</em>, nie <em>osobę</em>:</p>
 <ul>
-<li>nie ma śladu audytowego „kto zatwierdził rozwiązanie" ani „kto odpisał" (jest tylko <code>author_role</code> i niezweryfikowany <code>author_label</code>),</li>
+<li>nie ma śladu audytowego „kto zatwierdził rozwiązanie" ani „kto odpisał" (jest tylko niezweryfikowany <code>author_label</code>),</li>
 <li>wyciek tokenu wymaga rotacji dla wszystkich pracowników naraz,</li>
-<li>każdy, kto zna token, ma pełne uprawnienia swojego poziomu.</li>
+<li>każdy, kto zna token, ma pełne uprawnienia — także ekspert może zatwierdzać rozwiązania.</li>
 </ul>
 <p><strong>Blokujące</strong> dla wdrożenia z danymi realnych mieszkańców jest dopiero wejście w kontakt z prawdziwymi danymi bez kont indywidualnych (sekcja 15).</p>
 <p>Rzeczy, których <strong>nie wolno</strong> pominąć:</p>
 <ul>
-<li><code>contact_email</code> nie wychodzi z żadnego endpointu — zostaje w bazie, dostępny tylko bezpośrednio z <code>psql</code>. Dotyczy także <code>ADMIN</code>.</li>
-<li><code>raw_text</code> i <code>normalized_text</code> nie trafiają do logów, URL-i ani webhooków.</li>
+<li><code>contact_email</code> nie wychodzi z żadnego endpointu — zostaje w bazie, dostępny tylko bezpośrednio z <code>psql</code>. Dotyczy także <code>STAFF</code>.</li>
+<li><code>raw_text</code> i <code>normalized_text</code> nie trafiają do logów ani URL-i.</li>
 <li>Tokeny tylko w nagłówkach, HTTPS poza <code>localhost</code>, pusty token = poziom wyłączony.</li>
 </ul>
 <p>Dopisz brak kont indywidualnych wprost na slajdzie o dalszych krokach — nazwana i ograniczona luka wypada lepiej niż przemilczana.</p>
@@ -1234,88 +1127,77 @@ LLM_ENABLED=false</code></pre>
 
 <pre><code>hackyeah-2026/
 ├── docker-compose.yml           # db (pgvector/pgvector:pg16) + api
-├── Makefile                     # up, migrate, ingest, eval, test, fmt
+├── Makefile                     # up, ingest, test, fmt
 ├── .env.example                 # wszystkie zmienne z sekcji 11
 ├── docs/
 │   └── module-1-matchmaking.html # ten dokument
+├── db/
+│   └── init.sql                 # sekcje 4 i 5: rozszerzenia, polish_simple, tabele, seed taksonomii
 ├── api/
-│   ├── main.py                  # FastAPI, CORS, X-Request-Id, rate limiting
+│   ├── main.py                  # FastAPI, CORS, X-Request-Id
 │   ├── config.py                # pydantic-settings, sekcja 11
 │   ├── db.py                    # silnik async, sesje
-│   ├── auth.py                  # X-Access-Token -> PUBLIC/EXPERT/ADMIN, X-Report-Token (7.0)
-│   ├── notify.py                # webhook powiadomień (7.5)
+│   ├── auth.py                  # X-Access-Token -> PUBLIC/STAFF, X-Report-Token (7.0)
 │   ├── models.py                # modele SQLAlchemy, sekcja 4
 │   ├── schemas.py               # modele Pydantic request/response, sekcja 7
 │   ├── routers/
 │   │   ├── chat.py              # POST /api/chat (SSE)
-│   │   ├── search.py            # GET  /api/search (debug)
-│   │   ├── reports.py           # POST/GET/PATCH /api/reports, replies (7.4)
+│   │   ├── search.py            # GET  /api/search (debug, STAFF)
+│   │   ├── reports.py           # GET(lista, id, similar)/PATCH /api/reports, replies (7.4)
 │   │   ├── solutions.py         # POST/GET(lista, id)/PATCH /api/solutions
-│   │   ├── clusters.py          # GET/PATCH /api/clusters, notes  &lt;- kontrakt Modułu 2
-│   │   └── meta.py              # /api/taxonomy, /api/feedback, /healthz
+│   │   ├── staff.py             # /api/inbox, /api/stats  &lt;- kontrakt Panelu administratora
+│   │   └── meta.py              # /api/taxonomy, /api/gminy, /api/feedback, /healthz
 │   ├── pipeline/
 │   │   ├── preprocess.py        # 6.1
 │   │   ├── lexical.py           # 6.2
-│   │   ├── semantic.py          # 6.3
+│   │   ├── semantic.py          # 6.3 (rozwiązania + wiedza)
 │   │   ├── fusion.py            # 6.4
-│   │   ├── rerank.py            # 6.5
-│   │   ├── answer.py            # 6.6
-│   │   ├── clustering.py        # 6.7
+│   │   ├── rerank.py            # 6.5 (bramka)
+│   │   ├── answer.py            # 6.6 (generacja + filtr cytowań)
+│   │   ├── reports.py           # 6.7 (zapis + licznik podobnych)
 │   │   └── orchestrator.py      # spina kroki, asyncio.gather, telemetria
 │   ├── providers/
 │   │   ├── base.py              # Protocol: EmbeddingProvider, RerankProvider
-│   │   ├── embeddings_openai.py
-│   │   ├── embeddings_local.py
+│   │   ├── embeddings_openai.py # jedyna implementacja w PoC (ADR-015)
 │   │   ├── rerank_cohere.py
-│   │   ├── rerank_local.py
+│   │   ├── rerank_noop.py
 │   │   └── llm.py
-│   ├── chunking.py              # 4.4
-│   └── migrations/              # Alembic
+│   └── chunking.py              # 4.4
 ├── data/
 │   ├── taxonomy.json            # 4.2
-│   ├── gminy-malopolska.json    # 6.1
+│   ├── gminy-malopolska.json    # 6.1, /api/gminy
 │   ├── synonyms.json            # 5, 6.1
 │   ├── stopwords-pl.txt         # 6.2 (obowiązkowy dla toru leksykalnego)
 │   └── solutions/
 │       └── seed-demo.json       # 9
 ├── scripts/
-│   ├── ingest.py                # 9
-│   ├── reembed.py               # zmiana providera
-│   ├── evaluate.py              # 10
-│   ├── cluster_report.py        # kalibracja progu z 6.7
-│   └── retention.py             # 12
-├── eval/
-│   ├── queries.jsonl            # 10
-│   └── results.csv
+│   └── ingest.py                # 9
 └── tests/
     ├── test_fusion.py           # RRF na sztucznych listach - czysta funkcja, testuj ją
-    ├── test_preprocess.py       # ekstrakcja gmin, zdejmowanie wstępów
+    ├── test_preprocess.py       # zdejmowanie wstępów, identyfikatory, kategoria
     ├── test_lexical_query.py    # build_tsquery: OR, stopwords, escapowanie, None dla pustego
+    ├── test_citations.py        # filtr strumieniowy [n], answer_retracted (6.6)
     ├── test_auth.py             # brak/zły/pusty token, report_token cudzego zgłoszenia = 404
-    └── test_pipeline_e2e.py     # jeden przebieg na bazie testowej</code></pre>
+    └── test_pipeline_e2e.py     # jeden przebieg /api/chat na bazie testowej</code></pre>
 
 <h3>Kolejność implementacji</h3>
-<p>Kolejność wynika z zależności. Każdy krok kończy się czymś uruchamialnym — nie przechodź dalej, póki poprzedni nie działa.</p>
+<p>Kolejność wynika z zależności i z tego, co ocenia jury: działający czat z trafnymi kartami, licznik skali, ścieżka do administratora i odpowiedź do autora. Każdy krok kończy się czymś uruchamialnym — nie przechodź dalej, póki poprzedni nie działa. <strong>Godzina 0:</strong> zamrożony kontrakt z sekcji 7 i 8 trafia do zespołu frontendowego razem z przykładowymi odpowiedziami (mock), żeby interfejs nie czekał na backend.</p>
 
 <div class="tablewrap">
 <table>
 <tr><th>#</th><th>Krok</th><th>Gotowe, gdy</th></tr>
-<tr><td>1</td><td><code>docker-compose</code> + migracje + <code>polish_simple</code> + taksonomia</td><td><code>make up &amp;&amp; make migrate</code> przechodzi, <code>SELECT to_tsvector('polish_simple','starsi ludzie')</code> zwraca lekseny</td></tr>
-<tr><td>2</td><td>Modele, schematy, <code>/healthz</code></td><td><code>/healthz</code> zwraca <code>200</code> z informacją o providerach</td></tr>
-<tr><td>3</td><td>Providery embeddingów + <code>embedding_meta</code> + kontrola zgodności</td><td>Test jednostkowy: oba providery zwracają wektor długości 1024</td></tr>
-<tr><td>4</td><td>Chunkowanie + <code>scripts/ingest.py</code> + <code>seed-demo.json</code></td><td>Baza ma ~40 rozwiązań i chunki z niepustym <code>embedding</code> oraz <code>ts</code></td></tr>
-<tr><td>5</td><td>Tor leksykalny + tor semantyczny osobno</td><td><code>GET /api/search</code> zwraca dwie niepuste listy; <code>EXPLAIN</code> pokazuje <code>Index Scan</code> na HNSW</td></tr>
-<tr><td>6</td><td>Fuzja RRF + reranking</td><td><code>make eval</code> działa i <code>rrf</code> bije oba pojedyncze tory</td></tr>
-<tr><td>7</td><td><code>POST /api/chat</code> ze SSE + generacja RAG + walidacja cytowań</td><td><code>curl -N</code> pokazuje strumień zdarzeń w kolejności z 7.1</td></tr>
-<tr><td>8</td><td>Zapis zgłoszeń + klastrowanie</td><td>Dwa podobne zgłoszenia trafiają do jednego klastra, trzecie odmienne do nowego</td></tr>
-<tr><td>9</td><td><code>api/auth.py</code> (tokeny) + endpointy <code>/api/clusters</code> (kontrakt Modułu 2)</td><td>Bez tokenu <code>/api/clusters</code> zwraca <code>403</code> lub <code>401</code>; z <code>EXPERT_TOKEN</code> realne klastry z <code>member_count &gt; 1</code>; <code>PATCH</code> tylko z <code>ADMIN_TOKEN</code> i zapisuje ocenę skali</td></tr>
-<tr><td>10</td><td>Obieg strony odbierającej: <code>PATCH /api/solutions/{id}</code>, <code>GET /api/solutions</code>, notatki, odpowiedzi do autora, webhook</td><td>Rozwiązanie z <code>PENDING_REVIEW</code> po zatwierdzeniu pojawia się w <code>/api/search</code>; odpowiedź eksperta jest czytelna z <code>X-Report-Token</code> autora; <code>report.unmatched</code> dociera na testowy odbiornik</td></tr>
-<tr><td>11</td><td>Kalibracja: <code>MIN_RERANK_SCORE</code>, <code>CLUSTER_SIM_THRESHOLD</code>, <code>RRF_K</code></td><td>Wyniki zapisane w <code>eval/results.csv</code>, wartości w <code>.env</code></td></tr>
+<tr><td>1</td><td><code>docker-compose</code> + <code>db/init.sql</code> (tabele, <code>polish_simple</code>, taksonomia)</td><td><code>make up</code> przechodzi, <code>SELECT to_tsvector('polish_simple','starsi ludzie')</code> zwraca lekseny</td></tr>
+<tr><td>2</td><td>Provider OpenAI + chunkowanie + <code>scripts/ingest.py</code> + <code>seed-demo.json</code></td><td>Baza ma ~40 rozwiązań i kilka wpisów <code>KNOWLEDGE</code>, chunki z niepustym <code>embedding</code> oraz <code>ts</code></td></tr>
+<tr><td>3</td><td>Tor leksykalny + semantyczny + RRF + reranker Cohere + bramka, wszystko w <code>GET /api/search</code></td><td>Obie listy niepuste; ręczny przegląd na ~15 zapytaniach (sekcja 10) daje sensowne wyniki; progi wpisane do <code>.env</code></td></tr>
+<tr><td>4</td><td><code>POST /api/chat</code>: SSE, karty, <code>context</code>, generacja z filtrem cytowań, zapis zgłoszenia, licznik podobnych, <code>report_token</code></td><td><code>curl -N</code> pokazuje strumień w kolejności z 7.1; dwa podobne zgłoszenia z różnych sesji dają <code>similar_count = 1</code></td></tr>
+<tr><td>5</td><td><code>api/auth.py</code> + endpointy <code>STAFF</code>: lista zgłoszeń, podobne, skrzynka, statystyki, odpowiedzi, zatwierdzanie rozwiązań</td><td>Bez nagłówka <code>403</code>, z błędnym tokenem <code>401</code>; odpowiedź pracownika jest czytelna z <code>X-Report-Token</code> autora; rozwiązanie z <code>PENDING_REVIEW</code> po zatwierdzeniu pojawia się w <code>/api/chat</code></td></tr>
+<tr><td>6</td><td>Szlif: <code>also_see</code>, <code>POST /api/feedback</code>, <code>/api/gminy</code>, testy</td><td><code>make test</code> przechodzi</td></tr>
+<tr><td>7</td><td>Próba generalna + nagranie demo jako zapas (wymóg formalny, <code>base.md</code> sekcja 4)</td><td>Film ≤ 3 min z pełną ścieżką: zgłoszenie → karty i licznik → skrzynka „Nowe” → odpowiedź → autor ją czyta</td></tr>
 </table>
 </div>
 
 <div class="note">
-<p><strong>Najkrótsza działająca ścieżka</strong>, jeśli czasu jest mało: kroki 1–6 z <code>RERANK_PROVIDER=noop</code> i <code>LLM_ENABLED=false</code> (bramka „nie wiem" działa wtedy na cosinusie, <code>MIN_COSINE_SCORE</code>). Daje pełny hybrydowy pipeline zwracający trafne rozwiązania przez <code>GET /api/search</code> — moduł frontendowy ma już wtedy na czym pracować. Reranking, SSE i generacja to warstwy dodawane na wierzch, nie fundament.</p>
+<p><strong>Najkrótsza działająca ścieżka</strong>, jeśli czasu jest mało: kroki 1, 2 i 4 z <code>RERANK_ENABLED=false</code> i <code>LLM_ENABLED=false</code> (bramka „nie wiem" działa wtedy na cosinusie, <code>MIN_COSINE_SCORE</code>). <code>/api/chat</code> zwraca wtedy karty, wiedzę, licznik i token — interfejs mieszkańca ma już na czym pracować. Reranker, streszczenie i endpointy <code>STAFF</code> dochodzą na wierzch.</p>
 </div>
 
 <h2 id="s14">14. Rejestr decyzji (ADR) <span class="badge b-stable">stable</span></h2>
@@ -1327,42 +1209,74 @@ LLM_ENABLED=false</code></pre>
 <tr><th>ADR</th><th>Decyzja</th><th>Dlaczego</th><th>Odrzucono</th></tr>
 <tr><td><strong>001</strong></td><td>Python 3.12 + FastAPI + SQLAlchemy 2.0 async</td><td>Biblioteki embeddingów i rerankerów są natywnie pythonowe; SSE w FastAPI to kilka linii</td><td><em>Next.js full-stack</em> — brak sensownego wsparcia lokalnych modeli. <em>Spring Boot</em> — najwięcej boilerplate'u, najdroższy pivot</td></tr>
 <tr><td><strong>002</strong></td><td>Wyłącznie PostgreSQL 16: <code>pgvector</code> + wbudowany FTS</td><td>Jedna baza, jedno <code>docker-compose</code>, transakcyjny zapis zgłoszeń razem z wyszukiwaniem, RRF liczony bez sieci</td><td><em>Qdrant + Postgres</em> — lepszy hybrid out-of-the-box, ale drugi serwis i rozjazd spójności. <em>Elasticsearch</em> — najlepszy polski analizator, ale ciężki i wolny w setupie</td></tr>
-<tr><td><strong>003</strong></td><td>Abstrakcja <code>EmbeddingProvider</code> / <code>RerankProvider</code>: implementacja API (domyślna) + lokalna</td><td>Demo nie może zależeć od wifi na sali i od ważności klucza API</td><td><em>Tylko API</em> — ryzyko na prezentacji. <em>Tylko lokalnie</em> — kilka GB pobierania i wolne na CPU</td></tr>
+<tr><td><strong>003</strong> <em>superseded przez 015</em></td><td>Abstrakcja <code>EmbeddingProvider</code> / <code>RerankProvider</code>: implementacja API (domyślna) + lokalna</td><td>Demo nie może zależeć od wifi na sali i od ważności klucza API</td><td><em>Tylko API</em> — ryzyko na prezentacji. <em>Tylko lokalnie</em> — kilka GB pobierania i wolne na CPU</td></tr>
 <tr><td><strong>004</strong></td><td>Jeden wymiar wektora dla wszystkich providerów: <strong>1024</strong></td><td><code>text-embedding-3-large</code> z parametrem <code>dimensions=1024</code> (Matryoshka) ma ten sam wymiar co <code>bge-m3</code>. Bez tego przełączenie providera to migracja kolumny, a nie zmiana zmiennej</td><td><em>Natywne 3072</em> — uniemożliwia fallback lokalny. <em>Dwie kolumny wektorowe</em> — podwójny indeks i podwójny koszt zapisu</td></tr>
 <tr><td><strong>005</strong></td><td>Odpowiedź = RAG: streszczenie PL + twarde cytowania <code>[n]</code>, streaming SSE, wyłącznie na podstawie kontekstu</td><td>Czat bez odpowiedzi tekstowej nie jest czatem; cytowania i próg odrzucenia blokują halucynacje</td><td><em>Same karty</em> — bezpieczniejsze, ale słabsze w demo. <em>LLM tylko do doprecyzowania</em> — nie wykorzystuje kontekstu, który i tak mamy</td></tr>
-<tr><td><strong>006</strong></td><td>Skala problemu = przyrostowe klastrowanie semantyczne zgłoszeń, stały próg cosinusowy</td><td>Mapa wyzwań powstaje z realnych zgłoszeń, a nie z ankiety; wykrywa też wyzwania nienazwane w taksonomii</td><td><em>Tylko tagowanie LLM do taksonomii</em> — prostsze, ale niewidzi nowych zjawisk. <em>Oba naraz</em> — więcej pracy niż budżet Modułu 1 (wraca jako backlog)</td></tr>
+<tr><td><strong>006</strong> <em>superseded przez 016</em></td><td>Skala problemu = przyrostowe klastrowanie semantyczne zgłoszeń, stały próg cosinusowy</td><td>Mapa wyzwań powstaje z realnych zgłoszeń, a nie z ankiety; wykrywa też wyzwania nienazwane w taksonomii</td><td><em>Tylko tagowanie LLM do taksonomii</em> — prostsze, ale niewidzi nowych zjawisk. <em>Oba naraz</em> — więcej pracy niż budżet Modułu 1 (wraca jako backlog)</td></tr>
 <tr><td><strong>007</strong> <em>superseded przez 009</em></td><td>Moduł 1 nie zawiera żadnej warstwy tożsamości: brak kont, brak ról technicznych, brak uwierzytelniania i autoryzacji. Endpointy otwarte</td><td>Cały budżet modułu idzie w jakość wyszukiwania. Brak tabeli <code>users</code> i kolumn ról oznacza zero martwego kodu i zero fałszywego poczucia bezpieczeństwa</td><td><em>Role przez nagłówek demo</em> — wygląda jak kontrola dostępu, nią nie jest; mylące. <em>JWT + hasła</em> — pięć endpointów kosztem pipeline'u. <em>Magic link</em> — wymaga SMTP, zawodny offline</td></tr>
 <tr><td><strong>008</strong></td><td>Frontend w osobnym module; Moduł 1 kończy się na kontrakcie API</td><td>Dwie warstwy rozwijane równolegle bez blokowania się; definicja gotowości Modułu 1 to przechodzące <code>curl</code> i testy, nie wygląd ekranu</td><td><em>Backend i frontend w jednym module</em> — interfejs zawsze zjada czas przeznaczony na jakość wyszukiwania</td></tr>
-<tr><td><strong>009</strong></td><td>Cztery role domenowe (<code>RESIDENT</code>/<code>NGO</code>, <code>JST</code>, <code>EXPERT</code>, <code>ROPS_ADMIN</code>) i trzy poziomy dostępu (<code>PUBLIC</code>, <code>EXPERT</code>, <code>ADMIN</code>) realizowane dwoma współdzielonymi tokenami w <code>X-Access-Token</code>. Pusty token = poziom wyłączony. <code>author_label</code> jawnie niezweryfikowany. Zastępuje ADR-007</td><td>Wymóg z <code>base.md</code>: trendy i agregaty widoczne tylko dla administratora; cztery grupy użytkowników, w tym dwie po stronie odbierającej. Token to najtańszy uczciwy mechanizm, który to spełnia, nie udaje tożsamości i mieści się w jednym module (<code>auth.py</code>)</td><td><em>Pełne konta (JWT/OIDC)</em> — przebudowa poza budżetem Modułu 1. <em>Nagłówek roli bez sekretu</em> — wygląda jak kontrola dostępu, nią nie jest. <em>Token per osoba</em> — zarządzanie bez interfejsu to więcej pracy niż konta</td></tr>
+<tr><td><strong>009</strong> <em>superseded przez 017</em></td><td>Cztery role domenowe (<code>RESIDENT</code>/<code>NGO</code>, <code>JST</code>, <code>EXPERT</code>, <code>ROPS_ADMIN</code>) i trzy poziomy dostępu (<code>PUBLIC</code>, <code>EXPERT</code>, <code>ADMIN</code>) realizowane dwoma współdzielonymi tokenami w <code>X-Access-Token</code>. Pusty token = poziom wyłączony. <code>author_label</code> jawnie niezweryfikowany. Zastępuje ADR-007</td><td>Wymóg z <code>base.md</code>: trendy i agregaty widoczne tylko dla administratora; cztery grupy użytkowników, w tym dwie po stronie odbierającej. Token to najtańszy uczciwy mechanizm, który to spełnia, nie udaje tożsamości i mieści się w jednym module (<code>auth.py</code>)</td><td><em>Pełne konta (JWT/OIDC)</em> — przebudowa poza budżetem Modułu 1. <em>Nagłówek roli bez sekretu</em> — wygląda jak kontrola dostępu, nią nie jest. <em>Token per osoba</em> — zarządzanie bez interfejsu to więcej pracy niż konta</td></tr>
 <tr><td><strong>010</strong></td><td>Odpowiedź do autora zgłoszenia przez <code>report_token</code> (hash w bazie, token zwracany raz), nie przez e-mail</td><td>Zgłoszenie jest anonimowe i bez kont; zamyka pętlę „zgłosił → dostał odpowiedź" bez SMTP i bez danych identyfikujących</td><td><em>E-mail</em> — wymaga SMTP, przechowuje dane osobowe, zawodny offline. <em>Konto autora</em> — sprzeczne z anonimowością i ADR-009</td></tr>
+<tr><td><strong>011</strong> <em>zmienione przez 019</em></td><td>Korpus ma dwa rodzaje wpisów: <code>kind = SOLUTION | KNOWLEDGE</code>. Wiedza (Mapa Wyzwań, raporty ROPS) jest przeszukiwana tym samym pipeline'em, ale ma osobne indeksy HNSW i zwracana jest wyłącznie w <code>candidates.context</code>. Nie trafia na karty, do cytowań ani do <code>matched</code></td><td><code>base.md</code> I: matchmaking „wyszukuje informacje o danej kwestii” <em>i</em> „proponuje rozwiązania”. Raport wymieszany z innowacjami udawałby rozwiązanie bez kosztu i kroków wdrożenia, a „nie wiem” przestałoby znaczyć brak innowacji</td><td><em>Tylko innowacje w korpusie</em> — połowa wymogu niespełniona. <em>Jedna lista kart</em> — myli wiedzę z rozwiązaniem. <em>Osobne tabele</em> — duplikacja chunkowania, ingestu i obu torów</td></tr>
+<tr><td><strong>012</strong></td><td>Problem zgłasza się wyłącznie przez <code>POST /api/chat</code>. Brak osobnego formularza <code>POST /api/reports</code></td><td>Każde zgłoszenie przechodzi wyszukiwanie, więc <code>matched</code> zawsze odzwierciedla stan korpusu, a lista „bez dopasowania” i webhook <code>report.unmatched</code> nie dostają fałszywych sygnałów. Jedna ścieżka zapisu i jeden kontrakt</td><td><em>Formularz z cichym wyszukiwaniem</em> — druga ścieżka zapisu do utrzymania. <em>Formularz z <code>matched = NULL</code></em> — zgłaszający nie dostaje propozycji, a statystyka ma trzeci stan</td></tr>
+<tr><td><strong>013</strong></td><td>Brak rate limitingu w Module 1 (PoC)</td><td>Bez kont jedynym kluczem limitu jest IP albo niezweryfikowany <code>session_id</code>: pierwszy blokuje wspólne Wi-Fi na sali, drugi da się obejść. Na PoC z danymi testowymi to koszt bez zysku</td><td><em>Limit po <code>session_id</code></em> — pozorny, do obejścia rotacją identyfikatora. <em>Limit po IP</em> — blokuje demo i urzędy za NAT-em</td></tr>
+<tr><td><strong>014</strong></td><td>Brak automatycznej ewaluacji w PoC; progi ustawiane ręcznie przez <code>GET /api/search</code></td><td>Brak czasu na zbudowanie zestawu ze stabilnymi identyfikatorami rozwiązań i na pomiary. <code>/api/search</code> i tak pokazuje oba tory osobno</td><td><em>Zestaw <code>eval/queries.jsonl</code> + <code>make eval</code></em> — wymaga stabilnych kluczy rozwiązań i czasu na przygotowanie 25–30 przypadków</td></tr>
+<tr><td><strong>015</strong></td><td>Jedna implementacja providera embeddingów (OpenAI <code>text-embedding-3-large</code>, 1024) za interfejsem <code>EmbeddingProvider</code>; reranker Cohere + <code>noop</code>. Bez lokalnych modeli, trybu offline i <code>embedding_meta</code>. Zastępuje ADR-003</td><td>Lokalne modele to kilka GB, wolne CPU, drugi wolumen bazy i ryzyko rozjazdu indeksu — koszt L bez punktów w ocenie. Interfejs zostaje, więc dodanie modelu lokalnego nie zmienia pipeline'u</td><td><em>API + lokalne (ADR-003)</em> — za drogie w PoC. <em>Bez interfejsu</em> — utrudnia późniejszy wariant bez transferu danych</td></tr>
+<tr><td><strong>016</strong></td><td>Skala problemu = licznik podobnych zgłoszeń (cosinus ≥ próg, liczone sesje i gminy) + statystyki <code>GROUP BY</code> kategoria/gmina/tydzień. Bez klastrów, centroidów, blokad i notatek. Zastępuje ADR-006</td><td>Daje dokładnie to, co widać w demo („N osób z M gmin”, trendy dla administratora), jednym zapytaniem i bez wyścigów przy zapisie. Klastrowanie z progiem zgadywanym było najbardziej ryzykownym elementem demo</td><td><em>Klastrowanie przyrostowe (ADR-006)</em> — koszt M–L, wyścigi, próg do kalibracji. <em>Tylko kategorie</em> — nie odróżnia podobnych problemów w tej samej kategorii</td></tr>
+<tr><td><strong>017</strong></td><td>Jeden poziom uprzywilejowany <code>STAFF</code> z jednym współdzielonym tokenem dla ekspertów i pracowników ROPS. Zastępuje ADR-009</td><td>Dwa tokeny różniły się w PoC tylko zatwierdzaniem rozwiązań i statusami — mało wartości, dwa razy więcej testów i konfiguracji. Wymóg „trendy tylko dla administratora” nadal spełniony</td><td><em>EXPERT + ADMIN (ADR-009)</em> — złożoność bez efektu w demo. <em>Brak tokenu</em> — łamie wymóg z <code>base.md</code> II</td></tr>
+<tr><td><strong>018</strong></td><td>Powiadomienia dla Hubu jako skrzynka „Nowe” w Panelu administratora (<code>GET /api/inbox</code>), bez webhooka</td><td><code>base.md</code> sekcja 6 ocenia, <em>jak</em> administrator dowiaduje się o nowym pomyśle i jak odpowiada autorowi — skrzynka pokazuje to w demo; webhook z HMAC i ponowieniami jest dla jury niewidoczny</td><td><em>Webhook z podpisem i retry</em> — koszt bez efektu w demo (sekcja 15). <em>E-mail</em> — SMTP, zawodny offline</td></tr>
+<tr><td><strong>019</strong></td><td>Uproszczenia PoC: brak indeksów wektorowych (pełny skan); status i rodzaj wpisu filtrowane przez <code>JOIN solutions</code> zamiast kopii w chunkach; wiedza (<code>KNOWLEDGE</code>) tylko torem semantycznym; gmina z listy wyboru zamiast ekstrakcji z tekstu; <code>db/init.sql</code> zamiast Alembica; brak automatycznej retencji</td><td>Korpus PoC to kilkaset chunków i kilkadziesiąt zgłoszeń. Każdy z tych elementów usuwa osobną klasę pułapek (planer i indeksy częściowe, synchronizacja kopii, słownik odmian gmin) bez wpływu na to, co ocenia jury</td><td><em>HNSW od początku</em> — pułapki planera bez zysku przy tej skali. <em>Pełny pipeline dla wiedzy</em> — dwa razy więcej zapytań i strojenia (wraca, gdy starczy czasu)</td></tr>
 </table>
 </div>
 
 <h2 id="s15">15. Backlog kolejnych iteracji <span class="badge b-todo">todo</span></h2>
 
-<p>Nic z tej sekcji <strong>nie</strong> wchodzi do Modułu 1. Lista istnieje, żeby decyzje projektowe uwzględniały kierunek i żeby kolejna iteracja nie zaczynała od zera.</p>
+<p>Nic z tej sekcji <strong>nie</strong> wchodzi do PoC Modułu 1. Lista istnieje, żeby decyzje projektowe uwzględniały kierunek i żeby kolejna iteracja nie zaczynała od zera.</p>
 
+<h4>Moduły z <code>base.md</code></h4>
 <div class="tablewrap">
 <table>
 <tr><th>Moduł / temat</th><th>Co</th><th>Co już jest przygotowane w Module 1</th></tr>
-<tr><td><strong>Moduł frontendowy</strong></td><td>Ekran czatu dla mieszkańca, karty rozwiązań, obsługa strumienia SSE</td><td>Cała sekcja 8: gwarancje kolejności zdarzeń, jeden kształt <code>SolutionCard</code>, <code>/api/taxonomy</code>, walidacja cytowań po stronie backendu</td></tr>
-<tr><td><strong>Moduł 2 — dashboard operatora</strong></td><td>Lista klastrów po skali, triage, mapa wyzwań po gminach, trendy czasowe, kolejka <code>PENDING_REVIEW</code>, lista zgłoszeń bez dopasowania</td><td><code>GET/PATCH /api/clusters</code>, <code>report_clusters.operator_*</code>, <code>reports_unmatched_idx</code></td></tr>
-<tr><td><strong>Moduł 3 — Canvas Innowacji</strong></td><td>Plansze Canvas jako narzędzie w aplikacji, wypełniane dla klastra bez rozwiązania</td><td><code>implementation_steps</code> jako JSONB, klastry z <code>matched=false</code></td></tr>
-<tr><td>Konta indywidualne i uwierzytelnianie (następca tokenów z ADR-009)</td><td>Tabela użytkowników, uwierzytelnianie (JWT albo OIDC samorządowy), rozbicie „reszty" na <code>NGO</code> / <code>CUS</code> / <code>SAMORZAD</code> / <code>MENTOR</code> / <code>EXPERT</code> z osobnymi uprawnieniami</td><td>Cała logika poziomów mieszka w <code>api/auth.py</code>, więc podmiana tokenów na konta dotyka tylko tego modułu; <code>author_role</code>, <code>author_label</code> i <code>reporter_type</code> są zwykłymi kolumnami bez kluczy obcych. <code>submitted_by_name</code> jest zwykłym tekstem, więc nie trzeba migrować fałszywych kluczy obcych. Dodanie tożsamości to nowa tabela i middleware, bez przebudowy pipeline'u</td></tr>
+<tr><td><strong>Moduł frontendowy</strong></td><td>Ekran czatu dla mieszkańca, karty rozwiązań, obsługa strumienia SSE</td><td>Cała sekcja 8: gwarancje kolejności zdarzeń, jeden kształt <code>SolutionCard</code>, <code>/api/taxonomy</code>, <code>/api/gminy</code>, filtr cytowań po stronie backendu</td></tr>
+<tr><td><strong>Panel administratora</strong> (<code>base.md</code> VI, z trendami z II)</td><td>Interfejs: skrzynka „Nowe”, lista zgłoszeń (najpierw bez dopasowania), podobne zgłoszenia, trendy, zatwierdzanie rozwiązań, odpowiedzi do autorów</td><td>Wszystkie endpointy <code>STAFF</code> z 7.3 — interfejs nie wymaga zmian w API</td></tr>
+<tr><td><strong>Zasobnik wiedzy</strong> (<code>base.md</code> II)</td><td>Prezentacja Mapy Wyzwań, Biblioteki Innowacji (filmy), materiałów edukacyjnych; panel aktualizacji treści</td><td><code>solutions.kind</code> (ADR-011), <code>solutions.media</code>, <code>GET /api/solutions?kind=…</code>, <code>GET /api/stats</code>. Brakuje rozróżnienia wewnątrz <code>KNOWLEDGE</code> (raport / mapa / materiał edukacyjny)</td></tr>
+<tr><td><strong>Kreator pomysłów</strong> (<code>base.md</code> III)</td><td>Fiszka pomysłu (istota, adresat, etap realizacji), odpowiedź do autora pomysłu, generator wniosków pod nabór, Asystent kreatora, Canvas Innowacji Społecznych (m.in. dla zgłoszeń bez rozwiązania)</td><td><code>POST /api/solutions</code> z <code>PENDING_REVIEW</code> jest zalążkiem fiszki; mechanizm tokenu autora z 7.4 do powtórzenia dla pomysłów; zgłoszenia z <code>matched=false</code> jako wejście dla Canvasu. Brakuje pola etapu realizacji i modelu naboru</td></tr>
+<tr><td><strong>Tester innowacji</strong> (<code>base.md</code> IV)</td><td>Zgłoszenie chęci udziału w testach, oceny, usprawnienia</td><td><code>POST /api/feedback</code>, <code>search_events.helpful</code>. Do dodania: tabela zgłoszeń testerów powiązana z <code>solutions</code></td></tr>
+<tr><td><strong>Platforma aktywnej komunikacji</strong> (<code>base.md</code> V)</td><td>Dialog ROPS ↔ użytkownicy, wsparcie mentorów, budowanie międzysektorowych partnerstw. Opcjonalnie: kojarzenie organizacji między sobą — interpretacja planu, <code>base.md</code> tego wprost nie wymaga</td><td>Odpowiedzi do autora (7.4) to jednokierunkowy zalążek; brakuje wątków i odpowiedzi autora. Pod partnerstwa: <code>solutions.organization</code>, embeddingi rozwiązań</td></tr>
+<tr><td><strong>Middleman Innowacji</strong> (<code>base.md</code> VII)</td><td>Asystent AI dostosowujący innowację do formy usługi dla zgłaszającej się instytucji</td><td><code>implementation_steps</code>, <code>cost_range</code>, <code>target_group</code> jako wejście dla generacji; provider LLM z 6.6</td></tr>
+</table>
+</div>
+
+<h4>Rzeczy wycięte z PoC (wracają przy wdrożeniu)</h4>
+<div class="tablewrap">
+<table>
+<tr><th>Temat</th><th>Co</th><th>Co już jest przygotowane</th></tr>
+<tr><td>Lokalne modele i tryb offline</td><td><code>LocalEmbeddingProvider</code> (<code>BAAI/bge-m3</code>), <code>LocalRerankProvider</code> (<code>bge-reranker-v2-m3</code>), tabela <code>embedding_meta</code> z kontrolą zgodności przy starcie, wariant bez transferu danych do zewnętrznych API (sekcja 12)</td><td>Protokoły <code>EmbeddingProvider</code> / <code>RerankProvider</code>, stały wymiar 1024 (ADR-004), prefiksy w konfiguracji, <code>ingest --reembed-all</code></td></tr>
+<tr><td>Fuzja i rerank dla wiedzy</td><td>Tor leksykalny i RRF dla <code>KNOWLEDGE</code>, wiedza w tym samym wywołaniu rerankera</td><td>Zapytania 6.2 i 6.3 różnią się tylko filtrem <code>kind</code>; <code>rrf_fuse</code> przyjmuje dowolne listy</td></tr>
+<tr><td>Klastrowanie semantyczne zgłoszeń</td><td>Przyrostowe klastry z centroidami, nazwy klastrów, ocena skali przez Hub, notatki ekspertów (ADR-006, zastąpiony przez ADR-016)</td><td><code>reports.embedding</code>; licznik podobnych z 6.7 jako punkt odniesienia</td></tr>
+<tr><td>Indeksy wektorowe i skalowanie</td><td>HNSW na chunkach (częściowy, z kolumnami <code>published</code>/<code>kind</code> w chunku) i na <code>reports.embedding</code>; PgBouncer z <code>SET LOCAL hnsw.ef_search</code>; replika odczytowa. Próg: ok. 10 tys. chunków lub 50 tys. zgłoszeń</td><td>API bezstanowe, filtrowanie w jednym miejscu (6.2, 6.3)</td></tr>
+<tr><td>Osobne poziomy i konta</td><td>Rozdzielenie <code>EXPERT</code> / <code>ADMIN</code> (ADR-009, zastąpiony przez ADR-017), potem konta indywidualne (JWT albo OIDC samorządowy) z rolami <code>NGO</code> / <code>CUS</code> / <code>SAMORZAD</code> / <code>MENTOR</code> / <code>EXPERT</code></td><td>Cała logika poziomów w <code>api/auth.py</code>; <code>reporter_type</code>, <code>author_label</code>, <code>submitted_by_name</code> to zwykłe kolumny bez kluczy obcych</td></tr>
+<tr><td>Powiadomienia wychodzące</td><td>Webhook (Slack, przekaźnik e-mail, system grantowy) z podpisem HMAC i trwałą kolejką <code>outbox</code>; „Pojawiło się rozwiązanie na Twój problem” na <code>contact_email</code></td><td>Skrzynka „Nowe” (7.5) definiuje, które zdarzenia są ważne; <code>contact_email</code>, <code>reports.status</code></td></tr>
+<tr><td>Retencja RODO</td><td><code>scripts/retention.py</code> z crona: po 24 miesiącach czyści <code>raw_text</code>, <code>normalized_text</code>, <code>embedding</code>, treść odpowiedzi i zapytań w <code>search_events</code>; zostają kolumny statystyczne</td><td>Kolumny statystyczne (<code>category</code>, <code>gmina</code>, <code>reporter_type</code>, <code>matched</code>) oddzielone od treści</td></tr>
+<tr><td>Rate limiting</td><td>Limit na <code>/api/chat</code> i <code>POST /api/solutions</code> przed publicznym wdrożeniem: sufit per IP na proxy + limit per konto po wprowadzeniu kont</td><td>Bezstanowe API — limit można dodać na proxy bez zmian w kodzie (ADR-013)</td></tr>
+<tr><td>Ewaluacja jakości</td><td>Zestaw zapytań z oznaczonymi trafnymi rozwiązaniami, <code>make eval</code> (recall@10, MRR, nDCG), historia wyników</td><td>Wymaga stałego klucza rozwiązania (np. <code>solutions.key</code>) zamiast <code>id</code> z <code>BIGSERIAL</code>; <code>/api/search</code> już zwraca dane obu torów (ADR-014)</td></tr>
+<tr><td>Ekstrakcja gminy z tekstu</td><td>Słownik gmin z formami odmienionymi (<code>w Zakopanem</code>, <code>w Nowym Sączu</code>), automat Aho-Corasick po tekście <code>unaccent</code>-owanym — gdy użytkownik nie wybierze gminy z listy</td><td><code>data/gminy-malopolska.json</code></td></tr>
+<tr><td>Migracje</td><td>Alembic zamiast <code>db/init.sql</code></td><td>Modele SQLAlchemy w <code>api/models.py</code></td></tr>
+</table>
+</div>
+
+<h4>Rozwój jakości i integracje</h4>
+<div class="tablewrap">
+<table>
+<tr><th>Temat</th><th>Co</th><th>Co już jest przygotowane</th></tr>
 <tr><td>Polski stemming</td><td>Słownik hunspell <code>pl_PL</code> lub <code>pg_search</code> (BM25)</td><td><code>FTS_CONFIG</code> jako zmienna, tor leksykalny odizolowany w <code>lexical.py</code></td></tr>
 <tr><td>Pętla samouczenia</td><td>Rozwiązane zgłoszenia awansują do korpusu jako <code>PROMOTED_FROM_REPORT</code></td><td>Wartość ENUM już istnieje, nieużywana</td></tr>
 <tr><td>Hybrydowe wektory rzadkie</td><td><code>bge-m3</code> zwraca też wektory rzadkie — trzeci tor fuzji</td><td>RRF przyjmuje dowolną liczbę torów (<code>tracks: dict</code>)</td></tr>
 <tr><td>HyDE i rozszerzanie zapytań</td><td>LLM pisze hipotetyczne rozwiązanie, jego embedding idzie do wyszukiwania</td><td>Preprocessing jest osobnym krokiem z jawnym kontraktem</td></tr>
-<tr><td>Wielodzierżawność per gmina</td><td>Gmina widzi własne zgłoszenia, region widzi agregat</td><td><code>gmina</code> i <code>powiat</code> na zgłoszeniach, rozwiązaniach i klastrach</td></tr>
-<tr><td>Powiadomienia</td><td>„Pojawiło się rozwiązanie na Twój problem" na <code>contact_email</code></td><td><code>contact_email</code>, <code>cluster_id</code>, <code>reports.status</code>; webhook (7.5) już działa dla strony odbierającej</td></tr>
-<tr><td>Eksporty i raportowanie</td><td>CSV/JSON z klastrów i zgłoszeń dla ROPS, raport okresowy</td><td><code>GET /api/clusters</code> z filtrami, kolumny statystyczne zachowywane po retencji</td></tr>
-<tr><td>Trwała kolejka zdarzeń</td><td>Tabela <code>outbox</code> zamiast wysyłki w tle, gwarancja „co najmniej raz" także po restarcie</td><td><code>notify.py</code> jako jedyne miejsce wysyłki</td></tr>
-<tr><td><strong>Zasobnik wiedzy</strong> (<code>base.md</code> II)</td><td>Prezentacja Mapy Wyzwań, Biblioteki Innowacji (filmy), materiałów edukacyjnych; panel aktualizacji treści; trendy tylko dla administratora</td><td><code>solutions.media</code>, <code>GET /api/solutions</code>, <code>GET /api/taxonomy</code>, klastry z <code>first_seen_at</code>/<code>last_seen_at</code>. Brakuje typu treści (rozwiązanie / materiał / raport) i szeregu czasowego trendów</td></tr>
-<tr><td><strong>Kreator pomysłów</strong> (<code>base.md</code> III)</td><td>Fiszka pomysłu (istota, adresat, etap realizacji), generator wniosków pod nabór, Asystent kreatora</td><td><code>POST /api/solutions</code> z <code>PENDING_REVIEW</code> jest zalążkiem fiszki. Brakuje pola etapu realizacji i modelu naboru</td></tr>
-<tr><td><strong>Tester innowacji</strong> (<code>base.md</code> IV)</td><td>Zgłoszenie chęci udziału w testach, oceny, usprawnienia</td><td><code>POST /api/feedback</code>, <code>search_events.helpful</code>. Do dodania: tabela zgłoszeń testerów powiązana z <code>solutions</code></td></tr>
-<tr><td><strong>Platforma aktywnej komunikacji</strong> (<code>base.md</code> V)</td><td>Dialog ROPS ↔ użytkownicy, wsparcie mentorów, budowanie międzysektorowych partnerstw (<code>base.md</code>, linia opisująca moduł V). Opcjonalne rozszerzenie: kojarzenie organizacji między sobą (kto ma doświadczenie potrzebne komu) — interpretacja planu, <code>base.md</code> tego wprost nie wymaga</td><td>Odpowiedzi do autora (7.4) i notatki ekspertów (4.9) to jednokierunkowy zalążek; brakuje wątków i odpowiedzi autora. Pod partnerstwa: <code>solutions.organization</code>, <code>contact</code> (zerowane przy imporcie, sekcja 9), embeddingi rozwiązań</td></tr>
-<tr><td><strong>Middleman Innowacji</strong> (<code>base.md</code> VII)</td><td>Asystent AI dostosowujący innowację do formy usługi dla zgłaszającej się instytucji</td><td><code>implementation_steps</code>, <code>cost_range</code>, <code>target_group</code> jako wejście dla generacji</td></tr>
-<tr><td>Integracja z bazą grantową</td><td>Dwukierunkowa wymiana z systemem naborów Hubu, powiadomienia o zmianach w naborach</td><td>Webhook (7.5) i format pośredni ingestu (9); adapter w <code>scripts/</code></td></tr>
+<tr><td>Historia rozmowy</td><td>Pytanie doprecyzowujące i odpowiedź jako jedno zgłoszenie zamiast dwóch</td><td><code>session_id</code> na zgłoszeniach; licznik podobnych już liczy sesje (6.7)</td></tr>
+<tr><td>Wielodzierżawność per gmina</td><td>Gmina widzi własne zgłoszenia, region widzi agregat</td><td><code>gmina</code> i <code>powiat</code> na zgłoszeniach i rozwiązaniach</td></tr>
+<tr><td>Eksporty i raportowanie</td><td>CSV/JSON ze zgłoszeń i statystyk dla ROPS, raport okresowy</td><td><code>GET /api/stats</code>, <code>GET /api/reports</code> z filtrami</td></tr>
+<tr><td>Integracja z bazą grantową</td><td>Dwukierunkowa wymiana z systemem naborów Hubu, powiadomienia o zmianach w naborach</td><td>Format pośredni ingestu (9); adapter w <code>scripts/</code></td></tr>
 </table>
 </div>
 
@@ -1390,8 +1304,8 @@ LLM_ENABLED=false</code></pre>
 
 <ul>
 <li><strong>Jednorazowo:</strong> embedding korpusu — 500 rozwiązań × ok. 5 chunków × ok. 300 tokenów ≈ 0,75 mln tokenów, czyli ok. 0,1 USD. Pełny re-embedding kosztuje tyle samo.</li>
-<li><strong>Największa dźwignia:</strong> reranking to ok. 44% kosztu zmiennego. <code>RERANK_ENABLED=false</code> (z bramką cosinusową, 6.5) lub tryb <code>local</code> usuwa go; zmiana na <code>claude-haiku-4-5</code> jest już policzona w tabeli.</li>
-<li><strong>Tryb <code>local</code>:</strong> koszt zmienny zbliżony do zera, w zamian ok. 2–5 GB RAM na modele (<code>bge-m3</code>, <code>bge-reranker-v2-m3</code>) i wolniejsze odpowiedzi na CPU.</li>
+<li><strong>Największa dźwignia:</strong> reranking to ok. 44% kosztu zmiennego. <code>RERANK_ENABLED=false</code> (z bramką cosinusową, 6.5) usuwa go kosztem trafności kolejności. Tabela zakłada domyślny <code>claude-haiku-4-5</code>; przełączenie na <code>claude-sonnet-5-5</code> podnosi koszt streszczenia kilkukrotnie.</li>
+<li><strong>Modele lokalne (sekcja 15, poza PoC):</strong> koszt zmienny zbliżony do zera, w zamian ok. 2–5 GB RAM na modele (<code>bge-m3</code>, <code>bge-reranker-v2-m3</code>) i wolniejsze odpowiedzi na CPU.</li>
 </ul>
 
 <h4>Koszty stałe i zasoby techniczne</h4>
@@ -1403,14 +1317,16 @@ LLM_ENABLED=false</code></pre>
 
 <h4>Zasoby ludzkie (założenie)</h4>
 <ul>
-<li>Kurator treści po stronie ROPS: ok. 0,1–0,2 etatu — zatwierdzanie kolejki <code>PENDING_REVIEW</code>, przegląd klastrów, aktualizacja korpusu.</li>
-<li>Opiekun techniczny: kilka godzin miesięcznie — aktualizacje zależności, rotacja tokenów, kalibracja progów po <code>make eval</code>.</li>
+<li>Kurator treści po stronie ROPS: ok. 0,1–0,2 etatu — zatwierdzanie kolejki <code>PENDING_REVIEW</code>, przegląd skrzynki „Nowe” i odpowiedzi do autorów, aktualizacja korpusu.</li>
+<li>Opiekun techniczny: kilka godzin miesięcznie — aktualizacje zależności, rotacja tokenów, ręczna korekta progów (sekcja 10).</li>
 </ul>
 
 <hr>
 
 <footer>
-<p><strong>Moduł 1 — Matchmaking społeczny</strong> · v0.3 · 2026-10-03 · Małopolski Hub Innowacji Społecznych.</p>
+<p><strong>Moduł 1 — Matchmaking społeczny</strong> · v0.5 · 2026-10-03 · Małopolski Hub Innowacji Społecznych.</p>
+<p><strong>v0.5</strong> — uproszczenie do PoC po przeglądzie złożoności względem <code>base.md</code>. <em>Decyzje (ADR-015 – 019):</em> jeden provider embeddingów (OpenAI) za zachowanym interfejsem, bez trybu offline i <code>embedding_meta</code>; reranker Cohere od pierwszego etapu; licznik podobnych zgłoszeń i <code>GET /api/stats</code> zamiast klastrowania (usunięte <code>report_clusters</code>, notatki, endpointy klastrów); jeden token <code>STAFF</code> zamiast <code>EXPERT</code>/<code>ADMIN</code>; skrzynka „Nowe” (<code>GET /api/inbox</code>) zamiast webhooka; wiedza tylko torem semantycznym; brak indeksów HNSW i kopii statusu w chunkach; gmina z listy (<code>GET /api/gminy</code>); <code>db/init.sql</code>; retencja do backlogu. <em>Poprawione sprzeczności:</em> walidacja cytowań działa na strumieniu (filtr + <code>answer_retracted</code>); <code>candidates</code> zawsze przed <code>no_match</code>; bramka cosinusowa nie odrzuca kandydatów z toru leksykalnego (uzupełnienie cosinusa, 6.4); zapis odpięty od żądania, a strumień czeka na niego tylko przed <code>report_saved</code>; pytanie doprecyzowujące nie zawyża licznika (liczone sesje); <code>/api/search</code> nie jest źródłem kart, frontend startuje na mocku; powiadomienie dotyczy „nowego pomysłu” zgodnie z <code>base.md</code>; nowa kolejność prac w sekcji 13 (ścieżka krytyczna zawiera zapis, licznik i panel).</p>
+<p><strong>v0.4</strong> — porządki po drugim przeglądzie względem <code>base.md</code>. <em>Nowe:</em> <code>GET /api/reports</code> (lista dla Panelu administratora, w tym „bez dopasowania”). <em>Poprawki niespójności:</em> numer kroku generacji przy <code>LLM_ENABLED=false</code>; definicja <code>too_vague</code>; jeden mechanizm re-embeddingu (<code>ingest --reembed-all</code>, usunięty <code>scripts/reembed.py</code>); <code>SET LOCAL hnsw.ef_search</code> zgodnie z PgBouncerem; „trzy źródła” w ingeście; prefiksy w <code>embedding_meta</code> przy ingeście; usunięty <code>POST /api/reports</code> — jedyną drogą zgłoszenia problemu jest czat (ADR-012); jeden kształt <code>SolutionCard</code> (<code>scores: null</code> poza wyszukiwaniem, <code>/api/search</code> poza kontraktem kart); kody 401/403 w kroku 9; <code>MIN_COSINE_SCORE</code> w kalibracji; retencja podmienia etykietę klastra; WCAG 2.1 AA i design system w kontrakcie frontendu; zgłaszający to nie tylko mieszkaniec. <em>Decyzje (ADR-011 – 014):</em> korpus ma <code>kind = SOLUTION | KNOWLEDGE</code>, a wiedza o problemie trafia do <code>candidates.context</code> (wymóg <code>base.md</code> I „informacje o danej kwestii”); <code>also_see</code> to kolejne trafne wyniki z bramką per pozycja; usunięty <code>POST /api/reports</code>; usunięty rate limiting (PoC); domyślny LLM to Haiku 4.5, zgodnie z kosztami w sekcji 16; ewaluacja automatyczna usunięta na rzecz ręcznego przeglądu przez <code>/api/search</code>; moduły nazwane jak w <code>base.md</code> (Panel administratora VI, Canvas w Kreatorze pomysłów III).</p>
 <p><strong>v0.3</strong> — po przeglądzie względem <code>base.md</code>. <em>Role:</em> strona odbierająca rozbita na <code>EXPERT</code> i <code>ROPS_ADMIN</code>, strona zgłaszająca na <code>RESIDENT</code>/<code>NGO</code> i <code>JST</code> (<code>reporter_type</code>); trzy poziomy dostępu przez tokeny (ADR-009 zastępuje ADR-007), odpowiedzi do autora przez <code>report_token</code> (ADR-010). <em>Nowe:</em> zatwierdzanie rozwiązań, katalog <code>GET /api/solutions</code>, notatki do klastrów, webhook powiadomień, <code>media</code>, <code>also_see</code>, sekcja 16 (koszty), skalowanie w sekcji 3, tabele 4.8–4.10. <em>Poprawki błędów:</em> tor leksykalny budowany jako OR zamiast AND (6.2); centroid liczony w Pythonie, nie w SQL (6.7); bramka „nie wiem" działa bez rerankera (6.5); prefiksy embeddingów per model (6.3); poprawny identyfikator modelu LLM; retencja czyści wszystkie kopie treści; limit zapytań po <code>session_id</code>; usunięte niespójności (liczba tabel, „krok 7", brakujący DDL <code>embedding_meta</code>, kolumna na flagi w <code>search_events</code>, warunek indeksu HNSW).</p>
 <p><strong>v0.2</strong> — frontend wyjęty do osobnego modułu (sekcja 8 to teraz kontrakt, nie implementacja); warstwa tożsamości usunięta w całości: tabela <code>users</code>, typ <code>user_role</code>, nagłówek <code>X-Demo-Role</code> i powiązane klucze obce (ADR-007 przepisany, dodany ADR-008).</p>
 <p>Dokument iteracyjny. Zmiany: nowa sekcja na końcu, wpis w spisie treści, ADR w sekcji 14 przy zmianie decyzji. Podnieś wersję w nagłówku i w stopce.</p>
