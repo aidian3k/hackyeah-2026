@@ -17,7 +17,11 @@ from api.config import settings
 from api.db import engine
 from api.errors import REQUEST_ID_HEADER, install_error_handlers
 from api.log import request_id_var, setup_logging
+from api.routers import applications as m3_applications
+from api.routers import assist as m3_assist
+from api.routers import canvas as m3_canvas
 from api.routers import chat, innovation_tests, meta, reports, search, solutions, staff
+from api.routers import ideas as m3_ideas
 
 log = logging.getLogger(__name__)
 
@@ -88,6 +92,11 @@ def create_app() -> FastAPI:
         solutions.router,
         staff.router,
         innovation_tests.router,
+        # Moduł 3 — Kreator pomysłów
+        m3_ideas.router,
+        m3_canvas.router,
+        m3_assist.router,
+        m3_applications.router,
         meta.router,
         meta.health_router,
     ):

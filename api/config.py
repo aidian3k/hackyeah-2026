@@ -84,6 +84,22 @@ class Settings(BaseSettings):
     M4_COMMENT_MAX_CHARS: int = 4000
     M4_REPORT_FEEDBACK_MAX: int = 100
 
+    # --- Moduł 3 — Kreator pomysłów ---
+    M3_ASSIST_ENABLED: bool = True
+    M3_ASSIST_MAX_TOKENS: int = 1500
+    M3_ASSIST_DRAFT_MAX_TOKENS: int = 2500
+    M3_ASSIST_TIMEOUT_SECONDS: float = 30.0
+    M3_ASSIST_MAX_QUESTIONS: int = 3
+    M3_ASSIST_MAX_SUGGESTIONS: int = 5
+    IDEA_SIMILAR_LIMIT: int = 3
+    CANVAS_LIST_MAX_ITEMS: int = 12
+    CANVAS_ITEM_MAX_CHARS: int = 300
+    CANVAS_TEXT_MAX_CHARS: int = 2000
+    CANVAS_PARTNERS_MAX: int = 15
+    APPLICATION_TEXT_MAX_CHARS: int = 6000
+    APPLICATION_BUDGET_MAX_ROWS: int = 30
+    KREATOR_CALLS_IGNORE_DATES: bool = False
+
     @property
     def cors_origins_list(self) -> list[str]:
         return [o.strip() for o in self.CORS_ORIGINS.split(",") if o.strip()]

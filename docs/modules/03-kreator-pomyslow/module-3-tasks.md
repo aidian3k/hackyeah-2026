@@ -33,14 +33,14 @@ Materiały źródłowe ROPS są w `docs/resources/rops/`: indeks źródeł w `RE
 
 Zadania K00–K13: backend K00–K06, frontend K07–K13. Generator wniosków (K05, K12) to SHOULD.
 
-- [ ] K00 · Definicja Social Canvas `data/social-canvas.json` · zależy: —
-- [ ] K01 · Fundament: SQL `db/m3-kreator.sql`, modele, schematy, konfiguracja, rejestracja routerów · zależy: —
-- [ ] K02 · Kanwa (backend): pełna walidacja, scalanie, postęp, synchronizacja etapu · zależy: K00, K01
-- [ ] K03 · Pomysły (backend): CRUD, wysłanie, status, odpowiedzi · zależy: K01
+- [x] K00 · Definicja Social Canvas `data/social-canvas.json` · zależy: — — zrobione: claude-K00, 26 bloków, 3 arkusze
+- [x] K01 · Fundament: SQL `db/m3-kreator.sql`, modele, schematy, konfiguracja, rejestracja routerów · zależy: — — zrobione: claude-K01, make db-m3 idempotentny
+- [~] K02 · Kanwa (backend): pełna walidacja, scalanie, postęp, synchronizacja etapu · zależy: K00, K01 — agent: claude-K02, 2026-10-04 01:34
+- [~] K03 · Pomysły (backend): CRUD, wysłanie, status, odpowiedzi · zależy: K01 — agent: claude-K03, 2026-10-04 01:34
 - [ ] K04 · Asystent i podobne innowacje (provider + `/assist` + `/similar`) · zależy: K02, K03
 - [ ] K05 · Nabory i wnioski (backend, SHOULD): 2 pliki naborów, wniosek z prefill, szkic AI · zależy: K02, K03, K04
 - [ ] K06 · Seed demo pomysłów · zależy: K02, K03
-- [ ] K07 · Front: fundament (typy, klient, pamięć, trasy, nawigacja z licznikami) + komponenty asystenta · zależy: K01
+- [~] K07 · Front: fundament (typy, klient, pamięć, trasy, nawigacja z licznikami) + komponenty asystenta · zależy: K01 — agent: claude-K07, 2026-10-04 01:34
 - [ ] K08 · Front: fiszka 2.0 + wejście z „nie wiem” · zależy: K07, K03, K04
 - [ ] K09 · Front: komponenty bloków kanwy (w tym Venn, serca, macierz wpływu) · zależy: K07
 - [ ] K10 · Front: mapa Social Canvas z autozapisem · zależy: K09, K02
@@ -877,3 +877,4 @@ _(dopisuj na końcu: `- [Kxx → Kyy] opis`)_
   - `MainNav.tsx`: przebudowę menu pod role (nowa rola `mentor`) robi M5 w PK20 — K07 dopisuje „Kreator” i plakietkę na tym, co jest na masterze, bez przestawiania cudzych pozycji. `PanelLayout.tsx`: pozycja „Pomysły” obok „Rozmowy” (M5) i „Testerzy” (M4). `InboxPage.tsx`: sekcja „Nowe pomysły” (K11) — M5 dokłada osobną sekcję „Rozmowy czekające na Hub” (PK24); każdy moduł swoją sekcję, bez zmian w sekcji M1.
   - `api/providers/llm.py` jest zamrożony (M4 dodał `complete()`); asystent M3 zostaje w osobnym `api/providers/llm_assist.py`.
   - Wspólne pliki (`api/config.py`, `api/main.py`, `Makefile`, `.env.example`, `App.tsx`, `types.ts`, `client.ts`, `labels.ts`) — dopisuj blokiem z komentarzem `Moduł 3`. K01 i K07 wypchnij na master jak najwcześniej.
+- [K01 → K03, K05] Dodatkowe schematy żądań w `api/kreator/schemas.py`: `GrantApplicationCreate {call_id}` (POST `/api/ideas/{id}/applications`) i `DraftRequest {section_id}` (POST `/api/applications/{id}/draft`). Routery importowane w `api/main.py` jako `m3_ideas`, `m3_canvas`, `m3_assist`, `m3_applications`. Walidacja gminy (`GMINY`) i kategorii (`challenge_taxonomy`) należy do routerów (K03).
