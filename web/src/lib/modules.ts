@@ -4,6 +4,7 @@ export const MODULE_NAMES = {
   zasobnik: "Zasobnik wiedzy",
   kreator: "Kreator pomysłów",
   tester: "Tester innowacji",
+  komunikacja: "Platforma komunikacji", // Moduł 5
   panel: "Panel administratora",
 } as const;
 

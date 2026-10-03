@@ -1,4 +1,5 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
+import { useCommWaitingCount } from "@/hooks/useCommCount";
 import { useInboxCount } from "@/hooks/useInboxCount";
 import { plural } from "@/lib/format";
 import { MODULE_NAMES } from "@/lib/modules";
@@ -8,6 +9,7 @@ import { Banner } from "./Banner";
 export function PanelLayout() {
   const inboxCount = useInboxCount();
   const showBadge = inboxCount !== null && inboxCount > 0;
+  const commCount = useCommWaitingCount(); // Moduł 5
 
   return (
     <>
@@ -39,6 +41,21 @@ export function PanelLayout() {
           </NavLink>
           <NavLink to="/panel/testy" className="ds-nav__item">
             Testerzy
+          </NavLink>
+          {/* Moduł 5: rozmowy czekające na zespół Hubu */}
+          <NavLink to="/panel/rozmowy" className="ds-nav__item">
+            Rozmowy
+            {commCount !== null && commCount > 0 && (
+              <>
+                {" "}
+                <span className="ds-badge" aria-hidden="true">
+                  {commCount}
+                </span>
+                <span className="ds-sr-only">
+                  , {commCount} {plural(commCount, "czeka", "czekają", "czeka")} na odpowiedź
+                </span>
+              </>
+            )}
           </NavLink>
           <NavLink to="/panel/trendy" className="ds-nav__item">
             Trendy

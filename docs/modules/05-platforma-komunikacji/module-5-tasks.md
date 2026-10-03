@@ -32,7 +32,7 @@ Identyfikatory: `PK00`–`PK05` backend, `PK20`–`PK26` frontend.
 - [ ] PK03 · Asystent pierwszego kontaktu `api/comm/assistant.py` · zależy: PK02
 - [ ] PK04 · Eksperci i partnerstwa: `api/routers/mentors.py`, `api/routers/partnerships.py` · zależy: PK01
 - [ ] PK05 · Dane demo + `scripts/seed_comm.py` + `make seed-comm` · zależy: PK02, PK04
-- [~] PK20 · Frontend: fundament (klient `comm.ts`, etykiety, pamięć, rola `mentor`, trasy, nawigacja, zaślepki) · zależy: PK01 — agent: claude-m5, 2026-10-04 02:00
+- [x] PK20 · Frontend: fundament (klient `comm.ts`, etykiety, pamięć, rola `mentor`, trasy, nawigacja, zaślepki) · zależy: PK01 — zrobione: claude-m5, lint+build czyste; licznik panelu w hooks/useCommCount.ts
 - [ ] PK21 · Frontend: komponenty rozmowy (`Timeline`, `MessageForm`, `ThreadStatus`, `ThreadList`) + hook `useThread` · zależy: PK20
 - [ ] PK22 · Frontend: Platforma komunikacji — moje rozmowy, nowe pytanie, widok wątku · zależy: PK21, PK03
 - [ ] PK23 · Frontend: Tablica partnerstw (lista, dodawanie, ogłoszenie z dopasowaniami) · zależy: PK21, PK04
@@ -585,3 +585,4 @@ _(dopisuj na końcu: `- [PKxx → PKyy] opis`)_
   - `SolutionCard.tsx` należy do M2 (Z13) — w `Timeline` i `OfferPage` tylko go używaj.
   - Schemat w osobnym `db/m5-komunikacja.sql` jest teraz konwencją wszystkich modułów (M2: `db/m2-zasobnik.sql`, M3: `db/m3-kreator.sql`); M4 zostaje w `db/init.sql` (już na masterze).
   - Wspólne pliki (`api/config.py`, `api/main.py`, `Makefile`, `App.tsx`, `PanelLayout.tsx`) — dopisuj blokiem z komentarzem `Moduł 5`, bez przestawiania cudzych linii.
+- [PK20 → PK21–PK25] Licznik „Rozmowy” w panelu jest w osobnym hooku `web/src/hooks/useCommCount.ts` (poza listą plików PK20 — dopisany, żeby nie rozbudowywać `PanelLayout`). Limit znaków wiadomości to `COMM_MESSAGE_MAX_CHARS` w `lib/comm.ts` (nazwa `MESSAGE_MAX_CHARS` jest już zajęta w `labels.ts` przez czat M1 = 2000). Pamięć „Moich rozmów” jest w `lib/comm.ts` (`listMyThreads`, `rememberThread`, `forgetThread`).

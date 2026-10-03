@@ -22,6 +22,17 @@ import { ReportsPage } from "@/pages/panel/ReportsPage";
 import { SolutionReviewPage } from "@/pages/panel/SolutionReviewPage";
 import { SolutionsQueuePage } from "@/pages/panel/SolutionsQueuePage";
 import { TrendsPage } from "@/pages/panel/TrendsPage";
+// Moduł 5: Platforma komunikacji
+import { CommHomePage } from "@/pages/comm/CommHomePage";
+import { NewOfferPage } from "@/pages/comm/NewOfferPage";
+import { NewThreadPage } from "@/pages/comm/NewThreadPage";
+import { OfferPage } from "@/pages/comm/OfferPage";
+import { PartnersPage } from "@/pages/comm/PartnersPage";
+import { ThreadPage } from "@/pages/comm/ThreadPage";
+import { ExpertHomePage } from "@/pages/expert/ExpertHomePage";
+import { ExpertThreadPage } from "@/pages/expert/ExpertThreadPage";
+import { CommThreadPage } from "@/pages/panel/CommThreadPage";
+import { CommThreadsPage } from "@/pages/panel/CommThreadsPage";
 
 /**
  * Po zmianie ścieżki (nie przy pierwszym renderze) przenosi fokus na h1 nowej strony,
@@ -61,6 +72,19 @@ export function App() {
           <Route path="mam-pomysl" element={<IdeaPage />} />
           <Route path="moje-zgloszenia" element={<MyReportsPage />} />
         </Route>
+        {/* Moduł 5: Platforma komunikacji (rozmowy, tablica partnerstw, konsultacje eksperta) */}
+        <Route path="rozmowy" element={<CommHomePage />} />
+        <Route path="rozmowy/:id" element={<ThreadPage />} />
+        <Route path="partnerzy" element={<PartnersPage />} />
+        <Route path="partnerzy/:id" element={<OfferPage />} />
+        <Route element={<RequireRole requiredRole="reporter" />}>
+          <Route path="rozmowy/nowa" element={<NewThreadPage />} />
+          <Route path="partnerzy/nowe" element={<NewOfferPage />} />
+        </Route>
+        <Route element={<RequireRole requiredRole="mentor" />}>
+          <Route path="ekspert" element={<ExpertHomePage />} />
+          <Route path="ekspert/rozmowy/:id" element={<ExpertThreadPage />} />
+        </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Route>
       <Route path="panel" element={<RequireRole requiredRole="administrator" layout="panel" />}>
@@ -73,6 +97,9 @@ export function App() {
         <Route path="testy/nowy" element={<PanelInnovationTestCreatePage />} />
         <Route path="testy/:id" element={<PanelInnovationTestManagePage />} />
         <Route path="trendy" element={<TrendsPage />} />
+        {/* Moduł 5 */}
+        <Route path="rozmowy" element={<CommThreadsPage />} />
+        <Route path="rozmowy/:id" element={<CommThreadPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
