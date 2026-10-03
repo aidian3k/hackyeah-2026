@@ -19,6 +19,12 @@ Lista zmian do wdrożenia po pierwszej iteracji frontendu.
    - gmina ma zniknąć także z filtrów list i katalogów,
    - żaden ekran filtrów nie powinien już pokazywać pola `gmina`.
 
+4. **Branding nagłówka — iteracja 2**
+   - baner jak nagłówek `rops.krakow.pl`: oficjalny logotyp ROPS (`web/public/rops-logo.png`, w wysokim kontraście `rops-logo-i.png`, pobrane z `rops.krakow.pl/themes/page/images/`) linkujący do `/`,
+   - obok logotypu podpis **Dział Innowacji Społecznych** (nazwa działu z podstrony Kontakt ROPS) zamiast „Splot / Hub Innowacji Społecznych”,
+   - bez kolorowych pasków; narzędzia (logowanie, kontrast) po prawej, jak pasek narzędzi ROPS,
+   - tytuł karty przeglądarki: „… · ROPS Kraków”.
+
 ## Kryterium akceptacji
 
 - nagłówek i logo są zgodne z referencją ROPS,

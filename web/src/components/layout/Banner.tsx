@@ -1,28 +1,32 @@
 import { ContrastToggle } from "./ContrastToggle";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useContrast } from "@/hooks/useContrast";
 import { isProtectedPath, loginHref, useAuth } from "@/lib/auth";
 
-/** Baner z nazwą i paskami marki. Paski występują tylko tutaj, raz na ekranie. */
+/** Baner w stylu nagłówka rops.krakow.pl: logotyp ROPS (link do `/`), nazwa działu, narzędzia po prawej. */
 export function Banner() {
   const { session, logout } = useAuth();
   const navigate = useNavigate();
   const { pathname, search } = useLocation();
+  const [highContrast] = useContrast();
 
   return (
-    <div className="ds-banner">
-      <div className="ds-banner__brand">
-        <span className="ds-banner__name">Splot</span>
-        <span className="ds-banner__sub">Hub Innowacji Społecznych · ROPS Kraków</span>
+    <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 bg-surface px-4 py-4 md:px-6">
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+        <Link to="/" className="inline-flex">
+          <img
+            className="h-16 w-auto md:h-20"
+            src={highContrast ? "/rops-logo-i.png" : "/rops-logo.png"}
+            width={439}
+            height={142}
+            alt="Regionalny Ośrodek Polityki Społecznej w Krakowie — strona główna"
+          />
+        </Link>
+        <span className="border-l-4 border-accent pl-3 font-sans text-h3 text-navy">
+          Dział Innowacji Społecznych
+        </span>
       </div>
-      <svg className="ds-banner__stripes" viewBox="0 0 712 176" aria-hidden="true" focusable="false">
-        <polygon className="s-m" points="47,0 171,0 124,176 0,176" />
-        <polygon className="s-b" points="177,0 286,0 320,176 211,176" />
-        <polygon className="s-c" points="289,0 385,0 350,176 255,176" />
-        <polygon className="s-o" points="287.5,7.8 320,176 255,176" />
-        <polygon className="s-g" points="503,0 583,0 625,176 545,176" />
-        <polygon className="s-y" points="700,0 712,0 712,176 662,176" />
-      </svg>
-      <div className="ds-banner__tools">
+      <div className="flex items-center gap-2">
         {session ? (
           <button
             type="button"
