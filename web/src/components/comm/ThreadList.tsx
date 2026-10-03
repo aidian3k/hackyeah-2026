@@ -15,7 +15,7 @@ export function ThreadList({ items, hrefFor, viewer }: Props) {
   return (
     <ul className="m-0 flex list-none flex-col gap-3 p-0">
       {items.map((t) => (
-        <li key={t.id} className="flex flex-col gap-2 rounded-md border border-line bg-surface p-4">
+        <li key={t.id} className="flex flex-col gap-2 rounded-md border border-solid border-line bg-surface p-4">
           <p className="m-0 flex flex-wrap items-center gap-2">
             <Link to={hrefFor(t)} className="text-body-lg font-bold [overflow-wrap:anywhere]">
               {t.subject}

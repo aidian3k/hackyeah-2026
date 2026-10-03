@@ -34,11 +34,11 @@ Identyfikatory: `PK00`–`PK05` backend, `PK20`–`PK26` frontend.
 - [x] PK05 · Dane demo + `scripts/seed_comm.py` + `make seed-comm` · zależy: PK02, PK04 — zrobione: claude-m5, seed idempotentny (6 ekspertów, 8 ogłoszeń, 4 rozmowy)
 - [x] PK20 · Frontend: fundament (klient `comm.ts`, etykiety, pamięć, rola `mentor`, trasy, nawigacja, zaślepki) · zależy: PK01 — zrobione: claude-m5, lint+build czyste; licznik panelu w hooks/useCommCount.ts
 - [x] PK21 · Frontend: komponenty rozmowy (`Timeline`, `MessageForm`, `ThreadStatus`, `ThreadList`) + hook `useThread` · zależy: PK20 — zrobione: claude-m5, tsc+lint czyste; render sprawdzony w PK22–PK25
-- [~] PK22 · Frontend: Platforma komunikacji — moje rozmowy, nowe pytanie, widok wątku · zależy: PK21, PK03 — agent: claude-m5, 2026-10-04 03:30
-- [ ] PK23 · Frontend: Tablica partnerstw (lista, dodawanie, ogłoszenie z dopasowaniami) · zależy: PK21, PK04
-- [ ] PK24 · Frontend: Panel — Rozmowy (lista, wątek, odpowiedź, ekspert, zamknięcie) · zależy: PK21, PK02, PK04
-- [ ] PK25 · Frontend: widok eksperta „Moje konsultacje” · zależy: PK21, PK02, PK04
-- [ ] PK26 · Próba generalna demo M5 + przegląd dostępności · zależy: PK05, PK22, PK23, PK24, PK25
+- [x] PK22 · Frontend: Platforma komunikacji — moje rozmowy, nowe pytanie, widok wątku · zależy: PK21, PK03 — zrobione: claude-m5, scenariusz A w Chrome (bez LLM)
+- [x] PK23 · Frontend: Tablica partnerstw (lista, dodawanie, ogłoszenie z dopasowaniami) · zależy: PK21, PK04 — zrobione: claude-m5, filtr, dopasowania i rozwiązania w Chrome; propozycja sprawdzona przez API
+- [x] PK24 · Frontend: Panel — Rozmowy (lista, wątek, odpowiedź, ekspert, zamknięcie) · zależy: PK21, PK02, PK04 — zrobione: claude-m5, odpowiedź, przydział eksperta, licznik w Chrome
+- [x] PK25 · Frontend: widok eksperta „Moje konsultacje” · zależy: PK21, PK02, PK04 — zrobione: claude-m5, odpowiedź eksperta w Chrome
+- [x] PK26 · Próba generalna demo M5 + przegląd dostępności · zależy: PK05, PK22, PK23, PK24, PK25 — zrobione: claude-m5, module-5-demo.md; a11y częściowo (klawiatura i 360 px niesprawdzone)
 
 ### Fale równoległości (orientacyjnie)
 

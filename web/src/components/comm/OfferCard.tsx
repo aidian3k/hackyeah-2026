@@ -13,7 +13,7 @@ interface Props {
 export function OfferCard({ offer, note, headingLevel = 3 }: Props) {
   const Heading = `h${headingLevel}` as "h2" | "h3";
   return (
-    <article className="flex flex-col gap-2 rounded-md border border-line bg-surface p-4">
+    <article className="flex flex-col gap-2 rounded-md border border-solid border-line bg-surface p-4">
       <p className="m-0 flex flex-wrap items-center gap-2 text-small">
         <span className="ds-tag">{INTENT_LABELS[offer.intent]}</span>
         {note && <span className="ds-badge">{note}</span>}

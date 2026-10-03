@@ -53,12 +53,12 @@ export function Timeline({ messages, viewer }: Props) {
         const ai = msg.role === "ASSISTANT";
         const system = msg.role === "SYSTEM";
         const tone = own
-          ? "bg-surface-muted border-line"
+          ? "bg-surface-muted border-solid border-line"
           : ai
-            ? "bg-soft-blue border-line-strong"
+            ? "bg-soft-blue border-solid border-line-strong"
             : system
               ? "bg-surface border-line border-dashed"
-              : "bg-surface border-line-strong";
+              : "bg-surface border-solid border-line-strong";
         return (
           <li key={msg.id} className={`flex flex-col gap-3 rounded-md border p-4 ${tone}`}>
             <p className="m-0 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-small text-ink-muted">
@@ -68,7 +68,9 @@ export function Timeline({ messages, viewer }: Props) {
                   podpis: {msg.author_label} <span className="ds-sr-only">(niezweryfikowany)</span>
                 </span>
               )}
-              {msg.author_label && msg.role === "STAFF" && <span>{msg.author_label}</span>}
+              {msg.author_label && msg.role === "STAFF" && msg.author_label !== messageRoleLabel(msg, viewer) && (
+                <span>{msg.author_label}</span>
+              )}
               <time dateTime={msg.created_at}>{formatDateTime(msg.created_at)}</time>
             </p>
             <MessageBody msg={msg} />
