@@ -191,7 +191,7 @@ function ReportView({ report, onPatched, onRefresh }: ViewProps) {
         </details>
       </section>
 
-      <TopMatch solutionId={report.top_solution_id} />
+      <TopMatch solutionId={report.top_solution_id} reportId={report.id} />
 
       <StatusControl report={report} onChange={onPatched} onRefresh={onRefresh} />
 
@@ -219,13 +219,19 @@ function ReportView({ report, onPatched, onRefresh }: ViewProps) {
 }
 
 /** Najlepsze rozwiązanie z wyszukiwania albo informacja o luce w bibliotece. */
-function TopMatch({ solutionId }: { solutionId: number | null }) {
+function TopMatch({ solutionId, reportId }: { solutionId: number | null; reportId?: number }) {
   return (
     <section className="ds-stack" aria-labelledby="najlepsze-dopasowanie">
       <h2 id="najlepsze-dopasowanie">Najlepsze dopasowanie</h2>
       {solutionId === null ? (
         <Alert tone="warning">
           <p>Brak dopasowanego rozwiązania. To może być luka w bibliotece.</p>
+          {/* Moduł 3: fiszka pomysłu wypełniona tym zgłoszeniem (w URL tylko numer). */}
+          {reportId !== undefined && (
+            <p>
+              <Link to={`/mam-pomysl?zgloszenie=${reportId}`}>Fiszka pomysłu na podstawie tego zgłoszenia</Link>
+            </p>
+          )}
         </Alert>
       ) : (
         <TopMatchCard solutionId={solutionId} />

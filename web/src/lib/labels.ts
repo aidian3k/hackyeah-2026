@@ -114,8 +114,8 @@ export const EXAMPLE_PROMPTS: string[] = [
 export const IDEA_STATUS_LABELS: Record<IdeaStatus, string> = {
   DRAFT: "Szkic",
   SUBMITTED: "Wysłany",
-  IN_REVIEW: "W ocenie Hubu",
-  INVITED: "Zaproszony do rozmowy",
+  IN_REVIEW: "W analizie",
+  INVITED: "Zaproszony do dalszych prac",
   REJECTED: "Odrzucony",
 };
 
