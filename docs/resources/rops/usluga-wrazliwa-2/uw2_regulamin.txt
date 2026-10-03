@@ -1,0 +1,3580 @@
+                                                                                          Załącznik nr 1
+                                             do Uchwały Nr 2860/25 Zarządu Województwa Małopolskiego
+                                                                               z dnia 16 grudnia 2025 r.
+
+
+Regulamin udzielania grantów w ramach projektu „Usługa Wrażliwa –
+upowszechnianie innowacji społecznych w środowiskach lokalnych”
+
+Spis treści
+Regulamin udzielania grantów w ramach projektu „Usługa Wrażliwa – upowszechnianie
+innowacji społecznych w środowiskach lokalnych” ................................................................... 1
+
+   1.      Wykaz definicji i skrótów ................................................................................................ 3
+
+   2.      Postanowienia ogólne .................................................................................................... 5
+
+   3.      Informacja o przeznaczeniu grantów ............................................................................. 6
+
+   4.      Podmioty uprawnione do aplikowania o grant .............................................................. 7
+
+   5.      Tryb aplikowania ........................................................................................................... 10
+
+   6.      Zasady oceny wniosków o grant złożonych w naborze ................................................ 11
+
+        6.1.      Zasady ogólne ....................................................................................................... 11
+
+        6.2.      Ocena formalna wniosków o grant złożonych w naborze .................................... 13
+
+        6.3.      Ocena merytoryczna wniosków o grant złożonych w naborze ............................ 15
+
+   7.      Procedury dotyczące odwołań ..................................................................................... 18
+
+   8.      Indywidualny Plan Wdrażania Innowacji ...................................................................... 18
+
+   9.      Umowa o powierzenie grantu ...................................................................................... 20
+
+   10.         Obowiązki Grantobiorców ........................................................................................ 21
+
+   11.         Zabezpieczenie grantów ........................................................................................... 24
+
+   12.         Wypłacanie grantów ................................................................................................. 24
+
+   13.         Finansowanie i rozliczanie grantów .......................................................................... 25
+
+        13.1.         Kwalifikowalność wydatków ............................................................................. 25
+
+        13.2.         Cross-financing ................................................................................................. 26
+
+        13.3. Trwałość w grantach ............................................................................................. 28
+      13.4.          Pomoc de minimis ............................................................................................ 28
+
+      13.5.          Zasady rozliczania grantów ............................................................................... 29
+
+   14.        Monitorowanie i kontrola grantów .......................................................................... 30
+
+   15.        Odzyskiwanie grantów w przypadku ich wykorzystania niezgodnie z celami projektu
+   grantowego........................................................................................................................... 31
+
+   16.        Dane osobowe .......................................................................................................... 32
+
+   17.        Załączniki .................................................................................................................. 32
+
+Umowa o powierzenie grantu nr … .......................................................................................... 33
+
+   § 1. Definicje i skróty ............................................................................................................ 34
+
+   § 2. Przedmiot i okres realizacji Umowy .............................................................................. 36
+
+   § 3. Warunki finansowe ........................................................................................................ 37
+
+   § 4 Zobowiązania Grantobiorcy ............................................................................................ 39
+
+   § 5 Zabezpieczenie prawidłowej realizacji Umowy .............................................................. 42
+
+   § 6 System płatności i rozliczania grantu .............................................................................. 43
+
+   § 7 Monitorowanie i kontrola grantu ................................................................................... 45
+
+   § 8 Trwałość grantu .............................................................................................................. 47
+
+   § 9 Zmiany w zakresie grantu ............................................................................................... 48
+
+   § 10 Zwrot grantu ................................................................................................................. 48
+
+   § 11 Dane osobowe .............................................................................................................. 50
+
+   § 12 Rozwiązanie Umowy ..................................................................................................... 55
+
+   § 13 Odpowiedzialność za szkodę ........................................................................................ 56
+
+   § 14 Rozwiązywanie sporów ................................................................................................. 56
+
+   § 15 Informacje Kontaktowe ................................................................................................ 56
+
+   § 16 Postanowienia końcowe ............................................................................................... 57
+
+   Pełnomocnictwo dla osoby podpisującej Umowę o powierzenie grantu ............................ 59
+
+
+
+
+                                                            Strona 2 z 103
+   Indywidualny Plan Wdrażania Innowacji realizowany w ramach projektu pn. „Usługa
+   Wrażliwa – upowszechnianie innowacji społecznych w środowiskach lokalnych” ............. 60
+
+   Harmonogram płatności ....................................................................................................... 70
+
+   Sprawozdanie rzeczowo-finansowe ..................................................................................... 72
+
+   Zakres danych osobowych przetwarzanych w ramach FEM 2021-2027 .............................. 82
+
+   OŚWIADCZENIE UCZESTNIKA PROJEKTU .............................................................................. 84
+
+   Klauzula informacyjna Regionalnego Ośrodka Polityki Społecznej w Krakowie ................... 87
+
+   Obowiązek informacyjny w zakresie danych przetwarzanych przez Instytucję
+   Pośredniczącą: ...................................................................................................................... 89
+
+   Szczegółowe warunki realizacji usług społecznych w ramach grantów ............................... 92
+
+Wykaz kosztów niekwalifikowalnych ...................................................................................... 101
+
+
+
+    1. Wykaz definicji i skrótów
+
+1. Użyte w Regulaminie skróty i definicje oznaczają:
+   1) cross-financing – mechanizm polegający na możliwości finansowania części wydatków
+          w projekcie realizowanym w ramach Europejskiego Funduszu Społecznego Plus (EFS+)
+          z Europejskiego Funduszu Rozwoju Regionalnego (EFRR),
+   2) FEM 2021-2027 – program regionalny Fundusze Europejskie dla Małopolski 2021-
+          2027,
+   3) FERS 2021-2027 – program krajowy Fundusze Europejskie dla Rozwoju Społecznego
+          na lata 2021-2027,
+   4) grant – środki finansowe, które ROPS powierzył Grantobiorcy, na podstawie Umowy o
+          powierzenie grantu, na realizację zadań służących wdrożeniu innowacji społecznej,
+   5) Grantobiorca – podmiot wybrany w drodze otwartego naboru ogłoszonego przez
+          ROPS w ramach realizacji projektu grantowego, z którym ROPS zawarł Umowę o
+          powierzenie grantu,
+   6) innowacja społeczna – rozwiązanie (produkt, usługa, model) w obszarze zaspokajania
+          potrzeb społecznych, przetestowane w ramach projektów inkubacyjnych ROPS i
+          wybrane do wdrożenia w ramach projektu grantowego „Usługa Wrażliwa –
+
+
+                                                           Strona 3 z 103
+          upowszechnianie innowacji społecznych w środowiskach lokalnych”, wskazane w
+          ogłoszeniu o naborze grantowym na stronie internetowej ROPS1,
+     7) Indywidualny Plan Wdrażania Innowacji (IPWI) – dokument stanowiący załącznik do
+          Umowy o powierzenie grantu, wypracowany przed jej zawarciem we współpracy
+          rekomendowanego do otrzymania grantu Wnioskodawcy z ROPS, zawierający opis i
+          plan wdrażania usługi społecznej bazującej na wybranej innowacji społecznej, zgodnie
+          z którym Grantobiorca będzie realizował działania finansowane ze środków grantu.
+     8) Komisja Oceny Wniosków (KOW) – komisja składająca się z pracowników ROPS, która
+          dokonuje oceny formalnej i merytorycznej wniosków o grant złożonych w naborze
+          grantowym,
+     9) pomoc de minimis – pomoc stanowiąca szczególną kategorię wsparcia udzielanego
+          przez państwo, która, ze względu na swą małą wartość nie powoduje zakłócenia
+          konkurencji w wymiarze unijnym. Pomoc ta udzielana jest zgodnie z:
+          a. Rozporządzeniem Komisji (UE) nr 2023/2831 z dnia 13 grudnia 2023 r. w sprawie
+             stosowania art. 107 i 108 Traktatu o funkcjonowaniu Unii Europejskiej do pomocy
+             de minimis (Dz. Urz. UE L, 2023/2831 z 15.12.2023),
+          b. ustawą z dnia 30 kwietnia 2004 r. o postępowaniu w sprawach dotyczących
+             pomocy publicznej,
+          c. Rozporządzeniem Ministra Funduszy i Polityki Regionalnej z dnia 20 grudnia 2022 r.
+             w sprawie udzielania pomocy de minimis oraz pomocy publicznej w ramach
+             Europejskiego Funduszu Społecznego Plus na lata 2021 – 2027,
+     10) projekt grantowy – projekt, o którym mowa w art. 41 ustawy z dnia 28 kwietnia
+          2022 r. o zasadach realizacji zadań finansowanych ze środków europejskich w
+          perspektywie finansowej 2021–2027, pn. „Usługa Wrażliwa – upowszechnianie
+          innowacji społecznych w środowiskach lokalnych”,
+     11) Regulamin – Regulamin udzielania grantów w ramach projektu „Usługa Wrażliwa –
+          upowszechnianie innowacji społecznych w środowiskach lokalnych”,
+     12) ROPS – Regionalny Ośrodek Polityki Społecznej w Krakowie,
+
+
+
+
+1
+    https://rops.krakow.pl/
+
+                                          Strona 4 z 103
+     13) uczestnicy projektu grantowego – Grantobiorcy, którzy uzyskali grant w ramach
+          projektu grantowego oraz osoby, które zostaną objęte wsparciem w ramach
+          wdrażania innowacji społecznych finansowanych ze środków grantu,
+     14) Umowa o powierzenie grantu – umowa zawierana pomiędzy Grantobiorcą i ROPS
+          regulująca w szczególności zasady współpracy w zakresie wdrażania innowacji oraz
+          rozliczenia grantu,
+     15) Wnioskodawca – podmiot, który złożył wniosek o grant w naborze grantowym,
+     16) wytyczne – Wytyczne dotyczące kwalifikowalności wydatków na lata 2021-2027
+          określające ujednolicone warunki i procedury dotyczące kwalifikowalności wydatków
+          m.in. dla Europejskiego Funduszu Społecznego Plus, w ramach którego realizowany
+          jest Projekt.
+
+      2. Postanowienia ogólne
+
+1. Niniejszy Regulamin określa zasady udzielania grantów w ramach projektu grantowego
+     pn.: „Usługa Wrażliwa – upowszechnianie innowacji społecznych w środowiskach
+     lokalnych”, w tym zasady oceny i wyboru wniosków o grant złożonych w projekcie
+     grantowym oraz warunki przekazania, wykorzystania, a także rozliczenia przyznanych
+     grantów.
+2. Projekt grantowy realizowany jest w ramach programu Fundusze Europejskie dla
+     Małopolski 2021 – 2027, Priorytet 6 Fundusze europejskie dla rynku pracy, edukacji i
+     włączenia społecznego, Działanie 6.23 Włączenie społeczne – projekty Województwa
+     Małopolskiego, Typ C: System usług społecznych – upowszechnienie innowacji.
+3. Projekt grantowy dofinansowany jest przez Unię Europejską ze środków Europejskiego
+     Funduszu Społecznego Plus (EFS+).
+4. Projekt grantowy realizowany jest przez Województwo Małopolskie – Regionalny Ośrodek
+     Polityki Społecznej w Krakowie (ROPS) i obejmuje teren województwa małopolskiego.
+5. Celem projektu grantowego jest pilotażowe wdrożenie na terenie Małopolski 10 usług
+     społecznych świadczonych w społecznościach lokalnych bazujących na innowacyjnych
+     rozwiązaniach wskazanych w ogłoszeniu o naborze grantowym na stronie internetowej
+     ROPS2.
+
+
+2
+    https://rops.krakow.pl/
+
+                                          Strona 5 z 103
+6. Uczestnikami projektu grantowego będą Grantobiorcy wdrażający innowacje społeczne –
+    oraz osoby, które Grantobiorcy obejmą innowacyjnymi usługami społecznymi, a także
+    kadra realizująca działania w obszarze usług społecznych, z zastrzeżeniem spełnienia
+    warunków określonych w rozdziale 3 ust. 4 i 5 Regulaminu.
+7. Niniejszy Regulamin stanowi jednocześnie regulamin rekrutacji i udziału w projekcie
+    grantowym.
+8. Wszelkie działania i rezultaty projektu grantowego będą zgodne z zasadami
+    równościowymi wskazanymi w Wytycznych dotyczących realizacji zasad równościowych w
+    ramach funduszy unijnych na lata 2021-20273, w tym z zasadą równości kobiet i mężczyzn,
+    zasadami równości szans i niedyskryminacji, w szczególności standardami dostępności dla
+    osób z niepełnosprawnościami, Kartą Praw Podstawowych, Konwencją o Prawach Osób
+    Niepełnosprawnych, a także zasadami polityki zrównoważonego rozwoju, w tym zasadą
+    DNSH (zasada „nie czyń poważnych szkód”).
+9. Wdrażanie innowacyjnej usługi społecznej będzie zgodne z ideą deinstytucjonalizacji
+    wsparcia społecznego, rozumianą jako proces odchodzenia od pomocy instytucjonalnej na
+    rzecz wsparcia środowiskowego przy wykorzystaniu usług społecznych.
+
+    3. Informacja o przeznaczeniu grantów
+
+1. Celem udzielonego grantu jest pilotażowe wdrożenie innowacyjnej usługi społecznej
+    świadczonej w społecznościach lokalnych, która bazować będzie na wybranej innowacji
+    społecznej, wskazanej w ogłoszeniu o naborze grantowym na stronie internetowej ROPS4.
+2. Maksymalna kwota przyznanego grantu wynosi 600 000 zł.
+3. W wyniku wdrożenia innowacji Grantobiorca musi objąć innowacyjną usługą społeczną
+    określoną liczbę osób, wskazaną w zatwierdzonym przez ROPS Indywidualnym Planie
+    Wdrażania Innowacji, który stanowi załącznik nr 2 do Umowy o powierzenie grantu.
+4. Usługami społecznymi w ramach grantu mogą być objęte, w zależności od wdrażanej
+    innowacji, następujące kategorie osób mieszkających, uczących się lub pracujących na
+    terenie województwa małopolskiego:
+
+
+
+
+3
+  https://www.funduszeeuropejskie.gov.pl/strony/o-funduszach/dokumenty/wytyczne-dotyczace-
+realizacji-zasad-rownosciowych-w-ramach-funduszy-unijnych-na-lata-2021-2027-1/
+4
+  https://rops.krakow.pl/
+
+                                         Strona 6 z 103
+  1) rodziny (naturalne, zastępcze, adopcyjne) z dziećmi i ich otoczenie, w tym rodziny
+       dysfunkcyjne, przeżywające trudności w wypełnianiu funkcji opiekuńczo-
+       wychowawczych lub w kryzysie (dotyczy zarówno całych rodzin, jak i ich
+       poszczególnych członków),
+  2) dzieci i młodzież,
+  3) osoby wymagające wsparcia w codziennym funkcjonowaniu lub ich opiekunowie,
+  4) osoby z niepełnosprawnościami lub o ograniczonej mobilności.
+5. Wsparciem w ramach grantu może także zostać objęta kadra realizująca działania w
+  obszarze usług społecznych, pracująca w podmiotach działających na terenie
+  województwa małopolskiego.
+6. Maksymalny okres realizacji grantu wynosi 18 miesięcy, z zastrzeżeniem, że minimalny
+  okres świadczenia usługi społecznej bazującej na wybranej innowacji społecznej wynosi 12
+  miesięcy.
+7. Wdrażane w ramach grantów usługi społeczne muszą być zgodne z wymogami
+  wskazanymi w załączniku nr 8 do Umowy o powierzenie grantu, adekwatnymi dla danej
+  innowacyjnej usługi społecznej.
+
+   4. Podmioty uprawnione do aplikowania o grant
+
+1. Wnioskodawcą może być:
+  1) jednostka sektora finansów publicznych,
+  2) osoba prawna,
+  3) jednostka organizacyjna niebędąca osobą prawną, posiadająca zdolność prawną.
+  (status Wnioskodawcy weryfikowany jest w oparciu o złożoną przez Wnioskodawcę
+  dokumentację oraz na postawie dostępnych baz i rejestrów).
+2. Warunkiem udziału podmiotów wymienionych w ust. 1 jest spełnienie łącznie poniższych
+  wymogów:
+  1) podmiot posiada siedzibę, filię, delegaturę, oddział lub inną formę działalności na
+       terenie województwa małopolskiego (wymóg weryfikowany jest w oparciu o złożoną
+       przez Wnioskodawcę dokumentację oraz na postawie dostępnych baz i rejestrów);
+  2) podmiot posiada minimum 3-letnie doświadczenie w co najmniej jednym obszarze
+       zbieżnym z przedmiotem danej innowacji, tj. w:
+       a. pracy z grupą docelową, do której kierowana jest innowacja
+
+
+                                       Strona 7 z 103
+          b. udzielaniu podobnej formy wsparcia
+          c. działalności w obszarze innowacji społecznych
+          (wymóg weryfikowany jest w oparciu o informacje zawarte we wniosku o grant, może
+          być weryfikowany również na podstawie innej dostępnej dokumentacji, baz lub
+          rejestrów);
+     3) podmiot przestrzega przepisów antydyskryminacyjnych, o których mowa w art. 9
+          ust. 3 Rozporządzenia Parlamentu Europejskiego i Rady (UE) nr 2021/1060 (wymóg
+          weryfikowany jest w oparciu o oświadczenie Wnioskodawcy);
+     4) podmiot nie zalega z uiszczeniem podatków, opłat lub składek na ubezpieczenie
+          społeczne lub zdrowotne (wymóg weryfikowany jest w oparciu o oświadczenie
+          Wnioskodawcy złożone we wniosku o grant oraz przed podpisaniem Umowy o
+          powierzenie grantu na podstawie zaświadczenia z ZUS/Urzędu Skarbowego);
+     5) podmiot nie podlega wykluczeniu z otrzymania wsparcia, wynikającemu z nałożonych
+          sankcji w związku z agresją Federacji Rosyjskiej na Ukrainę tj.:
+          a. nie jest podmiotem, względem którego stosowane są środki sankcyjne,
+          b. nie jest związany z osobami lub podmiotami, względem których stosowane są
+             środki sankcyjne
+          (wymóg weryfikowany jest w oparciu o oświadczenie Wnioskodawcy oraz w oparciu o
+          listę osób i podmiotów objętych sankcjami, publikowaną na stronie BIP Ministerstwa
+          Spraw Wewnętrznych i Administracji5);
+     6) podmiot nie został wykluczony z możliwości otrzymania środków przeznaczonych na
+          realizację programów finansowanych z udziałem środków europejskich, na podstawie
+          art. 207 ust. 4 ustawy z dnia 27 sierpnia 2009 r. o finansach publicznych, art. 12 ust. 1
+          pkt 1 ustawy z dnia 15 czerwca 2012 r. o skutkach powierzania wykonywania pracy
+          cudzoziemcom przebywającym wbrew przepisom na terytorium Rzeczypospolitej
+          Polskiej oraz art. 9 ust. 1 pkt 2a ustawy z dnia 28 października 2002 r. o
+          odpowiedzialności podmiotów zbiorowych za czyny zabronione pod groźbą kary
+          (wymóg weryfikowany jest w oparciu o oświadczenie Wnioskodawcy złożone we
+          wniosku o grant oraz przed przystąpieniem do opracowania Indywidualnego Planu
+          Wdrażania Innowacji, poprzedzającym podpisanie Umowy o powierzenie grantu, w
+
+
+5
+    https://www.gov.pl/web/mswia/lista-osob-i-podmiotow-objetych-sankcjami
+
+                                            Strona 8 z 103
+       oparciu o rejestr podmiotów wykluczonych z możliwości otrzymania środków
+       przeznaczonych na realizację programów finansowanych z udziałem środków
+       europejskich);
+  7) podmiot niekorzystający równolegle z innych środków publicznych na realizację tych
+       samych wydatków, w szczególności w ramach FEM 2021-2027 oraz FERS 2021-2027
+       (wymóg weryfikowany jest w oparciu o oświadczenie Wnioskodawcy złożone we
+       wniosku o grant).
+3. Z wnioskowania o grant wyłączone są:
+   1) podmioty, których członek organu zarządzającego lub nadzorczego, wspólnik w spółce
+       jawnej lub partnerskiej albo komplementariusz w spółce komandytowej lub
+       komandytowo-akcyjnej został skazany prawomocnym wyrokiem sądu za umyślne
+       przestępstwo ścigane z oskarżenia publicznego lub umyślne przestępstwo skarbowe
+       (wymóg weryfikowany jest w oparciu o oświadczenie Wnioskodawcy złożone we
+       wniosku o grant oraz przed podpisaniem Umowy o powierzenie grantu na podstawie
+       zaświadczenia o niekaralności z Krajowego Rejestru Karnego),
+  2)   podmioty, których wspólnikiem lub urzędującym członkiem organu zarządzającego
+       lub nadzorczego jest pracownik ROPS lub osoba, którą łączy z pracownikiem ROPS
+       związek małżeński, stosunek pokrewieństwa i powinowactwa (w linii prostej lub w
+       linii bocznej do II stopnia) lub związek z tytułu przysposobienia, opieki lub kurateli
+       (wymóg weryfikowany jest w oparciu o oświadczenie Wnioskodawcy złożone we
+       wniosku o grant),
+  3)   podmioty, które łączy z personelem projektu oraz władzami ROPS, Głównym
+       Księgowym lub Radcą Prawnym ROPS inny związek faktyczny, który może budzić
+       uzasadnione wątpliwości, co do zachowania zasady bezstronności (wymóg
+       weryfikowany jest w oparciu o oświadczenie Wnioskodawcy złożone we wniosku o
+       grant),
+  4)   podmioty, które są jednostkami organizacyjnymi Województwa Małopolskiego lub
+       osobami prawnymi Województwa Małopolskiego (wymóg weryfikowany jest w
+       oparciu o informacje zawarte we wniosku o grant oraz dostępne bazy i rejestry),
+  5)   podmioty nieposiadające siedziby lub oddziału na terenie Polski (wymóg
+       weryfikowany jest w oparciu o informacje zawarte we wniosku o grant oraz dostępne
+       bazy i rejestry),
+
+
+                                         Strona 9 z 103
+     6)   podmioty, których działania w obszarze powiązanym z grantem są niezgodne z Kartą
+          Praw Podstawowych lub Konwencją o Prawach Osób Niepełnosprawnych (wymóg
+          weryfikowany jest w oparciu o oświadczenie Wnioskodawcy złożone we wniosku o
+          grant).
+4. Wnioskodawca może zostać wezwany przez ROPS do przedstawienia wszelkich
+     dokumentów oraz informacji niezbędnych do potwierdzenia prawdziwości złożonych przez
+     niego oświadczeń.
+
+      5. Tryb aplikowania
+
+1. W ramach projektu grantowego „Usługa Wrażliwa – upowszechnianie innowacji
+     społecznych w środowiskach lokalnych” przewidziano minimum 2 nabory wniosków o
+     grant. Ogłoszenie pierwszego naboru planowane jest w IV kwartale 2025 roku, a drugiego
+     naboru w II kwartale 2026 roku.
+2. Nabory, o których mowa w ust. 1 ogłoszone zostaną w minimum 10 kategoriach łącznie,
+     po 5 kategorii na nabór, odpowiadających innowacjom społecznym skierowanym do
+     wdrożenia w naborze. Każda kategoria dedykowana będzie wdrożeniu jednej innowacji
+     społecznej. Maksymalna kwota na wdrożenie innowacji społecznej w ramach grantu
+     wynosi 600 000 zł.
+3. Kwota środków przeznaczonych na granty w każdym naborze zostanie podana w
+     ogłoszeniu o naborze. W przypadku braku wykorzystania środków przeznaczonych na
+     granty w danym naborze, ROPS zastrzega sobie prawo uruchomienia naboru
+     uzupełniającego.
+4. Każdy otwarty nabór wniosków o grant będzie przeprowadzony z zachowaniem zasad
+     bezstronności, rzetelności i przejrzystości oraz równego podejścia do wszystkich
+     Wnioskodawców.
+5. Termin naboru zostanie wskazany w ogłoszeniu o naborze. Ogłoszenie zostanie
+     zamieszczone na stronie internetowej ROPS6.
+6. Wnioskodawca będzie składał wniosek poprzez dedykowany elektroniczny formularz
+     aplikacyjny, zamieszczony na stronie internetowej ROPS7.
+
+
+
+6
+    https://rops.krakow.pl/
+7
+    jw.
+
+                                         Strona 10 z 103
+7. Wnioski o grant będzie można składać w terminach określonych w ogłoszeniu o naborze
+  grantowym. ROPS zastrzega sobie możliwość wydłużenia okresu składania wniosków o
+  grant.
+8. Wnioski o grant złożone po terminie, o którym mowa w ust. 5 lub w innej formie niż
+  wskazana w ust. 6 nie będą rozpatrywane, a Wnioskodawcy nie będzie przysługiwało
+  odwołanie z tytułu braku rozpatrzenia wniosku o grant złożonego po terminie lub w innej
+  niż wymagana Regulaminem formie.
+9. Ogłoszenie będzie zawierać wzór wniosku, wzór Umowy o powierzenie grantu, wzory kart
+  oceny, informacje o zasadach rekrutacji oraz o wsparciu podczas przygotowania i składania
+  wniosków w naborze.
+10. Wnioskodawca może złożyć w naborze jeden wniosek o grant w ramach danej kategorii.
+    Wniosek dotyczy wdrożenia jednej wybranej innowacji społecznej. Wniosek złożony jako
+    kolejny w danej kategorii nie będzie rozpatrywany, o ile pierwszy wniosek nie zostanie
+    wycofany w terminie składania wniosków.
+11. W ramach Projektu grantowego Wnioskodawca może otrzymać tylko jeden grant.
+12. Podanie danych niezgodnych ze stanem faktycznym w treści wniosku lub w
+    oświadczeniach skutkować będzie wykluczeniem z możliwości ubiegania się o grant i
+    może być potraktowane jako próba wyłudzenia środków finansowych oraz podlegać
+    powiadomieniu właściwych organów ścigania.
+13. Wnioskodawca wnioskując o grant w ramach projektu grantowego „Usługa Wrażliwa –
+    upowszechnianie innowacji społecznych w środowiskach lokalnych” nie może korzystać
+    równolegle z innych środków publicznych na realizację tych samych wydatków
+    zaplanowanych w grancie, w szczególności ze środków FEM 2021-2027 oraz FERS 2021-
+    2027.
+
+   6. Zasady oceny wniosków o grant złożonych w naborze
+
+6.1. Zasady ogólne
+
+1. W celu przeprowadzenia oceny wniosków o grant powołana zostanie Komisja Oceny
+  Wniosków, w skład której wchodzić będą pracownicy ROPS.
+2. Ocena wniosków o grant będzie obejmować 2 następujące po sobie etapy:
+  1)   Etap 1 – ocena formalna,
+
+
+                                       Strona 11 z 103
+     2)   Etap 2 – ocena merytoryczna.
+3. Ostateczną ocenę będzie stanowić punktacja uzyskana w wyniku przeprowadzenia oceny
+     merytorycznej.
+4. Po zakończeniu obu etapów oceny zostanie stworzona Lista rankingowa oraz Lista
+     rezerwowa wniosków o grant. Ocenione wnioski będą uszeregowane na listach ze względu
+     na punktację uzyskaną podczas oceny (od najwyższej do najniższej), w podziale na
+     kategorie, o których mowa w rozdziale 5 ust. 2 Regulaminu. Listy zostaną zamieszczone na
+     stronie internetowej ROPS8.
+5. Podstawą umieszczenia Wnioskodawców na Liście rankingowej lub rezerwowej będzie
+     uzyskanie pozytywnej oceny formalnej, czyli spełnienie wszystkich wymogów formalnych
+     oraz otrzymanie minimum 50% punktów w ramach każdego kryterium merytorycznego
+     punktowego, o którym mowa w podrozdziale 6.3 ust. 3 pkt 1 lit. a-d.
+6. Lista rankingowa będzie zawierać zestawienie Wnioskodawców rekomendowanych do
+     otrzymania grantu. Do otrzymania grantu, w zależności od dostępności środków
+     finansowych, rekomendowany będzie przynajmniej jeden Wnioskodawca, w ramach
+     każdej kategorii, o której mowa w rozdziale 5 ust. 2 Regulaminu.
+7. Lista rezerwowa będzie zawierać zestawienie Wnioskodawców, których wnioski zostały
+     ocenione pozytywnie, jednak z uwagi na liczbę uzyskanych punktów oraz ograniczoną
+     alokację nie zostały rekomendowane do otrzymania grantu.
+8. W przypadku Wnioskodawców, którzy zajęli ostatnie miejsca na Liście rankingowej
+     uzyskując taką samą liczbę punktów, o miejscu na Liście rankingowej lub rezerwowej
+     rozstrzygać będzie liczba punktów uzyskanych w ramach kryterium „zasięg wdrożenia
+     innowacji społecznej”.
+9. Otrzymanie grantu przez Wnioskodawcę z Listy rezerwowej, który podczas oceny uzyskał
+     kolejną największą liczbę punktów będzie możliwe pod warunkiem dostępności środków
+     lub zwiększenia alokacji przeznaczonej na granty lub w przypadku rezygnacji
+     Wnioskodawcy z prac nad Indywidualnym Planem Wdrażania Innowacji lub niepodpisania
+     Umowy o powierzenie grantu lub wycofania się Grantobiorcy w trakcie realizacji Umowy o
+     powierzenie grantu.
+
+
+
+
+8
+    https://rops.krakow.pl/
+
+                                         Strona 12 z 103
+10. Zakłada się, iż w każdym z naborów, o których mowa w rozdziale 5 ust. 1 Regulaminu,
+       rekomendowanych do otrzymania grantu zostanie przynajmniej 5 wniosków grantowych,
+       minimum po 1 wniosku w każdej kategorii, o której mowa w rozdziale 5 ust. 2
+       Regulaminu. Możliwość przyznania grantu większej liczbie Wnioskodawców zależna
+       będzie od stopnia wykorzystania alokacji przeznaczonej na granty.
+11. ROPS poinformuje Wnioskodawców ubiegających się o grant o wynikach oceny każdego z
+       etapów za pomocą poczty elektronicznej na adres podany we wniosku o grant.
+       Informacja o przyznanych grantach zostanie zamieszczona na stronie internetowej
+       ROPS9.
+12. Po zakończeniu oceny, rekomendowany do otrzymania grantu Wnioskodawca przystąpi
+       we współpracy z ROPS do prac nad Indywidualnym Planem Wdrażania Innowacji.
+       Podpisanie Umowy o powierzenie grantu między ROPS a Wnioskodawcą możliwe będzie
+       po wspólnym wypracowaniu Indywidualnego Planu Wdrażania Innowacji oraz
+       zatwierdzeniu go przez obie Strony.
+
+6.2. Ocena formalna wniosków o grant złożonych w naborze
+
+1. Ocena formalna (spełnia/nie spełnia) dokonywana jest na podstawie informacji
+     przedstawionych we wniosku o grant, w tym złożonych przez Wnioskodawców
+     oświadczeń. Ocena dokumentowana jest na Karcie oceny formalnej.
+2. Ocena formalna polega na sprawdzeniu spełnienia warunków kwalifikacji do wsparcia,
+     weryfikacji braku wykluczeń do otrzymania grantu, prawidłowości (w tym kompletności)
+     złożonego wniosku o grant (zgodność z celami naboru, poprawność doboru grupy
+     docelowej).
+3. Wnioski o grant poprawne pod względem formalnym zostaną przekazane do oceny
+     merytorycznej.
+4. Wnioski o grant wadliwe pod względem formalnym będą podlegały procedurze
+     uzupełnienia braków formalnych/złożenia wymaganych wyjaśnień.
+5. Wniosek o grant zostanie uznany za poprawny pod względem formalnym, jeśli spełni
+     następujące kryteria:
+
+
+
+
+9
+    https://rops.krakow.pl/
+
+                                         Strona 13 z 103
+  1)   jest kompletny, tj. wszystkie jego pola zostały wypełnione oraz dołączone zostały
+       wymagane załączniki,
+  2)   został złożony w terminie wskazanym w ogłoszeniu o naborze i na odpowiednim
+       formularzu,
+  3)   został wypełniony w języku polskim,
+  4)   został złożony przez podmiot uprawniony zgodnie z rozdziałem 4 niniejszego
+       Regulaminu – weryfikacja statusu Wnioskodawcy na podstawie złożonej przez
+       Wnioskodawcę dokumentacji oraz dostępnych baz i rejestrów,
+  5)   wnioskowana kwota dofinansowania nie przekracza 600 000 zł,
+  6)   budżet został poprawnie skonstruowany pod względem rachunkowym (nie zawiera
+       błędów rachunkowych),
+  7)   koncepcja wdrażania innowacji społecznej jest zgodna z celem projektu grantowego, a
+       także obejmuje działania zgodne z założeniami projektu grantowego,
+  8)   Wnioskodawca nie przewiduje pobierania opłat od osób objętych usługami
+       społecznymi w ramach wdrażania innowacji lub kadry realizującej działania w
+       obszarze usług społecznych,
+  9)   całkowity okres realizacji działań zaplanowanych w ramach grantu nie przekracza 18
+       miesięcy, a okres świadczenia usługi społecznej bazującej na wybranej innowacji nie
+       jest krótszy niż 12 miesięcy.
+6. Wezwania do uzupełnienia braków formalnych/złożenia wymaganych wyjaśnień, o których
+  mowa w ust. 4, przesyłane będą pocztą elektroniczną na adres wskazany przez
+  Wnioskodawcę. Wezwanie uważa się za otrzymane przez Wnioskodawcę w momencie, w
+  którym mógł on pobrać wiadomość z serwera poczty przychodzącej, niezależnie od tego,
+  kiedy Wnioskodawca rzeczywiście zapozna się z treścią wezwania.
+7. Wyjaśnień oraz uzupełnienia braków formalnych należy dokonać w terminie 5 dni
+  roboczych (poniedziałek – piątek, z wyjątkiem dni ustawowo wolnych od pracy) od daty
+  otrzymania wezwania również pocztą elektroniczną na adres wskazany w wezwaniu. Jeśli
+  w tym terminie Wnioskodawca nie prześle wyjaśnień/uzupełnień, wniosek o grant
+  zostanie odrzucony na etapie oceny formalnej.
+8. Wniosek o grant zostanie przekazany do oceny merytorycznej w przypadku:
+  1)   spełnienia wszystkich kryteriów formalnych zweryfikowanych na etapie oceny
+       formalnej,
+
+
+                                       Strona 14 z 103
+      2)   uzyskania poprawek lub wyjaśnień udzielonych przez Wnioskodawcę w zakresie
+           objętym wezwaniem10.
+
+6.3. Ocena merytoryczna wniosków o grant złożonych w naborze
+
+1. Ocena merytoryczna dokonywana jest na podstawie zapisów wniosku o grant, w
+      szczególności opisu koncepcji wdrażania wybranej innowacji społecznej.
+2. Ocena przeprowadzana jest przez dwóch członków KOW na bazie ich wiedzy eksperckiej i
+      doświadczenia i dokumentowana jest na Karcie oceny merytorycznej.
+3. Ocena jest dokonana w odniesieniu do następujących kryteriów merytorycznych:
+      1)   obligatoryjnych punktowych:
+           a. adekwatność koncepcji wdrożenia innowacji – ocenie podlegać będzie
+              adekwatność doboru i opisu grupy docelowej w kontekście celu grantu oraz
+              adekwatność zaplanowanych działań w kontekście celu grantu, a także
+              przedstawionych w koncepcji problemów i potrzeb grupy docelowej. Zadaniem
+              Wnioskodawcy jest wykazanie, że planowana do wdrożenia innowacyjna usługa
+              społeczna wynika ze zidentyfikowanych w społeczności lokalnej deficytów w
+              zakresie świadczonego wsparcia, odpowiada na aktualne, zdiagnozowane
+              problemy grupy docelowej i prowadzi do zaspokojenia istniejących w tym zakresie
+              potrzeb. Przedstawiony opis powinien uzasadniać potrzebę wdrażania
+              innowacyjnej usługi w oparciu o wybraną innowację społeczną, a także
+              adekwatność zaplanowanych działań do grupy docelowej i celu projektu (skala
+              punktów: 0 – 20 pkt.)
+           b. efektywność wdrożenia innowacji – ocenie podlegać będzie efektywność
+              zaplanowanych kosztów w kontekście relacji „nakład–rezultat”. Poddane analizie
+              zostanie czy wskazane we wniosku o grant koszty (w kontekście czasowym,
+              finansowym i zasobów) są racjonalne i niezawyżone zarówno w stosunku do cen
+              rynkowych, jak i planowanych efektów. Wnioskodawca powinien zaplanować
+              koszty, które spełniają wymogi wskazane w podrozdziale 13.1 Regulaminu i
+              zapewnią efektywność wdrażania innowacji (skala punktów: 0 – 20 pkt.)
+
+
+
+
+10
+     Jeśli dotyczy.
+
+                                          Strona 15 z 103
+c. zasięg wdrożenia innowacji społecznej – ocenie podlegać będzie skala wdrożenia
+  innowacji w wymiarze terytorialnym i społecznym – w tym na jakim terenie będzie
+  wdrażana innowacja, ile osób zostanie objętych usługą społeczną bazującą na
+  innowacyjnym rozwiązaniu wybranym do wdrożenia (skala punktów: 0 – 20 pkt.)
+d. koncepcja utrzymania efektów wdrożenia innowacji – ocenie podlegać będą
+  przyjęte przez Wnioskodawcę założenia dotyczące utrzymania efektów wdrożonej
+  ze środków grantu innowacyjnej usługi społecznej (skala punktów: 0 – 20 pkt.)
+
+
+
+
+                               Strona 16 z 103
+  2)   premiujących:
+       doświadczenie Wnioskodawcy – premiowane będą wnioski złożone przez
+       Wnioskodawców, którzy jednoznacznie wykażą posiadanie doświadczenia w więcej
+       niż jednym obszarze zbieżnym z przedmiotem wdrażania danej innowacji, tj. w:
+       a. pracy z grupą docelową, do której kierowana jest innowacja
+       b. udzielaniu podobnej formy wsparcia
+       c. działalności w obszarze innowacji społecznych
+       (wysokość premii punktowej: posiadanie doświadczenia w dwóch z ww. obszarów –
+       10 pkt., posiadanie doświadczenia we wszystkich z ww. obszarach – 20 pkt.).
+4. Maksymalna liczba możliwych do uzyskania punktów wynosi 100.
+5. Wynik oceny merytorycznej stanowi średnia punktów przyznanych przez dwóch
+  oceniających, z zastrzeżeniem ust. 8.
+6. Pozytywną ocenę merytoryczną otrzyma wniosek, który uzyska minimum 50% punktów
+  możliwych do zdobycia w ramach każdego z kryteriów merytorycznych punktowych
+  wskazanych w ust. 3 pkt 1 lit. a-d.
+7. Wniosek, który nie spełni warunku, o którym mowa w ust. 6 i uzyska mniejszą wartość
+  punktów, otrzyma ocenę negatywną i zostanie odrzucony na etapie oceny merytorycznej.
+  Informacje o odrzuceniu wniosku o grant na etapie oceny merytorycznej zostaną
+  przekazane Wnioskodawcom na adres poczty elektronicznej podany we wniosku.
+8. W przypadku rozbieżności pomiędzy ocenami dwóch oceniających, z których jeden
+  członek KOW pozytywnie oceni wniosek o grant, a drugi negatywnie, wniosek zostanie
+  przekazany do trzeciej oceny, która jest rozstrzygająca.
+9. Po zakończeniu oceny merytorycznej Wnioskodawcy, których wnioski zostały ocenione
+  pozytywnie, zostaną uszeregowani na Liście rankingowej i Liście rezerwowej.
+10. Oceniający zobowiązani są do przedstawienia w formie pisemnej uzasadnienia punktów
+    przyznanych za spełnienie danego kryterium. W przypadku propozycji/uwag dotyczących
+    ocenianej koncepcji wdrażania innowacji społecznej, Oceniający ma możliwość
+    wyrażenia ich w specjalnie do tego przeznaczonym polu Karty oceny merytorycznej.
+
+
+
+
+                                          Strona 17 z 103
+   7. Procedury dotyczące odwołań
+
+1. Wnioskodawcom, których wnioski o grant nie uzyskały minimum punktowego na etapie
+  oceny merytorycznej, przysługuje możliwość odwołania się od wyników tej oceny.
+2. Odwołanie od wyników oceny musi zostać złożone w terminie 5 dni roboczych od dnia
+  otrzymania informacji o wynikach oceny. Odwołanie należy złożyć pocztą elektroniczną,
+  tradycyjną lub na dzienniku podawczym w siedzibie ROPS w Krakowie, ul. Piastowska 32.
+  Liczy się data wpływu odwołania na dziennik podawczy ROPS lub na adres poczty
+  elektronicznej wskazany w informacji o wyniku oceny. Odwołania należy składać w dni
+  robocze (od poniedziałku do piątku) w godz. od 8:00 do 16:00.
+3. ROPS na podstawie opinii KOW ustosunkowuje się w formie pisemnej do treści odwołania.
+  Jeśli argumenty przedstawione przez Wnioskodawcę w odwołaniu zostaną uznane przez
+  KOW za uzasadnione, wówczas wniosek o grant zostaje skierowany do ponownej oceny
+  merytorycznej w zakresie podnoszonym w odwołaniu, która zostanie dokonana w
+  terminie 7 dni roboczych od daty poinformowania Wnioskodawcy o wyniku rozpatrzenia
+  odwołania.
+4. Ponowna ocena merytoryczna będzie dokonywana przez osoby, które nie uczestniczyły w
+  ocenie pierwotnej danego wniosku o grant, zgodnie z zasadami określonymi w
+  podrozdziale 6.3 niniejszego Regulaminu.
+5. Ponowna ocena merytoryczna wniosku o grant jest oceną wiążącą i ostateczną, od której
+  nie przysługuje odwołanie.
+
+   8. Indywidualny Plan Wdrażania Innowacji
+
+1. Indywidualny Plan Wdrażania Innowacji wypracowany jest przed zawarciem Umowy o
+  powierzenie grantu we współpracy Wnioskodawcy z ROPS i stanowi załącznik nr 2 do
+  Umowy o powierzenie grantu.
+2. Przed przystąpieniem do opracowania Indywidualnego Planu Wdrażania Innowacji, ROPS
+  zweryfikuje:
+  1)   czy wyłonieni Wnioskodawcy nie są wykluczeni z możliwości otrzymania środków
+       przeznaczonych na realizację programów finansowanych ze środków europejskich
+       (weryfikacja nastąpi w oparciu o dane zamieszczone w Rejestrze podmiotów
+       wykluczonych z możliwości otrzymania środków finansowych na realizację
+
+
+
+                                      Strona 18 z 103
+       programów finansowanych ze środków europejskich, prowadzonym przez
+       Ministerstwo Finansów). W przypadku wykluczenia wnioskodawcy z możliwości
+       otrzymania środków, grant nie zostanie udzielony.
+  2)   w odniesieniu do Wnioskodawców prowadzących działalność gospodarczą - czy nie
+       występuje pomoc publiczna lub pomoc de minimis (weryfikacja nastąpi w oparciu o
+       test występowania pomocy publicznej/de minimis). W przypadku wystąpienia
+       pomocy de minimis weryfikacji podlega spełnienie warunków otrzymania pomocy de
+       minimis, w tym czy Wnioskodawca nie przekracza dopuszczalnego limitu pomocy de
+       minimis. Wynik weryfikacji zostanie udokumentowany do momentu podpisania
+       Umowy o powierzenie grantu. W przypadku wystąpienia pomocy publicznej lub
+       przekroczenia limitu pomocy de minimis, grant nie zostanie udzielony.
+3. W trakcie opracowania Indywidualnego Planu Wdrażania Innowacji Grantobiorca będzie
+  mógł skorzystać z następujących działań wspierających, zaplanowanych w ramach projektu
+  grantowego ROPS:
+  1)   praca indywidualna ze specjalistami/specjalistkami ds. wdrażania innowacji –
+       konsultacje IPWI z personelem projektu grantowego,
+  2)   konsultacje zewnętrzne (w razie potrzeby) – dodatkowe konsultacje tematyczne ze
+       specjalistami/specjalistkami z danego obszaru związanego ze specyfiką danej
+       innowacji.
+4. Indywidualny Plan Wdrażania Innowacji będzie zawierać: opis innowacji wybranej do
+  wdrożenia wraz z uzasadnieniem wyboru, opis grupy docelowej i jej problemów, potrzeb,
+  liczebności, opis zasad rekrutacji, opis procesu wdrażania usługi społecznej bazującej na
+  wybranej innowacji wraz z określeniem obszaru, na jakim usługa będzie wdrażana oraz
+  zaplanowanych w tym celu działań, opis dostępności w procesie wdrażania (zgodność ze
+  standardami dostępności), opis zakładanych efektów wdrażania innowacyjnych usług
+  społecznych, w tym wymaganych wskaźników produktu i rezultatu, harmonogram
+  wdrażania, kosztorys i informacje dotyczące jego szacowania, opis koncepcji utrzymania
+  efektów wdrożenia innowacji.
+5. Podczas prac nad IPWI koncepcja wdrażania innowacji przedstawiona przez
+  Wnioskodawcę we wniosku o grant może zostać zmodyfikowana w zakresie zgodnym z
+  wymogami niniejszego Regulaminu.
+
+
+
+                                       Strona 19 z 103
+6. ROPS zastrzega sobie prawo do przyznania niższej niż wnioskowana kwoty grantu, w
+  szczególności w przypadku zidentyfikowania kosztów, które zostaną uznane za
+  nieuzasadnione (np. niekwalifikowalne, zbędne, niezwiązane bezpośrednio z
+  przedsięwzięciem lub zawyżone w porównaniu ze stawkami rynkowymi). Istnieje również
+  możliwość zwiększenia kwoty grantu w przypadku zwiększenia zakresu rzeczowego w
+  stosunku do przedstawionego we wniosku o grant, o ile kwota ta nie przekroczy
+  maksymalnej wartości grantu, a ROPS będzie dysponował środkami przeznaczonymi na
+  wdrożenie danej innowacji, które nie zostały wykorzystane w naborze.
+
+   9. Umowa o powierzenie grantu
+
+1. Po zatwierdzeniu przez ROPS Indywidualnego Planu Wdrażania Innowacji, z Grantobiorcą
+  zostanie zawarta Umowa o powierzenie grantu, której wzór stanowi załącznik nr 1 do
+  niniejszego Regulaminu.
+2. Wraz z podpisaną Umową Wnioskodawca reprezentowany przez pełnomocnika przedkłada
+  stosowne pełnomocnictwo. W razie wątpliwości ROPS może wezwać Wnioskodawcę do
+  przedstawienia dokumentów potwierdzających spełnienie przez Wnioskodawcę
+  odpowiednich wymogów określonych w rozdziale 4 niniejszego Regulaminu.
+3. Umowa o powierzenie grantu określa w szczególności:
+  1)   cel grantu i zadania Grantobiorcy objęte grantem,
+  2)   kwotę grantu,
+  3)   warunki przekazania i rozliczenia grantu,
+  4)   warunki zmiany umowy,
+  5)   zobowiązania Grantobiorcy m.in. w zakresie:
+       a.   przekazywania danych, którymi ROPS musi dysponować, aby właściwie wywiązać
+            się z obowiązków wynikających z uchwały Nr 2309/24 ZWM z dnia 5.11.2024 r. w
+            sprawie podjęcia decyzji o dofinansowaniu projektu nr FEMP.06.23-IP.01-1359/24
+            złożonego przez Województwo Małopolskie – Regionalny Ośrodek Polityki
+            Społecznej w Krakowie pn.: „Usługa Wrażliwa – upowszechnianie innowacji
+            społecznych w środowiskach lokalnych” w odpowiedzi na nabór nr FEMP.06.23-
+            IP.01-037/24 w ramach Programu Fundusze Europejskie dla Małopolski 2021-
+            2027, Priorytet 6 Fundusze Europejskie dla rynku pracy, edukacji i włączenia
+            społecznego, Działania 6.23 Włączenie społeczne – projekty Województwa
+
+
+                                        Strona 20 z 103
+                Małopolskiego, Typ projektu Typ C. System usług społecznych – upowszechnienie
+                innowacji,
+           b. przechowywania dokumentów związanych z realizacją grantu - w trakcie realizacji
+                grantu oraz w okresie trwałości grantu, w którym wystąpił cross-financing,
+           c.   poddania się kontrolom lub audytom prowadzanym przez ROPS lub inne
+                uprawnione podmioty,
+           d. zwrotu grantu,
+           e.   przeniesienia na ROPS pełni autorskich praw majątkowych do wszelkich utworów
+                wypracowanych w ramach realizacji Umowy o powierzenie grantu.
+4. Załącznikami do umowy są m.in. Indywidualny Plan Wdrażania Innowacji i Harmonogram
+      płatności.
+5. Indywidualny Plan Wdrażania Innowacji i/lub Harmonogram płatności mogą ulegać
+      aktualizacji, pod warunkiem zatwierdzenia przez ROPS proponowanych modyfikacji w
+      Karcie zmian i nie wymagają aneksowania Umowy o powierzenie grantu.
+6. Zmiany w Indywidualnym Planie Wdrażania Innowacji nie mogą powodować:
+      1)   zmiany celu i charakteru wdrażanej Innowacji społecznej,
+      2)   wydłużenia okresu wdrażania innowacji.
+
+       10.Obowiązki Grantobiorców
+
+1. Do obowiązków Grantobiorców należy w szczególności:
+      1) opracowanie we współpracy z ROPS Indywidualnego Planu Wdrażania Innowacji,
+      2) zawarcie Umowy o powierzenie grantu,
+      3) złożenie zabezpieczenia Umowy o powierzenie grantu11,
+      4) przestrzeganie zapisów Regulaminu oraz wypełnianie postanowień zawartej Umowy o
+           powierzenie grantu we wskazanym terminie i zgodnie z jej warunkami, w tym
+           realizacja wybranej do wdrożenia usługi społecznej zgodnie z wymogami określonymi
+           w IPWI,
+      5) wykorzystanie grantu zgodnie z zawartą Umową o powierzenie grantu i niniejszym
+           Regulaminem,
+
+
+
+
+11
+     Jeśli dotyczy
+
+                                           Strona 21 z 103
+6) utrzymanie trwałości grantu, w przypadku przeznaczenia środków grantu na wydatki
+    poniesione w ramach cross-financingu, przez okres i na warunkach określonych w
+    Umowie o powierzenie grantu,
+7) podpisanie oświadczenia uczestnika projektu grantowego, którego wzór jest
+    załącznikiem do Umowy o powierzenie grantu,
+8) zrekrutowanie i objęcie usługami społecznymi (lub inną formą wsparcia, w przypadku
+    kadry) osób wskazanych w zatwierdzonym przez ROPS Indywidualnym Planie
+    Wdrażania Innowacji – Grantobiorca jest zobowiązany do uwzględnienia w IPWI
+    następujących obligatoryjnych kryteriów rekrutacji:
+    a. przynależność do grupy docelowej – weryfikowana na podstawie dokumentu
+      potwierdzającego status osoby np. zaświadczenia z odpowiedniej instytucji lub
+      innego dokumentu,
+    b. zamieszkiwanie, uczenie się lub pracowanie na terenie województwa
+      małopolskiego – weryfikowane w oparciu o oświadczenie uczestnika projektu o
+      miejscu zamieszkania, zaświadczenie dot. miejsca nauki lub pracy.
+    Szczegółowe kryteria oraz ramy czasowe rekrutacji zostaną opracowane przez
+    wybranych Grantobiorców i zapisane w Indywidualnym Planie Wdrażania Innowacji;
+9) poinformowanie osób, które będą objęte innowacyjnymi usługami społecznymi oraz
+    obejmowanej wsparciem kadry, że będą uczestnikami projektu oraz zebranie dla ROPS
+    od każdej osoby objętej wsparciem danych objętych oświadczeniem uczestnika
+    projektu,
+10) postępowanie w trakcie wdrażania innowacji społecznej zgodnie z zasadami
+    równościowymi wskazanymi w Wytycznych dotyczących realizacji zasad
+    równościowych w ramach funduszy unijnych na lata 2021-2027, w tym z zasadą
+    równości kobiet i mężczyzn, zasadami równości szans i niedyskryminacji, w
+    szczególności standardami dostępności dla osób z niepełnosprawnościami, Kartą Praw
+    Podstawowych, Konwencją o Prawach Osób Niepełnosprawnych, a także zasadami
+    polityki zrównoważonego rozwoju, w tym zasadą DNSH (zasada „nie czyń poważnych
+    szkód”) poprzez zastosowanie rozwiązań proekologicznych (ROPS zapewni niezbędne
+    konsultacje w zakresie dostępności i będzie na bieżąco wspierał Grantobiorców w
+    przedmiotowym obszarze). Grantobiorca zobowiązuje się również do poinformowania
+    uczestników projektu, objętych wsparciem grantu, o możliwości zgłoszenia
+
+
+                                    Strona 22 z 103
+           podejrzenia o niezgodności realizowanego grantu lub działań Grantobiorcy z KPON lub
+           KPP na adres mailowy: KPP_KPON@umwm.malopolska.pl.
+      11) udział w ścieżce wsparcia dobranej przez ROPS na etapie wdrażania innowacyjnej
+           usługi społecznej,
+      12) stała współpraca z ROPS w trakcie procesu realizacji grantu, w tym ze
+           specjalistkami/specjalistami ds. wdrażania innowacji,
+      13) poddanie się monitoringowi i kontroli prowadzonym przez ROPS i inne uprawnione
+           podmioty,
+      14) przekazywanie ROPS sprawozdań rzeczowo-finansowych w celu przedstawienia
+           postępów w realizacji grantu i rozliczenia otrzymanego grantu,
+      15) udział w ewaluacji wdrożenia innowacji społecznej realizowanej przez ROPS,
+      16) współpraca z podmiotami zewnętrznymi, realizującymi badanie ewaluacyjne na
+           zlecenie IZ FEM 2021-2027 lub innego uprawnionego podmiotu, w tym zbieranie i
+           przekazywanie każdorazowo na wniosek ww. podmiotów dokumentów i informacji na
+           temat realizacji grantu, niezbędnych do przeprowadzenia badania ewaluacyjnego, a
+           także informowanie osób objętych wsparciem i uwzględnienie w zapisach umowy
+           zawartej z uczestnikiem projektu obowiązku poddania się przez niego ewaluacji oraz
+           udostępnienia swoich danych, w tym danych teleadresowych,
+      17) przeniesienie na rzecz ROPS autorskich praw majątkowych do wszelkich utworów
+           wypracowanych w ramach realizacji Umowy o powierzenie grantu12,
+      18) przechowywanie dokumentacji dotyczącej realizacji grantu przez okres wynikający z
+           przepisów prawa, przy czym Grantobiorca posiadający siedzibę poza województwem
+           małopolskim ma obowiązek przechowywania dokumentacji w miejscu prowadzenia
+           działalności na terenie województwa małopolskiego, objętej realizacją grantu,
+      19) informowanie o realizowanym przedsięwzięciu i stosowanie właściwych oznaczeń
+           zgodnie z zapisami Umowy o powierzenie grantu.
+
+
+
+
+12
+     Jeśli dotyczy
+
+                                           Strona 23 z 103
+       11.Zabezpieczenie grantów
+
+1. Warunkiem wypłaty grantu jest wniesienie przez Grantobiorcę zabezpieczenia
+      prawidłowego wykonania zobowiązań wynikających z Umowy o powierzenie grantu.
+      Warunek ten nie dotyczy jednostek sektora finansów publicznych w rozumieniu ustawy z
+      dnia 27 sierpnia 2009 r. o finansach publicznych oraz fundacji, których jedynym
+      fundatorem jest Skarb Państwa.
+2. Zabezpieczenie zwrotu środków otrzymanych w ramach grantu wnoszone jest w formie
+      weksla in blanco wraz z deklaracją wekslową.
+3. Termin i warunki wniesienia zabezpieczenia określa Umowa o powierzenie grantu.
+
+       12.Wypłacanie grantów
+
+1. Kwota przyznanego grantu ustalana jest na podstawie zatwierdzonego przez ROPS
+      Indywidualnego Planu Wdrażania Innowacji.
+2. Grant wypłacany jest na wyodrębniony rachunek bankowy Grantobiorcy wskazany w
+      Umowie o powierzenie grantu.
+3. Grant jest wypłacany w 2 transzach, w wysokości i terminach określonych w
+      Harmonogramie płatności stanowiącym załącznik nr 3 do Umowy o powierzenie grantu,
+      pod warunkiem ujęcia środków przewidzianych na realizację projektu grantowego w
+      planie finansowym Grantodawcy na dany rok budżetowy oraz pod warunkiem dostępności
+      środków na rachunku bankowym prowadzonym przez ROPS.
+4. Pierwsza transza przeznaczona jest na pokrycie wydatków w okresie przygotowania
+      wdrożenia (etap 1), druga transza – na pokrycie wydatków związanych z wdrażaniem
+      innowacyjnej usługi społecznej (etap 2).
+5. Wypłata pierwszej transzy grantu następuje po zawarciu Umowy o powierzenie grantu
+      oraz wniesieniu przez Grantobiorcę zabezpieczenia13.
+6. Wypłata drugiej transzy następuje po upływie okresu rozliczeniowego dla etapu 1,
+      określonego w Harmonogramie płatności pod warunkiem zaakceptowania przez ROPS
+      przedstawionego przez Grantobiorcę rozliczenia pierwszej transzy.
+
+
+
+
+13
+     Jeśli dotyczy
+
+                                          Strona 24 z 103
+   13.Finansowanie i rozliczanie grantów
+
+13.1. Kwalifikowalność wydatków
+
+1. Udzielony grant stanowi 100% kosztów wskazanych w Indywidualnym Planie Wdrażania
+  Innowacji, stanowiącym załącznik nr 2 do Umowy o powierzenie grantu. Wkład własny nie
+  jest wymagany.
+2. Wszystkie wydatki ponoszone ze środków grantu muszą być:
+  1)   zgodne z przepisami prawa,
+  2)   niezbędne do realizacji celów grantu i poniesione w związku z realizacją grantu,
+  3)   dokonane w sposób przejrzysty, racjonalny i efektywny, z zachowaniem zasad
+       uzyskiwania najlepszych efektów z danych nakładów, oszczędny tzn. niezawyżony w
+       stosunku do średnich cen i stawek rynkowych.
+3. W ramach grantu niedozwolone jest podwójne finansowanie wydatków oznaczające w
+  szczególności:
+  1)   więcej niż jednokrotne przedstawienie do rozliczenia tego samego wydatku albo tej
+       samej części wydatku ze środków UE w jakiejkolwiek formie,
+  2)   rozliczenie zakupu używanego środka trwałego, który był uprzednio
+       współfinansowany z udziałem środków UE,
+  3)   rozliczenie kosztów amortyzacji środka trwałego uprzednio zakupionego z udziałem
+       środków UE,
+  4)   rozliczenie wydatku poniesionego przez leasingodawcę na zakup przedmiotu leasingu
+       w ramach leasingu finansowego, a następnie rozliczenie rat opłacanych przez
+       beneficjenta w związku z leasingiem tego przedmiotu,
+  5)   otrzymanie na wydatki kwalifikowalne dotacji z kilku źródeł (krajowych, unijnych lub
+       innych) w wysokości łącznie wyższej niż 100% wydatków kwalifikowalnych.
+4. Niedozwolone jest finansowanie ze środków grantu wydatków, o których mowa w
+  podrozdziale 2.3 Wytycznych dotyczących kwalifikowalności wydatków na lata 2021–2027,
+  wskazanych w załączniku nr 2 do niniejszego Regulaminu. W przypadku zmiany ww.
+  wytycznych załącznik zostanie zaktualizowany przez ROPS. Grantobiorca zostanie
+  poinformowany o aktualizacji załącznika. Aktualizacja załącznika nie wymaga zmiany
+  niniejszego Regulaminu.
+
+
+
+                                       Strona 25 z 103
+5. Ponoszone w ramach grantu koszty muszą również spełniać poniższe wymogi:
+  1)   nie mogą stanowić wydatku objętego pomocą publiczną, z zastrzeżeniem możliwości
+       udzielania pomocy de minimis,
+  2)   nie mogą pokrywać kosztów administracyjnych związanych z realizacją zadań
+       finansowanych w ramach grantu (np. koszt prowadzenia rachunku bankowego,
+       obsługa księgowa, koszty biurowe – telefon, czynsz, prąd) oraz związanych z
+       promocją/informacją, a także rekrutacją uczestników,
+  3)   nie mogą stanowić kosztów ewaluacji (ocena i ewaluacja procesu wdrożeń jest
+       zadaniem finansowanym przez ROPS w ramach kosztów bezpośrednich projektu
+       grantowego).
+6. Wydatki uznane za niekwalifikowalne, a związane z realizacją działań zaplanowanych w
+  ramach grantu ponosi Grantobiorca jako Strona Umowy o powierzenie grantu.
+
+13.2. Cross-financing
+
+1. W ramach grantu mogą być ponoszone wydatki w ramach cross-financingu, jeżeli ich
+  poniesienie będzie wynikało z potrzeby realizacji wsparcia zaplanowanego we wniosku o
+  grant i zatwierdzonego w Indywidualnym Planie Wdrażania Innowacji.
+2. W projektach EFS+ cross-financing może dotyczyć wyłącznie kategorii wydatków
+  wskazanych w podrozdziale 2.4 Wytycznych dotyczących kwalifikowalności wydatków na
+  lata 2021-2027, w tym m.in.:
+  1) zakupu infrastruktury rozumianej jako budowa nowej infrastruktury oraz
+       wykonywanie wszelkich prac w ramach istniejącej infrastruktury, których wynik staje
+       się częścią nieruchomości i które zostają trwale przyłączone do nieruchomości, w
+       szczególności adaptacja oraz prace remontowe związane z dostosowaniem
+       nieruchomości lub pomieszczeń do nowej funkcji,
+  2) zakupu mebli, sprzętu i pojazdów, z wyjątkiem sytuacji, gdy:
+       a) zakupy te zostaną zamortyzowane w całości w okresie realizacji projektu, z
+         zastrzeżeniem podrozdziału 3.7 Wytycznych dotyczących kwalifikowalności
+         wydatków na lata 2021-2027, lub
+
+
+
+
+                                       Strona 26 z 103
+      b) Grantobiorca udowodni, że zakup będzie najbardziej opłacalną opcją, tj. wymaga
+         mniejszych nakładów finansowych niż inne opcje, np. najem lub leasing, ale
+         jednocześnie jest odpowiedni do osiągnięcia celu projektu, lub
+      c) zakupy te są konieczne dla osiągniecia celu projektu (wdrożenia innowacyjnej
+         usługi społecznej) i nie są dokonywane w celu wspomagania procesu wdrażania
+         projektu;
+      Zakup mebli, sprzętu i pojazdów niespełniający żadnego z powyższych warunków
+      stanowi cross-financing.
+3. Wydatki w ramach cross-financingu będą możliwe w przypadku spełnienia przez
+  Grantobiorcę warunków określonych w Umowie o powierzenie grantu, będą limitowane, a
+  ich wysokość będzie podlegała monitorowaniu.
+4. Limit wydatków ponoszonych w ramach cross-financingu wynosi co do zasady 10%
+  wartości grantu, z zastrzeżeniem możliwości zwiększenia ww. limitu, za zgodą ROPS i pod
+  warunkiem dostępności środków w ramach limitu cross-financingu w projekcie
+  grantowym.
+5. Wydatki w ramach cross-financingu dotyczące infrastruktury mogą być ponoszone pod
+  warunkiem, że Grantobiorca posiada do niej tytuł prawny rozumiany jako:
+  1) własność,
+  2) współwłasność wraz z poświadczeniem faktycznego uprawnienia do korzystania z
+      danego lokalu/nieruchomości,
+  3) ograniczone prawo rzeczowe: użytkowanie, służebność, spółdzielcze prawo do
+      lokalu/nieruchomości,
+  4) prawo obligacyjne: najem, dzierżawa, użyczenie.
+  Warunek ten będzie weryfikowany na etapie opracowywania lub aktualizacji IPWI.
+6. Wydatki ponoszone w ramach cross-financingu nie mogą być powiązane z produkcją,
+  przetwarzaniem, transportem, dystrybucją, magazynowaniem lub spalaniem paliw
+  kopalnych, z wyjątkami opisanymi w art. 7, ust. 1 lit. h Rozporządzenia Parlamentu
+  Europejskiego i Rady (UE) 2021/1058 z dnia 24 czerwca 2021 r. w sprawie Europejskiego
+  Funduszu Rozwoju Regionalnego i Funduszu Spójności. Oznacza to brak możliwości
+  finansowania w ramach cross-financingu urządzeń/ maszyn/ pojazdów wykorzystujących
+  paliwa kopalne (w tym m.in. gaz ziemny, węgiel brunatny, węgiel kamienny, ropa naftowa,
+  torf), z wyjątkiem przypadku braku alternatywnych rozwiązań.
+
+
+                                      Strona 27 z 103
+7. W przypadku ponoszenia wydatków w ramach cross-financingu, należy zastosować
+     Standard architektoniczny określony w Załączniku nr 2 do Wytycznych dotyczących
+     realizacji zasad równościowych w ramach funduszy unijnych na lata 2021-202714.
+
+13.3. Trwałość w grantach
+
+1. W przypadku przeznaczenia środków grantu na wydatki w ramach cross-financingu,
+     Grantobiorca będzie zobowiązany do utrzymania trwałości grantu przez okres i na
+     zasadach określonych w Umowie o powierzenie grantu.
+2. We wniosku o grant Grantobiorca powinien wskazać, w jaki sposób planuje zachować
+     trwałość grantu oraz jakie dokumenty będą potwierdzały utrzymanie trwałości.
+3. Utrzymanie ww. trwałości będzie podlegać kontroli.
+
+13.4. Pomoc de minimis
+
+1. W ramach naboru grantowego nie istnieje możliwość udzielania pomocy publicznej.
+     Wsparcie udzielone w formie grantu może stanowić pomoc de minimis.
+2. Fakt występowania pomocy publicznej lub pomocy de minimis będzie weryfikowany przez
+     ROPS w oparciu o test pomocy publicznej/de minimis.
+3. Grantobiorca ubiegający się o pomoc de minimis powinien wraz z wnioskiem o grant
+     złożyć załączniki dotyczące pomocy de minimis:
+     1)   formularz informacji przedstawianych przy ubieganiu się o pomoc de minimis – na
+          obowiązującym wzorze15 oraz
+     2)   wszystkie zaświadczenia o pomocy de minimis, jakie podmiot wnioskujący o pomoc
+          de minimis otrzymał w okresie ostatnich 3 lat, albo
+     3)   oświadczenia o wielkości pomocy de minimis otrzymanej w tym okresie, albo
+     4)   oświadczenia o nieotrzymaniu pomocy de minimis w tym okresie,
+     5)   sprawozdania finansowe za okres 3 ostatnich zatwierdzonych lat obrotowych
+          sporządzane zgodnie z przepisami o rachunkowości.
+
+
+
+
+14
+   https://www.funduszeeuropejskie.gov.pl/strony/o-funduszach/dokumenty/wytyczne-dotyczace-
+realizacji-zasad-rownosciowych-w-ramach-funduszy-unijnych-na-lata-2021-2027-1/
+15
+   https://uokik.gov.pl/zasady-pomocy-de-minimis
+
+                                          Strona 28 z 103
+4. W przypadku grantów kwalifikujących się do objęcia pomocą de minimis – wsparcie
+  udzielane będzie zgodnie z właściwymi przepisami prawa dotyczącymi zasad udzielania tej
+  pomocy, obowiązującymi na dzień udzielenia wsparcia.
+5. Jeśli okaże się, że Grantobiorca nie spełnia warunków dostępu do otrzymania pomocy de
+  minimis, nie będzie mógł skorzystać ze wsparcia, o które wnioskował.
+
+13.5. Zasady rozliczania grantów
+
+1. Grant jest rozliczany na podstawie rzeczywiście ponoszonych wydatków.
+2. Grantobiorca zobowiązany jest do prowadzenia wyodrębnionej ewidencji księgowej w
+  zakresie przekazanego grantu.
+3. Wydatki na realizację zaplanowanych w ramach grantu form wsparcia, muszą zostać
+  udokumentowane dokumentami księgowymi (np. faktury, listy płac), które należy
+  odpowiednio opisać, aby widoczny był ich związek z przyznanym grantem.
+4. Wypłacone Grantobiorcy środki będą rozliczane w oparciu o składane przez Grantobiorcę
+  sprawozdania rzeczowo-finansowe uwzględniające opis zrealizowanych działań i
+  osiągniętych efektów grantu wraz z zestawieniem poniesionych wydatków i
+  oświadczeniem o wydatkowaniu środków zgodnie z przeznaczeniem grantu. Wzór
+  sprawozdania rzeczowo-finansowego stanowi załącznik nr 4 do Umowy o powierzenie
+  grantu.
+5. Grantobiorca jest zobowiązany do przedstawienia ww. dokumentów na wezwanie ROPS.
+6. Sprawozdania rzeczowo-finansowe powinny być składane za okresy nie dłuższe niż 3
+  miesiące, w ciągu 5 dni roboczych po upływie okresu sprawozdawczego wskazanego w
+  Harmonogramie płatności oraz w ciągu 10 dni roboczych od zakończenia realizacji grantu.
+7. Warunkiem rozliczenia wypłaconych transz grantu będzie zaakceptowanie przez ROPS
+  sprawozdań rzeczowo-finansowych z realizacji grantu.
+8. W przypadku niewykorzystania przez Grantobiorcę środków wypłaconych w ramach transz
+  grantu, Grantobiorca zwraca niewykorzystaną kwotę na rachunek bankowy ROPS, w
+  terminie wskazanym w wezwaniu, z zastrzeżeniem ust. 9.
+9. W przypadku niewykorzystania przez Grantobiorcę środków finansowych z pierwszej
+  transzy, przeznaczonych na przygotowanie wdrożenia (etap 1), Grantobiorca może złożyć
+  wniosek o przesunięcie tych środków do wykorzystania w okresie wdrażania innowacyjnej
+
+
+
+                                      Strona 29 z 103
+     usługi społecznej (etap 2), finansowanym w ramach drugiej transzy. Warunkiem
+     przesunięcia środków jest zaistnienie przesłanki uzasadniającej konieczność zwiększenia
+     środków zaplanowanych na realizację działań w etapie 2 oraz uzyskanie akceptacji ze
+     strony ROPS.
+10. W sytuacji, gdy w związku z zawinioną i nienależytą realizacją przez Grantobiorcę Umowy
+      o powierzenie grantu, na ROPS zostanie nałożona korekta finansowa16 lub zostanie
+      pomniejszona kwota wydatków kwalifikowalnych17, Grantobiorca, niezależnie od
+      obowiązku zwrotu środków zgodnie z rozdziałem 15 niniejszego Regulaminu,
+      zobowiązany będzie do naprawienia szkody powstałej z tego tytułu po stronie ROPS.18
+
+     14.Monitorowanie i kontrola grantów
+
+1. Grantobiorca zobowiązany będzie do poddania się kontrolom i audytom w zakresie
+     prawidłowości realizacji grantu zgodnie z Umową o powierzenie grantu przez ROPS oraz
+     inne uprawnione podmioty.
+2. ROPS będzie przeprowadzał kontrole w zakresie prawidłowości realizowanych form
+     wsparcia oraz w zakresie prawidłowości wykorzystania i ponoszenia wydatków na ich
+     realizację zgodnie z zapisami IPWI oraz Umową o powierzenie grantu, w tym m.in.
+     sposobu wydatkowania Grantu, właściwego sposobu dokumentowania wydatków, itp.
+3. Grantobiorca będzie podlegał monitorowaniu w zakresie prawidłowości wdrażania
+     bazującej na innowacyjnym rozwiązaniu usługi społecznej, zgodnie z IPWI, na wdrożenie
+     której otrzymał grant. Monitoring będzie prowadzony przez cały okres trwania Umowy
+     przez Specjalistki/Specjalistów ds. wdrażania innowacji.
+4. Szczegółowe zasady monitorowania i przeprowadzania kontroli u Grantobiorców reguluje
+     Umowa o powierzenie grantu.
+
+
+
+
+16
+   Korekta finansowa oznacza kwotę, o jaką obniża się finansowanie UE dla projektu grantowego
+„Usługa wrażliwa – upowszechnianie innowacji społecznych w środowiskach lokalnych”, w
+związku ze stwierdzoną nieprawidłowością w realizowanym grancie.
+17
+   Pomniejszenie wartości wydatków kwalifikowalnych oznacza pomniejszenie przed zatwierdzeniem
+wniosku o płatność złożonego przez Grantodawcę o kwotę wydatków poniesionych nieprawidłowo
+przez Grantobiorcę w realizowanym grancie.
+18
+   Dotyczy w szczególności sytuacji złożenia przez Grantobiorcę oświadczeń niezgodnych z prawdą.
+
+                                          Strona 30 z 103
+      15.Odzyskiwanie grantów w przypadku ich wykorzystania niezgodnie z
+           celami projektu grantowego
+
+1. Grantobiorca zobowiązany jest do zwrotu całości (całości lub części – w przypadku, o
+      którym mowa w pkt. 7) wypłaconych środków, jeżeli:
+      1)   Grantobiorca złożył niezgodne z prawdą oświadczenie na etapie ubiegania się o grant,
+      2)   grant został wykorzystany niezgodnie z celami projektu grantowego,
+      3)   Grantobiorca nie realizuje założonych zadań i nie osiąga celu przewidzianego w
+           Indywidualnym Planie Wdrażania Innowacji,
+      4)   po zakończeniu wdrażania wybranej innowacji społecznej Grantobiorca nie
+           przedstawił rozliczenia końcowego środków wydatkowanych w ramach grantu,
+      5)   złożone przez Grantobiorcę rozliczenie grantu nie zostało zaakceptowane przez ROPS,
+      6)   Grantobiorca nie podpisał umowy o przekazaniu praw autorskich, zgodnie z
+           obowiązkiem, o którym mowa w rozdziale 10 ust. 1 pkt 17 Regulaminu,
+      7)   Instytucja Pośrednicząca nałoży na ROPS korektę finansową19 lub pomniejszy kwotę
+           wydatków kwalifikowalnych20 z tytułu niewłaściwego wykorzystania grantu przez
+           Grantobiorcę (zwrot całości lub części wypłaconych środków odpowiadającej
+           nałożonej korekcie finansowej lub wartości pomniejszonych kwot wydatków
+           kwalifikowalnych),
+      8)   Grantobiorca wykorzystał grant z naruszeniem zapisów Umowy lub Regulaminu
+           udzielania grantów,
+      9)   Grantobiorca uniemożliwia lub utrudniania przeprowadzenie monitoringów, kontroli
+           lub audytów prowadzonych przez Grantodawcę lub inne uprawnione podmioty.
+2. Grantobiorca zobowiązany jest do zwrotu części wypłaconych środków, w przypadku:
+      1)   podwójnego finansowania, o którym mowa w podrozdziale 13.1 ust. 3 Regulaminu,
+      2)   niezrealizowania działania lub nieosiągnięcia zakładanych wskaźników,
+      3)   poniesienia innego niż wskazany w pkt. 1 wydatku niekwalifikowalnego, ujętego w
+           załączniku nr 2 do niniejszego Regulaminu,
+
+
+
+
+19
+     Patrz przypis nr 16
+20
+     Patrz przypis nr 17
+
+                                          Strona 31 z 103
+      4)   niezachowania trwałości grantu (zwrot części grantu proporcjonalnie do okresu, w
+           którym trwałość grantu nie została zachowana)21.
+3. W przypadkach, o których mowa w ust. 1 i 2 Grantobiorca zwraca na żądanie ROPS lub
+      innego organu kontrolującego otrzymane środki na rachunek bankowy wskazany przez
+      ROPS, w terminie 14 dni kalendarzowych od dnia otrzymania wezwania, wraz z odsetkami
+      w wysokości określonej jak dla zaległości podatkowych, liczonymi od dnia przekazania
+      środków do dnia zwrotu.
+4. W przypadku zmiany rachunku bankowego, każdy z Grantobiorców zostanie o tym
+      pisemnie poinformowany.
+5. W przypadku, gdy Grantobiorca nie dokonał w wyznaczonym terminie zwrotu, o którym
+      mowa w ust. 3, ROPS podejmie czynności zmierzające do odzyskania środków, z
+      wykorzystaniem dostępnych środków prawnych, w szczególności złożonego przez
+      Grantobiorcę zabezpieczenia prawidłowego wykonania zobowiązań wynikających z
+      Umowy o powierzenie grantu.
+6. Koszty czynności zmierzających do odzyskania środków grantu w odniesieniu do
+      przesłanek wskazanych w ust. 1 i 2 obciążają Grantobiorcę.
+
+       16.Dane osobowe
+
+Zasady przetwarzania danych osobowych zostały uregulowane w Umowie o powierzenie
+grantu, której wzór stanowi załącznik nr 1 do niniejszego Regulaminu.
+
+       17.Załączniki
+
+1. Wzór Umowy o powierzenie grantu
+2. Wykaz kosztów niekwalifikowalnych.
+
+
+
+
+21
+     Jeśli dotyczy
+
+                                          Strona 32 z 103
+Załącznik nr 1 do Regulaminu udzielania grantów w ramach projektu „Usługa Wrażliwa –
+upowszechnianie innowacji społecznych w środowiskach lokalnych”
+
+Umowa o powierzenie grantu nr …
+w ramach Projektu grantowego: Usługa Wrażliwa – upowszechnianie innowacji społecznych
+w środowiskach lokalnych, współfinansowanego ze środków Europejskiego Funduszu
+Społecznego Plus, w ramach programu Fundusze Europejskie dla Małopolski 2021 – 2027,
+Priorytet 6 Fundusze europejskie dla rynku pracy, edukacji i włączenia społecznego, Działanie
+6.23 Włączenie społeczne – projekty Województwa Małopolskiego, Typ C: System usług
+społecznych – upowszechnienie innowacji,
+
+zawarta w dniu ………………………
+
+pomiędzy:
+
+Województwem Małopolskim, ul. Basztowa 22, 31-156 Kraków,
+NIP: 6762178337, REGON: 351554287 – Regionalny Ośrodek Polityki Społecznej w Krakowie,
+ul. Piastowska 32, 30-070 Kraków, NIP: 6762101814, REGON: 351612501,
+zwanym dalej „Grantodawcą”, reprezentowanym przez [imię, nazwisko, stanowisko]
+
+a
+
+[Nazwa i adres siedziby Grantobiorcy, NIP, a gdy posiada – również REGON]
+zwanym dalej „Grantobiorcą”,
+
+zwanymi dalej „Stronami”.
+
+Dokument stwierdzający umocowanie do zawarcia niniejszej Umowy ze strony Grantobiorcy
+stanowi załącznik nr 1 do Umowy.22
+
+
+
+
+22
+     Jeśli dotyczy
+                                       § 1. Definicje i skróty
+
+1. Użyte w Umowie skróty i definicje oznaczają:
+      17) cross-financing – mechanizm polegający na możliwości finansowania części wydatków
+          w projekcie realizowanym w ramach Europejskiego Funduszu Społecznego Plus (EFS+)
+          z Europejskiego Funduszu Rozwoju Regionalnego (EFRR),
+      18) FEM 2021-2027 – program regionalny Fundusze Europejskie dla Małopolski 2021-
+          2027,
+      19) FERS 2021-2027 – program krajowy Fundusze Europejskie dla Rozwoju Społecznego
+          na lata 2021-2027,
+      20) grant – środki finansowe, które Grantodawca powierzył Grantobiorcy, na podstawie
+          Umowy o powierzenie grantu, na realizację zadań służących wdrożeniu innowacji
+          społecznej,
+      21) Grantobiorca – podmiot wybrany w drodze otwartego naboru ogłoszonego przez
+          Grantodawcę w ramach realizacji projektu grantowego, z którym Grantodawca zawarł
+          Umowę o powierzenie grantu,
+      22) Grantodawca – Regionalny Ośrodek Polityki Społecznej w Krakowie będący
+          realizatorem projektu grantowego pn. Usługa Wrażliwa – upowszechnianie innowacji
+          społecznych w środowiskach lokalnych, udzielający grantów na realizację zadań
+          służących osiągnięciu celu tego projektu,
+      23) innowacja społeczna – rozwiązanie (produkt, usługa, model) w obszarze zaspokajania
+          potrzeb społecznych, przetestowane w ramach projektów inkubacyjnych
+          Grantodawcy i wybrane do wdrożenia w ramach projektu grantowego „Usługa
+          Wrażliwa – upowszechnianie innowacji społecznych w środowiskach lokalnych”,
+          wskazane w ogłoszeniu o naborze grantowym na stronie internetowej Grantodawcy23,
+      24) Indywidualny Plan Wdrażania Innowacji (IPWI) – dokument stanowiący załącznik nr
+          2 do Umowy o powierzenie grantu, wypracowany przed jej zawarciem we współpracy
+          rekomendowanego do otrzymania grantu Wnioskodawcy z Grantodawcą, zawierający
+          opis i plan wdrażania usługi społecznej bazującej na wybranej innowacji społecznej,
+
+
+
+
+23
+     https://rops.krakow.pl/
+
+
+                                           Strona 34 z 103
+    zgodnie z którym Grantobiorca będzie realizował działania finansowane ze środków
+    grantu,
+25) Instytucja Pośrednicząca (IP FEM 2021-2027) – Instytucja Pośrednicząca Programu
+    Fundusze Europejskie dla Małopolski na lata 2021-2027, której funkcję pełni
+    Małopolskie Centrum Przedsiębiorczości,
+26) IZ FEM 2021-2027 – Instytucja Zarządzająca Programem Fundusze Europejskie dla
+    Małopolski na lata 2021-2027, której funkcję pełni Zarząd Województwa
+    Małopolskiego,
+27) pomoc de minimis – pomoc stanowiąca szczególną kategorię wsparcia udzielanego
+   przez państwo, która, ze względu na swą małą wartość nie powoduje zakłócenia
+   konkurencji w wymiarze unijnym. Pomoc ta udzielana jest zgodnie z:
+   a. Rozporządzeniem Komisji (UE) nr 2023/2831 z dnia 13 grudnia 2023 r. w sprawie
+       stosowania art. 107 i 108 Traktatu o funkcjonowaniu Unii Europejskiej do pomocy
+       de minimis,
+   b. ustawą z dnia 30 kwietnia 2004 r. o postępowaniu w sprawach dotyczących
+       pomocy publicznej,
+   c. Rozporządzeniem Ministra Funduszy i Polityki Regionalnej z dnia 20 grudnia 2022 r.
+       w sprawie udzielania pomocy de minimis oraz pomocy publicznej w ramach
+       Europejskiego Funduszu Społecznego Plus na lata 2021 – 2027,
+28) projekt grantowy – projekt, o którym mowa w art. 41 ustawy z dnia 28 kwietnia
+   2022 r. o zasadach realizacji zadań finansowanych ze środków europejskich w
+   perspektywie finansowej 2021–2027, pn. Usługa Wrażliwa – upowszechnianie
+   innowacji społecznych w środowiskach lokalnych,
+29) Regulamin – Regulamin udzielania grantów w ramach projektu „Usługa Wrażliwa –
+   upowszechnianie innowacji społecznych w środowiskach lokalnych”,
+30) uczestnicy projektu grantowego – Grantobiorcy, którzy uzyskali grant w ramach
+   projektu grantowego oraz osoby, które zostaną objęte wsparciem w ramach wdrażania
+   innowacji społecznych finansowanych ze środków grantu,
+31) Umowa o powierzenie grantu (Umowa) – umowa zawierana pomiędzy Grantobiorcą i
+   Grantodawcą regulująca w szczególności zasady współpracy w zakresie wdrażania
+   innowacji oraz rozliczenia grantu,
+
+
+
+                                    Strona 35 z 103
+     32) wytyczne – Wytyczne dotyczące kwalifikowalności wydatków na lata 2021-2027
+        określające ujednolicone warunki i procedury dotyczące kwalifikowalności wydatków
+        m.in. dla Europejskiego Funduszu Społecznego Plus, w ramach którego realizowany
+        jest Projekt.
+
+     § 2. Przedmiot i okres realizacji Umowy
+
+1. Umowa ustala warunki, na jakich Grantodawca powierza Grantobiorcy środki finansowe w
+     formie grantu na wdrażanie, w ramach usług społecznych świadczonych w społeczności
+     lokalnej, innowacji społecznej pn. „…………………………………………”, zgodnie z Indywidualnym
+     Planem Wdrażania Innowacji, stanowiącym załącznik nr 2 do niniejszej Umowy.
+2. Umowa określa w szczególności zobowiązania Grantobiorcy, kwotę Grantu, szczegółowe
+     zasady i warunki przekazywania, rozliczania, kontrolowania oraz zwrotu środków
+     finansowych w przypadku wykorzystania grantu niezgodnie z Umową.
+3. Okres wdrażania innowacji społecznej jest zgodny z okresem wskazanym w IPWI.
+4. Grant będzie realizowany przez: .................................................................24
+5. Grantobiorca zobowiązuje się do realizacji grantu i wdrażania innowacyjnej usługi
+     społecznej z należytą starannością, w szczególności ponosząc wydatki celowo, rzetelnie,
+     racjonalnie i oszczędnie, zgodnie z obowiązującymi przepisami prawa krajowego i
+     unijnego, postanowieniami niniejszej Umowy, zaleceniami Grantodawcy, a także w
+     sposób, który zapewni prawidłowe i terminowe wdrożenie innowacyjnej usługi społecznej
+     oraz osiągnięcie celu i wskaźników zakładanych w IPWI.
+6. Grantobiorca przy ponoszeniu wydatków grantu nie jest zobowiązany do stosowania
+     „Wytycznych dotyczących kwalifikowalności wydatków na lata 2021 – 2027”, z
+     zastrzeżeniem zapisów załącznika nr 2 do Regulaminu udzielania grantów (Wykaz kosztów
+     niekwalifikowalnych) oraz zapisów dotyczących cross-financingu i trwałości grantu25.
+
+
+
+
+24
+   W przypadku realizacji grantu przez jednostkę organizacyjną Grantobiorcy należy wpisać nazwę
+jednostki, adres, numer REGON lub/i NIP (w zależności od statusu prawnego podmiotu), a w
+przypadku osób fizycznych: imię i nazwisko, adres i PESEL. Jeżeli grant będzie realizowany wyłącznie
+przez podmiot wskazany jako Grantobiorca, ust. 4 należy wykreślić.
+25
+   Jeśli dotyczy
+
+
+                                                    Strona 36 z 103
+7. Wdrażanie innowacyjnej usługi społecznej jest zgodne z ideą deinstytucjonalizacji
+      wsparcia społecznego, rozumianą jako proces odchodzenia od pomocy instytucjonalnej na
+      rzecz wsparcia środowiskowego przy wykorzystaniu usług społecznych.
+8. Umowa obowiązuje od dnia jej podpisania przez ostatnią ze Stron do dnia 31.08.2028 r., z
+      zastrzeżeniem okresu trwałości26, o którym mowa w § 8 niniejszej Umowy.
+9. Grant udzielany jest w ramach realizowanego przez Grantodawcę projektu grantowego pn.
+      Usługa Wrażliwa – upowszechnianie innowacji społecznych w środowiskach lokalnych,
+      którego celem jest pilotażowe wdrożenie na terenie Małopolski 10 usług społecznych
+      świadczonych w społecznościach lokalnych bazujących na innowacyjnych rozwiązaniach
+      wskazanych w ogłoszeniu o naborze grantowym na stronie internetowej Grantodawcy27.
+
+           § 3. Warunki finansowe
+
+1. Na warunkach określonych w niniejszej Umowie Grantodawca powierza Grantobiorcy
+      grant w kwocie: ……………… zł (słownie złotych: ……………………………… 00/100) na wdrożenie
+      usługi społecznej bazującej na wybranej innowacji społecznej. Kwota ta stanowi 100%
+      kosztów określonych w zatwierdzonym Indywidualnym Planie Wdrażania Innowacji.
+2. Grant nie może zostać przeznaczony na działania podejmowane przed datą rozpoczęcia ani
+      po dacie zakończenia wdrażania innowacyjnej usługi społecznej, wskazanymi w aktualnym
+      Indywidualnym Planie Wdrażania Innowacji, ani też na jakiekolwiek działania
+      nieprzewidziane w aktualnym IPWI.
+3. Okres kwalifikowalności wydatków na działania opisane w ust. 2 obejmuje okres od daty
+      rozpoczęcia do daty zakończenia wdrażania innowacyjnej usługi społecznej, określonych w
+      zatwierdzonym IPWI.
+4. Grantobiorca zobowiązuje się pokryć ze środków własnych wszelkie inne wydatki niż
+      zatwierdzone w aktualnym IPWI oraz powyżej kwot zatwierdzonych w aktualnym IPWI.
+5. Grantobiorca zapewnia, że wszystkie wydatki ponoszone ze środków grantu będą:
+      1)    zgodne z przepisami prawa,
+      2)    niezbędne do realizacji celów grantu i poniesione w związku z realizacją grantu,
+
+
+
+
+26
+     Jeśli dotyczy
+27
+     https://rops.krakow.pl/
+
+
+                                            Strona 37 z 103
+     3)   dokonane w sposób przejrzysty, racjonalny i efektywny, z zachowaniem zasad
+          uzyskiwania najlepszych efektów z danych nakładów, oszczędny tzn. niezawyżony w
+          stosunku do średnich cen i stawek rynkowych.
+6. Grantobiorca może ponosić wydatki w ramach cross-financingu, zgodnie z zakresem i
+     limitem określonym w Indywidualnym Planie Wdrażania Innowacji.
+7. Wydatki w ramach cross-financingu dotyczące infrastruktury mogą być ponoszone pod
+     warunkiem, że Grantobiorca posiada do niej tytuł prawny rozumiany jako:
+     1)   własność,
+     2)   współwłasność wraz z poświadczeniem faktycznego uprawnienia do korzystania z
+          danego lokalu/nieruchomości,
+     3)   ograniczone prawo rzeczowe: użytkowanie, służebność, spółdzielcze prawo do
+          lokalu/nieruchomości,
+     4)   prawo obligacyjne: najem, dzierżawa, użyczenie.
+     Warunek ten będzie weryfikowany na etapie opracowania i aktualizacji IPWI.
+8. W przypadku ponoszenia wydatków w ramach cross-financingu, należy zastosować
+     Standard architektoniczny określony w Załączniku nr 2 do Wytycznych dotyczących
+     realizacji zasad równościowych w ramach funduszy unijnych na lata 2021-202728.
+9. Grantobiorca zobowiązuje się do nieponoszenia ze środków grantu wydatków
+     stanowiących podwójne finansowanie, które oznacza w szczególności:
+     1)   więcej niż jednokrotne przedstawienie do rozliczenia tego samego wydatku albo tej
+          samej części wydatku ze środków UE w jakiejkolwiek formie,
+     2)   rozliczenie zakupu używanego środka trwałego, który był uprzednio
+          współfinansowany z udziałem środków UE,
+     3)   rozliczenie kosztów amortyzacji środka trwałego uprzednio zakupionego z udziałem
+          środków UE,
+     4)   rozliczenie wydatku poniesionego przez leasingodawcę na zakup przedmiotu leasingu
+          w ramach leasingu finansowego, a następnie rozliczenie rat opłacanych przez
+          beneficjenta w związku z leasingiem tego przedmiotu,
+
+
+
+
+28
+  https://www.funduszeeuropejskie.gov.pl/strony/o-funduszach/dokumenty/wytyczne-dotyczace-
+realizacji-zasad-rownosciowych-w-ramach-funduszy-unijnych-na-lata-2021-2027-1/
+
+
+                                         Strona 38 z 103
+  5)     otrzymanie na wydatki kwalifikowalne dotacji z kilku źródeł (krajowych, unijnych lub
+         innych) w wysokości łącznie wyższej niż 100% wydatków kwalifikowalnych.
+10.     Grantobiorca w ramach udzielonego grantu nie będzie ponosić wydatków, o których
+  mowa w podrozdziale 2.3 Wytycznych dotyczących kwalifikowalności wydatków na lata
+  2021–2027, wskazanych w załączniku nr 2 do Regulaminu udzielania grantów. W
+  przypadku zmiany ww. wytycznych załącznik zostanie zaktualizowany przez Grantodawcę,
+  a Grantobiorca zostanie poinformowany o aktualizacji załącznika.
+11. Grantobiorca w ramach udzielonego grantu nie będzie ponosić wydatków
+      administracyjnych związanych z realizacją zadań finansowanych w ramach grantu (np.
+      koszt prowadzenia rachunku bankowego, obsługa księgowa, koszty biurowe – telefon,
+      czynsz, prąd) oraz związanych z promocją/informacją, a także rekrutacją uczestników. Ze
+      środków grantu nie będą również ponoszone wydatki na ewaluację.
+12. Grantodawca może uznać za niekwalifikowalny wydatek poniesiony niezgodnie z
+      zasadami określonymi w niniejszej Umowie.
+13. Wydatki uznane za niekwalifikowalne ponosi Grantobiorca jako Strona Umowy.
+14. Ponoszone w ramach grantu koszty nie mogą stanowić wydatku objętego pomocą
+      publiczną, z zastrzeżeniem możliwości udzielania pomocy de minimis. W przypadku, gdy
+      przyznany Grantobiorcy grant stanowi pomoc de minimis, pomoc ta udzielana jest
+      zgodnie z Rozporządzeniem Komisji (UE) nr 2023/2831 z dnia 13 grudnia 2023 r. w
+      sprawie stosowania art. 107 i 108 Traktatu o funkcjonowaniu Unii Europejskiej do
+      pomocy de minimis (Dz. Urz. UE L, 2023/2831 z 15.12.2023), ustawą z dnia 30 kwietnia
+      2004 r. o postępowaniu w sprawach dotyczących pomocy publicznej, Rozporządzeniem
+      Ministra Funduszy i Polityki Regionalnej z dnia 20 grudnia 2022 r. w sprawie udzielania
+      pomocy de minimis oraz pomocy publicznej w ramach Europejskiego Funduszu
+      Społecznego Plus na lata 2021 – 2027 (Dz.U. z 2025, poz. 37).
+15. Za dzień udzielenia pomocy de minimis uznaje się dzień zawarcia niniejszej Umowy.
+16. Na potwierdzenie wysokości udzielonej pomocy de minimis Grantodawca wyda
+      Grantobiorcy Zaświadczenie o pomocy de minimis.
+
+       § 4 Zobowiązania Grantobiorcy
+
+1. Do obowiązków Grantobiorców należy w szczególności:
+
+
+
+
+                                         Strona 39 z 103
+1)   wniesienie zabezpieczenia prawidłowej realizacji Umowy zgodnie z postanowieniami
+     § 5 Umowy,
+2)   wykorzystanie grantu zgodnie z zawartą Umową o powierzenie grantu i Regulaminem
+     udzielania grantów,
+3)   wdrażanie innowacyjnej usługi społecznej zgodnie z Indywidualnym Planem
+     Wdrażania Innowacji, a w przypadku dokonania zmian w IPWI, zgodnie z
+     zatwierdzonymi zmianami,
+4)   podpisanie oświadczenia uczestnika projektu grantowego, którego wzór stanowi
+     załącznik nr 6 do niniejszej Umowy,
+5)   zrekrutowanie (w oparciu o opracowane przez Grantobiorcę szczegółowe kryteria
+     rekrutacji, ujęte w IPWI) i objęcie usługami społecznymi (lub inną formą wsparcia, w
+     przypadku kadry) osób wskazanych w zatwierdzonym przez Grantodawcę IPWI –
+     Grantobiorca jest zobowiązany do uwzględnienia w IPWI następujących
+     obligatoryjnych kryteriów rekrutacji:
+     a.   przynależność do grupy docelowej – weryfikowana na podstawie dokumentu
+          potwierdzającego status osoby np. zaświadczenia z odpowiedniej instytucji lub
+          innego dokumentu,
+     b. zamieszkiwanie, uczenie się lub pracowanie na terenie województwa
+          małopolskiego – weryfikowane w oparciu o oświadczenie uczestnika projektu o
+          miejscu zamieszkania, zaświadczenie dot. miejsca nauki lub pracy.
+6)   poinformowanie osób, które będą objęte innowacyjnymi usługami społecznymi oraz
+     obejmowanej wsparciem kadry, że będą uczestnikami projektu oraz zebranie dla
+     Grantodawcy od każdej osoby objętej wsparciem danych objętych oświadczeniem
+     uczestnika projektu,
+7)   przestrzeganie, w toku wdrażania usługi społecznej bazującej na wybranej innowacji,
+     wymogów wskazanych w załączniku nr 8 do niniejszej Umowy, adekwatnych dla danej
+     innowacyjnej usługi społecznej,
+8)   postępowanie w trakcie wdrażania innowacji społecznej zgodnie z zasadami
+     równościowymi wskazanymi w Wytycznych dotyczących realizacji zasad
+
+
+
+
+                                       Strona 40 z 103
+          równościowych w ramach funduszy unijnych na lata 2021-202729, w tym z zasadą
+          równości kobiet i mężczyzn, zasadami równości szans i niedyskryminacji, w
+          szczególności standardami dostępności dla osób z niepełnosprawnościami, Kartą Praw
+          Podstawowych, Konwencją o Prawach Osób Niepełnosprawnych, a także zasadami
+          polityki zrównoważonego rozwoju, w tym zasadą DNSH (zasada „nie czyń poważnych
+          szkód”) poprzez zastosowanie rozwiązań proekologicznych (Grantodawca zapewni
+          niezbędne konsultacje w zakresie dostępności i będzie na bieżąco wspierał
+          Grantobiorców w przedmiotowym obszarze); Grantobiorca zobowiązuje się do
+          poinformowania uczestników projektu, objętych wsparciem grantu, o możliwości
+          zgłoszenia podejrzenia o niezgodności realizowanego grantu lub działań Grantobiorcy
+          z KPON lub KPP na adres mailowy: KPP_KPON@umwm.malopolska.pl,
+     9)   udział w ścieżce wsparcia dobranej przez Grantodawcę na etapie wdrażania
+          innowacyjnej usługi społecznej,
+     10) stała współpraca z Grantodawcą w trakcie procesu realizacji grantu, w tym ze
+          specjalistkami/specjalistami ds. wdrażania innowacji,
+     11) utrzymanie trwałości grantu, w przypadku przeznaczenia środków grantu na wydatki
+          poniesione w ramach cross-financingu, przez okres i na warunkach określonych w § 8
+          niniejszej Umowy,
+     12) poddanie się monitoringowi i kontroli prowadzonym przez Grantodawcę i inne
+          uprawnione podmioty,
+     13) przekazywanie Grantodawcy sprawozdań rzeczowo-finansowych w celu
+          przedstawiania postępów w realizacji grantu i jego rozliczenia,
+     14) udział w ewaluacji wdrożenia innowacji społecznej realizowanej przez Grantodawcę,
+     15) współpraca z podmiotami zewnętrznymi, realizującymi badanie ewaluacyjne na
+          zlecenie IZ FEM 2021-2027 lub innego uprawnionego podmiotu, w tym zbieranie i
+          przekazywanie każdorazowo na wniosek ww. podmiotów dokumentów i informacji na
+          temat realizacji grantu, niezbędnych do przeprowadzenia badania ewaluacyjnego, a
+          także informowanie osób objętych wsparciem i uwzględnienie w zapisach umowy
+
+
+
+
+29
+  https://www.funduszeeuropejskie.gov.pl/strony/o-funduszach/dokumenty/wytyczne-dotyczace-
+realizacji-zasad-rownosciowych-w-ramach-funduszy-unijnych-na-lata-2021-2027-1/
+
+
+                                            Strona 41 z 103
+         zawartej z uczestnikiem projektu obowiązku poddania się przez niego ewaluacji oraz
+         udostępnienia swoich danych, w tym danych teleadresowych,
+     16) przeniesienie na rzecz Grantodawcy autorskich praw majątkowych do wszelkich
+         utworów wypracowanych w ramach realizacji Umowy o powierzenie grantu,
+     17) przechowywanie dokumentacji dotyczącej realizacji grantu przez okres wynikający z
+         przepisów prawa, przy czym Grantobiorca posiadający siedzibę poza województwem
+         małopolskim ma obowiązek przechowywania dokumentacji w miejscu prowadzenia
+         działalności na terenie województwa małopolskiego, objętej realizacją grantu,
+     18) informowanie o realizowanym przedsięwzięciu i stosowanie właściwych oznaczeń
+         zgodnie z wytycznymi wskazanymi w Podręczniku wnioskodawcy i beneficjenta
+         Funduszy Europejskich na lata 2021-2027 w zakresie informacji i promocji30, w
+         zakresie zapisów podrozdziału 7.1 ust. 1, ust. 2 (z wyłączeniem obowiązku
+         zamieszczania tablicy informacyjnej), ust. 3 i ust. 4, zgodnie z przykładem opisanym w
+         rozdziale 11 pkt. 4 ww. Podręcznika.
+
+       § 5 Zabezpieczenie prawidłowej realizacji Umowy31
+
+1. Grantobiorca wnosi zabezpieczenie prawidłowej realizacji Umowy, nie później niż w
+     terminie 7 dni roboczych od dnia zawarcia niniejszej Umowy, o wartości ………………….. zł32
+     w formie weksla in blanco wraz z deklaracją wekslową (100 % kwoty grantu).
+2. Zabezpieczenie, o którym mowa w ust. 1, ustanawiane jest do dnia 31.08.2028 r. lub do
+     zakończenia okresu trwałości grantu, o którym mowa w § 8 niniejszej Umowy.
+3. Po upływie terminu wskazanego w ust. 2, Grantodawca zwróci na wniosek Grantobiorcy
+     zabezpieczenie prawidłowej realizacji Umowy w ciągu 14 dni roboczych. W przypadku
+     niezłożenia przez Grantobiorcę wniosku o zwrot dokumentu stanowiącego zabezpieczenie,
+     zostanie on komisyjnie zniszczony.
+
+
+
+
+30
+   https://fundusze.malopolska.pl/node/6028
+31
+   W przypadku, gdy Grantobiorca jest jednostką sektora finansów publicznych w rozumieniu ustawy z
+dnia 27 sierpnia 2009 r. o finansach publicznych albo fundacją, której jedynym fundatorem jest Skarb
+Państwa, obowiązków wynikających z § 5 nie stosuje się.
+32
+   Kwota zabezpieczenia to 100% wartości Grantu.
+
+
+                                          Strona 42 z 103
+         § 6 System płatności i rozliczania grantu
+
+1. Grant zostanie wypłacony na wyodrębniony na potrzeby niniejszej Umowy rachunek
+      bankowy Grantobiorcy nr: .............................. (prowadzony w banku: …………………………….).
+      Odsetki bankowe od przekazanych Grantobiorcy transz grantu podlegają zwrotowi, o ile
+      przepisy odrębne nie stanowią inaczej. Grantobiorca zwraca odsetki na rachunek bankowy
+      wskazany przez Grantodawcę, każdorazowo w terminie składania sprawozdań rzeczowo-
+      finansowych z realizacji grantu.
+2. Grant zostanie wypłacony Grantobiorcy w 2 transzach, w wysokości i terminach
+      określonych w Harmonogramie płatności stanowiącym załącznik nr 3 do niniejszej Umowy,
+      pod warunkiem ujęcia środków przewidzianych na realizację projektu grantowego w
+      planie finansowym Grantodawcy na dany rok budżetowy oraz pod warunkiem dostępności
+      środków na rachunku bankowym prowadzonym przez Grantodawcę.
+3. Pierwsza transza przeznaczona będzie na pokrycie wydatków w okresie przygotowania
+      wdrożenia (etap 1), druga transza na pokrycie wydatków związanych wdrażaniem
+      innowacyjnej usługi społecznej (etap 2).
+4. Wypłata pierwszej transzy grantu nastąpi w ciągu 14 dni roboczych od dnia zawarcia
+      niniejszej Umowy/od dnia wniesienia zabezpieczenia, o którym mowa w § 5 niniejszej
+      Umowy33, z zastrzeżeniem spełnienia warunków wskazanych w ust. 2.
+5. Wypłata drugiej transzy nastąpi po upływie okresu rozliczeniowego dla etapu 1,
+      określonego w Harmonogramie płatności, pod warunkiem zaakceptowania przez
+      Grantodawcę przedstawionego przez Grantobiorcę rozliczenia pierwszej transzy.
+6. Grantobiorca nie będzie zgłaszał roszczeń wobec Grantodawcy z tytułu opóźnienia w
+      wypłacie transzy, wynikającego z okoliczności, o których mowa w ust. 2.
+7. Grant będzie rozliczany na podstawie rzeczywiście ponoszonych wydatków.
+8. Grantobiorca zobowiązany jest do prowadzenia wyodrębnionej ewidencji księgowej w
+      zakresie przekazanego grantu.
+9. Wydatki na realizację zaplanowanych w ramach grantu form wsparcia, muszą zostać
+      udokumentowane dokumentami księgowymi (np. faktury, listy płac), opisanymi w sposób
+      potwierdzający ich związek z przyznanym grantem.
+
+
+
+33
+     Niepotrzebne skreślić
+
+
+                                           Strona 43 z 103
+10. Wypłacone Grantobiorcy środki będą rozliczane w oparciu o składane przez Grantobiorcę
+    sprawozdania rzeczowo-finansowe uwzględniające opis zrealizowanych działań i
+    osiągniętych efektów grantu wraz z zestawieniem poniesionych wydatków i
+    oświadczeniem o wydatkowaniu środków zgodnie z przeznaczeniem grantu. Wzór
+    sprawozdania rzeczowo-finansowego stanowi załącznik nr 4 do niniejszej Umowy.
+11. Grantobiorca jest zobowiązany do przedstawienia ww. dokumentów na wezwanie
+    Grantodawcy.
+12. Sprawozdania rzeczowo-finansowe powinny być składane za okresy nie dłuższe niż 3
+    miesiące, w ciągu 5 dni roboczych po upływie okresu sprawozdawczego wskazanego w
+    Harmonogramie płatności oraz w ciągu 10 dni roboczych od zakończenia realizacji
+    grantu.
+13. Sprawozdania rzeczowo-finansowe Grantobiorca wypełnia w języku polskim i przesyła do
+    Grantodawcy w formie elektronicznej (skan podpisanych dokumentów lub dokumenty
+    podpisane kwalifikowanym podpisem elektronicznym przez osobę uprawnioną do
+    reprezentowania Grantobiorcy lub osobę posiadającą odpowiednie pełnomocnictwo do
+    reprezentowania Grantobiorcy) na adres e-mail podany w § 15 niniejszej Umowy.
+14. Warunkiem rozliczenia wypłaconych transz grantu będzie zaakceptowanie przez
+    Grantodawcę sprawozdań rzeczowo-finansowych z realizacji grantu.
+15. W przypadku niewykorzystania przez Grantobiorcę środków wypłaconych w ramach
+    transz grantu, Grantobiorca zwraca niewykorzystaną kwotę na rachunek bankowy
+    Grantodawcy, w terminie wskazanym w wezwaniu, z zastrzeżeniem ust. 16.
+16. W przypadku niewykorzystania przez Grantobiorcę środków finansowych z pierwszej
+    transzy, przeznaczonych na przygotowanie wdrożenia (etap 1), Grantobiorca może złożyć
+    wniosek o przesunięcie tych środków do wykorzystania w okresie wdrażania
+    innowacyjnej usługi społecznej (etap 2), finansowanym w ramach drugiej transzy.
+    Warunkiem przesunięcia środków jest zaistnienie przesłanki uzasadniającej konieczność
+    zwiększenia środków zaplanowanych na realizację działań w etapie 2 oraz uzyskanie
+    akceptacji ze strony Grantodawcy.
+17. Grantodawca może zakwestionować wydatki przedstawione w sprawozdaniu rzeczowo-
+    finansowym i ich nie zatwierdzić, w sytuacji niezgodności wydatków z postanowieniami
+    niniejszej Umowy lub Regulaminu udzielania grantów. W takiej sytuacji, Grantodawca
+    informuje Grantobiorcę o kosztach uznanych za niekwalifikowalne i wzywa do zwrotu
+
+
+                                        Strona 44 z 103
+      środków grantu odpowiadających tym kosztom wraz z należnymi wg przepisów prawa
+      odsetkami.
+18. W sytuacji, gdy w związku z zawinioną i nienależytą realizacją przez Grantobiorcę Umowy
+      o powierzenie grantu, na Grantodawcę zostanie nałożona korekta finansowa34 lub
+      zostanie pomniejszona kwota wydatków kwalifikowalnych35, Grantobiorca, niezależnie
+      od obowiązku zwrotu środków zgodnie z § 10 niniejszej Umowy, zobowiązany będzie do
+      naprawienia szkody powstałej z tego tytułu po stronie Grantodawcy36.
+19. Grantobiorcy nie przysługuje prawo do odwołania się od ostatecznego rozstrzygnięcia
+      Grantodawcy dotyczącego rozliczenia, odmowy rozliczenia całości bądź części grantu lub
+      rozwiązania Umowy.
+
+       § 7 Monitorowanie i kontrola grantu
+
+1. Grantobiorca podlega monitorowaniu w zakresie prawidłowości wdrażania bazującej na
+     innowacyjnym rozwiązaniu usługi społecznej, zgodnie z IPWI, na wdrożenie której
+     otrzymał grant.
+2. Monitoring prowadzony jest przez cały okres trwania Umowy przez
+     Specjalistki/Specjalistów ds. wdrażania innowacji.
+3. Grantobiorca zobowiązany jest do poddania się kontrolom i audytom w zakresie
+     prawidłowości realizacji grantu zgodnie z Umową o powierzenie grantu przez Grantobiorcę
+     oraz inne uprawnione podmioty.
+4. Grantodawca będzie przeprowadzał kontrole w zakresie prawidłowości realizowanych
+     form wsparcia oraz w zakresie prawidłowości wykorzystania i ponoszenia wydatków na ich
+     realizację zgodnie z zapisami IPWI oraz Umową o powierzenie grantu, w tym m.in.
+     sposobu wydatkowania grantu, właściwego sposobu dokumentowania wydatków, itp.
+
+
+
+
+34
+   Korekta finansowa oznacza kwotę, o jaką obniża się finansowanie UE dla projektu grantowego
+„Usługa Wrażliwa – upowszechnianie innowacji społecznych w środowiskach lokalnych”, w
+związku ze stwierdzoną nieprawidłowością w realizowanym grancie.
+35
+   Pomniejszenie wartości wydatków kwalifikowalnych oznacza pomniejszenie przed zatwierdzeniem
+wniosku o płatność złożonego przez Grantodawcę o kwotę wydatków poniesionych nieprawidłowo
+przez Grantobiorcę w realizowanym grancie.
+36
+   Dotyczy w szczególności sytuacji złożenia przez Grantobiorcę oświadczeń niezgodnych z prawdą.
+
+
+
+                                          Strona 45 z 103
+5. Kontrolę przeprowadza się w siedzibie lub miejscu prowadzenia działalności Grantobiorcy
+  co najmniej jeden raz w okresie trwania Umowy. Termin przeprowadzenia kontroli
+  zostanie uzgodniony z Grantobiorcą drogą mailową.
+6. W przypadku powzięcia informacji o podejrzeniu realizacji Umowy niezgodnie z jej
+  zapisami lub Regulaminem udzielania grantów lub wystąpienia innych istotnych uchybień
+  ze strony Grantobiorcy, Grantodawca uprawniony jest do przeprowadzenia kontroli
+  doraźnej w każdym czasie.
+7. W przypadku, gdy Grantobiorca jest zobowiązany do zachowania trwałości grantu, o której
+  mowa w § 8, Grantodawca może przeprowadzić kontrolę również w okresie trwałości
+  grantu, tj. po zakończeniu realizacji Umowy.
+8. Grantobiorca zobowiązany jest do udostępniania i dostarczania wszelkich dokumentów
+  żądanych przez Grantodawcę oraz do udzielania wszelkich wyjaśnień w sprawach objętych
+  zakresem kontroli.
+9. W trakcie kontroli lub na każde żądanie Grantodawcy, Grantobiorca zobowiązany jest
+  okazać wszystkie zakupione w ramach grantu środki trwałe, wyposażenie, wartości
+  niematerialne i prawne lub inne towary bądź usługi potwierdzające wdrażanie usługi
+  społecznej bazującej na wybranej innowacji zgodnie z IPWI wraz z oryginalnymi
+  dokumentami ich zakupu/wykonania.
+10. Z przeprowadzonej kontroli Grantodawca w terminie do 30 dni kalendarzowych od dnia
+    przeprowadzenia kontroli lub od dnia dostarczenia przez Grantobiorcę wyjaśnień
+    /uzupełnień /dokumentacji sporządza informację pokontrolną podsumowującą stan
+    faktyczny stwierdzony w ramach czynności kontrolnych oraz zawierającą ustalenia i
+    ewentualne zalecenia pokontrolne wraz z terminem ich realizacji. Informacja
+    pokontrolna przekazywana jest Grantobiorcy.
+11. W terminie do 7 dni kalendarzowych od daty otrzymania informacji pokontrolnej,
+    Grantobiorca ma prawo wnieść do Grantodawcy umotywowane zastrzeżenia. W
+    przypadku niewniesienia zastrzeżeń w ww. terminie informacja pokontrolna staje się
+    ostateczną informacją pokontrolną. W przypadku wniesienia przez Grantobiorcę
+    zastrzeżeń w wymaganym terminie Grantodawca rozpatruje zastrzeżenia w terminie do 7
+    dni kalendarzowych od dnia zgłoszenia tych zastrzeżeń oraz sporządza ostateczną
+    informację pokontrolną, która przekazywana jest Grantobiorcy.
+
+
+
+                                       Strona 46 z 103
+12. Grantobiorca w wyznaczonym terminie informuje Grantodawcę o sposobie wykonania
+    zaleceń pokontrolnych.
+13. Jeżeli w wyniku czynności kontrolnych przeprowadzonych u Grantobiorcy przez
+    Grantodawcę lub inne uprawnione organy zostanie stwierdzone, że grant został
+    wykorzystany:
+    1) niezgodnie z przeznaczeniem,
+    2) z naruszeniem zapisów niniejszej Umowy lub Regulaminu udzielania grantów,
+    3) na pokrycie wydatków niekwalifikowalnych,
+    Grantodawca wezwie Grantobiorcę do zwrotu grantu lub jego części w terminie 14 dni
+    od dnia dostarczenia pisemnego wezwania wraz z odsetkami w wysokości określonej jak
+    dla zaległości podatkowych liczonymi od dnia przekazania grantu na rachunek bankowy
+    Grantobiorcy do dnia zwrotu.
+14. W przypadku, gdy Grantobiorca nie dokona zwrotu grantu lub jego części w terminie, o
+    którym mowa w ust. 13, Grantodawca podejmie czynności zmierzające do odzyskania
+    należnych środków.
+15. Uniemożliwianie lub utrudnianie prowadzenia monitoringu, kontroli lub audytów
+    prowadzonych przez Grantodawcę lub inne uprawnione podmioty jest równoznaczne z
+    niedotrzymaniem warunków Umowy i może stanowić podstawę do rozwiązania Umowy
+    oraz żądania zwrotu przekazanych środków grantu na zasadach określonych w § 10.
+
+     § 8 Trwałość grantu
+
+1. W przypadku przeznaczenia całości lub części środków grantu na wydatki w ramach cross-
+  financingu, Grantobiorca zobowiązany jest do utrzymania trwałości grantu przez okres 5
+  lat od daty zatwierdzenia wniosku o płatność końcową składanego przez Grantodawcę do
+  Instytucji Pośredniczącej. Grantodawca poinformuje Grantobiorcę o przewidywanym
+  terminie zakończenia trwałości grantu.
+2. Zachowanie trwałości podlega kontroli. Kontrola trwałości może być prowadzona w
+  miejscu realizacji grantu lub w siedzibie Grantobiorcy.
+3. Grantobiorca podlegający wymogowi zachowania trwałości zobowiązuje się do
+  przekazywania Grantodawcy sprawozdań z monitorowania projektu w okresie trwałości.
+  Grantodawca poinformuje Grantobiorcę o zakresie sprawozdań oraz terminach ich
+  składania.
+
+
+                                       Strona 47 z 103
+4. Naruszenie trwałości następuje, gdy zajdzie którakolwiek z poniższych okoliczności:
+  1)    zaprzestanie lub przeniesienie działalności produkcyjnej poza region, na poziomie
+        NUTS 2, w którym dana operacja otrzymała wsparcie,
+  2)    zmiana własności elementu infrastruktury, która daje przedsiębiorstwu lub
+        podmiotowi publicznemu nienależną korzyść,
+  3)    istotna zmiana wpływająca na charakter projektu, jego cele lub warunki realizacji,
+        która mogłaby doprowadzić do naruszenia jego pierwotnych celów.
+5. Obowiązek zachowania trwałości nie występuje w sytuacji, gdy Grantobiorca zaprzestał
+  działalności w wyniku ogłoszenia upadłości niewynikającej z oszustwa.
+6. W przypadku niezachowania trwałości grantu Grantobiorca jest zobowiązany do zwrotu
+  kwoty grantu proporcjonalnie do okresu, w którym trwałość grantu nie została
+  zachowana, na zasadach określonych w § 10.
+7. W przypadku stwierdzenia przez Grantodawcę przerwania okresu trwałości brak jest
+  możliwości do jego wznowienia.
+
+       § 9 Zmiany w zakresie grantu
+
+1. Wszelkie zmiany w zakresie grantu, w tym IPWI, muszą zostać uzgodnione i
+  zaakceptowane przez Grantodawcę przed ich wprowadzeniem przez Grantobiorcę. Zgoda
+  wydawana jest w formie pisemnej pod rygorem nieważności.
+2. W razie wystąpienia okoliczności powodujących konieczność wprowadzenia zmian w IPWI
+  Grantobiorca przedstawia Grantodawcy zakres zmian w formie wniosku o zmiany w IPWI.
+3. Aktualizacja IPWI możliwa jest pod warunkiem zatwierdzenia przez Grantobiorcę
+  proponowanych modyfikacji w Karcie zmian i nie wymaga aneksowania Umowy o
+  powierzenie grantu.
+4. Zmiany w IPWI nie mogą powodować:
+  1)    zmiany celu i charakteru wdrażanej innowacji społecznej,
+  2)    wydłużenia okresu wdrażania innowacji.
+
+       § 10 Zwrot grantu
+
+1. Grantobiorca zobowiązany jest do zwrotu całości (całości lub części – w przypadku, o
+  którym mowa w pkt. 9) wypłaconych środków, jeżeli:
+  1)    Grantobiorca złożył niezgodne z prawdą oświadczenie na etapie ubiegania się o grant,
+
+
+                                        Strona 48 z 103
+     2)   grant został wykorzystany niezgodnie z celami projektu grantowego,
+     3)   Grantobiorca nie realizuje założonych zadań i nie osiąga celu przewidzianego w
+          Indywidualnym Planie Wdrażania Innowacji,
+     4)   Grantobiorca wykorzystał grant z naruszeniem zapisów Umowy lub Regulaminu
+          udzielania grantów,
+     5)   po zakończeniu wdrażania wybranej innowacji społecznej Grantobiorca nie
+          przedstawił rozliczenia końcowego środków wydatkowanych w ramach grantu,
+     6)   złożone przez Grantobiorcę rozliczenie grantu nie zostało zaakceptowane przez
+          Grantodawcę,
+     7)   Grantobiorca uniemożliwia lub utrudniania przeprowadzenie monitoringów, kontroli
+          lub audytów prowadzonych przez Grantodawcę lub inne uprawnione podmioty,
+     8)   Grantobiorca nie podpisał umowy o przekazaniu praw autorskich, zgodnie z
+          obowiązkiem, o którym mowa w § 4 ust. 1 pkt 16 Umowy37,
+     9)   Instytucja Pośrednicząca nałoży na Grantodawcę korektę finansową38 lub pomniejszy
+          kwotę wydatków kwalifikowalnych39 z tytułu niewłaściwego wykorzystania grantu
+          przez Grantobiorcę (zwrot całości lub części wypłaconych środków odpowiadającej
+          nałożonej korekcie finansowej lub wartości pomniejszonych kwot wydatków
+          kwalifikowalnych).
+2. Grantobiorca zobowiązany jest do zwrotu części wypłaconych środków, w przypadku:
+     1) podwójnego finansowania, o którym mowa w § 3 ust. 9 niniejszej Umowy,
+     2) niezrealizowania działania lub nieosiągnięcia zakładanych wskaźników,
+     3) poniesienia innego niż wskazany w pkt. 1 wydatku niekwalifikowalnego, ujętego w
+          załączniku nr 2 do Regulaminu udzielania grantów,
+     4) niezachowania trwałości grantu (zwrot części grantu proporcjonalnie do okresu, w
+          którym trwałość grantu nie została zachowana).40
+3. W przypadkach, o których mowa w ust. 1 i 2, Grantobiorca zwraca na żądanie
+     Grantodawcy lub innego organu kontrolującego otrzymane środki na rachunek bankowy
+     Grantodawcy o numerze: 95 1020 2892 0000 5602 0934 9251, w terminie 14 dni
+
+
+
+37
+   Jeśli dotyczy
+38
+   Patrz przypis nr 13
+39
+   Patrz przypis nr 14
+40
+   Jeśli dotyczy
+
+
+                                         Strona 49 z 103
+  kalendarzowych od dnia otrzymania wezwania od Grantodawcy lub właściwego organu
+  kontrolnego, wraz z odsetkami w wysokości określonej jak dla zaległości podatkowych,
+  liczonymi od dnia przekazania środków do dnia zwrotu.
+4. W przypadku zmiany rachunku bankowego, Grantobiorca zostanie o tym pisemnie
+  poinformowany.
+5. W przypadku, gdy Grantobiorca nie dokona w wyznaczonym terminie zwrotu, o którym
+  mowa w ust. 3, Grantodawca podejmie czynności zmierzające do odzyskania środków, z
+  wykorzystaniem dostępnych środków prawnych, w szczególności złożonego przez
+  Grantobiorcę zabezpieczenia prawidłowego wykonania zobowiązań wynikających z
+  Umowy o powierzenie grantu.
+6. Koszty czynności zmierzających do odzyskania środków grantu w odniesieniu do
+  przesłanek wskazanych w ust. 1 i 2 obciążają Grantobiorcę.
+
+     § 11 Dane osobowe
+
+1. W celu należytego wykonania Umowy, Grantodawca działając jako Administrator,
+  powierza Grantobiorcy zgodnie z art. 28 ust. 3 RODO przetwarzanie danych osobowych
+  zwykłych i szczególnych kategorii uczestników projektu – osób objętych innowacyjną
+  usługą społeczną oraz kadry realizującej działania w obszarze usług społecznych, w
+  zakresie niezbędnym do wdrożenia innowacji społecznej i niewykraczającym poza katalog
+  danych określony w art. 87 ust. 2 i 3 ustawy z dnia 28 kwietnia 2022 r. o zasadach realizacji
+  zadań finansowanych ze środków europejskich w perspektywie finansowej 2021–2027
+  oraz w załączniku nr 5 do niniejszej Umowy.
+2. Powierzenie przetwarzania dotyczy wyłącznie czynności przetwarzania dokonywanych
+  przez Grantobiorcę, w związku z wykonywaniem jego zadań związanych z realizacją grantu
+  w projekcie pn. „Usługa wrażliwa – upowszechnianie innowacji społecznych w
+  środowiskach lokalnych” współfinansowanym z Programu Fundusze Europejskie dla
+  Małopolski 2021-2027, w ramach których Grantobiorca jako podmiot przetwarzający
+  będzie przetwarzał dane w imieniu i celu Administratora (Grantodawcy), w szczególności
+  w związku z pozyskiwaniem danych objętych oświadczeniem uczestnika projektu.
+3. Przetwarzanie danych osobowych przez Grantobiorcę odbywa się wyłącznie na
+  udokumentowane polecenie Grantodawcy, przez co rozumie się polecenie wykonania
+  zadań określonych niniejszą Umową o powierzenie grantu.
+
+
+                                       Strona 50 z 103
+4. Przetwarzanie danych odbywać się będzie w oparciu o:
+  1)   rozporządzenie Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia
+       2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych
+       osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia
+       dyrektywy 95/46/WE (zwane dalej RODO);
+  2)   właściwe przepisy prawa polskiego, w tym ustawę z dnia 10 maja 2018 r. o ochronie
+       danych osobowych;
+5. Grantobiorca oświadcza, że stosuje środki bezpieczeństwa, odpowiadające ryzyku
+  związanemu z przetwarzaniem danych osobowych, spełniające wymogi aktów prawnych,
+  o których mowa w ust. 4.
+6. Grantobiorca, jako podmiot przetwarzający zobowiązuje się dołożyć należytej staranności
+  przy przetwarzaniu powierzonych danych osobowych.
+7. Grantobiorca zobowiązuje się do nadania upoważnień do przetwarzania danych
+  osobowych wszystkim osobom, które będą przetwarzały powierzone dane w celu realizacji
+  Umowy o powierzenie grantu. Grantobiorca prowadzi ewidencję pracowników
+  upoważnionych do przetwarzania danych osobowych w związku z wykonywaniem Umowy.
+8. Grantodawca zobowiązuje Grantobiorcę, by osoby upoważnione przez niego do
+  przetwarzania danych osobowych zobowiązane zostały do zachowania w tajemnicy
+  danych osobowych oraz informacji o stosowanych sposobach ich zabezpieczenia, także po
+  ustaniu stosunku prawnego łączącego osobę upoważnioną do przetwarzania danych
+  osobowych z Grantobiorcą.
+9. Grantobiorca oświadcza, że w związku ze zobowiązaniem do zachowania w tajemnicy
+  danych poufnych nie będą one wykorzystywane, ujawniane ani udostępniane bez
+  pisemnej zgody Grantodawcy w innym celu niż wykonanie Umowy, chyba że konieczność
+  ujawnienia posiadanych informacji wynika z obowiązujących przepisów prawa lub Umowy.
+10. Grantobiorca jest zobowiązany do wykonywania i dokumentowania, również w imieniu
+    Instytucji Pośredniczącej i Grantodawcy, obowiązku informacyjnego wobec osób, których
+    dane pozyskuje, mając na uwadze zasadę rozliczalności, o której mowa w art. 5 ust. 2
+    RODO. Grantobiorca zapewnia, że obowiązek, o którym mowa w zdaniu pierwszym, jest
+    wykonywany również przez podmioty, którym powierza realizację zadań w ramach
+    projektu.
+11. Grantobiorca niezwłocznie informuje Grantodawcę o:
+
+
+                                      Strona 51 z 103
+    1)   wszelkich czynnościach z własnym udziałem w sprawach dotyczących ochrony
+         danych osobowych prowadzonych w szczególności przed Prezesem Urzędu Ochrony
+         Danych Osobowych, Europejskim Inspektorem Ochrony Danych Osobowych,
+         urzędami państwowymi, policją lub przed sądem;
+    2)   wynikach kontroli prowadzonych przez podmioty uprawnione w zakresie
+         przetwarzania danych osobowych wraz z informacją na temat zastosowania się do
+         wydanych zaleceń, o których mowa w ust. 18.
+    Niniejszy ustęp dotyczy wyłącznie danych osobowych, których przetwarzanie zostało
+    Grantobiorcy powierzone przez Grantodawcę.
+12. Grantobiorca udostępnia Grantodawcy wszelkie informacje niezbędne do wykonywania
+    przez Grantodawcę obowiązków wymaganych przepisami prawa, w szczególności
+    zobowiązuje się do udzielenia, na każde żądanie, informacji na temat przetwarzania
+    danych osobowych, o których mowa w niniejszym paragrafie, a w szczególności
+    niezwłocznego przekazywania informacji o każdym przypadku naruszenia przez niego i
+    osoby przez niego upoważnione do przetwarzania danych osobowych obowiązków
+    dotyczących ochrony danych osobowych.
+13. Grantobiorca, bez zbędnej zwłoki, nie później jednak niż w ciągu 24 godzin po
+    stwierdzeniu incydentu lub naruszenia, zgłosi ten fakt Grantodawcy. Zgłoszenie powinno
+    oprócz elementów określonych w art. 33 ust. 3 RODO zawierać informacje umożliwiające
+    Grantodawcy określenie czy naruszenie skutkuje wysokim ryzykiem naruszenia praw lub
+    wolności osób fizycznych. Jeżeli informacji, o których mowa w art. 33 ust. 3 RODO nie da
+    się udzielić w tym samym czasie, Grantobiorca może ich udzielać sukcesywnie bez
+    zbędnej zwłoki.
+14. Grantobiorca umożliwi Grantodawcy lub podmiotom przez niego upoważnionym, w
+    miejscach, w których są przetwarzane powierzone dane osobowe, dokonanie kontroli lub
+    audytu zgodności przetwarzania powierzonych danych osobowych z ustawą o ochronie
+    danych osobowych, RODO, przepisami prawa powszechnie obowiązującego dotyczącymi
+    ochrony danych osobowych oraz z Umową. Zawiadomienie o zamiarze przeprowadzenia
+    kontroli lub audytu powinno być przekazane podmiotowi kontrolowanemu co najmniej 5
+    dni roboczych przed rozpoczęciem kontroli.
+15. W przypadku powzięcia przez Grantodawcę wiadomości o poważnym naruszeniu przez
+    Grantobiorcę obowiązków wynikających z ustawy o ochronie danych osobowych, RODO,
+
+
+                                       Strona 52 z 103
+    innych przepisów prawa powszechnie obowiązującego dotyczącego ochrony danych
+    osobowych lub z Umowy, Grantobiorca umożliwi Grantodawcy dokonanie
+    niezapowiedzianej kontroli lub audytu.
+16. Kontrolerzy Grantodawcy mają w szczególności prawo:
+    1) wstępu, w godzinach pracy Wykonawcy, za okazaniem imiennego upoważnienia, do
+        pomieszczenia, w którym jest zlokalizowany zbiór powierzonych do przetwarzania
+        danych osobowych, oraz pomieszczenia, w którym są przetwarzane powierzone
+        dane osobowe i przeprowadzenia niezbędnych badań lub innych czynności
+        kontrolnych w celu oceny zgodności przetwarzania danych osobowych z ustawą o
+        ochronie danych osobowych, RODO, przepisami prawa powszechnie
+        obowiązującego dotyczącego ochrony danych osobowych oraz Umową;
+    2) żądania złożenia pisemnych lub ustnych wyjaśnień przez osoby upoważnione do
+        przetwarzania danych osobowych, przedstawiciela Wykonawcy oraz pracowników w
+        zakresie niezbędnym do ustalenia stanu faktycznego;
+    3) wglądu do wszelkich dokumentów i wszelkich danych mających bezpośredni związek
+        z przedmiotem kontroli lub audytu oraz sporządzania ich kopii;
+    4) przeprowadzania oględzin urządzeń, nośników oraz systemu informatycznego
+        służącego do przetwarzania danych osobowych.
+17. Grantobiorca może zostać poddany kontroli lub audytowi zgodności przetwarzania
+    powierzonych do przetwarzania danych osobowych z ustawą o ochronie danych
+    osobowych, RODO, przepisami prawa powszechnie obowiązującego dotyczącymi
+    ochrony danych osobowych w miejscach, w których są one przetwarzane przez instytucje
+    uprawnione do kontroli lub audytu na podstawie odrębnych przepisów.
+18. Grantobiorca zobowiązuje się zastosować zalecenia dotyczące poprawy jakości
+    zabezpieczenia danych osobowych oraz sposobu ich przetwarzania sporządzone w
+    wyniku kontroli lub audytu przeprowadzonych przez Instytucję Pośredniczącą,
+    Grantodawcę lub przez podmioty przez nie upoważnione albo przez inne instytucje
+    upoważnione do kontroli na podstawie odrębnych przepisów.
+19. Grantobiorca może powierzone dane osobowe powierzyć do dalszego przetwarzania
+    podwykonawcom jedynie w celu wykonania Umowy o powierzenie grantu i po
+    wcześniejszym poinformowaniu Grantodawcy, z co najmniej 3-dniowym wyprzedzeniem.
+
+
+
+                                      Strona 53 z 103
+        Grantodawcy jako administratorowi przysługuje prawo sprzeciwu wobec zamiaru
+        dalszego powierzenia przetwarzania.
+20. Zakres danych osobowych powierzanych przez Grantobiorcę do dalszego przetwarzania,
+        powinien być adekwatny do celu powierzenia oraz każdorazowo indywidualnie
+        dostosowany przez Grantobiorcę.
+21. Przekazanie danych, których przetwarzanie zostało powierzone Grantobiorcy do państwa
+        trzeciego może nastąpić jedynie na pisemne polecenie Grantodawcy chyba, że
+        obowiązek taki nakładają na Podmiot przetwarzający przepisy powszechnie
+        obowiązującego prawa. W takim przypadku przed przekazaniem Grantobiorca informuje
+        Grantodawcę o tym obowiązku prawnym, o ile prawo to nie zabrania udzielania takiej
+        informacji z uwagi na ważny interes publiczny.
+22. Podmiot, o którym mowa w ust. 19 winien spełniać te same gwarancje i obowiązki jakie
+        zostały nałożone na Grantobiorcę w niniejszym paragrafie.
+23. Grantobiorca oraz podmiot, o którym mowa w ust. 19, mając na uwadze zasadę
+        rozliczalności, o której mowa w art. 5 ust. 2 RODO, zobowiązani są do wykonywania i
+        dokumentowania obowiązków informacyjnych wynikających z art. 13 i art. 14 RODO
+        również w imieniu Grantodawcy i Instytucji Pośredniczącej, zgodnie ze wzorem klauzul
+        informacyjnych stanowiących załącznik nr 7a i 7b do niniejszej Umowy.
+24. Grantobiorca ponosi pełną odpowiedzialność wobec osób, których dane pozyskuje w
+        związku z wdrażaniem Innowacji społecznej oraz wobec Instytucji Pośredniczącej i
+        Grantodawcy za niewywiązywanie się z obowiązków dotyczących ochrony danych
+        osobowych, spoczywających na podmiocie, któremu powierzono dane do dalszego
+        przetwarzania.
+25. Grantobiorca oświadcza, że jest świadomy odpowiedzialności za naruszenie zasad
+        przetwarzania danych osobowych, określonej w RODO oraz ustawie z dnia 10 maja 2018
+        r. o ochronie danych osobowych i zobowiązuje się zachować w tajemnicy dane osobowe,
+        do których uzyskał dostęp.
+26. Grantobiorca jest uprawniony do przetwarzania powierzonych danych do zakończenia
+        realizacji Umowy o powierzenie grantu, nie dłużej jednak niż do dnia 31.08.2028 r. lub do
+        zakończenia okresu trwałości grantu41. Po tym terminie Grantobiorca jest bezwzględnie
+
+
+41
+     Jeśli dotyczy
+
+
+                                           Strona 54 z 103
+    zobowiązany do usunięcia danych osobowych (wersji papierowej, jak i elektronicznej)
+    będących w jego posiadaniu oraz do podjęcia stosownych działań w celu
+    wyeliminowania możliwości dalszego przetwarzania danych powierzonych mu na
+    podstawie niniejszej Umowy.
+
+       § 12 Rozwiązanie Umowy
+
+1. Grantodawca może rozwiązać niniejszą Umowę ze skutkiem natychmiastowym w formie
+  pisemnego wypowiedzenia, w przypadku, gdy:
+  1)    Grantobiorca wykorzysta przekazane środki na cel inny niż określony w IPWI lub
+        niezgodnie z niniejszą Umową;
+  2)    Grantobiorca złoży lub posłuży się fałszywym oświadczeniem lub podrobionymi,
+        przerobionymi lub stwierdzającymi nieprawdę dokumentami w celu uzyskania grantu
+        lub jego rozliczenia w ramach niniejszej Umowy;
+  3)    Grantobiorca nie przedłożył zabezpieczenia prawidłowej realizacji Umowy zgodnie
+        z § 5 niniejszej Umowy (jeśli dotyczy);
+  4)    Grantobiorca odmówi poddania się kontroli lub monitoringowi, o której mowa w § 7
+        niniejszej Umowy;
+  5)    Grantobiorca, mimo wezwania, uchyla się od wykonywania obowiązków, o których
+        mowa w § 4 niniejszej Umowy;
+  6)    wobec Grantobiorcy został złożony wniosek o ogłoszenie upadłości lub Grantobiorca
+        pozostaje w stanie likwidacji, lub podlega zarządowi komisarycznemu, lub zawiesił
+        swoją działalność, lub jest przedmiotem postępowań o podobnym charakterze;
+  7)    Zarząd Województwa Małopolskiego podejmie uchwałę o zaprzestaniu realizacji
+        projektu grantowego realizowanego przez Grantodawcę, przy czym rozwiązanie
+        niniejszej Umowy może nastąpić wyłącznie wówczas, gdy nie doszło do ostatecznego
+        rozliczenia środków grantu przez Grantodawcę.
+2. Umowa może zostać rozwiązana w drodze pisemnego porozumienia Stron na wniosek
+  każdej ze Stron w przypadku wystąpienia okoliczności, które uniemożliwiają dalsze
+  wykonywanie postanowień zawartych w Umowie.
+3. W przypadku rozwiązania niniejszej Umowy na podstawie ust. 1, Grantobiorca jest
+  zobowiązany do zwrotu całości otrzymanych środków grantu. § 10 ust. 3 i 5 stosuje się
+  odpowiednio.
+
+
+                                         Strona 55 z 103
+4. W przypadku rozwiązania niniejszej Umowy na podstawie ust. 2, Grantobiorca jest
+  zobowiązany do zwrotu nierozliczonych środków grantu. § 10 ust. 3 i 5 stosuje się
+  odpowiednio.
+
+     § 13 Odpowiedzialność za szkodę
+
+  Grantobiorca ponosi wyłączną odpowiedzialność wobec osób trzecich za szkody powstałe
+  z jego winy w związku z realizacją grantu.
+
+     § 14 Rozwiązywanie sporów
+
+1. Strony będą dążyły do polubownego rozwiązywania sporów powstałych w związku z
+  realizacją niniejszej Umowy.
+2. W przypadku braku możliwości polubownego rozwiązania sporu w terminie 14 dni od
+  zgłoszenia sporu przez którąkolwiek ze Stron, zostanie on rozstrzygnięty przez sąd
+  miejscowo właściwy dla Grantodawcy.
+
+     § 15 Informacje Kontaktowe
+
+1. Wszelka korespondencja związana z realizacją niniejszej Umowy będzie kierowana na
+  poniższe adresy:
+  Grantobiorca:
+  Imię i nazwisko/Nazwa podmiotu
+  Adres (ul. kod pocztowy, miejscowość)
+  Telefon:
+  e-mail:
+  Grantodawca:
+  Województwo Małopolskie - Regionalny Ośrodek Polityki Społecznej w Krakowie
+  ul. Piastowska 32, 30-070 Kraków
+  Telefon: 12 422 06 36
+  e-mail:
+2. Strony są obowiązane do pisemnego poinformowania bez zbędnej zwłoki o zmianie
+  danych, o których mowa w ust. 1.
+3. Zmiana danych określonych w ust. 1 nie stanowi zmiany Umowy i nie wymaga podpisania
+  aneksu.
+
+
+                                       Strona 56 z 103
+           § 16 Postanowienia końcowe
+
+1. Umowa wchodzi w życie w dniu podpisania przez ostatnią ze Stron.
+2. Umowa została sporządzona w trzech jednobrzmiących egzemplarzach, w tym w jednym
+      egzemplarzu dla Grantobiorcy oraz w dwóch egzemplarzach dla Grantodawcy/Umowa
+      została sporządzona w formie elektronicznej, pozwalającej na utrwalenie na trwałym
+      nośniku, z możliwością wygenerowania egzemplarza dla każdej Strony42.
+3. Zmiana formy prawnej Grantobiorcy lub wprowadzenie innych zmian do Umowy, w
+      wyniku wystąpienia okoliczności nieprzewidzianych w trakcie naboru mogących skutkować
+      przeniesieniem praw i obowiązków, możliwe są wyłącznie po poinformowaniu
+      Grantodawcy o konieczności ich wprowadzenia i zaakceptowaniu przez Grantodawcę, pod
+      rygorem rozwiązania Umowy na zasadach w niej przewidzianych.
+4. Zmiany Umowy, o ile szczegółowe jej postanowienia nie stanowią inaczej, wymagają
+      sporządzenia aneksu w formie pisemnej pod rygorem nieważności.
+5. W sprawach nieuregulowanych w Umowie zastosowanie mają właściwe przepisy prawa
+      krajowego, w szczególności przepisy ustawy z dnia 23 kwietnia 1964 r. Kodeks cywilny.
+6. Załączniki do Umowy stanowią:
+      1)    Załącznik nr 1. Pełnomocnictwo dla osoby/podmiotu podpisującego Umowę w
+            imieniu Grantobiorcy;
+      2)    Załącznik nr 2. Indywidualny Plan Wdrażania Innowacji;
+      3)    Załącznik nr 3. Harmonogram płatności;
+      4)    Załącznik nr 4. Sprawozdanie rzeczowo-finansowe;
+      5)    Załącznik nr 5. Zakres danych osobowych do przetwarzania w ramach FEM 2021-
+            2027;
+      6)    Załącznik nr 6. Wzór oświadczenia uczestnika projektu;
+      7)    Załącznik nr 7a. Klauzula informacyjna ROPS;
+      8)    Załącznik nr 7b. Obowiązek informacyjny IP;
+      9)    Załącznik nr 8. Szczegółowe warunki realizacji usług społecznych w ramach grantów.
+
+
+
+
+42
+     Niepotrzebne skreślić.
+
+
+                                           Strona 57 z 103
+           W imieniu Grantodawcy                                                      W imieniu Grantobiorcy
+
+
+
+...................................................................        ...................................................................
+
+
+
+
+                                                               Strona 58 z 103
+Załącznik nr 1 do Umowy nr ………………………… o powierzenie grantu w ramach projektu
+„Usługa Wrażliwa – upowszechnianie innowacji społecznych w środowiskach lokalnych”
+
+          Pełnomocnictwo dla osoby podpisującej Umowę o powierzenie grantu
+
+Ja, niżej podpisana/y, umocowana/y do reprezentowania ....................................... (nazwa
+Grantobiorcy i adres) ...................................................................., niniejszym upoważniam
+.......................... (imię i nazwisko) ............................., nr dowodu osobistego: ...................
+zamieszkałą/ego.......................(adres) …………................., do podpisania Umowy o
+powierzenie grantu pn.: .................................................................. oraz do dokonywania
+innych czynności dotyczących poprawnej realizacji grantu w ramach projektu „Usługa
+Wrażliwa – upowszechnianie innowacji społecznych w środowiskach lokalnych”
+współfinansowanego w ramach Programu Fundusze Europejskie dla Rozwoju Społecznego
+2021-2027. Zakresem pełnomocnictwa objęte jest w szczególności, lecz nie wyłącznie:
+ − zaciąganie zobowiązań finansowych w imieniu ....................... (nazwa Grantobiorcy), w
+        tym podpisanie Indywidualnego Planu Wdrażania Innowacji, Umowy o powierzenie
+        grantu i/lub złożenie zabezpieczenia należytego wykonania zobowiązań wynikających z
+        Umowy o powierzenie grantu43,
+ − składanie sprawozdań rzeczowo-finansowych z realizacji grantu wraz z oświadczeniami o
+        wydatkowaniu grantu zgodnie z przeznaczeniem grantu, podpisywania rozliczeń oraz
+        wniosków o zmiany w grancie.
+Pełnomocnictwo zostaje udzielone na okres do ......................... Pełnomocnictwo może być
+wypowiedziane w każdym czasie.
+Adres pełnomocnika do doręczeń: ............................................................................
+
+
+
+
+……………………………………………
+Imię i nazwisko oraz podpis
+
+
+
+
+43
+     Jeśli dotyczy
+Załącznik nr 2 do Umowy nr ………………………… o powierzenie grantu w ramach projektu
+„Usługa Wrażliwa – upowszechnianie innowacji społecznych w środowiskach lokalnych”
+
+
+Indywidualny Plan Wdrażania Innowacji
+realizowany w ramach projektu pn. „Usługa Wrażliwa – upowszechnianie
+innowacji społecznych w środowiskach lokalnych”
+
+NAZWA WYBRANEJ DO WDROŻENIA INNOWACJI SPOŁECZNEJ
+
+
+
+TYTUŁ INNOWACYJNEJ USŁUGI SPOŁECZNEJ
+
+
+
+DATY REALIZACJI INNOWACJNEJ USŁUGI SPOŁECZNEJ:
+
+ Etap 1. Przygotowanie do wdrożenia usługi          od …………………… do ……………………
+ Etap 2. Wdrażanie innowacyjnej usługi społecznej   od …………………… do ……………………
+
+DANE GRANTOBIORCY
+
+Status Grantobiorcy
+
+ Jednostka sektora finansów publicznych
+ Osoba prawna
+ Jednostka organizacyjna nie będąca osobą prawną, posiadająca zdolność prawną
+
+Dane teleadresowe Grantobiorcy
+
+ Nazwa podmiotu
+ Adres siedziby podmiotu
+ Adres filii, delegatury, oddziału lub miejsca
+ prowadzenia innej formy działalności na
+ terenie województwa małopolskiego
+ (dotyczy podmiotów, które nie posiadają
+ siedziby na terenie województwa
+ Małopolskiego)
+ Adres do korespondencji
+ Telefon
+ E-mail
+ NIP (jeśli dotyczy)
+ KRS/CEIDG (jeśli dotyczy)
+
+Dane teleadresowe Realizatora (jeśli dotyczy)
+
+ Nazwa podmiotu
+ Adres podmiotu
+ Adres do korespondencji
+ Telefon
+ E-mail
+ NIP (jeśli dotyczy)
+ KRS/CEIDG (jeśli dotyczy)
+
+KWOTA GRANTU
+
+ Wnioskowana kwota Grantu:            Słownie: …………………………………………………………………
+ Przyznana kwota Grantu:              Słownie: …………………………………………………………………
+
+CEL GRANTU
+
+
+
+INNOWACYJNA USŁUGA SPOŁECZNA
+
+ Postępowanie w trakcie wdrażania usługi społecznej opartej na wybranej innowacji
+ społecznej musi być zgodne z zasadami równościowymi, o których mowa w Wytycznych
+ dotyczących realizacji zasad równościowych w ramach funduszy unijnych na lata 2021-
+ 202744, w tym z zasadami równości szans i niedyskryminacji, standardami dostępności dla
+ osób z niepełnosprawnościami, zasadami równości kobiet i mężczyzn, a także zasadami
+ polityki zrównoważonego rozwoju, w tym zasadą DNSH (zasada „nie czyń poważnych
+ szkód”).
+
+ OPIS WYBRANEJ DO WDROŻENIA INNOWACJI WRAZ Z UZASADNIENIEM WYBORU
+ − na czym polega innowacyjna usługa społeczna
+ − opis sposobu wykorzystania innowacji w usłudze oraz uzasadnienie jej wyboru
+
+
+
+
+44
+  https://www.funduszeeuropejskie.gov.pl/strony/o-funduszach/dokumenty/wytyczne-dotyczace-
+realizacji-zasad-rownosciowych-w-ramach-funduszy-unijnych-na-lata-2021-2027-1/
+
+                                       Strona 61 z 103
+UZASADNIENIE POTRZEBY WDROŻENIA INNOWACYJNEJ USŁUGI SPOŁECZNEJ
+ − na jaki problem odpowiada innowacyjna usługa społeczna
+ − powody, dla których niezbędne jest wdrożenie usługi bazującej na wybranej innowacji
+   społecznej
+
+
+
+ZASIĘG TERYTORIALNY INNOWACYJNEJ USŁUGI SPOŁECZNEJ
+ − obszar na jakim wdrażania będzie innowacyjna usługa społeczna
+
+
+
+OPIS GRUPY DOCELOWEJ (w odniesieniu do obszaru, na którym będzie wdrażania
+innowacyjna usługa społeczna)
+ − charakterystyka grupy docelowej
+ − problemy i potrzeby grupy docelowej
+ − liczebność grupy docelowej, w tym liczba osób planowana do objęcia innowacyjną
+   usługą społeczną
+ − źródła informacji i danych dotyczących grupy docelowej
+
+
+
+ZASADY REKRUTACJI GRUPY DOCELOWEJ
+ − opis procesu rekrutacji osób, które zostaną objęte innowacyjną usługą społeczną
+ − kryteria rekrutacji wraz z punktacją i wskazaniem dokumentów na podstawie, których
+   weryfikowane będzie spełnienie kryteriów rekrutacji
+
+
+
+
+KONCEPCJA WDRAŻANIA INNOWACYJNEJ USŁUGI SPOŁECZNEJ
+
+ETAP PRZYGOTOWANIA DO WDROŻENIA INNOWACYJNEJ USŁUGI SPOŁECZNEJ
+− krótki opis działań niezbędnych do realizacji w celu przygotowania wdrożenia
+  innowacyjnej usługi społecznej (charakterystyka działania, rodzaj realizowanej formy
+  wsparcia, planowane miejsce realizacji, zakładana częstotliwość, szacowana liczba
+  uczestników)
+− planowany termin realizacji od … do … (miesiąc, rok)
+Działanie 1
+
+
+
+
+                                     Strona 62 z 103
+Wskaźniki własne (nazwa wskaźnika, jednostka miary, ilość, źródła pomiaru)
+
+
+
+
+Działanie 2
+
+
+
+
+Wskaźniki własne (nazwa wskaźnika, jednostka miary, ilość, źródła pomiaru)
+
+
+
+
+Działanie 3
+
+
+
+
+Wskaźniki własne (nazwa wskaźnika, jednostka miary, ilość, źródła pomiaru)
+
+
+
+
+ETAP WDRAŻANIA INNOWACYJNEJ USŁUGI SPOŁECZNEJ
+− krótki opis działań niezbędnych do realizacji w celu wdrożenia innowacyjnej usługi
+  społecznej (charakterystyka działania, rodzaj realizowanej formy wsparcia, planowane
+  miejsce realizacji, zakładana częstotliwość, szacowana liczba uczestników)
+− planowany termin realizacji od … do … (miesiąc, rok)
+
+Działanie 1
+
+
+
+
+Wskaźniki własne (nazwa wskaźnika, jednostka miary, ilość, źródła pomiaru)
+
+
+
+
+                                     Strona 63 z 103
+Działanie 2
+
+
+
+
+Wskaźniki własne (nazwa wskaźnika, jednostka miary, ilość, źródła pomiaru)
+
+
+
+
+Działanie 3
+
+
+
+
+Wskaźniki własne (nazwa wskaźnika, jednostka miary, ilość, źródła pomiaru)
+
+
+
+
+WSKAŹNIKI OBLIGATORYJNE
+
+WSKAŹNIK OBLIGATORYJNY PRODUKTU
+Liczba osób objętych usługami świadczonymi w społeczności lokalnej w programie
+Płeć           Wartość w 2026 r.        Wartość w 2027 r.    Wartość w ……..       Wartość
+                                                                                  ogółem
+Kobiety
+Mężczyźni
+Ogółem
+Sposób pomiaru (moment pomiaru, dokumenty stanowiące źródło pomiaru wskaźnika np.
+listy obecności):
+
+
+ZDODNOŚĆ Z ZASADAMI HORYZONTALNYMI, W TYM ZASADAMI RÓWNOŚCIOWYMI I
+ZASADĄ ZRÓWNOWAŻONEGO ROZWOJU
+
+Opis sposobu przestrzegania w ramach grantu:
+ − zasady równości kobiet i mężczyzn,
+ − zasady równości szans i niedyskryminacji, w tym dostępności innowacyjnej usługi społecznej i
+   działań w ramach grantu (zgodności usług i działań niezbędnych do jej wdrożenia ze
+   standardami dostępności),
+ − Karty Praw Podstawowych i Konwencji o Prawach Osób Niepełnosprawnych
+ − zasady zrównoważonego rozwoju oraz DNSH (zasada „nie czyń poważnych szkód”)
+
+
+
+
+                                          Strona 64 z 103
+TRWAŁOŚĆ GRANTU45
+
+     − opis założeń dotyczących zachowania trwałości grantu zgodnie z wymogami Umowy o
+       powierzenie grantu
+
+
+
+KONCEPCJA UTRZYMANIA EFEKTÓW WDROŻENIA INNOWACJI SPOŁECZNEJ
+
+     − opis założeń dotyczących utrzymania efektów wdrożonej ze środków grantu
+       innowacyjnej usługi społecznej
+
+
+OŚWIADCZENIA GRANTOBIORCY
+
+
+ Świadomy/a odpowiedzialności karnej wynikającej z art. 297 § 1 kodeksu karnego
+ przewidującego karę pozbawienia wolności do lat 5, oświadczam, że:
+     1. Zapoznałem/am się z Procedurami realizacji projektu grantowego i akceptuję wszystkie
+        warunki w nich określone.
+     2. Podmiot, który reprezentuję przestrzega przepisów antydyskryminacyjnych, zgodnie z
+        art. 9 ust. 3 Rozporządzenia Parlamentu Europejskiego i Rady (UE) nr 2021/1060.
+     3. Podmiot, który reprezentuję nie korzysta równolegle z innych środków publicznych na
+        realizację tych samych wydatków, w szczególności w ramach FEM 2021–2027 oraz FERS
+        2021–2027.
+     4. Nie będę pobierane opłaty od osób objętych wsparciem w ramach grantu, w trakcie
+        jego realizacji.
+     5. W odniesieniu do prowadzonej przeze mnie działalności gospodarczej:
+         1) nie występuje pomoc publiczna ani pomoc de minimis, co zostało zweryfikowane
+             na podstawie testu występowania pomocy publicznej/de minimis,
+             lub
+         2) w przypadku wystąpienia pomocy de minimis, spełniam wszystkie warunki jej
+             otrzymania, w tym nie przekraczam dopuszczalnego limitu pomocy de minimis46.
+     6. Informacji zawartych w niniejszym dokumencie są zgodne ze stanem faktycznym i
+        prawnym.
+
+ZAŁĄCZNIKI
+
+     1. Kosztorys grantu
+
+
+45
+     Dotyczy grantu, w którym ponoszone będą wydatki w ramach cross-financingu
+46
+     Wykreślić, jeśli nie występuje pomoc de minimis.
+
+                                             Strona 65 z 103
+Data zatwierdzenia Indywidualnego Planu Wdrażania Innowacji: ……………………………………
+
+
+Zatwierdzenie przez Grantobiorcę                     Zatwierdzenie przez Grantodawcę
+
+
+
+
+                                   Strona 66 z 103
+Załącznik nr 1 do Indywidualnego Planu Wdrażania Innowacji realizowanego w ramach
+projektu pn. „Usługa Wrażliwa – upowszechnianie innowacji społecznych w środowiskach
+lokalnych”
+
+                                 KOSZTORYS GRANTU
+
+ Etap przygotowania do wdrożenia innowacyjnej
+ usługi społecznej                                          w tym                      w tym
+                                                Wartość                 w tym środki
+ Działanie:                                     ogółem      cross-      inwestycyjne   środki
+                                                            financing                  bieżące
+ .……………………………………………………………………….
+                                                            w tym                      w tym
+                Wartość                         Wartość                 w tym środki
+ Koszt      Rok             Ilość                           cross-                     środki
+                jednostkowa                     ogółem                  inwestycyjne
+                                                            financing                  bieżące
+
+                     Razem
+
+
+                     Razem
+
+
+                     Razem
+
+
+                                                  Wartość   w tym       w tym środki   w tym
+ Działanie:                                        ogółem   cross-      inwestycyjne   środki
+                                                            financing                  bieżące
+ .……………………………………………………………………….
+                                                            w tym                      w tym
+                Wartość                         Wartość                 w tym środki
+ Koszt      Rok             Ilość                           cross-                     środki
+                jednostkowa                     ogółem                  inwestycyjne
+                                                            financing                  bieżące
+
+                     Razem
+
+
+                     Razem
+
+
+                     Razem
+
+
+                                                  Wartość   w tym       w tym środki   w tym
+ Działanie:                                        ogółem   cross-      inwestycyjne   środki
+                                                            financing                  bieżące
+ .……………………………………………………………………….
+                                                            w tym                      w tym
+                Wartość                         Wartość                 w tym środki
+ Koszt      Rok             Ilość                           cross-                     środki
+                jednostkowa                     ogółem                  inwestycyjne
+                                                            financing                  bieżące
+
+                     Razem
+               Razem
+
+
+               Razem
+
+
+Etap wdrażania innowacyjnej usługi
+społecznej                                         Wartość   w tym       w tym środki   w tym
+Działanie:                                          ogółem   cross-      inwestycyjne   środki
+                                                             financing                  bieżące
+.……………………………………………………………………….
+                                                             w tym                      w tym
+               Wartość                           Wartość                 w tym środki
+Koszt      Rok             Ilość                             cross-                     środki
+               jednostkowa                       ogółem                  inwestycyjne
+                                                             financing                  bieżące
+
+               Razem
+
+
+               Razem
+
+
+               Razem
+
+
+                                                   Wartość   w tym       w tym środki   w tym
+Działanie:                                          ogółem   cross-      inwestycyjne   środki
+                                                             financing                  bieżące
+.……………………………………………………………………….
+                                                             w tym                      w tym
+               Wartość                           Wartość                 w tym środki
+Koszt      Rok             Ilość                             cross-                     środki
+               jednostkowa                       ogółem                  inwestycyjne
+                                                             financing                  bieżące
+
+               Razem
+
+
+               Razem
+
+
+               Razem
+
+
+                                                   Wartość   w tym       w tym środki   w tym
+Działanie:                                          ogółem   cross-      inwestycyjne   środki
+                                                             financing                  bieżące
+.……………………………………………………………………….
+                                                             w tym                      w tym
+               Wartość                           Wartość                 w tym środki
+Koszt      Rok             Ilość                             cross-                     środki
+               jednostkowa                       ogółem                  inwestycyjne
+                                                             financing                  bieżące
+
+               Razem
+
+
+               Razem
+
+
+                                     Strona 68 z 103
+Razem
+
+
+                                       Wartość   w tym       w tym środki   w tym
+Całkowity koszt grantu                 ogółem    cross-      inwestycyjne   środki
+                                                 financing                  bieżące
+
+
+
+
+                         Strona 69 z 103
+Załącznik nr 3 do Umowy nr ………………………… o powierzenie grantu w ramach projektu „Usługa Wrażliwa – upowszechnianie innowacji
+społecznych w środowiskach lokalnych”
+
+        Harmonogram płatności
+
+ Nazwa Grantobiorcy
+
+ Tytuł grantu
+
+ Wartość grantu
+
+
+            Planowany termin wypłaty
+                                                               w tym cross-     w tym środki                                         Okres rozliczeniowy
+ L.p.       transzy47                       Kwota transzy                                            w tym środki bieżące
+                                                               financing        inwestycyjne                                         dd-mm-rrrr – dd-mm-rrr
+            (mm-rrrr)
+                                ETAP 1 przygotowanie do wdrożenia innowacyjnej usługi społecznej
+ 1
+ 2          -                               -
+ …          -                               -
+                                ETAP 2 wdrażanie innowacyjnej usługi społecznej
+ …
+
+
+
+47
+   Wypłata pierwszej transzy grantu nastąpi w ciągu 14 dni roboczych od dnia zawarcia Umowy/od dnia wniesienia zabezpieczenia, o którym mowa w § 5 Umowy,
+z zastrzeżeniem spełnienia warunków wskazanych w § 6 ust. 2 Umowy.
+Wypłata drugiej transzy nastąpi po upływie okresu rozliczeniowego dla etapu 1, pod warunkiem zaakceptowania przez Grantodawcę przedstawionego przez Grantobiorcę
+rozliczenia pierwszej transzy.
+Warunkiem rozliczenia wypłaconych transz grantu będzie zaakceptowanie przez Grantodawcę sprawozdań rzeczowo-finansowych z realizacji grantu.
+…   -                             -
+…   -                             -
+…   -                             -
+…   -                             -
+
+
+    W imieniu Grantobiorcy:                             W imieniu Grantodawcy:
+
+
+        imię, nazwisko, funkcja                          imię, nazwisko, funkcja
+
+
+
+
+                                      Strona 71 z 103
+Załącznik nr 4 do Umowy nr ………………………… o powierzenie grantu w ramach projektu „Usługa Wrażliwa – upowszechnianie innowacji
+społecznych w środowiskach lokalnych”
+
+      Sprawozdanie rzeczowo-finansowe
+
+ Nr Umowy o powierzenie grantu
+ Nazwa Grantobiorcy
+ Tytuł grantu
+ Wartość grantu
+ Okres realizacji grantu                      Data rozpoczęcia:                    Data zakończenia:
+ Okres, za który składane jest sprawozdanie   Od (dd-mm-rrrr):                     Do: (dd-mm-rrrr)
+
+OPIS POSTĘPU RZECZOWEGO
+
+ETAP PRZYGOTOWANIA DO WDROŻENIA INNOWACYJNEJ USŁUGI SPOŁECZNEJ
+Działanie 1
+
+
+Działanie 2
+
+
+Działanie 3
+
+
+ETAP WDRAŻANIA INNOWACYJNEJ USŁUGI SPOŁECZNEJ
+Działanie 1
+
+
+Działanie 2
+
+
+Działanie 3
+ZESTAWIENIE WYDATKÓW
+
+OGÓLNE ZESTAWIENIE WYDATKÓW PONIESIONYCH ZE ŚRODKÓW GRANTU
+ETAP PRZYGOTOWANIA DO WDROŻENIA INNOWACYJNEJ USŁUGI SPOŁECZNEJ
+Działanie                  Poniesione wydatki ogółem        w tym, w ramach wydatków majątkowych            w tym, w ramach cross-financingu
+Działanie 1
+Działanie 2
+Działanie 3
+ETAP WDRAŻANIA INNOWACYJNEJ USŁUGI SPOŁECZNEJ
+Działanie                  Poniesione wydatki ogółem        w tym, w ramach wydatków majątkowych            w tym, w ramach cross-financingu
+Działanie 1
+Działanie 2
+Działanie 3
+
+
+                    SZCZEGÓŁOWE ZESTAWIENIE WYDATKÓW PONIESIONYCH ZE ŚRODKÓW GRANTU
+                    ETAP PRZYGOTOWANIA DO WDROŻENIA INNOWACYJNEJ USŁUGI SPOŁECZNEJ
+      Nr i nazwa                                                                                   w tym,
+                                                                                                                                  Działanie,
+      dokumentu           Data                    Opis                                             środki
+                                        Data                      Wartość     w tym, w ramach                     w tym środki    którego
+Lp.   księgowego          wystawienia             rozliczanego                                     inwestycyjne
+                                        zapłaty                   wydatku     cross - financingu                  bieżące         dotyczy
+      (faktury, listy     dokumentu               wydatku
+                                                                                                                                  wydatek
+      płac, itp.)
+
+
+
+
+                                                                 Strona 73 z 103
+                     ETAP WDRAŻANIA INNOWACYJNEJ USŁUGI SPOŁECZNEJ
+       Nr i nazwa                                                                                     w tym,
+                                                                                                                                    Działanie,
+       dokumentu           Data                      Opis                                             środki
+                                         Data                        Wartość     w tym, w ramach                     w tym środki   którego
+ Lp.   księgowego          wystawienia               rozliczanego                                     inwestycyjne
+                                         zapłaty                     wydatku     cross - financingu                  bieżące        dotyczy
+       (faktury, listy     dokumentu                 wydatku
+                                                                                                                                    wydatek
+       płac, itp.)
+
+
+
+
+WSKAŻNIKI
+
+Wskaźniki produktu
+
+ 1     Liczba osób objętych usługami świadczonymi w społeczności lokalnej w programie
+       Jednostka miary:
+
+
+       Wartość docelowa
+       Ogółem:                                         Kobiety:                                       Mężczyźni:
+
+
+       Wartość osiągnięta w okresie sprawozdawczym
+       Ogółem:                                         Kobiety:                                       Mężczyźni:
+
+
+
+
+                                                                    Strona 74 z 103
+    Wartość osiągnięta od początku realizacji grantu (narastająco)
+    Ogółem:                                           Kobiety:                                   Mężczyźni:
+
+
+
+Wskaźniki produktu informacyjne
+
+1   Liczba projektów, w których sfinansowano koszty racjonalnych usprawnień dla osób z niepełnosprawnościami
+    Jednostka miary:
+
+
+    Wartość osiągnięta w okresie sprawozdawczym
+
+
+    Wartość osiągnięta od początku realizacji grantu (narastająco)
+
+
+2   Liczba obiektów dostosowanych do potrzeb osób z niepełnosprawnościami
+    Jednostka miary:
+
+
+    Wartość osiągnięta w okresie sprawozdawczym
+
+
+    Wartość osiągnięta od początku realizacji grantu (narastająco)
+
+
+3   Liczba osób z niepełnosprawnościami objętych wsparciem w programie
+    Jednostka miary:
+
+
+
+
+                                                                     Strona 75 z 103
+    Wartość osiągnięta w okresie sprawozdawczym
+    Ogółem:                                           Kobiety:                         Mężczyźni:
+
+
+    Wartość osiągnięta od początku realizacji grantu (narastająco)
+    Ogółem:                                           Kobiety:                         Mężczyźni:
+
+
+4   Liczba osób z krajów trzecich objętych wsparciem w programie
+    Jednostka miary:
+
+
+    Wartość osiągnięta w okresie sprawozdawczym
+    Ogółem:                                           Kobiety:                         Mężczyźni:
+
+
+    Wartość osiągnięta od początku realizacji grantu (narastająco)
+    Ogółem:                                           Kobiety:                         Mężczyźni:
+
+
+5   Liczba osób obcego pochodzenia objętych wsparciem w programie
+    Jednostka miary:
+
+
+    Wartość osiągnięta w okresie sprawozdawczym
+    Ogółem:                                           Kobiety:                         Mężczyźni:
+
+
+
+
+                                                                     Strona 76 z 103
+    Wartość osiągnięta od początku realizacji grantu (narastająco)
+    Ogółem:                                           Kobiety:                                   Mężczyźni:
+
+
+6   Liczba osób należących do mniejszości, w tym społeczności marginalizowanych takich jak Romowie, objętych wsparciem w programie
+    Jednostka miary:
+
+
+    Wartość osiągnięta w okresie sprawozdawczym
+    Ogółem:                                           Kobiety:                                   Mężczyźni:
+
+
+    Wartość osiągnięta od początku realizacji grantu (narastająco)
+    Ogółem:                                           Kobiety:                                   Mężczyźni:
+
+
+7   Liczba osób w kryzysie bezdomności lub dotkniętych wykluczeniem z dostępu do mieszkań, objętych wsparciem w programie
+    Jednostka miary:
+
+
+    Wartość osiągnięta w okresie sprawozdawczym
+    Ogółem:                                           Kobiety:                                   Mężczyźni:
+
+
+    Wartość osiągnięta od początku realizacji grantu (narastająco)
+    Ogółem:                                           Kobiety:                                   Mężczyźni:
+
+
+
+
+                                                                     Strona 77 z 103
+8   Liczba objętych wsparciem podmiotów administracji publicznej lub służb publicznych na szczeblu krajowym, regionalnym lub lokalnym
+    Jednostka miary:
+
+
+    Wartość osiągnięta w okresie sprawozdawczym
+
+
+    Wartość osiągnięta od początku realizacji grantu (narastająco)
+
+
+9   Liczba objętych wsparciem mikro-, małych i średnich przedsiębiorstw (w tym spółdzielni i przedsiębiorstw społecznych)
+    Jednostka miary:
+
+
+    Wartość osiągnięta w okresie sprawozdawczym
+
+
+    Wartość osiągnięta od początku realizacji grantu (narastająco)
+
+
+
+-Wskaźniki własne
+
+1
+    Jednostka miary:
+
+
+    Wartość docelowa
+
+
+    Wartość osiągnięta w okresie sprawozdawczym
+
+
+                                                                     Strona 78 z 103
+    Wartość osiągnięta od początku realizacji grantu (narastająco)
+
+
+2
+    Jednostka miary:
+
+
+    Wartość docelowa
+
+
+    Wartość osiągnięta w okresie sprawozdawczym
+
+
+    Wartość osiągnięta od początku realizacji grantu (narastająco)
+
+
+3
+    Jednostka miary:
+
+
+    Wartość docelowa
+
+
+    Wartość osiągnięta w okresie sprawozdawczym
+
+
+    Wartość osiągnięta od początku realizacji grantu (narastająco)
+
+
+
+
+                                                                     Strona 79 z 103
+OŚWIADCZENIA
+
+Oświadczam, że grant jest realizowany zgodne z zasadami równościowymi wskazanymi w Wytycznych dotyczących realizacji
+zasad równościowych w ramach funduszy unijnych na lata 2021-2027, w tym z zasadą równości kobiet i mężczyzn, zasadami
+równości szans i niedyskryminacji, w szczególności standardami dostępności dla osób z niepełnosprawnościami, Kartą Praw       Tak           Nie
+Podstawowych, Konwencją o Prawach Osób Niepełnosprawnych, a także zasadami polityki zrównoważonego rozwoju, w
+tym zasadą DNSH (zasada „nie czyń poważnych szkód”)
+
+W przypadku nieprzestrzegania ww. zasad należy opisać na czym polegały nieprawidłowości oraz wskazać planowane i podjęte działania naprawcze:
+
+
+
+
+Oświadczam, że:
+
+ 1. wydatki wskazane we wniosku jako kwalifikowalne zostały poniesione zgodnie ze wszystkimi odpowiednimi zasadami kwalifikowania wydatków,
+    określonymi w Regulaminie udzielania grantów w ramach projektu „Usługa Wrażliwa – upowszechnianie innowacji społecznych w środowiskach
+    lokalnych” oraz w Umowie o powierzenie grantu, w tym w szczególności:
+    wydatki zostały poniesione zgodnie z przepisami prawa krajowego i unijnego,
+    wydatki zostały poniesione w związku z realizacją grantu i są niezbędne do realizacji celu grantu,
+    wydatki zostały poniesione w terminie realizacji grantu zgodnym z Indywidualnym Planem Wdrażania Innowacji,
+ 2. poniesione wydatki nie stanowią podwójnego finansowania,
+ 3. informacje w niniejszym sprawozdaniu rzetelnie odzwierciedlają rzeczowy i finansowy postęp realizacji grantu,
+ 4. w niniejszym sprawozdaniu nie pominięto żadnych istotnych informacji, które mogłyby wpłynąć na ocenę prawidłowości realizacji grantu oraz
+    finansowego i rzeczowego postępu w realizacji grantu,
+ 5. jestem świadomy/świadoma odpowiedzialności karnej wynikającej z art. 297 kodeksu karnego dotyczącej poświadczenia nieprawdy co do
+    okoliczności mającej znaczenie prawne.
+
+Oświadczam, że dokumentacja grantu jest przechowywana pod następującym adresem:
+
+
+
+                                                                     Strona 80 z 103
+………………………………………………………………………………………………………………………………………………………………………………………………………………………………………..
+
+      W imieniu Grantobiorcy
+
+
+       imię, nazwisko, funkcja
+
+
+
+
+                                         Strona 81 z 103
+Załącznik nr 5 do Umowy o powierzenie grantu w ramach projektu „Usługa Wrażliwa –
+upowszechnianie innowacji społecznych w środowiskach lokalnych”
+
+     Zakres danych osobowych przetwarzanych w ramach FEM 2021-2027
+
+1. Dane identyfikujące osoby fizyczne:
+  imię i nazwisko, adres, adres poczty elektronicznej, firma i adres, login, numer telefonu,
+  numer faksu, numer PESEL, numer NIP, numer REGON lub inne identyfikatory
+  funkcjonujące w danym państwie, forma prawna prowadzonej działalności, forma
+  własności mienia tej osoby, płeć, wiek, wykształcenie, identyfikatory internetowe;
+2. Dane związane z zakresem uczestnictwa osób fizycznych w projekcie, niewymienione
+  w pkt 1, takie jak:
+  wymiar czasu pracy, stanowisko, kwota wynagrodzenia, obywatelstwo, obszar
+  według stopnia urbanizacji (DEGURBA), status mieszkaniowy, data rozpoczęcia udziału
+  w projekcie lub wsparciu, data zakończenia udziału w projekcie lub wsparciu, status na
+  rynku pracy, data założenia działalności gospodarczej, kwota przyznanych środków na
+  założenie działalności gospodarczej, kod w Polskiej Klasyfikacji Działalności (PKD) założonej
+  działalności gospodarczej, forma i okres zaangażowania w projekcie, planowana data
+  zakończenia edukacji w placówce edukacyjnej, w której skorzystano ze wsparcia;
+3. Dane osób fizycznych niewymienione w pkt 1, które widnieją na dokumentach
+  potwierdzających kwalifikowalność wydatków, w tym kwota wynagrodzenia, numer
+  rachunku bankowego, numer działki, gmina, obręb, numer księgi wieczystej, numer
+  przyłącza gazowego, numer uprawnień budowlanych, oraz dane dotyczące szczególnych
+  potrzeb osób, o których mowa w art. 2 pkt 3 ustawy z dnia 19 lipca 2019 r. o zapewnianiu
+  dostępności osobom ze szczególnymi potrzebami,
+4. Dane osób fizycznych niewymienione w pkt 1, które widnieją na dokumentach w związku
+  z prowadzeniem postępowań o zwrot dofinansowania oraz na deklaracjach wekslowych:
+  seria i numer dowodu osobistego, numer legitymacji pełnomocnika, data urodzenia,
+  numer ewidencyjny uprawnień budowalnych, zakres uprawnień, specjalność, dane
+  o niekaralności. W przypadku osób otrzymujących wsparcie z Europejskiego Funduszu
+  Społecznego Plus i osób ubiegających się o wsparcie w ramach projektu finansowanego
+  z Europejskiego Funduszu Społecznego Plus mogą być przetwarzane również dane
+dotyczące pochodzenia rasowego lub etnicznego lub zdrowia, oraz dane dotyczące
+terminu zakończenia odbywania kary pozbawienia wolności przez osoby skazane.
+
+
+
+
+                                  Strona 83 z 103
+Załącznik nr 6 do Umowy o powierzenie grantu w ramach projektu „Usługa Wrażliwa –
+upowszechnianie innowacji społecznych w środowiskach lokalnych”
+
+     OŚWIADCZENIE UCZESTNIKA PROJEKTU
+
+W związku z przystąpieniem do projektu pn. „Usługa Wrażliwa – upowszechnianie
+innowacji społecznych w środowiskach lokalnych” nr FEMP.06.23-IP.01-1359/24,
+oświadczam, że przyjmuję do wiadomości, iż:
+1. administratorem moich danych osobowych przetwarzanych w ramach zbioru danych „FEM
+  2021-2027 w MCP” jest Małopolskie Centrum Przedsiębiorczości, z siedzibą w Krakowie,
+  ul. Armii Krajowej 16, 30-150 Kraków; administratorem moich danych osobowych
+  przetwarzanych w ramach zbioru danych „Przetwarzanie danych osobowych w związku z
+  realizacją projektów” jest Beneficjent Województwo Małopolskie – Regionalny Ośrodek
+  Polityki Społecznej w Krakowi z siedzibą ul. Piastowska 32, 30-070 Kraków.
+
+  Nie narusza to praw i nie wyłącza obowiązków innych administratorów moich danych
+  osobowych w rozumieniu art. 88 Ustawy z dnia 28 kwietnia 2022 r. o zasadach realizacji
+  zadań finansowanych ze środków europejskich w perspektywie finansowej 2021-2027
+  tj. Instytucji Zarządzającej – Zarząd Województwa Małopolskiego, ministra właściwego do
+  spraw rozwoju regionalnego.
+2. przetwarzanie moich danych osobowych jest zgodne z prawem i spełnia warunki,
+  o których mowa w art. 6 ust. 1 lit. c) oraz art. 9 ust. 2 lit g) Rozporządzenia Parlamentu
+  Europejskiego i Rady (UE) 2016/679 – dane osobowe są niezbędne dla realizacji programu
+  Fundusze Europejskie dla Małopolski 2021-2027 na podstawie:
+   1) ustawy z dnia 28 kwietnia 2022 r. o zasadach realizacji zadań finansowanych ze
+      środków europejskich w perspektywie finansowej 2021–2027 (wdrożeniowa),
+   2) rozporządzenia Parlamentu Europejskiego i Rady (UE) 2021/1060 z dnia 24 czerwca
+      2021 r. ustanawiające wspólne przepisy dotyczące Europejskiego Funduszu Rozwoju
+      Regionalnego, Europejskiego Funduszu Społecznego Plus, Funduszu Spójności,
+      Funduszu na rzecz Sprawiedliwej Transformacji i Europejskiego Funduszu Morskiego,
+      Rybackiego i Akwakultury, a także przepisy finansowe na potrzeby tych funduszy oraz
+      na potrzeby Funduszu Azylu, Migracji i Integracji, Funduszu Bezpieczeństwa
+      Wewnętrznego i Instrumentu Wsparcia Finansowego na rzecz Zarządzania Granicami
+      i Polityki Wizowej (rozporządzenie ogólne),
+   3) rozporządzenia Parlamentu Europejskiego i Rady (UE) 2021/1057 z dnia 24 czerwca
+      2021 r. ustanawiające Europejski Fundusz Społeczny Plus (EFS+) oraz uchylające
+      rozporządzenie (UE) nr 1296/2013;
+3. moje dane osobowe w zakresie wskazanym w pkt. 1 będą przetwarzane wyłącznie w celu
+  realizacji projektu „Usługa Wrażliwa – upowszechnianie innowacji społecznych
+  w środowiskach lokalnych”, w szczególności potwierdzenia kwalifikowalności wydatków,
+  udzielenia wsparcia, monitoringu, ewaluacji, kontroli, audytu i sprawozdawczości oraz
+  działań informacyjno-promocyjnych w ramach programu Fundusze Europejskie dla
+  Małopolski 2021-2027;
+4. moje dane osobowe zostały udostępnione beneficjentowi realizującemu projekt –
+  Województwu Małopolskiemu – Regionalnemu Ośrodkowi Polityki Społecznej w Krakowi
+  z siedzibą ul. Piastowska 32, 30-070 Kraków oraz podmiotom, które na zlecenie
+  beneficjenta uczestniczą w realizacji projektu -
+  ……………………………………………………………………………………… (nazwa i adres Grantobiorcy).
+
+  Moje dane osobowe mogą zostać przekazane podmiotom realizującym badania
+  ewaluacyjne na zlecenie, Instytucji Pośredniczącej lub beneficjenta. Moje dane osobowe
+  mogą zostać również przekazane specjalistycznym podmiotom, realizującym na zlecenie
+  Instytucji Pośredniczącej oraz beneficjenta kontrole i audyty w ramach programu
+  Fundusze Europejskie dla Małopolski 2021-2027;
+5. moje dane osobowe będą przechowywane do momentu zakończenia realizacji i rozliczenia
+  projektu i zamknięcia i rozliczenia programu Fundusze Europejskie dla Małopolski 2021-
+  2027 oraz zakończenia okresu trwałości dla projektu i okresu archiwizacyjnego, w
+  zależności od tego, która z tych dat nastąpi później;
+6. podanie danych ma charakter dobrowolny, aczkolwiek jest wymogiem ustawowym
+  a konsekwencją odmowy ich podania jest brak możliwości udzielenia wsparcia w ramach
+  projektu;
+7. posiadam prawo dostępu do treści swoich danych oraz prawo ich: sprostowania,
+  ograniczenia przetwarzania, zgodnie z art. 15, 16, 18 RODO;
+8. mam prawo do wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych, gdy
+  uznam, iż przetwarzanie moich danych osobowych narusza przepisy RODO;
+
+
+
+
+                                        Strona 85 z 103
+9. moje dane osobowe mogą zostać ujawnione innym podmiotom upoważnionym na
+  podstawie przepisów prawa;
+10. moje dane osobowe nie będą przetwarzane w sposób zautomatyzowany, w tym również
+    profilowane;
+11. mogę skontaktować się z Inspektorem Ochrony Danych:
+   − działającym w ramach Instytucji Pośredniczącej, wysyłając wiadomość na adres
+       poczty elektronicznej: dane_osobowe@mcp.malopolska.pl lub pisemnie na adres:
+       Inspektor Ochrony Danych MCP, Małopolskie Centrum Przedsiębiorczości,
+       ul. Armii Krajowej 16, 30-150 Kraków,
+   − u Beneficjenta wysyłając wiadomość na adres poczty elektronicznej:
+       iod@rops.krakow.pl lub pisemnie na adres:
+       Regionalny Ośrodek Polityki Społecznej w Krakowie,
+       ul. Piastowska 32, 30-070 Kraków.
+12. do 4 tygodni od zakończenia udziału w projekcie udostępnię dane dotyczące mojej
+    sytuacji społecznej lub zawodowej (np. status na rynku pracy, udział w kształceniu lub
+    szkoleniu).
+
+
+
+Miejscowość i data, czytelny podpis uczestnika projektu
+
+
+
+
+                                       Strona 86 z 103
+Załącznik nr 7a do Umowy o powierzenie grantu w ramach projektu „Usługa Wrażliwa –
+upowszechnianie innowacji społecznych w środowiskach lokalnych”
+
+     Klauzula informacyjna Regionalnego Ośrodka Polityki Społecznej w
+     Krakowie
+
+Zgodnie z art. 13 i 14 Rozporządzenia Parlamentu Europejskiego i Rady (UE) Nr 2016/679 z
+dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem
+danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia
+dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie danych), zwanego dalej RODO,
+informujemy, iż:
+1. Administratorem Pani/Pana danych osobowych jest Regionalny Ośrodek Polityki
+  Społecznej w Krakowie, z siedzibą ul. Piastowska 32, 30-070 Kraków.
+2. Może Pani/Pan skontaktować się z powołanym przez Administratora Inspektorem Ochrony
+  Danych wysyłając wiadomość na adres poczty elektronicznej iod@rops.krakow.pl
+3. Pani/Pana dane osobowe będą przetwarzane wyłącznie w celu realizacji projektu „Usługa
+  Wrażliwa – upowszechnianie innowacji społecznych w środowiskach lokalnych”,
+  w szczególności potwierdzenia kwalifikowalności wydatków, udzielenia wsparcia,
+  monitoringu, ewaluacji, kontroli, audytu i sprawozdawczości, w tym w Centralnym
+  Systemie Teleinformatycznym oraz działań informacyjno-promocyjnych w ramach
+  Programu Fundusze Europejskie dla Małopolski 2021-2027 (FEM).
+4. Przetwarzanie Pani/Pana danych osobowych jest zgodne z prawem i spełnia warunki, o
+  których mowa art. 6 ust. 1 lit. c oraz art. 9 ust. 2 lit. g Rozporządzenia Parlamentu
+  Europejskiego i Rady (UE) 2016/679 (RODO) – dane osobowe są niezbędne dla realizacji
+  FEM 2021-2027 na podstawie:
+   1) rozporządzenia Parlamentu Europejskiego i Rady (UE) 2021/1060 z dnia 24 czerwca
+       2021 r.
+   2) rozporządzenia Parlamentu Europejskiego i Rady (UE) 2021/1057 z dnia 24 czerwca
+       2021 r.
+   3) ustawy z dnia 28 kwietnia 2022 r. o zasadach realizacji zadań finansowanych ze
+       środków europejskich w perspektywie finansowej 2021–2027.
+5. Pani/Pana dane osobowe mogą zostać udostępnione podmiotom realizującym na zlecenie
+  administratora lub Instytucji Zarządzającej badania ewaluacyjne, kontrole i audyt, a także
+      podmiotom, których uprawnienie dostępu do danych wynika z obowiązujących przepisów,
+      organom sprawującym funkcje nadzoru i kontroli nad realizacją zadań przez Regionalny
+      Ośrodek Polityki Społecznej w Krakowie oraz podmiotom przetwarzającym dane osobowe
+      na polecenie Administratora na podstawie zawartych umów (w tym podmiotom
+      dostarczającym usługi informatyczne wykorzystywane w procesie przetwarzania danych).
+      Na podstawie art. 89 ustawy z dnia 28 kwietnia 2022 r. o zasadach realizacji zadań
+      finansowanych ze środków europejskich w perspektywie finansowej 2021–2027 dane
+      osobowe mogą być udostępniane podmiotom biorącym udział w procesie realizacji
+      Programu FEM 2021-2027.
+6. Dane pozyskujemy bezpośrednio od osób, których one dotyczą, albo od instytucji i
+      podmiotów zaangażowanych w realizację projektu, w tym w szczególności od
+      grantobiorców.
+7. Dane osobowe będą przetwarzane do momentu zakończenia realizacji i rozliczenia
+      projektu oraz zakończenia okresu trwałości dla projektu48, a następnie przechowywane
+      przez okres wynikający z obowiązujących Regionalny Ośrodek Polityki Społecznej w
+      Krakowie regulacji z zakresu postępowania z materiałami archiwalnymi i inną
+      dokumentacją.
+8. W granicach określonych przepisami prawa, w tym w szczególności RODO, ma Pan/Pani
+      prawo dostępu do treści danych, do sprostowania danych, do żądania ograniczenia
+      przetwarzania danych. Ma Pan/Pani prawo wniesienia skargi do Prezesa Urzędu Ochrony
+      Danych Osobowych, jeżeli przetwarzanie moich danych osobowych narusza przepisy
+      RODO;
+9.     Podanie danych jest dobrowolne, ale ich niepodanie może skutkować brakiem
+       możliwości udziału w realizacji działań w ramach projektu;
+10. Pani/Pana dane nie są wykorzystywane przy zautomatyzowanym podejmowaniu decyzji
+       oraz nie podlegają profilowaniu;
+11. Pani/Pana dane nie będą przekazywane do państw trzecich (tj. poza Europejski Obszar
+       Gospodarczy) ani udostępniane organizacjom międzynarodowym.
+
+
+
+
+48
+     Jeśli dotyczy
+
+                                          Strona 88 z 103
+Załącznik nr 7b do Umowy o powierzenie grantu w ramach projektu „Usługa Wrażliwa –
+upowszechnianie innowacji społecznych w środowiskach lokalnych”
+
+      Obowiązek informacyjny w zakresie danych przetwarzanych przez
+      Instytucję Pośredniczącą:
+
+Informacje podawane w przypadku pozyskiwania danych od osoby, której dane
+dotyczą oraz pozyskiwanych w sposób inny niż od osoby, której dane dotyczą:
+
+Zgodnie z art. 13 oraz 14 rozporządzenia Parlamentu Europejskiego i Rady (UE)
+2016/679 z 27.04.2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem
+danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia
+dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie danych) zwanego dalej RODO –
+informuje się, że:
+
+I.   Administrator danych osobowych
+Administratorem danych osobowych jest Małopolskie Centrum Przedsiębiorczości,
+ul. Armii Krajowej 16, 30-150 Kraków.
+Powyższe nie narusza praw i nie wyłącza obowiązków innych administratorów danych
+osobowych w rozumieniu art. 88 ustawy wdrożeniowej.
+
+II. Inspektor Ochrony Danych
+Dane kontaktowe Inspektora Ochrony Danych w MCP:
+dane_osobowe@mcp.malopolska.pl.
+
+III. Cele przetwarzania danych
+Administrator będzie przetwarzać dane wyłącznie w celu realizacji programu Fundusze
+Europejskie dla Małopolski 2021-2027, w szczególności do celów monitorowania,
+sprawozdawczości, komunikacji, publikacji, ewaluacji, zarządzania finansowego,
+weryfikacji i audytów oraz, w stosownych przypadkach, do celów określania
+kwalifikowalności uczestników.
+
+IV. Informacja o wymogu podania danych wynikających z przepisu prawa
+Przetwarzanie danych jest zgodne z prawem i spełnia warunki, o których mowa w art. 6
+ust. 1 lit. c) oraz art. 9 ust. 2 lit g) RODO – dane osobowe są niezbędne dla realizacji
+programu na podstawie:
+− ustawy z dnia 28 kwietnia 2022 r. o zasadach realizacji zadań finansowanych ze środków
+  europejskich w perspektywie finansowej 2021–2027 (wdrożeniowa),
+− rozporządzenia Parlamentu Europejskiego i Rady (UE) 2021/1060 z dnia 24 czerwca 2021 r.
+  ustanawiające wspólne przepisy dotyczące Europejskiego Funduszu Rozwoju
+  Regionalnego, Europejskiego Funduszu Społecznego Plus, Funduszu Spójności, Funduszu
+  na rzecz Sprawiedliwej Transformacji i Europejskiego Funduszu Morskiego, Rybackiego i
+  Akwakultury, a także przepisy finansowe na potrzeby tych funduszy oraz na potrzeby
+  Funduszu Azylu, Migracji i Integracji, Funduszu Bezpieczeństwa Wewnętrznego i
+  Instrumentu Wsparcia Finansowego na rzecz Zarządzania Granicami i Polityki Wizowej
+  (rozporządzenie ogólne),
+− rozporządzenia Parlamentu Europejskiego i Rady (UE) 2021/1057 z dnia 24 czerwca 2021 r.
+  ustanawiające Europejski Fundusz Społeczny Plus (EFS+) oraz uchylające rozporządzenie
+  (UE) nr 1296/2013.
+
+V. Konsekwencje niepodania danych osobowych
+Podanie danych ma charakter dobrowolny, aczkolwiek jest wymogiem ustawowym, a
+konsekwencją odmowy ich podania jest brak możliwości udzielenia wsparcia w ramach
+projektu.
+
+VI. Okres przechowywania danych
+Dane osobowe będą przechowywane do momentu zakończenia realizacji projektu i jego
+rozliczenia oraz do momentu zamknięcia i rozliczenia programu Fundusze Europejskie
+dla Małopolski 2021-2027 oraz zakończenia okresu trwałości dla projektu i okresu
+archiwizacyjnego w zależności od tego, która z tych dat nastąpi później.
+
+VII. Prawa osób, których dane dotyczą
+Osoba, której dane dotyczą posiada prawo dostępu do treści swoich danych oraz prawo
+ich: sprostowania, ograniczenia przetwarzania, zgodnie z art. 15, 16, 18 RODO.
+
+VIII. Prawo wniesienia skargi do organu nadzorczego
+Osoba, której dane dotyczą ma prawo do wniesienia skargi do Prezesa Urzędu
+Ochrony Danych Osobowych, gdy uzna, iż przetwarzanie jej danych osobowych
+narusza przepisy RODO.
+
+IX. Odbiorcy danych
+
+
+                                        Strona 90 z 103
+Dane osobowe mogą zostać ujawnione innym podmiotom upoważnionym na podstawie
+przepisów prawa oraz mogą być również powierzone podmiotom przetwarzającym, np.
+w związku z realizacją umów w zakresie usług IT, w tym usług chmurowych w ramach
+pakietu Microsoft Office 365.
+
+X. Informacja dotycząca zautomatyzowanego przetwarzania danych osobowych, w tym
+    profilowania
+Dane osobowe nie będą przetwarzane w sposób zautomatyzowany, w tym również
+profilowane.
+
+XI. Udostępnianie
+Na podstawie art. 89 ustawy wdrożeniowej dane osobowe mogą być udostępniane
+innym podmiotom biorącym udział w procesie realizacji programu Fundusze
+Europejskie dla Małopolski 2021-2027.
+
+
+
+
+                                        Strona 91 z 103
+Załącznik nr 8 do Umowy powierzenia grantu w ramach projektu „Usługa Wrażliwa –
+upowszechnianie innowacji społecznych w środowiskach lokalnych”
+
+
+      Szczegółowe warunki realizacji usług społecznych w ramach grantów
+
+Realizowane w ramach grantu usługi muszą być zgodne z wskazanymi poniżej wymogami,
+adekwatnymi dla danej innowacyjnej usługi społecznej.
+1.   Wsparcie jest dostosowane do indywidualnych potrzeb, potencjału i osobistych
+     preferencji odbiorców tych usług, zwłaszcza w przypadku osób potrzebujących wsparcia
+     w codziennym funkcjonowaniu i osób z niepełnosprawnościami.
+2.   Niezbędne jest dopasowanie wsparcia dla osób wykluczonych komunikacyjnie.
+3.   Wsparcie w obszarze włączenia społecznego jest zgodne ze „Strategią Rozwoju Usług
+     Społecznych, polityka publiczna do roku 2030 (z perspektywą do 2035 r.)” oraz
+     Regionalnym Planem Rozwoju Usług Społecznych i Deinstytucjonalizacji Województwa
+     Małopolskiego na lata 2023-2025 z perspektywą do 2030, a także z „Krajowym
+     Programem Przeciwdziałania Ubóstwu i Wykluczeniu Społecznemu. Aktualizacja 2021–
+     2027, polityka publiczna z perspektywą do roku 2030”.
+4.   Wsparcie z zakresu usług społecznych dotyczy wyłącznie usług świadczonych w
+     społeczności lokalnej*.
+5.   Odbiorcami usług opiekuńczych są osoby potrzebujące wsparcia w codziennym
+     funkcjonowaniu tj. osoby, które ze względu na wiek, stan zdrowia lub niepełnosprawność
+     wymagają opieki lub wsparcia w związku z niemożnością samodzielnego wykonywania co
+     najmniej jednej z podstawowych czynności dnia codziennego.
+6.   Odbiorcami usług asystenckich są w szczególności osoby z niepełnosprawnościami.
+7.   Wsparcie dla usług opiekuńczych lub asystenckich prowadzi każdorazowo do zwiększenia
+     liczby miejsc świadczenia usług w społeczności lokalnej oraz liczby osób objętych
+     usługami świadczonymi w społeczności lokalnej przez danego Grantobiorcę w stosunku
+     do danych z roku poprzedzającego rok złożenia wniosku o grant. Obowiązek zwiększania
+     liczby miejsc świadczenia usług oraz liczby osób objętych tymi usługami nie dotyczy:
+     1) wsparcia dla usług opiekuńczych świadczonych przez opiekunów faktycznych;
+     2) wsparcia realizowanego przez CUS (którego skala powinna wynikać z lokalnej
+         diagnozy potrzeb);
+     3) wsparcia realizowanego uprzednio w ramach programów rządowych.
+     Obowiązek zwiększania liczby osób objętych usługami nie oznacza zakazu jednoczesnego
+     wsparcia osób dotychczas obejmowanych usługami przez Grantobiocę.
+8.   Zwiększanie liczby miejsc świadczenia usług opiekuńczych świadczonych
+     niestacjonarnie/w miejscu zamieszkania odbywa się poprzez zwiększanie liczby
+     opiekunów świadczących usługi. Zwiększanie liczby miejsc świadczenia usług
+     opiekuńczych w formach stacjonarnych odbywa się poprzez tworzenie miejsc:
+     1) stałego lub krótkookresowego pobytu dziennego,
+     2) stałego lub krótkookresowego pobytu całodobowego w placówkach, w których są
+           realizowane usługi społeczne świadczone w społeczności lokalnej lub miejsc opieki
+           wytchnieniowej w formie krótkookresowego pobytu.
+9.   Miejsca krótkookresowego pobytu służą przede wszystkim poprawie dostępu do usług
+     opiekuńczych w zastępstwie za opiekunów faktycznych w ramach opieki wytchnieniowej.
+10. Wsparcie w ramach projektu nie może spowodować:
+     1) zmniejszenia dotychczasowego finansowania usług opiekuńczych przez Grantobiorcę
+           oraz
+     2) zastąpienia środkami projektu dotychczasowego finansowania usług ze środków
+           innych niż europejskie.
+     Warunki te nie dotyczą kontynuacji wsparcia realizowanego ze środków EFS+.
+11. Nie jest wspierana opieka instytucjonalna, tj. nie są tworzone nowe miejsca opieki w
+     formach instytucjonalnych, nie są utrzymywane istniejące miejsca w tych placówkach
+     oraz nie są realizowane usługi na rzecz osób w nich przebywających, z wyłączeniem ust.
+     12.
+12. Wsparcie w ramach projektu dla osób będących w długoterminowej opiece
+     instytucjonalnej jest możliwe wyłącznie w celu przejścia tych osób do opieki realizowanej
+     w formie usług świadczonych w społeczności lokalnej. Wsparcie to musi przyczyniać się
+     do zwiększenia liczby miejsc świadczenia usług opiekuńczych świadczonych w
+     społeczności lokalnej.
+13. Wykorzystanie nowoczesnych technologii informacyjno-komunikacyjnych, np. teleopieki,
+     systemów przywoławczych, możliwe jest wyłącznie jako element wsparcia i pod
+     warunkiem zagwarantowania kompleksowości usługi.
+
+
+
+                                         Strona 93 z 103
+14. Usługa asystencka obejmuje wspieranie osób z niepełnosprawnościami w wykonywaniu
+    podstawowych czynności dnia codziennego, niezbędnych do aktywnego funkcjonowania
+    społecznego, zawodowego, edukacyjnego. W zależności od potrzeb osoby z
+    niepełnosprawnością, usługa asystencka może obejmować również opiekę higieniczną
+    oraz pomoc w czynnościach fizjologicznych.
+15. Usługa asystencka jest świadczona przez:
+    1) asystenta osoby niepełnosprawnej – warunkiem zatrudnienia asystenta osoby
+        niepełnosprawnej jest ukończone kształcenie w zawodzie asystenta osoby
+        niepełnosprawnej zgodnie z rozporządzeniem Ministra Edukacji Narodowej z dnia 7
+        lutego 2012 r. w sprawie podstawy programowej kształcenia w zawodach (Dz. U.
+        poz. 184, z późn. zm.);
+    2) asystenta osobistego osoby niepełnosprawnej – warunkiem zatrudnienia kandydata
+        jako asystenta osobistego osoby niepełnosprawnej jest uzyskanie pozytywnej opinii
+        psychologa na podstawie weryfikacji predyspozycji osobowościowych oraz
+        kompetencji społecznych. Po uzyskaniu pozytywnej opinii psychologa, asystentem
+        osobistym osoby niepełnosprawnej mogą zostać kandydaci:
+        a.   posiadający doświadczenie w realizacji usług asystenckich, w tym zawodowe,
+             wolontariackie lub osobiste, wynikające z pełnienia roli opiekuna faktycznego
+             lub
+        b. bez adekwatnego doświadczenia, którzy odbyli minimum 60-godzinne szkolenie
+             asystenckie. Szkolenie składa się z minimum 20 godzin części teoretycznej z
+             zakresu wiedzy ogólnej dotyczącej niepełnosprawności, udzielania pierwszej
+             pomocy, pielęgnacji i obsługi sprzętu pomocniczego oraz z minimum 40 godzin
+             części praktycznej w formie przyuczenia do pracy np. praktyki, wolontariat.
+16. Zakres usług opiekuńczych świadczonych w miejscu zamieszkania obejmuje w
+    szczególności:
+    1) pomoc w zaspokajaniu codziennych potrzeb życiowych;
+    2) opiekę higieniczną;
+    3) pielęgnację zaleconą przez lekarza, która obejmuje czynności pielęgnacyjne
+        wynikające z przedłożonego zaświadczenia lekarskiego lub dokumentacji medycznej,
+        uzupełniające w stosunku do pielęgniarskiej opieki środowiskowej;
+    4) zapewnienie kontaktów z otoczeniem.
+
+                                       Strona 94 z 103
+17. Organizacja świadczenia usług opiekuńczych uwzględnia podmiotowość odbiorców
+    usług, w tym respektowanie prawa do poszanowania i ochrony godności, intymności, w
+    szczególności w przypadku czynności o charakterze opieki higienicznej i pielęgnacji oraz
+    poczucia bezpieczeństwa i ochrony dóbr osobistych.
+18. Podmiot realizujący usługi opiekuńcze zobowiązany jest do zapewnienia dostępności do
+    nieprzerwanego i właściwego pod względem jakości procesu świadczenia usług przez 7
+    dni w tygodniu, poprzez właściwe ustalenie z osobami świadczącymi usługi opiekuńcze
+    godzin oraz zleconego wymiaru i zakresu usług.
+19. Usługa opiekuńcza jest świadczona przez osobę, która posiada:
+    1) kwalifikacje do wykonywania jednego z zawodów: opiekun środowiskowy, asystent
+        osoby niepełnosprawnej, pielęgniarz, opiekun osoby starszej, opiekun medyczny,
+        opiekun kwalifikowany w domu pomocy społecznej lub
+    2) doświadczenie w realizacji usług opiekuńczych, w tym zawodowe, wolontariackie lub
+        osobiste wynikające z pełnienia roli opiekuna faktycznego i odbyła minimum 80-
+        godzinne szkolenie z zakresu realizowanej usługi, w tym udzielania pierwszej
+        pomocy lub pomocy przedmedycznej.
+20. Specjalistyczne usługi opiekuńcze w miejscu zamieszkania obejmują usługi dostosowane
+    do szczególnych potrzeb wynikających z rodzaju schorzenia lub niepełnosprawności i
+    wykonywane są przez osoby ze specjalistycznym przygotowaniem zawodowym.
+21. Zakres specjalistycznych usług opiekuńczych w miejscu zamieszkania obejmuje obok
+    usług opiekuńczych m.in:
+    1) pielęgnację jako wspieranie procesu leczenia, w tym:
+        a.   pomoc w dostępie do świadczeń zdrowotnych;
+        b. uzgadnianie i pilnowanie terminów wizyt lekarskich, badań diagnostycznych;
+        c.   pomoc w wykupywaniu lub zamawianiu leków w aptece;
+        d. pilnowanie przyjmowania leków oraz obserwowanie ewentualnych skutków
+             ubocznych ich stosowania;
+        e.   w szczególnie uzasadnionych przypadkach zmianę opatrunków, pomoc w użyciu
+             środków pomocniczych i materiałów medycznych, przedmiotów
+             ortopedycznych, a także w utrzymaniu higieny;
+        f.   pomoc w dotarciu do placówek służby zdrowia;
+        g.   pomoc w dotarciu do placówek rehabilitacyjnych;
+
+                                       Strona 95 z 103
+    2) rehabilitację fizyczną i usprawnianie zaburzonych funkcji organizmu w zakresie
+        nieobjętym przepisami ustawy z dnia 27 sierpnia 2004 r. o świadczeniach opieki
+        zdrowotnej finansowanych ze środków publicznych (możliwe w projektach
+        dotyczących opieki długoterminowej):
+        1) zgodnie z zaleceniami lekarskimi lub specjalisty z zakresu rehabilitacji ruchowej
+             lub fizjoterapii;
+        2) współpracę ze specjalistami w zakresie wspierania
+             psychologicznopedagogicznego i edukacyjno-terapeutycznego zmierzającego do
+             wielostronnej aktywizacji osoby korzystającej ze specjalistycznych usług
+             opiekuńczych.
+    Wymagania te nie dotyczą specjalistycznych usług opiekuńczych dla osób z zaburzeniami
+    psychicznymi, określonych w rozporządzeniu Ministra Polityki Społecznej z dnia 22
+    września 2005 r. w sprawie specjalistycznych usług opiekuńczych (Dz. U. poz. 1598, z
+    późn. zm.).
+22. Specjalistyczna usługa opiekuńcza w miejscu zamieszkania jest świadczona przez osobę,
+    która spełnia wymogi określone w rozporządzeniu Ministra Polityki Społecznej z dnia 22
+    września 2005 r. w sprawie specjalistycznych usług opiekuńczych.
+23. W przypadku realizacji wsparcia w postaci usług sąsiedzkich, są one zgodne z zasadami
+    określonymi w art. 50 ustawy z dnia 12 marca 2004 r. o pomocy społecznej.
+24. Wsparcie dla rodziny i pieczy zastępczej odbywa się zgodnie z ustawą z dnia 9 czerwca
+    2011 r. o wspieraniu rodziny i systemie pieczy zastępczej, z zastrzeżeniem, że z EFS+ nie
+    są finansowane świadczenia wypłacane na podstawie ustawy z dnia 9 czerwca 2011 r. o
+    wspieraniu rodziny i systemie pieczy zastępczej. Świadczenia te mogą stanowić wkład
+    własny do projektu.
+25. Wsparcie dla mieszkań treningowych i mieszkań wspomaganych polega na tworzeniu
+    miejsc w nowo tworzonych lub istniejących mieszkaniach.
+26. Wsparcie usług w ramach istniejących mieszkań treningowych i mieszkań wspomaganych
+    jest możliwe wyłącznie pod warunkiem zwiększenia liczby miejsc w danym mieszkaniu,
+    bez pogorszenia jakości świadczonych usług lub w przypadku mieszkań treningowych
+    objęcia nowych osób, które dotychczas nie korzystały ze wsparcia.
+
+
+
+
+                                        Strona 96 z 103
+27. Liczba miejsc w mieszkaniu (treningowym, wspomaganym) nie może być większa niż 3,
+    chyba że większa liczba miejsc wynika z faktu bycia rodziną w rozumieniu ustawy z dnia
+    12 marca 2004 r. o pomocy społecznej. Pokoje w mieszkaniu powinny być 1-osobowe.
+28. Mieszkania treningowe lub mieszkania wspomagane nie mogą być zlokalizowane na
+    nieruchomości, na której znajduje się placówka opieki instytucjonalnej.
+29. W przypadku nieruchomości, w której znajduje się do 8 lokali włącznie, mieszkania
+    treningowe lub wspomagane mogą stanowić 50% lokali. W nieruchomości o większej
+    liczbie lokali, maksymalna liczba takich mieszkań wynosi 4 i 25% nadwyżki liczby lokali
+    powyżej 4. W przypadku mieszkań, w których przebywa jedna osoba, mieszkania te
+    mogą stanowić 100% lokali w przypadku nieruchomości, w której znajduje się do 8 lokali
+    włącznie, a w przypadku większych nieruchomości ― odpowiednio 25% nadwyżki liczby
+    lokali powyżej 8.
+30. W przypadku mieszkań treningowych i wspomaganych, jest stosowany standard
+    dotyczący tej formy pomocy wynikający z ustawy z dnia 12 marca 2004 r. o pomocy
+    społecznej i aktów wykonawczych wydanych na podstawie tej ustawy, o ile zapisy
+    niniejszego załącznika nie stanowią inaczej.
+31. Wsparcie w ramach projektu nie spowoduje:
+    1) zmniejszenia dotychczasowego finansowania usług w formie mieszkań treningowych
+        lub wspomaganych przez Grantobiorcę oraz
+    2) zastąpienia środkami projektu dotychczasowego finansowania usług ze środków
+        innych niż europejskie.
+    Warunki te nie dotyczą kontynuacji wsparcia realizowanego ze środków EFS+
+32. Finansowanie usług zdrowotnych jest możliwe w zakresie działań o charakterze
+    diagnostycznym lub profilaktycznym, zaś finansowanie leczenia jest możliwe wyłącznie w
+    ramach opieki długoterminowej, jako wsparcie towarzyszące.
+33. Grantobiorca ma obowiązek informować uczestników / uczestniczki swoich projektów na
+    temat realizowanych projektów z obszaru włączenia społecznego, w celu umożliwienia
+    im skorzystania z dalszego wsparcia.
+
+*usługi świadczone w społeczności lokalnej – usługi społeczne lub zdrowotne umożliwiające
+osobom niezależne życie w środowisku lokalnym, a dzieciom życie w rodzinie lub rodzinnej
+pieczy zastępczej. Usługi te zapobiegają odizolowaniu osób od rodziny lub społeczności
+
+
+
+                                        Strona 97 z 103
+lokalnej oraz umożliwiają podtrzymywanie więzi rodzinnych i sąsiedzkich. Są to usługi
+świadczone w sposób:
+
+   a) zindywidualizowany (dostosowany do potrzeb i możliwości danej osoby);
+   b) umożliwiający odbiorcom tych usług kontrolę nad swoim życiem i nad decyzjami,
+       które ich dotyczą (w zakresie wsparcia dzieci uwzględnianie ich zdania);
+   c) zapewniający, że odbiorcy usług nie są odizolowani od ogółu społeczności lub nie są
+       zmuszeni do mieszkania razem;
+   d) gwarantujący, że wymagania organizacyjne nie mają pierwszeństwa przed
+       indywidualnymi potrzebami osoby z niej korzystającej.
+
+Warunki, o których mowa w lit. a–d, muszą być spełnione łącznie. Do usług społecznych i
+zdrowotnych świadczonych w społeczności lokalnej należą w szczególności:
+
+   a) usługi opiekuńcze, obejmujące pomoc w zaspokajaniu codziennych potrzeb
+       życiowych, opiekę higieniczną, zaleconą przez lekarza pielęgnację oraz zapewnienie
+       kontaktów z otoczeniem, świadczone przez opiekunów faktycznych lub w postaci:
+       usług sąsiedzkich, usług opiekuńczych w miejscu zamieszkania, specjalistycznych
+       usług opiekuńczych w miejscu zamieszkania lub dziennych form usług opiekuńczych
+   b) opieka wytchnieniowa w formie całodobowego krótkookresowego pobytu (nie dłużej
+       niż 60 dni w roku kalendarzowym) w placówkach, w których liczba miejsc
+       całodobowego pobytu nie jest większa niż 8 lub w formie dziennego pobytu;
+   c) usługi w rodzinnym domu pomocy, o którym mowa w ustawie z dnia 12 marca 2004 r.
+       o pomocy społecznej;
+   d) usługi w ośrodkach wsparcia, o których mowa w ustawie z dnia 12 marca 2004 r. o
+       pomocy społecznej (zarówno w formie pobytu dziennego jak i całodobowego), o ile
+       liczba miejsc całodobowego pobytu w tych ośrodkach nie jest większa niż 8;
+   e) usługi w gospodarstwach opiekuńczych w formie pobytu dziennego lub
+       całodobowego, o ile liczba miejsc pobytu całodobowego w tych gospodarstwach nie
+       jest większa niż 8;
+   f) usługi asystenckie, świadczone przez asystentów na rzecz osób z
+       niepełnosprawnościami (oraz ich rodzin), umożliwiające stałe lub okresowe wsparcie
+       tych osób w wykonywaniu podstawowych czynności dnia codziennego, niezbędnych
+       do ich aktywnego funkcjonowania społecznego, zawodowego lub edukacyjnego;
+
+
+                                       Strona 98 z 103
+g) usługi asystenckie dla innych grup niż osoby z niepełnosprawnościami, z wyłączeniem
+   asystentury rodzinnej;
+h) usługi pielęgniarskiej opieki długoterminowej domowej;
+i) opieka paliatywna i hospicyjna w formach zdeinstytucjonalizowanych;
+j) poradnictwo specjalistyczne, świadczone osobom i rodzinom, które mają trudności
+   lub wykazują potrzebę wsparcia w rozwiązywaniu swoich problemów życiowych;
+k) usługi wspierania rodziny zgodnie z ustawą z dnia 9 czerwca 2011 r. o wspieraniu
+   rodziny i systemie pieczy zastępczej, w tym:
+       − praca z rodziną, w tym w szczególności asystentura rodzinna, konsultacje i
+          poradnictwo specjalistyczne, terapia i mediacja; usługi dla rodzin z dziećmi, w
+          tym usługi opiekuńcze i specjalistyczne, pomoc prawna, szczególnie w zakresie
+          prawa rodzinnego; organizowanie dla rodzin spotkań mających na celu
+          wymianę ich doświadczeń oraz zapobieganie izolacji, zwanych „grupami
+          wsparcia” lub „grupami samopomocowymi”;
+       − pomoc w opiece i wychowaniu dziecka poprzez usługi placówek wsparcia
+          dziennego w formie opiekuńczej i specjalistycznej oraz w formie pracy
+          podwórkowej;
+       − pomoc rodzinie w opiece i wychowaniu poprzez wsparcie rodzin
+          wspierających;
+l) usługi dla dzieci i młodzieży w formach dziennych i środowiskowych;
+m) usługi preadopcyjne i postadopcyjne;
+n) rodzinna piecza zastępcza, rodzinne domy dziecka oraz placówki opiekuńczo-
+   wychowawcze typu rodzinnego, o których mowa w ustawie z dnia 9 czerwca 2011 r. o
+   wspieraniu rodziny i systemie pieczy zastępczej, a także usługi dla kandydatów do
+   pełnienia funkcji rodzinnych form pieczy zastępczej;
+o) usługi w postaci mieszkań treningowych lub mieszkań wspomaganych, o ile liczba
+   miejsc w mieszkaniu nie jest większa niż 3;
+p) usługi interwencji kryzysowej, o których mowa w art. 47 ustawy z dnia 12 marca 2004
+   r. o pomocy społecznej (schronienie nie może być udzielane w placówkach
+   świadczących opiekę instytucjonalną);
+q) usługi przeciwdziałania przemocy, w tym przemocy domowej na mocy ustawy z dnia
+   29 lipca 2005 r. o przeciwdziałaniu przemocy domowej (Dz. U. z 2021 r. poz. 1249, z
+
+                                   Strona 99 z 103
+późn. zm.) (schronienie nie może być udzielane w placówkach świadczących opiekę
+instytucjonalną).
+
+
+
+
+                              Strona 100 z 103
+Załącznik nr 2 do Regulaminu udzielania grantów w ramach projektu „Usługa Wrażliwa –
+upowszechnianie innowacji społecznych w środowiskach lokalnych”
+
+
+       Wykaz kosztów niekwalifikowalnych
+1. Wydatkami niekwalifikowalnymi są w szczególności:
+  1)    kary i grzywny,
+  2)    koszty postępowania sądowego, wydatki związane z przygotowaniem i obsługą
+        prawną spraw sądowych oraz wydatki poniesione na funkcjonowanie komisji
+        rozjemczych,
+  3)    koszty pożyczki lub kredytu zaciągniętego na prefinansowanie dotacji,
+  4)    prowizje pobierane w ramach operacji wymiany walut,
+  5)    rozliczony notą księgową koszt zakupu środka trwałego będącego własnością
+        Grantobiorcy lub prawa przysługującego Grantobiorcy,
+  6)    nagrody jubileuszowe,
+  7)    odprawy pracownicze,
+  8)    wpłaty dokonywane na Państwowy Fundusz Rehabilitacji Osób Niepełnosprawnych
+        zgodnie z ustawą z dnia 27 sierpnia 1997 r. o rehabilitacji zawodowej i społecznej oraz
+        zatrudnianiu osób niepełnosprawnych (Dz. U. z 2024 r. poz. 44, z późn. zm.), w tym
+        wpłaty dokonywane przez stronę trzecią,
+  9)    świadczenia na rzecz personelu realizowane z Zakładowego Funduszu Świadczeń
+        Socjalnych (ZFŚS),
+  10) koszty ubezpieczenia cywilnego funkcjonariuszy publicznych za szkodę wyrządzoną
+        przy wykonywaniu władzy publicznej,
+  11) koszty składek i opłat fakultatywnych na rzecz personelu, niewymaganych
+        obowiązującymi przepisami prawa, chyba że:
+        a. zostały przewidziane w regulaminie pracy lub regulaminie wynagradzania lub
+          innych właściwych przepisach prawa pracy,
+        b. zostały wprowadzone co najmniej sześć miesięcy przed złożeniem wniosku o grant,
+        c. potencjalnie obejmują wszystkich pracowników, a zasady ich przyznawania są takie
+          same w przypadku personelu zaangażowanego w ramach grantu oraz pozostałych
+          pracowników Grantobiorcy,
+  12) koszt zaangażowania personelu projektu zatrudnionego jednocześnie na podstawie
+      stosunku pracy w IZ, IP, IW, gdy zachodzi konflikt interesów rozumiany jako naruszenie
+      zasady bezinteresowności i bezstronności poprzez w szczególności wykonywanie
+      zadań mających związek lub kolidujących ze stanowiskiem służbowym, mających
+      negatywny wpływ na sprawy prowadzone w ramach obowiązków służbowych, lub na
+      bezstronność prowadzenia spraw służbowych z uwagi na względy rodzinne,
+      emocjonalne, sympatie polityczne lub związki z jakimkolwiek krajem, interes
+      gospodarczy lub jakiekolwiek inne bezpośrednie lub pośrednie interesy osobiste,
+  13) koszt zaangażowania pracownika Grantobiorcy na podstawie umowy cywilnoprawnej
+      innej niż umowa o dzieło, z wyjątkiem:
+      a. przypadków, gdy szczególne przepisy dotyczące zatrudniania danej grupy
+         pracowników uniemożliwiają wykonywanie zadań w ramach projektu na podstawie
+         stosunku pracy,
+      b. prac badawczo-rozwojowych,
+  14) transakcje, bez względu na liczbę wynikających z nich płatności, dokonane w gotówce,
+      których wartość przekracza kwotę, o której mowa w art. 19 ustawy z dnia 6 marca
+      2018 r. – Prawo przedsiębiorców (Dz. U. z 2024 r. poz. 236, z późn. zm.),
+  15) zaliczka wypłacona wykonawcy przez Grantobiorcę niezgodnie z postanowieniami
+      umowy, lub jeśli element objęty zaliczką nie jest kwalifikowalny lub nie został
+      faktycznie zrealizowany lub dostarczony.
+2. Niedozwolone jest podwójne finansowanie wydatków. Podwójne finansowanie oznacza w
+  szczególności:
+  1) więcej niż jednokrotne przedstawienie do rozliczenia tego samego wydatku albo tej
+      samej części wydatku ze środków UE w jakiejkolwiek formie (w szczególności dotacji,
+      pożyczki, gwarancji/poręczenia),
+  2) rozliczenie zakupu używanego środka trwałego, który był uprzednio
+      współfinansowany z udziałem środków UE,
+  3) rozliczenie kosztów amortyzacji środka trwałego uprzednio zakupionego z udziałem
+      środków UE,
+  4) rozliczenie wydatku poniesionego przez leasingodawcę na zakup przedmiotu leasingu
+      w ramach leasingu finansowego, a następnie rozliczenie rat opłacanych przez
+      Grantobiorcę w związku z leasingiem tego przedmiotu,
+
+                                      Strona 102 z 103
+  5) objęcie kosztów kwalifikowalnych jednocześnie wsparciem w formie pożyczki i
+       gwarancji/poręczenia,
+  6) rozliczenie tego samego wydatku w kosztach pośrednich projektu oraz kosztach
+       bezpośrednich projektu,
+  7) otrzymanie na wydatki kwalifikowalne danego projektu lub części projektu dotacji z
+       kilku źródeł (krajowych, unijnych lub innych) w wysokości łącznie wyższej niż 100%
+       wydatków kwalifikowalnych projektu lub części projektu.
+3. Zapisy dotyczące wydatków niekwalifikowalnych zawarte są w podrozdziale 2.3
+  Wytycznych dotyczących kwalifikowalności wydatków na lata 2021–2027.
+4. Kwalifikowalność danego wydatku oceniana jest na dzień, w którym został on poniesiony,
+  w oparciu wersję Wytycznych dotyczących kwalifikowalności wydatków na lata 2021-2027
+  obowiązującą w dniu poniesienia wydatku. W przypadku zmiany ww. wytycznych niniejszy
+  załącznik zostanie zaktualizowany przez ROPS, a Grantobiorca zostanie poinformowany o
+  aktualizacji załącznika.
+
+
+
+
+                                      Strona 103 z 103
+

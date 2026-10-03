@@ -1,0 +1,2713 @@
+                                                     Załącznik nr 1 do Ogłoszenia o naborze
+
+                PROCEDURY REALIZACJI PROJEKTU GRANTOWEGO
+                   „INKUBATOR WŁĄCZENIA SPOŁECZNEGO 2.0”
+
+
+  I. INFORMACJE OGÓLNE O PROJEKCIE
+
+1) Niniejsze Procedury dotyczą zasad związanych z udzieleniem i realizacją grantów w
+   ramach projektu pn.: „Inkubator Włączenia Społecznego 2.0” o nr FERS.05.01-IZ.00-
+   0006/23, realizowanego przez partnerstwo: Województwo Małopolskie - Regionalny
+   Ośrodek Polityki Społecznej w Krakowie (Lider) oraz Krakowskie Centrum Innowacyjnych
+   Technologii INNOAGH sp. z o.o. (Partner), w okresie od 1 stycznia 2024 do 30 czerwca
+   2028 na terenie całej Polski.
+2) Projekt jest realizowany w ramach V Osi Priorytetowej programu Fundusze Europejskie
+   dla Rozwoju Społecznego 2021-2027 (Działanie 5.1: Innowacje społeczne),
+   współfinansowanego ze środków Europejskiego Funduszu Społecznego Plus, na zlecenie
+   Ministerstwa Funduszy i Polityki Regionalnej.
+3) Procedury opisują zasady oceny i wyboru pomysłów zgłoszonych do udziału w projekcie
+   grantowym oraz warunki przekazania, wykorzystania a także rozliczenia przyznanych
+   grantów.
+4) Celem głównym projektu jest zwiększenie wykorzystania innowacji społecznych w
+   procesie szeroko rozumianego włączenia społecznego osób zagrożonych ubóstwem lub
+   wykluczeniem społecznym (w tym dzieci) poprzez inkubację i akcelerację nowych
+   produktów, usług, metod pracy, rozwiązań IT.
+5) Wszelkie działania i rezultaty projektu, w tym strona www, mat. informacyjne, produkty
+   innowacji, filmy będą zgodne z zasadami równościowymi obowiązującymi w ramach
+   funduszy unijnych na lata 2021- 2027, w tym zasadami równości szans i niedyskryminacji,
+   standardami dostępności dla osób z niepełnosprawności, zasadami równości kobiet i
+  mężczyzn, a także zasadami polityki zrównoważonego rozwoju, w tym zasadą DNSH
+  poprzez zastosowanie rozwiązań proekologicznych.
+
+
+ II. SŁOWNIK POJĘĆ
+
+Użyte w niniejszych Procedurach pojęcia oznaczają:
+
+   1) ROPS – Regionalny Ośrodek Polityki Społecznej w Krakowie – Lider projektu
+       „Inkubator Włączenia Społecznego 2.0”.
+   2) INNOAGH - Krakowskie Centrum Innowacyjnych Technologii INNOAGH sp. z o.o. –
+       Partner projektu „Inkubator Włączenia Społecznego 2.0”,
+   3) Inkubator – partnerstwo Województwa Małopolskiego - Regionalnego Ośrodka
+       Polityki Społecznej w Krakowie oraz Krakowskiego Centrum Innowacyjnych
+       Technologii INNOAGH sp. z o.o.,
+   4) projekt grantowy - projekt, o którym mowa w art. 41 ustawy z dnia 28 kwietnia 2022
+       r. o zasadach realizacji zadań finansowanych ze środków europejskich w
+       perspektywie finansowej 2021–2027, pn. „Inkubator Włączenia Społecznego 2.0”.
+   5) innowacja społeczne – nowe pomysły (m.in. produkty, usługi i modele), które
+       jednocześnie zaspokajają potrzeby społeczne (skuteczniej niż alternatywy) i tworzą
+       nowe relacje społeczne lub środowiska współpracy.
+   6) Grant - środki finansowe, które ROPS powierzył Grantobiorcy, na podstawie Umowy
+       o powierzenie Grantu, na realizację zadań służących osiągnięciu celu innowacji
+       społecznej.
+   7) Grantobiorca - osoba fizyczna, podmiot lub grupę osób indywidualnych, wybrany w
+       drodze otwartego naboru ogłoszonego przez ROPS w ramach realizacji projektu
+       grantowego, z którym ROPS zawarł Umowę o powierzenie Grantu, zwany też
+       Innowatorem.
+   8) Instytucja Zarządzająca – Minister Funduszy i Polityki Regionalnej.
+   9) Komisja Oceny Innowacji (KOI) - komisja składająca się z przedstawicieli Inkubatora,
+       która dokonuje oceny merytorycznej złożonych aplikacji.
+10) RIS - Rada Innowacji Społecznych - gremium powoływane w celu przeprowadzenia
+   oceny strategicznej złożonych w naborze aplikacji. Składa się m.in. z przedstawicieli
+   jednostek samorządu terytorialnego, organizacji pozarządowych, środowiska
+   naukowego, przedstawicieli biznesu, a także przedstawicieli ROPS i INNOAGH. Każdy z
+   członków RIS będzie posiadał minimum 5-letnie doświadczenie
+   naukowe/doświadczenie zawodowe lub praktyczne, a także odpowiednie kwalifikacje
+   i kompetencje związane z przynajmniej jednym z obszarów: innowacje społeczne,
+   włączenie społeczne, biznes. Członkowie RIS zostaną powołani przez Dyrektora ROPS
+   na czas realizacji projektu.
+11) Specyfikacja innowacji - dokument opracowany wspólnie przez Innowatora i ROPS,
+   po wyborze pomysłu na innowację społeczną, będący obowiązkowym załącznikiem
+   do umowy o powierzenie grantu. Zawiera cel i opis innowacji, opis grupy docelowej,
+   uzasadnienie innowacyjności, opis dostępności produktów, koncepcję testowania,
+   kosztorys i harmonogram opracowania/testowania innowacji oraz określa produkty
+   częściowe i produkt końcowy, które będą stanowić podstawę rozliczenia grantu.
+12) Testerzy innowacji społecznych – osoby i podmioty, które testują innowacje
+   społeczne sfinansowane w ramach powierzonych grantów.
+13) Uczestnicy Projektu grantowego – Grantobiorcy, którzy uzyskali grant w ramach
+   projektu grantowego.
+14) Umowa o powierzenie grantu - umowa zawierana pomiędzy Grantobiorcą i ROPS
+   regulująca w szczególności zasady współpracy w zakresie opracowania i testowania
+   innowacji oraz rozliczenia Grantu.
+15) Wnioskodawca – podmiot/osoba, która złożyła aplikację w naborze.
+16) Strona internetowa Inkubatora – www.rops.krakow.pl, zakładka Innowacje Społeczne
+   - Inkubator Włączenia Społecznego 2.0.
+17) deinstytucjonalizacja – proces rozumiany jako przechodzenie od opieki o charakterze
+   instytucjonalnym do opieki świadczonej w środowisku rodzinnym i społeczności
+   lokalnej.
+III. INFORMACJA O PRZEZNACZENIU GRANTÓW
+
+  1) Celem udzielonego grantu jest opracowanie, przetestowanie oraz dopracowanie (jeśli
+     dotyczy) innowacji społecznej z obszaru szeroko rozumianego włączenia społecznego.
+     Granty nie mogą być przeznaczone na projekty o charakterze wdrożeniowym.
+  2) Maksymalna kwota przyznanego grantu wynosi 120 000 zł.
+  3) Produktem końcowym innowacji musi być model końcowy innowacji społecznej
+     obejmujący: opis do czego służy dane rozwiązanie, kto jest odbiorcą/ użytkownikiem,
+     opis zasad użytkowania oraz wszystkie elementy składowe innowacji, wykazane w
+     specyfikacji innowacji.
+  4) Wybrane w naborze innowacje społeczne muszą dostarczać rozwiązania problemów
+     osób zagrożonych wykluczeniem społecznym lub wykluczonych społecznie, w
+     szczególności z powodu wieku, niepełnosprawności, ubóstwa, oddalenia od rynku
+     pracy, obciążenia rolami opiekuńczymi, mieszkających (w rozumieniu Kodeksu
+     cywilnego) na terenie Polski. Innowacje mogą mieć postać produktów, modelowych
+     usług, rozwiązań IT.
+  5) Maksymalny okres realizacji innowacji społecznej wynosi 12 miesięcy, przy czym
+     okres przygotowawczy nie może być dłuższy niż 3 miesiące, a łączny okres dwóch faz
+     testowania i dopracowanie nie może być dłuższy niż 9 miesięcy.
+  6) Testowanie innowacji oznacza jej praktyczne zastosowanie w małej grupie testerów
+     innowacji społecznych, której liczebność wskazana zostanie w Specyfikacji innowacji
+     (minimum 4 osoby). Liczba testerów uzależniona jest od charakteru innowacji.
+  7) Testowane innowacje nie mogą powielać:
+         a) standardowych form wsparcia,
+         b) innowacji już wdrożonych lub inkubowanych na terenie Polski, w tym działań
+            zrealizowanych w Programie Operacyjnym Kapitał ludzki, Programie
+            Operacyjnym Wiedza Edukacja Rozwój na lata 2014-2020, w szczególności w
+            Działaniu 4.1: Innowacje Społeczne oraz w Regionalnych Programach
+            Operacyjnych.
+          c) przedsięwzięć zaplanowanych lub realizowanych w Programie Fundusze
+                Europejskie dla Rozwoju Społecznego na lata 2021-2027 lub Regionalnych
+                Programach Operacyjnych.
+
+
+IV. OBOWIĄZKI GRANTOBIORCÓW
+
+Do obowiązków Grantobiorców należy w szczególności:
+   1) opracowanie w ścisłej współpracy z ROPS specyfikacji innowacji społecznej;
+   2) zawarcie umowy o powierzenie grantu,
+   3) złożenie zabezpieczenia umowy o powierzenie grantu, o ile ROPS nie zwolni
+      Grantobiorcy z tego obowiązku,
+   4) wypełnienie postanowień zawartej umowy o powierzenie grantu we wskazanym
+      terminie i zgodnie z jej warunkami,
+   5) wykorzystanie grantu zgodnie z zawartą umową o powierzenie grantu,
+   6) podpisanie oświadczenia uczestnika projektu grantowego. Wzór oświadczenia będzie
+      załącznikiem do umowy o powierzenie grantu.
+   7) odebranie deklaracji udziału w testowaniu innowacji społecznych od testerów
+      innowacji społecznych. Wzór deklaracji będzie załącznikiem do umowy o powierzenie
+      grantu,
+   8) postępowanie w trakcie opracowywania, testowania i dopracowania innowacji
+      społecznych i ich produktów zgodnie z zasadami równościowymi obowiązującymi w
+      ramach funduszy unijnych na lata 2021- 2027, w tym zasadami równości szans i
+      niedyskryminacji, standardami dostępności dla osób z niepełnosprawnościami,
+      zasadami równości kobiet i mężczyzn, a także zasadami polityki zrównoważonego
+      rozwoju, w tym zasadą DNSH poprzez zastosowanie rozwiązań proekologicznych.
+      ROPS zapewni niezbędne konsultacje w zakresie dostępności i będzie na bieżąco
+      wspierał grantobiorców w przedmiotowym obszarze,
+   9) udział w ścieżce wsparcia dobranej przez Inkubator na etapie realizacji innowacji
+      społecznej,
+   10) poddanie się monitoringowi i kontroli prowadzonym przez ROPS,
+  11) przekazanie ustalonych na etapie specyfikacji produktów częściowych i produktu
+     końcowego innowacji w celu rozliczenia otrzymanego grantu,
+  12) stała współpraca z Inkubatorem w trakcie procesu realizacji grantu,
+  13) udział w ewaluacji realizowanej innowacji społecznej,
+  14) współudział w opracowaniu ostatecznej wersji opisu innowacji do upowszechniania
+     (jeśli dotyczy),
+  15) przeniesienie na rzecz ROPS autorskich praw majątkowych do wszelkich utworów
+     wypracowanych w trakcie realizacji umowy o powierzenie grantu,
+  16) informowanie o realizowanym przedsięwzięciu i stosowanie właściwych oznaczeń
+     zgodnie z zapisami umowy o powierzenie grantu.
+
+
+V. PODMIOTY UPRAWNIONE DO APLIKOWANIA O GRANT
+
+  1) Wnioskodawcą mogą być:
+     a) osoby fizyczne, które:
+           i.    posiadają miejsce zamieszkania (w rozumieniu Kodeksu cywilnego) na
+                 terenie Polski,
+           ii.   posiadają pełną zdolność do czynności prawnych,
+          iii.   nie były skazane prawomocnym wyrokiem sądu za umyślne przestępstwo
+                 ścigane z oskarżenia publicznego lub umyślne przestępstwo skarbowe,
+          iv.    nie zostały wykluczone z możliwości otrzymania środków przeznaczonych
+                 na realizację programów finansowanych z udziałem środków europejskich
+                 na podstawie artykułu 207 ust. 4 ustawy o finansach publicznych,
+           v.    nie zalegają z uiszczeniem podatków, opłat lub składek na ubezpieczenia
+                 społeczne lub zdrowotne.
+     b) osoby prawne (w szczególności fundacje, stowarzyszenia, spółki kapitałowe,
+         spółdzielnie, w tym spółdzielnie socjalne),
+     c) jednostki organizacyjne, niebędące osobami prawnymi, którym ustawa przyznaje
+         zdolność prawną (w szczególności spółki jawne, spółki komandytowe, spółki
+         komandytowo-akcyjne),
+   d) jednostki sektora finansów publicznych,
+   e) grupy nieformalne osób lub podmiotów wymienionych w punktach od a) do d)
+      reprezentowane przez jednego z członków grupy nieformalnej umocowanego do
+      działania w imieniu i na rzecz wszystkich pozostałych członków (w tym do
+      działania w toku naboru, zawarcia umowy o powierzenie grantu oraz działania w
+      toku realizacji umowy o powierzenie grantu). Dokumenty potwierdzające
+      umocowanie do reprezentacji będą weryfikowane na etapie podpisywania
+      umowy o powierzenie grantu.
+2) Warunkiem udziału podmiotów wymienionych w pkt. 1). Ppkt. B) -d) jest spełnienie
+   łącznie poniższych wymogów:
+         i.    podmiot posiada siedzibę (lub oddział) na terenie Polski,
+        ii.    urzędujący członek organu zarządzającego lub nadzorczego podmiotu,
+               wspólnik w spółce jawnej lub partnerskiej albo komplementariusz w
+               spółce komandytowej lub komandytowo-akcyjnej nie został skazany
+               prawomocnym wyrokiem sądu za umyślne przestępstwo ścigane z
+               oskarżenia publicznego lub umyślne przestępstwo skarbowe,
+        iii.   podmiot nie został wykluczony z możliwości otrzymania środków
+               przeznaczonych na realizację programów finansowanych z udziałem
+               środków europejskich na podstawie artykułu 207 ust. 4 ustawy o finansach
+               publicznych,
+        iv.    podmiot nie zalega z uiszczeniem podatków, opłat lub składek na
+               ubezpieczenia społeczne lub zdrowotne.
+3) Z wnioskowania o grant wyłączeni są pracownicy ROPS i INNOAGH a także osoby,
+   które łączy lub łączył z pracownikiem ROPS lub INNOAGH:
+         i.    związek małżeński, stosunek pokrewieństwa i powinowactwa (w linii
+               prostej lub w linii bocznej do II stopnia),
+        ii.    związek z tytułu przysposobienia, opieki lub kurateli.
+4) Z wnioskowania o grant wyłączone są także podmioty:
+           i.    których wspólnikiem lub urzędującym członkiem organu zarządzającego
+                 lub nadzorczego jest pracownik ROPS lub INNOAGH lub osoba, którą łączy
+                 z pracownikiem ROPS lub INNOAGH stosunek określony w pkt. 3 ppkt. 1
+                 lub 2,
+          ii.    które łączy z personelem projektu oraz władzami ROPS lub INNOAGH,
+                 Głównym Księgowym lub Radcą Prawnym ROPS lub INNOAGH inny
+                 związek faktyczny, który może budzić uzasadnione wątpliwości, co do
+                 zachowania zasady bezstronności.
+          iii.   które są jednostkami organizacyjnymi Województwa Małopolskiego lub
+                 osobami prawnymi Województwa Małopolskiego.
+          iv.    które są powiązane kapitałowo z Akademią Górniczo-Hutniczą im.
+                 Stanisława Staszica w Krakowie.
+
+
+VI. TRYB APLIKOWANIA
+
+  1) Otwarty nabór aplikacji będzie przeprowadzony z zachowaniem zasad bezstronności,
+     rzetelności i przejrzystości oraz równym podejściem do Wnioskodawców z wszystkich
+     województw.
+  2) Termin naboru zostanie wskazany w ogłoszeniu o naborze, które zostanie
+     opublikowane co najmniej 3 miesiące przed uruchomieniem możliwości składania
+     aplikacji. Czas trwania naboru przewiduje się na miesiąc kalendarzowy. W przypadku
+     niewystarczającej liczby zgłoszeń, okres ten może zostać wydłużony.
+  3) Ogłoszenie o naborze zostanie zamieszczone na stronie internetowej Inkubatora.
+     Ogłoszenie będzie zawierać wzór aplikacji, wzór umowy o powierzenie grantu, wzory
+     kart oceny, informacje o zasadach rekrutacji oraz informację o wsparciu podczas
+     aplikowania w naborze.
+  4) Wnioskodawca będzie aplikował poprzez dedykowany elektroniczny formularz
+     aplikacyjny, zamieszczony na stronie internetowej Inkubatora.
+  5) Wnioskodawca może złożyć w naborze maksymalnie 2 aplikacje, przy czym każdy z
+     nich musi dotyczyć innej innowacji.
+   6) Podanie danych niezgodnych ze stanem faktycznym w aplikacji lub w oświadczeniach
+      skutkować będzie wykluczeniem z możliwości ubiegania się o grant i może być
+      potraktowane jako próba wyłudzenia środków finansowych oraz podlegać
+      powiadomieniu właściwych organów ścigania.
+   7) Wnioskodawca wnioskując o wsparcie w ramach projektu grantowego „Inkubator
+      Włączenia Społecznego 2.0” nie może równolegle aplikować o wsparcie na ten sam
+      pomysł (w tym samym w temacie, tj.: włączenie społeczne), w ramach innego
+      projektu wdrażanego w V Osi Priorytetowej programu Fundusze Europejskie dla
+      Rozwoju Społecznego 2021-2027 (Działanie 5.1: Innowacje społeczne) lub innego
+      funduszu.
+   8) W przypadku niewyłonienia 32 innowacji w ramach jednego naboru, przewiduje się
+      zorganizowanie naboru uzupełniającego.
+
+
+VII. ZASADY OCENY APLIKACJI ZŁOŻONYCH W NABORZE
+
+   1) Ocena aplikacji będzie obejmować 3 następujące po sobie etapy:
+          a) Etap 1 – ocena formalna,
+          b) Etap 2 – ocena merytoryczna,
+          c) Etap 3 – ocena strategiczna.
+   2) Ostateczną ocenę będzie stanowić suma punktów uzyskanych podczas oceny
+      merytorycznej
+      i strategicznej.
+   3) Po dokonaniu wszystkich etapów oceny zostanie stworzona Lista Rankingowa
+      i Rezerwowa, która będzie zawierać Wnioskodawców rekomendowanych do
+      otrzymania grantu, uszeregowanych ze względu na punktację uzyskaną podczas
+      oceny (od najwyższej do najniższej). Podstawą umieszczenia Wnioskodawców na
+      Liście Rankingowej lub Rezerwowej będzie spełnienie warunków uzyskania
+      pozytywnej oceny. Lista rankingowa i Rezerwowa zostaną zamieszczone na stronie
+      internetowej Inkubatora.
+4) W przypadku Wnioskodawców, którzy zajęli ostatnie miejsca na Liście Rankingowej
+   uzyskując taką samą liczbę punktów, RIS podejmuje decyzję rozstrzygającą o miejscu
+   na Liście Rankingowej lub Rezerwowej.
+5) Wnioskodawcy, których aplikacje otrzymały pozytywną ocenę, jednak z uwagi na
+   liczbę uzyskanych punktów oraz ograniczoną alokację nie zostaną zakwalifikowane na
+   Listę Rankingową, zostaną umieszczeni na Liście Rezerwowej.
+6) Otrzymanie grantu przez Wnioskodawcę z Listy Rezerwowej, który podczas oceny
+   uzyskał kolejną największą liczbę punktów jest możliwe pod warunkiem dostępności
+   środków lub zwiększenia alokacji przeznaczonej na granty, lub w przypadku
+   rezygnacji Wnioskodawcy z prac nad Specyfikacją innowacji, lub niepodpisania
+   umowy o powierzenie grantu, lub wycofania się Grantobiorcy w trakcie realizacji
+   Umowy o powierzenie Grantu.
+7) Zakłada się, iż w naborze do otrzymania grantu zostaną skierowane 32 aplikacje.
+   Dopuszcza się możliwość przyznania Grantu większej liczbie Wnioskodawców, jeśli
+   ROPS będzie dysponował odpowiednimi środkami.
+8) Po zakończeniu oceny, Inkubator przystąpi do prac nad Specyfikacją Innowacji.
+   Podpisanie umowy o powierzenie grantu między ROPS a Wnioskodawcą możliwe
+   będzie po wspólnym wypracowaniu Specyfikacji Innowacji oraz jej zaakceptowaniu
+   przez Inkubator.
+9) ROPS poinformuje Wnioskodawców ubiegających się o grant o wynikach oceny
+   każdego
+   z etapów za pomocą poczty elektronicznej na adres podany w aplikacji. Informacja
+   o przyznanych Grantach zostanie zamieszczona na stronie internetowej Inkubatora.
+10) Osoby zaangażowane w dokonywanie oceny na każdym z jej etapów będą
+   zobowiązane do złożenia oświadczenia o bezstronności i poufności. ROPS będzie
+   weryfikował wiarygodność oświadczenia o bezstronności na podstawie informacji
+   zawartych w Krajowym Rejestrze Sądowym lub Centralnej Ewidencji i Informacji o
+   Działalności Gospodarczej, na próbie losowo wybranych 5% aplikacji na każdym
+   etapie oceny, jednak nie mniej niż 1 i nie więcej niż 5. W przypadku wykrycia
+        niezgodności w oświadczeniu osoba oceniająca będzie wyłączona z oceny aplikacji w
+        naborze. Weryfikacja będzie udokumentowana w spisanej informacji z danego etapu
+        oceny.
+
+
+VIII. OCENA FORMALNA APLIKACJI ZŁOŻONYCH W NABORZE
+
+1)   Ocena formalna (spełnia/nie spełnia) dokonywana jest przez pracowników ROPS,
+     posiadających minimum 3-letnie doświadczenie w inkubowaniu innowacji społecznych
+     na podstawie aplikacji.
+ 2) Ocena formalna polega na sprawdzeniu spełnienia warunków kwalifikacji do wsparcia,
+     weryfikacji braku wykluczeń do otrzymania grantu, prawidłowości (w tym kompletności)
+     złożonej aplikacji (zgodność z celami naboru, poprawność wyboru grupy docelowej,
+     wykluczenie charakteru wdrożeniowego) oraz wstępnej analizie innowacyjności.
+ 3) Wstępna analiza innowacyjności polega na weryfikacji czy przedstawiony pomysł nie
+     powiela standardowych form wsparcia zaplanowanych w FERS lub Regionalnych
+     Programach Operacyjnych lub innowacji wypracowanych w Programie Inicjatywy
+     Wspólnotowej EQUAL, Programie Operacyjnym Kapitał Ludzki, Programie Operacyjnym
+     Wiedza Edukacja Rozwój lub w ramach innych projektów wybranych do dofinansowania
+     w Działaniu 5.1 Programu Fundusze Europejskie dla Rozwoju Społecznego. Weryfikacja
+     odbywa się na bazie dostępnych baz innowacji PO KL i PO WER, bazy innowacji
+     dostępnej na https://innowacjespoleczne.pl/innowacje-spoleczne/lista-innowacji/, a
+     także informacji pozyskanych z Internetu oraz od pozostałych Inkubatorów Innowacji
+     Społecznych funkcjonujących na terenie Polski.
+4)   Aplikacje poprawne pod względem formalnym zostają przekazane do oceny
+     merytorycznej. Aplikacje wadliwe pod względem formalnym podlegają procedurze
+     uzupełnienia braków formalnych/ złożenia wymaganych wyjaśnień.
+5)   Aplikacja zostanie uznana za prawidłową, jeśli spełni następujące kryteria:
+       a) jest kompletna, tj. wszystkie jego pola zostały wypełnione oraz dołączone
+           wymagane załączniki,
+b) została złożona w terminie wskazanym w ogłoszeniu i na odpowiednim
+   formularzu,
+c) została wypełniona w języku polskim,
+d) została złożona przez podmiot uprawniony zgodnie z rozdziałem V niniejszych
+   Procedur- weryfikacja statusu wnioskodawcy na podstawie złożonej
+   dokumentacji,
+e) została złożona przez wnioskodawcę niewykluczonego z możliwości otrzymania
+   środków finansowych – weryfikacja na podstawie oświadczenia,
+f) została złożona przez podmiot inny niż ROPS i INNOAGH – weryfikowane na
+   podstawie oświadczenia wnioskodawcy.
+g) budżet został poprawnie skonstruowany pod względem rachunkowym (nie
+   zawiera błędów rachunkowych),
+h) wnioskowana kwota dofinansowania nie przekracza 120 tysięcy złotych,
+i) przedstawiony pomysł na innowacje dotyczy włączenia społecznego,
+j) wnioskodawca nie przewiduje pobierania wpłat i opłat od testerów innowacji
+   społecznych w trakcie testowania innowacji,
+k) całkowity okres realizacji innowacji nie przekracza 12 miesięcy, przy czym okres
+   opracowania innowacji nie przekracza 3 miesięcy, a okres dwufazowego
+   testowania innowacji nie przekracza 9 miesięcy.
+l) pomysł na innowację jest zgodny z celem projektu grantowego, a także obejmuje
+   działania zgodne z założeniami projektu grantowego.
+m) pomysł na innowację jest innowacyjny w skali kraju tj. nie powiela standardowych
+   form wsparcia zaplanowanych w FERS lub Regionalnych Programach
+   Operacyjnych lub innowacji wypracowanych w Programie Inicjatywy
+   Wspólnotowej EQUAL, Programie Operacyjnym Kapitał Ludzki, Programie
+   Operacyjnym Wiedza Edukacja Rozwój lub w ramach innych projektów
+   wybranych do dofinansowania w Działaniu 5.1 Programu Fundusze Europejskie
+   dla Rozwoju Społecznego.
+6) Wezwania, o których mowa w pkt. 4), przesyłane będą pocztą elektroniczną na adres
+   wskazany przez Wnioskodawcę. Wezwanie uważa się za otrzymane przez Wnioskodawcę
+   w momencie, w którym mógł on pobrać wiadomość z serwera poczty przychodzącej,
+   niezależnie od tego, kiedy Wnioskodawca rzeczywiście zapozna się z treścią wezwania.
+7) Wyjaśnień oraz uzupełnienia braków formalnych należy dokonać w terminie 5 dni
+   roboczych (poniedziałek – piątek, z wyjątkiem dni ustawowo wolnych od pracy) od daty
+   otrzymania wezwania również pocztą elektroniczną na adres wskazany w wezwaniu. Jeśli
+   w tym terminie Wnioskodawca nie prześle wyjaśnień / uzupełnień, aplikacja zostanie
+   odrzucona na etapie oceny formalnej.
+8) Aplikacja zostanie przekazana do oceny merytorycznej w przypadku:
+       a) spełnienia wszystkich kryteriów formalnych zweryfikowanych na etapie oceny
+           formalnej,
+       b) uzyskania poprawek lub wyjaśnień udzielonych przez Wnioskodawcę w zakresie
+           objętym wezwaniem.
+
+
+IX. OCENA MERYTORYCZNA INNOWACJI SPOŁECZNYCH
+
+1) Ocena merytoryczna dokonywana jest w sposób bezstronny przez personel projektu
+    zaangażowany przez Lidera i Partnera, posiadający min. 3 letnie doświadczenie w
+    obszarze innowacji społecznych lub w obszarze włączenia społecznego.
+2) W celu przeprowadzenia oceny merytorycznej, ROPS powoła Komisję Oceny Innowacji
+    (KOI), składającą się z przedstawicieli ROPS i INNOAGH – w szczególności ze specjalistów
+    zatrudnionych w projekcie, spełniających kryterium opisane w pkt. 1).
+3) Ocena merytoryczna jest oceną dwustopniową:
+      a. Ocena w oparciu o formularz oceny na podstawie aplikacji- ocena dokonywana
+         przez dwóch pracowników ROPS na bazie ich wiedzy eksperckiej i doświadczenia.
+         Ostateczną liczbę punktów z tego etapu stanowi średnia ocen dwóch oceniających.
+         W przypadku rozbieżności pomiędzy ocenami dwóch oceniających, z których jeden
+         członek KOI pozytywnie oceni wniosek o grant, a drugi negatywnie, wniosek
+   zostanie przekazany do trzeciej oceny, która jest rozstrzygająca. Ocena jest
+   dokonana w odniesieniu do następujących kryteriów:
+      •   Innowacyjność – ocena rozwiązania pod kątem potencjału by w nowy lub
+          znacząco zmieniony względem istniejących rozwiązań sposób rozwiązać
+          wskazane problemy społeczne. Innowacyjność rozwiązania oceniana jest
+          na poziomie krajowym dla danej grupy docelowej. Zadaniem
+          wnioskodawcy jest opisanie proponowanego sposobu na tle istniejących,
+          stosunkowo najbardziej podobnych rozwiązań istniejących w kraju. (skala
+          punktów: 0-10 pkt.)
+      •   Adekwatności do potrzeb odbiorców i użytkowników - czy cele/produkty
+          innowacji społecznej są adekwatne do obecnej diagnozy potrzeb i
+          problemów grupy docelowej w skali kraju? W jakim stopniu innowacja
+          społeczna odpowiada na potrzeby grupy docelowej? W jakim stopniu
+          innowacja społeczna ma szansę na kontrybucję do zmiany społecznej tzn.
+          zmianę sytuacji grupy docelowej w skali kraju? (skala punktów: 0-10 pkt.)
+      •   Efektywność kosztowa – ocena stopnia optymalizacji, stosunku nakładów
+          do planowanych efektów, bilansu potencjalnych efektów pozytywnych i
+          negatywnych innowacji społecznej? (skala punktów: 0-10 pkt.)
+      •   Uniwersalność – ocena możliwości zastosowania rozwiązania w różnym
+          miejscu, łatwość stosowania, wdrażalność rozwiązania, możliwości
+          upowszechnienia i wyskalowania (skala punktów: 0-10 pkt.)
+      •   Wizja rozwoju pomysłu w przyszłości – ocena pomysłów na wykorzystanie
+          innowacji w przyszłości. (skala punktów: 0-10 pkt.)
+b. Ocena przyznana przez przedstawicieli KOI po przeprowadzonym „pitchingu” z
+   wnioskodawcą. Pitchingi są spotkaniami online z Wnioskodawcami skierowanymi
+   do oceny merytorycznej, w trakcie których zostaną uszczegółowione zapisy
+   aplikacji, a także doprecyzowany potencjał wnioskodawcy. W spotkaniu bierze
+   udział 3 przedstawicieli KOI, a ich oceny są udokumentowane na karcie oceny
+   prezentacji Wnioskodawcy. Przyznana liczba punktów po tym etapie oceny jest
+         średnią arytmetyczną punktów przyznanych przez trzech oceniających. KOI ocenia
+         aplikację na postawie kryteriów:
+             •   Ocena koncepcji testowania innowacji – ocena założeń sposobu weryfikacji
+                 w praktyce proponowanego rozwiązania i prowadzenia testu (skala od 0 do
+                 5 pkt),
+             •   Ocena potencjału Wnioskodawcy – ocena doświadczenia wnioskodawcy w
+                 realizacji zadań w podobnym zakresie dla danej grupy docelowej (skala od
+                 0 do 5 pkt.)
+             •   Zgodność z ideą deinstytucjonalizacji – stopień realizacji idei
+                 deinstytucjonalizacji wsparcia (skala punktów: 0-5 pkt.)
+4) W przypadku oceny opisanej w pkt 3) a), w celu uzyskania pozytywnej oceny konieczne
+    jest uzyskanie minimum 5 punktów w kryterium innowacyjność, natomiast 4 punktów w
+    pozostałych kryteriach. W przypadku oceny opisanej w pkt. 3) b) konieczne jest
+    uzyskanie minimum 3 punktów w każdym kryterium. Uzyskanie mniejszej liczby jest
+    jednoznaczne z odrzuceniem projektu na etapie oceny merytorycznej.
+5) Oceniający zobowiązani są do przedstawienia w formie pisemnej uzasadnienia dla
+    przyznanych za dane kryterium punktów. W przypadku propozycji/uwag dotyczących
+    ocenianej innowacji, Oceniający ma możliwość wyrażenia ich w specjalnie do tego
+    przeznaczonym polu Karty Oceny Aplikacji lub Karcie Oceny Prezentacji Wnioskodawcy.
+6) Wynikiem końcowym oceny merytorycznej jest suma punktów przyznanych na dwóch
+   etapach oceny merytorycznej. Maksymalna liczba możliwych do uzyskania punktów: 65.
+7) Efektem oceny merytorycznej jest lista aplikacji rekomendowanych do oceny
+   strategicznej (warunkiem rekomendacji jest osiągnięcie min. 50% możliwych do
+   uzyskania punktów z oceny merytorycznej tj. min. 32,5 pkt.). Aplikacje, które nie spełnią
+   tego kryterium, nie są kierowane do oceny strategicznej.
+8) Informacje o odrzuceniu aplikacji na etapie oceny merytorycznej zostaną przekazane
+   Wnioskodawcom na adres poczty elektronicznej podany we aplikacji.
+ X. PROCEDURY DOTYCZĄCE ROZPATRYWANIA ODWOŁAŃ
+
+1)   Wnioskodawcom, których aplikacje nie uzyskały minimum punktowego podczas oceny
+     merytorycznej przysługuje możliwość odwołania się od oceny.
+2)   Odwołanie od oceny musi zostać złożone pisemnie w terminie 5 dni roboczych od dnia
+     otrzymania informacji o wynikach oceny. Odwołanie należy złożyć pocztą elektroniczną,
+     tradycyjną lub na dzienniku podawczym w siedzibie ROPS, ul. Piastowska 32, Kraków.
+     Liczy się data wpływu odwołania na dziennik podawczy ROPS lub na adres poczty
+     elektronicznej wskazany w informacji o wyniku oceny. Odwołania należy składać w dni
+     robocze (od poniedziałku do piątku) od 8:00 do 16:00.
+3)   ROPS na podstawie opinii KOI ustosunkowuje się w formie pisemnej do treści
+     odwołania. Jeśli argumenty przedstawione przez Wnioskodawcę w odwołaniu zostaną
+     uznane przez KOI za uzasadnione, wówczas aplikacja zostaje skierowana do ponownej
+     oceny merytorycznej w zakresie podnoszonym w odwołaniu, która zostanie dokonana w
+     terminie 7 dni roboczych od daty poinformowania Wnioskodawcy o wyniku rozpatrzenia
+     odwołania.
+4)   Powtórna ocena merytoryczna będzie dokonywana przez osoby, które nie uczestniczyły
+     w ocenie pierwotnej danej aplikacji, zgodnie z zasadami określonymi w rozdziale IX
+     niniejszych Procedur.
+5)   Powtórna ocena merytoryczna aplikacji jest oceną wiążącą i ostateczną, od której
+     odwołanie nie przysługuje.
+6)   Aplikacje, które podczas ponownej oceny uzyskają pozytywną ocenę merytoryczną,
+     zostaną przekazane do oceny strategicznej.
+
+
+XI. OCENA STRATEGICZNA INNOWACJI SPOŁECZNYCH
+
+1) Ocenie strategicznej podlegają aplikacje, które zostały pozytywnie ocenione pod
+     względem merytorycznym.
+2) Oceny strategicznej aplikacji i wyboru projektów do dofinansowania dokonuje RIS.
+3) Członkowie RIS zostaną powołani przez Dyrektora ROPS na czas realizacji projektu.
+     Każdy z członków RIS będzie posiadał minimum 5-letnie doświadczenie naukowe/
+    doświadczenie zawodowe lub praktyczne, a także / odpowiednie kwalifikacje i
+    kompetencje związane z przynajmniej jednym z obszarów: innowacje społeczne,
+    włączenie społeczne.
+4) Ocena strategiczna opiera się na:
+      a. wynikach listy rankingowej
+      b. kartach Oceny Aplikacji oraz Karty Oceny Prezentacji Wnioskodawcy,
+      c. aplikacjach złożonych w naborze.
+5) W ramach oceny strategicznej RIS może przyznać dodatkowo 20 punktów każdej z
+   ocenianych aplikacji w oparciu o kryterium strategiczne rozumiane jako: „zwiększenie
+   skuteczności rozwiązywania problemów w obszarze włączenia społecznego”.
+6) Przyznanie dodatkowych punktów następuje w wyniku głosowania członków RIS.
+   Głosowanie może odbyć się podczas posiedzenia lub drogą elektroniczną.
+7) Wynik oceny strategicznej wymaga udokumentowanego uzasadnienia Rady.
+8) Po zakończeniu oceny strategicznej i zsumowaniu punktów uzyskanych na etapie oceny
+   merytorycznej i strategicznej, Wnioskodawcy zostaną uszeregowani na Liście
+   Rankingowej i Rezerwowej.
+9) Wynik oceny strategicznej będzie udokumentowany w Protokole z posiedzenia RIS.
+10) Od oceny strategicznej wnioskodawcą nie przysługuje odwołanie.
+
+
+XII. SPECYFIKACJA INNOWACJI
+
+1) Specyfikacja innowacji wypracowana jest przed zawarciem umowy o powierzenie grantu
+   we współpracy wnioskodawcy z Inkubatorem i stanowi załącznik do umowy o
+   powierzenie grantu.
+2) Przed przystąpieniem do opracowania specyfikacji innowacji, Inkubator zweryfikuje:
+       a) w odniesieniu do wyłonionych wnioskodawców, czy nie są oni wykluczeniu z
+          możliwości otrzymania środków przeznaczonych na realizację programów
+          finansowanych ze środków europejskich. Weryfikacja nastąpi w oparciu o dane
+          zamieszczone w Rejestrze podmiotów wykluczonych z możliwości otrzymania
+          środków finansowych na realizację programów finansowanych ze środków
+          europejskich, prowadzonym przez Ministerstwo Finansów. W przypadku
+          wykluczenia wnioskodawcy z możliwości otrzymania finansowania, grant nie
+          zostanie udzielony.
+       b) w odniesieniu do wnioskodawców prowadzących działalność gospodarczą, czy
+          nie występuje pomoc publiczna lub pomoc de minimis. Weryfikacja nastąpi w
+          oparciu o test występowania pomocy publicznej/de minimis. Wynik zostanie
+          udokumentowany do momentu przyznania grantu. W przypadku zaistnienia
+          pomocy publicznej, grant nie zostanie udzielony.
+       c) w odniesieniu do wyłonionych wnioskodawców, czy nie otrzymali w ramach IWS
+          2.0 więcej niż dwóch grantów na realizację innowacji. Zakłada się, że w ramach
+          projektu możliwe jest, by dany autor innowacji był zaangażowany maksymalnie 2
+          razy w ciągu całej realizacji projektu. W przypadku otrzymania dwóch grantów w
+          ramach projektu, kolejny grant nie zostanie udzielony.
+3) Inkubator zaplanował następujące działania wspierające opracowanie specyfikacji
+   innowacji:
+    a) Preakademia (2 x 16 h, wyjazdowa/online) – spotkanie wnioskodawców, korzy
+        zostali rekomendowani do otrzymania grantu. Tematyka akademii dotyczy m.in.
+        kwestii praw autorskich, projektowania uniwersalnego, obowiązków i praw
+        grantobiorcy, zwinnego zarządzania procesem testowania innowacji, głównych
+        założeń specyfikacji innowacji społecznych. Udział w jednej Preakademii jest
+        obligatoryjny i niezbędny do podpisania umowy o powierzenie grantu.
+    b) Praca indywidualna z Innowatorami/kami (online) - konsultacje specyfikacji z
+        zespołem Inkubatora.
+    c) Konsultacje zewnętrzne (w razie potrzeby) – dodatkowe konsultacje tematyczne ze
+        specjalistami z danego obszaru.
+4) Specyfikacja innowacji będzie zawierać: opis innowacji, grupy docelowej, uzasadnienie
+   innowacyjności, opis dostępności rozwiązania (zgodność wypracowywanych produktów
+   lub usług ze standardami dostępności), opis produktów częściowych i produktu
+   końcowego (w tym wymogi jakościowe i ilościowe), wskaźniki zakładanych produktów,
+   harmonogram, koncepcję testowania innowacji, w tym opis działań w ramach
+   przygotowania i testowania innowacji, kosztorys i informacje dotyczące jego szacowania.
+5) Specyfikacja innowacji określa racjonalne koszty bezpośrednio związane z realizacją
+   pomysłu i niezbędne do osiągnięcia celu, na który przyznano grant. Muszą być one
+   przypisane do konkretnych produktów częściowych i produktu końcowego, których
+   osiągnięcie będzie miało kluczowe znaczenie przy rozliczaniu grantu.
+6) Zatwierdzenia Specyfikacji innowacji dokonuje Dyrektor/ka ROPS, po wcześniejszej
+   akceptacji animatora/ki innowacji społecznej, specjalisty/tki ds. rozliczenia,
+   kierownika/czki projektu. Proces weryfikacji i akceptacji Specyfikacji innowacji będzie
+   udokumentowany w formie Kart pracy nad specyfikacją.
+7) Podczas prac nad Specyfikacją pomysł przedstawiony przez Innowatora w aplikacji może
+   zostać zmodyfikowany.
+8) W ramach prac nad Specyfikacją innowacji ROPS weryfikuje:
+   a) czy działania zostały zaplanowane w sposób racjonalny i służą osiągnięciu celu
+       innowacji społecznej,
+   b) czy koszty są zgodne z celami projektu grantowego,
+   c) czy koszty i działania są niezbędne do realizacji celów innowacji,
+   d) czy koszty dotyczą działań Grantobiorcy podejmowanych w okresie realizacji
+       Innowacji Społecznej,
+   e) czy koszty będą zgodne z przepisami prawa powszechnie obowiązującego, w tym
+       zarówno krajowego, jak i unijnego,
+   f) czy koszty są przejrzyste, racjonalne, efektywne, dokonane w sposób oszczędny, tzn.
+       niezawyżony w stosunku do średnich cen i stawek rynkowych i spełniający wymogi
+       uzyskiwania najlepszych efektów z danych nakładów.
+9) ROPS zastrzega sobie prawo do przyznania niższej niż wnioskowana, kwoty grantu
+   w przypadku zidentyfikowania kosztów, które zostaną uznane za nieuzasadnione (np.
+   zbędne, niezwiązane bezpośrednio z przedsięwzięciem lub zawyżone w porównaniu ze
+   stawkami rynkowymi). Istnieje również możliwość zwiększenia kwoty grantu w
+   przypadku zwiększenia zakresu rzeczowego w stosunku do przedstawionego w aplikacji.
+   Kwota ta nie może przekroczyć 120 tysięcy złotych. W ramach prac nad budżetem ROPS
+   porówna poszczególne koszty pomiędzy Wnioskodawcami, tak aby zatwierdzone
+   Specyfikacje Innowacji zawierały porównywalne koszty za podobne usługi.
+10) W celu weryfikacji stawek rynkowych kosztów wskazanych przez Grantobiorcę/czynię
+   ROPS opracuje Katalog średnich cen usług i towarów dla wydatków ponoszonych przez
+   Grantobiorców. Średnia cena poszczególnych działań/zakupów/usług/dostaw zostanie
+   określona na podstawie jednej z następujących metod:
+       a) rozeznania rynku polegającego na analizie wycen przesłanych w odpowiedzi na
+          zapytanie skierowane do wykonawców, analizie dostępnych cenników lub analizie
+          informacji uzyskanych w ramach kontaktu telefonicznego z wykonawcą,
+       b) porównania z wydatkami poniesionymi w innych projektach realizowanych przez
+          ROPS lub w jego bieżącej działalności.
+       c) W oparciu o aktualny Wykaz standardów i ceny rynkowych opracowany przez IZ.
+11) Katalog średnich cen usług i towarów dla wydatków ponoszonych przez Grantobiorców
+   nie stanowi katalogu zamkniętego i może być rozszerzany o inne kategorie.
+12) W celu weryfikacji kosztów, ROPS zweryfikuje:
+       a) rynkowość przyjętych stawek,
+       b) rynkowość przyjętych kosztów jednostkowych w przypadku zakupu towaru w
+           kwocie powyżej 2 500 zł za sztukę poprzez wskazanie 3 ofert lub 3 dostępnych
+           cenników (dokumenty te będą częścią specyfikacji),
+       c) zasadność finansową danych kosztów w przyjętej liczbie godzin,
+       d) zakresu danego kosztu (co składa się na dany koszt),
+       e) jasne powiązanie z realizowanymi w ramach grantu działaniami.
+13) Do wydatków ponoszonych w ramach grantów nie stosuje się Wytycznych dotyczących
+   kwalifikowalności 2021 – 2027, z zastrzeżeniem, poniższych warunków:
+    a) wydatki ponoszone w ramach grantu muszą spełniać następujące wymogi:
+          1) Być zgodne z przepisami prawa.
+          2) Być niezbędne do realizacji celów projektu i poniesione w związku z realizacją
+            projektu.
+        3) Być dokonane w sposób przejrzysty, racjonalny i efektywny, z zachowaniem
+           zasad uzyskiwania najlepszych efektów z danych nakładów, oszczędny tzn.
+           niezawyżony w stosunku do średnich cen i stawek rynkowych.
+   b) wydatkami niekwalifikowalnymi są wydatki wskazane w załączniku nr 2 do Procedur.
+14) ROPS zweryfikuje, czy w budżecie nie wystąpią koszty niekwalifikowalne wymienione w
+   Załączniku nr 2 do Procedur rozumiane zgodnie z 2.3 Wytycznych dotyczących
+   kwalifikowalności 2021 – 2027. W przypadku pkt. 2.3 2) Wytycznych dotyczących
+   kwalifikowalności 2021 – 2027 dotyczącego podwójnego dofinansowania, weryfikacja
+   nastąpi na podstawie oświadczenia grantobiorcy.
+15) Wskazane w kosztorysie koszty nie mogą stanowić wydatku w ramach cross-financingu
+   zgodnie z podrozdziałem 2.4 Wytycznych dotyczących kwalifikowalności 2021 – 2027.
+   Szczegółowe informacje dot. cross-financingu zawarto w załączniku nr 2 do Procedur.
+16) Wydatki w ramach grantów, mogą obejmować koszt podatku od towarów i usług (VAT).
+   Podatek VAT jest wydatkiem kwalifikowalnym, a jego kwalifikowalność nie podlega
+   weryfikacji.
+17) Wydatki ponoszone w ramach grantu muszą spełniać również poniższe wymogi:
+     a) nie stanowić wydatku stanowiącego pomoc publiczną z zastrzeżeniem możliwości
+         udzielania pomocy de minimis.
+     b) nie stanowić kosztu administracyjnego związanego z realizacją zadań
+         finansowanych w ramach grantu.
+     c) nie stanowić kosztu ewaluacji (ocena skuteczności, efektywności i trafności
+         wypracowanego przez grantobiorcę rozwiązania jest zadaniem finansowanym z
+         kosztów bezpośrednich przez ROPS), przy czym przez ewaluację nie jest
+         rozumiana weryfikacja i uwzględnianie wyników testów w trakcie dopracowania
+         innowacji.
+     d) nie stanowić wydatku wyłączonego z finansowania na podstawie procedur
+         realizacji projektu grantowego lub umowy o dofinansowanie projektu.
+18) Udzielony grant stanowi 100% wskazanych kosztów. Wkład własny nie jest wymagany.
+XIII. WYPŁACANIE GRANTÓW
+
+1) Grant wypłacany jest w formie zaliczki na konto wskazane przez Grantobiorcę w umowie
+    o powierzenie grantu, pod warunkiem dostępności środków na rachunku bankowym
+    prowadzonym przez ROPS. Grant wypłacany będzie w transzach.
+2) Grant wypłacany będzie w maksymalnie trzech transzach, przy czym dwie z nich
+    określone są w kosztorysie w momencie zawarcia umowy o powierzenie grantu,
+    natomiast trzecia możliwa jest w przypadku konieczności dodania po pierwszej fazie
+    testów niezbędnych kosztów modyfikacji rozwiązania na bazie opinii testerów. Łączna
+    kwota grantu nie może jednak przekroczyć 120 tys. złotych, a dodatkowa transza zaliczki
+    na modyfikację rozwiązania pomiędzy fazami testu nie może przekroczyć 10% kwoty
+    grantu określonej w momencie zawarcia umowy o powierzenie grantu. Dodatkowa
+    trzecia transza będzie wypłacana na podstawie aneksu do umowy o powierzenie grantu.
+3) Wypłata pierwszej transzy grantu następuje po zawarciu umowy o powierzenie grantu
+    oraz wniesieniu przez Grantobiorcę zabezpieczenia, o ile ROPS nie zwolnił Grantobiorcy
+    z tego obowiązku.
+ 4) Wypłata kolejnej transzy następuje po upływie okresu rozliczeniowego określonego dla
+    danej innowacji i uzależniona jest od osiągnięcia produktu częściowego określonego w
+    Specyfikacji Innowacji w danym okresie rozliczeniowym.
+5) Wypłata transzy, o której mowa w pkt. 4, następuje po zaakceptowaniu przez ROPS
+    Protokołu odbioru produktów częściowych przez Grantobiorcę zgodnych ze specyfikacją
+    innowacji społecznej. W przypadku wskazanym w rozdziale XVI pkt. 8 niniejszych
+    Procedur istnieje możliwość pomniejszenia transzy.
+6) Grantobiorca, który otrzyma grant, będzie zobowiązany do oświadczenia, że wydatkował
+    środki grantu zgodnie z ich przeznaczeniem wynikającym z umowy o powierzenie grantu
+    oraz osiągnął zakładany/e w Specyfikacji Innowacji produkty oraz dostarczenia
+    dowodów potwierdzających ich osiągnięcie.
+7) W przypadku nieosiągania przez Grantobiorcę założonych w Specyfikacji Innowacji
+    produktów przy jednoczesnym niepodejmowaniu działań zaradczych lub podejrzeniu o
+     przeznaczeniu środków niezgodnie z umową o powierzenie grantu, ROPS może powziąć
+     decyzję o niewypłaceniu kolejnych transz zaliczki.
+
+
+XIV. ZABEZPIECZENIE GRANTÓW
+
+1) Warunkiem wypłaty grantu jest wniesienie przez Grantobiorcę zabezpieczenia, o ile
+     ROPS nie zwolnił Grantobiorcy z tego obowiązku.
+2) ROPS może zwolnić Grantobiorcę w całości lub części z obowiązku wniesienia
+     zabezpieczenia, w szczególności, gdy sytuacja finansowa Grantobiorcy nie budzi
+     wątpliwości co do zdolności Grantobiorcy do wywiązania się z obowiązku zwrotu grantu,
+     w sytuacjach określonych w niniejszych Procedurach. Obowiązkowo zwolnieni z
+     wniesienia zabezpieczenia są Grantobiorcy będący jednostkami sektora finansów
+     publicznych.
+3) Zabezpieczenie zwrotu środków otrzymanych w ramach grantu stanowi weksel in
+     blanco.
+4) Grantobiorca zobowiązany jest do ustanowienia zabezpieczenia na okres do momentu
+     zakończenia realizacji projektu tj. do 30.06.2028 r.
+
+
+XV. UMOWA O POWIERZENIE GRANTU
+
+1)   Po zaakceptowaniu przez ROPS Specyfikacji Innowacji, z Grantobiorcą zostanie
+     podpisana umowa
+     o powierzenie grantu.
+2)   Wraz z podpisaniem umowy wnioskodawca reprezentowany przez pełnomocnika
+     przedkłada pełnomocnictwo. W razie wątpliwości ROPS może wezwać wnioskodawcę do
+     przedstawienia dokumentów, potwierdzających spełnianie przez Wnioskodawcę
+     odpowiednich wymogów określonych w rozdziale V niniejszych Procedur.
+3)   Umowa o powierzenie Grantu określa w szczególności:
+         a) cel projektu grantowego i zadania grantobiorcy objęte grantem,
+         b) kwotę grantu,
+c) warunki przekazania i rozliczenia grantu, w tym warunki rozliczania wydatków
+   dotyczące:
+    •   informacji co do transz,
+    •   formy rozliczenia grantu i jego dokumentowania,
+    •   powiązania wypłaty transzy grantu / końcowego rozliczenia grantu z
+        obowiązkiem przedstawienia stosownych dokumentów i osiągnięcia
+        zakładanych efektów częściowych i produktu końcowego zgodnych ze
+        Specyfikacją innowacji,
+    •   numeru rachunku bankowego, na który grant będzie przekazywany,
+    •   zabezpieczenia grantów,
+    •   obowiązku przekazywania przez grantobiorców danych niezbędnych do
+        rozliczenia grantu oraz innych dokumentów wynikających z umowy o
+        dofinansowanie projektu grantowego,
+    •   obowiązków w zakresie informacji i promocji,
+    •   zasad rozliczania grantu w sytuacji, gdy w trakcie realizacji umowy o
+        powierzenie grantu nie uda się grantobiorcy osiągnąć zakładanych
+        produktów,
+d) zobowiązanie do zwrotu grantu,
+e) zobowiązanie do poddania się kontrolom lub audytom prowadzanym przez
+   ROPS lub inne uprawnione podmioty (wskazane w art. 25 ust. 1 i 2 ustawy
+   wdrożeniowej).
+f) kwestię przekazywania przez grantobiorców wszystkich danych, którymi ROPS
+   musi dysponować, aby właściwie wywiązać się z obowiązków wynikających z
+   umowy o dofinansowanie projektu grantowego;
+g) warunki zmiany umowy, w tym terminy i sposób, w jaki grantobiorca powinien
+   wnioskować o wprowadzenie zmian;
+h) zobowiązanie grantobiorcy do przechowywania dokumentów związanych z
+   realizacją grantu w trakcie realizacji grantu;
+        i) zobowiązanie grantobiorcy do przeniesienia na ROPS pełni autorskich praw
+              majątkowych do wszelkich utworów wypracowanych w ramach realizacji
+              Umowy,
+ 4) Załącznikami do umowy są: specyfikacja Innowacji i harmonogram płatności.
+
+ 5) Specyfikacja innowacji lub harmonogram płatności mogą ulegać aktualizacji, pod
+    warunkiem akceptacji ROPS i nie wymagają zmiany w Umowie. Zmiany w Specyfikacji
+    Innowacji nie mogą powodować:
+           a) zmiany charakteru i celu Innowacji Społecznej,
+           b) zwiększenia powyżej 10% kwoty Grantu określonej w momencie podpisania
+                umowy;
+           c) przedłużenia okresu realizacji innowacji powyżej 12 miesięcy, w tym
+                opracowania innowacji powyżej 3 miesięcy oraz okresu testowania i
+                dopracowania Innowacji Społecznej powyżej 9 miesięcy.
+
+
+XVI. FINANSOWANIE GRANTÓW
+
+1) Granty będą rozliczane na podstawie osiągniętych produktów, co oznacza, że
+    grantobiorcy nie będą zobowiązani do sprawozdawczości finansowej. Warunkiem
+    rozliczenia grantu będzie osiągnięcie produktów częściowych i produktu końcowego,
+    określonych w Specyfikacji Innowacji, stanowiącej załącznik do umowy o powierzenie
+    grantu.
+2) Maksymalna kwota przyznanego grantu na opracowanie, przetestowanie i
+    dopracowanie innowacji społecznej wynosi 120 000 zł.
+3) Kwota przyznanego grantu ustalana jest na podstawie zatwierdzonej przez ROPS
+    Specyfikacji Innowacji.
+4) W odniesieniu do środków finansowych przekazanych grantobiorcy, w ramach grantu,
+    obowiązuje zakaz podwójnego finansowania tych samych wydatków. Jeżeli wydatki
+    ponoszone przez grantobiorcę zostały zrefundowane/pokryte w ramach innych środków
+    publicznych, nie można ich ponosić ze środków otrzymanych w ramach grantu. Takie
+    działanie skutkować będzie koniecznością zwrotu proporcjonalnej części otrzymanego
+    grantu.
+5) Grant przyznawany jest na osiągnięcie celu innowacji społecznej. Grant nie jest
+    przyznawany na rozwój i podniesienie konkurencyjności grantobiorcy.
+6) Rozliczenie środków (grantu lub części grantu) następuje poprzez:
+        a) złożenie rozliczenia częściowego lub końcowego (z opisem osiągniętych
+              produktów) wraz z oświadczeniem o wydatkowaniu środków zgodnie z
+              przeznaczeniem grantu, w terminie zgodnym z harmonogramem dla danego
+              etapu oraz
+        b) złożenie innych dokumentów specyficznych dla innowacji społecznych
+              potwierdzających produkty częściowe lub produkt końcowy innowacji.
+  7) Odbiór produktów częściowych i produktu końcowego innowacji społecznej następuje
+     zgodnie z harmonogramem płatności, stanowiącym załącznik do umowy o powierzenie
+     grantu. Dokumentacja, o której mowa w pkt. 6) powinna zostać złożona za okres
+     wykazany w harmonogramie płatności w ciągu 5 dni roboczych po upływie okresu
+     rozliczeniowego w przypadku rozliczania częściowego oraz w przypadku rozliczenia
+     końcowego w ciągu 15 dni roboczych od zakończenia realizacji innowacji.
+  8) W przypadku nieosiągnięcia produktów określonych dla danego etapu realizacji
+     innowacji, Grantobiorca zwraca koszt przypisany w Specyfikacji Innowacji do
+     niezrealizowanego produktu lub kolejna transza zostaje pomniejszona o wartość
+     przypisaną do niezrealizowanego produktu.
+  9) W sytuacji opisanej w pkt. 8) Grantobiorca jest zobowiązany do złożenia korekty
+     rozliczenia i zwrotu środków w wysokości odpowiadającej nieosiągniętemu
+     produktowi. Zwrot środków nie będzie miał miejsca, jeśli Grantobiorca wyrazi zgodę na
+     pomniejszenie kolejnej transzy.
+  10) Grantobiorca w sytuacji zaistnienia obiektywnych przeszkód w dalszym testowaniu
+     innowacji społecznej ma możliwość wnioskować o przerwanie testowania innowacji
+     społecznej i rozliczenia się za zrealizowane do danego momentu produkty. W
+     przypadku zaakceptowania przez ROPS wniosku Grantobiorcy, zwrotowi podlega ta
+          część grantu, która została wypłacona na poczet niezrealizowanych produktów
+          częściowych opisanych w Specyfikacji Innowacji.
+      11) W sytuacji, gdy w związku z zawinioną nienależytą realizacją Umowy przez
+          Grantobiorcę, na ROPS zostanie nałożona korekta finansowa, Grantobiorca,
+          niezależnie od obowiązku zwrotu środków zgodnie z rozdziałem XVII niniejszych
+          Procedur, zobowiązany będzie do naprawienia szkody powstałej z tego tytułu po
+          stronie ROPS1.
+
+
+XVII. ODZYSKIWANIE GRANTÓW W PRZYPADKU ICH WYKORZYSTANIA NIEZGODNIE
+        Z CELAMI PROJEKTU GRANTOWEGO
+
+       1) Grantobiorca zobowiązany jest do zwrotu całości (całości lub części – w przypadku, o
+          którym mowa w pkt. g) wypłaconych środków, jeżeli:
+            a) nie realizuje założonych zadań i nie osiąga przewidzianego w Specyfikacji
+                innowacji celu
+                (z zastrzeżeniem rozdziału XVI pkt. 10 niniejszych Procedur)
+            b) złożone przez grantobiorcę rozliczenie grantu nie zostało zaakceptowane przez
+                ROPS,
+            c) po zakończeniu testowania innowacji grantobiorca nie przedstawi rozliczenia
+                końcowego Innowacji Społecznej,
+            d) grantobiorca złożył niezgodne z prawdą oświadczenie na etapie ubiegania się
+                o grant,
+            e) grant został wykorzystany niezgodnie z celami projektu grantowego,
+            f) grantobiorca nie podpisze umowy o przekazaniu praw autorskich, zgodnie z
+                obowiązkiem, o którym mowa w rozdziale IV pkt. 15) Procedur,
+
+
+
+
+ 1
+     Dotyczy w szczególności sytuacji złożenia przez Grantobiorcę oświadczeń niezgodnych z prawdą.
+          g) Instytucja Zarządzająca nałoży na ROPS korektę finansową z tytułu niewłaściwego
+              wykorzystania grantu przez grantobiorcę (zwrot części wypłaconych środków
+              odpowiadającej nałożonej korekcie finansowej).
+      2) Grantobiorca zobowiązany jest do zwrotu części wypłaconych środków, w przypadku:
+          a) podwójnego finansowania, o którym mowa w rozdziale XVI pkt. 4) Procedur;
+          b) nieosiągnięcia produktu, jeżeli kolejna transza nie zostanie pomniejszona o
+              wartość przypisaną do niezrealizowanego produktu.
+          c) zaakceptowania przez ROPS wniosku grantobiorcy o przerwanie testowania
+              innowacji, o którym mowa w XVI pkt 10 – zwrotowi podlega część grantu, która
+              została wypłacona na poczet niezrealizowanych produktów częściowych
+              opisanych w specyfikacji innowacji.
+      3) W przypadkach, o których mowa w pkt. 1) i 2), grantobiorca zwraca na żądanie ROPS
+         lub innego organu kontrolującego otrzymane środki na rachunek bankowy wskazany
+         przez ROPS, w terminie 14 dni kalendarzowych od dnia otrzymania wezwania od
+         Inkubatora lub właściwego organu kontrolnego. W przypadku zmiany rachunku
+         bankowego, każdy z Grantobiorców zostanie o tym pisemnie poinformowany.
+  4) W przypadku gdy grantobiorca nie dokonał w wyznaczonym terminie zwrotu, o którym
+         mowa w pkt. 3), ROPS podejmie czynności zmierzające do odzyskania środków,
+         z wykorzystaniem dostępnych środków prawnych, w szczególności zabezpieczenia.
+  5) Koszty czynności zmierzających do odzyskania nieprawidłowo wykorzystanych środków
+         grantu obciążają grantobiorcę.
+
+
+XX.      MONITOROWANIE I KONTROLA GRANTÓW
+
+1) ROPS przeprowadzi co najmniej dwie wizyty monitoringowo-kontrolne u każdego
+       Grantobiorcy, weryfikujące postęp realizacji pomysłu innowacyjnego, w tym zgodność
+       realizacji grantu ze specyfikacją innowacji oraz harmonogramem i stopień osiągnięcia
+       zakładanych produktów. W trakcie wizyty następuje konsultacja spostrzeżeń, a ROPS
+       może podjąć decyzję o dokonaniu korekty realizowanych/zaplanowanych działań.
+2) Podczas wizyt monitoringowo-kontrolnych grantobiorca jest zobowiązany przedstawić
+     wypracowane produkty innowacji. Wizyty monitoringowo-kontrolne służą ocenie
+     prawidłowości realizacji przedsięwzięć przez Grantobiorców, a także bieżącemu
+     rozwiązaniu napotkanych problemów podczas realizacji innowacji społecznej. Wizyty
+     monitoringowo-kontrolne będą przeprowadzane przez zespół Inkubatora w formie
+     stacjonarnej lub online. O wizycie Grantobiorca zostanie poinformowany co najmniej
+     tydzień przed spotkaniem. Wnioski z wizyty będą udokumentowane na Karcie
+     monitoringu.
+3)    Testerzy innowacji społecznych mogą zgłaszać podczas wizyt monitoringowo-
+     kontrolnych, a także mailowo, swoje uwagi w zakresie testowania innowacji. Uwagi/
+     rekomendacje będą uwzględniane podczas dopracowywania produktów innowacji.
+
+
+Załącznikami do Procedur są:
+
+     1) Wzór Umowy o powierzenie grantu.
+     2) Wykaz wydatków niekwalifikowalnych w ramach grantu
+                                  Załącznik nr 1 do Procedur realizacji projektu grantowego
+                                                       „Inkubator Włączenia Społecznego 2.0”
+
+                                          Wzór
+
+                        UMOWA O POWIERZENIE GRANTU NR….
+
+
+w ramach Projektu grantowego: Inkubator Włączenia Społecznego 2.0, współfinansowanego
+ze środków Europejskiego Funduszu Społecznego Plus w ramach V Osi Priorytetowej
+Programu Fundusze Europejskie dla Rozwoju Społecznego 2021-2027 (Działanie 5.1:
+Innowacje społeczne),
+
+zawarta w dniu ………………………
+
+pomiędzy:
+Województwem Małopolskim, ul. Basztowa 22, 31-156 Kraków, NIP: 6762178337, REGON:
+351554287- Regionalny Ośrodek Polityki Społecznej w Krakowie, ul. Piastowska 32, 30-070
+Kraków, zwanym dalej „Grantodawcą” reprezentowanym przez: [imię, nazwisko, stanowisko]
+a
+
+[Dane grantobiorcy], zwanymi dalej „Grantobiorcą”.
+
+Dokument stwierdzający umocowanie do zawarcia niniejszej Umowy ze strony Grantobiorcy
+stanowi załącznik nr 1 do Umowy (jeśli dotyczy).
+
+
+
+                                        Definicje
+
+                                           §1
+
+Użyte w niniejszej umowie pojęcia oznaczają:
+
+1) ROPS – Regionalny Ośrodek Polityki Społecznej w Krakowie – Lider projektu „Inkubator
+    Włączenia Społecznego 2.0”,
+2) INNOAGH - Krakowskie Centrum Innowacyjnych Technologii INNOAGH sp. z o.o. –
+    Partner projektu „Inkubator Włączenia Społecznego 2.0”,
+3) Inkubator – partnerstwo Województwa Małopolskiego - Regionalnego Ośrodka Polityki
+   Społecznej w Krakowie oraz Krakowskiego Centrum Innowacyjnych Technologii
+   INNOAGH
+   sp. z o.o.,
+4) Projekt - projekt, o którym mowa w art. 41 ustawy z dnia 28 kwietnia 2022 r. o zasadach
+   realizacji zadań finansowanych ze środków europejskich w perspektywie finansowej
+   2021–2027, pn. „Inkubator Włączenia Społecznego 2.0”,
+5) Grant - środki finansowe, które ROPS powierzył Grantobiorcy, na podstawie Umowy o
+   powierzenie Grantu, na realizację zadań służących osiągnięciu celu innowacji społecznej,
+6) Grantobiorca - osoba fizyczna, podmiot lub partnerstwo/ grupa nieformalna, wybrany w
+   drodze otwartego naboru ogłoszonego przez ROPS w ramach realizacji projektu, z
+   którym ROPS zawarł Umowę o powierzenie Grantu, zwany też Innowatorem,
+7) Instytucja Zarządzająca – Minister Funduszy i Polityki Regionalnej,
+8) „Program” - oznacza to Program Fundusze Europejskie dla Rozwoju Społecznego 2021-
+   2027,
+9) Specyfikacja innowacji - dokument opracowany wspólnie przez Innowatora i ROPS, po
+   wyborze pomysłu na innowację społeczną, będący obowiązkowym załącznikiem do
+   umowy o powierzenie grantu, który zawiera cel i opis innowacji, opis grupy docelowej,
+   uzasadnienie innowacyjności, opis dostępności efektów, koncepcję testowania,
+   kosztorys i harmonogram opracowania/testowania innowacji oraz określa produkty
+   cząstkowe i produkt końcowy, stanowiące podstawę rozliczenia grantu,
+10) Testerzy innowacji społecznych – osoby i podmioty, które testują innowacje społeczne
+   sfinansowane w ramach powierzonych grantów,
+11) Uczestnicy Projektu grantowego – Grantobiorcy, którzy uzyskali grant w ramach
+   projektu grantowego,
+12) Strona internetowa Inkubatora – www.rops.krakow.pl, zakładka Realizowane projekty -
+   Inkubator Włączenia Społecznego 2.0,
+13) „Dni robocze” - oznacza to dni z wyłączeniem sobót i dni ustawowo wolnych od pracy
+   w rozumieniu ustawy z dnia 18 stycznia 1951 r. o dniach wolnych od pracy,
+14) „Dane osobowe” oznacza to dane osobowe w rozumieniu rozporządzenia Parlamentu
+   Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony osób
+      fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego
+      przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o
+      ochronie danych),
+ 15) „Ustawa o ochronie danych osobowych” – oznacza to ustawę z dnia 10 maja 2018 r. o
+      ochronie danych osobowych,
+ 16) „Wydatki kwalifikowalne” - oznacza to wydatki wskazane w zatwierdzonej Specyfikacji
+      Innowacji.
+ 17) „Procedury” – zatwierdzone przez Instytucję Zarządzającą „Procedury realizacji projektu
+      grantowego Inkubator Włączenia Społecznego 2.0”.
+ 18) „Umowa” – niniejsza umowa o powierzenie grantu.
+
+                                      Przedmiot i okres realizacji umowy
+
+                                                           §2
+
+ 1. Umowa określa prawa i obowiązki Stron związane z opracowaniem, testowaniem i
+     dopracowaniem2 w ramach powierzonego grantu Innowacji Społecznej pn. „tytuł
+     innowacji”, zwanej dalej „Innowacją Społeczną”, określoną szczegółowo w „Specyfikacji
+     Innowacji”, stanowiącej załącznik nr 2 do niniejszej Umowy, w tym warunki powierzenia
+     grantu Grantobiorcy.
+ 2. Okres realizacji Innowacji Społecznej jest zgodny z okresem wskazanym w Specyfikacji
+     Innowacji.
+ 3. Grantodawca, na uzasadniony wniosek Grantobiorcy, może wyrazić zgodę na zmianę
+     terminu realizacji Innowacji Społecznej, z zastrzeżeniem, że okres opracowania będzie nie
+     dłuższy niż 3 miesiące, a okres testowania i dopracowania3 nie dłuższy niż 9 miesięcy.
+4. Grant będzie realizowany przez: ................................................................. 4
+
+
+
+
+ 2
+   Jeśli dotyczy
+ 3
+   Jeśli dotyczy
+ 4
+    W przypadku realizacji Grantu przez jednostkę organizacyjną Grantobiorcy należy wpisać nazwę
+ jednostki, adres, numer REGON lub/i NIP (w zależności od statusu prawnego podmiotu) a w przypadku
+ osób fizycznych: imię i nazwisko, adres i PESEL. Jeżeli Grant będzie realizowany wyłącznie przez podmiot
+ wskazany jako Grantobiorca, ust. 4 należy wykreślić.
+5. Grantobiorca zobowiązuje się do realizacji Innowacji Społecznej z należytą starannością,
+   w szczególności ponosząc wydatki celowo, rzetelnie, racjonalnie i oszczędnie, zgodnie z
+   obowiązującymi przepisami prawa krajowego i unijnego, postanowieniami niniejszej
+   Umowy, zaleceniami Inkubatora, a także w sposób, który zapewni prawidłową i
+   terminową realizację Innowacji Społecznej oraz osiągnięcie celu i wskaźników zakładanych
+   w Specyfikacji Innowacji.
+6. Grantobiorca przy ponoszeniu wydatków grantu nie jest zobowiązany do stosowania
+   „Wytycznych dotyczących kwalifikowalności 2021 – 2027”, z zastrzeżeniem załącznika nr 2
+   do Procedur.
+7. Grant nie jest przeznaczony na rozwiązania o charakterze wdrożeniowym.
+8. Produktem końcowym Innowacji jest model końcowy innowacji społecznej obejmujący:
+   opis do czego służy dane rozwiązanie, kto jest odbiorcą/ użytkownikiem, opis zasad
+   użytkowania oraz wszystkie elementy składowe innowacji, wykazane w Specyfikacji
+   Innowacji.
+9. Innowacja Społeczna, o której mowa w ust. 1, jest zgodna z ideą deinstytucjonalizacji
+   wsparcia społecznego, rozumianą jako proces odchodzenia od pomocy instytucjonalnej na
+   rzecz wsparcia środowiskowego przy wykorzystaniu usług społecznych.
+
+                                       Warunki finansowe
+
+                                              §3
+
+1. Na warunkach określonych w niniejszej Umowie Grantodawca powierza Grantobiorcy
+   Grant w kwocie: xx xxx,xx zł (słownie złotych: ……………………………… 00/100 PLN) na
+   opracowanie i testowanie Innowacji Społecznej. Kwota ta stanowi 100% kosztów
+   określonych w zatwierdzonej Specyfikacji Innowacji.
+2. W przypadku konieczności wprowadzenia modyfikacji do Innowacji Społecznej na bazie
+   rekomendacji po pierwszej fazie testu, istnieje możliwość zwiększenia kwoty grantu na
+   dopracowanie innowacji, z założeniem, że zwiększenie nie przekroczy 10% pierwotnie
+   przyznanej kwoty grantu.
+3. Grantobiorca zobowiązuje się pokryć ze środków własnych wszelkie inne wydatki niż
+   zatwierdzone w aktualnej Specyfikacji Innowacji oraz powyżej kwot zatwierdzonych w
+   aktualnej Specyfikacji Innowacji.
+4. Grant nie może zostać przeznaczony na działania podejmowane przed datą rozpoczęcia
+   ani po dacie zakończenia innowacji, wskazanymi w aktualnej Specyfikacji Innowacji, ani
+   też na jakiekolwiek działania nieprzewidziane w aktualnej Specyfikacji Innowacji.
+5. Grantobiorca w ramach udzielonego grantu nie będzie ponosić wydatków
+   administracyjnych i ewaluacyjnych.
+
+                                 Zobowiązania Grantobiorcy
+
+                                             §4
+
+Grantobiorca zobowiązuje się w szczególności do:
+
+1) wniesienia zabezpieczenia prawidłowej realizacji Umowy zgodnie z postanowieniami § 5
+   Umowy,
+2) wykorzystania grantu zgodnie z zawartą umową o powierzenie grantu,
+3) realizacji Innowacji Społecznej w oparciu o Specyfikację innowacji, a w przypadku
+   dokonania zmian w Specyfikacji Innowacji, zgodnie z zatwierdzonymi zmianami,
+4) podpisania oświadczenia uczestnika projektu, którego wzór stanowi załącznik nr 4 do
+   niniejszej umowy,
+5) odebranie Deklaracji Testera Innowacji Społecznych od osób biorących udział w teście,
+   której wzór stanowi załącznik nr 7 do niniejszej umowy,
+6) postępowania w trakcie opracowywania, testowania i dopracowania Innowacji
+   Społecznych i ich produktów zgodnie z zasadami równościowymi obowiązującymi w
+   ramach funduszy unijnych na lata 2021- 2027, w tym zasadami równości szans i
+   niedyskryminacji, standardami dostępności dla osób z niepełnosprawnościami, zasadami
+   równości kobiet i mężczyzn, a także zasadami polityki zrównoważonego rozwoju, w tym
+   zasadą DNSH poprzez zastosowanie rozwiązań proekologicznych. Inkubator zapewni
+   niezbędne konsultacje w zakresie dostępności i będzie na bieżąco wspierał w
+   przedmiotowym obszarze,
+7) udziału w ścieżce wsparcia dobranej przez Inkubator na etapie realizacji innowacji
+   społecznej,
+8) poddania się monitoringowi i kontroli prowadzonym przez Inkubator,
+9) przekazania ustalonych na etapie specyfikacji produktów częściowych i produktu
+   końcowego innowacji w celu rozliczenia otrzymanego grantu,
+10) stałej współpracy z Inkubatorem w trakcie procesu realizacji grantu,
+11) udziału w ewaluacji realizowanej innowacji społecznej,
+12) współudziału w opracowaniu ostatecznej wersji opisu innowacji do upowszechniania (jeśli
+   dotyczy),
+13) oznakowania produktów częściowych i produktu końcowego znakiem licencji otwartej
+   typu „Creative Commons” („CC”),
+14) przeniesienia na rzecz ROPS autorskich praw majątkowych do wszelkich utworów
+   wypracowanych w trakcie realizacji umowy o powierzenie grantu,
+15) informowanie o realizowanym przedsięwzięciu i stosowanie właściwych oznaczeń zgodnie
+   z wytycznymi wskazanymi w „Podręczniku wnioskodawcy i beneficjenta Funduszy
+   Europejskich na lata 2021-2027 w zakresie informacji i promocji”
+   https://www.funduszeeuropejskie.gov.pl/media/127192/Podrecznik_wnioskodawcy_i_be
+   neficjenta_FE_2021_27w_zakresie_informacji_i_promocji.pdf
+
+                             Zabezpieczenie prawidłowej realizacji Umowy 5
+
+                                                          §5
+
+ 1. Grantobiorca wnosi zabezpieczenie prawidłowej realizacji Umowy, nie później niż w
+     terminie 7 dni roboczych od dnia zawarcia niniejszej Umowy o wartości6 xx xxx,xx zł w
+     formie Weksla in blanco (100 % kwoty grantu).
+ 2. Zabezpieczenie, o którym mowa w ust. 1, ustanawiane jest do dnia 30.06.2028 r. z
+     możliwością wcześniejszego zwolnienia zabezpieczenia.
+ 3. Po upływie terminu wskazanego w ust. 2, Grantodawca zwróci na wniosek Grantobiorcy
+     zabezpieczenie prawidłowej realizacji Umowy w ciągu 14 dni roboczych.
+
+
+
+
+5 W przypadku gdy Grantobiorca jest jednostką sektora finansów publicznych w rozumieniu ustawy z dnia 27 sierpnia 2009 r.
+
+o finansach publicznych albo fundacją, której jedynym fundatorem jest Skarb Państwa, obowiązków wynikających z § 5 nie
+stosuje się.
+6 Kwota zabezpieczenia to 100% wartości Grantu.
+                                          System płatności
+
+                                                 §6
+
+1.       Grant jest przekazywany na rzecz Grantobiorcy w systemie płatności zaliczkowej zgodnie
+         z Harmonogramem płatności stanowiącym załącznik nr 3 do niniejszej Umowy.
+2.       Grant będzie przekazany przez Grantodawcę na rachunek bankowy:
+         Grantobiorcy/realizatora7 o numerze xxxxxxxxxxxxxxxx. Grantobiorca oświadcza, że z
+         tego rachunku bankowego nie jest prowadzona egzekucja. Grantobiorca zobowiązuje się
+         niezwłocznie poinformować Grantodawcę o zajęciu w/w rachunku bankowego w okresie
+         realizacji niniejszej Umowy (do momentu ostatecznego rozliczenia środków Grantu
+         przez Grantodawcę).
+ 3. Wypłata pierwszej transzy Grantu nastąpi w ciągu 14 dni roboczych od dnia wniesienia
+         przez Grantobiorcę zabezpieczenia, o którym mowa w § 5 niniejszej Umowy/ od dnia
+         zawarcia niniejszej umowy8 pod warunkiem otrzymania przez Grantodawcę oryginału
+         podpisanej umowy wraz z jej załącznikami.
+ 4. Wypłata drugiej transzy następuje po upływie okresu rozliczeniowego określonego dla
+         danej innowacji w Harmonogramie płatności i uzależniona jest od osiągnięcia produktu
+         częściowego określonego w Specyfikacji Innowacji w danym okresie rozliczeniowym. W
+         przypadku niemożności osiągnięcia mierników w okresie rozliczeniowym Grantobiorca
+         ma możliwość wystąpienia do Grantodawcy przed upływem okresu rozliczeniowego z
+         wnioskiem o zmianę terminu zakończenia okresu rozliczeniowego, z zastrzeżeniem, że
+         okres opracowania będzie nie dłuższy niż 3 miesiące, a okres testowania i
+         dopracowania9 łącznie nie dłuższy niż 9 miesięcy.
+ 5. Wypłata drugiej transzy, o której mowa w ust. 4, następuje po zaakceptowaniu przez
+         ROPS produktów częściowych przedstawionych przez Grantobiorcę zgodnych ze
+         specyfikacją innowacji społecznej.
+
+
+
+
+7 Niepotrzebne skreślić.
+
+8
+     Niepotrzebne skreślić.
+
+9
+     Jeśli dotyczy
+6. W przypadku konieczności dopracowania produktu innowacji w oparciu o wyniki
+        pierwszej fazy testu Grantodawca przewiduje możliwość udzielenia trzeciej transzy
+        obejmującej koszty dopracowania.
+7. Dodatkowa, trzecia, transza zostanie wypłacona od dnia wniesienia przez Grantobiorcę
+        uzupełnienia zabezpieczenia, o którym mowa w § 5 niniejszej Umowy/ od dnia zawarcia
+        aneksu niniejszej umowy10 pod warunkiem otrzymania przez Grantodawcę oryginału
+        podpisanego aneksu do umowy wraz z załącznikami.
+8. Grantobiorca jest zobowiązany do wykazania w rozliczeniu, że osiągnął zakładany/-e dla
+        danego produktu miernik/-i, poprzez dostarczenie dowodów to potwierdzających.
+9. W przypadku nieosiągnięcia produktu określonego dla danego etapu realizacji grantu
+        lub zaprzestania za zgodą ROPS realizacji poszczególnych etapów, Grantobiorca zwraca
+        koszt przypisany w Specyfikacji Innowacji do niezrealizowanego produktu albo kolejna
+        transza zostaje pomniejszona o wartość przypisaną do niezrealizowanego produktu.
+10. W sytuacji opisanej w ust. 9, Grantobiorca odpowiada za złożenie korekty rozliczenia i
+        zwrot środków w wysokości odpowiadającej nieosiągniętemu produktowi lub jego
+        części. Zwrot środków nie ma zastosowania, jeśli za zgodą Grantobiorcy zostanie
+        pomniejszona kolejna transza.
+11. W przypadku nieosiągania przez Grantobiorcę założonych w Specyfikacji Innowacji
+        produktów przy jednoczesnym niepodejmowaniu działań zaradczych lub podejrzeniu o
+        przeznaczeniu środków niezgodnie z umową o powierzenie grantu, ROPS może powziąć
+        decyzję o niewypłaceniu kolejnych transz zaliczki.
+12. Grantobiorca w sytuacji obiektywnych przesłanek ma możliwość wnioskować o
+        przerwanie testowania Innowacji Społecznej i rozliczenia się za zrealizowane do danego
+        momentu produkty. W przypadku zaakceptowania przez Grantodawcę wniosku
+        Grantobiorcy, zwrotowi podlega ta część grantu, która została wypłacona na poczet
+        niezrealizowanych produktów cząstkowych opisanych w Specyfikacji Innowacji.
+13. Rozliczenie środków (grantu lub części grantu) następuje poprzez:
+
+
+
+
+10
+     Niepotrzebne skreślić.
+       1) złożenie Protokołu odbioru produktów Innowacji Społecznej wraz z oświadczeniem
+           o wydatkowaniu środków zgodnie z przeznaczeniem grantu, w terminie zgodnym
+           z harmonogramem dla danego etapu
+       2) złożenie     innych   dokumentów    specyficznych   dla   innowacji   społecznych
+           potwierdzających produkty częściowe lub produkt końcowy innowacji.
+14. Protokół odbioru produktów Innowacji Społecznych wraz z dokumentami, o których mowa
+    w ust. 13, Grantobiorca składa w ciągu 5 dni roboczych po upływie okresu rozliczeniowego
+    wskazanego w Harmonogramie płatności w przypadku odbioru produktów częściowych
+    oraz w przypadku odbioru produktu końcowego w ciągu 15 dni roboczych od zakończenia
+    realizacji innowacji.
+15. Grantobiorca sporządza dokumenty, o których mowa w ust. 13 w języku polskim i
+   przedkłada do Grantodawcy w formie elektronicznej (skan podpisanych dokumentów lub
+   dokumenty podpisane kwalifikowalnym podpisem elektronicznym). W razie wystąpienia
+   błędów Grantodawca przekazuje drogą elektroniczną stosowne uwagi do Grantobiorcy,
+   który w terminie 5 dni roboczych od otrzymania uwag przekazuje skorygowaną
+   dokumentację, dokonuje uzupełnienia dokumentacji lub udziela stosownych wyjaśnień.
+   Grantodawca może uzupełniać lub poprawiać dokumentację po konsultacjach z
+   Grantobiorcą, w zakresie oczywistych omyłek o charakterze technicznym lub
+   rachunkowym.
+16. Wypłata środków Grantu następuje pod warunkiem ujęcia środków przewidzianych na
+   realizację Projektu w planie finansowym Grantodawcy na dany rok budżetowy oraz
+   dostępności środków na rachunku bankowym prowadzonym przez Grantodawcę.
+   Grantobiorcy nie przysługuje odszkodowanie w przypadku opóźnienia lub niedokonania
+   wypłaty Grantu przez Grantodawcę będących rezultatem:
+        1) braku środków przeznaczonych na realizację Projektu w planie finansowym
+            Grantodawcy na dany rok budżetowy;
+        2) nieprzekazania przez Instytucję Zarządzającą środków na właściwy rachunek
+            prowadzony przez Grantodawcę;
+        3) braku ustanowienia lub wniesienia zabezpieczenia prawidłowego wykonania
+            zobowiązań wynikających z Umowy zgodnie z § 5;
+          4) niewykonania lub nienależytego wykonania przez Grantobiorcę obowiązków
+               wynikających z Umowy;
+          5) problemów technicznych uniemożliwiających terminowe przekazanie Grantu.
+17. Rzeczy nabyte z udziałem środków Grantu są własnością Grantobiorcy11.
+18. Grantobiorcy nie przysługuje prawo do odwołania się od ostatecznego rozstrzygnięcia
+     Grantodawcy dotyczącego rozliczenia, odmowy całości bądź części Grantu lub
+     rozwiązania umowy.
+
+                                         Monitorowanie i kontrola Grantu
+
+                                                          §7
+
+1. Grantobiorca zobowiązuje się poddać kontroli i monitoringowi w zakresie realizacji
+     niniejszej Umowy, zarówno przez Grantodawcę, jak i inne podmioty uprawnione do
+     przeprowadzenia kontroli, w zakresie jego prawidłowości realizacji. Grantobiorca
+     umożliwi pełny i niezakłócony dostęp do wszelkich informacji, dokumentów, miejsc i
+     obiektów, związanych z realizacją umowy. Wizyta monitoringowa może mieć miejsce w
+     miejscu realizacji innowacji lub on-line.
+2. ROPS przeprowadzi co najmniej dwie wizyty monitoringowo-kontrolne u Grantobiorcy,
+     weryfikujące postęp realizacji pomysłu innowacyjnego, w tym zgodność realizacji grantu
+     ze Specyfikacją Innowacji oraz harmonogramem i stopień osiągnięcia zakładanych
+     produktów. W trakcie wizyty następuje konsultacja spostrzeżeń, a ROPS może podjąć
+     decyzję o dokonaniu korekty realizowanych/ zaplanowanych działań.
+3. Wizyta monitoringowa może mieć również miejsce po zakończeniu testowania Innowacji
+     Społecznej, w trakcie rozliczenia końcowego w siedzibie / miejscu zamieszkania12
+     Grantobiorcy/Realizatora.
+4. Podczas wizyt monitoringowych Grantobiorca jest zobowiązany przedstawić produkty
+     Innowacji Społecznej, określone w Specyfikacji Innowacji.
+
+
+
+11 dotyczy towarów zakupionych w ramach grantu, które służyły do opracowania i testowania innowacji społecznych np.
+
+
+materiały techniczne, papiernicze itp.
+
+12 dotyczy osób fizycznych.
+5. Grantobiorca jest zobowiązany informować Testerów innowacji społecznych o
+   możliwości zgłaszania uwag do Grantodawcy (mailowo, telefonicznie, osobiście) oraz
+   umożliwić im zgłaszanie uwag do Grantodawcy w zakresie testowania Innowacji
+   Społecznej podczas wizyt monitoringowych.
+
+                                        Zwrot Grantu
+
+                                            §8
+
+1. Grantobiorca zobowiązany jest do zwrotu całości (lub części – w przypadku, o którym
+   mowa w pkt. 7)) wypłaconych środków, jeżeli:
+   1) nie realizuje założonych zadań i nie osiąga przewidzianego w Specyfikacji innowacji
+       celu (z zastrzeżeniem § 6 ust. 12 niniejszej umowy)
+   2) złożony przez grantobiorcę Protokół odbioru produktów Innowacji Społecznej nie
+       został zaakceptowany przez ROPS,
+   3) po zakończeniu testowania innowacji grantobiorca nie przedstawi Protokołu odbioru
+       produktu Innowacji Społecznej,
+   4) grantobiorca złożył niezgodne z prawdą oświadczenie na etapie ubiegania się o
+       grant,
+   5) grant został wykorzystany niezgodnie z celami projektu,
+   6) grantobiorca nie podpisze umowy o przekazaniu praw autorskich,
+   7) Instytucja Zarządzająca nałoży na ROPS korektę finansową z tytułu niewłaściwego
+       wykorzystania grantu przez grantobiorcę (zwrot części wypłaconych środków
+       odpowiadającej nałożonej korekcie finansowej).
+2. Grantobiorca zobowiązany jest do zwrotu części wypłaconych środków, w przypadku:
+    1) podwójnego finansowania;
+    2) nieosiągnięcia produktu, jeżeli kolejna transza nie zostanie pomniejszona o wartość
+       przypisaną do niezrealizowanego produktu.
+    3) zaakceptowania przez ROPS wniosku grantobiorcy o przerwanie testowania
+       innowacji, o którym mowa w § 6 ust. 12 – zwrotowi podlega część grantu, która
+       została wypłacona na poczet niezrealizowanych produktów częściowych opisanych
+       w specyfikacji innowacji.
+3. W przypadkach, o których mowa w ust. 1. i 2, grantobiorca zwraca na żądanie ROPS lub
+   innego organu kontrolującego otrzymane środki na rachunek bankowy ROPS o numerze
+   02 1020 2892 0000 5702 0898 1112, w terminie 14 dni kalendarzowych od dnia
+   otrzymania wezwania od ROPS lub właściwego organu kontrolnego. W przypadku
+   zmiany rachunku bankowego, grantobiorca zostanie o tym pisemnie poinformowany.
+4. W przypadku gdy grantobiorca nie dokonał w wyznaczonym terminie zwrotu, o którym
+   mowa w ust. 3, ROPS podejmie czynności zmierzające do odzyskania środków, z
+   wykorzystaniem dostępnych środków prawnych, w szczególności zabezpieczenia.
+5. Koszty czynności zmierzających do odzyskania nieprawidłowo wykorzystanych środków
+   grantu obciążają grantobiorcę.
+6. W przypadku gdy grantobiorca nie dokona w wyznaczonym terminie zwrotu, o którym
+   mowa w ust. 3, od kwoty podlegającej zwrotowi naliczane będą odsetki ustawowe za
+   opóźnienie, a grantodawca podejmie czynności zmierzające do odzyskania środków, w
+   szczególności z wykorzystaniem zabezpieczenia.
+7. W sytuacji, gdy w związku z zawinioną nienależytą realizacją umowy przez grantobiorcę,
+   na grantodawcę zostanie nałożona korekta finansowa, grantobiorca niezależnie od
+   obowiązku zwrotu środków, zobowiązany będzie do naprawienia szkody powstałej z
+   tego tytułu po stronie grantodawcy.
+
+                                    Prawa autorskie
+
+                                           §9
+
+1. Grantobiorca jest zobowiązany do zapewnienia sobie wyłącznych, nieograniczonych
+   majątkowych praw autorskich do utworów wytworzonych w ramach Innowacji
+   Społecznej.
+2. W przypadku zlecania przez Grantobiorcę innemu podmiotowi części zadań objętych
+   niniejszą umową Grantobiorca zobowiązuje się do uwzględnienia w umowie z tym
+   podmiotem klauzuli przenoszącej autorskie prawa majątkowe do wszelkich utworów
+   stworzonych przez ten podmiot w ramach wykonywania umowy z Grantobiorcą na
+   Grantobiorcę, co najmniej na następujących polach eksploatacji:
+        1) utrwalanie na wszelkich nośnikach,
+        2) zwielokrotnianie każdą znaną techniką,
+        3) wprowadzanie do obrotu, użyczenie lub najem egzemplarzy,
+        4) wprowadzanie do pamięci komputera i sieci multimedialnych, w szczególności
+            do Internetu,
+        5) publiczne odtwarzanie i wyświetlanie,
+        6) nadawanie i reemitowanie za pomocą wszelkich dostępnych technologii,
+        7) tworzenie nowych wersji i adaptacji (tłumaczenie, przystosowanie, zmianę
+            układu lub jakiekolwiek inne zmiany
+        8) wykorzystanie w całości lub części w publikacjach Zamawiającego,
+    a także klauzulę obejmującą przeniesienie na Grantobiorcę wyłącznego prawa do
+    zezwalania na wykonywanie zależnych praw autorskich do wszelkich utworów
+    stworzonych przez ten podmiot w ramach wykonywania umowy z Grantobiorcą.
+3. Grantobiorca zobowiązuje się w ramach w odrębnej umowy nieodpłatnie przenieść na
+    rzecz Grantodawcy autorskie prawa majątkowe do korzystania z wszelkich utworów
+    powstałych w ramach realizowania przez Grantobiorcę niniejszej umowy co najmniej na
+    polach eksploatacji wymienionych w ust. 2, łącznie z wyłącznym prawem do udzielania
+    zezwoleń na wykonywanie zależnych praw autorskich dla dowolnego celu, również
+    komercyjnego. Zawarcie stosownej umowy jest warunkiem niezbędnym do końcowego
+    rozliczenia Grantu. Po przekazaniu praw autorskich oraz przekazaniu praw autorskich
+    przez Grantodawcę na rzecz Instytucji Zarządzającej, Grantobiorca będzie mógł
+    korzystać z wypracowanej innowacji w ramach licencji otwartej typu „Creative
+    Commons” („CC”).
+
+                                        Dane osobowe
+
+                                            § 10
+
+1. W celu należytego wykonania Umowy, Grantodawca działając jako Administrator,
+   powierza Grantobiorcy zgodnie z art. 28 ust. 3 RODO przetwarzanie danych osobowych
+   niezbędnych do realizacji Innowacji Społecznej w zakresie nie wykraczającym poza zakres
+   określony treścią załącznika nr 5.
+2. Przetwarzanie danych osobowych przez Grantobiorcę odbywa się wyłącznie na
+    udokumentowane polecenie Grantodawcy dotyczące realizacji Innowacji Społecznej, o
+    której mowa w §2 Umowy.
+3. Przetwarzanie danych odbywać się będzie w oparciu o:
+ 1) rozporządzenie Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia
+    2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych
+    osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia
+    dyrektywy 95/46/WE (zwane dalej RODO);
+ 2) właściwe przepisy prawa polskiego, w tym ustawę z dnia 10 maja 2018 r. o ochronie
+    danych osobowych;
+4. Grantobiorca oświadcza, że stosuje środki bezpieczeństwa, odpowiadające ryzyku
+   związanym z przetwarzaniem danych osobowych, spełniające wymogi aktów prawnych, o
+   których mowa w ust. 3.
+5. Do przetwarzania danych osobowych mogą być dopuszczone jedynie osoby upoważnione
+   przez Grantobiorcę lub podmiot, o którym mowa w ust. 16, posiadające imienne
+   upoważnienie do przetwarzania danych osobowych. Upoważnienia Grantobiorca oraz
+   podmiot, o którym mowa w ust. 16 przechowują w swojej siedzibie.
+6. Grantodawca zobowiązuje Grantobiorcę, by osoby upoważnione przez niego do
+   przetwarzania danych osobowych zobowiązane zostały do zachowania w tajemnicy
+   danych osobowych oraz informacji o stosowanych sposobach ich zabezpieczenia, także
+   po ustaniu stosunku prawnego łączącego osobę upoważnioną do przetwarzania danych
+   osobowych z Grantobiorcą.
+7. Grantobiorca oświadcza, że w związku ze zobowiązaniem do zachowania w tajemnicy
+   danych poufnych nie będą one wykorzystywane, ujawniane ani udostępniane bez
+   pisemnej zgody Grantodawcy w innym celu niż wykonanie Umowy, chyba że konieczność
+   ujawnienia posiadanych informacji wynika z obowiązujących przepisów prawa lub
+   Umowy.
+8. Grantobiorca niezwłocznie informuje Grantodawcę o:
+1) wszelkich przypadkach naruszenia tajemnicy danych osobowych lub o ich niewłaściwym
+    użyciu oraz naruszeniu obowiązków dotyczących ochrony powierzonych do
+    przetwarzania danych osobowych;
+2) wszelkich czynnościach z własnym udziałem w sprawach dotyczących ochrony danych
+    osobowych prowadzonych w szczególności przed Prezesem Urzędu Ochrony Danych
+   Osobowych, Europejskim Inspektorem Ochrony Danych Osobowych, urzędami
+   państwowymi, policją lub przed sądem;
+3) wynikach kontroli prowadzonych przez podmioty uprawnione w zakresie przetwarzania
+   danych osobowych wraz z informacją na temat zastosowania się do wydanych zaleceń, o
+   których mowa w ust. 15.
+   Niniejszy ustęp dotyczy wyłącznie danych osobowych powierzonych przez
+   Zamawiającego.
+ 9. Grantobiorca udostępnia Grantodawcy wszelkie informacje niezbędne do wykonywania
+    przez Grantodawcę obowiązków wymaganych przepisami prawa, w szczególności
+    zobowiązuje się do udzielenia, na każde żądanie, informacji na temat przetwarzania
+    danych osobowych, o których mowa w niniejszym paragrafie, a w szczególności
+    niezwłocznego przekazywania informacji o każdym przypadku naruszenia przez niego i
+    osoby przez niego upoważnione do przetwarzania danych osobowych obowiązków
+    dotyczących ochrony danych osobowych.
+ 10. Grantobiorca, bez zbędnej zwłoki, nie później jednak niż w ciągu 24 godzin po
+    stwierdzeniu incydentu lub naruszenia, zgłosi ten fakt Grantodawcy Zgłoszenie powinno
+    oprócz elementów określonych w art. 33 ust. 3 RODO zawierać informacje
+    umożliwiające Grantodawcy określenie czy naruszenie skutkuje wysokim ryzykiem
+    naruszenia praw lub wolności osób fizycznych. Jeżeli informacji, o których mowa w art.
+    33 ust. 3 RODO nie da się udzielić w tym samym czasie, Grantobiorca może ich udzielać
+    sukcesywnie bez zbędnej zwłoki.
+ 11. Grantobiorca umożliwi Grantodawcy, w miejscach, w których są przetwarzane
+    powierzone dane osobowe, dokonanie kontroli lub audytu zgodności przetwarzania
+    powierzonych danych osobowych z ustawą o ochronie danych osobowych, RODO,
+    przepisami prawa powszechnie obowiązującego dotyczącymi ochrony danych
+    osobowych oraz z umową. Zawiadomienie o zamiarze przeprowadzenia kontroli lub
+    audytu powinno być przekazane podmiotowi kontrolowanemu co najmniej 5 dni
+    roboczych przed rozpoczęciem kontroli.
+ 12. W przypadku powzięcia przez Grantodawcę wiadomości o poważnym naruszeniu przez
+    Grantobiorcę obowiązków wynikających z ustawy o ochronie danych osobowych,
+    RODO, innych przepisów prawa powszechnie obowiązującego dotyczącego ochrony
+   danych osobowych lub z umowy, Grantobiorca umożliwi Grantodawcy dokonanie
+   niezapowiedzianej kontroli lub audytu.
+13. Kontrolerzy Grantodawcy mają w szczególności prawo:
+     1) wstępu, w godzinach pracy Wykonawcy, za okazaniem imiennego upoważnienia,
+         do pomieszczenia, w którym jest zlokalizowany zbiór powierzonych do
+         przetwarzania danych osobowych, oraz pomieszczenia, w którym są
+         przetwarzane powierzone dane osobowe i przeprowadzenia niezbędnych badań
+         lub innych czynności kontrolnych w celu oceny zgodności przetwarzania danych
+         osobowych z ustawą o ochronie danych osobowych, RODO, przepisami prawa
+         powszechnie obowiązującego dotyczącego ochrony danych osobowych oraz
+         umową;
+     2) żądania złożenia pisemnych lub ustnych wyjaśnień przez osoby upoważnione do
+         przetwarzania danych osobowych, przedstawiciela Wykonawcy oraz
+         pracowników w zakresie niezbędnym do ustalenia stanu faktycznego;
+     3) wglądu do wszelkich dokumentów i wszelkich danych mających bezpośredni
+         związek z przedmiotem kontroli lub audytu oraz sporządzania ich kopii;
+     4) przeprowadzania oględzin urządzeń, nośników oraz systemu informatycznego
+         służącego do przetwarzania danych osobowych.
+14. Grantobiorca może zostać poddany kontroli lub audytowi zgodności przetwarzania
+   powierzonych do przetwarzania danych osobowych z ustawą o ochronie danych
+   osobowych, RODO, przepisami prawa powszechnie obowiązującego dotyczącymi
+   ochrony danych osobowych w miejscach, w których są one przetwarzane przez
+   instytucje uprawnione do kontroli lub audytu na podstawie odrębnych przepisów.
+15. Grantobiorca zobowiązuje się zastosować zalecenia dotyczące poprawy jakości
+   zabezpieczenia danych osobowych oraz sposobu ich przetwarzania sporządzone w
+   wyniku kontroli lub audytu przeprowadzonych przez Instytucję Zarządzającą,
+   Grantodawcę lub przez podmioty przez nie upoważnione albo przez inne instytucje
+   upoważnione do kontroli na podstawie odrębnych przepisów.
+16. Grantobiorca może powierzone dane osobowe powierzyć do dalszego przetwarzania
+   innemu podmiotowi jedynie w celu wykonania przedmiotu niniejszej umowy i po
+   uzyskaniu uprzedniej zgody Grantodawcy wyrażonej pod rygorem nieważności na
+   piśmie. Zakres danych osobowych powierzanych przez Grantobiorcę do dalszego
+   przetwarzania, powinien być adekwatny do celu powierzenia oraz każdorazowo
+   indywidualnie dostosowany przez Grantobiorcę.
+17. Podmiot, o którym mowa w ust. 16 winien spełniać te same gwarancje i obowiązki jakie
+   zostały nałożone na Grantobiorcę w niniejszej Umowie.
+18. Grantobiorca oraz podmiot, o którym mowa w ust. 16 zobowiązani są do wykonywania
+   wobec osób, których dane pozyskują w związku z realizacją Innowacji Społecznej,
+   obowiązków informacyjnych wynikających z art. 13 i art. 14 RODO również w imieniu
+   Grantodawcy oraz Instytucji Zarządzającej, zgodnie ze wzorem klauzul informacyjnych
+   stanowiących załącznik nr 6 do niniejszej umowy.
+19. Grantobiorca ponosi pełną odpowiedzialność wobec osób, których dane pozyskuje w
+   związku z realizacją Innowacji Społecznej, oraz wobec Instytucji Zarządzającej i
+   Grantodawcy za niewywiązywanie się z obowiązków dotyczących ochrony danych
+   osobowych, spoczywających na podmiocie, któremu powierzono dane do dalszego
+   przetwarzania.
+20. Grantobiorca oświadcza, że jest świadomy odpowiedzialności karnej za naruszenie
+   zasad przetwarzania danych osobowych, określonej w RODO oraz ustawie z dnia 10
+   maja 2018 r. o ochronie danych osobowych i zobowiązuje się zachować w tajemnicy
+   dane osobowe, do których uzyskał dostęp.
+21. Grantobiorca jest uprawniony do przetwarzania powierzonych danych do zakończenia
+   realizacji umowy o powierzenie grantu, nie dłużej jednak niż do dnia 30.06.2028 r. Po
+   tym terminie Grantobiorca jest bezwzględnie zobowiązany do usunięcia danych
+   osobowych (wersji papierowej, jak i elektronicznej) będących w jego posiadaniu oraz do
+   podjęcia stosownych działań w celu wyeliminowania możliwości dalszego
+   przetwarzania danych powierzonych mu na podstawie niniejszej umowy.
+
+                                  Rozwiązanie umowy
+
+                                           § 11
+
+1. Grantodawca może rozwiązać niniejszą Umowę ze skutkiem natychmiastowym w formie
+   pisemnego wypowiedzenia, w przypadku, gdy:
+    1) Grantobiorca wykorzysta przekazane środki na cel inny niż określony w Specyfikacji
+       Innowacji lub niezgodnie z niniejszą Umową;
+    2) Grantobiorca złoży lub posłuży się fałszywym oświadczeniem lub podrobionymi,
+       przerobionymi lub stwierdzającymi nieprawdę dokumentami w celu uzyskania
+       Grantu lub jego rozliczenia w ramach niniejszej umowy;
+    3) Grantobiorca ze swojej winy nie rozpoczął realizacji zadań w ciągu 1 miesiąca od
+       daty rozpoczęcia ustalonej w Specyfikacji Innowacji;
+    4) Grantobiorca nie przedłożył zabezpieczenia prawidłowej realizacji umowy zgodnie z
+       § 5 niniejszej Umowy (jeśli dotyczy);
+    5) Grantobiorca odmówi poddania się kontroli lub monitoringowi, o której mowa w § 7
+       niniejszej Umowy;
+    6) Grantobiorca, mimo wezwania, nie przedkłada Protokołu odbioru produktów
+       Innowacji Społecznej;
+    7) Grantobiorca, mimo wezwania, uchyla się od wykonywania obowiązków, o których
+       mowa w § 4 niniejszej Umowy;
+    8) został złożony wobec Grantobiorcy wniosek o ogłoszenie upadłości lub gdy
+       Grantobiorca pozostaje w stanie likwidacji, lub podlega zarządowi komisarycznemu,
+       lub zawiesił swoją działalność, lub jest przedmiotem postępowań o podobnym
+       charakterze;
+    9) Instytucja Zarządzająca rozwiąże umowę o finansowanie projektu Grantodawcy,
+       przy czym rozwiązanie niniejszej Umowy może nastąpić wyłącznie wówczas, gdy nie
+       doszło do ostatecznego rozliczenia środków Grantu przez Grantodawcę.
+2. Umowa może zostać rozwiązana w drodze pisemnego porozumienia stron na wniosek
+   każdej ze stron w przypadku wystąpienia okoliczności, które uniemożliwiają dalsze
+   wykonywanie postanowień zawartych w Umowie.
+3. W przypadku rozwiązania niniejszej Umowy na podstawie ust. 1, Grantobiorca jest
+   zobowiązany do zwrotu całości otrzymanych środków Grantu. § 8 ust. 3 stosuje się
+   odpowiednio.
+4. W przypadku rozwiązania niniejszej Umowy na podstawie ust. 2, Grantobiorca jest
+   zobowiązany do zwrotu nierozliczonych środków grantu. § 8 ust. 3 stosuje się
+   odpowiednio.
+                                  Odpowiedzialność za szkodę
+
+                                              § 12
+
+Grantobiorca ponosi wyłączną odpowiedzialność wobec osób trzecich za szkody powstałe z
+jego winy w związku z opracowaniem, testowaniem i dopracowaniem13 Innowacji
+Społecznej, w szczególności przyjmuje na siebie ryzyko za straty i szkody czy inne możliwe
+negatywne skutki spowodowane przez tą Innowację Społeczną w trakcie jej opracowywania,
+testowania i dopracowania14.
+
+                                   Zmiany w zakresie Grantu
+
+                                              § 13
+
+1. Wszelkie zmiany w zakresie Innowacji Społecznej, w tym Specyfikacji Innowacji, muszą
+       zostać uzgodnione i zaakceptowane przez Grantodawcę przed ich wprowadzeniem przez
+       Grantobiorcę. Zgoda wydawana jest w formie pisemnej pod rygorem nieważności.
+2. W razie wystąpienia okoliczności powodujących konieczność wprowadzenia zmian w
+       Specyfikacji Innowacji Grantobiorca przedstawia Grantodawcy zakres zmian w formie
+       wniosku o zmiany w Specyfikacji Innowacji.
+3. Zmiany w Specyfikacji Innowacji nie mogą powodować:
+        1) zmiany charakteru i celu Innowacji Społecznej,
+        2) zwiększenia powyżej 10% kwoty Grantu określonej w momencie podpisania umowy;
+        3) przedłużenia okresu realizacji innowacji powyżej 12 miesięcy, w tym opracowania
+            innowacji powyżej 3 miesięcy oraz okresu testowania i dopracowania15 Innowacji
+            Społecznej powyżej 9 miesięcy.
+
+                                    Rozwiązywanie sporów
+
+                                              § 14
+
+
+
+
+13
+     Niepotrzebne skreślić.
+14
+     Niepotrzebne skreślić
+15
+     Niepotrzebne skreślić
+1. Strony będą dążyły do polubownego rozwiązywania sporów powstałych w związku z
+   realizacją niniejszej Umowy.
+2. W przypadku braku możliwości polubownego rozwiązania sporu w terminie 14 dni od
+   zgłoszenia sporu przez którąkolwiek ze Stron, zostanie on rozstrzygnięty przez sąd
+   miejscowo właściwy dla Grantodawcy.
+
+                                  Informacje Kontaktowe
+
+                                           § 15
+
+1. Wszelka korespondencja związana z realizacją niniejszej Umowy będzie kierowana na
+   poniższe adresy:
+   Grantobiorca:
+   Imię i nazwisko/Nazwa podmiotu
+   Adres (ul. kod pocztowy, miejscowość)
+   Telefon
+   e-mail
+
+   Grantodawca:
+   Województwo Małopolskie - Regionalny Ośrodek Polityki Społecznej w Krakowie
+   ul. Piastowska 32, 30-070 Kraków
+   Telefon
+   e-mail
+2. Strony są obowiązane do pisemnego poinformowania bez zbędnej zwłoki o zmianie
+   danych, o których mowa w ust. 1.
+3. Zmiana danych określonych w ust. 1 nie stanowi zmiany Umowy.
+
+                                  Postanowienia końcowe
+
+                                           § 16
+
+1. Niniejsza Umowa wchodzi w życie w dniu podpisania przez ostatnią ze Stron.
+2. Niniejsza Umowa pozostaje w mocy do dnia 30.06.2028 r.
+3. Umowa została sporządzona w trzech jednobrzmiących egzemplarzach, w tym w jednym
+   egzemplarzu dla Grantobiorcy oraz w dwóch egzemplarzach dla Grantodawcy.
+ 4. Zmiana formy prawnej Grantobiorcy lub konieczność wprowadzenia innych zmian, w
+        wyniku wystąpienia okoliczności nieprzewidzianych w trakcie naboru, a mogących
+        skutkować przeniesieniem praw i obowiązków, możliwe są wyłącznie po
+        poinformowaniu Grantodawcy o konieczności ich wprowadzenia i zaakceptowaniu przez
+        Grantodawcę, pod rygorem rozwiązania Umowy na zasadach w niej przewidzianych.
+ 5. Zmiany Umowy z wyłączeniem § 6 ust. 2 i § 8 ust. 3 oraz załączników z zastrzeżeniem § 6
+        ust. 7, wymagają sporządzenia aneksu w formie pisemnej pod rygorem nieważności.
+ 6. W sprawach nieuregulowanych w Umowie zastosowanie mają właściwe przepisy prawa
+        krajowego, w szczególności przepisy ustawy z dnia 23 kwietnia 1964 r. Kodeks cywilny.
+ 7. Grantobiorcy realizujący niniejszą Umowę w formule partnerstwa, za wszelkie
+        zobowiązania wynikające z niniejszej Umowy odpowiadają solidarnie.
+ 8. Załączniki do Umowy stanowią jej integralną część16:
+       1) Pełnomocnictwo dla osoby/podmiotu podpisującego Umowę w imieniu
+           Grantobiorcy;
+       2) Specyfikacja Innowacji;
+       3) Harmonogram płatności;
+       4) Wzór oświadczenia uczestnika projektu;
+       5) Zakres danych osobowych powierzonych do przetwarzania;
+       6) Wzór klauzul informacyjnych;
+       7) Deklaracja testera innowacji społecznej;
+       8) Wzór Protokołu odbioru produktów innowacji społecznej.
+
+
+W imieniu Grantodawcy                                                            W imieniu Grantobiorcy
+
+
+
+
+...................................................................   ...................................................................
+imię, nazwisko, funkcja                                                          imię, nazwisko, funkcja
+
+
+16
+     Niepotrzebne załączniki wykreślić.
+                                           Załącznik Nr 1 do Umowy nr …………………………… o powierzenie Grantu
+                                                                                   (miejscowość i data)
+...……………………………………………………………………
+………………………………………………………………………
+(nazwa i adres Grantobiorcy)
+
+           PEŁNOMOCNICTWO DLA OSOBY PODPISUJĄCEJ UMOWĘ O POWIERZENIE GRANTU
+
+Ja, niżej podpisana/y, umocowana/y do reprezentowania ....................................... (nazwa
+Grantobiorcy i adres)...................................................................., niniejszym upoważniam
+.......................... (imię i nazwisko) ............................., nr dowodu osobistego: ...................
+zamieszkałą/ego.......................(adres) …………................., do podpisania umowy o powierzenie
+Grantu pt: .................................................................. oraz do dokonywania innych czynności
+dotyczących poprawnej realizacji Grantu w ramach projektu „Inkubator Włączenia
+Społecznego 2.0” współfinansowanego w ramach Programu Fundusze Europejskie dla Rozwoju
+Społecznego 2021-2027.
+Zakresem pełnomocnictwa objęte jest w szczególności, lecz nie wyłącznie:
+       •    zaciąganie zobowiązań finansowych w imieniu.......................(nazwa Grantobiorcy), w
+            tym podpisanie specyfikacji innowacji, umowy o powierzenie Grantu i/lub złożenie
+            zabezpieczenia należytego wykonania zobowiązań wynikających z umowy o
+            powierzenie Grantu17,
+       •    składanie protokołu odbioru produktów innowacji społecznej, oświadczenia o
+            wydatkowaniu Grantu zgodnie z przeznaczeniem Grantu, podpisywania rozliczeń lub
+            oraz wniosków o zmiany w Grancie.
+      Pełnomocnictwo zostaje udzielone na okres do ......................... Pełnomocnictwo może być
+      wypowiedziane w każdym czasie.
+Adres pełnomocnika do doręczeń:
+............................................................................          ……………………………………………
+                                                                                      Imię i nazwisko oraz podpis
+
+
+17
+     Niepotrzebne skreślić.
+                          Załącznik Nr 2 do Umowy nr ……………………………o powierzenie Grantu
+
+                                  SPECYFIKACJA INNOWACJI
+
+           Realizowana w ramach projektu pn. „Inkubator Włączenia Społecznego 2.0”
+
+Tytuł innowacji społecznej:
+
+
+
+Daty realizacji Innowacji Społecznej:
+
+ Okres etapu przygotowawczego: od… do…
+
+ Okres etapu testowania: od… do …
+
+
+
+                                          GRANTOBIORCA
+
+
+Status Grantobiorcy
+
+ Osoba fizyczna
+
+ Podmiot
+
+ Grupa nieformalna
+
+
+
+Dane teleadresowe
+
+ Imię i nazwisko osoby/Nazwa
+ podmiotu/ Członkowie Grupy
+ nieformalnej
+
+ Adres siedziby podmiotu /
+ Adres korespondencyjny osoby fizycznej
+
+ Telefon
+
+
+ E-mail
+ NIP (jeśli dotyczy)
+
+ KRS/CEIDG (jeśli dotyczy)
+
+
+
+Kwota grantu
+
+ Wnioskowana kwota
+                                                              Słownie:………………………………………………….
+ Grantu:………………………………………………..
+
+ Przyznana kwota
+                                                              Słownie:…………………………………………………
+ Grantu:………………………………………………………
+
+
+
+                                    INNOWACJA SPOŁECZNA
+
+ Postępowanie w trakcie opracowywania, testowania i dopracowania innowacji społecznych musi być
+ zgodne z zasadami równościowymi obowiązującymi w ramach funduszy unijnych na lata 2021- 2027, w
+ tym zasadami równości szans i niedyskryminacji, standardami dostępności dla osób z
+ niepełnosprawnościami, zasadami równości kobiet i mężczyzn, a także zasadami polityki zrównoważonego
+ rozwoju, w tym zasadą DNSH poprzez zastosowanie rozwiązań proekologicznych.
+ OPIS INNOWACJI (cel innowacji i jej zgodność z tematem projektu Inkubator Włączenia Społecznego 2.0)
+
+
+ UZASADNIENIE POTRZEBY REALIZACJI INNOWACJI (Opis problemu, na który odpowiada innowacja
+ społeczna)
+
+
+
+
+ UZASADNIENIE INNOWACYJNOŚCI (z uwzględnieniem skali całego kraju):
+
+
+
+
+ OPIS DOSTĘPNOŚCI EFEKTÓW (zgodność wypracowywanych produktów lub usług ze standardami
+ dostępności):
+
+
+
+
+ OPIS GRUPY DOCELOWEJ (opis grupy potencjalnych odbiorców i użytkowników, ich problemów i potrzeb,
+ zmiany jaką wprowadzi innowacja w kontekście potrzeb osób wykluczonych/zagrożonych wykluczeniem):
+ OPIS GRUPY TESTUJĄCEJ (określenie ilości osób biorących udział w testowaniu innowacji, ich
+ charakterystyka, plan rekrutacji członków grupy testującej, miejsce testowania):
+
+
+
+
+Koncepcja realizacji innowacji
+
+ ETAP OPRACOWANIA INNOWACJI
+
+ Działanie 1 (opis planowanego działania, jego zasadność i sposób realizacji):
+
+
+ Produkt częściowy (opis jakościowy planowanego produktu):
+
+
+ miernik i wartość (np. sztuka 1)
+
+ Działanie 2:
+
+
+ Produkt częściowy:
+
+ miernik i wartość (np. sztuka 1)
+
+ ETAP TESTOWANIA INNOWACJI
+
+ Działanie 1:
+
+
+ Produkt częściowy:
+
+
+ miernik i wartość (np. sztuka 1)
+
+ Działanie 2:
+
+
+ Produkt częściowy:
+
+
+ miernik i wartość (np. sztuka 1)
+
+ ETAP DOPRACOWANIA INNOWACJI (jeśli dotyczy)
+ Działanie 1:
+
+ Produkt częściowy:
+
+
+ miernik i wartość (np. sztuka 1)
+
+ Produkt końcowy innowacji (modelowe rozwiązanie obejmujące: opis do czego służy dane rozwiązanie,
+ kto jest odbiorcą/ użytkownikiem, opis zasad użytkowania oraz wszystkie elementy składowe innowacji):
+
+
+
+
+Załączniki
+
+     1. Kosztorys wraz z harmonogramem
+     2. Karta zmian
+     3. Wyceny produktów/działań wskazanych w kosztorysie
+
+
+Data zatwierdzenia Specyfikacji Innowacji:
+
+
+
+
+ Zatwierdzenie przez Grantobiorcę                             Zatwierdzenie przez Grantodawcę
+                                                  Załącznik Nr 1 do Specyfikacji innowacji
+
+
+
+
+                                                                          Załącznik nr 1 do Specyfikacji Innowacji Społecznej
+                                        KOSZTORYS INNOWACJI SPOŁECZNEJ PN. ………......................... W RAMACH PROJEKTU PN. INKUBATOR WŁĄCZENIA SPOŁECZNEGO 2.0
+
+                                                                                        I OKRES SPRAWOZDAWCZY
+
+                              Planowany czas realizacji
+                                                                                       jednostka      liczba      Cena jednostkowa    Łaczna kwota    Wydatki brutto         Produkty planowanych działań
+ Lp.      NAZWA DZIAŁANIA            działania                  NAZWA KOSZTU
+                                                                                         miary      jednostek          brutto        wydatku brutto
+                                 od               do                                                                                                     I transza     Produkt            Miernik           Wartość
+
+PRZYGOTOWANIE DO TESTOWANIA
+
+
+                                                                                                                                                                -
+ 1.
+
+
+
+
+                                                                                                                 RAZEM
+                                                                                                                                              -                 -
+                                                                                                                 PRZYGOTOWANIE
+
+
+
+
+                                                                                       II OKRES SPRAWOZDAWCZY
+
+                              Planowany czas realizacji
+                                                                                                       Cena                                           Wydatki brutto         Produkty planowanych działań
+                                     działania                                         jednostka                                      Łaczna kwota
+ Lp.      NAZWA DZIAŁANIA                                       NAZWA KOSZTU                       jednostkowa     jednostka miary
+                                                                                         miary                                       wydatku brutto
+                                 od               do                                                  brutto                                            II transza     Produkt            Miernik           Wartość
+
+                                                                                           TESTOWANIE I FAZA
+
+
+                                                                                                                                                                -
+ 1.
+
+
+
+
+                                                                                                                                                                -
+ 2.
+
+
+
+                                                                                                                 RAZEM I FAZA
+                                                                                                                                              -                 -
+                                                                                                                 TESTU
+
+                                                                                           TESTOWANIE II FAZA
+
+
+                                                                                                                                                                -
+ 1.
+
+
+
+
+                                                                                                                                                                -
+ 2.
+
+
+
+                                                                                                                 RAZEM II FAZA
+                                                                                                                                              -                 -
+                                                                                                                 TESTU
+                                                                                                                 Razem I i II FAZA
+                                                                                                                                              -                 -
+                                                                                                                 TESTU
+
+
+                              Planowany czas realizacji
+                                                                                                       Cena                                           Wydatki brutto         Produkty planowanych działań
+                                     działania                                         jednostka                                      Łaczna kwota
+ Lp.      NAZWA DZIAŁANIA                                       NAZWA KOSZTU                       jednostkowa     jednostka miary
+                                                                                         miary                                       wydatku brutto
+                                 od               do                                                  brutto                                            III transza    Produkt            Miernik           Wartość
+
+                                                                                DOPRACOWANIE INNOWACJI (JEŚLI DOTYCZY)
+
+
+                                                                                                                                                                -
+ 1.
+
+
+
+
+                                                                                                                                                                -
+ 2.
+
+
+
+                                                                                                                 RAZEM
+                                                                                                                                              -                 -
+                                                                                                                 DOPRACOWANIE
+
+                                                                                                                       RAZEM                  -                 -
+
+
+
+
+                                                                                                                                                                                                    56
+                                                     Załącznik Nr 2 do Specyfikacji innowacji
+
+
+                    KARTA ZMIANTYTUŁ INNOWACJI SPOŁECZNEJ:
+
+
+
+
+                                     GRANTOBIORCA:
+
+
+
+
+                Lista zmian wprowadzonych na etapie opracowania specyfikacji
+
+ Zapisy z Wniosku                               Specyfikacja
+
+
+
+
+Data zatwierdzenia KARTY ZMIAN:
+
+
+Podpis osoby zatwierdzającej:
+
+
+
+
+                                                                                          57
+                                               Załącznik Nr 3 do Specyfikacji innowacji
+
+              WYCENY PRODUKTÓW/DZIAŁAŃ WSKAZANYCH W KOSZTORYSIE
+
+
+                          TYTUŁ INNOWACJI SPOŁECZNEJ:
+
+
+
+
+                                 GRANTOBIORCA:
+
+
+
+
+KOSZTY INNOWACJI ZOSTAŁY WYCENIONE NA PODSTAWIE:
+
+1…..
+
+2……
+
+
+
+
+                                                                                    58
+                          Załącznik Nr 3 do Umowy nr ………………………… o powierzenie Grantu
+
+                                HARMONOGRAM PŁATNOŚCI
+
+Nazwa Grantobiorcy
+
+
+Tytuł Innowacji Społecznej
+
+
+Wartość Grantu
+
+
+ Nr transzy         Planowana data          Kwota transzy        Okres za jaki składany
+                 przekazania płatności                          będzie Protokół odbioru
+                                                                 produktów Innowacji
+                       (mm-rrrr)
+                                                                      Społecznej
+
+                                                                    (od dd/mm/rrrr
+
+                                                                    do dd/mm/rrrr)
+
+      1.
+
+
+      2.
+
+
+      3.
+
+
+
+
+W imieniu Grantobiorcy:                                     W imieniu Grantodawcy
+
+
+     ……………………………………                                         ……………………………………
+
+              imię, nazwisko, funkcja                       imię, nazwisko, funkcja
+
+
+
+
+                                                                                      59
+                       Załącznik Nr 4 do Umowy nr ……………………………. o powierzenie Grantu
+
+                          OŚWIADCZENIE UCZESTNIKA PROJEKTU
+
+   (uwzględnia obowiązek informacyjny realizowany w związku z art. 13 Rozporządzenia
+   Parlamentu Europejskiego i Rady (UE) 2016/679) oraz uchylenia dyrektywy 95/46/WE
+
+W związku z przystąpieniem do projektu pn. Inkubator Włączenia Społecznego 2.0 przyjmuję
+do wiadomości, że:
+
+1. Administratorem moich danych osobowych jest Regionalny Ośrodek Polityki Społecznej
+   w Krakowie, z siedzibą ul. Piastowska 32, 30-070 Kraków.
+
+2. Przetwarzanie moich danych osobowych jest zgodne z prawem i spełnia warunki, o
+   których mowa art. 6 ust. 1 lit. c oraz art. 9 ust. 2 lit. g Rozporządzenia Parlamentu
+   Europejskiego i Rady (UE) 2016/679 (RODO) – dane osobowe są niezbędne dla realizacji
+   Programu Fundusze Europejskie dla Rozwoju Społecznego 2021-2027 (FERS) na
+   podstawie:
+
+  a) rozporządzenia Parlamentu Europejskiego i Rady (UE) 2021/1060 z dnia 24 czerwca
+      2021 r.
+  b) rozporządzenia Parlamentu Europejskiego i Rady (UE) 2021/1057 z dnia 24 czerwca
+      2021 r.
+  c) ustawy z dnia 28 kwietnia 2022 r. o zasadach realizacji zadań finansowanych ze
+      środków europejskich w perspektywie finansowej 2021–2027.
+3. Moje dane osobowe będą przetwarzane wyłącznie w celu realizacji projektu „Inkubator
+    Włączenia Społecznego 2.0”, w szczególności potwierdzenia kwalifikowalności
+    wydatków, udzielenia wsparcia, monitoringu, ewaluacji, kontroli, audytu i
+    sprawozdawczości, w tym w Centralnym Systemie Teleinformatycznym oraz działań
+    informacyjno-promocyjnych w ramach FERS.
+
+4. Moje dane osobowe mogą zostać udostępnione podmiotom realizującym na zlecenie
+   administratora lub Instytucji Zarządzającej badania ewaluacyjne, kontrole i audyt a także
+   podmiotom, których uprawnienie dostępu do danych wynika z obowiązujących
+   przepisów, organom sprawującym funkcje nadzoru i kontroli nad realizacją zadań przez
+
+
+                                                                                           60
+   Regionalny Ośrodek Polityki Społecznej w Krakowie oraz podmiotom przetwarzającym
+   dane osobowe na polecenie Administratora na podstawie zawartych umów (w tym
+   podmiotom dostarczającym usługi informatyczne wykorzystywane w procesie
+   przetwarzania danych). Na podstawie art. 89 ustawy z dnia 28 kwietnia 2022 r. o
+   zasadach realizacji zadań finansowanych ze środków europejskich w perspektywie
+   finansowej 2021–2027 dane osobowe mogą być udostępniane podmiotom biorącym
+   udział w procesie realizacji Programu Fundusze Europejskie dla Rozwoju Społecznego
+   2021-2027.
+
+5. Podanie danych jest warunkiem koniecznym otrzymania wsparcia, a odmowa ich podania
+   jest równoznaczna z brakiem możliwości udzielenia wsparcia w ramach projektu.
+
+6. W terminie 4 tygodni po zakończeniu udziału w projekcie przekażę beneficjentowi dane
+   dotyczące mojego statusu na rynku pracy oraz informacje na temat udziału w kształceniu
+   lub szkoleniu oraz uzyskania kwalifikacji lub nabycia kompetencji.
+
+7. Moje dane osobowe nie będą przekazywane do państwa trzeciego lub organizacji
+   międzynarodowej.
+
+8. Moje dane osobowe nie będą poddawane zautomatyzowanemu podejmowaniu decyzji.
+
+9. Moje dane osobowe będą przechowywane do czasu rozliczenia Programu Fundusze
+   Europejskie dla Rozwoju Społecznego 2021-2027 oraz zakończenia archiwizowania
+   dokumentacji.
+
+10. Mogę skontaktować się z powołanym przez administratora Inspektorem Ochrony Danych
+   wysyłając wiadomość na adres poczty elektronicznej iod@rops.krakow.pl.
+11. Mam prawo dostępu do treści swoich danych i ich sprostowania, usunięcia lub
+   ograniczenia przetwarzania jeżeli spełnione są przesłanki określone w art. 17, 18 i 19
+   RODO.
+
+12. Mam prawo do wniesienia skargi do organu nadzorczego, którym jest Prezes Urzędu
+   Ochrony Danych Osobowych.
+
+
+
+
+                                                                                            61
+13. Potwierdzam wypełnienie wobec mnie obowiązku informacyjnego w imieniu Instytucji
+   Zarządzającej, zgodnie z treścią przekazanej klauzuli informacyjnej ministra właściwego
+   do spraw rozwoju regionalnego.
+
+
+
+…………………………………                                     ……………………………………………………….……….
+MIEJSCOWOŚĆ I DATA                                CZYTELNY PODPIS UCZESTNIKA PROJEKTU
+*
+
+
+
+
+                                                                                             62
+            Klauzula informacyjna ministra właściwego do spraw rozwoju regionalnego
+
+W celu wykonania obowiązku nałożonego art. 13 i 14 RODO18, w związku z art. 88 ustawy
+o zasadach realizacji zadań finansowanych ze środków europejskich w perspektywie
+finansowej 2021-202719, informujemy o zasadach przetwarzania Państwa danych
+osobowych:
+
+      I.    Administrator
+Odrębnym administratorem Państwa danych jest:
+      1. Minister właściwy do spraw rozwoju regionalnego z siedzibą przy ul. Wspólnej 2/4,
+           00-926 Warszawa.
+     II.    Cel przetwarzania danych
+Dane osobowe będą przetwarzać w związku z realizacją FERS, w szczególności w celu
+monitorowania, sprawozdawczości, komunikacji, publikacji, ewaluacji, zarządzania
+finansowego, weryfikacji i audytów oraz do celów określania kwalifikowalności uczestników.
+
+Podanie danych jest dobrowolne, ale konieczne do realizacji wyżej wymienionego celu.
+Odmowa ich podania jest równoznaczna z brakiem możliwości podjęcia stosownych działań.
+ III.       Podstawa przetwarzania
+Będziemy przetwarzać Państwa dane osobowe w związku z tym, że:
+      1. Zobowiązuje nas do tego prawo (art. 6 ust. 1 lit. c, art. 9 ust. 2 lit. g oraz art. 1020
+           RODO)21:
+
+
+
+18
+  Rozporządzenie Parlamentu Europejskiego i Rady (UE) 2016/679 z 27 kwietnia 2016 r. w sprawie
+ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego
+przepływu takich danych (Dz. Urz. UE. L 119 z 4 maja 2016 r., s.1-88).
+19
+  Ustawa z dnia 28 kwietnia 2022 r o zasadach realizacji zadań finansowanych ze środków
+europejskich
+w perspektywie finansowej 2021-2027 (Dz.U. 2022 poz. 1079), zwana dalej „ustawą wdrożeniową”.
+20
+     Dotyczy wyłącznie projektów aktywizujących osoby odbywające karę pozbawienia wolności.
+21
+  Należy wskazać jeden lub kilka przepisów prawa - możliwe jest ich przywołanie w zakresie
+ograniczonym na potrzeby konkretnej klauzuli.
+
+
+                                                                                                    63
+      ▪ rozporządzenie Parlamentu Europejskiego i Rady (UE) nr 2021/1060 z 24 czerwca
+        2021 r. ustanawiającego wspólne przepisy dotyczące Europejskiego Funduszu
+        Rozwoju Regionalnego, Europejskiego Funduszu Społecznego Plus, Funduszu
+        Spójności, Funduszu na rzecz Sprawiedliwej Transformacji i Europejskiego Funduszu
+        Morskiego, Rybackiego i Akwakultury, a także przepisy finansowe na potrzeby tych
+        funduszy oraz na potrzeby Funduszu Azylu, Migracji i Integracji, Funduszu
+        Bezpieczeństwa Wewnętrznego i Instrumentu Wsparcia Finansowego na rzecz
+        Zarządzania Granicami i Polityki Wizowej,
+      ▪ rozporządzenie Parlamentu Europejskiego i Rady (UE) 2021/1057 z dnia 24 czerwca
+        2021 r. ustanawiające Europejski Fundusz Społeczny Plus (EFS+) oraz uchylające
+        rozporządzenie (UE) nr 1296/2013 (Dz. Urz. UE L 231 z 30.06.2021, str. 21, z późn.
+        zm.)
+      ▪ ustawa z dnia 28 kwietnia 2022 r. o zasadach realizacji zadań finansowanych ze
+        środków europejskich w perspektywie finansowej 2021-2027, w szczególności art.
+        87-93,
+      ▪ ustawa z 14 czerwca 1960 r. - Kodeks postępowania administracyjnego,
+      ▪ ustawa z 27 sierpnia 2009 r. o finansach publicznych.
+IV.    Sposób pozyskiwania danych
+Dane pozyskujemy bezpośrednio od osób, których one dotyczą, albo od instytucji
+i podmiotów zaangażowanych w realizację Programu, w tym w szczególności od
+wnioskodawców, beneficjentów, partnerów.
+ V.    Dostęp do danych osobowych
+Dostęp do Państwa danych osobowych mają pracownicy i współpracownicy administratora.
+Ponadto Państwa dane osobowe mogą być powierzane lub udostępniane:
+  1. podmiotom, którym zleciliśmy wykonywanie zadań w FERS,
+  2. organom Komisji Europejskiej, ministrowi właściwemu do spraw finansów publicznych,
+      prezesowi zakładu ubezpieczeń społecznych,
+  3. podmiotom, które wykonują dla nas usługi związane z obsługą i rozwojem systemów
+      teleinformatycznych, a także zapewnieniem łączności, np. dostawcom rozwiązań IT
+      i operatorom telekomunikacyjnym.
+
+
+                                                                                             64
+ VI.         Okres przechowywania danych
+Dane osobowe są przechowywane przez okres niezbędny do realizacji celów określonych
+w punkcie II.
+VII.         Prawa osób, których dane dotyczą
+Przysługują Państwu następujące prawa:
+1. prawo dostępu do swoich danych oraz otrzymania ich kopii (art. 15 RODO),
+2. prawo do sprostowania swoich danych (art. 16 RODO),
+3. prawo do usunięcia swoich danych (art. 17 RODO) - jeśli nie zaistniały okoliczności,
+          o których mowa w art. 17 ust. 3 RODO,
+4. prawo do żądania od administratora ograniczenia przetwarzania swoich danych
+          (art. 18 RODO),
+5. prawo do przenoszenia swoich danych (art. 20 RODO) - jeśli przetwarzanie odbywa się
+          na podstawie umowy: w celu jej zawarcia lub realizacji (w myśl art. 6 ust. 1 lit. b RODO),
+          oraz w sposób zautomatyzowany22,
+6. prawo wniesienia skargi do organu nadzorczego Prezesa Urzędu Ochrony Danych
+          Osobowych (art. 77 RODO) - w przypadku, gdy osoba uzna, iż przetwarzanie jej danych
+          osobowych narusza przepisy RODO lub inne krajowe przepisy regulujące kwestię ochrony
+          danych osobowych, obowiązujące w Polsce.
+VIII.        Zautomatyzowane podejmowanie decyzji
+Dane osobowe nie będą podlegały zautomatyzowanemu podejmowaniu decyzji, w tym
+profilowaniu.
+ IX.         Przekazywanie danych do państwa trzeciego
+Państwa dane osobowe nie będą przekazywane do państwa trzeciego.
+
+
+     X.      Kontakt z administratorem danych i Inspektorem Ochrony Danych
+
+
+
+
+22
+  Do automatyzacji procesu przetwarzania danych osobowych wystarczy, że dane te są zapisane na
+dysku komputera.
+
+
+                                                                                                   65
+Jeśli mają Państwo pytania dotyczące przetwarzania przez ministra właściwego do spraw
+rozwoju regionalnego danych osobowych, prosimy kontaktować się z Inspektorem Ochrony
+Danych (IOD) w następujący sposób:
+    ▪   pocztą tradycyjną (ul. Wspólna 2/4, 00-926 Warszawa),
+    ▪   elektronicznie (adres e-mail: IOD@mfipr.gov.pl)
+
+
+
+
+                                                                                        66
+                  Załącznik Nr 5 do Umowy nr ……………………………. o powierzenie Grantu
+
+             Zakres danych osobowych powierzonych do przetwarzania
+
+Osoby fizyczne:
+
+a) ……
+
+b) ……
+
+c) ……
+                                 Załącznik Nr 6 do Umowy nr ………………………..o powierzenie Grantu
+
+            Klauzula informacyjna Regionalnego Ośrodka Polityki Społecznej w Krakowie
+
+    Oświadczam, że zgodnie z art. 13 i 14 Rozporządzenia Parlamentu Europejskiego i Rady (UE) Nr 2016/679
+z dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych
+i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie
+o ochronie danych), zwanego dalej RODO, zostałam/łem poinformowana/ny, iż:
+
+   1. Administratorem moich danych osobowych jest Regionalny Ośrodek Polityki Społecznej w Krakowie,
+       z siedzibą ul. Piastowska 32, 30-070 Kraków.
+   2. Mogę skontaktować się z powołanym przez Administratora Inspektorem Ochrony Danych wysyłając
+       wiadomość na adres poczty elektronicznej iod@rops.krakow.pl.
+   3. Moje dane osobowe będą przetwarzane wyłącznie w celu realizacji projektu „Inkubator Włączenia
+       Społecznego 2.0”, w szczególności potwierdzenia kwalifikowalności wydatków, udzielenia
+       wsparcia, monitoringu, ewaluacji, kontroli, audytu i sprawozdawczości, w tym w Centralnym
+       Systemie Teleinformatycznym oraz działań informacyjno-promocyjnych w ramach FERS.
+   4. Przetwarzanie moich danych osobowych jest zgodne z prawem i spełnia warunki, o których mowa
+       art. 6 ust. 1 lit. c oraz art. 9 ust. 2 lit. g Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679
+       (RODO) – dane osobowe są niezbędne dla realizacji Programu Fundusze Europejskie dla Rozwoju
+       Społecznego 2021-2027 (FERS) na podstawie:
+       a) rozporządzenia Parlamentu Europejskiego i Rady (UE) 2021/1060 z dnia 24 czerwca 2021 r.
+       b) rozporządzenia Parlamentu Europejskiego i Rady (UE) 2021/1057 z dnia 24 czerwca 2021 r.
+       c) ustawy z dnia 28 kwietnia 2022 r. o zasadach realizacji zadań finansowanych ze środków
+           europejskich w perspektywie finansowej 2021–2027.
+   5. Moje dane osobowe mogą zostać udostępnione podmiotom realizującym na zlecenie
+       administratora lub Instytucji Zarządzającej badania ewaluacyjne, kontrole i audyt, a także
+       podmiotom, których uprawnienie dostępu do danych wynika z obowiązujących przepisów,
+       organom sprawującym funkcje nadzoru i kontroli nad realizacją zadań przez Regionalny Ośrodek
+       Polityki Społecznej w Krakowie oraz podmiotom przetwarzającym dane osobowe na polecenie
+       Administratora na podstawie zawartych umów (w tym podmiotom dostarczającym usługi
+       informatyczne wykorzystywane w procesie przetwarzania danych).
+       Na podstawie art. 89 ustawy z dnia 28 kwietnia 2022 r. o zasadach realizacji zadań finansowanych
+       ze środków europejskich w perspektywie finansowej 2021–2027 dane osobowe mogą być
+     udostępniane podmiotom biorącym udział w procesie realizacji Programu Fundusze Europejskie dla
+     Rozwoju Społecznego 2021-2027.
+6. Dane pozyskujemy bezpośrednio od osób, których one dotyczą, albo od instytucji i podmiotów
+     zaangażowanych w realizację projektu, w tym w szczególności od wnioskodawców, grantobiorców,
+     wykonawców i partnerów.
+7. Dane osobowe będą przetwarzane przez czas realizacji zadań, a następnie przechowywane przez
+     okres wynikający z obowiązujących Regionalny Ośrodek Polityki Społecznej w Krakowie regulacji z
+     zakresu postępowania z materiałami archiwalnymi i inną dokumentacją.
+8. W granicach określonych przepisami prawa, w tym w szczególności RODO, mam prawo:
+
+1)    dostępu do treści moich danych,
+2)   do sprostowania moich danych,
+3)   do żądania ograniczenia przetwarzania moich danych,
+4)   do przenoszenia moich danych,
+5)   do wniesienia sprzeciwu wobec przetwarzania moich danych osobowych,
+6)   do cofnięcia zgody w dowolnym momencie bez wpływu na zgodność z prawem przetwarzania,
+     którego dokonano na podstawie zgody przed jej cofnięciem, jeżeli przetwarzanie danych odbywa się
+     wyłącznie na podstawie mojej zgody, oraz
+7)   do żądania usunięcia danych (prawo do bycia zapomnianym);
+9. Mam prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych, jeżeli przetwarzanie
+     moich danych osobowych narusza przepisy RODO;
+10. Podanie danych jest dobrowolne, ale jest warunkiem koniecznym udziału w realizacji działań
+     związanych z projektem;
+11. Moje dane nie są wykorzystywane przy zautomatyzowanym podejmowaniu decyzji oraz nie podlegają
+     profilowaniu;
+12. Moje dane nie będą przekazywane do państw trzecich (tj. poza Europejski Obszar Gospodarczy) ani
+     udostępniane organizacjom międzynarodowym.
+13. Potwierdzam wypełnienie wobec mnie obowiązku informacyjnego w imieniu Instytucji
+     Zarządzającej, zgodnie z treścią przekazanej klauzuli informacyjnej ministra właściwego do
+     spraw rozwoju regionalnego.
+
+
+                                                ……………………….…..………………………………………….
+                                                 (data i podpis osoby składającej oświadczenie)
+           Klauzula informacyjna ministra właściwego do spraw rozwoju regionalnego
+
+W celu wykonania obowiązku nałożonego art. 13 i 14 RODO23, w związku z art. 88 ustawy
+o zasadach realizacji zadań finansowanych ze środków europejskich w perspektywie
+finansowej 2021-202724, informujemy o zasadach przetwarzania Państwa danych
+osobowych:
+
+   I. Administrator
+Odrębnym administratorem Państwa danych jest:
+    2. Minister właściwy do spraw rozwoju regionalnego z siedzibą przy ul. Wspólnej 2/4,
+       00-926 Warszawa.
+  II. Cel przetwarzania danych
+Dane osobowe będą przetwarzać w związku z realizacją FERS, w szczególności w celu
+monitorowania, sprawozdawczości, komunikacji, publikacji, ewaluacji, zarządzania
+finansowego, weryfikacji i audytów oraz do celów określania kwalifikowalności uczestników.
+
+Podanie danych jest dobrowolne, ale konieczne do realizacji wyżej wymienionego celu.
+Odmowa ich podania jest równoznaczna z brakiem możliwości podjęcia stosownych działań.
+ III. Podstawa przetwarzania
+Będziemy przetwarzać Państwa dane osobowe w związku z tym, że:
+    2. Zobowiązuje nas do tego prawo (art. 6 ust. 1 lit. c, art. 9 ust. 2 lit. g oraz art. 1025
+       RODO)26:
+       ▪ rozporządzenie Parlamentu Europejskiego i Rady (UE) nr 2021/1060 z 24 czerwca
+         2021 r. ustanawiającego wspólne przepisy dotyczące Europejskiego Funduszu
+         Rozwoju Regionalnego, Europejskiego Funduszu Społecznego Plus, Funduszu
+         Spójności, Funduszu na rzecz Sprawiedliwej Transformacji i Europejskiego Funduszu
+         Morskiego, Rybackiego i Akwakultury, a także przepisy finansowe na potrzeby tych
+         funduszy oraz na potrzeby Funduszu Azylu, Migracji i Integracji, Funduszu
+         Bezpieczeństwa Wewnętrznego i Instrumentu Wsparcia Finansowego na rzecz
+         Zarządzania Granicami i Polityki Wizowej,
+
+
+23
+  Rozporządzenie Parlamentu Europejskiego i Rady (UE) 2016/679 z 27 kwietnia 2016 r. w sprawie
+ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego
+przepływu takich danych (Dz. Urz. UE. L 119 z 4 maja 2016 r., s.1-88).
+24
+  Ustawa z dnia 28 kwietnia 2022 r o zasadach realizacji zadań finansowanych ze środków
+europejskich
+w perspektywie finansowej 2021-2027 (Dz.U. 2022 poz. 1079), zwana dalej „ustawą wdrożeniową”.
+25
+     Dotyczy wyłącznie projektów aktywizujących osoby odbywające karę pozbawienia wolności.
+26
+  Należy wskazać jeden lub kilka przepisów prawa - możliwe jest ich przywołanie w zakresie
+ograniczonym na potrzeby konkretnej klauzuli.
+        ▪ rozporządzenie Parlamentu Europejskiego i Rady (UE) 2021/1057 z dnia 24 czerwca
+            2021 r. ustanawiające Europejski Fundusz Społeczny Plus (EFS+) oraz uchylające
+            rozporządzenie (UE) nr 1296/2013 (Dz. Urz. UE L 231 z 30.06.2021, str. 21, z późn.
+            zm.)
+        ▪ ustawa z dnia 28 kwietnia 2022 r. o zasadach realizacji zadań finansowanych ze
+            środków europejskich w perspektywie finansowej 2021-2027, w szczególności art.
+            87-93,
+        ▪ ustawa z 14 czerwca 1960 r. - Kodeks postępowania administracyjnego,
+        ▪ ustawa z 27 sierpnia 2009 r. o finansach publicznych.
+  IV.     Sposób pozyskiwania danych
+Dane pozyskujemy bezpośrednio od osób, których one dotyczą, albo od instytucji
+i podmiotów zaangażowanych w realizację Programu, w tym w szczególności od
+wnioskodawców, beneficjentów, partnerów.
+   V.     Dostęp do danych osobowych
+Dostęp do Państwa danych osobowych mają pracownicy i współpracownicy administratora.
+Ponadto Państwa dane osobowe mogą być powierzane lub udostępniane:
+    4. podmiotom, którym zleciliśmy wykonywanie zadań w FERS,
+    5. organom Komisji Europejskiej, ministrowi właściwemu do spraw finansów publicznych,
+        prezesowi zakładu ubezpieczeń społecznych,
+    6. podmiotom, które wykonują dla nas usługi związane z obsługą i rozwojem systemów
+        teleinformatycznych, a także zapewnieniem łączności, np. dostawcom rozwiązań IT
+        i operatorom telekomunikacyjnym.
+  VI. Okres przechowywania danych
+Dane osobowe są przechowywane przez okres niezbędny do realizacji celów określonych
+w punkcie II.
+VII. Prawa osób, których dane dotyczą
+Przysługują Państwu następujące prawa:
+5. prawo dostępu do swoich danych oraz otrzymania ich kopii (art. 15 RODO),
+6. prawo do sprostowania swoich danych (art. 16 RODO),
+7. prawo do usunięcia swoich danych (art. 17 RODO) - jeśli nie zaistniały okoliczności,
+      o których mowa w art. 17 ust. 3 RODO,
+8. prawo do żądania od administratora ograniczenia przetwarzania swoich danych
+      (art. 18 RODO),
+9. prawo do przenoszenia swoich danych (art. 20 RODO) - jeśli przetwarzanie odbywa się
+      na podstawie umowy: w celu jej zawarcia lub realizacji (w myśl art. 6 ust. 1 lit. b RODO),
+      oraz w sposób zautomatyzowany27,
+10. prawo wniesienia skargi do organu nadzorczego Prezesa Urzędu Ochrony Danych
+      Osobowych (art. 77 RODO) - w przypadku, gdy osoba uzna, iż przetwarzanie jej danych
+
+27
+  Do automatyzacji procesu przetwarzania danych osobowych wystarczy, że dane te są zapisane na
+dysku komputera.
+     osobowych narusza przepisy RODO lub inne krajowe przepisy regulujące kwestię ochrony
+     danych osobowych, obowiązujące w Polsce.
+VIII. Zautomatyzowane podejmowanie decyzji
+Dane osobowe nie będą podlegały zautomatyzowanemu podejmowaniu decyzji, w tym
+profilowaniu.
+ IX. Przekazywanie danych do państwa trzeciego
+Państwa dane osobowe nie będą przekazywane do państwa trzeciego.
+  X.    Kontakt z administratorem danych i Inspektorem Ochrony Danych
+Jeśli mają Państwo pytania dotyczące przetwarzania przez ministra właściwego do spraw
+rozwoju regionalnego danych osobowych, prosimy kontaktować się z Inspektorem Ochrony
+Danych (IOD) w następujący sposób:
+      ▪ pocztą tradycyjną (ul. Wspólna 2/4, 00-926 Warszawa),
+      ▪ elektronicznie (adres e-mail: IOD@mfipr.gov.pl).
+                             Załącznik Nr 7 do Umowy nr ………………………..o powierzenie Grantu
+
+                        DEKLARACJA TESTERA INNOWACJI SPOŁECZNEJ
+
+1. Deklaruję udział w testowaniu innowacji społecznej pod nazwą:
+
+
+
+
+realizowanej przez (nazwa Grantobiorcy/czyni):
+
+
+
+
+w ramach projektu Województwa Małopolskiego/Regionalnego Ośrodka Polityki Społecznej
+w Krakowie oraz Krakowskiego Centrum Innowacyjnych Technologii INNOAGH sp. z o.o., Inkubator
+Włączenia Społecznego 2.0:
+
+
+ Imię i Nazwisko
+
+ Numer telefonu
+
+ Adres e- mail
+
+
+
+2. Oświadczam, że należę do grupy osób, do których kierowane są rozwiązania innowacyjne, czyli
+    osób zagrożonych wykluczeniem społecznym.
+3. Zostałem/am poinformowany/a, że Projekt współfinansowany jest z Europejskiego Funduszu
+    Społecznego Plus.
+4. Otrzymałem/am i zapoznałem/am się z klauzulami informacyjnymi Grantodawcy i Instytucji
+    Zarządzającej - ministra właściwego do spraw rozwoju regionalnego.
+
+
+
+
+                                                              …………………………………………………..
+                                                        data i podpis Testera innowacji społecznej
+              Klauzula informacyjna Regionalnego Ośrodka Polityki Społecznej w Krakowie
+
+     Oświadczam, że zgodnie z art. 13 Rozporządzenia Parlamentu Europejskiego i Rady (UE) Nr 2016/679 z
+dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i
+w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie
+o ochronie danych, zwanego dalej RODO, zostałam/łem poinformowana/ny, iż:
+
+1. Administratorem moich danych osobowych w zakresie zawartym w deklaracji testera innowacji
+     społecznej, jest Regionalny Ośrodek Polityki Społecznej w Krakowie z siedzibą w Krakowie, ul. Piastowska
+     32, 30-070 Kraków;
+2.   Administrator wyznaczył inspektora ochrony danych (IOD), z którym można kontaktować się za
+     pośrednictwem poczty elektronicznej: iod@rops.krakow.pl
+3.   Moje dane osobowe przetwarzane będą w celu przeprowadzenia testu innowacji społecznej i ewaluacji
+     służących realizacji projektu Inkubator Włączenia Społecznego 2.0 zwanego dalej „Projektem”,
+     współfinansowanego przez Unię Europejską w ramach działania 5.1 Innowacje społeczne, programu
+     Fundusze Europejskie dla Rozwoju Społecznego 2021-2027 współfinansowanego ze środków
+     Europejskiego Funduszu Społecznego Plus (podstawa prawna: art. 6 ust. 1 lit. c RODO, art. 9 ust. 2 lit. g
+     RODO);
+4.   Odbiorcami moich danych osobowych będą:
+     1) Grantobiorca, którym jest ……………………………………………………………………………………………………………..,
+     2) minister właściwy do spraw rozwoju regionalnego pełniący funkcję Instytucji Zarządzającej dla
+         programu Fundusze Europejskie dla Rozwoju Społecznego 2021-2027, mający siedzibę przy
+         ul. Wspólnej 2/4, 00-926 Warszawa,
+     3) organy, których uprawnienie do dostępu do danych osobowych wynika z obowiązujących przepisów,
+         w tym organy sprawujące funkcje nadzoru i kontroli nad realizacją zadań przez Regionalny Ośrodek
+         Polityki Społecznej w Krakowie, a także,
+     4) podmioty przetwarzające dane osobowe na polecenie administratora na podstawie zawartych umów
+         (w tym podmioty dostarczające i utrzymujące oprogramowanie wykorzystywane przy działaniach
+         związanych z przetwarzaniem danych);
+5. Moje dane osobowe mogą zostać przekazane podmiotom realizującym badania ewaluacyjne na zlecenie
+     Instytucji Zarządzającej lub Administratora. Moje dane osobowe mogą zostać również powierzone
+     specjalistycznym firmom, realizującym na zlecenie Instytucji Zarządzającej lub Administratora kontrole i
+     audyt w ramach Projektu.
+6. W granicach określonych przepisami prawa, w tym w szczególności RODO, mam prawo:
+   1) dostępu do treści moich danych,
+   2)   do sprostowania moich danych,
+   3)   do żądania ograniczenia przetwarzania moich danych,
+   4)   do przenoszenia moich danych,
+   5)   do wniesienia sprzeciwu wobec przetwarzania moich danych osobowych,
+   6)   do cofnięcia zgody w dowolnym momencie bez wpływu na zgodność z prawem przetwarzania,
+        którego dokonano na podstawie zgody przed jej cofnięciem, jeżeli przetwarzanie danych odbywa się
+        wyłącznie na podstawie mojej zgody, oraz
+   7)   do żądania usunięcia danych (prawo do bycia zapomnianym);
+7. Mam prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych, jeżeli przetwarzanie moich
+   danych osobowych narusza przepisy RODO;
+8. Podanie przeze mnie danych osobowych jest dobrowolne, ale konsekwencją ich niepodania będzie
+   brak możliwości uczestnictwa w teście innowacji społecznej realizowanej w ramach Projektu,
+9. Moje dane nie są wykorzystywane przy zautomatyzowanym podejmowaniu decyzji oraz nie podlegają
+   profilowaniu;
+10. Moje dane nie będą przekazywane do państw trzecich (tj. poza Europejski Obszar Gospodarczy) ani
+   udostępniane organizacjom międzynarodowym.
+
+
+
+
+                                                   ……………………….…..………………………………………….
+
+                                                   (data i podpis osoby składającej oświadczenie
+           Klauzula informacyjna ministra właściwego do spraw rozwoju regionalnego
+
+W celu wykonania obowiązku nałożonego art. 13 i 14 RODO28, w związku z art. 88 ustawy
+o zasadach realizacji zadań finansowanych ze środków europejskich w perspektywie
+finansowej 2021-202729, informujemy o zasadach przetwarzania Państwa danych
+osobowych:
+
+   I. Administrator
+Odrębnym administratorem Państwa danych jest:
+    3. Minister właściwy do spraw rozwoju regionalnego z siedzibą przy ul. Wspólnej 2/4,
+       00-926 Warszawa.
+  II. Cel przetwarzania danych
+Dane osobowe będą przetwarzać w związku z realizacją FERS, w szczególności w celu
+monitorowania, sprawozdawczości, komunikacji, publikacji, ewaluacji, zarządzania
+finansowego, weryfikacji i audytów oraz do celów określania kwalifikowalności uczestników.
+
+Podanie danych jest dobrowolne, ale konieczne do realizacji wyżej wymienionego celu.
+Odmowa ich podania jest równoznaczna z brakiem możliwości podjęcia stosownych działań.
+ III. Podstawa przetwarzania
+Będziemy przetwarzać Państwa dane osobowe w związku z tym, że:
+    3. Zobowiązuje nas do tego prawo (art. 6 ust. 1 lit. c, art. 9 ust. 2 lit. g oraz art. 1030
+       RODO)31:
+       ▪ rozporządzenie Parlamentu Europejskiego i Rady (UE) nr 2021/1060 z 24 czerwca
+         2021 r. ustanawiającego wspólne przepisy dotyczące Europejskiego Funduszu
+         Rozwoju Regionalnego, Europejskiego Funduszu Społecznego Plus, Funduszu
+         Spójności, Funduszu na rzecz Sprawiedliwej Transformacji i Europejskiego Funduszu
+         Morskiego, Rybackiego i Akwakultury, a także przepisy finansowe na potrzeby tych
+         funduszy oraz na potrzeby Funduszu Azylu, Migracji i Integracji, Funduszu
+         Bezpieczeństwa Wewnętrznego i Instrumentu Wsparcia Finansowego na rzecz
+         Zarządzania Granicami i Polityki Wizowej,
+
+
+28
+  Rozporządzenie Parlamentu Europejskiego i Rady (UE) 2016/679 z 27 kwietnia 2016 r. w sprawie
+ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego
+przepływu takich danych (Dz. Urz. UE. L 119 z 4 maja 2016 r., s.1-88).
+29
+  Ustawa z dnia 28 kwietnia 2022 r o zasadach realizacji zadań finansowanych ze środków
+europejskich
+w perspektywie finansowej 2021-2027 (Dz.U. 2022 poz. 1079), zwana dalej „ustawą wdrożeniową”.
+30
+     Dotyczy wyłącznie projektów aktywizujących osoby odbywające karę pozbawienia wolności.
+31
+  Należy wskazać jeden lub kilka przepisów prawa - możliwe jest ich przywołanie w zakresie
+ograniczonym na potrzeby konkretnej klauzuli.
+        ▪ rozporządzenie Parlamentu Europejskiego i Rady (UE) 2021/1057 z dnia 24 czerwca
+            2021 r. ustanawiające Europejski Fundusz Społeczny Plus (EFS+) oraz uchylające
+            rozporządzenie (UE) nr 1296/2013 (Dz. Urz. UE L 231 z 30.06.2021, str. 21, z późn.
+            zm.)
+        ▪ ustawa z dnia 28 kwietnia 2022 r. o zasadach realizacji zadań finansowanych ze
+            środków europejskich w perspektywie finansowej 2021-2027, w szczególności art.
+            87-93,
+        ▪ ustawa z 14 czerwca 1960 r. - Kodeks postępowania administracyjnego,
+        ▪ ustawa z 27 sierpnia 2009 r. o finansach publicznych.
+  IV.     Sposób pozyskiwania danych
+Dane pozyskujemy bezpośrednio od osób, których one dotyczą, albo od instytucji
+i podmiotów zaangażowanych w realizację Programu, w tym w szczególności od
+wnioskodawców, beneficjentów, partnerów.
+   V.     Dostęp do danych osobowych
+Dostęp do Państwa danych osobowych mają pracownicy i współpracownicy administratora.
+Ponadto Państwa dane osobowe mogą być powierzane lub udostępniane:
+    7. podmiotom, którym zleciliśmy wykonywanie zadań w FERS,
+    8. organom Komisji Europejskiej, ministrowi właściwemu do spraw finansów publicznych,
+        prezesowi zakładu ubezpieczeń społecznych,
+    9. podmiotom, które wykonują dla nas usługi związane z obsługą i rozwojem systemów
+        teleinformatycznych, a także zapewnieniem łączności, np. dostawcom rozwiązań IT
+        i operatorom telekomunikacyjnym.
+  VI. Okres przechowywania danych
+Dane osobowe są przechowywane przez okres niezbędny do realizacji celów określonych
+w punkcie II.
+VII. Prawa osób, których dane dotyczą
+Przysługują Państwu następujące prawa:
+11. prawo dostępu do swoich danych oraz otrzymania ich kopii (art. 15 RODO),
+12. prawo do sprostowania swoich danych (art. 16 RODO),
+13. prawo do usunięcia swoich danych (art. 17 RODO) - jeśli nie zaistniały okoliczności,
+      o których mowa w art. 17 ust. 3 RODO,
+14. prawo do żądania od administratora ograniczenia przetwarzania swoich danych
+      (art. 18 RODO),
+15. prawo do przenoszenia swoich danych (art. 20 RODO) - jeśli przetwarzanie odbywa się
+      na podstawie umowy: w celu jej zawarcia lub realizacji (w myśl art. 6 ust. 1 lit. b RODO),
+      oraz w sposób zautomatyzowany32,
+16. prawo wniesienia skargi do organu nadzorczego Prezesa Urzędu Ochrony Danych
+      Osobowych (art. 77 RODO) - w przypadku, gdy osoba uzna, iż przetwarzanie jej danych
+
+32
+  Do automatyzacji procesu przetwarzania danych osobowych wystarczy, że dane te są zapisane na
+dysku komputera.
+     osobowych narusza przepisy RODO lub inne krajowe przepisy regulujące kwestię ochrony
+     danych osobowych, obowiązujące w Polsce.
+VIII. Zautomatyzowane podejmowanie decyzji
+Dane osobowe nie będą podlegały zautomatyzowanemu podejmowaniu decyzji, w tym
+profilowaniu.
+ IX. Przekazywanie danych do państwa trzeciego
+Państwa dane osobowe nie będą przekazywane do państwa trzeciego.
+  X.    Kontakt z administratorem danych i Inspektorem Ochrony Danych
+Jeśli mają Państwo pytania dotyczące przetwarzania przez ministra właściwego do spraw
+rozwoju regionalnego danych osobowych, prosimy kontaktować się z Inspektorem Ochrony
+Danych (IOD) w następujący sposób:
+      ▪ pocztą tradycyjną (ul. Wspólna 2/4, 00-926 Warszawa),
+      ▪ elektronicznie (adres e-mail: IOD@mfipr.gov.pl).
+                                    Załącznik Nr 8 do Umowy nr ………………………..o powierzenie Grantu
+
+                                        PROTOKÓŁ ODBIORU
+
+                                    Produktów Innowacji Społecznej
+
+     realizowanej w ramach projektu pn. „INKUBATOR WŁĄCZENIA SPOŁECZNEGO 2.0” realizowanego
+                        przez Regionalny Ośrodek Polityki Społecznej w Krakowie
+      w ramach Działania 5.1 programu Fundusze Europejskie dla Rozwoju Społecznego 2021-2027,
+               współfinansowanego ze środków Europejskiego Funduszu Społecznego Plus.
+
+GRANTOBIORCA:
+TYTUŁ INNOWACJI SPOŁECZNEJ:
+NR UMOWY O POWIERZENIE GRANTU:
+OKRES KTÓRY JEST ROZLICZANY NINIEJSZYM
+PROTOKOŁEM
+KWOTA ROZLICZANA PROTOKOŁEM
+
+Poświadcza się zrealizowanie następujących produktów:
+
+           Produkt                   Opis produktu              Miernik        Wartość        Poświadcze
+                                                              osiągnięcia      miernika           nie
+                                                               produktu                        realizacji
+                                                                               (zgodnie ze
+                                                               (zgodnie ze    specyfikacją)
+                                                              specyfikacją)
+
+1.                                                                                            TAK/NIE1)
+
+2.                                                                                            TAK/NIE1)
+
+3.                                                                                            TAK/NIE1)
+
+
+
+                                    OŚWIADCZENIE GRANTOBIORCY
+
+Ja niżej podpisany oświadczam, iż zgodnie z moja wiedzą:
+
+· otrzymany grant został wydatkowany zgodnie z przeznaczeniem grantu określonym w Specyfikacji
+  innowacji;
+· wydatki zostały poniesione w terminie realizacji przedsięwzięcia zgodnym z umową o powierzenie grantu;
+· informacje zawarte w niniejszym Protokole, rzetelnie odzwierciedlają rzeczowy postęp realizacji Innowacji
+ Społecznej;
+· wydatki nie zostały objęte podwójnym finansowaniem w ramach Specyfikacji innowacji;
+· wydatki były ponoszone zgodnie z obowiązującymi przepisami prawa krajowego i unijnego;
+· w niniejszym Protokole nie pominięto żadnych istotnych informacji ani nie podano nieprawdziwych
+ informacji, które mogłyby wpłynąć na ocenę prawidłowości opracowania i testowania Innowacji
+ Społecznej w ramach powierzonego grantu;
+· jestem świadomy odpowiedzialności karnej wynikającej z art. 297 kodeksu karnego, dotyczącej
+ poświadczania nieprawdy co do okoliczności mającej znaczenie prawne.
+………………………………………..
+
+Podpis Grantobiorcy
+
+
+
+  Do Protokołu dołączam następujące dowody osiągnięcia produktów:
+  1. ………………………….…..
+  2. ………………………………
+
+  Osiągnięte produkty przyjmuje się bez zastrzeżeń1) / stwierdza się zastrzeżenia1)
+
+
+  ……………………………………………………………………………………………………………
+  Termin na wprowadzenie korekty: …………………………………………………….
+  Na tym Protokół zakończono.
+
+
+     ……………………………………………….                                             ………………………………………………..
+  Data i podpis Grantodawcy                                             Data i podpis Grantobiorcy
+                                    Załącznik nr 2 do Procedur realizacji projektu grantowego
+                                                       „Inkubator Włączenia Społecznego 2.0”
+
+
+I. WYDATKI NIEKWALIFIKOWALNE W RAMACH GRANTU:
+1) kary i grzywny,
+2) koszty postępowania sądowego, wydatki związane z przygotowaniem i obsługą prawną spraw
+   sądowych oraz wydatki poniesione na funkcjonowanie komisji rozjemczych,
+3) koszty pożyczki lub kredytu zaciągniętego na prefinansowanie dotacji,
+4) prowizje pobierane w ramach operacji wymiany walut,
+5) rozliczony notą księgową koszt zakupu środka trwałego będącego własnością Grantobiorcy lub
+   prawa przysługującego Grantobiorcy (taki środek trwały może zostać wniesiony do grantu w
+   formie wkładu niepieniężnego),
+6) nagrody jubileuszowe,
+7) odprawy pracownicze,
+8) wpłaty dokonywane na Państwowy Fundusz Rehabilitacji Osób Niepełnosprawnych zgodnie z
+   ustawą z dnia 27 sierpnia 1997 r. o rehabilitacji zawodowej i społecznej oraz zatrudnianiu osób
+   niepełnosprawnych (Dz. U. z 2021 r. poz. 573, z późn. zm.), w tym wpłaty dokonywane przez
+   stronę trzecią,
+9) świadczenia na rzecz personelu realizowane z Zakładowego Funduszu Świadczeń Socjalnych
+   (ZFŚS),
+10) koszty ubezpieczenia cywilnego funkcjonariuszy publicznych za szkodę wyrządzoną przy
+   wykonywaniu władzy publicznej,
+11) koszty składek i opłat fakultatywnych na rzecz personelu, niewymaganych obowiązującymi
+   przepisami prawa, chyba że:
+    i)   zostały przewidziane w regulaminie pracy lub regulaminie wynagradzania lub innych
+         właściwych przepisach prawa pracy,
+    ii) zostały wprowadzone co najmniej sześć miesięcy przed złożeniem wniosku o
+         dofinansowanie projektu,
+    iii) potencjalnie obejmują wszystkich pracowników, a zasady ich przyznawania są takie same
+         w przypadku personelu pracującego w ramach grantu oraz pozostałych pracowników
+         Grantobiorcy,
+12) koszt zaangażowania personelu zatrudnionego jednocześnie na podstawie stosunku pracy w
+   IZ, IP, IW, gdy zachodzi konflikt interesów rozumiany jako naruszenie zasady bezinteresowności
+   i bezstronności poprzez w szczególności wykonywanie zadań mających związek lub kolidujących
+   ze stanowiskiem służbowym, mających negatywny wpływ na sprawy prowadzone w ramach
+   obowiązków służbowych, lub na bezstronność prowadzenia spraw służbowych z uwagi na
+   względy rodzinne, emocjonalne, sympatie polityczne lub związki z jakimkolwiek krajem, interes
+   gospodarczy lub jakiekolwiek inne bezpośrednie lub pośrednie interesy osobiste,
+13) koszt zaangażowania pracownika Grantobiorcy na podstawie umowy cywilnoprawnej innej niż
+   umowa o dzieło, z wyjątkiem:
+        i)    przypadków, gdy szczególne przepisy dotyczące zatrudniania danej grupy pracowników
+              uniemożliwiają wykonywanie zadań w ramach projektu na podstawie stosunku pracy,
+    ii)       prac badawczo-rozwojowych,
+14) transakcje, bez względu na liczbę wynikających z nich płatności, dokonane w gotówce, których
+   wartość przekracza kwotę, o której mowa w art. 19 ustawy z dnia 6 marca 2018 r. Prawo
+   przedsiębiorców (Dz. U. z 2021 r. poz. 162, z późn. zm.),
+15) zaliczka wypłacona przez Grantobiorcę niezgodnie z postanowieniami umowy,
+lub jeśli element objęty zaliczką nie jest kwalifikowalny lub nie został faktycznie zrealizowany lub
+   dostarczony w okresie kwalifikowalności projektu.
+16) Cross- financing:
+a) zakupu gruntu i nieruchomości,
+b) zakupu infrastruktury rozumianej jako budowa nowej infrastruktury oraz wykonywanie
+   wszelkich prac w ramach istniejącej infrastruktury, których wynik staje się częścią
+   nieruchomości i które zostają trwale przyłączone do nieruchomości, w szczególności adaptacja
+   oraz prace remontowe związane z dostosowaniem nieruchomości lub pomieszczeń do nowej
+   funkcji (np. wykonanie podjazdu do budynku, zainstalowanie windy w budynku, renowacja
+   budynku lub pomieszczeń, prace adaptacyjne w budynku lub pomieszczeniach,
+c) zakupu mebli, sprzętu i pojazdów, z wyjątkiem sytuacji, gdy:
+  i)         zakupy te zostaną zamortyzowane w całości w okresie realizacji projektu
+  ii)        Grantobiorca udowodni, że zakup będzie najbardziej opłacalną opcją, tj. wymaga
+             mniejszych nakładów finansowych niż inne opcje, np. najem lub leasing, ale jednocześnie
+             jest odpowiedni do osiągnięcia celu projektu; przy porównywaniu kosztów finansowych
+             związanych z różnymi opcjami, ocena powinna opierać się na przedmiotach o podobnych
+             cechach; uzasadnienie zakupu jako najbardziej opłacalnej opcji powinno wynikać z
+             zatwierdzonej Specyfikacji Innowacji,
+    iii)      zakupy te są konieczne dla osiągniecia celów grantu uzasadnienie konieczności tych
+              zakupów powinno wynikać z zatwierdzonej Specyfikacji Innowacji (za niezasadny należy
+              uznać zakup sprzętu dokonanego w celu wspomagania procesu wdrażania grantu).
+
+Warunki z tiretów i-iii są rozłączne, co oznacza, że w przypadku spełnienia któregokolwiek z nich,
+zakup mebli, sprzętu i pojazdów może być kwalifikowalny w ramach EFS+ poza cross-financingiem.
+Zakup mebli, sprzętu i pojazdów niespełniający żadnego z warunków wskazanych w tirecie i-iii
+stanowi cross-financing.
+II. PODWÓJNE FINANSOWANIE
+Niedozwolone jest podwójne finansowanie wydatków. Podwójne finansowanie oznacza w
+szczególności:
+   a) więcej niż jednokrotne przedstawienie do rozliczenia tego samego wydatku albo tej samej
+           części wydatku ze środków UE w jakiejkolwiek formie (w szczególności dotacji, pożyczki,
+           gwarancji/poręczenia),
+   b) rozliczenie zakupu używanego środka trwałego, który był uprzednio współfinansowany z
+           udziałem środków UE,
+   c) rozliczenie kosztów amortyzacji środka trwałego uprzednio zakupionego z udziałem środków
+           UE,
+   d) rozliczenie wydatku poniesionego przez leasingodawcę na zakup przedmiotu leasingu w
+           ramach leasingu finansowego, a następnie rozliczenie rat opłacanych przez beneficjenta w
+           związku z leasingiem tego przedmiotu,
+   e) objęcie kosztów kwalifikowalnych jednocześnie wsparciem w formie pożyczki i
+           gwarancji/poręczenia,
+   f)      rozliczenie tego samego wydatku w kosztach pośrednich projektu oraz kosztach
+           bezpośrednich projektu,
+   g) otrzymanie na wydatki kwalifikowalne danego projektu lub części projektu dotacji z kilku
+           źródeł (krajowych, unijnych lub innych) w wysokości łącznie wyższej niż 100% wydatków
+           kwalifikowalnych projektu lub części projektu.
+

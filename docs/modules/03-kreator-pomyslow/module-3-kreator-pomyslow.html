@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Moduł 3 — Kreator pomysłów</title>
 <style>
-<style>
 :root{
   --bg:#fbfaf8; --surface:#ffffff; --surface-2:#f3f1ed; --border:#e0dcd4;
   --text:#1c1a17; --text-dim:#5f5a52; --accent:#8a4b1f; --accent-soft:#f6ece3;
@@ -85,6 +84,7 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 .cov-part{color:var(--warn); font-weight:600}
 .cov-no{color:var(--danger); font-weight:600}
 
+.grid-demo{font:12px/1.4 var(--mono); white-space:pre; overflow-x:auto}
 </style>
 </head>
 <body>
@@ -92,18 +92,19 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 
 <header class="doc">
   <h1>Moduł 3 — Kreator pomysłów</h1>
-  <div class="sub">Dokument implementacyjny dla Małopolskiego Hubu Innowacji Społecznych (<code>base.md</code>, funkcjonalność III). <strong>Szkielet</strong> — sekcje do wypełnienia na sesji planowania. Odbiorca: agent lub programista implementujący moduł.</div>
+  <div class="sub">Dokument implementacyjny dla Małopolskiego Hubu Innowacji Społecznych (<code>base.md</code>, funkcjonalność III): fiszka pomysłu, interaktywna Social Innovation Canvas, asystent AI, odpowiedź Hubu do autora i generator wniosków grantowych na wzór naborów ROPS. Odbiorca: agent lub programista implementujący moduł.</div>
   <div class="meta">
-    <span><strong>Wersja:</strong> v0.1</span>
-    <span><strong>Data:</strong> 2026-10-03</span>
-    <span><strong>Status:</strong> <span class="badge b-todo">szkielet</span></span>
-    <span><strong>Plik zadań:</strong> <code>docs/modules/03-kreator-pomyslow/module-3-tasks.md</code></span>
+    <span><strong>Wersja:</strong> v0.2</span>
+    <span><strong>Data:</strong> 2026-10-04</span>
+    <span><strong>Status:</strong> <span class="badge b-draft">draft</span></span>
+    <span><strong>Plik zadań:</strong> <code>docs/modules/03-kreator-pomyslow/module-3-tasks.md</code> (K00–K19)</span>
+    <span><strong>Materiały źródłowe:</strong> <code>docs/resources/rops/</code></span>
   </div>
 </header>
 
 <div class="note">
 <p><strong>Jak czytać ten dokument.</strong> Każda sekcja ma status: <span class="badge b-stable">stable</span> — ustalone, nie zmieniaj bez ADR; <span class="badge b-draft">draft</span> — kierunek ustalony, szczegóły do dopracowania w kodzie; <span class="badge b-todo">todo</span> — do zaplanowania, nie implementuj.</p>
-<p>Struktura i konwencje jak w <code>docs/modules/01-matchmaking/module-1-matchmaking.html</code>. Twarde reguły z <code>AGENTS.md</code> obowiązują także tutaj (progi w <code>settings</code>, <code>polish_simple</code>, brak treści w logach, jeden kształt <code>SolutionCard</code>, bez autoryzacji i bez testów automatycznych). Moduł 1 jest kontraktem zewnętrznym — zmiana jego tabel lub endpointów wymaga ADR i wpisu w „Uwagach między zadaniami” Modułu 1.</p>
+<p>Twarde reguły z <code>AGENTS.md</code> obowiązują także tutaj: progi i limity w <code>api.config.settings</code>, brak treści użytkownika w logach, <code>contact_email</code> nigdy nie wychodzi z API, jeden kształt <code>SolutionCard</code>, teksty po polsku, bez autoryzacji i bez testów automatycznych. Moduł 1 jest kontraktem zewnętrznym — ten moduł <strong>nie zmienia</strong> jego tabel ani endpointów; dopisuje się do kilku współdzielonych plików wyłącznie w sposób opisany w ADR-M3-003.</p>
 </div>
 
 <nav class="toc">
@@ -115,20 +116,23 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
     <li><a href="#s4">Użytkownicy i scenariusze</a></li>
     <li><a href="#s5">Architektura i zależności od Modułu 1</a></li>
     <li><a href="#s6">Model danych</a></li>
-    <li><a href="#s7">Logika i AI</a></li>
-    <li><a href="#s8">Kontrakt API</a></li>
-    <li><a href="#s9">Kontrakt dla frontendu (ekrany)</a></li>
-    <li><a href="#s10">Konfiguracja i feature flagi</a></li>
-    <li><a href="#s11">RODO i bezpieczeństwo</a></li>
-    <li><a href="#s12">Struktura katalogów i kolejność prac</a></li>
-    <li><a href="#s13">Rejestr decyzji (ADR)</a></li>
-    <li><a href="#s14">Backlog kolejnych iteracji</a></li>
-    <li><a href="#s15">Koszt utrzymania i zasoby</a></li>
-    <li><a href="#s16">Pytania otwarte do sesji planowania</a></li>
+    <li><a href="#s7">Social Innovation Canvas</a></li>
+    <li><a href="#s8">Asystent AI i podobne innowacje</a></li>
+    <li><a href="#s9">Generator wniosków (nabory)</a></li>
+    <li><a href="#s10">Kontrakt API</a></li>
+    <li><a href="#s11">Kontrakt dla frontendu (ekrany)</a></li>
+    <li><a href="#s12">Konfiguracja</a></li>
+    <li><a href="#s13">RODO i bezpieczeństwo</a></li>
+    <li><a href="#s14">Struktura katalogów i kolejność prac</a></li>
+    <li><a href="#s15">Rejestr decyzji (ADR)</a></li>
+    <li><a href="#s16">Backlog kolejnych iteracji</a></li>
+    <li><a href="#s17">Koszt utrzymania i zasoby</a></li>
+    <li><a href="#s18">Pytania otwarte</a></li>
   </ol>
 </nav>
 
-<h2 id="s1">1. Cel i kontekst biznesowy <span class="badge b-draft">draft</span></h2>
+<!-- ====================================================================== -->
+<h2 id="s1">1. Cel i kontekst biznesowy <span class="badge b-stable">stable</span></h2>
 
 <h4>Wymaganie z <code>base.md</code> (III)</h4>
 <blockquote>
@@ -138,155 +142,638 @@ footer{margin-top:4rem; padding-top:1.25rem; border-top:1px solid var(--border);
 <p>Mile widziany byłby Asystent kreatora innowacji, który podpowiada, jak zbudować innowację, pomaga rozwinąć pomysł, podpowiada nietuzinkowe rozwiązania, robi jego wizualizację, np. innowacyjnego przedmiotu.</p>
 </blockquote>
 
+<h4>Cel modułu w jednym zdaniu</h4>
+<p><strong>Od problemu do wniosku:</strong> mieszkaniec lub organizacja zamienia problem (także ten, na który Matchmaking odpowiedział „nie wiem”) w fiszkę, rozwija ją na interaktywnej Social Innovation Canvas z pomocą asystenta, dostaje odpowiedź od Hubu, a w okresie naboru jednym kliknięciem przygotowuje wniosek wypełniony danymi z fiszki i kanwy.</p>
+
+<h4>Nowa jakość (kryterium pomysłowości, <code>base.md</code> §6)</h4>
+<ul>
+<li><strong>Ciągłe „czy to już istnieje?”</strong> — przy fiszce i kanwie system pokazuje podobne innowacje z Biblioteki ROPS (pipeline Matchmakingu). To ten sam test, który ROPS robi w ocenie formalnej („innowacyjność w skali kraju, brak powielenia”).</li>
+<li><strong>Kanwa jako żywa mapa</strong> — plansze Social Canvas (INNOAGH, v1.0) odwzorowane 1:1, zapisywane w bazie, z podpowiedziami asystenta przy każdym bloku.</li>
+<li><strong>Wniosek modyfikowany do naboru</strong> — nabór to konfiguracja (sekcje, pytania, limity, karta oceny) na wzór prawdziwych naborów ROPS (IWS 2.0, Usługa Wrażliwa); wniosek wypełnia się wstępnie z fiszki i kanwy, a asystent robi samoocenę według prawdziwej karty oceny.</li>
+<li><strong>Zamknięta pętla Matchmaking → Kreator → Biblioteka</strong> — „nie wiem” prowadzi do fiszki, a zatwierdzony pomysł może trafić do Biblioteki (przez istniejący przegląd rozwiązań).</li>
+</ul>
+
 <h4>Ocena w konkursie</h4>
-<p>Kryterium „Stopień spełnienia wyzwania” (40%): Matchmaking 10%, każda dodatkowa funkcjonalność +5%. Liczy się jakość działania — moduł ma być pokazywalny w demo, nie tylko obecny w nawigacji.</p>
+<p>„Stopień spełnienia wyzwania” (40%): Matchmaking 10%, każda dodatkowa funkcjonalność +5%. Liczy się jakość działania. Moduł 3 dotyka też kryterium testowego „szybkość komunikacji” (§6: „jak system powiadamia administratora o nowym pomyśle i jak wygląda ścieżka odpowiedzi do autora”) — pętla admin → autor jest w MUST.</p>
 
-<div class="pending">
-<p><strong>Do uzupełnienia:</strong> cel modułu w jednym zdaniu, jak wspiera „cyfrowe serce” Hubu i czym wnosi „nową jakość” (kryterium pomysłowości z <code>base.md</code> §6).</p>
-</div>
-
+<!-- ====================================================================== -->
 <h2 id="s2">2. Stan obecny — co już działa <span class="badge b-draft">draft</span></h2>
 
-<p>Stan na 2026-10-03 po Module 1 (backend T00–T26) i module frontendowym (F00–F21).</p>
+<p>Stan na 2026-10-04 po Module 1 (backend T00–T26) i module frontendowym (F00–F21).</p>
 <div class="tablewrap">
 <table>
-<tr><th>Wymaganie</th><th>Pokrycie</th><th>Gdzie / czego brakuje</th></tr>
-<tr><td>Fiszka pomysłu (istota, adresat, etap)</td><td><span class="cov-part">częściowo</span></td><td><code>/mam-pomysl</code> (F13) → <code>POST /api/solutions</code> jako <code>PENDING_REVIEW</code>; etap zapisany jako pierwsza linia <code>body</code> — brak pola i osobnego bytu „pomysł”</td></tr>
-<tr><td>Przegląd pomysłów przez Hub</td><td><span class="cov-yes">jest</span></td><td>Kolejka zatwierdzania w panelu (F17), skrzynka „Nowe” (F14)</td></tr>
-<tr><td>Odpowiedź do autora pomysłu</td><td><span class="cov-no">brak</span></td><td>Mechanizm odpowiedzi istnieje tylko dla zgłoszeń problemów (<code>report_replies</code>)</td></tr>
-<tr><td>Generator wniosków pod nabór</td><td><span class="cov-no">brak</span></td><td>Brak modelu naboru, okna czasowego, szablonu pytań i generacji</td></tr>
-<tr><td>Canvas Innowacji Społecznych</td><td><span class="cov-no">brak</span></td><td>—</td></tr>
-<tr><td>Asystent kreatora (podpowiedzi, wizualizacja)</td><td><span class="cov-no">brak</span></td><td>Jest provider LLM (<code>api/providers/llm.py</code>), brak generacji obrazów</td></tr>
+<tr><th>Wymaganie</th><th>Pokrycie</th><th>Gdzie / czego brakuje → zadanie</th></tr>
+<tr><td>Fiszka pomysłu (opis, istota, adresaci, etap)</td><td><span class="cov-part">częściowo</span></td><td><code>/mam-pomysl</code> (F13) → <code>POST /api/solutions</code> jako <code>PENDING_REVIEW</code>; etap jako pierwsza linia <code>body</code>. Przepinamy na <code>ideas</code> → K04, K11</td></tr>
+<tr><td>Przegląd pomysłów przez Hub</td><td><span class="cov-part">częściowo</span></td><td>Kolejka rozwiązań (F17) i skrzynka (F14) widzą tylko <code>solutions</code>. Nowy widok „Pomysły” → K16</td></tr>
+<tr><td>Odpowiedź do autora pomysłu</td><td><span class="cov-no">brak</span></td><td>Wzorzec <code>report_replies</code> istnieje → <code>idea_replies</code>, K04, K15, K16</td></tr>
+<tr><td>Canvas Innowacji Społecznych</td><td><span class="cov-no">brak</span></td><td>Materiał: <code>docs/resources/rops/materialy/social_canvas.pdf</code> → K00, K03, K12, K13</td></tr>
+<tr><td>Asystent kreatora</td><td><span class="cov-no">brak</span></td><td>Jest provider LLM do streszczeń (strumieniowy, 400 tokenów) → osobny provider JSON, K05, K06, K14</td></tr>
+<tr><td>Generator wniosków pod nabór</td><td><span class="cov-no">brak</span></td><td>Wzory wniosków, karty oceny i regulaminy w <code>docs/resources/rops/</code> → K07, K08, K18</td></tr>
+<tr><td>Wizualizacja pomysłu</td><td>—</td><td>Świadomie poza zakresem (decyzja zespołu 2026-10-04)</td></tr>
 </table>
 </div>
 
-<h2 id="s3">3. Zakres MVP i granice <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Co dokładnie wchodzi do PoC tego modułu, a co jest backlogiem (sekcja 14)?</li>
-<li>Zasada granicy: czego ten moduł <strong>nie</strong> robi i który moduł to przejmuje?</li>
-</ul>
-</div>
+<!-- ====================================================================== -->
+<h2 id="s3">3. Zakres MVP i granice <span class="badge b-stable">stable</span></h2>
 
-<h2 id="s4">4. Użytkownicy i scenariusze <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Które grupy z <code>base.md</code> §3 korzystają z modułu: mieszkańcy/NGO, JST, pracownicy ROPS, eksperci?</li>
-<li>2–4 scenariusze krok po kroku (kto, co wpisuje, co dostaje) — w tym jeden scenariusz do nagrania demo.</li>
-</ul>
-</div>
-
-<h2 id="s5">5. Architektura i zależności od Modułu 1 <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Nowe pliki w <code>api/</code> (router, pipeline, provider) i co reużywamy z Modułu 1 (providery, <code>SolutionCard</code>, <code>api.tasks.spawn</code>, taksonomia, gminy).</li>
-<li>Czy moduł zmienia istniejące tabele lub endpointy Modułu 1? Każda taka zmiana = ADR.</li>
-</ul>
-</div>
-
-<h2 id="s6">6. Model danych <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>DDL nowych tabel i typów (dopisywany do <code>db/init.sql</code>), klucze obce do <code>solutions</code> / <code>reports</code>.</li>
-<li>Które kolumny są treścią (RODO, sekcja 11), a które statystyką?</li>
-</ul>
-</div>
-
-<h2 id="s7">7. Logika i AI <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Gdzie jest LLM / embeddingi, z jakim promptem i jakim kontraktem wejścia–wyjścia?</li>
-<li>Zachowanie przy wyłączonym LLM (<code>LLM_ENABLED=false</code>) i przy błędzie providera — moduł musi działać bez AI.</li>
-</ul>
-</div>
-
-<h2 id="s8">8. Kontrakt API <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Lista endpointów z kształtem żądania i odpowiedzi (pydantic w <code>api/schemas.py</code>), kody błędów 404/422.</li>
-<li>Bez autoryzacji (decyzja zespołu) — wszystkie endpointy otwarte.</li>
-</ul>
-</div>
-
-<h2 id="s9">9. Kontrakt dla frontendu (ekrany) <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Trasy w <code>web/</code>, ekrany i stany (ładowanie, pusto, błąd), elementy nawigacji.</li>
-<li>Wymogi WCAG 2.1 AA i design systemu (<code>DESIGN.md</code>, najwyżej jeden <code>ds-btn--cta</code> na ekran).</li>
-</ul>
-</div>
-
-<h2 id="s10">10. Konfiguracja i feature flagi <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Nowe zmienne w <code>api.config.settings</code> (progi, limity, flagi włączenia modułu) — zero literałów w kodzie.</li>
-</ul>
-</div>
-
-<h2 id="s11">11. RODO i bezpieczeństwo <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Jakie dane osobowe zbiera moduł, co nie może wyjść z API i nie może trafić do logów?</li>
-</ul>
-</div>
-
-<h2 id="s12">12. Struktura katalogów i kolejność prac <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Drzewo nowych plików i ścieżka krytyczna do demo (najkrótsza działająca ścieżka).</li>
-</ul>
-</div>
-
-<h2 id="s13">13. Rejestr decyzji (ADR) <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Numeracja per moduł: <code>ADR-M3-001</code>… — żeby nie kolidować z ADR-001 – 019 Modułu 1.</li>
-</ul>
-</div>
-
-<h2 id="s14">14. Backlog kolejnych iteracji <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Co świadomie odkładamy i co już przygotowujemy pod to w PoC.</li>
-</ul>
-</div>
-
-<h2 id="s15">15. Koszt utrzymania i zasoby <span class="badge b-todo">todo</span></h2>
-<div class="pending">
-<p><strong>Do ustalenia na sesji planowania.</strong></p>
-<ul>
-<li>Koszt zmienny (LLM, generacja obrazów itp.) na jedno użycie i przy 10 tys. / 100 tys. użyć miesięcznie; zasoby ludzkie po stronie ROPS.</li>
-</ul>
-</div>
-
-<h2 id="s16">16. Pytania otwarte do sesji planowania <span class="badge b-draft">draft</span></h2>
+<h3>MUST — ścieżka demo</h3>
 <ol>
-<li>Pomysł to nadal wiersz w <code>solutions</code> (z nowym polem etapu), czy osobna tabela <code>ideas</code> z awansem do <code>solutions</code> po zatwierdzeniu?</li>
-<li>Jak autor wraca do pomysłu bez kont (decyzja: brak autoryzacji) — lista w <code>localStorage</code> jak „Moje zgłoszenia”?</li>
-<li>Nabór: jakie pola definiuje ROPS (kryteria, pytania wniosku, terminy)? Skąd przykładowy regulamin do demo?</li>
-<li>Canvas: pola z plansz HackYeah — formularz krok po kroku czy edytor kafelkowy? Eksport do PDF?</li>
-<li>Asystent: tryb czatu czy podpowiedzi przy polach fiszki/Canvasu? Wizualizacja — który model obrazów i czy mieści się w kosztach?</li>
-<li>Połączenie z Modułem 1: zgłoszenia z <code>matched=false</code> jako inspiracja („problemy czekające na pomysł”)?</li>
+<li><strong>Fiszka jako osobny byt</strong> (<code>ideas</code>): tytuł, krótki opis, istota, adresaci, etap (skala gotowości z Social Canvas), wyzwanie (taksonomia M1), gmina, podpis, opcjonalny e-mail. Stany <code>DRAFT → SUBMITTED → …</code>.</li>
+<li><strong>Interaktywna Social Innovation Canvas</strong>: 3 arkusze w układzie plansz PDF, wszystkie bloki edytowalne, autozapis do bazy, postęp wypełnienia, widok tylko-do-odczytu w panelu.</li>
+<li><strong>Asystent</strong>: „Pomóż mi rozwinąć” przy fiszce i „Podpowiedz” przy blokach kanwy — pytania doprecyzowujące i propozycje do zaakceptowania. Działa też bez LLM (statyczne pytania pomocnicze z kanwy).</li>
+<li><strong>Podobne innowacje</strong> z Biblioteki przy fiszce i kanwie (pipeline M1, tylko wyniki ponad bramką).</li>
+<li><strong>Pętla komunikacji</strong>: nowy pomysł w skrzynce panelu → status i odpowiedź Hubu → autor widzi je w „Moich pomysłach”.</li>
+<li><strong>Wejście z „nie wiem”</strong>: przycisk „Masz pomysł, jak to rozwiązać?” w wynikach czatu otwiera fiszkę wstępnie wypełnioną opisem problemu (po <code>report_id</code>).</li>
+<li><strong>Materiały</strong>: odnośniki do Social Canvas (PDF) i Mapy Wyzwań Społecznych na stronach ROPS.</li>
+</ol>
+
+<h3>SHOULD — generator wniosków</h3>
+<ol start="8">
+<li>Nabory jako pliki JSON (<code>data/calls/</code>): „Przykładowy nabór na wzór IWS 2.0” (otwarty w datach demo) i „Usługa Wrażliwa — II nabór” (zamknięty — realne daty; pokazuje okno czasowe).</li>
+<li>Wniosek tworzony z pomysłu, wstępnie wypełniony z fiszki i kanwy (deterministycznie, bez AI), tabela budżetu z walidacją limitów, kontrole kompletności.</li>
+<li>Szkic sekcji przez AI (na żądanie, do edycji) i samoocena według karty oceny naboru (podpowiedź, nie ocena ROPS).</li>
+<li>Druk / zapis do PDF z przeglądarki (style druku).</li>
+<li>Awans zatwierdzonego pomysłu do Biblioteki (<code>solutions</code> jako <code>PENDING_REVIEW</code>, dalej istniejący przegląd F17).</li>
+</ol>
+
+<h3>COULD</h3>
+<ol start="13">
+<li>Tablica „Problemy czekające na pomysł” (zgłoszenia M1 z <code>matched=false</code>) jako inspiracja.</li>
+<li>Seed demo z kilkoma pomysłami w różnych stanach (K09 — zalecany przed nagraniem demo).</li>
+</ol>
+
+<h3>Poza zakresem</h3>
+<ul>
+<li>Wizualizacja pomysłu (generacja obrazów).</li>
+<li>Realne składanie wniosku do ROPS (Webankieta), podpisy, oświadczenia o mocy prawnej, załączniki.</li>
+<li>Dane osobowe wnioskodawcy (adres, KRS, PESEL) — sekcja „Dane wnioskodawcy” jest tylko informacyjna.</li>
+<li>Ocena wniosków przez komisję w systemie, edycja naborów w panelu, powiadomienia e-mail, konta i autoryzacja.</li>
+<li>Wspólna edycja kanwy w czasie rzeczywistym (ostatni zapis wygrywa).</li>
+</ul>
+
+<h3>Granice z innymi modułami</h3>
+<div class="tablewrap">
+<table>
+<tr><th>Moduł</th><th>Granica</th></tr>
+<tr><td>M1 Matchmaking</td><td>M3 <em>używa</em> <code>preprocess</code> + <code>run_search</code> (bez zapisu zgłoszeń) i czyta <code>GET /api/reports/{id}</code> do wstępnego wypełnienia fiszki. Nie zmienia tabel ani endpointów M1.</td></tr>
+<tr><td>M2 Zasobnik wiedzy</td><td>Materiały (kanwa, Mapa Wyzwań) to tylko odnośniki w Kreatorze; prezentacja zasobów należy do M2.</td></tr>
+<tr><td>M4 Tester innowacji</td><td>Status <code>INVITED</code> oznacza zaproszenie do dalszych prac/naboru; nie uruchamia testów.</td></tr>
+<tr><td>M5 Platforma komunikacji</td><td>M3 ma wąski kanał „odpowiedź Hubu do autora pomysłu” (<code>idea_replies</code>, jednokierunkowy, jak <code>report_replies</code>). Dialog wielostronny i mentoring przejmie M5.</td></tr>
+<tr><td>M6 Panel administratora</td><td>M3 dostarcza ekrany panelu dla pomysłów (lista, przegląd) — w układzie istniejącego panelu.</td></tr>
+</table>
+</div>
+
+<!-- ====================================================================== -->
+<h2 id="s4">4. Użytkownicy i scenariusze <span class="badge b-draft">draft</span></h2>
+
+<div class="tablewrap">
+<table>
+<tr><th>Grupa (<code>base.md</code> §3)</th><th>Co robi w module</th></tr>
+<tr><td>Mieszkańcy, NGO, grupy nieformalne</td><td>Fiszka, kanwa, asystent, „Moje pomysły”, wniosek do naboru IWS-podobnego (osoby fizyczne mogą aplikować).</td></tr>
+<tr><td>JST, instytucje</td><td>To samo; dodatkowo nabór typu Usługa Wrażliwa (wdrożenie gotowej innowacji, tylko instytucje).</td></tr>
+<tr><td>Pracownicy ROPS</td><td>Lista nowych pomysłów, przegląd fiszki i kanwy, status, odpowiedź do autora, awans do Biblioteki.</td></tr>
+<tr><td>Eksperci</td><td>W PoC jak pracownik ROPS (pole <code>author_label</code> w odpowiedzi). Mentoring — M5.</td></tr>
+</table>
+</div>
+
+<h3>S1. Od „nie wiem” do pomysłu (scenariusz demo, ok. 90 s)</h3>
+<ol>
+<li>Mieszkanka wpisuje w „Znajdź rozwiązanie” problem, na który Biblioteka nie ma odpowiedzi → „nie wiem”.</li>
+<li>Klika „Masz pomysł, jak to rozwiązać?” → <code>/mam-pomysl?zgloszenie=123</code>; opis problemu trafia do pola „Krótki opis” (z <code>GET /api/reports/123</code>), wyzwanie i gmina z tego zgłoszenia.</li>
+<li>Dopisuje tytuł i istotę, klika „Pomóż mi rozwinąć” → 3 pytania i propozycja doprecyzowania „Dla kogo”; akceptuje jedną. Obok: „Podobne innowacje w Bibliotece” — 2 karty albo „Nie znaleźliśmy podobnych rozwiązań”.</li>
+<li>„Zapisz i rozwiń na kanwie” → kanwa arkusz #01; zaznacza intensywność, skalę, dodaje aktorów (z „Podpowiedz”). Autozapis.</li>
+<li>„Wyślij do Hubu” → pomysł <code>SUBMITTED</code>, numer w „Moich pomysłach”.</li>
+<li>Panel: skrzynka pokazuje nowy pomysł; pracownik otwiera przegląd (fiszka + kanwa tylko do odczytu), pisze „Zapraszamy do naboru” i ustawia „Zaproszony”.</li>
+<li>Autorka w „Moich pomysłach” widzi status i odpowiedź → „Przygotuj wniosek” → wniosek do przykładowego naboru IWS wypełniony wstępnie, budżet, samoocena → „Drukuj / zapisz PDF”.</li>
+</ol>
+
+<h3>S2. Rozwijanie pomysłu na kanwie bez AI</h3>
+<p>Przy <code>LLM_ENABLED=false</code> przycisk „Podpowiedz” pokazuje pytania pomocnicze z planszy (dosłownie z Social Canvas). Podobne innowacje działają, jeśli działają embeddingi. Kanwa i wniosek działają w całości.</p>
+
+<h3>S3. Przegląd i awans do Biblioteki</h3>
+<p>Pracownik ROPS otwiera pomysł w stanie <code>IN_REVIEW</code>, klika „Przekaż do Biblioteki” → powstaje rozwiązanie <code>PENDING_REVIEW</code> (origin <code>USER_SUBMITTED</code>) z treścią z fiszki i kanwy; dalej istniejący przegląd rozwiązań (F17) publikuje je w katalogu i w wyszukiwaniu.</p>
+
+<h3>S4. Nabór zamknięty</h3>
+<p>Na <code>/nabory</code> „Usługa Wrażliwa — II nabór” ma etykietę „Nabór zakończony 30.06.2026”; przycisk tworzenia wniosku jest niedostępny, a API zwraca 409 <code>CALL_CLOSED</code>. „Przykładowy nabór na wzór IWS 2.0” jest otwarty do 31.12.2026.</p>
+
+<!-- ====================================================================== -->
+<h2 id="s5">5. Architektura i zależności od Modułu 1 <span class="badge b-stable">stable</span></h2>
+
+<pre><code>  web/ (React)                          api/ (FastAPI)                               PostgreSQL
+  ───────────                           ─────────────                                ──────────
+  /mam-pomysl[/:id]  ── fiszka ───────▶ routers/ideas.py ─────────────────────────▶  ideas, idea_replies
+  /mam-pomysl/:id/kanwa ─ autozapis ──▶ routers/canvas.py ─ kreator/canvas.py ────▶  idea_canvases (JSONB)
+                     ◀─ definicja ────  GET /api/canvas/definition ◀─ data/social-canvas.json
+  AssistPanel        ── podpowiedź ───▶ routers/assist.py ─ kreator/assistant.py ─▶ providers/llm_assist.py ─▶ Anthropic (Haiku 4.5)
+  SimilarInnovations ── podobne ──────▶ routers/assist.py ─ kreator/similar.py ──▶  M1: preprocess + run_search (solutions)
+  /nabory, /wnioski/:id ──────────────▶ routers/applications.py ─ kreator/calls.py ◀─ data/calls/*.json
+                                                             └ kreator/prefill.py, kreator/application_ai.py ─▶ applications
+  /panel/pomysly[/:id] ───────────────▶ routers/ideas.py (status, odpowiedzi, promote) ─▶ M1: corpus.rebuild_chunks → solutions
+</code></pre>
+
+<h4>Reużywamy z Modułu 1 (bez zmian)</h4>
+<ul>
+<li><code>api.db</code> (<code>SessionLocal</code>, <code>get_session</code>), <code>api.models.Base</code> i modele (FK do <code>reports</code>, <code>solutions</code>, <code>challenge_taxonomy</code>), <code>api.errors.ApiError</code>, <code>api.log</code>.</li>
+<li><code>api.pipeline.preprocess.preprocess</code>, <code>GMINY</code> (walidacja gminy i powiat), <code>api.pipeline.orchestrator.run_search</code>.</li>
+<li><code>api.cards.to_card</code> / <code>SolutionCard</code> (podobne innowacje), <code>api.corpus.content_hash</code> + <code>rebuild_chunks</code> (awans do Biblioteki).</li>
+<li><code>api.schemas.ReplyCreate</code> (kształt treści odpowiedzi), <code>api.schemas.Page</code>.</li>
+<li>Frontend: klient <code>web/src/api/client.ts</code>, komponenty wspólne (F05), <code>ReplyList</code>, <code>GminaSelect</code>, design system.</li>
+</ul>
+
+<h4>Dopisujemy do plików współdzielonych (ADR-M3-003, tylko dopisanie, jeden właściciel)</h4>
+<div class="tablewrap">
+<table>
+<tr><th>Plik</th><th>Co dopisujemy</th><th>Zadanie</th></tr>
+<tr><td><code>api/config.py</code></td><td>sekcja „Moduł 3 — Kreator pomysłów” (sekcja 12)</td><td>K01</td></tr>
+<tr><td><code>Makefile</code>, <code>.env.example</code></td><td>cel <code>db-m3</code>; zmienne M3</td><td>K01</td></tr>
+<tr><td><code>api/main.py</code></td><td>import i rejestracja 4 routerów M3</td><td>K02</td></tr>
+<tr><td><code>web/src/api/types.ts</code>, <code>client.ts</code>, <code>lib/storage.ts</code>, <code>lib/labels.ts</code></td><td>typy, metody, „Moje pomysły”, etykiety</td><td>K10</td></tr>
+<tr><td><code>web/src/App.tsx</code>, <code>components/layout/MainNav.tsx</code>, <code>PanelLayout.tsx</code></td><td>trasy, nawigacja Kreatora i panelu</td><td>K10</td></tr>
+<tr><td><code>web/src/pages/IdeaPage.tsx</code>, <code>components/idea/IdeaForm.tsx</code></td><td>przepięcie fiszki na <code>/api/ideas</code></td><td>K11</td></tr>
+<tr><td><code>web/src/pages/panel/InboxPage.tsx</code></td><td>sekcja „Nowe pomysły”</td><td>K16</td></tr>
+<tr><td><code>web/src/components/chat/NoMatchNotice.tsx</code>, <code>ChatResults.tsx</code>, <code>pages/panel/ReportPage.tsx</code></td><td>wejście do fiszki z <code>report_id</code></td><td>K17</td></tr>
+</table>
+</div>
+
+<!-- ====================================================================== -->
+<h2 id="s6">6. Model danych <span class="badge b-stable">stable</span></h2>
+
+<p>Plik <code>db/m3-kreator.sql</code> (ADR-M3-002): idempotentny, ładowany po <code>init.sql</code> przy pierwszym starcie kontenera (kolejność alfabetyczna w <code>docker-entrypoint-initdb.d</code>) albo ręcznie <code>make db-m3</code> na działającej bazie — bez utraty korpusu.</p>
+
+<pre><code>DO $$ BEGIN
+  CREATE TYPE idea_status AS ENUM ('DRAFT', 'SUBMITTED', 'IN_REVIEW', 'INVITED', 'REJECTED', 'PROMOTED');
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+DO $$ BEGIN
+  CREATE TYPE idea_stage AS ENUM ('IDEA', 'PROTOTYPE', 'TESTED', 'READY');   -- skala „Gotowość do wdrożenia” (Social Canvas)
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+DO $$ BEGIN
+  CREATE TYPE application_status AS ENUM ('DRAFT', 'READY');
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+
+CREATE TABLE IF NOT EXISTS ideas (
+    id                   BIGSERIAL PRIMARY KEY,
+    title                TEXT        NOT NULL,
+    summary              TEXT        NOT NULL,              -- krótki opis pomysłu
+    essence              TEXT        NOT NULL DEFAULT '',   -- istota (wymagana przy wysłaniu)
+    audience             TEXT        NOT NULL DEFAULT '',   -- komu jest dedykowany (wymagane przy wysłaniu)
+    stage                idea_stage  NOT NULL DEFAULT 'IDEA',
+    category             TEXT        REFERENCES challenge_taxonomy(code),
+    gmina                TEXT,
+    powiat               TEXT,
+    author_name          TEXT,                              -- podpis (widoczny w panelu)
+    contact_email        TEXT,                              -- nigdy nie wychodzi z API ani do logów
+    source_report_id     BIGINT      REFERENCES reports(id) ON DELETE SET NULL,
+    promoted_solution_id BIGINT      REFERENCES solutions(id) ON DELETE SET NULL,
+    status               idea_status NOT NULL DEFAULT 'DRAFT',
+    submitted_at         TIMESTAMPTZ,
+    created_at           TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at           TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS ideas_status_idx   ON ideas (status, submitted_at DESC);
+CREATE INDEX IF NOT EXISTS ideas_category_idx ON ideas (category);
+
+CREATE TABLE IF NOT EXISTS idea_canvases (
+    idea_id    BIGINT PRIMARY KEY REFERENCES ideas(id) ON DELETE CASCADE,
+    data       JSONB       NOT NULL DEFAULT '{}',   -- {block_id: wartość}, kształt w sekcji 7
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS idea_replies (
+    id           BIGSERIAL PRIMARY KEY,
+    idea_id      BIGINT NOT NULL REFERENCES ideas(id) ON DELETE CASCADE,
+    author_label TEXT,
+    body         TEXT   NOT NULL,
+    created_at   TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS idea_replies_idea_idx ON idea_replies (idea_id, created_at);
+
+CREATE TABLE IF NOT EXISTS applications (
+    id              BIGSERIAL PRIMARY KEY,
+    idea_id         BIGINT NOT NULL REFERENCES ideas(id) ON DELETE CASCADE,
+    call_id         TEXT   NOT NULL,                     -- id naboru z data/calls/*.json
+    answers         JSONB  NOT NULL DEFAULT '{}',        -- {section_id: wartość}
+    budget          JSONB  NOT NULL DEFAULT '{"periods": {}, "rows": []}',
+    self_assessment JSONB,                               -- ostatnia samoocena AI (sekcja 9)
+    status          application_status NOT NULL DEFAULT 'DRAFT',
+    created_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
+    UNIQUE (idea_id, call_id)
+);
+</code></pre>
+
+<h4>Treść a statystyka (RODO, sekcja 13)</h4>
+<ul>
+<li><strong>Treść</strong> (nigdy w logach): <code>ideas.title/summary/essence/audience/author_name/contact_email</code>, <code>idea_canvases.data</code>, <code>idea_replies.body</code>, <code>applications.answers/budget/self_assessment</code>.</li>
+<li><strong>Statystyka</strong> (wolno logować): identyfikatory, statusy, <code>stage</code>, <code>category</code>, <code>gmina</code>, liczby wypełnionych bloków, długości tekstów, <code>call_id</code>, sumy budżetu.</li>
+</ul>
+
+<h4>Statusy pomysłu</h4>
+<pre><code>DRAFT ──submit──▶ SUBMITTED ──▶ IN_REVIEW ──▶ INVITED
+                      │  (odpowiedź Hubu też przenosi SUBMITTED → IN_REVIEW)
+                      ├──────────▶ REJECTED ◀── IN_REVIEW, INVITED
+IN_REVIEW, INVITED ──promote──▶ PROMOTED   (tworzy rozwiązanie PENDING_REVIEW)</code></pre>
+<p>Autor może edytować fiszkę i kanwę w stanach <code>DRAFT</code>, <code>SUBMITTED</code>, <code>IN_REVIEW</code>, <code>INVITED</code>; w <code>REJECTED</code> i <code>PROMOTED</code> → 409 <code>IDEA_LOCKED</code>. Wniosek można tworzyć z pomysłu w każdym stanie poza <code>REJECTED</code>.</p>
+
+<!-- ====================================================================== -->
+<h2 id="s7">7. Social Innovation Canvas <span class="badge b-stable">stable</span></h2>
+
+<p>Źródło: <em>Social Innovation Canvas</em>, INNOAGH, wersja 1.0 z 5 maja 2026, na bazie kanwy The New Global School (<code>docs/resources/rops/materialy/social_canvas.pdf</code>; online: <a href="https://rops.krakow.pl/mpliki/IS/Moj_folder/INNO_AGH_-_SOCIAL_CANVAS.pdf">rops.krakow.pl</a>). Treść plansz (tytuły, pytania, opcje) przenosimy dosłownie do <code>data/social-canvas.json</code> (ADR-M3-004) — jedno źródło dla walidacji w API, renderowania w UI i promptów asystenta.</p>
+
+<h3>7.1 Typy bloków i kształt danych</h3>
+<div class="tablewrap">
+<table>
+<tr><th>Typ</th><th>Wartość w <code>idea_canvases.data[block_id]</code></th><th>„Wypełniony”, gdy</th><th>Walidacja</th></tr>
+<tr><td><code>single</code></td><td><code>"KOD"</code> albo brak klucza</td><td>jest kod</td><td>kod z <code>options</code></td></tr>
+<tr><td><code>multi</code></td><td><code>{"selected": ["kod", …], "other": ["własny wpis", …]}</code></td><td>≥ 1 pozycja w <code>selected</code> lub <code>other</code></td><td>kody z <code>options</code>; <code>len(selected)+len(other) ≤ max</code> (gdy blok ma <code>max</code>); ≤ <code>CANVAS_LIST_MAX_ITEMS</code> w <code>other</code>; wpis ≤ <code>CANVAS_ITEM_MAX_CHARS</code></td></tr>
+<tr><td><code>list</code></td><td><code>["wpis", …]</code></td><td>≥ 1 wpis</td><td>≤ <code>CANVAS_LIST_MAX_ITEMS</code>, wpis 1…<code>CANVAS_ITEM_MAX_CHARS</code></td></tr>
+<tr><td><code>text</code></td><td><code>"tekst"</code></td><td>niepusty po <code>strip()</code></td><td>≤ <code>CANVAS_TEXT_MAX_CHARS</code></td></tr>
+<tr><td><code>partners</code></td><td><code>[{"name": "…", "how": "…", "roles": ["CHEAPER"|"REACH"|"VALUE", …], "status": "CONFIRMED"|"TALKING"|"POTENTIAL"}]</code></td><td>≥ 1 partner</td><td>≤ <code>CANVAS_PARTNERS_MAX</code>; <code>name</code> 1…<code>CANVAS_ITEM_MAX_CHARS</code>; <code>how</code> ≤ <code>CANVAS_ITEM_MAX_CHARS</code>; ≥ 1 rola</td></tr>
+</table>
+</div>
+<p><strong>Zapis częściowy</strong> (ADR-M3-005): <code>PATCH /api/ideas/{id}/canvas</code> z <code>{"blocks": {block_id: wartość | null}}</code> scala bloki (null usuwa klucz). Nieznany <code>block_id</code>, zły typ wartości lub przekroczony limit → 422 <code>VALIDATION_ERROR</code> z nazwą bloku. Ostatni zapis wygrywa.</p>
+<p><strong>Synchronizacja etapu</strong> (ADR-M3-011): zapis bloku <code>solution_readiness</code> ustawia <code>ideas.stage</code>; zmiana <code>stage</code> w fiszce ustawia <code>solution_readiness</code>. Kody są te same: <code>IDEA</code>, <code>PROTOTYPE</code>, <code>TESTED</code>, <code>READY</code>.</p>
+<p><strong>Postęp</strong>: <code>filled</code> / <code>total</code> bloków (<code>impact_*</code> liczą się osobno), także per arkusz; <code>percent = round(100·filled/total)</code>.</p>
+
+<h3>7.2 Definicja bloków</h3>
+<p>Kody opcji w blokach <code>multi</code> to slug z etykiety: małe litery ASCII, bez ogonków, spacje i „/” → „_” (np. „osoby z niepełnosprawnościami” → <code>osoby_z_niepelnosprawnosciami</code>, „czynsz / przestrzeń” → <code>czynsz_przestrzen</code>). Kody w blokach <code>single</code> są podane jawnie. Wielkie litery, emoji i znaki z plansz <strong>nie</strong> trafiają do etykiet (DESIGN.md: bez emoji) — w UI skale pokazujemy wskaźnikiem 1–4.</p>
+
+<h4>Arkusz S1 — „#01 Social Innovation Canvas”</h4>
+<div class="tablewrap">
+<table>
+<tr><th>Obszar</th><th><code>block_id</code></th><th>Typ</th><th>Tytuł i polecenie</th><th>Opcje (kod — etykieta — opis)</th></tr>
+<tr><td rowspan="3">Problem</td><td><code>problem_intensity</code></td><td>single</td><td>Intensywność — „Zaznaczcie, jak bardzo źle jest bez Waszego rozwiązania”</td><td><code>VERY_SERIOUS</code> Bardzo poważny problem — Powoduje stres, wykluczenie albo realną krzywdę · <code>STRONG</code> Mocno przeszkadza — Problem regularnie blokuje ważne działania · <code>HINDERS</code> Utrudnia działanie — Trzeba szukać alternatyw, traci się czas lub energię · <code>MILD</code> Lekko przeszkadza — Da się żyć, problem raczej irytuje niż blokuje</td></tr>
+<tr><td><code>problem_frequency</code></td><td>single</td><td>Częstotliwość — „Zaznaczcie, jak często występuje problem, na który odpowiada Wasze rozwiązanie”</td><td><code>VERY_OFTEN</code> Bardzo często — Codziennie albo prawie codziennie · <code>OFTEN</code> Często — Co tydzień lub regularnie · <code>SOMETIMES</code> Czasami — Kilka razy w roku lub miesiącu · <code>RARELY</code> Rzadko — Raz na jakiś czas – raz w roku lub rzadziej</td></tr>
+<tr><td><code>problem_scale</code></td><td>single</td><td>Skala problemu — „Zaznaczcie, ilu ludzi dotyka problem”</td><td><code>INDIVIDUALS</code> Pojedyncze osoby — Dotyczy kilku osób lub małej grupy · <code>NARROW</code> Wąska grupa — Dotyczy konkretnej społeczności, np. uczniów jednej szkoły, ludzi z jednej okolicy, załogi konkretnej instytucji · <code>LARGE</code> Duża grupa — Dotyczy wielu osób w mieście, regionie, branży lub większej społeczności · <code>VERY_WIDE</code> Bardzo szeroka grupa — Dotyczy dużej części społeczeństwa albo wielu podobnych grup w różnych miejscach</td></tr>
+<tr><td rowspan="2">Aktorzy zmiany</td><td><code>actors_support</code></td><td>list</td><td>Wspierają zmianę — „Wypiszcie osoby, grupy lub instytucje, które widzą potrzebę zmiany, wspierają Wasz pomysł albo mogą pomóc go wdrożyć”</td><td>Pytania pomocnicze: Kto najbardziej potrzebuje tej zmiany? · Kto może zyskać na rozwiązaniu? · Kto już mówi, że problem trzeba rozwiązać? · Kto może Was poprzeć, polecić albo otworzyć drzwi? · Kto ma energię, wpływ lub zasoby, żeby pomóc?</td></tr>
+<tr><td><code>actors_block</code></td><td>list</td><td>Utrudniają zmianę — „Wypiszcie osoby, grupy lub instytucje, które mogą nie chcieć zmiany, bać się jej, tracić na niej albo utrudniać wdrożenie”</td><td>Pytania pomocnicze: Kto może nie rozumieć potrzeby zmiany? · Kto może bać się dodatkowej pracy, kosztów lub ryzyka? · Kto może tracić wpływ, kontrolę albo dotychczasową rolę? · Kto może powiedzieć „to się nie uda”? · Kto może zablokować decyzję, finansowanie albo dostęp do odbiorców?</td></tr>
+<tr><td rowspan="3">Rozwiązanie</td><td><code>solution_value</code></td><td>single</td><td>Przystępność i wartość rozwiązania</td><td><code>COST_EXCEEDS</code> Koszt jest większy niż korzyść — Rozwiązanie pochłania dużo pieniędzy, czasu lub wysiłku, a efekt jest mało widoczny · <code>EVEN</code> Korzyść i koszt są podobne — Rozwiązanie może pomagać, ale nie jest jasne, czy opłaca się z niego korzystać · <code>BENEFIT_EXCEEDS</code> Korzyść jest większa niż koszt — Rozwiązanie oferuje zauważalną wartość za rozsądną cenę · <code>HIGH_VALUE</code> Bardzo duża wartość przy małym koszcie — Rozwiązanie pomaga, a bariera wejścia jest niska (niskie koszty, oszczędność czasu, łatwość użycia)</td></tr>
+<tr><td><code>solution_readiness</code></td><td>single</td><td>Gotowość do wdrożenia</td><td><code>IDEA</code> Pomysł — Mamy koncepcję, ale rozwiązanie nie zostało jeszcze sprawdzone z odbiorcami · <code>PROTOTYPE</code> Prototyp — Mamy pierwszą wersję rozwiązania, jednak wciąż wymaga ona testów i dopracowania · <code>TESTED</code> Przetestowane rozwiązanie — Rozwiązanie zostało sprawdzone z realnymi użytkownikami i wiemy, co trzeba poprawić · <code>READY</code> Gotowe do wdrożenia — Rozwiązanie można uruchomić w rzeczywistym miejscu, z prawdziwymi odbiorcami i znanymi zasobami</td></tr>
+<tr><td><code>solution_clarity</code></td><td>single</td><td>Prostota i zrozumiałość — „Czy osoba, która pierwszy raz widzi Wasze rozwiązanie, szybko rozumie: dla kogo jest, jak działa i co daje? Zaznaczcie najbardziej prawdziwą opcję”</td><td><code>UNCLEAR</code> Rozwiązanie jest niejasne — Trzeba długo tłumaczyć, o co chodzi. Ludzie często zadają podstawowe pytania · <code>PARTLY_CLEAR</code> Rozwiązanie jest częściowo jasne — Ludzie rozumieją ogólny pomysł, ale jeszcze nie wiedzą dokładnie, jak z niego skorzystać · <code>CLEAR</code> Rozwiązanie jest jasne — Większość osób szybko rozumie, jaki problem rozwiązujemy, jak działa rozwiązanie i co trzeba zrobić, żeby z niego skorzystać · <code>SELF_EXPLAINING</code> Ludzie potrafią wyjaśnić sami — Osoba z grupy docelowej potrafi wyjaśnić rozwiązanie własnymi słowami po krótkim kontakcie z nim lub korzystaniu</td></tr>
+<tr><td rowspan="2">Struktura kosztów</td><td><code>costs_fixed</code></td><td>multi</td><td>Stałe koszty — „Ponosicie je niezależnie od liczby użytkowników. Trzeba je opłacać nawet wtedy, gdy z rozwiązania korzysta mało osób albo nikt jeszcze nie korzysta. Zaznaczcie lub dopiszcie koszty, które powinniście ponosić, żeby rozwiązanie mogło działać”</td><td>wynagrodzenie zespołu · czynsz / przestrzeń · utrzymanie aplikacji lub strony · abonamenty narzędzi · koordynacja projektu · księgowość / administracja · promocja podstawowa · sprzęt potrzebny na start</td></tr>
+<tr><td><code>costs_variable</code></td><td>multi</td><td>Zmienne koszty — „Rosną, gdy korzysta więcej osób lub gdy realizujecie więcej działań. Co kosztuje za każdym razem, gdy pomagacie kolejnej osobie, grupie lub organizujecie kolejne działanie?”</td><td>materiały dla uczestników · czas specjalisty na jedną osobę · dojazdy · catering · wydruk materiałów · wsparcie techniczne dla kolejnej osoby</td></tr>
+</table>
+</div>
+
+<h4>Arkusz S2 — „#02 Social Innovation Canvas”</h4>
+<div class="tablewrap">
+<table>
+<tr><th>Obszar</th><th><code>block_id</code></th><th>Typ</th><th>Tytuł i polecenie</th><th>Opcje</th></tr>
+<tr><td rowspan="3">Odbiorcy</td><td><code>recipients_users</code></td><td>multi</td><td>Główny użytkownik — „Komu to rozwiązanie ma realnie pomóc?”</td><td>dzieci · młodzież · rodzice · seniorzy · osoby z niepełnosprawnościami · nauczyciele · pracownicy instytucji · osoby w kryzysie · organizacje społeczne · mieszkańcy konkretnego miejsca</td></tr>
+<tr><td><code>recipients_payers</code></td><td>multi</td><td>Klient / płatnik — „Kto wyciąga portfel albo uruchamia budżet, żeby Wasze rozwiązanie działało?”</td><td>sam użytkownik · rodzic / opiekun · szkoła · firma · urząd miasta / gmina · fundacja / organizacja społeczna · grantodawca · sponsor · NFZ / instytucja publiczna · pracodawca</td></tr>
+<tr><td><code>recipients_deciders</code></td><td>multi</td><td>Autorytet / instytucja / decydent — „Czyja zgoda, rekomendacja albo decyzja jest potrzebna, żeby rozwiązanie zostało użyte?”</td><td>dyrektor szkoły · nauczyciel · lekarz · terapeuta · pracownik socjalny · urząd · lider lokalny · organizacja społeczna · rodzic · opiekun · menedżer · ekspert · instytucja finansująca</td></tr>
+<tr><td rowspan="4">Źródła dochodów</td><td><code>revenue_main</code></td><td>single</td><td>Główny dochód — „Co jest podstawowym źródłem pieniędzy? Za co klienci będą najpewniej płacić w pierwszej kolejności?”</td><td><code>UNKNOWN</code> Nie wiemy jeszcze — Nie mamy jasnego pomysłu, kto i za co miałby płacić · <code>IDEA</code> Mamy pomysł — Wiemy, co mogłoby być źródłem dochodu, ale nie sprawdziliśmy tego z potencjalnym klientem · <code>OFFER</code> Mamy konkretną propozycję — Wiemy, co oferujemy, komu i dlaczego ktoś miałby za to zapłacić lub zainwestować w utrzymanie rozwiązania · <code>CONFIRMED</code> Mamy potwierdzenie — Ktoś już nam zapłacił, zadeklarował nam gotowość do wspierania finansowego naszego rozwiązania</td></tr>
+<tr><td><code>revenue_main_note</code></td><td>text</td><td>„Jeśli macie propozycję / pomysł na główne źródło finansowania, wypiszcie je poniżej”</td><td>—</td></tr>
+<tr><td><code>revenue_scaling</code></td><td>single</td><td>Skalowanie dochodu — „Jakie dodatkowe rzeczy możecie sprzedawać lub finansować w przyszłości?”</td><td><code>NONE</code> Brak jasnych dodatkowych źródeł — Na razie widzimy tylko jedno źródło finansowania (to główne, powyżej) i nie wiemy, jak dochód mógłby rosnąć · <code>CHANCES</code> Są szanse na dodatkowe pieniądze — Mamy kilka pomysłów na dodatkowe źródła dochodu, ale są jeszcze niesprawdzone · <code>PATHS</code> Widzimy realne ścieżki rozwoju — Wiemy, jakie dodatkowe usługi, pakiety lub wdrożenia można sprzedawać po pierwszym sukcesie · <code>REPLICABLE</code> Nasz model działania można powielać — Rozwiązanie można sprzedawać lub finansować w wielu miejscach, dla wielu grup albo przez wiele kanałów</td></tr>
+<tr><td><code>revenue_scaling_note</code></td><td>text</td><td>„Jeśli macie propozycję / pomysł na główne źródło dodatkowego dochodu, wypiszcie je poniżej”</td><td>—</td></tr>
+<tr><td rowspan="2">Propozycja wartości</td><td><code>value_emotional</code></td><td>multi, <code>max: 3</code></td><td>Emocjonalna — „Co odbiorcy poczują dzięki rozwiązaniu? Zaznaczcie maksymalnie 2–3 najważniejsze wartości emocjonalne lub dopiszcie swoją własną”</td><td>Bezpieczeństwo · Spokój · Pewność · Zmniejszenie samotności · Większa sprawczość · Poprawa stanu zdrowia · Niezależność · Motywacja · Włączenie społeczne · Poczucie bycia widzianym · Poprawa nastroju · Większe zadowolenie z życia</td></tr>
+<tr><td><code>value_functional</code></td><td>multi, <code>max: 3</code></td><td>Funkcjonalna — „Co rozwiązanie konkretnie poprawia? Zaznaczcie maksymalnie 2–3 najważniejsze wartości funkcjonalne lub dopiszcie swoją własną”</td><td>Obniża koszty · Oszczędza czas · Zwiększa skuteczność · Poprawia jakość · Upraszcza proces · Zwiększa dostępność · Zwiększa zasięg pomocy · Zmniejsza obciążenie · Poprawia bezpieczeństwo · Zwiększa wpływ społeczny · Ogranicza negatywny wpływ na środowisko · Pomaga w podejmowaniu lepszych decyzji</td></tr>
+</table>
+</div>
+
+<h4>Arkusz S3 — „#03 Social Innovation Canvas”</h4>
+<div class="tablewrap">
+<table>
+<tr><th>Obszar</th><th><code>block_id</code></th><th>Typ</th><th>Tytuł i polecenie</th><th>Opcje</th></tr>
+<tr><td rowspan="3">Kanały</td><td><code>channels_direct</code></td><td>multi</td><td>Bezpośrednie — „Jak ludzie trafiają do Was bezpośrednio?”</td><td>własna strona internetowa · własny formularz zgłoszeniowy · własny sklep / system zakupu · kontakt telefoniczny lub mailowy · spotkania bezpośrednie · własne warsztaty · własne media społecznościowe · własna aplikacja · newsletter · wydarzenia organizowane samodzielnie</td></tr>
+<tr><td><code>channels_partners</code></td><td>multi</td><td>Pośrednie — „Kto może pomóc Wam dotrzeć do odbiorców?” <em>(na planszy omyłkowo drugi raz „Bezpośrednie”)</em></td><td>szkoła · urząd / gmina · organizacja społeczna · ekspert · lekarz / terapeuta · nauczyciel · pracownik socjalny · lider lokalny · firma · partner · ambasador · handlowiec</td></tr>
+<tr><td><code>channels_extra</code></td><td>multi</td><td>Dodatkowe — „Jakie kanały dodatkowe możecie wykorzystać?”</td><td>kampania online · webinary · platforma cyfrowa · lokalne wydarzenia · program ambasadorski · materiały edukacyjne · rekomendacje ekspertów · współpraca z instytucjami · newsletter · społeczność online</td></tr>
+<tr><td>Konstelacja partnerów</td><td><code>partners</code></td><td>partners</td><td>„Kto jest partnerem lub może nim zostać? Jak dokładnie pomaga, w którym obszarze rozwiązania? W jaki sposób wnosi wartość? Pamiętajcie: jeden partner może pomagać na kilka sposobów naraz.”</td><td>Role: <code>CHEAPER</code> Jak robić to taniej? — Jacy partnerzy mogą obniżać koszty rozwiązania? W jaki sposób? · <code>REACH</code> Jak dotrzeć do odbiorców? — Jacy partnerzy mogą wspierać komunikację i dystrybucję rozwiązania? Jakimi kanałami? · <code>VALUE</code> Jak dawać lepszą wartość? — Jacy partnerzy mogą wzmacniać propozycję wartości rozwiązania? W jaki sposób?<br>Status: <code>CONFIRMED</code> Potwierdzony partner · <code>TALKING</code> Partner, z którym rozmawiacie · <code>POTENTIAL</code> Potencjalny partner</td></tr>
+<tr><td rowspan="3">Wpływ — „Co zmienia Twoje rozwiązanie — dla osoby, społeczności i świata wokół?”</td><td><code>impact_person</code></td><td>single</td><td>Osoba — „Jak zmienia życie użytkownika? Co staje się łatwiejsze, bezpieczniejsze, spokojniejsze albo bardziej dostępne?”</td><td rowspan="3">Wspólne: <code>SMALL</code> Mały wpływ — Zmiana jest niewielka lub jeszcze niejasna · <code>POSSIBLE</code> Możliwy wpływ — Widzimy potencjał zmiany, ale nie mamy jeszcze potwierdzenia · <code>CLEAR</code> Wyraźny wpływ — Rozwiązanie daje konkretną, zauważalną zmianę · <code>STRONG</code> Silny wpływ — Zmiana jest duża, ważna i potwierdzona przez użytkowników, społeczność lub dane</td></tr>
+<tr><td><code>impact_community</code></td><td>single</td><td>Społeczność — „Jak pomaga większej grupie? Czy zwiększa dostęp, zmniejsza wykluczenie, wzmacnia współpracę albo poprawia jakość wsparcia?”</td></tr>
+<tr><td><code>impact_environment</code></td><td>single</td><td>Środowisko — „Jak zmienia świat wokół? Czy ogranicza odpady, zużycie zasobów, transport, energię albo inne szkody dla środowiska?”</td></tr>
+</table>
+</div>
+<p>Razem 26 bloków (S1: 10, S2: 9, S3: 7 — w tym 3 bloki wpływu).</p>
+
+<h3>7.3 Układ mapy (frontend)</h3>
+<p>Na szerokim ekranie (≥ 75em) każdy arkusz to siatka (klasy Tailwinda) odwzorowująca planszę; poniżej 48em bloki układają się w jedną kolumnę w kolejności czytania planszy (kolumnami od lewej). Między 48 a 75em — dwie kolumny.</p>
+<pre class="grid-demo"><code>S1:  "intensity   support    value       fixed"
+     "frequency   blockers   readiness   variable"
+     "scale       clarity    clarity     variable"
+
+S2:  "users       rev_main      emotional  emotional"
+     "payers      rev_main      emotional  emotional"
+     "payers      rev_scaling   functional functional"
+     "deciders    rev_scaling   functional functional"
+
+S3:  "ch_direct    partners  partners"
+     "ch_partners  partners  partners"
+     "ch_extra     impact    impact"</code></pre>
+<ul>
+<li><strong>Skale</strong> (<code>single</code>): karty-przyciski radiowe z etykietą i opisem, wskaźnik stopnia 1–4 zamiast emoji. Częstotliwość jako pionowa „drabinka” jak na planszy, ale nadal <code>radio</code>.</li>
+<li><strong>Wartości</strong>: wartości emocjonalne jako karty w kształcie serca (SVG tła), funkcjonalne jako kafelki; to są prawdziwe <code>checkbox</code>y. Po wybraniu 3 pozostałe dostają <code>aria-disabled</code>, a licznik „Wybrano 3 z 3” jest ogłaszany (<code>aria-live="polite"</code>).</li>
+<li><strong>Konstelacja partnerów</strong>: trzy koła Venna wokół „Twoje rozwiązanie” (SVG); partner pojawia się w regionie odpowiadającym kombinacji ról, ze znacznikiem statusu (gwiazdka / kwadrat / plus — kształt, nie tylko kolor). Edycja przez listę partnerów pod diagramem (nazwa, jak pomaga, role jako <code>checkbox</code>, status jako <code>select</code>). SVG ma <code>role="img"</code> i opis tekstowy z liczbą partnerów w każdej roli.</li>
+<li><strong>Wpływ</strong>: macierz 3 kolumny (Osoba, Społeczność, Środowisko) × 4 wiersze (Mały → Silny); każda kolumna to grupa <code>radio</code> z legendą.</li>
+<li><strong>Listy i „inne”</strong>: pole + „Dodaj”, wpisy z przyciskiem „Usuń” (z nazwą wpisu w etykiecie dostępnej).</li>
+<li>Stylowanie wyłącznie klasami Tailwinda z presetu design systemu i komponentami <code>ds-*</code>, bez nowych plików CSS i bez <code>style={{…}}</code> (<code>AGENTS.md</code>, „Stylowanie”); kształty jako SVG w JSX. Najwyżej jeden <code>ds-btn--cta</code> na ekranie („Wyślij do Hubu”).</li>
+<li>Autozapis: zmiana bloku → <code>PATCH</code> po <code>CANVAS_AUTOSAVE_DEBOUNCE_MS</code> (stała frontendu, 800 ms); wskaźnik „Zapisano” / „Zapisywanie…” / błąd z „Spróbuj ponownie”. Ogłaszany jest tylko błąd zapisu.</li>
+</ul>
+
+<!-- ====================================================================== -->
+<h2 id="s8">8. Asystent AI i podobne innowacje <span class="badge b-draft">draft</span></h2>
+
+<h3>8.1 Provider</h3>
+<p><code>api/providers/llm_assist.py</code> (ADR-M3-006) — osobny od strumieniowego <code>llm.py</code> (M1 bez zmian). Anthropic <code>AsyncAnthropic</code>, model <code>settings.LLM_MODEL</code> (<code>claude-haiku-4-5-20251001</code>), <strong>structured outputs</strong>: <code>client.messages.parse(model=…, max_tokens=…, system=…, messages=[…], output_format=PydanticModel)</code> → <code>response.parsed_output</code>. Haiku 4.5 obsługuje structured outputs. Limit czasu <code>ASSIST_TIMEOUT_SECONDS</code>. Każdy błąd SDK, przekroczenie czasu albo <code>stop_reason</code> inny niż <code>end_turn</code> → <code>ProviderError("anthropic", "LLM_UNAVAILABLE")</code>.</p>
+<p><strong>Dostępność</strong>: <code>assist_available() = LLM_ENABLED and ASSIST_ENABLED and bool(ANTHROPIC_API_KEY)</code>. Gdy niedostępny lub błąd — endpoint odpowiada <strong>200</strong> z <code>available: false</code> i treścią zastępczą (statyczne pytania), nigdy 5xx. „Asystent nie działa” to stan, nie błąd.</p>
+
+<h3>8.2 Cele asystenta</h3>
+<div class="tablewrap">
+<table>
+<tr><th>Cel (<code>target</code>)</th><th>Wejście (kontekst)</th><th>Wyjście (structured output)</th><th>Bez LLM</th></tr>
+<tr><td><code>idea</code></td><td>pola fiszki, nazwa wyzwania, do <code>ASSIST_CONTEXT_SOLUTIONS</code> tytułów i streszczeń podobnych innowacji</td><td><code>{questions: [str ≤ ASSIST_MAX_QUESTIONS], suggestions: [{field ∈ title|summary|essence|audience, value: str, rationale: str}] ≤ ASSIST_MAX_SUGGESTIONS}</code></td><td>pytania: „Na czym polega Twój pomysł…”, „Kto skorzysta…”, „Czym różni się od istniejących…” (stałe w <code>prompts.py</code>)</td></tr>
+<tr><td><code>canvas_block</code> + <code>block_id</code></td><td>fiszka, definicja bloku (tytuł, polecenie, opcje), bieżąca wartość bloku, skrót pozostałych wypełnionych bloków</td><td><code>{questions, suggestions: [{field: block_id, value: &lt;wartość w kształcie typu bloku&gt;, rationale}]}</code></td><td>pytania pomocnicze z definicji bloku (<code>help</code>), a gdy ich nie ma — polecenie bloku</td></tr>
+</table>
+</div>
+<ul>
+<li><strong>Propozycje nigdy nie nadpisują danych</strong> — UI pokazuje je z przyciskiem „Wstaw” / „Dodaj”; dopiero akceptacja wysyła zwykły <code>PATCH</code>.</li>
+<li><strong>Walidacja wyjścia</strong>: propozycje dla bloków są sprawdzane walidatorem kanwy (sekcja 7.1). Dla <code>multi</code> nieznane kody są odrzucane albo przenoszone do <code>other</code>; dla <code>single</code> nieznany kod → propozycja odrzucona. Odrzucenia nie są błędem.</li>
+<li><strong>Prompt systemowy</strong> (<code>api/kreator/prompts.py</code>, po polsku): rola „asystent Małopolskiego Hubu Innowacji Społecznych”, prosty język dla osób bez przygotowania, <em>nie wymyślaj liczb, statystyk, nazw instytucji ani partnerów, których nie ma w kontekście — zamiast tego zapytaj albo zaproponuj, skąd wziąć dane</em>, propozycje krótkie (≤ 300 znaków), bez obietnic finansowania. Treść użytkownika podawana w znacznikach <code>&lt;fiszka&gt;</code>, <code>&lt;kanwa&gt;</code> jako dane, nie polecenia.</li>
+</ul>
+
+<h3>8.3 Podobne innowacje</h3>
+<p><code>api/kreator/similar.py</code> (ADR-M3-009): tekst = tytuł + krótki opis + istota + adresaci (ucięty do <code>MAX_QUERY_CHARS</code>) → <code>preprocess(text, gmina=None)</code> → <code>run_search(q)</code> (bez zapisu zgłoszenia i <code>search_events</code>). Zwracamy <code>solutions</code> + <code>also_see</code>, łącznie do <code>IDEA_SIMILAR_LIMIT</code>, <strong>tylko gdy bramka przeszła</strong> (<code>result.matched</code>). Gdy nie przeszła: <code>matched: false</code> i komunikat „Nie znaleźliśmy w Bibliotece podobnych rozwiązań. To dobry znak — Twój pomysł może być nowy.”. Gdy <code>q.too_vague</code>: „Opisz pomysł dokładniej, żebyśmy mogli poszukać podobnych.”. Błąd embeddingów (<code>ProviderError</code>) → <code>available: false</code>, 200.</p>
+
+<!-- ====================================================================== -->
+<h2 id="s9">9. Generator wniosków (nabory) <span class="badge b-draft">draft</span></h2>
+
+<p>Źródła: <code>docs/resources/rops/RAPORT.md</code> (§2 struktura wniosków, §3 kryteria, §7 różnice między naborami), wzory w <code>docs/resources/rops/iws2/</code> i <code>usluga-wrazliwa-2/</code>.</p>
+
+<h3>9.1 Nabór jako plik</h3>
+<p><code>data/calls/&lt;id&gt;.json</code> (ADR-M3-007), wczytywane przy pierwszym użyciu i walidowane modelem <code>CallFile</code>. Nabór jest otwarty, gdy <code>opens_at ≤ dziś ≤ closes_at</code> (strefa Europe/Warsaw) albo <code>KREATOR_CALLS_IGNORE_DATES=true</code>.</p>
+<pre><code>{
+  "id": "iws2-demo",
+  "title": "Przykładowy nabór na wzór Inkubatora Włączenia Społecznego 2.0",
+  "short_pl": "Granty do 120 000 zł na opracowanie i przetestowanie nowej innowacji społecznej.",
+  "program": "Na wzór: FERS 2021–2027, Działanie 5.1 (ROPS Kraków, INNOAGH)",
+  "demo": true,
+  "based_on": [{"title": "Formularz aplikacyjny IWS 2.0 (wzór)", "url": "https://rops.krakow.pl/pliki-do-pobrania/artykul,wzor-formularza-aplikacyjnego,1049"}],
+  "opens_at": "2026-09-15", "closes_at": "2026-12-31",
+  "eligibility": {"applicant_types": ["osoba fizyczna", "podmiot", "grupa nieformalna"], "notes_pl": "…"},
+  "limits": {"max_amount": 120000, "total_max_months": 12,
+             "periods": [{"id": "prep", "label": "Okres przygotowawczy", "max_months": 3},
+                         {"id": "test", "label": "Okres testowania (faza I i II)", "max_months": 9}]},
+  "categories": [],
+  "sections": [
+    {"id": "title", "title": "Tytuł innowacji", "kind": "text", "required": true, "max_chars": 200,
+     "prompt": "Zastanów się nad tytułem, by był on krótki i kojarzący się z przedmiotem innowacji.",
+     "prefill": [{"from": "idea.title"}]},
+    {"id": "applicant", "title": "Dane pomysłodawcy", "kind": "info",
+     "prompt": "W prawdziwym naborze podasz tu dane osoby fizycznej, podmiotu albo grupy nieformalnej. W Kreatorze ich nie zbieramy."},
+    {"id": "testers", "title": "Liczba testerów", "kind": "number", "required": true, "min": 4, "prompt": "…"},
+    {"id": "plan", "title": "Plan działania i koszty", "kind": "budget", "required": true, "prompt": "…"},
+    …
+  ],
+  "criteria": [{"id": "innovation", "title": "Innowacyjność rozwiązania", "description": "…", "max_points": 10, "min_points": 5, "sections": ["innovation", "description"]}, …],
+  "pass_threshold": 21,
+  "statements": ["Innowacja nie ma charakteru wdrożeniowego.", …]
+}</code></pre>
+<p>Rodzaje sekcji: <code>text</code> (limit <code>max_chars</code> albo <code>APPLICATION_TEXT_MAX_CHARS</code> — ROPS nie publikuje limitów, to limit PoC), <code>choice</code> (jedna z <code>options</code>), <code>multi</code> (wiele z <code>options</code>), <code>number</code> (<code>min</code>/<code>max</code>), <code>budget</code> (jedna na nabór), <code>info</code> (tylko treść). Odwołania w <code>prefill</code>: <code>idea.&lt;pole&gt;</code> albo <code>canvas.&lt;block_id&gt;</code>.</p>
+
+<h3>9.2 Nabory w PoC</h3>
+<div class="tablewrap">
+<table>
+<tr><th></th><th><code>iws2-demo</code></th><th><code>uw2-demo</code></th></tr>
+<tr><td>Wzór</td><td>Formularz aplikacyjny IWS 2.0 (12 sekcji), karta oceny merytorycznej 5 × 0–10, próg 21</td><td>Wniosek o grant Usługa Wrażliwa, II nabór; karta oceny 4 × 0–20 (min. 10 w każdym) + premia za doświadczenie</td></tr>
+<tr><td>Daty</td><td>2026-09-15 – 2026-12-31 (demo, otwarty)</td><td>2026-05-27 – 2026-06-30 (realne, zamknięty)</td></tr>
+<tr><td>Limity</td><td>120 000 zł; okresy 3 + 9 mies.; ≥ 4 testerów</td><td>600 000 zł; przygotowanie ≤ 6 mies., wdrażanie ≥ 12 mies., łącznie ≤ 18</td></tr>
+<tr><td>Kategorie</td><td>brak (własny pomysł) + wybór obszaru Mapy Wyzwań (<code>data/challenge-map.json</code>)</td><td>5 innowacji do wyboru: Przenośne modularne łazienki; koMIX życiowy; Organizator kompleksowej opieki w miejscu zamieszkania; Szlakiem ludzi bezdomnych; Terapeuta przestrzeni</td></tr>
+</table>
+</div>
+<p>Pytania w sekcjach przepisujemy dosłownie z <code>RAPORT.md</code> §2A / §2B; przy każdej sekcji <code>prefill</code> według mapy:</p>
+<div class="tablewrap">
+<table>
+<tr><th>Sekcja IWS 2.0</th><th>Wstępne wypełnienie</th></tr>
+<tr><td>1 Tytuł innowacji</td><td><code>idea.title</code></td></tr>
+<tr><td>3 Opis innowacji</td><td><code>idea.summary</code>, <code>idea.essence</code>, <code>canvas.solution_readiness</code></td></tr>
+<tr><td>4 Innowacyjność rozwiązania</td><td>— (szkic AI; kontekst: podobne innowacje)</td></tr>
+<tr><td>5 Diagnoza problemu</td><td><code>canvas.problem_intensity</code>, <code>canvas.problem_frequency</code>, <code>canvas.problem_scale</code> + wybór obszaru Mapy Wyzwań</td></tr>
+<tr><td>6 Opis odbiorców</td><td><code>idea.audience</code>, <code>canvas.recipients_users</code></td></tr>
+<tr><td>7 Zmiana jaką wprowadza innowacja</td><td><code>canvas.value_emotional</code>, <code>canvas.value_functional</code>, <code>canvas.impact_*</code></td></tr>
+<tr><td>8 Wizja przyszłości</td><td><code>canvas.revenue_scaling</code>, <code>canvas.channels_*</code></td></tr>
+<tr><td>9 Plan działania i koszty</td><td>pozycje kosztów z <code>canvas.costs_fixed</code> / <code>costs_variable</code> jako puste wiersze do uzupełnienia</td></tr>
+<tr><td>11 Zespół projektowy</td><td><code>canvas.partners</code> ze statusem <code>CONFIRMED</code></td></tr>
+<tr><td>12 Oświadczenia</td><td><code>info</code> + lista <code>statements</code></td></tr>
+</table>
+</div>
+<p>Prefill jest deterministyczny (<code>api/kreator/prefill.py</code>): dla pól fiszki — tekst; dla bloków — „Etykieta bloku: etykiety wybranych opcji” po polsku. Wykonuje się raz, przy tworzeniu wniosku; później użytkownik edytuje swobodnie.</p>
+
+<h3>9.3 Kontrole, szkic i samoocena</h3>
+<ul>
+<li><strong>Walidacja zapisu</strong> (422): nieznana sekcja, tekst ponad limit, wartość spoza <code>options</code>. Prefill przycina tekst do limitu sekcji.</li>
+<li><strong>Kontrole</strong> (liczone przy każdym odczycie, nie blokują zapisu): <code>REQUIRED_MISSING</code> (sekcja wymagana pusta), <code>NUMBER_OUT_OF_RANGE</code> (np. mniej niż 4 testerów), <code>BUDGET_EMPTY</code>, <code>AMOUNT_OVER_LIMIT</code> (suma &gt; <code>max_amount</code>), <code>PERIOD_TOO_LONG</code> (miesiące okresu &gt; <code>max_months</code>), <code>PERIOD_TOO_SHORT</code> (&lt; <code>min_months</code>, jeśli podano), <code>TOTAL_TOO_LONG</code>. Każda: <code>{code, ok, section_id?, message_pl}</code>.</li>
+<li><strong>Gotowy</strong>: <code>POST …/ready</code> przechodzi na <code>READY</code> tylko gdy wszystkie kontrole <code>ok</code> (inaczej 409 <code>CHECKS_FAILED</code> z listą). Każdy <code>PATCH</code> wniosku <code>READY</code> wraca do <code>DRAFT</code>.</li>
+<li><strong>Szkic sekcji</strong> (<code>POST …/draft</code>): AI pisze propozycję tekstu sekcji <code>text</code> na podstawie fiszki, kanwy, pytań sekcji i (dla innowacyjności) podobnych innowacji; ≤ <code>max_chars</code>; nie zapisuje się sam.</li>
+<li><strong>Samoocena</strong> (<code>POST …/assess</code>): AI ocenia każde kryterium naboru (punkty całkowite 0…<code>max_points</code> + komentarz ≤ 400 znaków, wskazówka, co poprawić). Serwer liczy sumę, <code>passed</code> per kryterium (≥ <code>min_points</code>) i całość (≥ <code>pass_threshold</code>). Wynik zapisywany w <code>applications.self_assessment</code> z <code>disclaimer_pl</code>: „To podpowiedź asystenta, nie ocena ROPS. Prawdziwą ocenę prowadzi komisja według regulaminu naboru.”</li>
+</ul>
+
+<!-- ====================================================================== -->
+<h2 id="s10">10. Kontrakt API <span class="badge b-stable">stable</span></h2>
+
+<p>Wszystkie endpointy otwarte, prefiks <code>/api</code>, błędy w formacie M1 (<code>ApiError</code>: <code>{"error": {"code", "message"}}</code>). Modele pydantic w <code>api/kreator/schemas.py</code> (pełne kształty w pliku zadań, „Wspólne kontrakty”). Metody HTTP tylko GET, POST, PATCH (CORS M1).</p>
+
+<div class="tablewrap">
+<table>
+<tr><th>Endpoint</th><th>Żądanie → odpowiedź</th><th>Błędy</th></tr>
+<tr><td><code>POST /api/ideas</code></td><td><code>IdeaCreate</code> → 201 <code>IdeaDetail</code> (<code>DRAFT</code>)</td><td>422 kategoria/gmina/zgłoszenie</td></tr>
+<tr><td><code>GET /api/ideas</code></td><td><code>status?</code>, <code>category?</code>, <code>gmina?</code>, <code>limit</code> (20, max 100), <code>offset</code> → <code>Page[IdeaListItem]</code>; bez <code>status</code> pomija <code>DRAFT</code>; sort <code>submitted_at DESC NULLS LAST, id DESC</code></td><td>422</td></tr>
+<tr><td><code>GET /api/ideas/{id}</code></td><td>→ <code>IdeaDetail</code></td><td>404</td></tr>
+<tr><td><code>PATCH /api/ideas/{id}</code></td><td><code>IdeaUpdate</code> (pola częściowo) → <code>IdeaDetail</code></td><td>404, 409 <code>IDEA_LOCKED</code>, 422</td></tr>
+<tr><td><code>POST /api/ideas/{id}/submit</code></td><td>→ <code>IdeaDetail</code> (<code>SUBMITTED</code>, <code>submitted_at</code>)</td><td>404, 409 <code>INVALID_TRANSITION</code>, 422 <code>IDEA_INCOMPLETE</code></td></tr>
+<tr><td><code>POST /api/ideas/{id}/status</code></td><td><code>{status: IN_REVIEW|INVITED|REJECTED}</code> → <code>IdeaDetail</code></td><td>404, 409 <code>INVALID_TRANSITION</code></td></tr>
+<tr><td><code>POST /api/ideas/{id}/replies</code></td><td><code>ReplyCreate</code> → 201 <code>IdeaReply</code>; <code>SUBMITTED</code> → <code>IN_REVIEW</code></td><td>404, 409 dla <code>DRAFT</code>, 422</td></tr>
+<tr><td><code>GET /api/ideas/{id}/replies</code></td><td>→ <code>list[IdeaReply]</code> rosnąco</td><td>404</td></tr>
+<tr><td><code>POST /api/ideas/{id}/promote</code></td><td>→ <code>IdeaDetail</code> (<code>PROMOTED</code>, <code>promoted_solution_id</code>)</td><td>404, 409, 503 <code>EMBEDDING_UNAVAILABLE</code></td></tr>
+<tr><td><code>GET /api/canvas/definition</code></td><td>→ <code>CanvasDefinition</code> (treść <code>data/social-canvas.json</code>)</td><td>—</td></tr>
+<tr><td><code>GET /api/ideas/{id}/canvas</code></td><td>→ <code>CanvasState</code> (pusta, gdy nie ma wiersza)</td><td>404</td></tr>
+<tr><td><code>PATCH /api/ideas/{id}/canvas</code></td><td><code>CanvasPatch</code> → <code>CanvasState</code></td><td>404, 409 <code>IDEA_LOCKED</code>, 422</td></tr>
+<tr><td><code>GET /api/ideas/{id}/similar</code></td><td>→ <code>SimilarResponse</code></td><td>404</td></tr>
+<tr><td><code>POST /api/ideas/{id}/assist</code></td><td><code>AssistRequest</code> → <code>AssistResponse</code></td><td>404, 422 nieznany <code>block_id</code></td></tr>
+<tr><td><code>GET /api/challenge-map</code></td><td>→ <code>list[ChallengeArea]</code> (Mapa Wyzwań, 8 obszarów)</td><td>—</td></tr>
+<tr><td><code>GET /api/calls</code></td><td>→ <code>list[CallSummary]</code> (z <code>is_open</code>)</td><td>—</td></tr>
+<tr><td><code>GET /api/calls/{call_id}</code></td><td>→ <code>CallDetail</code></td><td>404</td></tr>
+<tr><td><code>POST /api/ideas/{id}/applications</code></td><td><code>{call_id}</code> → 201 <code>ApplicationDetail</code> (z prefill) albo 200 istniejący</td><td>404, 409 <code>CALL_CLOSED</code>, 409 <code>IDEA_LOCKED</code> (REJECTED)</td></tr>
+<tr><td><code>GET /api/applications/{id}</code></td><td>→ <code>ApplicationDetail</code> (z <code>checks</code>, <code>totals</code>)</td><td>404</td></tr>
+<tr><td><code>PATCH /api/applications/{id}</code></td><td><code>ApplicationPatch</code> → <code>ApplicationDetail</code></td><td>404, 422</td></tr>
+<tr><td><code>POST /api/applications/{id}/ready</code></td><td>→ <code>ApplicationDetail</code> (<code>READY</code>)</td><td>404, 409 <code>CHECKS_FAILED</code></td></tr>
+<tr><td><code>POST /api/applications/{id}/draft</code></td><td><code>{section_id}</code> → <code>DraftResponse</code></td><td>404, 422 sekcja nie <code>text</code></td></tr>
+<tr><td><code>POST /api/applications/{id}/assess</code></td><td>→ <code>SelfAssessment</code></td><td>404</td></tr>
+</table>
+</div>
+<p><code>contact_email</code> przyjmowany w <code>IdeaCreate</code>/<code>IdeaUpdate</code>, nigdy nie zwracany — w odpowiedziach tylko <code>has_contact: bool</code>.</p>
+
+<!-- ====================================================================== -->
+<h2 id="s11">11. Kontrakt dla frontendu (ekrany) <span class="badge b-draft">draft</span></h2>
+
+<div class="tablewrap">
+<table>
+<tr><th>Trasa</th><th>Ekran</th><th>Zadanie</th></tr>
+<tr><td><code>/mam-pomysl</code>, <code>/mam-pomysl?zgloszenie=&lt;report_id&gt;</code></td><td>Nowa fiszka (wstępne wypełnienie ze zgłoszenia), asystent i podobne innowacje; „Zapisz i rozwiń na kanwie”, „Wyślij do Hubu” (CTA)</td><td>K11</td></tr>
+<tr><td><code>/mam-pomysl/:id</code></td><td>Edycja fiszki, status, odnośniki: kanwa, wnioski</td><td>K11</td></tr>
+<tr><td><code>/mam-pomysl/:id/kanwa?arkusz=1|2|3</code></td><td>Interaktywna mapa Social Canvas: zakładki arkuszy, postęp, autozapis, „Podpowiedz” przy obszarach</td><td>K13</td></tr>
+<tr><td><code>/moje-pomysly</code></td><td>Pomysły z <code>localStorage</code>: status, postęp kanwy, odpowiedzi Hubu, „Przygotuj wniosek”</td><td>K15</td></tr>
+<tr><td><code>/nabory</code></td><td>Lista naborów z oknem czasowym i stanem (otwarty / zakończony / przyszły), materiały (kanwa, Mapa Wyzwań — odnośniki do ROPS)</td><td>K18</td></tr>
+<tr><td><code>/wnioski/:id</code></td><td>Edytor wniosku: sekcje z pytaniami, budżet, kontrole, „Napisz szkic”, samoocena, „Drukuj / zapisz PDF”</td><td>K18</td></tr>
+<tr><td><code>/panel/pomysly</code></td><td>Lista pomysłów z filtrami statusu</td><td>K16</td></tr>
+<tr><td><code>/panel/pomysly/:id</code></td><td>Przegląd: fiszka, kanwa tylko do odczytu, podobne, status, odpowiedź, „Przekaż do Biblioteki”</td><td>K16</td></tr>
+</table>
+</div>
+<ul>
+<li>Nawigacja serwisu: pozycja „Kreator pomysłów” prowadzi do <code>/mam-pomysl</code>; w module podnawigacja (jak <code>ZasobnikNav</code>): „Nowy pomysł”, „Moje pomysły”, „Nabory”.</li>
+<li>Panel: pozycja „Pomysły” z licznikiem <code>SUBMITTED</code>; w skrzynce sekcja „Nowe pomysły”.</li>
+<li>Pamięć przeglądarki: <code>splot_ideas</code> — lista <code>{idea_id, created_at, title_excerpt (≤ 80 znaków)}</code>, maks. 20; odczyt/zapis w try/catch (wzór „Moich zgłoszeń”). Treść pomysłu nie trafia do URL ani <code>sessionStorage</code>.</li>
+<li>Stany każdego ekranu: ładowanie, pusto, błąd (z <code>LoadState</code>/<code>Alert</code>); 404 pomysłu w „Moich pomysłach” → „Usuń z listy”.</li>
+<li>WCAG 2.1 AA, design system, najwyżej jeden <code>ds-btn--cta</code> na ekran, wersja do druku wniosku przez warianty <code>print:</code> Tailwinda (bez nawigacji, czarno-biała, numeracja sekcji).</li>
+</ul>
+
+<!-- ====================================================================== -->
+<h2 id="s12">12. Konfiguracja <span class="badge b-stable">stable</span></h2>
+<p>Dopisywane do <code>api/config.py</code> w sekcji „Moduł 3 — Kreator pomysłów” (K01). Zero literałów progów i limitów w kodzie M3. Limity pól pydantic (<code>max_length</code> w schematach) są częścią kontraktu i zostają w <code>schemas.py</code>, jak w M1.</p>
+<div class="tablewrap">
+<table>
+<tr><th>Zmienna</th><th>Domyślnie</th><th>Znaczenie</th></tr>
+<tr><td><code>ASSIST_ENABLED</code></td><td><code>True</code></td><td>wyłącznik asystenta niezależny od <code>LLM_ENABLED</code></td></tr>
+<tr><td><code>ASSIST_MAX_TOKENS</code></td><td><code>1500</code></td><td>limit odpowiedzi dla <code>idea</code>/<code>canvas_block</code>/samooceny</td></tr>
+<tr><td><code>ASSIST_DRAFT_MAX_TOKENS</code></td><td><code>2500</code></td><td>limit szkicu sekcji wniosku</td></tr>
+<tr><td><code>ASSIST_TIMEOUT_SECONDS</code></td><td><code>30.0</code></td><td>limit czasu wywołania LLM</td></tr>
+<tr><td><code>ASSIST_MAX_QUESTIONS</code></td><td><code>3</code></td><td>pytania doprecyzowujące</td></tr>
+<tr><td><code>ASSIST_MAX_SUGGESTIONS</code></td><td><code>5</code></td><td>propozycje w jednej odpowiedzi</td></tr>
+<tr><td><code>ASSIST_CONTEXT_SOLUTIONS</code></td><td><code>3</code></td><td>podobne innowacje w kontekście promptu</td></tr>
+<tr><td><code>IDEA_SIMILAR_LIMIT</code></td><td><code>3</code></td><td>podobne innowacje zwracane w UI</td></tr>
+<tr><td><code>CANVAS_LIST_MAX_ITEMS</code></td><td><code>12</code></td><td>wpisy w bloku <code>list</code> / „inne” w <code>multi</code></td></tr>
+<tr><td><code>CANVAS_ITEM_MAX_CHARS</code></td><td><code>300</code></td><td>długość wpisu / nazwy partnera / „jak pomaga”</td></tr>
+<tr><td><code>CANVAS_TEXT_MAX_CHARS</code></td><td><code>2000</code></td><td>blok <code>text</code></td></tr>
+<tr><td><code>CANVAS_PARTNERS_MAX</code></td><td><code>15</code></td><td>partnerzy w konstelacji</td></tr>
+<tr><td><code>APPLICATION_TEXT_MAX_CHARS</code></td><td><code>6000</code></td><td>domyślny limit sekcji <code>text</code> (gdy brak <code>max_chars</code>)</td></tr>
+<tr><td><code>APPLICATION_BUDGET_MAX_ROWS</code></td><td><code>30</code></td><td>wiersze budżetu</td></tr>
+<tr><td><code>KREATOR_CALLS_DIR</code></td><td><code>"calls"</code></td><td>katalog naborów względem <code>DATA_DIR</code></td></tr>
+<tr><td><code>KREATOR_CALLS_IGNORE_DATES</code></td><td><code>False</code></td><td>wszystkie nabory otwarte (próby demo)</td></tr>
+<tr><td><code>KREATOR_TIMEZONE</code></td><td><code>"Europe/Warsaw"</code></td><td>„dziś” dla okna naboru</td></tr>
+</table>
+</div>
+
+<!-- ====================================================================== -->
+<h2 id="s13">13. RODO i bezpieczeństwo <span class="badge b-stable">stable</span></h2>
+<ul>
+<li>Dane osobowe: <code>author_name</code> (podpis, opcjonalny), <code>contact_email</code> (opcjonalny), ewentualnie nazwy osób wpisane przez użytkownika w kanwie (partnerzy, aktorzy). Formularz ostrzega, żeby nie wpisywać danych osób trzecich (istniejące <code>PRIVACY_WARNING</code>).</li>
+<li><code>contact_email</code> nigdy nie wychodzi z API (tylko <code>has_contact</code>) i nie trafia do logów ani promptów LLM.</li>
+<li>Logi: tylko identyfikatory, statusy, <code>block_id</code>, długości, liczby — nigdy treść fiszki, kanwy, odpowiedzi, wniosku ani promptu/odpowiedzi LLM.</li>
+<li>Do LLM trafia treść fiszki, kanwy i wniosku (bez <code>author_name</code> i <code>contact_email</code>). Informacja w UI przy asystencie: „Asystent korzysta z zewnętrznego modelu AI. Nie wpisuj danych osobowych.”</li>
+<li>Wniosek nie zbiera danych wnioskodawcy (sekcja <code>info</code>).</li>
+<li>Brak autoryzacji (ADR-M3-010): kto zna <code>id</code>, może czytać i edytować pomysł — akceptowane w PoC, jak <code>report_id</code> w M1. Docelowo token edycji / konta (backlog).</li>
+<li>Prompt injection: treść użytkownika w znacznikach jako dane; wyjście tylko przez structured outputs i walidację; propozycje nie wykonują żadnych akcji.</li>
+</ul>
+
+<!-- ====================================================================== -->
+<h2 id="s14">14. Struktura katalogów i kolejność prac <span class="badge b-draft">draft</span></h2>
+<pre><code>db/m3-kreator.sql                          # K01
+data/social-canvas.json                    # K00
+data/challenge-map.json  data/calls/iws2-demo.json  data/calls/uw2-demo.json   # K07
+data/ideas-seed.json  scripts/seed_ideas.py                                     # K09
+api/kreator/__init__.py  models.py (K01)  schemas.py (K02)  canvas.py (K03)
+            similar.py  assistant.py  prompts.py (K06)
+            calls.py  prefill.py  application_ai.py (K08)
+api/providers/llm_assist.py                # K05
+api/routers/ideas.py (K04)  canvas.py (K03)  assist.py (K06)  applications.py (K08)   # stuby: K02
+web/src/components/canvas/*                                      # K12, K13 (Tailwind, bez plików CSS)
+web/src/components/assistant/*                                   # K14
+web/src/components/application/*                                 # K18
+web/src/pages/CanvasPage.tsx (K13)  MyIdeasPage.tsx (K15)  CallsPage.tsx ApplicationPage.tsx (K18)
+web/src/pages/panel/IdeasPage.tsx IdeaReviewPage.tsx             # K16
+docs/modules/03-kreator-pomyslow/module-3-demo.md                # K19</code></pre>
+<p><strong>Najkrótsza ścieżka demo (MUST):</strong> K00 → K01 → K02 → K03, K04, K05 → K06 → K10 → K14, K12 → K11, K13 → K15, K16, K17 → K19. Generator (K07, K08, K18) równolegle, gdy MUST jest w toku.</p>
+
+<!-- ====================================================================== -->
+<h2 id="s15">15. Rejestr decyzji (ADR) <span class="badge b-stable">stable</span></h2>
+
+<h3>ADR-M3-001 — Pomysł jako osobna tabela <code>ideas</code></h3>
+<p><strong>Decyzja:</strong> pomysły w <code>ideas</code> (z <code>idea_canvases</code>, <code>idea_replies</code>, <code>applications</code>), nie w <code>solutions</code>. Awans do Biblioteki tworzy rozwiązanie <code>PENDING_REVIEW</code>, <code>origin=USER_SUBMITTED</code>, które przechodzi istniejący przegląd (F17).<br><strong>Powód:</strong> pomysł ma własny cykl życia, kanwę, odpowiedzi i wnioski; <code>solutions</code> to korpus wyszukiwania. Brak zmian w enumach i endpointach M1.<br><strong>Konsekwencja:</strong> F13 przestaje wysyłać <code>POST /api/solutions</code>; endpoint zostaje dla innych klientów.</p>
+
+<h3>ADR-M3-002 — Schemat M3 w osobnym pliku <code>db/m3-kreator.sql</code></h3>
+<p><strong>Decyzja:</strong> odstępstwo od „jeden plik <code>db/init.sql</code>”: DDL M3 w osobnym, idempotentnym pliku (<code>IF NOT EXISTS</code>, <code>DO … duplicate_object</code>), ładowanym po <code>init.sql</code> (kolejność alfabetyczna) i przez <code>make db-m3</code>.<br><strong>Powód:</strong> dodanie tabel bez <code>make reset-db</code> — nie tracimy zaingestowanego korpusu i embeddingów.</p>
+
+<h3>ADR-M3-003 — Dopisywanie do plików współdzielonych</h3>
+<p><strong>Decyzja:</strong> zadania M3 mogą <em>dopisywać</em> (nie przepisywać) do plików M1 i frontendu wymienionych w sekcji 5; każdy taki plik ma w M3 dokładnie jednego właściciela-zadanie. Zmiana sygnatur lub zachowania istniejącego kodu = wpis w „Uwagach” właściwego pliku zadań.<br><strong>Powód:</strong> M1 i F są ukończone; rejestracja routerów, ustawienia i trasy nie mają innego miejsca.</p>
+
+<h3>ADR-M3-004 — Definicja Social Canvas jako dane</h3>
+<p><strong>Decyzja:</strong> <code>data/social-canvas.json</code> (bloki, typy, opcje, pytania) serwowany przez <code>GET /api/canvas/definition</code>; frontend renderuje bloki z definicji, a układ siatki trzyma w mapie klas Tailwinda po <code>block_id</code>.<br><strong>Powód:</strong> jedno źródło dla walidacji, UI i promptów; nowa wersja planszy = zmiana danych.</p>
+
+<h3>ADR-M3-005 — Kanwa w JSONB, zapis częściowy per blok</h3>
+<p><strong>Decyzja:</strong> jedna kolumna <code>data JSONB</code> z walidacją w API; <code>PATCH</code> scala bloki; ostatni zapis wygrywa.<br><strong>Powód:</strong> autozapis pojedynczych bloków, brak migracji przy zmianie planszy, prostota.</p>
+
+<h3>ADR-M3-006 — Asystent: structured outputs, propozycje, praca bez LLM</h3>
+<p><strong>Decyzja:</strong> osobny provider <code>llm_assist.py</code> (Haiku 4.5, <code>messages.parse</code> + pydantic), propozycje akceptowane przez użytkownika, brak LLM → 200 z <code>available:false</code> i pytaniami z planszy.<br><strong>Powód:</strong> poprawny JSON bez parsowania tekstu; <code>llm.py</code> M1 bez zmian; „moduł działa bez AI”.</p>
+
+<h3>ADR-M3-007 — Nabory jako pliki JSON</h3>
+<p><strong>Decyzja:</strong> <code>data/calls/*.json</code> bez tabeli i bez edycji w panelu. Demo: <code>iws2-demo</code> otwarty w datach demo, <code>uw2-demo</code> zamknięty (realne daty).<br><strong>Powód:</strong> „wniosek modyfikowany do naboru” = konfiguracja; ROPS przygotowuje nabór jako plik (docelowo panel — backlog).</p>
+
+<h3>ADR-M3-008 — Wniosek bez danych osobowych, samoocena jako podpowiedź</h3>
+<p><strong>Decyzja:</strong> sekcja danych wnioskodawcy tylko informacyjna; samoocena AI zawsze z <code>disclaimer_pl</code>.<br><strong>Powód:</strong> minimalizacja danych; nie udajemy oceny komisji.</p>
+
+<h3>ADR-M3-009 — Podobne innowacje przez pipeline M1</h3>
+<p><strong>Decyzja:</strong> <code>preprocess</code> + <code>run_search</code> bez zapisu zgłoszeń i <code>search_events</code>; pokazujemy tylko wyniki, które przeszły bramkę „nie wiem”.<br><strong>Powód:</strong> ta sama trafność co Matchmaking; brak zatruwania statystyk zgłoszeń; uczciwy komunikat „nie znaleźliśmy”.</p>
+
+<h3>ADR-M3-010 — Brak autoryzacji pomysłów</h3>
+<p><strong>Decyzja:</strong> pomysł czytany i edytowany po samym <code>id</code>, jak <code>report_id</code> w M1 (decyzja zespołu: bez autoryzacji).<br><strong>Konsekwencja:</strong> backlog: token edycji w <code>localStorage</code> albo konta.</p>
+
+<h3>ADR-M3-011 — Etap fiszki = skala gotowości z Social Canvas</h3>
+<p><strong>Decyzja:</strong> <code>idea_stage</code> = <code>IDEA | PROTOTYPE | TESTED | READY</code> z opisami z planszy; synchronizacja z blokiem <code>solution_readiness</code>.<br><strong>Powód:</strong> oficjalna skala ROPS/INNOAGH zamiast własnych 4 etapów z F13.</p>
+
+<!-- ====================================================================== -->
+<h2 id="s16">16. Backlog kolejnych iteracji <span class="badge b-draft">draft</span></h2>
+<ul>
+<li>Wizualizacja pomysłu (model obrazów), eksport kanwy do PDF w układzie plansz.</li>
+<li>Edycja naborów w panelu, harmonogramy, powiadomienia o otwarciu naboru (<code>base.md</code> §5).</li>
+<li>Integracja z prawdziwym formularzem naboru (eksport odpowiedzi do Webankiety / systemu grantowego).</li>
+<li>Token edycji pomysłu / konta; współautorzy; historia wersji kanwy.</li>
+<li>Komentarze ekspertów przy blokach kanwy (M5), ocena pomysłów przez społeczność (M4).</li>
+<li>Tablica „Problemy czekające na pomysł”, jeśli nie wejdzie w PoC.</li>
+<li>Specyfikacja innowacji (dokument po wyborze pomysłu w IWS) i IPWI (Usługa Wrażliwa) generowane z wniosku.</li>
+</ul>
+
+<!-- ====================================================================== -->
+<h2 id="s17">17. Koszt utrzymania i zasoby <span class="badge b-draft">draft</span></h2>
+<p>Cennik Claude Haiku 4.5 (Anthropic, stan 2026-09): 1 USD / 1 mln tokenów wejścia, 5 USD / 1 mln tokenów wyjścia. Szacunki przy kursie przyjętym 4 zł/USD (założenie).</p>
+<div class="tablewrap">
+<table>
+<tr><th>Wywołanie</th><th>Tokeny (wejście / wyjście)</th><th>Koszt</th></tr>
+<tr><td>Podpowiedź fiszki / bloku kanwy</td><td>~2 500 / ~600</td><td>~0,0055 USD ≈ 2 gr</td></tr>
+<tr><td>Szkic sekcji wniosku</td><td>~3 000 / ~1 200</td><td>~0,009 USD ≈ 4 gr</td></tr>
+<tr><td>Samoocena wniosku</td><td>~5 000 / ~800</td><td>~0,009 USD ≈ 4 gr</td></tr>
+<tr><td>Podobne innowacje (embedding zapytania, M1)</td><td>~300 tokenów embeddingu</td><td>pomijalny</td></tr>
+</table>
+</div>
+<ul>
+<li>Pełna ścieżka jednego autora (2 podpowiedzi fiszki, 6 kanwy, 8 szkiców, 2 samooceny): ~0,13 USD ≈ 0,55 zł.</li>
+<li>10 tys. wywołań asystenta miesięcznie (średnio ~0,007 USD): ~70 USD ≈ 280 zł; 100 tys.: ~700 USD ≈ 2 800 zł.</li>
+<li>Infrastruktura: bez zmian względem M1 (ta sama baza i API; kanwa i wnioski to kilka KB JSON na pomysł).</li>
+<li>Zasoby ROPS: przegląd pomysłów i odpowiedzi (panel), przygotowanie pliku naboru przy każdym naborze (~1–2 h na podstawie wzoru wniosku i karty oceny).</li>
+</ul>
+
+<!-- ====================================================================== -->
+<h2 id="s18">18. Pytania otwarte <span class="badge b-draft">draft</span></h2>
+<h4>Rozstrzygnięte w v0.2</h4>
+<ol>
+<li>Pomysł w <code>solutions</code> czy osobna tabela? → osobna <code>ideas</code> (ADR-M3-001).</li>
+<li>Powrót autora bez kont? → „Moje pomysły” w <code>localStorage</code> (sekcja 11).</li>
+<li>Pola naboru? → wzory ROPS: IWS 2.0 i Usługa Wrażliwa (sekcja 9, <code>docs/resources/rops/</code>).</li>
+<li>Canvas: formularz czy mapa? → interaktywna mapa w układzie plansz, zapis w bazie (sekcja 7).</li>
+<li>Asystent: czat czy podpowiedzi? → podpowiedzi przy fiszce, blokach i sekcjach wniosku; wizualizacja poza zakresem.</li>
+<li>„Problemy czekające na pomysł”? → COULD; MUST to wejście z „nie wiem”.</li>
+</ol>
+<h4>Do potwierdzenia u mentorów ROPS</h4>
+<ol>
+<li>Czy Social Canvas INNOAGH v1.0 to te same plansze, które dostali uczestnicy HackYeah?</li>
+<li>Czy pokazywanie „przykładowego naboru na wzór IWS 2.0” z datami demo jest w porządku (oznaczony jako przykład)?</li>
+<li>Czy statusy pomysłu (W analizie / Zaproszony / Odrzucony / W Bibliotece) odpowiadają praktyce Hubu?</li>
 </ol>
 
 <hr>
 
 <footer>
-<p><strong>Moduł 3 — Kreator pomysłów</strong> · v0.1 · 2026-10-03 · Małopolski Hub Innowacji Społecznych.</p>
+<p><strong>Moduł 3 — Kreator pomysłów</strong> · v0.2 · 2026-10-04 · Małopolski Hub Innowacji Społecznych.</p>
+<p><strong>v0.2</strong> — zakres po sesji planowania: fiszka jako <code>ideas</code>, interaktywna Social Innovation Canvas (definicja 26 bloków), asystent (structured outputs, Haiku 4.5), podobne innowacje z pipeline'u M1, pętla odpowiedzi do autora, generator wniosków na wzór naborów ROPS (IWS 2.0, Usługa Wrażliwa II), ADR-M3-001–011, koszty.</p>
 <p><strong>v0.1</strong> — szkielet: wymaganie z <code>base.md</code>, ocena pokrycia przez istniejącą implementację, pytania do sesji planowania.</p>
-<p>Dokument iteracyjny. Zmiany: nowa sekcja na końcu, wpis w spisie treści, ADR w sekcji 13 przy zmianie decyzji. Podnieś wersję w nagłówku i w stopce.</p>
+<p>Dokument iteracyjny. Zmiany: nowa sekcja na końcu, wpis w spisie treści, ADR w sekcji 15 przy zmianie decyzji. Podnieś wersję w nagłówku i w stopce.</p>
 </footer>
 
 </div>

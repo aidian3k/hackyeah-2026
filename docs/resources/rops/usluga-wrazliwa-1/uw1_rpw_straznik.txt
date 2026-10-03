@@ -1,0 +1,658 @@
+   2.        Strażnik (Alarm Ally)
+
+  I.    Istota i wyróżniki innowacji
+
+a. Opis innowacji
+
+Strażnik - Alarm Ally to nowoczesne rozwiązanie, które pomaga odbierać sygnały alarmowe
+osobom, które nie mogą ich usłyszeć. Rozwiązanie wspiera ewakuację osób g/Głuchych i
+osób z czasową utratą słuchu.
+
+System ma wykrywać alarm a następnie przekazywać informację o nim użytkownikowi w
+wybrany przez niego sposób. Aplikacja ma wykrywać dźwięki o wysokim natężeniu i
+regularnej amplitudzie w otoczeniu ciszy, w nocy, kiedy użytkownik śpi i nie korzysta z
+wszelkich narzędzi wspomagających słuch przez co nie jest w stanie usłyszeć żadnych
+dźwiękowych komunikatów ostrzegawczych.
+
+Aplikacja ma być darmowa dla każdego zainteresowanego. Aplikacja funkcjonuje na
+platformach Android i iOS. Po wdrożeniu będzie dostępna w sklepach Google Play oraz App
+Store dzięki czemu każdy zainteresowany będzie mógł ją pobrać i zainstalować na swoim
+telefonie.
+
+Aplikacja jest dostępna dla osób:
+
+   •    Z dysfunkcją słuchu - aplikacja posiada prostą szatę graficzną, wszystkie treści zostały
+        skonsultowane z mentorem dostępności.
+   •    Z zaburzeniami widzenia barw - kolory zastosowane w aplikacji czynią ją dostępną dla
+        osób z Deuteranopią, Protanopią oraz Tritanopią:
+   •    Z dysfunkcją wzroku - aplikacja współpracuje z systemowymi czytnikami ekranów
+        TalkBack (Android) oraz VoiceOver (iOS)
+   •    Starszych – aplikacja jest bardzo prosta w obsłudze, nie zawiera zbędnych przycisków
+        czy elementów na ekranie. Ponadto każde okno zawiera opis tego, co można w nim
+        zrobić, dzięki czemu użytkownik uzyska wsparcie, jeżeli tego potrzebuje.
+
+Dostępne metody ostrzegania o niebezpieczeństwie to:
+
+   •         wibracje w telefonie,
+   •         latarka w telefonie,
+    •        połączenia alarmowe - połączenie telefoniczne pod wskazany numer w przypadku
+             braku reakcji użytkownika na powiadomienia o wykrytym alarmie (Android),
+    •        wibracje w opasce inteligentnej/zegarku inteligentnym,
+    •        rejestrowanie wykrytych zdarzeń w historii.
+
+Aplikacja współpracuje ze wszystkimi opaskami inteligentnymi na rynku, posiadającymi silniki
+wibracyjne i zdolność sparowania z smartfonem działającym w oparciu o system Android lub
+iOS za pomocą interfejsu Bluetooth.
+
+Jak wynika z danych opublikowanych przez Stowarzyszenie Polski Instytut Praw g/Głuchych,
+w Polsce żyje do 200 000 osób niesłyszących i ponad 3 miliony osób z różnymi rodzajami
+niedosłuchu.
+
+Problem osób głuchych w kontekście alarmów przeciwpożarowych polega na tym, że
+tradycyjne systemy ostrzegania oparte wyłącznie na sygnale dźwiękowym są dla nich
+całkowicie niedostępne. W Polsce żyje kilkadziesiąt tysięcy osób głuchych i
+głuchoniewidomych, które w sytuacji zagrożenia mogą nie zostać powiadomione o
+konieczności ewakuacji. Brak wizualnych sygnalizatorów w budynkach mieszkalnych i
+użyteczności publicznej sprawia, że osoby te są szczególnie narażone na ryzyko utraty zdrowia
+lub życia.
+
+Nie istnieją oficjalne statystyki pokazujące, ile osób głuchych faktycznie nie usłyszało alarmu
+przeciwpożarowego. Jednak raporty Rzecznika Praw Obywatelskich oraz Polskiego Związku
+Głuchych wskazują, że bariery komunikacyjne w sytuacjach kryzysowych są powszechne.
+Osoby głuche często nie mają dostępu do tłumaczy języka migowego, a służby ratownicze nie
+dysponują procedurami dostosowanymi do ich potrzeb. W efekcie osoby niesłyszące
+pozostają poza systemem ostrzegania, co prowadzi do realnego zagrożenia.
+
+Z wywiadu opublikowanego w Przeglądzie Pożarniczym wynika, że alarmy dźwiękowe w
+hotelach czy mieszkaniach są dla osób głuchych bezużyteczne. Jeśli system nie posiada
+sygnalizacji świetlnej, osoba niesłysząca nie ma świadomości zagrożenia i nie podejmuje
+ewakuacji. Strażacy, którzy przybywają na miejsce, napotykają dodatkowe bariery
+komunikacyjne – brak możliwości szybkiego porozumienia się w języku migowym,
+konieczność pisania w stresie czy korzystania z dzieci jako tłumaczy. To prowadzi do chaosu i
+opóźnia działania ratownicze.
+Systemowe braki obejmują nie tylko brak obowiązkowych wizualnych alarmów, ale również
+brak szkoleń dla strażaków i personelu medycznego w zakresie podstawowej komunikacji z
+osobami głuchymi. Nie istnieje także centrum komunikacji z tłumaczami PJM dostępne całą
+dobę dla służb ratowniczych. Dodatkowym problemem jest niska świadomość społeczna –
+sąsiedzi czy współmieszkańcy często nie wiedzą, że w budynku mieszka osoba głucha, co
+opóźnia reakcję w sytuacji kryzysowej.
+
+Konsekwencje tych braków są poważne. Osoby głuche mogą nie zdążyć opuścić budynku w
+czasie pożaru, co bezpośrednio zagraża ich życiu. Pojawia się także poczucie izolacji i lęk
+przed sytuacjami kryzysowymi, a brak zaufania do systemu ochrony przeciwpożarowej
+pogłębia marginalizację. Opóźniona ewakuacja jednej osoby może dodatkowo utrudnić
+działania ratownicze i zwiększyć zagrożenie dla pozostałych mieszkańców.
+
+b. Co się składa na innowację
+    •   Kod aplikacji
+    •   Instrukcja obsługi aplikacji
+    •   Raport ewaluacyjny
+    •   Specyfikacja innowacji
+    •   Raport z akceleracji
+    •   Plan rozwoju
+c. Analiza rozwiązania pod kątem kryteriów ewaluacyjnych
+
+Trafność
+
+Celem Innowacji było opracowanie i przetestowanie aplikacji mobilnej, współpracującej z
+urządzeniami: opaski/ telefony które będą powiadamiać użytkownika o sygnale dźwiękowym
+wskazującym na zagrożenie. W trakcie trwania innowacji Innowator musiał się zmierzyć z
+efektami postępu technologicznego i faktu, że Apple i Google wprowadziły aplikacje, które
+rejestrują sygnały ewakuacji i przesyłają informacje do użytkownika. Dlatego potrzebna była
+zmiana celu samej innowacji, aby nie powielać rozwiązania, które już istnieje. Strażnik -
+Alarm Ally skupił się więc na przesyłaniu w różny sposób informacji oraz obudzenie osoby,
+która nie słyszy.
+
+W modelu końcowym Innowatora czytamy:
+„Jednym z istotnych problemów osób z dysfunkcją słuchową, mającym bardzo duże znaczenie
+w kontekście ich zdrowia i życia jest brak lub ograniczona możliwość prawidłowego odbioru
+dźwiękowych sygnałów alarmowych, informujących o wystąpieniu potencjalnego zagrożenia
+w ich otoczeniu, szczególnie w nocy podczas snu, kiedy to przy zmniejszonej reaktywności na
+bodźce zewnętrzne uniemożliwia prawidłowe odczytanie również innych sygnałów – np.
+świetlnych. Potrzebny jest specjalny system informujący osoby z niepełnosprawnością
+słuchową o pojawieniu się niebezpieczeństwa, inny niż sygnały dźwiękowe.”
+
+Skuteczność
+
+Strażnik - Alarm Ally został przetestowany w warunkach zbliżonych do rzeczywistych, w tym
+w nocy, w ciszy oraz w sytuacjach, gdy użytkownik nie korzystał z urządzeń wspomagających
+słuch. Aplikacja skutecznie wykrywała sygnały alarmowe o wysokim natężeniu i regularnej
+amplitudzie, a następnie przekazywała informację użytkownikowi w wybrany przez niego
+sposób – poprzez wibracje, światło, połączenie telefoniczne lub sygnał na opasce. Testy
+wykazały, że aplikacja działa niezawodnie zarówno na urządzeniach z systemem Android, jak i
+iOS, a także współpracuje z popularnymi opaskami i zegarkami inteligentnymi. Dzięki temu
+użytkownik otrzymuje powiadomienie nawet wtedy, gdy nie ma telefonu przy sobie.
+Skuteczność rozwiązania potwierdzają pozytywne opinie uczestników testów, którzy
+podkreślali jego prostotę, intuicyjność i realne wsparcie w sytuacjach zagrożenia.
+
+Użyteczność
+
+Aplikacja Strażnik - Alarm Ally została zaprojektowana z myślą o maksymalnej dostępności i
+łatwości obsługi. Interfejs jest prosty, pozbawiony zbędnych elementów, a każda funkcja
+została opisana w sposób zrozumiały, co ułatwia korzystanie osobom starszym oraz tym z
+ograniczeniami poznawczymi. Zastosowane kolory są dostosowane do potrzeb osób z
+zaburzeniami widzenia barw, a kompatybilność z czytnikami ekranowymi TalkBack i
+VoiceOver zapewnia dostępność dla osób z dysfunkcją wzroku. Aplikacja nie wymaga dostępu
+do Internetu, co zwiększa jej użyteczność w sytuacjach awaryjnych. Możliwość wyboru
+sposobu powiadamiania sprawia, że użytkownik może dostosować działanie aplikacji do
+swoich indywidualnych potrzeb i preferencji. Dzięki temu Strażnik - Alarm Ally jest
+praktycznym narzędziem, które realnie zwiększa bezpieczeństwo i komfort życia osób
+niesłyszących oraz innych użytkowników narażonych na brak reakcji na sygnały alarmowe.
+Testowanie innowacji
+Proces testowania innowacji obejmował spotkania fokusowe siedmiu osób głuchych i
+niedosłyszących z udziałem tłumacza języka migowego, które pozwoliły na dokładne
+poznanie potrzeb użytkowników. Wnioski z tych spotkań wskazały, że aplikacja może realnie
+zmienić życie wielu osób – pojawiły się przykłady osób, które omal nie zginęły w pożarze
+przez nieusłyszenie alarmu, czy takich, które żyją w ciągłym lęku przed zaczadzeniem.
+
+Innowator na bieżąco weryfikował spójność rozwiązania z potrzebami grupy docelowej,
+korzystając z ankiet online, konsultacji w mediach społecznościowych oraz materiałów
+edukacyjnych, takich jak film animowany i strona internetowa. Dzięki temu udało się
+zniwelować niezrozumienie projektu i zwiększyć jego akceptację wśród użytkowników.
+
+Wielu testerów już teraz korzysta z systemu na co dzień. Wielu deklaruje pobranie aplikacji
+zaraz po wdrożeniu jej na rynek. Jest też zainteresowanie i chęć pomocy w promowaniu
+rozwiązania przez jednostki Straży Pożarnej i Policji.
+
+Testy oraz naniesione w wyniku ich poprawki wykazały skuteczność w działaniu
+mechanizmów wibracji, latarki w telefonie, połączeń alarmowych oraz wibracji w opasce
+inteligentnej.
+
+Aplikacja oprócz realizacji celu nadrzędnego jakim jest informowanie użytkowników o
+niebezpieczeństwie w ich otoczeniu, daje poczucie mniejszego wykluczenia społecznego z
+powodu posiadanej niepełnosprawności. Członkowie grupy testującej wielokrotnie
+wspominali, że jest to dla nich bardzo ważne, że ktoś interesuje się ich losem, problemami
+próbuje je rozwiązać.
+
+Aplikacja funkcjonuje tak samo dobrze na systemach Android i iOS. Wyjątkiem jest funkcja
+połączeń alarmowych, której na chwilę obecną nie udało się wprowadzić na telefonach z
+systemem iOS ze względu na zabezpieczenia uniemożliwiające automatyczne wykonanie
+połączenia pod wybrany numer. Testowana była funkcja wysyłania alarmowych wiadomości
+SMS, natomiast i ta została zablokowana przez systemowe zabezpieczenia stworzone przez
+firmę Apple.
+
+d. Potencjalni odbiorcy i użytkownicy innowacji
+   •   Osoby głuche i niedosłyszące,
+       •   Osoby o silnych lekach obniżających percepcję, wzmagających senność,
+    •      Osoby słyszące, w sytuacjach, miejscach, w których czujnik i sygnalizator dźwiękowy
+           znajdują się w pomieszczeniach oddalonych od sypialni, a przez to usłyszenie sygnału
+           dźwiękowego może być utrudnione, lub niemożliwe.
+e. Unikalność rozwiązania na tle innych działań społecznych
+
+Strażnik - Alarm Ally to wyjątkowe rozwiązanie, które pomaga osobom g/Głuchym oraz
+tymczasowo niesłyszącym bezpiecznie reagować na sytuacje alarmowe, zwłaszcza w nocy,
+gdy nie korzystają z aparatów słuchowych ani innych urządzeń wspomagających. W
+przeciwieństwie do innych działań społecznych, które skupiają się głównie na edukacji czy
+integracji, Strażnik - Alarm Ally oferuje realne wsparcie w krytycznych momentach,
+wykrywając charakterystyczne dźwięki alarmowe w ciszy i informując użytkownika w
+wybrany przez niego sposób – na przykład przez światło lub wibracje. Co ważne, system
+działa bez dostępu do Internetu, dzięki czemu jest niezawodny nawet w awaryjnych
+warunkach. To praktyczne, dostępne i inkluzywne narzędzie, które zwiększa bezpieczeństwo
+osób niesłyszących i pokazuje, że technologia może skutecznie wspierać równość i ochronę
+życia.
+
+
+ II.       Cel upowszechnienia
+
+f. Zdefiniowanie ogólnego i szczegółowego celu. Cele projektu powinny być osiągalne,
+       określone w czasie i wymierne.
+
+Cel ogólny
+Poprawa bezpieczeństwa osób z dysfunkcją słuchową w związku z brakiem lub ograniczoną
+możliwością prawidłowego odbioru dźwiękowych sygnałów alarmowych, informujących o
+wystąpieniu potencjalnego zagrożenia w ich otoczeniu, szczególnie w nocy podczas snu,
+kiedy to przy zmniejszonej reaktywności na bodźce zewnętrzne uniemożliwia prawidłowe
+odczytanie również innych sygnałów – np. świetlnych.
+
+Cel szczegółowy
+
+Upowszechnienie aplikacji Strażnik - Alarm Ally wśród osób g/Głuchych. Pobranie aplikacji
+przez x osób.
+
+g. Oczekiwane rezultaty i wskaźniki
+ Oczekiwany rezultat                                            Wskaźnik
+ Pobranie aplikacji Strażnik - Alarm Ally przez x osób          Min. x pobrań aplikacji przez
+ g/Głuchych, co zwiększy ich dostęp do alternatywnych form      osoby zainteresowane,
+ ostrzegania o zagrożeniach.                                    tj. odbiorców i użytkowników
+ Zwiększenie poczucia bezpieczeństwa wśród osób z dysfunkcją    Przeprowadzenie kwestionariuszy
+ słuchu, szczególnie w porze nocnej, dzięki funkcji wibracyjnych ankiet wśród min. X
+ i wizualnych powiadomień alarmowych.                           użytkowników
+ Wzrost świadomości społecznej na temat potrzeb osób            Min. x spotkań/ warsztatów lub
+ g/Głuchych w zakresie bezpieczeństwa i komunikacji             innych form pracy bezpośredniej
+ kryzysowej.
+ Zmniejszenie ryzyka wypadków i opóźnionej reakcji w            Liczba przeprowadzonych
+ sytuacjach zagrożenia (np. pożar, wyciek gazu, włamanie)       działań/akcji informacyjnych.
+ dzięki szybszemu i bardziej dostosowanemu systemowi
+ powiadomień.
+
+
+
+
+ III.   Rekomendowany kierunek upowszechnienia
+
+h. Elementy do upowszechnienia: metody działania, narzędzia, materiały.
+
+W procesie upowszechniania innowacji Strażnik - Alarm Ally warto skupić się na przekazaniu
+sprawdzonych metod działania, które umożliwiają skuteczne wykrywanie sygnałów
+alarmowych i ich przekazywanie użytkownikowi w sposób dostosowany do jego potrzeb.
+Kluczowe jest udostępnienie aplikacji na platformach Android i iOS, wraz z instrukcją obsługi
+w języku prostym i dostępnościowym. Należy również upowszechniać materiały edukacyjne,
+takie jak poradniki, filmy instruktażowe oraz infografiki, które pokazują, jak korzystać z
+aplikacji i jak ją skonfigurować. Warto także dzielić się doświadczeniami z testów aplikacji,
+dobrymi praktykami wdrożeniowymi oraz wynikami konsultacji z osobami z
+niepełnosprawnościami. Istotnym elementem są również rekomendacje dotyczące
+współpracy z producentami opasek i zegarków inteligentnych, aby zapewnić pełną
+kompatybilność urządzeń. Wszystkie te działania powinny być dostępne w formie cyfrowej i
+drukowanej, tak aby dotrzeć do jak najszerszego grona odbiorców, w tym instytucji
+publicznych, organizacji pozarządowych i lokalnych społeczności.
+i.    Skala upowszechnienia.
+
+W pierwszej kolejności aplikacja może zostać wdrożona w instytucjach publicznych, takich jak
+domy pomocy społecznej, placówki opieki długoterminowej, szkoły specjalne czy ośrodki
+rehabilitacyjne, gdzie przebywają osoby z ograniczeniami słuchu lub wzroku. Następnie warto
+rozszerzyć dostępność na poziomie województw, poprzez współpracę z samorządami i
+organizacjami pozarządowymi działającymi na rzecz osób z niepełnosprawnościami. Dzięki
+swojej uniwersalności i dostępności technologicznej, aplikacja może być również promowana
+wśród szerokiej grupy użytkowników indywidualnych – zarówno osób z dysfunkcjami, jak i
+tych, którzy mogą znaleźć się w sytuacjach ograniczonego dostępu do sygnałów alarmowych.
+
+
+IV.     Plan komunikacji
+
+     a. Stan wyjściowy
+        •   Brak szerokiej rozpoznawalności aplikacji wśród osób g/Głuchych i
+            niedosłyszących.
+        •   Brak obecności w mediach społecznościowych i kanałach informacyjnych
+            dedykowanych osobom z niepełnosprawnościami.
+        •   Niska świadomość społeczna dotycząca problemu niedostępności alarmów
+            dźwiękowych dla osób niesłyszących.
+        •   Brak systemowych rozwiązań w budynkach mieszkalnych i publicznych – aplikacja
+            ma pełnić rolę uzupełniającą i wspierającą.
+     b. Wyróżniki innowacji
+        •   Nowoczesność i dostępność – aplikacja działa na Android i iOS, jest darmowa i
+            dostępna dla każdego.
+        •   Uniwersalność – współpracuje z wszystkimi opaskami i zegarkami inteligentnymi
+            sparowanymi przez Bluetooth.
+        •   Pełna dostępność cyfrowa – dostosowana do osób z dysfunkcją słuchu, wzroku,
+            zaburzeniami widzenia barw oraz osób starszych.
+        •   Bezpieczeństwo – wspiera ewakuację poprzez różne metody powiadamiania
+            (wibracje, światło, połączenia alarmowe).
+        •   Prostota obsługi – intuicyjny interfejs, brak zbędnych elementów, jasne opisy w
+            każdym oknie aplikacji.
+c. Cele działań komunikacyjnych
+   •   Zwiększenie świadomości problemu niedostępności alarmów dźwiękowych dla
+       osób g/Głuchych.
+   •   Upowszechnienie aplikacji Strażnik - Alarm Ally jako darmowego i prostego
+       narzędzia wspierającego bezpieczeństwo.
+   •   Dotarcie do osób niesłyszących, niedosłyszących i ich rodzin z informacją o
+       możliwości korzystania z aplikacji.
+   •   Budowanie zaufania wśród użytkowników poprzez pokazanie prostoty i
+       skuteczności działania aplikacji.
+   •   Włączenie instytucji publicznych, organizacji pozarządowych i mediów w promocję
+       rozwiązania.
+d. Cele działań komunikacyjnych
+   •   Zwiększenie świadomości problemu niedostępności alarmów dźwiękowych dla
+       osób g/Głuchych.
+   •   Upowszechnienie aplikacji Strażnik - Alarm Ally jako darmowego i prostego
+       narzędzia wspierającego bezpieczeństwo.
+   •   Dotarcie do osób niesłyszących, niedosłyszących i ich rodzin z informacją o
+       możliwości korzystania z aplikacji.
+   •   Budowanie zaufania wśród użytkowników poprzez pokazanie prostoty i
+       skuteczności działania aplikacji.
+   •   Włączenie instytucji publicznych, organizacji pozarządowych i mediów w promocję
+       rozwiązania.
+e. Grupy docelowe
+   •   Osoby g/Głuche i niedosłyszące – użytkownicy aplikacji, osoby dorosłe i młodzież.
+   •   Rodziny i opiekunowie – osoby wspierające osoby niesłyszące w codziennym
+       życiu.
+   •   Osoby starsze – z czasową utratą słuchu lub potrzebujące prostych narzędzi
+       bezpieczeństwa.
+   •   Instytucje i organizacje – Polski Związek Głuchych, Rzecznik Praw Obywatelskich,
+       NGO zajmujące się dostępnością.
+       •   Placówki publiczne i media – szkoły, urzędy, organizacje społeczne, media
+           branżowe i lokalne.
+   f. BIG IDEA
+
+                           „Bezpieczeństwo dostępne dla każdego”
+
+Myśl przewodnia podkreślająca, że każdy – niezależnie od sprawności – ma prawo do
+informacji o zagrożeniu i bezpiecznej ewakuacji.
+
+   a. Filary komunikacji
+       •   Wskazanie problemu:
+                   i. Alarmy dźwiękowe są niedostępne dla osób niesłyszących.
+                   ii. Brak wizualnych sygnalizatorów w budynkach mieszkalnych i
+                      publicznych.
+                  iii. Bariery komunikacyjne w sytuacjach kryzysowych prowadzą do
+                      realnego zagrożenia życia.
+       •   Rozwiązanie:
+                   i. Aplikacja Starżnik - Alarm Ally wykrywa alarmy i powiadamia
+                      użytkownika w wybrany sposób.
+                   ii. Wibracje, światło, połączenia alarmowe – różne metody dostosowane
+                      do potrzeb użytkownika.
+                  iii. Prosty interfejs i pełna dostępność cyfrowa.
+       •   Dowody na prawdziwość:
+                   i. Konsultacje z mentorem dostępności.
+                   ii. Dostosowanie aplikacji do osób z różnymi niepełnosprawnościami.
+                  iii. Dane o liczbie osób g/Głuchych i niedosłyszących w Polsce (200 tys.
+                      niesłyszących, ponad 3 mln z niedosłuchem).
+   b. Kluczowe przekazy
+       •   Każdy ma prawo do bezpiecznej ewakuacji.
+       •   Strażnik - Alarm Ally daje ci sygnał, którego nie usłyszysz.
+       •   Proste rozwiązanie, które może uratować życie.
+       •   Dostępność to nie luksus – to standard.
+       •   Bezpieczeństwo w twoim telefonie – darmowe i dostępne dla wszystkich.
+      c. Budowanie lejka marketingowego
+          •   Zwrócenie uwagi: kampania informacyjna w mediach społecznościowych i
+              tradycyjnych, pokazująca problem niedostępności alarmów.
+          •   Zaciekawienie: krótkie filmy i grafiki pokazujące działanie aplikacji w praktyce.
+          •   Wzbudzenie potrzeby: historie osób, które dzięki aplikacji czują się bezpieczniej.
+          •   Działanie: pobranie aplikacji z Google Play i App Store, dołączenie do społeczności
+              użytkowników na Facebooku.
+          •   Utrzymanie kontaktu: newsletter, aktualizacje aplikacji, grupy wsparcia online.
+      d. Ton przekazu
+          •   Towarzyszący i wspierający – język prosty, zrozumiały, bez technicznego żargonu.
+          •   Partnerski – komunikacja oparta na empatii i współodpowiedzialności.
+          •   Indywidualny – każda historia użytkownika jest ważna.
+          •   Rozwijający – edukacja o dostępności i bezpieczeństwie.
+      e. Proponowane platformy komunikacji
+          •   Facebook – profil główny.
+          •   YouTube – tutoriale i materiały edukacyjne o bezpieczeństwie.
+          •   Google Play i App Store – główne kanały dystrybucji aplikacji.
+          •   Media tradycyjne – artykuły w prasie, wywiady w radiu i TV, portale społeczno-
+              technologiczne.
+          •   Newsletter i mailing – bieżące informacje o aktualizacjach i nowych funkcjach
+              aplikacji.
+
+
+ V.       Dowiedz się więcej! Inspiracje z kraju i ze świata
+
+Jeśli chcesz pogłębić wiedzę w tym obszarze, zapoznaj się z poniższymi raportami:
+
+      •   „Osoby głuche w Polsce 2020. Wyzwania i rekomendacje” (RPO)
+      •   „Perspektywa osób głuchych” (COI, 2023)
+
+Wśród międzynarodowych podmiotów/instytucji, które mogą stanowić inspirację dla
+dalszych działań związanych z upowszechnianiem materiałów edukacyjnych można wskazać
+m.in.:
+   •   SoundWatch - System SoundWatch jest zaprojektowany tak, żeby rozpoznawał
+       powszechne i ważne rodzaje dźwięków w postaci m.in.: dzwonka do drzwi, klaksonu
+       samochodowego, szczekania psa czy płaczącego dziecka.
+   •   Deaf Wake - Aplikacja Deaf Wake, zaprojektowana nie tylko dla osób głuchych, oferuje
+       alarmy oparte na diodach LED, wibracjach i wizualizacji. Zaleca się zdejmowanie
+       aparatów słuchowych na noc, w celu naładowania, osuszenia lub bezpiecznego
+       przechowywania. Większość z nas używa smartfonów do ustawiania budzika; osoby z
+       ubytkiem słuchu mogą mieć trudności z jego usłyszeniem. Deaf Wake pozwala wybrać
+       różne sposoby budzenia oprócz dźwięku – flesz aparatu, migający ekran, wibracje lub
+       kombinację tych opcji. Deaf Wake oferuje użytkownikom możliwość wyboru spośród
+       różnych tarcz zegarka oraz łączność z Apple Watch. Można jej również używać do
+       ustawiania timera.
+   •   Nagish - wykorzystuje sztuczną inteligencję do konwersji tekstu na mowę i mowy na
+       tekst w czasie rzeczywistym. Technologia ułatwia wykonywanie i odbieranie połączeń
+       bez konieczności słyszenia i mówienia. Zamiast tego można pisać i czytać.
+   •   Jacoti ListenApp - Dla osób, które dopiero zaczynają mieć problemy ze słuchem,
+       aplikacja Jacoti zapewnia wsparcie słuchu. Jacoti wychwytuje dźwięki i wzmacnia je,
+       przesyłając do słuchawek Apple.
+
+
+
+Suplement rynkowy – Strażnik (Alarm Ally)
+
+Opis istoty innowacji społecznej
+
+Strażnik – „Alarm Ally” to aplikacja, która nasłuchuje sygnałów alarmowych - pożarowych,
+czadu, dymu i innych ostrzegawczych dźwięków - i budzi użytkownika poprzez silną wibrację,
+błysk światła lub sygnał wysyłany do opaski/wearable. Rozwiązanie powstało z myślą o
+osobach g/Głuchych, seniorach, osobach o głębokim śnie oraz mieszkańcach lokali o niskim
+standardzie bezpieczeństwa. Prototyp został przetestowany i potwierdzono, że realnie
+zwiększa poczucie bezpieczeństwa oraz pozwala osobom niesłyszącym lub zagrożonym
+szybko zareagować w nocy.
+
+Największą siłą Strażnika – „Alarm Ally” jest to, że działa na zwykłym smartfonie, nie wymaga
+instalacji systemów budynkowych ani dodatkowych kosztów. To rozwiązanie codzienne,
+przystępne i gotowe do natychmiastowego zastosowania jako fundament usługi społecznej,
+którą OPS-y, CUS-y, samorządy i NGO mogą świadczyć bez potrzeby posiadania
+specjalistycznego sprzętu czy kompetencji technicznych.
+
+1. Co warto uzupełnić, aby innowacja mogła stać się usługą społeczną
+
+    ● Prosty opis, kiedy i dla kogo Strażnik - Alarm Ally jest najbardziej potrzebny.
+
+    ● Krótki przewodnik wdrożeniowy dla instytucji - krok po kroku: instalacja, test,
+       instruktaż.
+    ● Materiały informacyjne dla beneficjentów (ulotka, film instruktażowy, wersja PJM).
+    ● Standard wizyty środowiskowej z instalacją aplikacji (dla opiekunek, pracowników
+       CUS/OPS).
+    ● Podstawowe procedury okresowej kontroli działania (np. test raz na kwartał).
+    ● Lista akcesoriów, które mogą wzmacniać działanie (lampki błyskowe, opaski).
+
+    ● Zestaw dobrych praktyk: gdzie położyć telefon, jak ustawić parametry itd.
+
+Dodatkowe wskazówki:
+
+    ● Standard Testu Gotowości Mieszkania (TGM) - pracownik OPS/CUS wykonuje
+       symulację alarmu (np. z innego urządzenia), wspólnie z mieszkańcem sprawdza
+       reakcję aplikacji, a całość dokumentowana jest w Karcie Testu Gotowości podpisanej
+       przez obie strony.
+
+    ● Pakiet komunikacji dostępnej (Karta Awaryjna) - wizualna karta A5 z piktogramami i
+       tekstem łatwym do czytania (ETR), pokazująca krok po kroku: co zrobić po
+       wibracji/błysku (sprawdź - ewakuuj się - wezwij pomoc).
+
+    ● Minimalne Standardy Techniczne (MST) - lista parametrów telefonu wymagana do
+       działania aplikacji. Jeśli beneficjent nie ma odpowiedniego telefonu, instytucja może
+       wydać „telefon bezpieczeństwa” z podstawowych zasobów gminy.
+
+    ● Protokół integracji z systemami budynkowymi - instrukcja, gdzie umieścić czujki oraz
+       gdzie postawić telefon, by sygnał alarmowy był jak najlepiej wykrywalny (np. w
+       sypialni, nie obok wentylacji).
+2. Przykładowe kierunki przekucia innowacji w usługę społeczną
+
+1) „Bezpieczne Noce” - usługa środowiskowa dla osób g/Głuchych, seniorów i osób
+   samotnych
+
+Pracownik instaluje aplikację, wykonuje test, zapewnia krótką instrukcję i wraca na kontrolę.
+To prosta, szybka w realizacji usługa o natychmiastowym wpływie na bezpieczeństwo.
+
+2) Strażnik - Alarm Ally jako standard w mieszkaniach socjalnych i komunalnych
+
+Jednostka wdrażająca może wprowadzić aplikację jako element „podstawowego pakietu
+bezpieczeństwa” dla osób mieszkających w lokalach wysokiego ryzyka.
+
+3) Usługa w schroniskach, hostelach interwencyjnych i mieszkaniach chronionych
+
+Aplikacja może być stosowana w miejscach, gdzie ryzyko nocnych zagrożeń jest szczególnie
+wysokie i gdzie przebywają osoby w kryzysie.
+
+4) Narzędzie dla opiekunek środowiskowych i asystentów rodziny
+
+Opiekunka w trakcie wizyty pomaga w instalacji, upewnia się, że aplikacja działa poprawnie i
+tłumaczy zasady korzystania.
+
+5) „Bezpieczny budynek” - współpraca z zarządcami
+
+Włączenie Strażnika - Alarm Ally do procedur bezpieczeństwa budynków, szczególnie tam,
+gdzie mieszkają osoby niesłyszące, starsze lub zagrożone wykluczeniem.
+
+Dodatkowe wskazówki:
+
+   ● Usługa Asystent Bezpieczeństwa Nocnego (ABN) - cykliczne wizyty (np. raz na
+       kwartał), kontrola TGM, aktualizacja aplikacji i ponowny instruktaż.
+
+   ● Pakiet wsparcia dla nowych lokatorów - w lokalach socjalnych aplikacja i telefon
+       spełniający MST są wydawane jako obowiązkowy element wyposażenia mieszkania.
+
+   ● Integracja z teleopieką/SOS - brak reakcji na alarm przez 5 minut może przekierować
+       sygnał do centrum teleopieki lub dyżurnego CUS (z zachowaniem RODO).
+   ● Edukacja „Ciche Zagrożenia” - cykliczne warsztaty dostępne w PJM o bezpieczeństwie
+      nocnym i reagowaniu na czad/dym.
+
+3. Obszary, w których instytucja wdrażająca może dodać coś od siebie
+
+   ● Testy alarmów z lokalnymi strażakami (OSP/PSP).
+   ● Dostosowanie materiałów do PJM oraz przygotowanie wersji łatwych do czytania.
+   ● Opracowanie mapy mieszkańców wymagających podniesienia bezpieczeństwa
+      nocnego.
+   ● Zorganizowanie „dnia bezpieczeństwa” w dzielnicy z demonstracją aplikacji.
+   ● Współpraca z miejscowymi sklepami budowlanymi w zakresie akcesoriów.
+   ● Dodanie Strażnika - Alarm Ally jako elementu pakietów wsparcia dla osób
+      wychodzących z kryzysów (przemoc, bezdomność).
+
+
+Dodatkowe wskazówki:
+
+   ● Partnerstwo ze strażą w zakresie dostępnej ewakuacji - tworzenie „Map Dostępności
+      Ewakuacyjnej” (MDU), w których strażacy wiedzą, gdzie mieszkają osoby niesłyszące.
+
+   ● „Bank akcesoriów” - gromadzenie używanych, sprawnych opasek/wearables i lampek
+      LED pozyskiwanych np. od firm telekomunikacyjnych.
+
+   ● Kwestionariusz oceny ryzyka - priorytetyzuje beneficjentów o największym ryzyku
+      (osoby samotne, o głębokim śnie, w lokalach z piecami gazowymi).
+
+   ● Kampania „Czad/Dym - Zobacz Alarm” - wizualne kampanie ETR/PJM w przestrzeni
+      lokalnej.
+
+4. Modele wdrożenia usługi społecznej - S / M / L
+
+
+Model S - 1-3 rodziny / osoby
+
+   ● instalacja podczas wizyty,
+   ● krótka instrukcja,
+   ● test działania,
+   ● kontrola po 3 miesiącach.
+Rozwinięcie: Miernik: liczba Kart TGM podpisanych podczas pilotażu.
+
+
+Model M - wdrożenie w jednej dzielnicy
+
+   ● grupa 10-20 osób,
+   ● współpraca z lokalną strażą pożarną,
+   ● mini-szkolenia,
+   ● ocena bezpieczeństwa mieszkań.
+
+Rozwinięcie: Miernik: procent objętych lokali komunalnych + spadek interwencji OSP.
+
+
+Model L - „Gminny Program Bezpiecznych Nocy”
+
+   ● wdrożenie gminne,
+   ● partnerstwa z zarządcami budynków, OSP, domami seniora,
+   ● działania edukacyjne i środowiskowe,
+   ● monitoring realnych efektów.
+
+Rozwinięcie: Miernik: liczba Map Dostępności Ewakuacyjnej i certyfikat „Gmina Bezpieczna
+dla Osób Niesłyszących”.
+
+5. Rzeczy, których instytucje powinny unikać
+
+   ● Nie zastępować aplikacją systemów pożarowych budynków.
+   ● Nie zakładać, że użytkownik sam poprawnie skonfiguruje aplikację.
+   ● Nie wdrażać bez wcześniejszego testu na miejscu.
+   ● Nie komplikować wdrożenia ani formalności.
+   ● Nie ograniczać grupy odbiorców wyłącznie do osób g/Głuchych.
+
+Dodatkowe wskazówki:
+
+   ● Unikanie naruszeń prywatności – Strażnik - Alarm Ally nie może służyć do
+       monitorowania aktywności użytkowników.
+   ● Unikanie tworzenia fałszywego poczucia bezpieczeństwa - aplikacja jest „ostatnią
+       linią obrony”.
+   ● Unikanie implementacji na siłę - kluczowa jest zgoda i motywacja użytkownika.
+   ● Unikanie braku Planu B na wypadek awarii aplikacji lub wycofania aktualizacji.
+
+6. Typy partnerów, którzy mogą wzmocnić usługę
+
+Partnerzy lokalni:
+
+   ● Straż Pożarna i OSP,
+   ● zarządcy budynków, TBS,
+   ● domy seniora, mieszkania chronione,
+   ● organizacje osób g/Głuchych i seniorów.
+
+Partnerzy środowiskowi:
+
+   ● hostele interwencyjne,
+   ● asystenci rodziny, opiekunki środowiskowe,
+   ● biblioteki i domy kultury.
+
+Partnerzy branżowi:
+
+   ● producenci akcesoriów świetlnych i wibracyjnych,
+   ● ubezpieczyciele,
+   ● miasta UE - wspólne pilotaże.
+
+Nowe grupy partnerów:
+
+   ● Producenci systemów Smart Home - integracja z domowymi lampami/urządzeniami.
+   ● Serwisy napraw telefonów - diagnoza telefonów pod kątem MST.
+   ● Ubezpieczyciele mieszkaniowi - zniżki dla mieszkań z Strażnikiem - Alarm Ally.
+   ● Szkoły i poradnie - wsparcie tworzenia materiałów PJM i ETR.
+
+7. Wybrane ścieżki finansowania kontynuacji po zakończeniu grantu
+
+   ● środki gminne ds. bezpieczeństwa i wsparcia osób starszych,
+   ● PFRON dla osób z niepełnosprawnością słuchu,
+   ● programy senioralne i zdrowotne,
+   ● fundusze TBS i zarządców nieruchomości,
+   ● budżety CSR firm energetycznych i ubezpieczeniowych,
+   ● mikrogranty miejskie,
+     ● partnerstwa międzynarodowe.
+
+Rozszerzenia:
+
+     ● Finansowanie EFS+ w programach deinstytucjonalizacji.
+     ● Abonament dla zarządców nieruchomości w Modelu L.
+     ● Finansowanie z programów przeciwdziałania wykluczeniu mieszkaniowemu.
+     ● Partnerstwa z producentami czujek alarmowych jako wspólne pakiety.
+
+8.   Ryzyka wdrożeniowe i sposoby ich ograniczania
+
+     ● Ryzyko braku reakcji aplikacji → regularne testy co 3 miesiące.
+     ● Brak wiedzy użytkownika → wspólna instalacja i instruktaż.
+     ● Problemy techniczne → akcesoria wspomagające.
+     ● Zbyt duże poleganie na aplikacji → jasne komunikaty o ograniczeniach.
+     ● Niska akceptacja → demonstracje w praktyce.
+
+Rozszerzenia:
+
+     ● Fałszywe alarmy → protokoły PFA i lokalne testy dźwięków.
+     ● Opóźnienia powiadomień → instrukcja wyłączania optymalizacji baterii.
+     ● Awaria telefonu → kontrola ładowarki i baterii podczas ABN.
+
+9. Rozszerzone kierunki rozwoju usługi społecznej
+
+Kierunki lokalne:
+
+     ● stała usługa „Bezpieczne Noce”,
+     ● element pakietów wsparcia w mieszkaniach socjalnych,
+     ● integracja z planami ewakuacji instytucji publicznych.
+
+Kierunki środowiskowe:
+
+     ● usługa w wizytach opiekunek środowiskowych,
+     ● wsparcie osób w hostelach i mieszkaniach chronionych,
+     ● lokalne grupy użytkowników.
+
+Kierunki branżowe:
+   ● współpraca z ubezpieczycielami,
+   ● współpraca z zarządcami nieruchomości.
+
+Kierunki międzynarodowe:
+
+   ● pilotaże w miastach partnerskich,
+   ● adaptacja do różnych systemów alarmowych,
+   ● udział w projektach europejskich dostępności.
+
+Dodatkowe, zaawansowane kierunki:
+
+   ● Integracja z alarmami publicznymi RCB - aplikacja przekazuje użytkownikowi
+      wizualnie i wibracyjnie wszystkie lokalne alerty RCB.
+   ● Lokalny system „Ally-to-Ally” - sąsiedzka wzajemna pomoc w razie braku reakcji
+      użytkownika.
+   ● Test Dźwięków Lokalnych - dodawanie lokalnych alarmów do bazy aplikacji.
+
+   ● Certyfikacja akcesoriów - lokalnie przetestowana lista kompatybilnych urządzeń
+      wibracyjnych/świetlnych.
+

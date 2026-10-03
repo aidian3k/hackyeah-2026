@@ -1,0 +1,639 @@
+                                                                                        Załącznik nr 1
+                              do Ogłoszenia naboru (stanowiącego zał. 1 do Zarządzenia IS-430-6/26)
+
+Ramowy Plan Wdrożenia Innowacji
+
+Szlakiem ludzi bezdomnych
+Autor innowacji: Miejski Ośrodek Pomocy Społecznej w Stalowej Woli
+
+1.   Istota innowacji:
+
+Innowacja opiera się na Mobilnym Punkcie Higienicznym (MPH), czyli przyczepie z prysznicem
+(400×200 cm, 750 kg), która dociera bezpośrednio do miejsc przebywania osób w kryzysie
+bezdomności.
+Z przodu znajduje się oddzielna maszynownia z instalacją gazową, a wnętrze podzielono na dwa
+pomieszczenia: większy przedsionek ze stolikiem, ławkami, szafką i dwoma oknami oraz mniejszą
+łazienkę z prysznicem, zlewem i lusterkiem, doświetlaną wyłącznie oknem dachowym dla
+zachowania prywatności.
+Przyczepa wyposażona jest w dwa zbiorniki na czystą wodę (po 80 l), zbiornik na wodę szarą, kocioł
+gazowy do podgrzewania wody, instalację elektryczną 230 V zasilaną agregatem 3,8 kW oraz
+oświetlenie 12 V. Wnętrze ogrzewają dwa grzejniki z funkcją przeciwzamarzaniową, co umożliwia
+pracę także zimą. MPH służy przede wszystkim do kąpieli i podstawowych zabiegów higienicznych,
+ale w sezonie chłodnym pełni również funkcję „Kącika ciepła”, gdzie można ogrzać się, napić
+herbaty i zmienić odzież. To rozwiązanie tańsze i bardziej elastyczne niż stacjonarne łaźnie miejskie,
+pozwalające dotrzeć bezpośrednio do osób najbardziej potrzebujących.
+
+2.   Kluczowe wyróżniki rozwiązania
+
+     •   Mobilność i elastyczność: Pozwala na szybką reakcję i zmianę lokalizacji w zależności od
+         potrzeb.
+
+     •   Niskie koszty: Rozwiązanie jest tańsze w utrzymaniu niż budowa stacjonarnej łaźni,
+         co czyni je atrakcyjnym dla mniejszych samorządów.
+
+     •   Budowanie relacji: MPH to nie tylko „łazienka na kółkach”, ale przestrzeń
+         do spotkania ze streetworkerem, budowania zaufania i motywowania do dalszych kroków
+         (leczenie, schronisko).
+     •    Odwrócony model pomocy: To instytucja wyrusza szlakiem człowieka, eliminując bariery
+          wstydu, lęku przed instytucjami i konieczność formalnej rejestracji.
+
+3.    Diagnoza: na jaki problem/potrzebę odpowiada innowacja?
+
+Tradycyjny system pomocy często nie dociera do osób w kryzysie bezdomności. Osoby
+przebywające poza schroniskami mają krytycznie utrudniony dostęp do higieny, co pogłębia ich
+wykluczenie, obniża poczucie godności i pogarsza stan zdrowia.
+     • Pogłębiająca się skala problemu: ogólnopolskie badania z 2024 roku wykazują, że choć liczba
+         osób w placówkach rośnie powoli, to liczba osób przebywających poza systemem
+         (na ulicach, w pustostanach) wzrosła aż o 44,5%1 (dane dotyczące Małopolski).
+
+     • Bariery infrastrukturalne: Osoby bezdomne są często przeganiane z ogólnodostępnych toalet
+         (stacje benzynowe, sklepy), co demotywuje ich do dbania o siebie i zamyka
+         w „błędnym kole” wykluczenia.
+
+     • Profil odbiorcy: Dominującą grupą są mężczyźni w wieku 40-60 lat, ale coraz częściej problem
+         dotyka osób młodych z tzw. „zwykłych rodzin”2.
+
+     • Skutki braku higieny: To nie tylko kwestia zdrowia fizycznego, ale drastyczny spadek poczucia
+         własnej wartości, godności i lęk przed kontaktem z innymi ludźmi.
+
+4.    Model Innowacji: Co konkretnie wdrażasz?
+
+Innowacja odwraca tradycyjny model wsparcia: to instytucja wyrusza szlakiem człowieka, zamiast
+oczekiwać, że on pojawi się w placówce. Innowacja opiera się na gotowych elementach
+udostępnionych na otwartej licencji:
+     •    Infrastruktura: specyfikacja techniczna mobilnego kontenera/przyczepy wraz
+          z wyposażeniem.
+
+     •    Pakiety Higieniczne: Wnioskodawca powinien zapewnić spersonalizowane zestawy (inne
+          dla kobiet, inne dla mężczyzn), zawierające m.in. szampon, mydło, przybory do golenia,
+          szczoteczkę do zębów, ręczniki jednorazowe oraz czystą bieliznę na zmianę.
+
+
+1
+  Ogólnopolskie badanie liczby osób bezdomnych - Edycja 2024 -
+https://www.gov.pl/web/rodzina/ogolnopolskie-badanie-liczby-osob-bezdomnych-i
+2
+  „Chciałam zrobić więcej”. Historia Agnieszki Sikory, Fundacji po DRUGIE i walki o godność młodych w
+kryzysie bezdomności. Ngo.pl, stan na dzień 17.02.2026 r.
+
+
+                                              Strona 2 z 18
+     •     Narzędzie edukacyjne – Instruktaż: Kluczowym elementem jest trzystopniowa instrukcja
+           (czynności przed, w trakcie i po kąpieli). Pełni ona dwie role:
+
+               − Dyscyplinującą: Uczy oszczędnego gospodarowania ograniczonymi zasobami wody.
+
+               − Edukacyjną: Przywraca nawyki dbania o czystość i odpowiedzialność
+                  za wspólną przestrzeń (sprzątanie po sobie).
+
+     •     Procedury: Schemat organizacji pracy, zasady współpracy ze streetworkerami oraz
+           dokumentacja operacyjna.
+
+5.       Lekcje z testowania: Jak uniknąć pułapek?
+
+Testy przeprowadzone na terenie Stalowej Woli (3 razy w tygodniu, 3 punkty w mieście, średnio 6
+godzin usług tygodniowo) dostarczyły ważnych wniosków:
+     •     Regularność to podstawa: Zaufanie buduje się powoli. Dopiero powtarzalność usługi
+           sprawia, że osoby bezdomne zaczynają traktować MPH jako bezpieczny punkt kontaktowy.
+     •     Przewidywanie trudności: Wnioskodawca musi założyć, że nie każda zaplanowana usługa
+           się odbędzie. Przyczynami mogą być:
+           − Warunki pogodowe: Silne mrozy lub śnieżyce mogą uniemożliwić wyjazd w teren.
+           − Stan użytkowników: Problemy z alkoholem lub nagłe hospitalizacje.
+     •     Efekty uboczne (pozytywne): MPH często staje się „mostem” do innych usług. Dzięki relacji
+           zbudowanej przy prysznicu, niektórzy użytkownicy decydują się na pobyt
+           w schronisku, wizytę u lekarza czy podjęcie leczenia szpitalnego.
+
+
+
+
+                                                Strona 3 z 18
+6.   Matryca logiczna
+
+
+           Problem                          Rozwiązanie                      Cel główny
+           Osoby bezdomne                   Odwrócenie                       Włączenie MPH do
+           przebywające poza                tradycyjnego                     katalogu lokalnych
+           schroniskami mają                modelu – to usługa               usług społecznych
+           krytycznie                       dociera do klienta,              jako narzędzia
+           utrudniony dostęp                eliminując bariery               pierwszego
+           do higieny,                      wstydu, lęku przed               kontaktu
+           co pogłębia ich                  instytucjami czy                 i przywracania
+           wykluczenie, obniża              barier                           godności.
+           poczucie godności                logistycznych.
+           i pogarsza stan
+           zdrowia
+
+7.   Strategia Komunikacji i BIG IDEA
+
+Komunikacja nie może być „instytucjonalna”. Powinna opierać się na haśle:
+
+                                 „Idziemy tam, gdzie oni są”.
+
+     •   Filary przekazu: Higiena jako prawo człowieka, a nie luksus; szacunek i partnerskie
+         podejście; „małe kroki”, które prowadzą do dużych zmian (np. od kąpieli do terapii).
+
+     •   Ton: Empatyczny, konkretny, pozbawiony oceniania i patosu.
+
+     •   Grupy docelowe: Nie tylko osoby w kryzysie bezdomności, ale też osoby zamieszkujące
+         lokale bez łazienek (np. z powodu nieuregulowanej sytuacji prawnej lokalu).
+
+8.   Potencjał rozwoju i inspiracje
+
+Wnioskodawcy mogą rozwijać MPH, łącząc go z innymi usługami:
+     •   Pomoc medyczna: Wzorem poznańskiego projektu „Mobilna pomoc medyczna”, MPH może
+         być uzupełniony o proste zabiegi paramedyczne w terenie.
+
+     •   Pralnia i suszarnia: Dodanie funkcji prania ubrań znacząco podnosi atrakcyjność usługi
+         (inspiracja MOPS w Łodzi).
+
+     •   Inspiracje światowe: Warto czerpać z doświadczeń Lava Mae (USA) – pionierów mobilnych
+         pryszniców w autobusach, czy helsińskiego modelu Housing First, gdzie MPH wspiera
+         proces wychodzenia z bezdomności.
+
+
+
+                                             Strona 4 z 18
+9.   Podsumowanie korzyści dla realizatora (np. Gminy/NGO):
+
+Wdrożenie tej innowacji i przekształcenie jej w usługę pozwala na szybkie i elastyczne reagowanie
+na potrzeby tam, gdzie nie ma stałej infrastruktury. Dzięki otwartej licencji
+na dokumentację i specyfikację, Wnioskodawca otrzymuje gotowe narzędzie, które można łatwo
+zaadaptować do lokalnych warunków, budując nowoczesny i empatyczny wizerunek lokalnej
+pomocy społecznej.
+
+Wdrożenie Mobilnego Punktu Higienicznego przynosi wyraźne korzyści zarówno osobom w kryzysie
+bezdomności, jak i całym społecznościom. Dostęp do kąpieli i czystej odzieży podnosi poczucie
+godności, zmniejsza stygmatyzację i poprawia samopoczucie. Regularny kontakt z usługą pomaga
+odbudować nawyki higieniczne, a w przypadku części osób staje się impulsem do skorzystania z
+noclegowni i podjęcia dalszych kroków wychodzenia z kryzysu. Możliwość skorzystania z
+sanitariatów bezpośrednio w miejscach przebywania osób bezdomnych daje im poczucie
+bezpieczeństwa, intymności i realnie obniża stres związany z brakiem dostępu do wody.
+
+Innowacja przynosi również korzyści społeczne: zmiana wyglądu zewnętrznego osób korzystających
+z MPH wpływa na większą akceptację ze strony otoczenia i ułatwia reintegrację. Mobilna łaźnia
+odciąża przestrzeń publiczną, ograniczając korzystanie z toalet w sklepach czy na stacjach
+benzynowych. Jest też rozwiązaniem tańszym i prostszym w utrzymaniu niż stacjonarne łaźnie, co
+ma znaczenie zwłaszcza dla gmin o mniejszych budżetach. Model sprawdza się również w pracy z
+osobami żyjącymi w skrajnym ubóstwie, które mają dach nad głową, ale nie mają dostępu do
+wody. Wypełnia lukę systemową, zapewniając podstawowe warunki egzystencjalne tam, gdzie
+brakuje standardowych form wsparcia.
+
+
+
+
+                                            Strona 5 z 18
+Ścieżka wdrożenia innowacji w formie usługi społecznej
+
+Szlakiem ludzi bezdomnych
+1.   Istota innowacji - czego nie można zgubić
+
+Szlakiem ludzi bezdomnych nie jest zakupem mobilnej łazienki, kontenera ani przyczepy z
+prysznicem. To usługa pierwszego kontaktu z osobami, które nie przychodzą do instytucji, nie
+korzystają regularnie ze schronisk i często są poza realnym zasięgiem OPS/CUS.
+
+Istotą innowacji jest odwrócenie tradycyjnego modelu pomocy: nie czekamy, aż osoba w kryzysie
+bezdomności przyjdzie do urzędu, noclegowni czy schroniska, tylko usługa dociera tam, gdzie ta
+osoba faktycznie przebywa. Mobilny Punkt Higieniczny ma być jednocześnie miejscem kąpieli,
+odzyskiwania godności i pierwszą przestrzenią rozmowy ze streetworkerem lub pracownikiem
+pomocowym.
+
+Tego nie należy pomijać:
+     ● MPH musi być mobilny - jego sens polega na docieraniu do miejsc przebywania osób poza
+        systemem;
+     ● prysznic jest początkiem relacji, nie celem samym w sobie;
+     ● usługa musi być regularna - zaufanie buduje się przez powtarzalność;
+     ● przy usłudze powinien działać doświadczony streetworker lub osoba mająca realne
+        doświadczenie pracy ulicznej z osobami w kryzysie bezdomności;
+     ● osoba korzystająca z prysznica nie powinna być traktowana wyłącznie jako odbiorca
+        interwencji, ale jako mieszkaniec znajdujący się w kryzysie, który może stopniowo
+        odbudowywać kontakt z systemem wsparcia;
+     ● po kąpieli osoba powinna mieć możliwość otrzymania czystej odzieży i obuwia - bez tego
+        efekt higieniczny i psychologiczny usługi szybko znika;
+     ● prysznic ma być pretekstem do czegoś więcej: rozmowy, kontaktu, pomocy medycznej,
+        terapii, schronienia lub odbudowy relacji z systemem wsparcia.
+
+Ważne ostrzeżenie dla podmiotu wdrażającego:
+Nie należy robić z tej innowacji "mobilnej łaźni do odhaczenia usługi". Jeśli po kąpieli nie ma relacji,
+informacji, pakietu higienicznego, czystych ubrań, rozmowy i ścieżki do dalszego wsparcia, gmina
+kupuje sprzęt, ale nie tworzy usługi społecznej.
+
+
+
+                                             Strona 6 z 18
+2.   Jak przekształcić innowację w usługę społeczną
+
+Innowacja Szlakiem ludzi bezdomnych ma sens szczególnie wtedy, gdy:
+     ● osoby w kryzysie bezdomności przebywają w pustostanach, altanach, ogródkach
+        działkowych, piwnicach, dworcach, okolicach sklepów, lasów lub miejsc sezonowej pracy;
+     ● gmina nie ma własnej łaźni, noclegowni ani rozbudowanego zaplecza;
+     ● osoby nie chcą lub nie potrafią wejść w klasyczną procedurę pomocy;
+     ● OPS wie o kilku/kilkunastu osobach, ale kontakt z nimi jest nieregularny;
+     ● problem higieny blokuje dalsze kroki: wizytę u lekarza, przyjęcie do schroniska, kontakt z
+        rodziną, rozmowę o leczeniu lub dokumentach.
+
+Usługa powinna działać jako mobilny punkt godności i pierwszego kontaktu:
+     ● podmiot identyfikuje miejsca przebywania osób;
+     ● ustala stały harmonogram przyjazdów;
+     ● zapewnia prysznic, pakiet higieniczny, czystą bieliznę, podstawową odzież i obuwie;
+     ● przy usłudze obecny jest streetworker/pracownik pomocowy;
+     ● każda wizyta jest okazją do krótkiej rozmowy, nie do przesłuchania;
+     ● osoba może stopniowo przejść do dalszych usług: schronienia, lekarza, leczenia,
+        dokumentów, świadczeń, mieszkania wspieranego.
+
+W praktyce mobilny punkt może być rozszerzany o inne elementy pierwszego kontaktu:
+     ● gorące napoje;
+     ● prosty posiłek;
+     ● wymianę odzieży;
+     ● pomoc przedmedyczną;
+     ● podstawowe działania ograniczania szkód związanych z uzależnieniami;
+     ● wsparcie w sprawach formalnych i urzędowych;
+     ● podstawowe poradnictwo prawne, np. dotyczące dokumentów, zadłużenia, świadczeń lub
+        kontaktu z instytucjami.
+
+To podejście dobrze łączy się z filozofią Housing First: pomoc zaczyna się od uznania godności i
+potrzeb osoby, a nie od wymagania, by najpierw spełniła warunki "gotowości" do wsparcia. MPH
+nie jest Housing First, ale może być bramą relacyjną do dalszych form pomocy.
+
+
+
+
+                                            Strona 7 z 18
+3.   Mapa wdrożenia usługi - krok po kroku
+
+Etap przygotowania usługi - do 6 miesięcy
+
+1) Zmapować miejsca, nie tylko osoby
+
+Podmiot wdrażający powinien zacząć od mapy miejsc:
+     ● pustostany;
+     ● altany i ogródki działkowe;
+     ● okolice dworców, przystanków, sklepów, mostów;
+     ● miejsca sezonowego nocowania;
+     ● lokale bez łazienki;
+     ● miejsca wskazane przez policję, straż gminną, sołtysów, parafie, pracowników socjalnych.
+
+Warto przy tym rozpoznać:
+     ● gdzie osoby śpią;
+     ● gdzie się ogrzewają;
+     ● gdzie próbują dbać o higienę;
+     ● gdzie najczęściej pojawiają się konflikty lub interwencje.
+
+2) Wybrać lokalny model działania
+
+Nie trzeba zaczynać od dużego pojazdu i rozbudowanego zespołu. Model usługi powinien być
+dopasowany do lokalnej skali problemu, możliwości organizacyjnych oraz doświadczenia podmiotu
+wdrażającego.
+
+Możliwe rozwiązania:
+     ● zakup lub adaptacja mobilnego punktu higienicznego;
+     ● zlecenie realizacji usługi organizacji pozarządowej lub podmiotowi mającemu
+        doświadczenie w pracy z osobami w kryzysie bezdomności;
+     ● wykorzystanie istniejącego pojazdu lub zaplecza technicznego i stopniowe rozwijanie
+        usługi;
+     ● uruchamianie MPH sezonowo lub w określone dni, jeśli skala problemu jest niewielka;
+     ● pilotażowe wdrożenie usługi w jednej lokalizacji przed rozszerzeniem działań.
+
+Najważniejsze jest jednak nie samo wyposażenie, ale doświadczenie zespołu. Osoby w kryzysie
+bezdomności bardzo szybko wyczuwają sztuczność, dystans lub nadmiernie formalny styl
+
+
+
+                                            Strona 8 z 18
+kontaktu. Dlatego przy usłudze powinny działać osoby mające doświadczenie streetworkingowe
+lub praktyczną znajomość środowiska ulicznego.
+
+3) Ustalić punkty postoju i harmonogram
+
+Testy innowacji pokazały, że regularność jest podstawą budowania zaufania.
+
+Dlatego lepiej mieć:
+   ● 1-2 stałe miejsca działania;
+   ● stałe dni i godziny;
+   ● przewidywalny harmonogram kontaktu,
+
+niż wiele lokalizacji bez ciągłości i rozpoznawalności usługi.
+
+Podstawowe informacje przekazywane odbiorcom powinny obejmować:
+   ● miejsce postoju;
+   ● terminy i godziny działania;
+   ● orientacyjny czas postoju;
+   ● zasady korzystania z usługi;
+   ● zakres dostępnego wsparcia;
+   ● możliwość rozmowy ze streetworkerem lub pracownikiem pomocowym;
+   ● informację o konieczności podstawowego dokumentowania udziału w usłudze zgodnie z
+       zasadami realizacji grantu.
+
+4) Zabezpieczyć kwestie techniczne
+
+Szczegółowe rozwiązania techniczne mobilnego punktu higienicznego znajdują się w dokumentacji
+innowacji, obejmującej między innymi specyfikację przyczepy lub kontenera, wyposażenie oraz
+procedury operacyjne.
+
+Na etapie planowania usługi podmiot wdrażający powinien skupić się przede wszystkim na
+zapewnieniu bezpiecznych i stabilnych warunków świadczenia wsparcia.
+
+W praktyce należy sprawdzić:
+   ● dostęp do wody;
+   ● możliwość odprowadzania ścieków;
+   ● dostęp do zasilania;
+   ● miejsca bezpiecznego postoju;
+
+
+
+                                             Strona 9 z 18
+   ● możliwość działania usługi w okresie jesienno-zimowym;
+   ● zasady bezpieczeństwa personelu i użytkowników;
+   ● organizację sprzątania i dezynfekcji;
+   ● sposób transportu i serwisowania mobilnego punktu.
+
+Warto również od początku przygotować zaplecze wspierające usługę, w szczególności:
+   ● miejsce przechowywania odzieży i obuwia;
+   ● sposób segregowania i wydawania ubrań;
+   ● możliwość prania lub suszenia odzieży;
+   ● podstawowe wyposażenie do pomocy przedmedycznej;
+   ● przestrzeń umożliwiającą spokojną rozmowę ze streetworkerem lub pracownikiem
+       pomocowym.
+
+5) Zaplanować pakiety higieniczne
+
+Opis innowacji wskazuje, że pakiety powinny być dostosowane do potrzeb kobiet i mężczyzn oraz
+zawierać między innymi: szampon, mydło, przybory do golenia, szczoteczkę do zębów, ręczniki
+jednorazowe, podpaski oraz czystą bieliznę.
+
+Pakiet higieniczny nie powinien być traktowany jako dodatek do usługi. Dla wielu osób możliwość
+wyjścia spod prysznica w czystej bieliźnie i ubraniu ma równie duże znaczenie jak sama kąpiel -
+zarówno pod względem higieny, jak i poczucia godności oraz gotowości do dalszego kontaktu z
+pomocą.
+
+W praktyce szczególnie potrzebne będą:
+   ● skarpety;
+   ● bielizna;
+   ● koszulki;
+   ● bluzy;
+   ● buty;
+   ● odzież zimowa.
+
+6) Przygotować rolę streetworkera/pracownika pomocowego
+
+Rolą streetworkera nie powinno być wyłącznie kierowanie osoby do systemu pomocy, ale przede
+wszystkim budowanie relacji i stopniowego kontaktu z osobą pozostającą poza systemem
+wsparcia.
+
+
+                                          Strona 10 z 18
+Podstawowe elementy tej pracy to między innymi:
+   ● rozmowa prowadzona bez presji i oceniania;
+   ● przekazywanie informacji o dostępnych formach pomocy;
+   ● rozpoznanie podstawowych problemów zdrowotnych i sytuacji kryzysowych;
+   ● zachęcanie do kolejnego kontaktu;
+   ● wsparcie w wykonaniu pierwszego kroku, np. w sprawach dokumentów, kontaktu z
+       lekarzem, schronieniem, leczeniem, posiłkiem lub pomocą socjalną.
+
+Bardzo ważne jest, aby przy usłudze działały osoby rozumiejące specyfikę bezdomności ulicznej. W
+praktyce osoby wspierane znacznie lepiej reagują na streetworkerów mających doświadczenie
+terenowe, a czasem także osobiste doświadczenie kryzysu bezdomności. Zmniejsza to dystans i
+poczucie oceniania.
+
+W Polsce streetworking przez lata rozwijał się praktycznie, ale nie był mocno opisany ustawowo;
+od 2025 r. zawód streetworkera został wpisany do klasyfikacji zawodów. Dlatego gmina powinna
+opisać tę funkcję operacyjnie: jako pracę terenową przy mobilnej usłudze higienicznej.
+
+7) Przygotować procedurę reagowania w sytuacjach trudnych i kryzysowych
+
+Testowanie innowacji pokazało, że realizacja usługi terenowej wymaga przygotowania na sytuacje
+nieprzewidywalne. Na możliwość przeprowadzenia działania mogą wpływać między innymi
+warunki pogodowe, stan zdrowia osób korzystających z usługi, kryzysy psychiczne, używanie
+alkoholu lub innych substancji psychoaktywnych.
+
+Procedura powinna określać między innymi:
+   ● kiedy usługa może zostać czasowo odwołana lub ograniczona ze względów bezpieczeństwa;
+   ● w jaki sposób informować o zmianie harmonogramu;
+   ● jak reagować na zachowania agresywne lub sytuacje konfliktowe;
+   ● co robić w przypadku zagrożenia zdrowia lub życia;
+   ● kiedy należy wezwać pogotowie ratunkowe, policję lub inne służby;
+   ● jak chronić prywatność i godność osób korzystających z usługi;
+   ● jak dokumentować sytuacje trudne i interwencje.
+
+Warto również przygotować podstawowe procedury dotyczące:
+   ● pomocy osobom z problemami stóp, ranami lub odleżynami;
+   ● udzielania podstawowej pomocy przedmedycznej;
+
+
+
+                                          Strona 11 z 18
+     ● reagowania na silne objawy uzależnień lub kryzysów psychicznych;
+     ● postępowania wobec osób wymagających pilnej pomocy medycznej;
+     ● zasad bezpiecznej pracy personelu i wolontariuszy w terenie.
+
+Etap świadczenia usługi - minimum 12 miesięcy
+
+Usługa powinna działać w regularnym rytmie i obejmować:
+     ● stałe wyjazdy terenowe według harmonogramu;
+     ● możliwość skorzystania z prysznica i pakietu higienicznego;
+     ● wydawanie czystej odzieży i obuwia;
+     ● kontakt ze streetworkerem lub pracownikiem pomocowym;
+     ● podstawowe wsparcie informacyjne, zdrowotne lub socjalne;
+     ● monitorowanie dalszych potrzeb osób korzystających z usługi;
+     ● okresową ocenę lokalizacji i sposobu działania usługi.
+
+Najważniejsze jest zachowanie regularności, przewidywalności i relacyjnego charakteru wsparcia.
+Dla wielu osób pierwszy kontakt przy mobilnym punkcie higienicznym może być początkiem
+stopniowego odbudowywania zaufania do systemu pomocy.
+
+4.   Co jest obowiązkowe, a co można rozszerzać
+
+Elementy konieczne
+
+Bez tych elementów usługa traci swój relacyjny i terenowy charakter:
+     ● mobilny punkt higieniczny docierający do miejsc przebywania osób w kryzysie
+        bezdomności;
+     ● regularny i przewidywalny harmonogram działania;
+     ● podstawowy pakiet higieniczny;
+     ● możliwość zmiany bielizny i odzieży;
+     ● obecność doświadczonego streetworkera lub pracownika pomocowego;
+     ● procedury bezpieczeństwa dla użytkowników i personelu;
+     ● zasady utrzymania czystości oraz gospodarowania wodą i ściekami;
+     ● dokumentowanie kontaktów i podstawowych efektów usługi;
+     ● możliwość przekierowania osoby do dalszych form wsparcia.
+
+
+
+
+                                           Strona 12 z 18
+Elementy opcjonalne
+
+Usługa może zostać rozszerzona o dodatkowe działania odpowiadające na lokalne potrzeby:
+     ● mobilną pralnię lub możliwość suszenia odzieży;
+     ● punkt wymiany odzieży i obuwia;
+     ● podstawowe wsparcie przedmedyczne;
+     ● pomoc przy problemach ze stopami, ranami lub odleżynami;
+     ● konsultacje pielęgniarskie, opatrunki lub działania profilaktyczne;
+     ● wsparcie fryzjera lub barbera;
+     ● pomoc w sprawach formalnych i dokumentach;
+     ● mobilny punkt poradnictwa socjalnego;
+     ● współpracę z lekarzem, terapeutą uzależnień lub psychologiem;
+     ● gorący napój lub prosty posiłek;
+     ● działania ograniczania szkód związanych z uzależnieniami;
+     ● współpracę z noclegownią, schroniskiem lub mieszkaniem wspieranym;
+     ● działania skierowane do osób mieszkających w lokalach bez dostępu do podstawowych
+        warunków higienicznych.
+
+5.   Jak poradzić sobie z typowymi barierami JST
+
+Bariera 1: "U nas nie ma osób w kryzysie bezdomności"
+
+W mniejszych miejscowościach często oznacza to raczej brak kontaktu z osobami pozostającymi
+poza systemem wsparcia niż rzeczywisty brak problemu. Osoby mogą przebywać:w pustostanach,
+altanach i ogródkach działkowych, lokalach bez dostępu do podstawowych warunków sanitarnych,
+u znajomych lub rodziny, sezonowo przemieszczać się między miejscowościami.
+
+Bariera 2: "Skala problemu jest zbyt mała na własny punkt mobilny"
+
+Usługa nie musi od początku przyjmować rozbudowanej formy organizacyjnej. Możliwe jest
+rozpoczęcie od: ograniczonego harmonogramu wyjazdów, jednej lokalizacji pilotażowej,
+prostszego modelu organizacyjnego, współpracy z organizacją posiadającą doświadczenie
+terenowe.
+
+
+
+
+                                           Strona 13 z 18
+Bariera 3: "Nie mamy streetworkera"
+
+To jedna z najważniejszych barier przy wdrażaniu usługi. Osoby przypadkowe lub niemające
+doświadczenia pracy terenowej mogą mieć trudność z budowaniem relacji z osobami w kryzysie
+bezdomności.
+
+Dlatego warto:
+   ● współpracować z organizacjami posiadającymi doświadczenie streetworkingowe;
+   ● korzystać ze wsparcia doświadczonych zespołów terenowych;
+   ● szkolić osoby mające doświadczenie pracy środowiskowej;
+   ● budować zespół oparty na relacyjności, cierpliwości i regularnym kontakcie.
+
+Bariera 4: "Obawiamy się konfliktów z mieszkańcami"
+
+Punkt postoju powinien być jednocześnie dostępny dla osób korzystających z usługi i bezpieczny
+organizacyjnie.
+
+Komunikacja wokół usługi powinna podkreślać ochronę zdrowia i bezpieczeństwa,
+przeciwdziałanie wykluczeniu, poprawę warunków higienicznych, ograniczanie sytuacji
+kryzysowych w przestrzeni publicznej.
+
+Bariera 5: "Osoby będą pod wpływem alkoholu lub innych substancji"
+
+W pracy terenowej należy zakładać możliwość występowania takich sytuacji. Dlatego konieczne są
+jasne procedury bezpieczeństwa określające:
+   ● kiedy osoba może skorzystać z usługi;
+   ● kiedy należy ograniczyć lub przerwać kontakt ze względów bezpieczeństwa;
+   ● jak reagować w sytuacjach kryzysowych;
+   ● kiedy konieczne jest wezwanie pomocy medycznej lub służb.
+
+Nawet w sytuacji odmowy ważne jest zachowanie relacyjnego charakteru kontaktu i możliwość
+zaproszenia osoby do ponownego skorzystania z usługi w bezpiecznych warunkach.
+
+Bariera 6: "Sam prysznic nie rozwiąże problemu"
+
+Sama możliwość kąpieli nie rozwiązuje problemu bezdomności ani wykluczenia społecznego.
+Dlatego mobilny punkt higieniczny powinien być początkiem dalszego wsparcia, a nie jego końcem.
+
+W praktyce usługa może prowadzić do:
+   ● nawiązania regularnego kontaktu z osobą pozostającą poza systemem;
+
+
+                                         Strona 14 z 18
+     ● wsparcia medycznego lub terapeutycznego;
+     ● pomocy w sprawach dokumentów i świadczeń;
+     ● skierowania do schronienia lub mieszkania wspieranego;
+     ● kontaktu z leczeniem uzależnień;
+     ● odbudowy relacji rodzinnych;
+     ● stopniowego włączania osoby w dalsze formy pomocy środowiskowej.
+
+To “coś więcej” powinno być przygotowane wspólnie z podmiotami mającymi doświadczenie pracy
+z osobami w kryzysie bezdomności i dostosowane do lokalnych możliwości wsparcia.
+
+6.   Działania wspierające wdrożenie innowacji
+
+Działania wspierające powinny pomagać osobie przejść od kąpieli do kolejnego kroku.
+
+Rekomendowane działania:
+     ● pakiet higieniczny i bielizna;
+     ● wymiana odzieży i obuwia;
+     ● gorący napój lub prosty posiłek;
+     ● krótka karta informacyjna;
+     ● dyżur streetworkera;
+     ● mobilne wsparcie medyczne;
+     ● pomoc przy problemach ze stopami;
+     ● kontakt z terapią uzależnień;
+     ● pomoc w przygotowaniu wniosków o wydanie dokumentów, np. dowodu osobistego;
+     ● ścieżka do schroniska lub mieszkania wspieranego;
+     ● współpraca z lokalnym lekarzem/POZ;
+     ● działania ograniczania szkód związanych z uzależnieniami;
+     ● dyżur zimowy.
+
+7.   Jak wykorzystać wdrożenie do trwałej zmiany lokalnej
+
+Po zakończeniu grantu mogą pozostać:
+     ● lepsza wiedza o miejscach przebywania osób pozostających poza systemem wsparcia;
+     ● wypracowana procedura pracy terenowej;
+     ● lokalny zespół lub partnerstwo wspierające działania streetworkingowe;
+
+
+
+                                          Strona 15 z 18
+     ● regularny harmonogram mobilnej usługi higienicznej;
+     ● współpraca między podmiotami społecznymi, zdrowotnymi i organizacjami pracującymi w
+        terenie;
+     ● większa wiedza o potrzebach osób pozostających w kryzysie bezdomności;
+     ● procedury reagowania w okresie zimowym i sytuacjach kryzysowych;
+     ● standard pierwszego kontaktu z osobami pozostającymi poza systemem pomocy;
+     ● lepsza koordynacja kierowania do dalszych form wsparcia, leczenia lub schronienia;
+     ● większe rozumienie zjawiska bezdomności ulicznej i ukrytej w społeczności lokalnej.
+
+Najważniejsza zmiana myślenia:
+Mobilny Punkt Higieniczny przestaje być traktowany wyłącznie jako forma pomocy higienicznej.
+Staje się narzędziem pracy terenowej, budowania relacji i docierania do osób, które często od lat
+pozostają poza regularnym kontaktem z instytucjami i systemem wsparcia.
+
+8.   Możliwe kierunki rozwoju usługi lokalnie
+
+Po wdrożeniu pilotażowym można rozwijać usługę w kilku kierunkach:
+     ● rozszerzenie mobilnego punktu higienicznego o wydawanie odzieży i obuwia;
+     ● połączenie usługi z podstawowym wsparciem zdrowotnym lub przedmedycznym;
+     ● rozwój mobilnego streetworkingu połączonego z wydawaniem napojów lub posiłków;
+     ● uruchomienie mobilnej pralni lub punktu wymiany odzieży;
+     ● rozwój działań ograniczania szkód związanych z uzależnieniami;
+     ● stworzenie sezonowych procedur wsparcia zimowego;
+     ● rozwój lokalnych działań streetworkingowych;
+     ● połączenie usługi z programami mieszkaniowymi i środowiskowymi;
+     ● rozwój współpracy z organizacjami społecznymi i podmiotami zdrowotnymi;
+     ● tworzenie lokalnych modeli pierwszego kontaktu z osobami pozostającymi poza systemem
+        wsparcia.
+
+9.   Szybka checklista dla grantobiorcy przed zaplanowaniem wdrożenia
+
+     ● Czy zachowujemy istotę innowacji: docieranie z usługą do osób pozostających poza
+        systemem wsparcia?
+     ● Czy przy usłudze działa doświadczony streetworker lub pracownik pomocowy?
+     ● Czy rozpoznano miejsca przebywania osób wymagających wsparcia?
+
+
+                                          Strona 16 z 18
+● Czy mobilny punkt higieniczny będzie działał regularnie i w przewidywalnym
+   harmonogramie?
+● Czy zapewniono pakiety higieniczne, czystą bieliznę, odzież i obuwie?
+● Czy przewidziano możliwość podstawowej pomocy przedmedycznej lub wsparcia
+   zdrowotnego?
+● Czy przygotowano procedury reagowania w sytuacjach kryzysowych, np. podczas mrozów,
+   agresji lub zagrożenia zdrowia?
+● Czy zaplanowano dalsze formy wsparcia po pierwszym kontakcie z osobą korzystającą z
+   usługi?
+● Czy usługa ma charakter relacyjny i środowiskowy, a nie wyłącznie infrastrukturalny?
+● Czy po zakończeniu grantu pozostanie trwały model pracy terenowej i współpracy z
+   osobami w kryzysie bezdomności?
+
+
+
+
+                                     Strona 17 z 18
+Strona 18 z 18
+

@@ -1,0 +1,698 @@
+            5. Głuchy czytelnik w bibliotece
+
+     I.     Istota i wyróżniki innowacji
+
+a.        Opis innowacji
+
+Celem innowacji było opracowanie i przetestowanie publikacji z instruktażem w PJM, pt.:
+Głuchy czytelnik w bibliotece. Innowacja jest odpowiedzią na potrzebę włączenia osób
+Głuchych do społeczności korzystającej z usług bibliotek na terenie całego kraju. Publikacja
+ma przybliżyć osobom Głuchym instytucję jaką jest biblioteka i pokazać im, że jest to miejsce,
+gdzie mogą znaleźć źródło rozrywki, materiały do nauki, sposób na poszerzenie swoich
+horyzontów oraz realizację hobby. W założeniu Innowatorek publikacja „Głuchy czytelnik w
+bibliotece” dostarczy czytelnikowi zarówno podstawową wiedzę o książkach, sposobach ich
+opisywania, jak i wyposaży go w umiejętności praktyczne z zakresu korzystania z biblioteki. W
+pewien sposób ma pełnić funkcję „wirtualnego bibliotekarza”, który pokaże osobom
+Głuchym, jak korzystać z oferty bibliotecznej.
+
+b. Problem, na który odpowiada innowacja
+
+Według diagnozy Innowatorek, wywodzących się ze środowiska osób Głuchych, biblioteki
+uznawane są przez osoby Głuche za miejsca dla osób słyszących, w których nie znajdą
+interesującej dla siebie oferty. Obecnie biblioteki to nie tylko miejsca wypożyczania lektur
+szkolnych – to miejsca kulturotwórcze, organizujące spotkania autorskie, kluby książki,
+wystawy czy zajęcia dla dzieci. Obecnie ta oferta jest niedostępna dla osób Głuchych i ich
+dzieci (tych niesłyszących, ale również słyszących - KODA). Zdaniem Innowatorek istnieje kilka
+przyczyn wykluczenia osób Głuchych w tym obszarze:
+
+      •     Większość osób Głuchych ma trudność w posługiwaniu się językiem polskim (nie czyta
+            tekstów pisanych, ma problem z zapisaniem poprawnie gramatycznie tekstu,
+            wypowiada się niepoprawnie artykulacyjnie), biblioteka zaś kojarzy się przede
+            wszystkim z wypożyczaniem i czytaniem książek.
+
+      •     Osoby Głuche w trakcie edukacji nie pozyskują wiedzy w zakresie oferty i sposobów
+            korzystania z bibliotek.
+   •   Osoby Głuche obawiają się trudności w komunikacji z bibliotekarzami, z których
+       niewielu posługuje się polskim językiem migowym (PJM). Skuteczność komunikacji
+       zależy między innymi od otwartości i gotowości do nawiązania relacji obydwu stron.
+
+   •   Brak tłumaczeń na język migowy informacji zawartych na stronach internetowych
+       bibliotek.
+
+Osoby z niepełnosprawnością słuchu to grupa bardzo zróżnicowana. Są wśród nich osoby
+Głuche, posługujące się jedynie polskim językiem migowym i słabo znające język polski. Dla
+tych osób polski jest językiem obcym lub drugim po PJM. Drugą grupą są Głusi posługujący
+się PJM, ale znający też język polski. Wśród nich można spotkać osoby odczytujące mowę z
+ruchu warg, umiejętność ta nie jest jednak powszechna. Trzecia grupa to osoby ogłuchłe,
+które straciły słuch po nauczeniu się języka polskiego. Te osoby często mówią płynnie po
+polsku, są w stanie czytać ze zrozumieniem nawet długie i skomplikowane teksty w języku
+polskim, ale zwykle nie najlepiej lub w ogóle nie znają PJM. I wreszcie ostatnia grupa to osoby
+słabosłyszące. Osoby te często nie znają języka migowego. Posiadają aparaty słuchowe i z ich
+pomocą bazują przede wszystkim na informacjach dźwiękowych.
+
+Jak wynika z danych opublikowanych przez Stowarzyszenie Polski Instytut Praw g/Głuchych,
+w Polsce żyje do 200 000 osób niesłyszących i ponad 3 miliony osób z różnymi rodzajami
+niedosłuchu. W Polsce żyje około 50 tysięcy osób g/Głuchych, które posługują się Polskim
+Językiem Migowym (PJM) jako swoim pierwszym językiem. Pomimo tego, że PJM został
+uznany przez prawo w 2011 roku, a g/Głusi mają prawo do korzystania z tłumaczy języka
+migowego w instytucjach publicznych, wciąż istnieją poważne luki w realizacji tych praw.
+Dostęp do tłumaczy bywa ograniczony, co często prowadzi do sytuacji, w której osoby
+g/Głuche są wykluczone z pełnoprawnego uczestnictwa w życiu codziennym, np. w
+kontaktach z urzędami, służbą zdrowia, czy systemem edukacji.
+
+Na podstawie opracowania: „OSOBY G/GŁUCHE W POLSCE 2020, WYZWANIA I
+REKOMENDACJE, RAPORT KOMISJI EKSPERTÓW DS. OSÓB G/GŁUCHYCH, Warszawa 2020”
+wiemy, że osoby g/Głuche nadal należą do najbardziej wykluczonych grup społecznych.
+Dotyczy to zwłaszcza osób, które posługują się wyłącznie lub przede wszystkim językiem
+migowym. Jest spora grupa g/Głuchych znających słabo lub bardzo słabo język polski.
+Źródłem problemów, które dotykają g/Głuchych w codziennym życiu, jest niezrozumienie
+przez słyszących specyfiki g/Głuchoty. Słyszący na ogół uważają, że każda osoba g/Głucha
+„jedynie” nie słyszy i (ewentualnie) nie mówi, ale zna język polski w piśmie i potrafi się nim
+sprawnie posługiwać. Nie pojmują, że język polski jest dla wielu g/Głuchych językiem obcym,
+drugim, którego się nauczyli, zaś ich pierwszym, naturalnym językiem był język migowy.
+
+Mam wrażenie, że nasze państwo nie staje na wysokości zadania, jeżeli chodzi o dwujęzyczną
+edukację Głuchych. Głusi mają ograniczony dostęp do języka polskiego. Rodzice Głusi nie
+mają świadomości potrzeby nauki języka polskiego, zaniedbują to, bo w domu migają.
+
+                                                                                        Tester 2
+
+Skala czytelnictwa wśród Głuchych jest niska. Oni nie chodzą do biblioteki, mają problem z
+czytaniem. Nie wiedzą jak działają biblioteki, nikt im o tym nie mówi. A w dobie komputerów i
+komórek trudno zachęcić do czytelnictwa.
+
+                                                                                        Tester 1
+
+Sama szkoła nie wdroży czytelnictwa wśród dzieci, a Głusi muszą czytać! Jeżeli nie wyssają
+tego z mlekiem matki to są biedni… Jesteśmy Polakami i swój język powinniśmy znać, Głusi
+także. Jedno z najważniejszych zadań rodziców to nauczyć dzieci kochać książki. (…) Ja się
+cieszę, że są takie inicjatywy w dzisiejszym świecie [mowa o innowacji]. Przez rozwój
+technologii Głusi jeszcze mniej czytają. Tworzenie książek w dwóch językach jest bardzo
+potrzebne.
+
+                                                                                        Tester 2
+
+ c. Co się składa na innowację
+
+
+    •   Film Głuchy czytelnik w bibliotece
+    •   Podręcznik Głuchy czytelnik w bibliotece
+    •   Raport ewaluacyjny
+    •   Model innowacji
+    •   Plan rozwoju
+    •   Raport z testowania
+    •   Koncepcja budowania marki i komunikacji
+d. Analiza rozwiązania pod kątem kryteriów ewaluacyjnych
+Trafność
+
+Cele innowacji dobrze wpisują się w potrzeby osób Głuchych, szczególnie rodziców, którzy
+posiadają dzieci w wieku szkolnym słyszące (KODA) ale może również wspierać rodziców
+dzieci niesłyszących. Zdaniem jednej z Innowatorek w środowisku osób Głuchych warto
+mówić o czytaniu i korzyściach z tego wynikających - jednym z obowiązków rodziców
+Głuchych jest wprowadzenie dziecka w świat czytelnictwa, co jest ważnym elementem
+rozwoju poznawczego (również w zakresie kompetencji językowych), emocjonalnego i
+społecznego dziecka. Dlatego w opracowanej publikacji i instruktażu prezentowane są treści,
+które pozwalają rodzicom Głuchym zrozumieć wartość czytania, motywują ich do podjęcia
+działań na rzecz rozwoju czytania u dziecka, dają wskazówki, jak wspierać dziecko w czytaniu i
+wreszcie jak korzystać z biblioteki. Biorąc pod uwagę bariery w korzystaniu z biblioteki osób
+Głuchych, należy uznać, że innowacja w dużym stopniu odpowiada na te trudności i może
+realnie wpłynąć na jakość życia Głuchych rodziców, ale też przede wszystkim ich dzieci. Warto
+podkreślić, że publikacja, dzięki temu, że powstała w dwóch językach wpisuje się w potrzeby
+osób Głuchych, które znają język polski oraz tych, którzy komunikują się wyłącznie w PJM.
+
+Skuteczność
+
+W ramach przeprowadzonych testów zweryfikowano pozytywnie mechanizm prowadzący do
+wystąpienia założonych efektów. Spełnione zostały założenia prowadzące do zmian w grupie
+docelowej. Uwidocznił się w szczególności efekt dot. zwiększenia wiedzy osób Głuchych z
+zakresu funkcjonowania bibliotek. Choć wszyscy testerzy zadeklarowali, że po zapoznaniu się
+z publikacją bez problemu potrafiliby skorzystać z konta bibliotecznego, trudno jednoznacznie
+ocenić pojawienie się gotowości do korzystania z jej oferty – zdecydowana większość
+testerów ma już konto w bibliotece i w mniejszym bądź większym stopniu z niego korzysta.
+Osoby, które nie korzystały do tej pory z oferty biblioteki zadeklarowały, że nareszcie wiedzą,
+jak to robić, co nie jest równoznaczne z gotowością do tego. Należy jednak uznać, że
+zakładane efekty zostały zrealizowane lub mają wysoki potencjał realizacji.
+
+Użyteczność
+
+Ogólna ocena użyteczności rozwiązania jest wysoka. Innowacja skutecznie odpowiada na
+potrzeby osób Głuchych, szczególnie rodziców, którzy są odpowiedzialni za rozwój poznawczy,
+emocjonalny i społeczny swoich dzieci – rozwój ten z powodzeniem wspierany jest poprzez
+czytanie.
+
+Testowanie innowacji
+
+Innowacja „Głuchy Czytelnik w Bibliotece” była testowana w kilku etapach, które miały
+charakter otwarty i konsultacyjny. Najpierw przeprowadzono diagnozę potrzeb poprzez pięć
+pogłębionych wywiadów z osobami Głuchymi o różnym wieku, płci, poziomie znajomości
+języka polskiego i kapitale społecznym. Na tej podstawie opracowano treść publikacji, która
+początkowo miała charakter zbyt naukowy i trudny w odbiorze. Po konsultacjach z osobami
+Głuchymi została przeformułowana na bardziej przystępną, a kluczowym zabiegiem okazało
+się „przemiganie” tekstu i dopiero późniejsze tłumaczenie na język polski przez Głuchą
+tłumaczkę. Następnie przygotowano nagranie w Polskim Języku Migowym, a na sugestię
+testerów dodano obrazy i opisy, mimo że nie było to planowane w budżecie – koszty tych
+działań pokryła Innowatorka z własnych środków.
+
+Rekrutacja testerów była dużym wyzwaniem ze względu na ograniczony czas, długość
+nagrania oraz fakt, że temat bibliotek budził obawy w środowisku Głuchych. Ostatecznie
+udało się zgromadzić zróżnicowaną grupę, która przekazała krytyczne opinie i wskazała
+potrzebę zdynamizowania przekazu. Wprowadzono więc kolejne modyfikacje, co wymagało
+dodatkowej pracy i zaangażowania. Mimo trudności organizacyjnych, zdrowotnych i
+finansowych, determinacja Innowatorki pozwoliła doprowadzić projekt do końca i stworzyć
+wysokiej jakości produkt.
+
+e. Potencjalni odbiorcy i użytkownicy innowacji
+
+Publikacja jest dedykowana osobom Głuchym tym, którzy znają język polski oraz tym, którzy
+posługują się tylko językiem migowym. Mówiąc o osobach g/Głuchych, mówimy o niezwykle
+zróżnicowanej wewnętrznie grupie, mającej bardzo zróżnicowane możliwości komunikacyjne
+i potrzeby. Wśród g/Głuchych są osoby bardzo dobrze komunikujące się po polsku,
+wykształcone, o wysokich kompetencjach społecznych i wysokim statusie zawodowym. Są
+osoby znające język polski, które w komunikacji potrzebują wsparcia – w formie napisów w
+języku polskim lub tłumaczenia na PJM. Są tacy, którzy nie znają języka polskiego, a
+komunikują się biegle w polskim języku migowym i w innych językach migowych, np.
+angielskim. I są wreszcie ci, którzy nie znają żadnego języka. Specyficzne potrzeby mają
+słyszące dzieci g/Głuchych rodziców – CODA/KODA. Każda z tych grup napotyka inne bariery i
+każda potrzebuje innego wsparcia w ich pokonywaniu.
+
+Nie ma jednak przeszkód by z publikacją zapoznały się osoby, które do tej pory nie korzystały
+z oferty biblioteki, a chciałyby zacząć. Publikacja może okazać się również interesująca dla
+osób, które przez dłuższy czas nie korzystały z biblioteki i mają problem z obsługą cyfrowych
+katalogów. Wśród innych odbiorców można wskazać również m.in.:
+
+  1.   Rodziny osób Głuchych: osoby z otoczenia osób Głuchych (rodziny, opiekunowie),
+       mogą skorzystać z publikacji, by lepiej zrozumieć, jak wspierać osoby Głuche w
+       korzystaniu z bibliotecznych zasobów;
+  2.   Pracownicy biblioteki: publikacja może być również pomocna dla samych
+       pracowników biblioteki, którzy chcą lepiej zrozumieć potrzeby i specyfikę obsługi osób
+       Głuchych, co może przyczynić się do bardziej dostosowanych usług;
+  3.   Nauczyciele, edukatorzy i terapeuci: nauczyciele, terapeuci i inni specjaliści pracujący
+       z osobami Głuchymi mogą wykorzystać publikację jako narzędzie dydaktyczne lub
+       materiał informacyjny dla swoich podopiecznych;
+  4.   Instytucje edukacyjne: szkoły, uniwersytety czy ośrodki edukacyjne, które obsługują
+       osoby Głuche, mogą wykorzystać publikację jako pomoc dydaktyczną lub źródło
+       informacji na temat korzystania z bibliotecznych zasobów;
+  5.   Organizacje społeczne: organizacje zajmujące się sprawami osób Głuchych, grupy
+       wsparcia czy stowarzyszenia mogą wykorzystać publikację, aby edukować w temacie
+       korzystania z bibliotek;
+  6.   Tłumacze języka migowego: osoby zajmujące się tłumaczeniem języka migowego
+       mogą korzystać z instruktażu jako materiału edukacyjnego, aby nauczyć osób
+       Głuchych słownictwa związanego z biblioteką. Unikalność rozwiązania na tle innych
+       działań społecznych.
+f. Unikalność rozwiązania na tle innych działań społecznych
+
+Innowacja „Głuchy czytelnik w bibliotece” wyróżnia się tym, że została stworzona przez osoby
+Głuche dla osób Głuchych, co zapewnia jej autentyczność i trafność w odpowiadaniu na
+realne potrzeby tej społeczności. W przeciwieństwie do wielu działań społecznych, które
+koncentrują się na ogólnej dostępności usług publicznych, ta publikacja skupia się na
+konkretnym obszarze – bibliotece – i pokazuje, jak można uczynić go bardziej otwartym i
+przyjaznym dla osób komunikujących się w polskim języku migowym. Innowacja nie tylko
+edukuje, ale też buduje poczucie przynależności i zachęca osoby Głuche do aktywnego
+uczestnictwa w życiu kulturalnym. Dzięki formie instruktażu w PJM, publikacja przełamuje
+bariery językowe i komunikacyjne, które do tej pory wykluczały osoby Głuche z korzystania z
+zasobów bibliotecznych. To rozwiązanie nie tylko informuje, ale też wzmacnia kompetencje i
+samodzielność użytkowników, pełniąc rolę „wirtualnego przewodnika” po świecie książek i
+kultury.
+
+
+ II.     Cel upowszechnienia
+
+a. Zdefiniowanie ogólnego i szczegółowego celu. Cele projektu powinny być osiągalne,
+       określone w czasie i wymierne.
+
+Cel ogólny
+
+Opanowanie umiejętności zakładania kont czytelniczych i korzystania z zasobów
+bibliotecznych przez osoby Głuche. Wzrost wiedzy z zakresu piśmiennictwa i organizacji
+bibliotek.
+
+Cel szczegółowy
+
+Dotarcie do x bibliotek w województwie (x% wszystkich bibliotek w regionie).
+
+Przeszkolenie pracowników i wolontariuszy z publikacji „Głuchy czytelnik w bibliotece”. Część
+I i II publikacji i filmu może zostać udostępniona na stronie internetowej każdej biblioteki w
+Małopolsce, ponieważ przekazywane w tych częściach treści mają charakter uniwersalny. W
+III instruktażowej części: „Jak korzystać z konta bibliotecznego ze strony Internetowej
+biblioteki. Przewodnik praktyczny” autorzy odnoszą się do dwóch systemów katalogowych
+(choć wspominają, że jest ich więcej): Mateusz i Sowa. Całość publikacji może zatem być
+udostępniona na stronach internetowych bibliotek, które wykorzystują te systemy
+katalogowania.
+
+b. Oczekiwane rezultaty i wskaźniki
+        Oczekiwany rezultat                                          Wskaźnik
+        Udostępnienie materiałów edukacyjnych i instruktażowych      Min. x pobrań / odsłon publikacji
+        (filmów, publikacji) na stronach internetowych bibliotek w   przez osoby zainteresowane,
+        Małopolsce, zwiększające dostępność informacji dla osób      tj. odbiorców i użytkowników
+        Głuchych.
+        Dotarcie do bibliotek w województwie z materiałami           Min. x stron internetowych
+        edukacyjnymi i instruktażowymi.                              bibliotek, na których
+                                                                     publikacja zostanie udostępniona
+        Przeszkolenie pracowników i wolontariuszy w zakresie         Min. x spotkań/ warsztatów lub
+        obsługi osób Głuchych, z wykorzystaniem publikacji           innych form pracy bezpośredniej
+        „Głuchy czytelnik w bibliotece” – części I, II i III.        z pracownikami bibliotek
+        Wzrost kompetencji bibliotekarzy w zakresie komunikacji z    Przeprowadzenie kwestionariuszy
+        osobami Głuchymi oraz znajomości ich potrzeb                 ankiet wśród min. x bibliotekarzy
+        czytelniczych.
+        Zwiększenie liczby osób Głuchych korzystających z zasobów    Przeprowadzenie kwestionariuszy
+        bibliotecznych, w tym zakładających konta czytelnicze i      ankiet wśród min. x Głuchych
+        wypożyczających materiały.                                   czytelników
+        Dostosowanie stron internetowych bibliotek do potrzeb        Liczba stron, które zostały
+        osób Głuchych, szczególnie tych korzystających z systemów    dostosowane.
+        katalogowych Mateusz i Sowa.
+
+
+
+
+ III.       Rekomendowany kierunek upowszechnienia
+
+a. Elementy do upowszechnienia: metody działania, narzędzia, materiały.
+
+Publikacja „Głuchy czytelnik w bibliotece” powinna być upowszechniana przede wszystkim w
+ramach systemu usług społecznych jako narzędzie wspierające aktywizację i integrację osób
+Głuchych. Rekomenduje się włączenie materiału do działań realizowanych przez ośrodki
+pomocy społecznej, centra usług społecznych, domy kultury, świetlice środowiskowe oraz
+placówki wsparcia dziennego. Może być wykorzystywana przez pracowników socjalnych,
+asystentów osobistych osób z niepełnosprawnościami, terapeutów i edukatorów jako
+element pracy indywidualnej i grupowej z osobami Głuchymi oraz ich rodzinami. Publikacja
+może również stanowić część programów aktywizujących i edukacyjnych, realizowanych przez
+organizacje pozarządowe w obszarze przeciwdziałania wykluczeniu społecznemu. Warto, aby
+znalazła się w zasobach bibliotek publicznych jako materiał dostępnościowy, a także w
+szkoleniach dla pracowników instytucji społecznych, którzy chcą lepiej rozumieć potrzeby
+osób Głuchych i wspierać ich w korzystaniu z oferty kulturalnej i edukacyjnej.
+Upowszechnienie publikacji w tym kontekście wzmacnia rolę usług społecznych jako
+przestrzeni otwartej, inkluzywnej i odpowiadającej na zróżnicowane potrzeby mieszkańców.
+
+b. Skala upowszechnienia.
+
+Rekomendowanym kierunkiem upowszechnienia publikacji „Głuchy czytelnik w bibliotece”
+jest wdrożenie jej w ramach regionalnych struktur usług społecznych województwa
+małopolskiego. Materiał może zostać włączony do działań realizowanych przez powiatowe
+centra pomocy rodzinie, miejskie i gminne ośrodki pomocy społecznej, centra usług
+społecznych oraz instytucje kultury współpracujące z sektorem społecznym. Warto, aby
+publikacja była dostępna w bibliotekach publicznych na terenie całego województwa,
+szczególnie w tych, które prowadzą działania animacyjne, edukacyjne i integracyjne. Może
+być również wykorzystywana przez regionalne organizacje pozarządowe działające na rzecz
+osób z niepełnosprawnościami, w tym środowiska osób Głuchych jako narzędzie wspierające
+aktywizację społeczną i kulturalną. Upowszechnienie publikacji na poziomie województwa
+pozwoli na zwiększenie dostępności usług bibliotecznych dla osób Głuchych, a także na
+podniesienie kompetencji pracowników instytucji społecznych w zakresie komunikacji i pracy
+z osobami niesłyszącymi. Dzięki temu możliwe będzie budowanie bardziej otwartego i
+inkluzyjnego systemu usług społecznych w regionie.
+
+
+IV.    Plan komunikacji
+
+a. Wyróżniki innowacji
+
+   •   publikacja powstała w polskim języku migowym, a następnie została przełożona na
+       łatwy tekst w języku polskim
+   •   łatwa do upowszechnienia (po drobnych personalizacjach, np. strona internetowa,
+       katalog on-line może służyć każdej bibliotece w kraju)
+   •   jest czymś zdecydowanie większym niż przewodnik po bibliotece
+   •   pomaga zmotywować się do podjęcia działań na rzecz rozwoju czytania u dziecka i
+       dowiedzieć się, jak wspierać je w czytaniu
+   •   ułatwia oswoić lęk/dyskomfort osobom g/Głuchym nieznającym języka polskiego
+   •   pomaga nauczyć się, jak korzystać z pełnej oferty biblioteki
+
+b. Cele działań komunikacyjnych
+
+   •   Zmotywowanie rodziców i opiekunów dzieci głuchych do podjęcia działań na rzecz
+       rozwoju czytania u dziecka oraz wspierania go w tym procesie
+   •   Promowanie wartości czytania i roli bibliotek wśród osób głuchych
+   •   Uświadomienie pracowników_czek bibliotek o potrzebach osób głuchych
+       korzystających z oferty placówki
+
+c. Grupy docelowe
+
+   •   osoby g/Głuche, szczególnie rodzice, którzy posiadają dzieci w wieku szkolnym,
+       zarówno słyszące (KODA), jak i dzieci g/Głuche oraz słabosłyszące,
+   •   pracownicy i pracowniczki bibliotek.
+
+d. BIG IDEA
+
+BIG IDEA (parasol komunikacyjny) to myśl przewodnia, wokół której buduje się całą koncepcję
+komunikacji. Określa motyw przewodni i zamysł, jaki przyświeca marce, ułatwia spójność
+przekazu. Wyróżnia komunikację i wskazuje na jej najważniejsze kwestie. BIG IDEA to nie
+hasło reklamowe!
+
+DWUJĘZYCZNE MARZENIA, JEDNA PASJA - CZYTANIE! Odkryj magię zapisanych słów!
+
+e. Filary komunikacji
+
+   •   INFORMACJA
+
+          o Posty informacyjno-edukacyjne na temat wartości czytania i roli bibliotek
+
+   •   MOTYWACJA
+
+          o Posty budujące/wzmacniające motywację rodziców i opiekunów dzieci
+              g/Głuchych do podjęcia działań na rzecz rozwoju czytania u dziecka oraz
+              wspierania go w tym procesie
+
+   •   UWRAŻLIWIENIE
+          o Posty uświadamiajace i uwrażliwiające pracowników_czek bibliotek na
+                potrzeby osób g/Głuchych korzystających z oferty placówki
+
+f. Kluczowe przekazy
+
+  •   Moim marzeniem jest to, by dzieci g/Głuche były w pełni dwujęzyczne i korzystały z
+      bibliotek w taki sam sposób, jak dzieci słyszące.
+  •   Wśród magicznych chwil dzieciństwa, czytanie zajmuje szczególne miejsce. To nie
+      tylko umiejętność, ale także klucz do odkrywania fascynującego świata.
+  •   Razem z dzieckiem odkrywajcie niezwykłe metody cieszenia się czytaniem.
+      Dostosujcie podejście do indywidualnych potrzeb, eksplorując różnorodne techniki i
+      materiały.
+  •   Biblioteka to nie tylko skarbnica książek, ale prawdziwe centrum eksploracji słowa
+      pisanego. Odkryjcie razem nowe horyzonty czytelnicze!
+  •   Jako pracownik_czka biblioteki, masz niepowtarzalną szansę być kluczowym_ą
+      członkiem_nią wspierającej społeczności czytelniczej. Wykorzystaj ją, by stworzyć
+      otoczenie przyjazne i dostępne dla wszystkich, inspirować rodziców do korzystania z
+      biblioteki jako skarbnicy wiedzy i cennego partnera w rozwijaniu umiejętności
+      czytania ich dzieci. Bądź ambasadorem_ką inkluzji czytelniczej i razem z nami twórz
+      przestrzeń, gdzie każde dziecko może odkrywać magię słowa pisanego.
+  •   Rodzice, bez względu na środowisko słuchowe swoich dzieci, są nieodłącznymi
+      przewodnikami w podróży ku magii czytania. Wasze zaangażowanie kształtuje
+      czytelniczy rozwój maluchów.
+  •   Zapraszamy do naszej społeczności wsparcia! Dzielcie się doświadczeniami, inspirujcie
+      się nawzajem, bo razem możemy stworzyć magiczne miejsce rozwoju czytelnictwa u
+      dzieci!
+
+g. Ton przekazu
+
+      •   Ton komunikacji powinien być inspirujący, informacyjny i wspierający.
+
+      •   Inspirujący: podkreślać wartość czytania jako kluczowego elementu rozwoju dzieci,
+          niezależnie od ich słuchowej zdolności; zachęcaj rodziców do odkrywania
+              własnych, nowych sposobów motywowania i rozwijania umiejętności czytania u
+              swoich dzieci.
+
+          •   Informacyjny i praktyczny: przedstawiający konkretne, poradnikowe i praktyczne
+              informacje zawarte w publikacji, takie jak wskazówki dotyczące wspierania dziecka
+              w czytaniu czy korzystania z oferty biblioteki.
+
+          •   Wspierający: wyrażający zrozumienie trudności, z jakimi mogą się spotykać rodzice
+              dzieci z różnymi zdolnościami słuchowymi; podkreślający kluczową rolę rodziców w
+              rozwijaniu umiejętności czytania u dzieci; zachęcający pracowników_czki bibliotek
+              do większej otwartości w kontaktach z osobami g/Głuchymi; zachęcający do
+              zadawania pytań i dzielenia się doświadczeniami, aby stworzyć społeczność
+              skupioną wokół czytania i bibliotek.
+
+          •   W SM komunikat powinien być angażujący, nawołujący do działania, włączający -
+              pytania, wykrzykniki, call to action (żywy język).
+
+h. Proponowane platformy komunikacji
+
+          •   Aby zapewnić jak najbardziej skuteczne dotarcie do grup docelowych oraz
+              zrealizować zakładane cele komunikacyjne proponujemy wykorzystanie
+              następujących platform komunikacji oraz kanałów w social mediach:
+
+          •   Strona internetowa (udostępnienie publikacji)
+
+          •   Facebook + Instagram
+
+          •   Mailing do bibliotek
+
+
+ V.       Dowiedz się więcej! Inspiracje z kraju i ze świata
+
+Jeśli chcesz pogłębić wiedzę w tym obszarze, zapoznaj się z poniższymi raportami:
+
+      •   „Osoby głuche w Polsce 2020. Wyzwania i rekomendacje” (RPO)
+
+      •   „Perspektywa osób głuchych” (COI, 2023)
+
+Wśród międzynarodowych inspiracji można wskazać np.:
+   •   Deaf Cultural Centre Library, Birmingham, Wielka Brytania: zbiory książek, filmów i
+       materiałów w języku migowym, programy edukacyjne i kulturalne dla społeczności
+       Głuchych;
+
+   •   Biblioteka dla Głuchych w Berlinie (Zentrum für Kultur und visuelle Kommunikation
+       der Gehörlosen Berlin/Brandenburg): szeroki wybór materiałów w języku migowym
+       oraz prowadzi zajęcia edukacyjne, warsztaty i prezentacje dla społeczności Głuchych.
+
+   •   Szukając kierunków rozwoju innowacji, warto także śledzić wydarzenia kierowane do
+       tej społeczności, takiej jak np. sympozjum “Deaf Community and Culture and Best
+       Practices for Libraries”.
+
+Na gruncie polskim warto wskazać poniższe inicjatywy:
+
+   •       Krakowska Fundacja Między Uszami zrealizowała projekt Migane Lektury –
+           opracowanie lektur szkolnych w Polskim Języku Migowym.
+   •       Projekt „Dostępna książka” rozwijany przez Sieć Badawczą Łukasiewicz polega na
+           przygotowywaniu multimedialnych publikacji, w których tekst jest uzupełniany
+           tłumaczeniem na Polski Język Migowy, nagraniem lektora oraz elementami
+           wizualnymi. Rozwiązanie to wspiera szczególnie dzieci i młodzież Głuchą w
+           dostępie do lektur szkolnych.
+   •       Z kolei projekt „Dostęp do skarbów Biblioteki Narodowej” koncentruje się na
+           zwiększeniu dostępności zasobów tej instytucji dla osób z niepełnosprawnościami,
+           w tym Głuchych – obejmuje m.in. seminaria online z tłumaczeniem na PJM oraz
+           wdrażanie rozwiązań poprawiających dostępność czytelń.
+   •       Ważnym przedsięwzięciem jest także forum „Dostępna biblioteka – wymogi,
+           potrzeby, możliwości”, organizowane przez Fundację Kultury bez Barier we
+           współpracy ze Stowarzyszeniem Bibliotekarzy Polskich, które służy wymianie
+           doświadczeń i wypracowywaniu standardów dostępności w bibliotekach.
+Suplement rynkowy - Głuchy czytelnik w bibliotece
+
+Opis istoty innowacji społecznej
+“Głuchy czytelnik w bibliotece” to praktyczny zestaw materiałów - przewodnik, nagrania w
+PJM, instrukcje wizualne i proste zasady obsługi - który umożliwia osobom g/Głuchym pełne,
+samodzielne korzystanie z biblioteki. Materiały pokazują krok po kroku, jak zapisać się do
+biblioteki, znaleźć książkę, skorzystać z katalogu OPAC, poruszać się po budynku i korzystać z
+usług biblioteki bez stresu i zależności od pracowników.
+
+Innowacja zamyka realną lukę: w Polsce brakowało do tej pory spójnej, wielokanałowej
+ścieżki dostępności - łączącej język migowy, materiały wizualne i komunikację intuicyjną.
+Program ma potencjał stać się trwałą usługą społeczną, która nie tylko poprawi dostęp do
+kultury, ale też buduje więź biblioteki ze społecznością g/Głuchych, wzmacnia kompetencje
+kadry oraz unowocześnia pracę instytucji publicznych.
+
+1. Co warto uzupełnić, aby innowacja mogła stać się usługą społeczną
+   ● Przewodnik wdrożeniowy dla instytucji - krok po kroku opisujący, jak uruchomić
+       usługę dostępnej obsługi g/Głuchych: od przygotowania przestrzeni i materiałów, po
+       szkolenie zespołu i komunikację z mieszkańcami.
+
+   ● Materiały w PJM o różnym poziomie trudności - dla osób biegłych w PJM oraz dla
+       tych, które dopiero uczą się korzystać z usług bibliotecznych.
+
+   ● Proste filmy instruktażowe (PJM + napisy + grafiki): zapis do biblioteki, wyszukiwanie
+       zasobów, odbiór rezerwacji, przedłużenia, poruszanie się po budynku.
+
+   ● Standard dostępności bibliotecznej - obejmujący nawigację wizualną, piktogramy,
+       kontrasty, wyraźne oznaczenia, materiały w ETR (Easy-to-Read) i jasne procedury
+       komunikacyjne.
+
+   ● Minimalne kompetencje pracowników pierwszej linii - podstawowe zwroty wizualne,
+       znajomość kart komunikacyjnych, umiejętność pracy „bez głosu”, spokojny sposób
+       komunikacji.
+
+   ● Krótkie spotkania orientacyjne dla nowych użytkowników - osobiste wprowadzenie
+       do biblioteki, które przełamuje pierwszą barierę kontaktu.
+   ● Stała współpraca z lokalną społecznością g/Głuchych - konsultowanie treści,
+       testowanie materiałów, zgłaszanie potrzeb i usprawnień.
+
+   ● System wielokanałowej dostępności (omnichannel) - łączenie PJM, napisów,
+       piktogramów, tekstów łatwych do czytania, aby każdy użytkownik mógł korzystać z
+       biblioteki zgodnie ze swoimi preferencjami.
+
+2. Przykładowe kierunki przekucia innowacji w usługę społeczną
+   ✓ „Biblioteka Przyjazna Głuchym” - stała usługa dostępności
+       Instytucja wdraża komplet materiałów w PJM, oznaczenia wizualne, piktogramy,
+       krótkie ścieżki orientacyjne i regularne dyżury pracowników, którzy potrafią wesprzeć
+       osobę g/Głuchą „tu i teraz”. Celem jest stworzenie biblioteki, do której g/Głusi
+       mieszkańcy mogą wejść spontanicznie - bez umawiania, tłumaczenia i stresu.
+       Biblioteka staje się lokalnym miejscem rzeczywistej inkluzji.
+
+„Głuchy Czytelnik - program wsparcia wejścia”
+
+       Krótka, powtarzalna usługa środowiskowa: pracownik biblioteki lub CUS/OPS pomaga
+       nowemu użytkownikowi przejść przez wszystkie kroki pierwszej wizyty. To prosty, ale
+       bardzo potrzebny produkt społeczny - jeden kontakt, który uczy samodzielności i
+       przełamuje bariery.
+
+„Popołudnia PJM” - dostępność programowa
+
+       Cykliczne wydarzenia - spotkania autorskie, warsztaty, kluby czytelnicze, projekcje
+       filmowe - wszystkie prowadzone w PJM lub z tłumaczeniem. Biblioteka zaczyna
+       działać jak centrum kultury wizualnej.
+
+Punkty dostępności w kulturze
+
+       Biblioteka staje się centrum referencyjnym dla innych instytucji (muzea, kina, domy
+       kultury), wspierając je w przygotowaniu oznaczeń, piktogramów, krótkich instrukcji
+       oraz nagrań w PJM. W powiecie pojawia się wspólny standard dostępności.
+
+Wsparcie cyfrowe i zdalne
+
+       Możliwość skorzystania z krótkich filmów instruktażowych, zdalnego tłumacza PJM
+       (jeśli dostępny) oraz prostych narzędzi „live-help”, które rozwiązują trudność w czasie
+       rzeczywistym, np. podczas kontaktu z OPAC lub rezerwacjami.
+Program „Dostępny Wolontariat”
+
+       Wolontariusze (młodzież, studenci lingwistyki, pedagogiki, KODA/CODA) pełnią rolę
+       „nawigatorów”, wspierając g/Głuchych czytelników w sytuacjach wymagających
+       dodatkowego wsparcia. Lekka usługa, duży efekt.
+
+„Klub Czytelniczy w PJM”
+
+       Formalny klub książki, prowadzony przez g/Głuchego ambasadora lub tłumacza.
+       Biblioteka staje się przestrzenią wspólnej kultury wizualnej - nie tylko „miejscem
+       książek”.
+
+Biblioteka jako centrum zasobów wizualnych
+
+       Udostępnienie przestrzeni i sprzętu, gdzie osoby g/Głuche mogą nagrywać własne
+       krótkie materiały w PJM - ogłoszenia, mini-wywiady, krótkie historie, prace szkolne. To
+       wzmacnia kompetencje cyfrowe społeczności i buduje bibliotekę jako przestrzeń
+       twórców, a nie tylko odbiorców kultury.
+
+Cross-sector Accessibility
+
+       Biblioteka jako ekspert regionalny: szkolenie OPS/CUS, szkół, urzędów,
+       przygotowywanie wspólnych piktogramów i instrukcji, prowadzenie audytów
+       dostępności.
+
+3. Obszary, w których instytucja wdrażająca może dodać coś od siebie
+   ● Stała współpraca z lokalną społecznością g/Głuchych - zespoły redakcyjne
+       aktualizujące nagrania PJM i materiały co kwartał.
+
+   ● Budowanie kapitału społecznego - biblioteka jako przestrzeń spotkań, warsztatów,
+       integracji osób niesłyszących i słyszących.
+
+   ● Materiały dla rodzin g/Głuchych i dzieci KODA/CODA - warsztaty, zajęcia czytelnicze,
+       treści wzmacniające komunikację w rodzinach dwujęzycznych.
+
+   ● Pakiet ETR dla osób g/Głuchych obcojęzycznych - uniwersalne wizualne instrukcje i
+       proste teksty dla migrantów.
+   ● „Książka Zdigitalizowana Dostępna” - współpraca z dostawcami e-booków, aby w
+       bibliotecznych książkach cyfrowych pojawiały się łatwe do czytania teksty lub opisy
+       wizualne.
+
+4. Modele wdrożenia usługi społecznej - S / M / L
+
+Model S - „Dostępność na start” (1 filia / 1 lokalizacja)
+   ● materiały w PJM dostępne przy wejściu i w katalogu,
+
+   ● podstawowe piktogramy i mapa wizualna,
+
+   ● 1-2 przeszkolonych pracowników,
+
+   ● krótkie spotkania wprowadzające dla nowych użytkowników,
+
+   ● minimalna wersja „karty komunikacyjnej” i podstawowy standard ETR.
+
+Model M - „Biblioteka przyjazna g/Głuchym” (kilka placówek)
+   ● pełny zestaw nagrań PJM + filmy instruktażowe „krok po kroku”,
+
+   ● cykliczne wydarzenia dostępne w PJM,
+
+   ● współpraca z organizacjami g/Głuchych,
+
+   ● szkolenia dla personelu w modelu cyklicznym,
+
+   ● wspólne zasoby wizualne i repozytorium piktogramów,
+
+   ● integracja działań z domami kultury i muzeami.
+
+Model L - „Regionalna sieć dostępnych bibliotek”
+   ● wspólne standardy dostępności dla całego regionu,
+
+   ● wspólna baza multimediów w PJM i ETR,
+
+   ● ambasadorzy g/Głusi w kilku instytucjach,
+
+   ● powiatowy/wojewódzki program wydarzeń dostępnych,
+
+   ● regionalna jednostka adaptacji treści (PJM/ETR) obsługująca szkoły, OPS-y, urzędy.
+
+5. Rzeczy, których instytucje powinny unikać
+   ● Oparcia usługi tylko na technologii - czynnik ludzki jest niezbędny.
+   ● Tworzenia skomplikowanych procedur - użytkownik musi intuicyjnie „od razu
+       wiedzieć”.
+
+   ● Braku aktualizacji materiałów - PJM, piktogramy i instrukcje muszą żyć.
+
+   ● Zakładania jednorodności społeczności g/Głuchych - trzeba łączyć PJM + napisy +
+       piktogramy + ETR.
+
+   ● Zakupów technologii bez konsultacji z użytkownikami - wiele narzędzi jest formalnie
+       „dostępnych”, ale realnie nieużytecznych.
+
+   ● Izolowania usługi od OPS/CUS - potrzeby g/Głuchych często dotyczą również spraw
+       administracyjnych.
+
+6. Typy partnerów, którzy mogą wzmocnić usługę
+Partnerzy lokalni:
+organizacje g/Głuchych, szkoły, klasy integracyjne, poradnie, domy kultury, muzea, kina.
+
+Partnerzy technologiczni:
+kioski informacyjne z PJM, smart glasses w wersji „light”, dostawcy tabletów, platformy
+tłumacza zdalnego.
+
+Partnerzy naukowi:
+wydziały lingwistyki stosowanej, pedagogiki specjalnej, które mogą badać skuteczność
+materiałów i wspierać rozwój ETR/PJM.
+
+Partnerzy systemowi:
+pełnomocnicy ds. OzN, samorządy, instytucje certyfikujące dostępność.
+
+Partnerzy medialni:
+lokalne media i twórcy materiałów wideo - wsparcie w nagraniach PJM i promocji usługi.
+
+7. Wybrane ścieżki finansowania kontynuacji po zakończeniu grantu
+   ● budżety gminne: kultura, dostępność, włączenie społeczne,
+
+   ● PFRON (likwidacja barier informacyjnych i komunikacyjnych),
+
+   ● fundusze ministerialne i biblioteczne,
+
+   ● mikrogranty instytucji kultury,
+  ● budżet obywatelski,
+
+  ● Erasmus+, CERV, Interreg,
+
+  ● partnerstwa CSR z firmami (np. sponsoring Klubu PJM).
+
+8. Ryzyka wdrożeniowe i sposoby ich ograniczania
+  ● Ryzyko nieużywalności → testy z lokalną społecznością g/Głuchych.
+
+  ● Brak kompetencji personelu → krótkie szkolenia + cykliczne odświeżenia.
+
+  ● Materiały zbyt trudne wizualnie → piktogramy, krótkie filmy, prosty język.
+
+  ● Niska frekwencja → promocja w społecznościach g/Głuchych i szkołach.
+
+  ● Ryzyko stygmatyzacji → wydarzenia dostępne dla wszystkich, bez wydzielania
+      „oddzielnej sekcji”.
+
+  ● Ryzyko niedopasowania PJM → konsultacje z lokalnymi dialektami, dodawanie
+      napisów.
+
+  ● Ryzyko izolacji cyfrowej → zapewnienie pełnej wersji „low-tech”: druk, piktogramy,
+      przeszkolony personel.
+
+9. Rozszerzone kierunki rozwoju usługi społecznej
+  ● Regularne dyżury dostępności - stały dzień/godzina z pracownikiem znającym
+      podstawy komunikacji wizualnej.
+
+  ● Usługa „Pierwsza wizyta w bibliotece” - prosty produkt, który można wdrożyć w
+      każdej filii.
+      „Dni dostępnej kultury” - PJM w programach, dyskusje, warsztaty, integracja
+      społeczności.
+
+  ● Lokalne kluby g/Głuchych - biblioteka jako naturalne centrum życia społecznego.
+
+  ● Kioski informacyjne w PJM i OPAC wizualny, AR-nawigacja, zdalny tłumacz (tam,
+      gdzie dostępny).
+
+  ● Regionalne repozytorium materiałów PJM - wspólne zasoby dla instytucji kultury i
+      administracji.
+● Program certyfikacyjny „Biblioteka Przyjazna Głuchym” - wspólne standardy i jasna
+   omunikacja dostępności.
+
+● Transgraniczne partnerstwa językowe - współpraca z bibliotekami europejskimi,
+   wymiana zasobów migowych.
+
+● Wideo-eseje w PJM - seria materiałów o historii regionu, zdrowiu, kulturze,
+   przygotowana wspólnie z ekspertami i społecznością g/Głuchych.
+

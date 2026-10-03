@@ -1,0 +1,543 @@
+                                                                                    Załącznik nr 1
+                             do Ogłoszenia naboru (stanowiącego zał. 1 do Zarządzenia IS-430-6/26)
+
+Ramowy Plan Wdrożenia Innowacji
+
+Przenośne modularne łazienki
+Autor innowacji: OK NON-PROFIT Sp. z o.o.: Tomasz Orliński, Paweł Krępski
+
+1.   Istota innowacji:
+
+Innowację stanowi prototyp modułowej, przenośnej łazienki składającej się z lekkich ścianek,
+przyłączy oraz podstawowych elementów sanitarnych (ustęp, umywalka i prysznic), możliwej do
+montażu w pomieszczeniach nieprzystosowanych do standardowych instalacji sanitarnych, takich
+jak strychy, piwnice czy przedpokoje. Konstrukcja jest samowystarczalna technicznie: posiada
+rozdrabniacz ścieków z pompą (pozwalający na odpływ o małej średnicy), własny system
+podgrzewania wody, ogrzewania, oświetlenia oraz system inteligentnej wentylacji.
+
+2.   Kluczowe wyróżniki rozwiązania
+
+     •   Mobilność i elastyczność: Możliwość szybkiego montażu i demontażu bez konieczności
+         posiadania specjalistycznych narzędzi, co jest kluczowe w lokalach
+         o nieuregulowanym stanie prawnym.
+     •   Niezależność: łazienka stanowi osobne pomieszczeniem-urządzenie, do działania którego
+         wystarczy dostęp do przyłącza wody, rury odpływowej/ściekowej oraz gniazdko
+         elektryczne.
+     •   Niski koszt: Wykorzystanie ogólnodostępnych materiałów z marketów budowlanych
+         (drewno, standardowa armatura), co obniża koszty produkcji i napraw.
+     •   Wysoka estetyka: Nowoczesny wygląd z wykorzystaniem imitacji naturalnych materiałów
+         (beton, drewno), co wpływa pozytywnie na komfort użytkowania i jest bliższe domowemu,
+         przytulnemu pomieszczeniu.
+
+3.   Diagnoza: na jaki problem/potrzebę odpowiada innowacja?
+
+Możliwość zaspokojenia podstawowych potrzeb fizjologicznych i higienicznych jest elementarnym
+warunkiem godnego życia, jednak aż około 800 tysięcy mieszkań w Polsce
+nie posiada łazienki ani toalety1, co zmusza mieszkańców do korzystania z nieogrzewanych
+sławojek lub wynoszenia nieczystości. Skutkuje to zagrożeniem dla zdrowia i bezpieczeństwa, a
+także poważnymi konsekwencjami społecznymi. Osoby żyjące w takich warunkach często
+doświadczają wstydu i obaw przed negatywną oceną ze strony otoczenia, co prowadzi do
+ograniczania kontaktów społecznych i stopniowej izolacji. Unikają zapraszania gości, ale także
+niechętnie odwiedzają innych, obawiając się konieczności odwzajemnienia zaproszenia. Ponadto,
+tradycyjne programy remontowe często nie docierają do osób w najtrudniejszej sytuacji
+mieszkaniowej. Lokale o nieuregulowanym statusie prawnym lub braku odpowiednich pionów
+kanalizacyjnych pozostają poza systemem wsparcia, co skazuje mieszkańców na wykluczenie
+sanitarne. Innymi istotnymi kwestiami w ramach diagnozy są:
+     •   Bariery techniczne i ekonomiczne: Brak odpowiednich odpływów, niska wysokość
+         pomieszczeń (strychy, sutereny) oraz niski status społeczno-ekonomiczny uniemożliwiają
+         standardową przebudowę.
+     •   Profil odbiorcy: W przypadku tego rozwiązania stanowią przede wszystkim osoby żyjące w
+         niewystarczających warunkach materialnych, ale także seniorzy, osoby
+         z niepełnosprawnościami, rodziny w mieszkaniach socjalnych czy miejscach
+         z nieuregulowaną sytuacją prawną oraz osoby w sytuacjach kryzysowych
+         (np. po powodziach, pożarach).
+     •   Skutki braku higieny: Spadek godności, wstyd, wykluczenie i izolacja społeczna, ale również
+         możliwe komplikacje zdrowotne.
+
+4.   Model Innowacji: Co konkretnie wdrażasz?
+
+Innowacja dostarcza możliwość zaspokojenia podstawowych potrzeb każdego człowieka,
+w sposób, który do tej pory był nieosiągalny z uwagi na sytuację materialną czy miejsce
+dotychczasowego zamieszkania rodzin. Rozwiązanie obejmuje kilka elementów składowych, które
+ułatwią jego wdrażanie:
+     •   Metodyka pracy modułowej, zakładająca dzielenie konstrukcji na segmenty łatwe
+         do transportu) oraz procedury montażu i demontażu. Metoda uwzględnia ograniczenia
+         przestrzenne typowe dla gospodarstw domowych o ograniczonych zasobach finansowych,
+
+
+
+1
+ Dane pochodzą z Narodowego Spisu Powszechnego 2021 (najbardziej aktualny na moment opracowania
+planu)
+
+
+                                            Strona 2 z 17
+         takie jak niska wysokość pomieszczeń, brak pionów kanalizacyjnych czy ograniczony dostęp
+         do instalacji elektrycznej.
+     •   Pełna dokumentacja techniczna – projekty konstrukcyjne, hydrauliczne, elektryczne
+         i automatyki, zawierające szczegółowe opisy wykorzystanych rozwiązań wraz
+         z sugestiami dotyczącymi możliwych zamienników i rekomendacjami w zakresie
+         materiałów i sposobu montażu konstrukcji. Dokumentacja zawiera rysunki, schematy, listy
+         prefabrykatów i komponentów oraz instrukcje montażu poszczególnych modułów.
+     •   Procedury logistyczne związane z transportem modułów, ich wnoszeniem do lokali
+         o utrudnionym dostępie oraz montażem w warunkach ograniczonej przestrzeni.
+
+5.   Lekcje z testowania: Jak uniknąć pułapek?
+
+Testy przeprowadzone w gospodarstwach domowych testerów pozwoliły sformułować kluczowe
+wskazówki wdrożeniowe:
+     •   Zaufanie i wsparcie: Sam montaż to za mało. Kluczowe jest przygotowanie mieszkańców
+         do korzystania i obsługi niestandardowej łazienki oraz zapewnienie serwisu technicznego,
+         co buduje poczucie bezpieczeństwa.
+     •   Wyzwania: Podczas testowania zidentyfikowano ryzyko „zazdrości otoczenia”,
+         co wymaga odpowiedniego zarządzania relacjami sąsiedzkimi podczas skalowania.
+     •   Pozytywne obserwacje: Testy w dwóch rodzinach wykazały radykalną poprawę warunków
+         higienicznych i zmianę nawyków wszystkich domowników. Dodatkowo nastąpiła redukcja
+         lęku przed wizytami znajomych i większa otwartość na kontakty społeczne.
+     •   Korzyści ekonomiczne: Zaobserwowano obniżenie opłat za media dzięki efektywniejszemu
+         systemowi grzania wody.
+
+
+
+
+                                            Strona 3 z 17
+6.   Matryca logiczna
+
+
+           Problem                         Rozwiązanie                    Cel główny
+           Rodziny żyjące                  Wprowadzenie                   Przywrócenie
+           w gospodarstwach                w pełni                        godności, poprawa
+           domowych                        funkcjonalnych,                zdrowia
+           bezdostępu                      przenośnych                    i odbudowa relacji
+           do łazienki,                    modułów                        społecznych
+           co prowadzi                     sanitarnych                    poprzez
+           do problemów                    do przestrzeni                 zapewnienie
+           zdrowotnych,                    niestandardowych.              komfortu
+           poczucia wstydu                                                higienicznego.
+           i izolacji społecznej.
+
+
+
+7.   Strategia Komunikacji i BIG IDEA
+
+Komunikacja powinna przełamywać tabu ubóstwa sanitarnego i stygmatyzację:
+„Elastyczność w każdym kącie. Modułowe łazienki do nieprzystosowanych przestrzeni”.
+     •   Filary przekazu: Higiena jako prawo człowieka; mobilność (łazienkę można zabrać przy
+         przeprowadzce), estetyka budująca godność.
+     •   Ton: Ekspercki, ale technicznie uproszczony (budujący zaufanie), empatyczny
+         i skoncentrowany na poprawie jakości życia.
+     •   Grupy docelowe: Samorządy, OPS-y, NGO-sy oraz bezpośrednio osoby potrzebujące.
+
+8.   Potencjał rozwoju i inspiracje
+
+Wnioskodawcy mogą rozwijać projekt, dostosowując go do specyficznych potrzeb:
+     •   Sytuacje kryzysowe: Wykorzystanie modułów po powodziach lub pożarach jako szybka
+         alternatywa dla kontenerów sanitarnych. Również jako doraźne zabezpieczenie potrzeb
+         uchodźców.
+     •   Modernizacja mieszkań socjalnych: Narzędzie dla gmin do szybkiego podnoszenia
+         standardu lokali o niskim standardzie.
+     •   Inspiracje światowe: Doświadczenia Habitat for Humanity w poprawie warunków
+         domowych oraz Water.org w zakresie innowacyjnych systemów sanitarnych.
+
+
+
+
+                                            Strona 4 z 17
+9.   Podsumowanie korzyści dla realizatora (np. Gminy/NGO):
+
+Wdrożenie innowacji pozwala na natychmiastową poprawę warunków życia mieszkańców tam,
+gdzie tradycyjne remonty są niemożliwe ze względów technicznych lub prawnych.
+Dzięki dostępności pełnej dokumentacji na otwartej licencji, realizator otrzymuje gotowe, tanie i
+sprawdzone technicznie narzędzie, które buduje wizerunek nowoczesnej i skutecznej pomocy
+społecznej.
+
+
+
+
+                                          Strona 5 z 17
+Ścieżka wdrożenia innowacji w formie usługi społecznej
+
+Przenośne modularne łazienki
+1. Istota innowacji - czego nie można zgubić
+
+Przenośne modularne łazienki nie są "remontem łazienki", zakupem kabiny prysznicowej ani
+inwestycją budowlaną w klasycznym sensie. To usługa przywracania podstawowej godności
+sanitarnej osobom i rodzinom, które żyją w lokalach, gdzie standardowy remont jest niemożliwy,
+zbyt drogi albo odsuwany od lat z powodów technicznych, prawnych lub finansowych.
+Istotą innowacji jest modułowa, możliwa do montażu i demontażu łazienka, którą można
+wprowadzić do trudnych przestrzeni: strychów, piwnic, przedpokojów, suteren, lokali socjalnych
+lub mieszkań o nieuregulowanym stanie prawnym. Rozwiązanie korzysta z lekkiej konstrukcji,
+własnego podgrzewania wody, ogrzewania, oświetlenia, wentylacji oraz pompy z rozdrabniaczem.
+Tego nie należy pomijać:
+   ● głównym celem nie jest "montaż urządzenia", ale ograniczenie wykluczenia sanitarnego
+       konkretnego gospodarstwa domowego;
+   ● łazienka ma być rozwiązaniem dla miejsc, w których klasyczna przebudowa jest trudna,
+       nieopłacalna lub nierealna;
+   ● kluczowe znaczenie mają mobilność, możliwość demontażu oraz relatywnie niski koszt
+       wdrożenia;
+   ● podmiot wdrażający usługę powinien zapewnić nie tylko montaż, ale także przygotowanie
+       użytkowników, instruktaż, serwis i bezpieczne korzystanie z modułu;
+   ● decyzja o montażu powinna wynikać z diagnozy społecznej i technicznej, a nie wyłącznie z
+       kolejności zgłoszeń;
+   ● rozwiązanie powinno być traktowane jako elastyczne narzędzie wsparcia - czasem
+       przejściowe, a czasem wieloletnie, zależnie od sytuacji mieszkańców i lokalnych możliwości
+       organizacyjnych.
+
+Ważne ostrzeżenie dla podmiotu wdrażającego:
+Nie należy zamieniać tej innowacji w zwykły program remontowy. Jej wartość polega na tym, że
+pozwala pomóc tam, gdzie zwykłe remonty, programy mieszkaniowe i inwestycje komunalne nie
+docierają.
+
+
+
+                                          Strona 6 z 17
+2.   Jak przekształcić innowację w usługę społeczną
+
+Ta innowacja nie powinna być rozumiana wyłącznie jako wykonanie i montaż modułowej łazienki
+w lokalu. Łazienka jest narzędziem, które pozwala rozpocząć szersze wsparcie osoby lub rodziny
+żyjącej w kryzysie ubóstwa, wykluczenia sanitarnego, pogorszonych warunków mieszkaniowych
+lub braku realnego dostępu do podstawowej higieny.
+Usługa społeczna powinna więc obejmować nie tylko wykonanie modułu zgodnie z instrukcją
+montażu i jego instalację, ale cały proces pracy z gospodarstwem domowym:
+     ● rozpoznanie osób i rodzin, które nie mają dostępu do łazienki lub korzystają z warunków
+        sanitarnych naruszających podstawową godność i bezpieczeństwo;
+     ● ocenę, czy modułowa łazienka rzeczywiście odpowiada na sytuację życiową mieszkańców, a
+        nie wyłącznie na problem techniczny lokalu;
+     ● indywidualną pracę z rodziną lub użytkownikami lokalu dotyczącą codziennego
+        funkcjonowania, higieny, bezpieczeństwa i organizacji życia domowego;
+     ● rozmowę o tym, jak brak łazienki wpływa na zdrowie, relacje rodzinne, funkcjonowanie
+        dzieci, seniorów lub osób z niepełnosprawnościami;
+     ● ocenę techniczną lokalu i możliwości montażu;
+     ● wykonanie łazienki zgodnie z instrukcją oraz montaż modułu;
+     ● przygotowanie użytkowników do korzystania z rozwiązania;
+     ● instruktaż dotyczący bezpiecznego użytkowania, higieny, kosztów eksploatacji i zgłaszania
+        awarii;
+     ● monitoring, czy rozwiązanie rzeczywiście poprawia codzienne funkcjonowanie rodziny;
+     ● powiązanie usługi z innymi formami wsparcia, jeżeli gospodarstwo domowe ich potrzebuje.
+Istotne jest, aby nie zaczynać od pytania: “gdzie można zamontować łazienkę?”, lecz od pytania:
+“komu brak łazienki najbardziej ogranicza zdrowie, bezpieczeństwo, samodzielność i godne
+funkcjonowanie”? Dopiero potem należy sprawdzić, czy w danym lokalu rozwiązanie modułowe
+jest możliwe technicznie i organizacyjnie.
+Modułowa łazienka może stać się punktem wyjścia do szerszego wsparcia rodziny, na przykład:
+     ● poprawy higieny i zdrowia domowników;
+     ● zwiększenia bezpieczeństwa dzieci, seniorów lub osób z niepełnosprawnościami;
+     ● ograniczenia izolacji społecznej wynikającej ze wstydu i złych warunków mieszkaniowych;
+     ● wsparcia rodziny w lepszej organizacji codziennego funkcjonowania;
+
+
+
+                                             Strona 7 z 17
+     ● połączenia gospodarstwa domowego z innymi usługami społecznymi, mieszkaniowymi,
+        zdrowotnymi lub opiekuńczymi.
+Dla podmiotu wdrażającego najważniejsze jest zrozumienie, że nie jest to projekt budowlany
+realizowany przy okazji działań społecznych. To usługa społeczna, która wykorzystuje rozwiązanie
+techniczne do ograniczenia jednej z najbardziej podstawowych form wykluczenia - braku dostępu
+do higieny, prywatności i bezpiecznego korzystania z łazienki.
+
+3.   Mapa wdrożenia usługi – krok po kroku
+
+Etap przygotowania usługi – do 6 miesięcy
+
+1) Zidentyfikować osoby i rodziny doświadczające wykluczenia sanitarnego
+
+Punktem wyjścia do wdrożenia usługi powinno być rozpoznanie osób i rodzin, które funkcjonują
+bez dostępu do podstawowych warunków sanitarnych oraz nie mają realnej możliwości
+samodzielnego rozwiązania problemu.
+Usługa powinna być kierowana przede wszystkim tam, gdzie brak łazienki:
+     ● wpływa na zdrowie i bezpieczeństwo mieszkańców;
+     ● utrudnia codzienne funkcjonowanie rodziny;
+     ● pogłębia ubóstwo, zależność lub izolację społeczną;
+     ● szczególnie dotyka dzieci, seniorów lub osób z niepełnosprawnościami.
+W praktyce warto przeanalizować między innymi:
+     ● gospodarstwa domowe bez łazienki lub toalety;
+     ● lokale, w których toaleta znajduje się poza mieszkaniem;
+     ● mieszkania o bardzo niskim standardzie sanitarnym;
+     ● lokale zajmowane przez osoby starsze, samotne lub zależne od wsparcia innych osób;
+     ● rodziny żyjące w długotrwałym ubóstwie lub kryzysie mieszkaniowym;
+     ● osoby mieszkające w lokalach o bardzo złym stanie technicznym;
+     ● gospodarstwa domowe wymagające czasowego wsparcia po zdarzeniach kryzysowych, np.
+        pożarze lub zalaniu.
+Należy pamiętać, że zgodnie z założeniami modelu modułowa łazienka nie jest celem samym w
+sobie ani trwałym wyposażeniem zasobu mieszkaniowego podmiotu wdrażającego. Jest
+elementem usługi społecznej świadczonej przez określony czas – zależnie od sytuacji rodziny,
+diagnozy potrzeb oraz możliwości poprawy warunków życia mieszkańców.
+
+
+
+                                           Strona 8 z 17
+2) Przygotować diagnozę potrzeb i sytuacji gospodarstwa domowego
+
+Diagnoza powinna obejmować nie tylko ocenę warunków technicznych lokalu, ale również
+sytuację życiową mieszkańców i wpływ warunków sanitarnych na ich codzienne funkcjonowanie.
+Warto ustalić między innymi:
+   ● jak brak łazienki wpływa na zdrowie, higienę i bezpieczeństwo domowników;
+   ● czy problem utrudnia opiekę nad dziećmi, seniorami lub osobami zależnymi;
+   ● czy mieszkańcy są w stanie samodzielnie korzystać z modułu;
+   ● jakie dodatkowe wsparcie może być potrzebne rodzinie lub użytkownikom lokalu;
+   ● czy poprawa warunków sanitarnych może ograniczyć inne problemy społeczne lub
+       zdrowotne;
+   ● jaki powinien być przewidywany czas świadczenia usługi w danym gospodarstwie
+       domowym.
+Diagnoza powinna pomóc odpowiedzieć przede wszystkim na pytanie: czy modułowa łazienka
+rzeczywiście poprawi codzienne funkcjonowanie mieszkańców i ograniczy wykluczenie sanitarne?
+
+3) Przyjąć jasne zasady kwalifikowania do usługi
+
+Kryteria objęcia usługą powinny łączyć aspekt społeczny i techniczny.
+Warto uwzględnić między innymi:
+   ● brak łazienki lub bardzo złe warunki higieniczne;
+   ● niski dochód gospodarstwa domowego;
+   ● obecność dzieci, seniorów lub osób z niepełnosprawnościami;
+   ● brak realnej możliwości wykonania klasycznego remontu;
+   ● możliwość bezpiecznego montażu modułu;
+   ● zgodę właściciela lub zarządcy lokalu;
+   ● możliwość bezpiecznego użytkowania rozwiązania.
+Decyzja o objęciu gospodarstwa usługą powinna wynikać z diagnozy potrzeb mieszkańców, a nie
+wyłącznie z kolejności zgłoszeń lub dostępności lokalu.
+Warto również od początku określić:
+   ● w jakich sytuacjach usługa ma charakter czasowy;
+   ● jak długo moduł może pozostawać w danym miejscu;
+   ● kto podejmuje decyzję o zakończeniu świadczenia usługi;
+   ● jakie dalsze wsparcie może zostać zaproponowane rodzinie lub mieszkańcom.
+
+
+                                           Strona 9 z 17
+Jasne zasady są ważne zarówno organizacyjnie, jak i społecznie. Pomagają ograniczyć konflikty,
+nieporozumienia i poczucie utraty bezpieczeństwa po zakończeniu wsparcia.
+
+4) Przygotować procedurę prawną, techniczną i organizacyjną
+
+Przed wykonaniem i montażem modułu należy sprawdzić:
+   ● kto jest właścicielem lokalu;
+   ● jaki jest status prawny lokalu;
+   ● czy potrzebna jest zgoda zarządcy, właściciela lub wspólnoty;
+   ● czy montaż będzie ingerował w istniejące instalacje;
+   ● kto odpowiada za eksploatację i serwis modułu;
+   ● jakie będą zasady użytkowania oraz ewentualnego demontażu modułu po zakończeniu
+       świadczenia usługi.
+W części lokali, szczególnie mieszkań socjalnych lub treningowych, przepisy dotyczące standardów
+technicznych i układu pomieszczeń mogą utrudniać montaż modułu. Dlatego każdorazowo
+konieczna jest indywidualna analiza prawna i techniczna konkretnego przypadku.
+Podmiot wdrażający powinien również jasno określić:
+   ● kto odpowiada za kontakt z mieszkańcami;
+   ● kto zapewnia instruktaż użytkowania;
+   ● kto przyjmuje zgłoszenia awarii;
+   ● jak będzie wyglądało monitorowanie efektów usługi;
+   ● w jaki sposób oceniana będzie dalsza potrzeba świadczenia wsparcia.
+
+5) Przygotować mieszkańców do korzystania z usługi
+
+Testowanie innowacji pokazało, że sam montaż modułu nie jest wystarczający. Kluczowe znaczenie
+ma przygotowanie mieszkańców do korzystania z rozwiązania oraz zapewnienie bezpiecznej
+eksploatacji.
+Przed rozpoczęciem użytkowania warto omówić:
+   ● sposób korzystania z modułów;
+   ● zasady utrzymania higieny i czystości;
+   ● sposób zgłaszania awarii;
+   ● zasady serwisowania;
+   ● koszty eksploatacji;
+   ● zasady zakończenia świadczenia usługi, jeśli ma ona charakter czasowy.
+
+
+                                          Strona 10 z 17
+6) Przygotować komunikację sąsiedzką i lokalną
+
+Wdrażanie usługi może budzić emocje i poczucie nierównego traktowania mieszkańców. Dlatego
+komunikacja powinna podkreślać:
+   ● przeciwdziałanie wykluczeniu sanitarnemu;
+   ● poprawę zdrowia i bezpieczeństwa;
+   ● wsparcie osób żyjących w szczególnie trudnych warunkach;
+   ● czasowy i usługowy charakter rozwiązania.
+Nie należy przedstawiać usługi jako “przyznawania nowej łazienki”, ale jako element wsparcia osób
+i rodzin znajdujących się w trudnej sytuacji życiowej.
+
+Etap świadczenia usługi – minimum 12 miesięcy
+W okresie świadczenia usługi wsparcie nie powinno ograniczać się wyłącznie do montażu modułu i
+jego utrzymania technicznego. Modułowa łazienka ma być punktem wyjścia do poprawy
+codziennego funkcjonowania osoby lub rodziny oraz ograniczenia skutków wykluczenia
+sanitarnego.
+Usługa powinna obejmować między innymi:
+   ● wykonanie i montaż modułów;
+   ● przygotowanie mieszkańców do bezpiecznego korzystania z rozwiązania;
+   ● instruktaż dotyczący higieny, eksploatacji i zgłaszania awarii;
+   ● regularny kontakt z mieszkańcami i ocenę, czy usługa rzeczywiście poprawia warunki życia;
+   ● identyfikację dodatkowych trudności wpływających na funkcjonowanie gospodarstwa
+       domowego;
+   ● wsparcie mieszkańców w organizacji codziennego funkcjonowania po poprawie warunków
+       sanitarnych;
+   ● przekazywanie informacji o dostępnych lokalnie formach pomocy i wsparcia;
+   ● współpracę z innymi podmiotami lub specjalistami, jeśli rodzina wymaga szerszego
+       wsparcia;
+   ● wizyty kontrolne i monitoring społecznych efektów usługi;
+   ● serwis techniczny modułu.
+W praktyce brak łazienki bardzo często współwystępuje z innymi problemami: ubóstwem,
+zadłużeniem, samotnością, problemami zdrowotnymi, przeciążeniem opiekuńczym, złym stanem
+technicznym mieszkania, trudnościami w codziennym funkcjonowaniu rodziny. Dlatego usługa
+
+
+
+                                           Strona 11 z 17
+powinna pomagać nie tylko w poprawie warunków sanitarnych, ale także w odbudowie
+bezpieczeństwa, sprawczości i podstawowego komfortu życia mieszkańców.
+
+4.   Co jest obowiązkowe, a co można rozszerzać
+
+Elementy konieczne
+Bez tych elementów usługa traci swój społeczny charakter i sprowadza się wyłącznie do montażu
+rozwiązania technicznego:
+     ● identyfikacja osób lub rodzin doświadczających wykluczenia sanitarnego;
+     ● diagnoza potrzeb mieszkańców i sytuacji gospodarstwa domowego;
+     ● ocena technicznej możliwości wykonania i montażu modułu;
+     ● wykonanie modułowej łazienki zgodnie z instrukcją innowacji;
+     ● możliwość montażu i demontażu rozwiązania;
+     ● przygotowanie mieszkańców do korzystania z modułu;
+     ● instruktaż dotyczący bezpiecznego użytkowania i eksploatacji;
+     ● zapewnienie serwisu technicznego;
+     ● monitoring społecznych efektów usługi;
+     ● jasne zasady użytkowania oraz zakończenia świadczenia usługi;
+     ● określenie odpowiedzialności za eksploatację i utrzymanie modułu w okresie świadczenia
+        usługi.
+
+Elementy opcjonalne
+Usługa może zostać rozszerzona o dodatkowe działania odpowiadające na potrzeby mieszkańców i
+sytuację gospodarstwa domowego, między innymi:
+     ● wyposażenie zwiększające bezpieczeństwo seniorów lub osób z niepełnosprawnościami;
+     ● wsparcie mieszkańców w organizacji codziennego funkcjonowania po poprawie warunków
+        sanitarnych;
+     ● działania edukacyjne dotyczące higieny, bezpieczeństwa i utrzymania mieszkania;
+     ● współpracę z podmiotami świadczącymi pomoc społeczną, zdrowotną lub środowiskową;
+     ● działania wspierające rodziny znajdujące się w kryzysie ubóstwa lub kryzysie
+        mieszkaniowym;
+     ● czasowe wykorzystanie rozwiązania w sytuacjach kryzysowych, np. po pożarach lub
+        zalaniach;
+
+
+
+                                          Strona 12 z 17
+     ● partnerstwa ze szkołami branżowymi, organizacjami społecznymi lub uczelniami w zakresie
+        wsparcia technicznego i edukacyjnego;
+     ● dodatkowe działania poprawiające bezpieczeństwo i warunki życia mieszkańców.
+
+5.   Jak poradzić sobie z typowymi barierami JST
+
+Bariera 1: "To wygląda jak inwestycja budowlana, a nie usługa społeczna"
+Usługą jest przywrócenie mieszkańcom dostępu do higieny, bezpiecznego funkcjonowania i
+bardziej godnych warunków życia. Modułowa łazienka jest narzędziem, które ma wspierać
+poprawę codziennego funkcjonowania osoby lub rodziny oraz ograniczać skutki wykluczenia
+sanitarnego i społecznego.
+
+Bariera 2: "Nie wiemy, czy to zgodne z przepisami"
+Każdorazowo konieczna jest indywidualna analiza techniczna i prawna konkretnego lokalu,
+ponieważ możliwość montażu modułu zależy między innymi od: układu pomieszczeń, stanu
+technicznego budynku, istniejących instalacji, statusu prawnego lokalu, możliwości bezpiecznego
+użytkowania rozwiązania.
+Usługa powinna być kierowana przede wszystkim do osób i rodzin żyjących w lokalach bez dostępu
+do podstawowych warunków sanitarnych, a nie do wzmacniania lub doposażania zasobów
+mieszkaniowych podmiotu wdrażającego.
+Warto również pamiętać, że część lokali, np. mieszkania treningowe, musi spełniać określone
+standardy techniczne i funkcjonalne, dlatego modułowa łazienka nie zawsze będzie tam
+rozwiązaniem potrzebnym lub możliwym do zastosowania.
+
+Bariera 3: "Co, jeśli sytuacja rodziny zmieni się po wdrożeniu usługi?"
+Modułowa łazienka jest elementem usługi społecznej świadczonej w odpowiedzi na konkretną
+sytuację życiową mieszkańców. Nie należy z góry zakładać sztywnego czasu korzystania z
+rozwiązania. Zakres i czas wsparcia powinny wynikać z diagnozy potrzeb oraz bieżącej sytuacji
+gospodarstwa domowego.
+W praktyce sytuacja mieszkańców może się zmieniać, na przykład: rodzina poprawi swoją sytuację
+finansową, możliwe stanie się wykonanie standardowego remontu, mieszkańcy zmienią miejsce
+zamieszkania, pojawi się możliwość skorzystania z innego rozwiązania mieszkaniowego.
+Dlatego ważne jest, aby: od początku jasno określić zasady korzystania z usługi, regularnie oceniać,
+czy wsparcie nadal odpowiada na potrzeby mieszkańców, prowadzić rozmowę z rodziną o
+
+
+
+                                          Strona 13 z 17
+możliwych dalszych rozwiązaniach, unikać sytuacji nagłego zakończenia wsparcia bez
+wcześniejszego przygotowania mieszkańców.
+
+Bariera 4: "Będziemy mieli lawinę oczekiwań"
+Dlatego trzeba:
+     ● jasno określić kryteria;
+     ● komunikować ograniczony pilotaż;
+     ● tłumaczyć, że to interwencja dla najtrudniejszych przypadków.
+
+Bariera 5: "To nie rozwiązuje całego problemu mieszkaniowego"
+Nie musi.
+To szybka interwencja dla osób żyjących latami bez podstawowych warunków sanitarnych.
+
+6.   Działania wspierające wdrożenie innowacji
+
+Rekomendowane działania:
+     ● lokalna diagnoza ubóstwa sanitarnego;
+     ● współpraca z uczelniami architektonicznymi i technicznymi;
+     ● lokalny bank podstawowego wyposażenia sanitarnego;
+     ● partnerstwo ze szkołami branżowymi;
+     ● działania wspierające poprawę bezpieczeństwa i funkcjonalności mieszkań osób starszych
+        lub zależnych;
+     ● wsparcie osób i rodzin po zdarzeniach kryzysowych, np. pożarach lub zalaniach;
+     ● szkolenia z bezpiecznego użytkowania modułu;
+     ● instrukcje eksploatacyjne przygotowane prostym i zrozumiałym językiem;
+     ● działania informacyjne dotyczące higieny, bezpieczeństwa i organizacji codziennego
+        funkcjonowania w miejscu zamieszkania.
+
+7.   Jak wykorzystać wdrożenie do trwałej zmiany lokalnej
+
+Po zakończeniu grantu mogą pozostać:
+     ● wypracowana procedura identyfikowania i wspierania osób doświadczających wykluczenia
+        sanitarnego;
+     ● większa wiedza o lokalnych problemach mieszkaniowych i sanitarnych mieszkańców;
+     ● doświadczenie w łączeniu wsparcia technicznego i społecznego w miejscu zamieszkania;
+
+
+
+                                          Strona 14 z 17
+     ● partnerstwa między podmiotami społecznymi, technicznymi i środowiskowymi;
+     ● większa gotowość do reagowania na sytuacje kryzysowe związane z warunkami życia
+        mieszkańców;
+     ● praktyczne doświadczenie w świadczeniu usług poprawiających bezpieczeństwo i
+        codzienne funkcjonowanie osób zagrożonych wykluczeniem.
+Najważniejsza zmiana polega na tym, że poprawa warunków sanitarnych zaczyna być traktowana
+nie jako wyłącznie problem techniczny lub mieszkaniowy, ale jako element wsparcia społecznego
+wpływający na zdrowie, bezpieczeństwo, relacje rodzinne i codzienne funkcjonowanie
+mieszkańców.
+
+8.   Możliwe kierunki rozwoju usługi lokalnie
+
+Po wdrożeniu pilotażowym można rozwijać usługę w kilku kierunkach:
+     ● mieszkania współdzielone dla seniorów;
+     ● ogrzewalnie sezonowe;
+     ● kryzysowe lokale po pożarach i powodziach;
+     ● mobilne zaplecze sanitarne;
+     ● adaptacja pustostanów;
+     ● mieszkania wspierane;
+     ● małe centra interwencji kryzysowej;
+     ● partnerstwa z uczelniami technicznymi;
+     ● lokalne pracownie adaptacji wnętrz dla osób ubogich;
+     ● połączenie z usługami opiekuńczymi i zdrowotnymi.
+
+9.   Szybka checklista dla Grantobiorcy przed zaplanowaniem wdrożenia
+
+     ● Czy zachowujemy istotę innowacji: ograniczanie wykluczenia sanitarnego i poprawę
+        codziennego funkcjonowania mieszkańców?
+     ● Czy diagnoza społeczna poprzedza decyzję techniczną?
+     ● Czy sprawdzono status prawny i techniczny lokalu?
+     ● Czy wiadomo, dlaczego standardowy remont nie jest obecnie możliwy lub realny do
+        przeprowadzenia?
+     ● Czy użytkownicy zostali przygotowani do korzystania z modułu?
+     ● Czy określono zasady eksploatacji, serwisowania i zgłaszania awarii?
+
+
+                                          Strona 15 z 17
+● Czy komunikacja ogranicza ryzyko konfliktów i poczucia nierównego traktowania
+   mieszkańców?
+● Czy usługa obejmuje również wsparcie społeczne i pracę z rodziną lub mieszkańcami?
+● Czy rozwiązanie odpowiada na realne potrzeby konkretnego gospodarstwa domowego?
+● Czy po zakończeniu grantu pozostanie większa zdolność do rozpoznawania i ograniczania
+   wykluczenia sanitarnego mieszkańców?
+
+
+
+
+                                    Strona 16 z 17
+Strona 17 z 17
+

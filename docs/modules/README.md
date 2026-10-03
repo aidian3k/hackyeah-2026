@@ -6,7 +6,7 @@ Siedem funkcjonalności z `docs/base.md` §2. Każdy moduł ma specyfikację HTM
 |---|---|---|---|---|
 | 1 | I. Matchmaking społeczny (obligatoryjny) | `01-matchmaking/module-1-matchmaking.html` | `01-matchmaking/module-1-tasks.md`, frontend: `01-matchmaking/frontend-tasks.md` (+ `module-1-calibration.md`, `frontend-a11y.md`) | gotowy (T00–T26, F00–F21) |
 | 2 | II. Zasobnik wiedzy | `02-zasobnik-wiedzy/module-2-zasobnik-wiedzy.html` | `02-zasobnik-wiedzy/module-2-tasks.md` | szkielet; częściowo pokryty przez M1 |
-| 3 | III. Kreator pomysłów | `03-kreator-pomyslow/module-3-kreator-pomyslow.html` | `03-kreator-pomyslow/module-3-tasks.md` | szkielet; zalążek: fiszka |
+| 3 | III. Kreator pomysłów | `03-kreator-pomyslow/module-3-kreator-pomyslow.html` | `03-kreator-pomyslow/module-3-tasks.md` (materiały: `docs/resources/rops/`) | draft v0.2; zadania K00–K19 do wzięcia |
 | 4 | IV. Tester innowacji | `04-tester-innowacji/module-4-tester-innowacji.html` | `04-tester-innowacji/module-4-tasks.md` | szkielet; brak |
 | 5 | V. Platforma aktywnej komunikacji | `05-platforma-komunikacji/module-5-platforma-komunikacji.html` | `05-platforma-komunikacji/module-5-tasks.md` | szkielet; zalążek: odpowiedzi do autora |
 | 6 | VI. Panel administratora | `06-panel-administratora/module-6-panel-administratora.html` | `06-panel-administratora/module-6-tasks.md` | szkielet; w dużej części pokryty przez M1 |

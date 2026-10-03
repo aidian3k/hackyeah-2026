@@ -1,0 +1,675 @@
+                                                                                       Załącznik nr 1
+                            do Ogłoszenia naboru (stanowiącego zał. 1 do Zarządzenia IS-430-6/26)
+
+Ramowy Plan Wdrożenia Innowacji
+
+Terapeuta przestrzeni
+Autorka innowacji: Urszula Żmudzińska
+
+1.   Istota innowacji:
+
+Innowacja „Terapeuta przestrzeni - dostosowanie środowiska do indywidualnych potrzeb osób
+starszych” to pakiet usług realizowanych w miejscu zamieszkania seniora obejmujący:
+specjalistyczną diagnozę, plan ergonomizacji, szkolenia dla seniora i rodziny oraz wsparcie
+psychologiczne. Model zakłada dostosowanie przestrzeni domowej seniora do jego
+indywidualnych dysfunkcji, a jego kluczowym elementem jest maksymalne wykorzystanie
+zasobów, które senior już posiada (mebli, wyposażenia, układu lokalu), aby przedłużyć jego
+samodzielność w środowisku domowym.
+
+Usługę realizuje trzyosobowy zespół: terapeuta przestrzeni, fizjoterapeuta i psycholog. Każdy z
+nich wnosi odmienną, komplementarną perspektywę, dzięki czemu diagnoza i zmiany w
+mieszkaniu seniora są jednocześnie bezpieczne, funkcjonalne i akceptowalne psychologicznie.
+
+Terapeuta przestrzeni - odpowiada za ocenę środowiska domowego i zaplanowanie
+ergonomicznych zmian wspierających codzienne funkcjonowanie seniora. Łączy wiedzę z zakresu
+terapii zajęciowej, ergonomii, procesów starzenia oraz funkcjonowania społecznego. Rozpoznaje
+potrzeby bio-psycho-społeczne, tworzy indywidualny plan interwencji i uczy korzystania ze sprzętu
+wspomagającego.
+
+Fizjoterapeuta - skupia się na utrzymaniu i poprawie sprawności seniora, aby umożliwić mu jak
+najdłuższą samodzielność. Przeprowadza testy funkcjonalne (np. TUG), opracowuje program
+treningu zdrowotnego i dobiera sprzęt wspierający bezpieczne poruszanie się.
+
+Psycholog - diagnozuje stan psychiczny seniora, wspiera w adaptacji do zmian w otoczeniu i
+prowadzi psychoedukację rodziny.
+
+2.   Kluczowe wyróżniki rozwiązania
+      •   Wykorzystanie własnych zasobów: Model nie opiera się na kosztownych remontach, lecz
+          na kreatywnym i niskokosztowym wykorzystaniu istniejącego wyposażenia mieszkania.
+
+      •   Holistyczne podejście: Łączy elementy ergonomii, fizjoterapii i wsparcia psychologicznego
+          w jednym, spójnym procesie realizowanym w miejscu zamieszkania seniora.
+
+      •   Wzmacnianie sprawczości: Senior nie jest biernym odbiorcą pomocy, lecz aktywnym
+          współtwórcą zmian – każda modyfikacja wymaga jego akceptacji.
+
+      •   Wsparcie dla opiekunów: Zamiast obciążać rodzinę, oferuje krótkie, praktyczne szkolenia i
+          narzędzia dostosowane do ich ograniczonych możliwości czasowych.
+
+3.     Diagnoza: na jaki problem/potrzebę odpowiada innowacja?
+
+      •   Niefunkcjonalność mieszkań: Spadek sprawności osób w wieku senioralnym sprawia, że
+          dotychczasowe lokum staje się niebezpieczne (wysokie progi, ryzykowne elementy łazienki),
+          co przyspiesza decyzję o umieszczeniu w placówce całodobowej opieki
+          (np. DPS).
+
+      •   Starzenie się społeczeństwa: W Małopolsce w 2024 r. osoby 60+ stanowiły aż 24,5%
+          populacji, a liczba osób powyżej 80 lat (wymagających skokowo większej pomocy) stale
+          rośnie1.
+
+      •   Bariery w systemie opieki: Braki kadrowe wśród opiekunów oraz zapracowanie młodszych
+          pokoleń powodują, że seniorzy zostają sami ze swoimi ograniczeniami.
+
+      •   Skutki izolacji: Poczucie bycia ciężarem dla bliskich i lęk przed upadkiem prowadzą
+          do wycofania społecznego i drastycznego spadku jakości życia.
+
+4.     Model Innowacji: Co konkretnie wdrażasz?
+
+Innowacja dostarcza kompletny pakiet narzędzi wdrożeniowych na otwartej licencji:
+      •   Model merytoryczny, czyli opis metodyki „Terapeuta przestrzeni – dostosowanie
+          środowiska do indywidualnych potrzeb osób starszych”.
+      •   Scenariusze treningowe - gotowe instrukcje prowadzenia warsztatów dla osób zależnych
+          oraz ich rodzin metodą „uczenia przez doświadczanie”.
+
+
+1
+    Dane Głównego Urzędu Statystycznego.
+
+
+                                              Strona 2 z 19
+     •    Narzędzia diagnostyczne, takie jak kwestionariusze wywiadu, testy czynnościowe
+          (np. test „Wstań i Idź”) oraz wzory rekomendacji psychologicznych.
+     •    Dokumentacja operacyjna, w tym wzory planów ergonomizacji przestrzeni, protokoły
+          interwencji i karty konsultacji.
+
+5.   Lekcje z testowania: Jak uniknąć pułapek?
+
+Testowanie innowacji „Terapeuta przestrzeni” opierało się na wielospecjalistycznym wsparciu
+seniorów bezpośrednio w ich miejscu zamieszkania, co pozwoliło na realną ocenę ich codziennych
+trudności. Proces ten składał się z trzech kluczowych etapów: diagnozowania, wdrażania zmian
+ergonomicznych oraz szkoleń dla seniorów i ich rodzin. Wnioski płynące z testów to:
+         • Bariera w szukaniu pomocy: Seniorzy często uważają, że muszą radzić sobie sami,
+           w związku z czym często nie szukają specjalistycznego wsparcia pomimo problemów
+           zdrowotnych. Kluczem jest empatyczne podejście i budowanie zaufania.
+         • Specyfika wizyt domowych: Należy założyć elastyczny czas pracy - seniorzy często bardziej
+           potrzebują rozmowy i ugoszczenia specjalisty niż szybkiej realizacji zadań.
+         • Prostota rozwiązań: Rekomendowane zmiany muszą być maksymalnie proste, aby
+           seniorzy mogli je bezpiecznie stosować po wyjściu specjalisty. Najlepiej sprawdzają się
+           rozwiązania niskokosztowe, wykorzystujące posiadane już przez seniora zasoby.
+         • Praca nad motywacją i akceptacją: Zaobserwowano znikomą motywację do zmian oraz
+           trudności w utrwalaniu przekazywanych treści, co wymaga włączenia treningów typu
+           „Insight” oraz stałego wsparcia psychologa.
+         • Zaangażowanie rodziny: Dużym wyzwaniem okazało się włączenie członków rodziny w
+           proces szkoleniowy, co tłumaczono głównie brakiem czasu i pracą zawodową.
+
+
+
+
+                                              Strona 3 z 19
+6.   Matryca logiczna
+
+
+           Problem                         Rozwiązanie                      Cel główny
+           Utrata                         Model                             Odejście od
+           samodzielności                 wielospecjalistyczne-             tradycyjnego,
+           seniorów w                     go wsparcia w domu                opiekuńczego
+           niefunkcjonalnych              (fizjoterapia,                    modelu wsparcia
+           mieszkaniach,                  psychologia) mające               seniorów na rzecz
+           prowadząca                     na celu                           podejścia, które
+           do ich izolacji                ergonomizację                     wzmacnia ich
+           i instytucjonalizacji          przestrzeni i naukę               sprawczość oraz
+           wsparcia.                      bezpiecznego                      wykorzystuje
+                                          funkcjonowania.                   potencjał
+                                                                            środowiska
+                                                                            domowego.
+
+7.   Strategia Komunikacji i BIG IDEA
+
+Komunikacja powinna wskazywać, że środowisko domowe seniora może stać się bezpiecznym
+azylem, które nie jest przeciwko niemu, a działa na jego rzecz:
+
+                         „Mój dom – moje bezpieczne miejsce”.
+
+     •   Filary przekazu: Edukacja o wpływie drobnych zmian na zdrowie i jakość codziennego
+         funkcjonowania, rola rodziny w adaptacji, profesjonalizacja Terapeuty Przestrzeni jako
+         eksperta.
+
+     •   Ton: Wspierający, ekspercki, ale przystępny, skupiony na bezpieczeństwie i komforcie.
+
+     •   Grupy docelowe: Seniorzy 60+, ich rodziny (często zapracowane dzieci), instytucje pomocy
+         społecznej (OPS/CUS), sektor pozarządowy.
+
+8.   Potencjał rozwoju i inspiracje
+
+Wnioskodawcy mogą rozwijać model w zależności od diagnozy i specyficznych potrzeb lokalnego
+środowiska:
+     •   Skalowalność: Model można wdrożyć zarówno w pojedynczej gminie, jak i jako system
+         regionalny.
+
+     •   Integracja usług: Możliwość połączenia z istniejącymi strukturami wsparcia, takimi jak
+         środowiskowe domy samopomocy, kluby seniora, centra usług społecznych czy zespoły
+
+
+
+                                            Strona 4 z 19
+         opieki domowej - albo jako samodzielna, mobilna usługa realizowana przez przeszkolonych
+         terapeutów przestrzeni.
+
+     •   Mobilność: Usługa idealnie sprawdza się na terenach wiejskich i o rozproszonej zabudowie,
+         gdzie dostęp do stacjonarnej opieki jest utrudniony.
+
+9.   Podsumowanie korzyści dla realizatora (np. Gminy/OPS/CUS):
+
+Wdrożenie „Terapeuty przestrzeni” pozwala samorządom na znaczące oszczędności poprzez
+odroczenie konieczności umieszczania seniorów w kosztownych placówkach całodobowych (DPS).
+Dzięki gotowej dokumentacji i wzorom narzędzi, realizator otrzymuje produkt
+„pod klucz”, który buduje nowoczesny wizerunek lokalnej polityki senioralnej opartej
+na usługach środowiskowych i realnym wsparciu opiekunów faktycznych.
+
+Dzięki innowacji seniorzy zyskują większą samodzielność, bezpieczeństwo i sprawność dzięki
+ergonomizacji mieszkania, treningom zdrowotnym oraz wsparciu emocjonalnemu, co przekłada się
+na lepszy dobrostan i większą aktywność społeczną. Rodziny otrzymują rzetelną wiedzę, wskazówki
+dotyczące opieki i wsparcie psychologiczne, co ułatwia im zrozumienie potrzeb bliskiej osoby i
+poprawia relacje.
+
+
+
+
+                                            Strona 5 z 19
+Ścieżka wdrożenia innowacji w formie usługi społecznej
+
+Terapeuta przestrzeni
+1.   Istota innowacji – czego nie można zgubić
+
+“Terapeuta przestrzeni” nie jest remontem mieszkania, zakupem uchwytów ani jednorazową
+wizytą specjalisty. To domowa usługa wspierająca seniora w dłuższym zachowaniu samodzielności
+przez dopasowanie mieszkania do jego realnych ograniczeń, nawyków, lęków i możliwości.
+
+Istotą innowacji jest diagnoza mieszkania i codziennego funkcjonowania seniora, a następnie
+wprowadzenie prostych, niskokosztowych zmian z wykorzystaniem tego, co senior już ma: mebli,
+układu pomieszczeń, sprzętów i codziennych rutyn. Model obejmuje diagnozę, plan ergonomizacji,
+trening seniora i rodziny oraz wsparcie psychologiczne.
+
+Usługa realizowana jest przez trzyosobowy zespół specjalistów, którzy patrzą na funkcjonowanie
+seniora z różnych, uzupełniających się perspektyw:
+     ● terapeuta przestrzeni odpowiada za ocenę środowiska domowego, identyfikację barier
+        oraz zaplanowanie zmian wspierających codzienne funkcjonowanie seniora; łączy wiedzę z
+        zakresu ergonomii, terapii zajęciowej, procesów starzenia i funkcjonowania społecznego;
+     ● fizjoterapeuta ocenia sprawność seniora, bezpieczeństwo poruszania się oraz ryzyko
+        upadków, a następnie proponuje ćwiczenia, trening funkcjonalny i rozwiązania wspierające
+        samodzielność;
+     ● psycholog wspiera seniora i rodzinę w adaptacji do zmian, pomaga oswoić lęk przed utratą
+        sprawności oraz wzmacnia gotowość do korzystania z nowych rozwiązań i codziennych
+        nawyków.
+
+Tego nie należy pomijać:
+     ● usługa musi odbywać się w mieszkaniu seniora, bo dopiero tam widać realne ryzyka;
+     ● senior ma być współtwórcą zmian, nie biernym odbiorcą zaleceń;
+     ● rozwiązania mają być proste, bezpieczne i możliwe do utrzymania po wyjściu specjalisty;
+     ● celem nie jest "ładniejsze mieszkanie", tylko bezpieczniejsze codzienne funkcjonowanie;
+     ● usługa łączy ergonomię, fizjoterapię, psychologię i edukację rodziny - nie jest wyłącznie
+        techniczną adaptacją lokalu;
+
+
+
+
+                                            Strona 6 z 19
+     ● rekomendacje muszą uwzględniać realne możliwości finansowe seniora i rodziny - usługa
+        nie może kończyć się listą kosztownych zakupów lub remontów.
+
+Ważne ostrzeżenie dla podmiotu wdrażającego:
+Nie należy przekształcać tej innowacji w program remontowy lub zakupowy. Jeżeli usługa zostanie
+sprowadzona wyłącznie do montażu uchwytów, zakupu sprzętu lub wymiany wyposażenia, zniknie
+jej najważniejszy element: wspólna praca nad zmianą sposobu funkcjonowania seniora w jego
+własnym domu i wzmacnianiem jego możliwie najdłuższej samodzielności.
+
+2.   Jak przekształcić innowację w usługę społeczną
+
+Innowacja Terapeuta przestrzeni może być bardzo praktyczną usługą środowiskową, bo
+odpowiada na problem, który OPS/CUS widzi codziennie: senior jeszcze mieszka sam, ale coraz
+gorzej radzi sobie z samoobsługą, schodami, progiem, kuchnią, łóżkiem, oświetleniem, lękiem
+przed upadkiem i poczuciem, że staje się ciężarem dla rodziny.
+
+Usługa powinna działać jako domowy audyt samodzielności i bezpieczeństwa, zakończony prostym
+planem zmian:
+     ● wnioskodawca identyfikuje seniorów zagrożonych utratą samodzielności;
+     ● zespół specjalistów odwiedza seniora w domu;
+     ● obserwują, jak senior wstaje, chodzi, korzysta z łazienki, kuchni, łóżka i krzesła;
+     ● wykonują krótkie testy funkcjonalne;
+     ● rozmawiają z seniorem i rodziną;
+     ● przygotowują plan ergonomizacji przestrzeni;
+     ● pomagają wdrożyć najprostsze zmiany;
+     ● uczą seniora i rodzinę nowych sposobów bezpiecznego funkcjonowania;
+     ● wracają po pewnym czasie, żeby sprawdzić, co działa.
+
+Usługa powinna być przedstawiana jako:
+     ● wsparcie dla samodzielności seniora;
+     ● praktyczna pomoc dla rodzin;
+     ● profilaktyka upadków i utraty sprawności;
+     ● nowoczesna usługa środowiskowa dostępna dla mieszkańców, a nie wyłącznie dla osób
+        korzystających z pomocy społecznej.
+
+
+
+
+                                             Strona 7 z 19
+Warto rozważyć możliwość korzystania z usługi niezależnie od dochodu, szczególnie jeśli gmina
+chce budować bardziej uniwersalny model usług społecznych, a nie wyłącznie interwencję
+socjalną.
+
+3.   Mapa wdrożenia usługi - krok po kroku
+
+Etap przygotowania usługi - do 6 miesięcy
+
+1) Przygotować lokalny model realizacji usługi
+
+Na początku warto jasno określić role osób zaangażowanych we wdrożenie oraz sposób
+współpracy między specjalistami, rodziną i podmiotem realizującym usługę.
+
+Praktyczny podział:
+     ● podmiot wdrażający organizuje proces, kontakt z rodziną oraz harmonogram działań;
+     ● terapeuta przestrzeni, fizjoterapeuta lub odpowiednio przygotowany pracownik
+        przeprowadza diagnozę funkcjonalną mieszkania i codziennego funkcjonowania seniora;
+     ● psycholog wspiera seniora i rodzinę w akceptacji zmian oraz adaptacji do nowych
+        sposobów funkcjonowania;
+     ● pracownik socjalny, opiekunka środowiskowa lub inna osoba pracująca w środowisku
+        lokalnym może wspierać monitorowanie wdrażanych zmian;
+     ● rodzina uczestniczy w instruktażu i uczy się, jak wspierać seniora w codziennym
+        funkcjonowaniu;
+     ● lokalni wykonawcy lub rzemieślnicy mogą pomagać przy prostych adaptacjach mieszkania.
+
+W praktyce nie zawsze konieczne jest budowanie nowego zespołu specjalistów od podstaw.
+Możliwe jest również przygotowanie pracowników podmiotu wdrażającego do wykonywania
+części diagnozy i wdrażania zmian poprzez szkolenia, konsultacje i pracę z gotowymi narzędziami
+innowacji.
+
+Warto od początku rozwijać lokalną sieć współpracy obejmującą między innymi:
+     ● drobnych wykonawców;
+     ● stolarzy i osoby wykonujące proste adaptacje mieszkań;
+     ● szkoły branżowe;
+     ● lokalnych przedsiębiorców;
+     ● uczelnie zajmujące się architekturą, wzornictwem lub projektowaniem uniwersalnym.
+
+
+
+
+                                            Strona 8 z 19
+Dzięki temu usługa może stopniowo budować lokalne kompetencje związane z dostosowywaniem
+mieszkań do potrzeb osób starszych i wspieraniem ich możliwie najdłuższej samodzielności w
+miejscu zamieszkania.
+
+2) Wybrać grupę seniorów
+
+Na początku nie warto tworzyć szerokiej akcji skierowanej do wszystkich seniorów. Lepiej
+skoncentrować usługę na osobach, u których stosunkowo niewielkie zmiany w mieszkaniu i
+codziennych nawykach mogą znacząco poprawić bezpieczeństwo oraz ograniczyć ryzyko utraty
+samodzielności.
+
+Przy kwalifikowaniu uczestników warto opierać się na ocenie poziomu samodzielności seniora,
+między innymi z wykorzystaniem Skali Barthel oraz obserwacji codziennego funkcjonowania w
+domu.
+
+Szczególną uwagę warto zwrócić na:
+   ● seniorów mieszkających samotnie;
+   ● osoby po upadkach lub odczuwające lęk przed upadkiem;
+   ● osoby po hospitalizacji lub pogorszeniu sprawności;
+   ● seniorów mających trudności z korzystaniem z łazienki, łóżka, kuchni lub schodów;
+   ● osoby z ograniczoną mobilnością;
+   ● sytuacje, w których rodzina lub opiekunowie obserwują narastające trudności w
+        codziennym funkcjonowaniu;
+   ● seniorów zagrożonych koniecznością zwiększenia zakresu usług opiekuńczych lub
+        skierowania do opieki instytucjonalnej.
+
+W praktyce bardzo skutecznym źródłem zgłoszeń mogą być:
+   ● lekarze podstawowej opieki zdrowotnej;
+   ● pielęgniarki środowiskowe;
+   ● fizjoterapeuci i rehabilitanci;
+   ● pracownicy socjalni i opiekunki środowiskowe;
+   ● kluby seniora;
+   ● organizacje lokalne i parafie;
+   ● rodziny wielopokoleniowe;
+   ● osoby mające regularny kontakt z seniorami w środowisku lokalnym.
+
+
+
+                                           Strona 9 z 19
+Seniorzy często nie reagują na ogólne kampanie informacyjne lub oficjalne komunikaty. Znacznie
+skuteczniejsze jest docieranie do nich przez osoby, którym ufają i które znają ich codzienne
+trudności.
+
+3) Przygotować prostą procedurę kwalifikacji
+
+Kwalifikacja do usługi powinna obejmować zarówno ocenę poziomu samodzielności seniora, jak i
+analizę tego, w jaki sposób warunki mieszkaniowe wpływają na jego codzienne funkcjonowanie.
+
+W praktyce warto uwzględnić:
+   ● ocenę samodzielności seniora;
+   ● krótki opis najważniejszych trudności w codziennym funkcjonowaniu;
+   ● informację, czy senior mieszka sam;
+   ● historię upadków lub innych sytuacji zagrażających bezpieczeństwu;
+   ● zakres wsparcia ze strony rodziny lub opiekunów;
+   ● gotowość seniora do przyjęcia wizyty i współpracy przy zmianach;
+   ● zgodę na wejście do mieszkania i przeprowadzenie diagnozy;
+   ● ocenę, czy trudności wynikają przede wszystkim z organizacji przestrzeni i sposobu
+       funkcjonowania w domu, a nie wyłącznie z potrzeby dużego remontu lub modernizacji
+       mieszkania.
+
+Na tym etapie bardzo ważna jest także odpowiednia komunikacja z seniorem i rodziną. Warto
+jasno podkreślać, że:
+   ● usługa nie ma charakteru kontroli;
+   ● nie służy ocenie “czy senior sobie radzi”;
+   ● jej celem nie jest ograniczanie samodzielności;
+   ● działania mają pomóc seniorowi bezpieczniej i bardziej komfortowo funkcjonować we
+       własnym domu możliwie jak najdłużej.
+
+4) Przygotować narzędzia pracy
+
+Opis innowacji wskazuje gotowy pakiet: model merytoryczny, scenariusze treningowe,
+kwestionariusze wywiadu, testy czynnościowe, wzory rekomendacji psychologicznych, plany
+ergonomizacji, protokoły interwencji i karty konsultacji.
+
+Podmiot wdrażający nie musi tworzyć całej dokumentacji od początku. W praktyce warto wybrać
+prosty zestaw narzędzi, który ułatwi diagnozę, planowanie zmian i monitorowanie efektów usługi.
+
+
+                                           Strona 10 z 19
+Minimalny zestaw może obejmować:
+   ● kartę zgłoszenia seniora;
+   ● kartę wizyty domowej;
+   ● listę ryzyk i barier w mieszkaniu;
+   ● plan ergonomizacji przestrzeni;
+   ● kartę zaleceń dla seniora i rodziny;
+   ● kartę wizyty kontrolnej;
+   ● kartę rekomendacji psychologicznych lub funkcjonalnych.
+
+Warto również uzupełnić standard o:
+   ● orientacyjny poziom kosztów proponowanych zmian;
+   ● podział rekomendacji na: działania możliwe do wykonania samodzielnie, drobne zakupy
+       poprawiające bezpieczeństwo, zmiany wymagające wsparcia wykonawcy lub specjalisty;
+   ● wskazanie priorytetów: co warto wdrożyć najpierw, aby szybko ograniczyć najważniejsze
+       ryzyka.
+
+To bardzo ważne, aby senior i rodzina nie kończyli wizyty z poczuciem konieczności kosztownego
+remontu lub całkowitej reorganizacji mieszkania. Istotą usługi jest pokazanie, że nawet niewielkie,
+dobrze przemyślane zmiany mogą realnie poprawić bezpieczeństwo i komfort codziennego
+funkcjonowania.
+
+5) Zbudować mały zespół kompetencji
+
+Nie potrzeba dużego zespołu. Minimum:
+   ● osoba z OPS/CUS do kontaktu;
+   ● specjalista od funkcjonowania ruchowego;
+   ● psycholog;
+   ● kontakt do drobnego wykonawcy, jeśli trzeba coś przestawić, zamontować lub usunąć.
+
+Dobrą praktyką może być stworzenie:
+   ● lokalnej "podzielni" sprzętów i prostych rozwiązań;
+   ● bazy wymiany używanych elementów wyposażenia;
+   ● sieci lokalnych rzemieślników wspierających seniorów w drobnych dostosowaniach
+       mieszkań.
+
+
+
+
+                                            Strona 11 z 19
+6) Przygotować standard pierwszej wizyty
+
+Testowanie pokazało, że wizyty domowe wymagają elastycznego czasu, bo seniorzy często bardziej
+potrzebują rozmowy i budowania zaufania niż szybkiej realizacji zadań.
+
+Pierwsza wizyta powinna obejmować:
+   ● rozmowę wprowadzającą;
+   ● obserwację codziennych czynności;
+   ● ocenę łazienki, kuchni, sypialni, przejść i oświetlenia;
+   ● krótkie testy sprawności;
+   ● ustalenie, czego senior się boi;
+   ● wybór 3-5 najważniejszych zmian, nie 30 zaleceń;
+   ● wskazanie prostych działań możliwych do wykonania od razu.
+
+Warto unikać sytuacji, w której senior po wizycie otrzymuje długą listę problemów bez realnego
+wsparcia we wdrożeniu zmian.
+
+7) Przygotować język komunikacji
+
+Nie mówić seniorowi:
+   ● "mieszkanie jest niebezpieczne",
+   ● "trzeba to zmienić",
+   ● "OPS przyjdzie ocenić sytuację".
+
+Lepszy komunikat:
+   ● "Sprawdzimy, co można zrobić, żeby było Pani/Panu łatwiej."
+   ● "Nie będziemy robić remontu, tylko poszukamy prostych zmian."
+   ● "To Pan/Pani decyduje, które rozwiązania są do przyjęcia."
+   ● "Celem jest, żeby jak najdłużej dobrze funkcjonować u siebie."
+   ● "To praktyczna pomoc dla seniora i rodziny, a nie kontrola mieszkania."
+
+Warto wykorzystać pozytywną narrację podobną do tej zaproponowanej przez twórców innowacji:
+"Mój dom - moje bezpieczne miejsce".
+
+Etap świadczenia usługi - minimum 12 miesięcy
+
+Rytm usługi:
+   ● zgłoszenie seniora;
+
+
+
+                                          Strona 12 z 19
+     ● kwalifikacja do udziału w usłudze;
+     ● pierwsza wizyta domowa;
+     ● diagnoza funkcjonalna, przestrzenna i psychologiczna;
+     ● przygotowanie planu ergonomizacji mieszkania;
+     ● wdrożenie prostych zmian poprawiających bezpieczeństwo i codzienne funkcjonowanie;
+     ● trening seniora dotyczący bezpiecznego korzystania z przestrzeni;
+     ● konsultacje psychologiczne wspierające adaptację do zmian i wzmacniające poczucie
+        sprawczości seniora;
+     ● krótki instruktaż dla rodziny lub opiekuna;
+     ● wizyta kontrolna;
+     ● korekta zaleceń i dalszych działań;
+     ● decyzja o potrzebie dodatkowego wsparcia, np. rehabilitacji, teleopieki, pomocy
+        sąsiedzkiej, usług środowiskowych lub drobnego doposażenia mieszkania.
+
+4.   Co jest obowiązkowe, a co można rozszerzać
+
+Elementy konieczne
+
+Bez tych elementów usługa przestaje być "Terapeutą przestrzeni":
+     ● wizyta w miejscu zamieszkania seniora;
+     ● diagnoza codziennych czynności i poziomu samodzielności;
+     ● analiza przestrzeni i identyfikacja ryzyk w mieszkaniu;
+     ● przygotowanie planu prostych zmian poprawiających bezpieczeństwo i komfort
+        funkcjonowania;
+     ● konsultacja psychologiczna wspierająca akceptację zmian i adaptację seniora;
+     ● akceptacja proponowanych rozwiązań przez seniora;
+     ● trening bezpiecznego korzystania z przestrzeni i codziennych czynności;
+     ● włączenie rodziny lub opiekuna w proces wsparcia;
+     ● wizyta kontrolna;
+     ● dokumentowanie efektów usługi;
+     ● rekomendacje możliwe do wdrożenia przy realnych możliwościach finansowych seniora i
+        rodziny.
+
+
+
+
+                                             Strona 13 z 19
+Elementy opcjonalne
+
+Możliwe rozszerzenia:
+     ● baza wymiany sprzętów i wyposażenia;
+     ● lokalna sieć rzemieślników wspierających drobne adaptacje mieszkań;
+     ● współpraca z uczelniami architektonicznymi, artystycznymi i technicznymi;
+     ● bank prostych rozwiązań typu “zrób to sam”;
+     ● drobne doposażenie poprawiające bezpieczeństwo i ergonomię mieszkania;
+     ● teleopieka;
+     ● wolontariat sąsiedzki;
+     ● współpraca z podstawową opieką zdrowotną i rehabilitacją;
+     ● szkolenia i instruktaże dla rodzin oraz opiekunów;
+     ● współpraca z centrami aktywności seniorów, klubami seniora i lokalnymi organizacjami
+        wspierającymi osoby starsze;
+     ● działania pomagające ograniczać izolację społeczną seniorów;
+     ● konsultacje psychologiczne dotyczące lęku przed wychodzeniem z domu, utratą sprawności
+        lub zmianą codziennych nawyków;
+     ● wspólne planowanie bezpiecznych tras codziennego funkcjonowania seniora, np. do
+        sklepu, apteki, kościoła, przychodni lub na cmentarz;
+     ● działania wspierające odbudowę codziennej aktywności i poczucia sprawczości seniora
+        poza mieszkaniem.
+
+5.   Jak poradzić sobie z typowymi barierami JST
+
+Bariera 1: "Instytucje społeczne kojarzą się z kontrolą"
+To jedna z najważniejszych barier wdrożeniowych. W wielu środowiskach seniorzy nadal kojarzą
+kontakt z pomocą społeczną głównie z sytuacją kryzysową, oceną sytuacji życiowej lub utratą
+samodzielności.
+
+Dlatego:
+     ● usługa powinna być komunikowana jako wsparcie codziennego bezpieczeństwa i
+        samodzielności;
+     ● warto angażować partnerów spoza systemu pomocy społecznej;
+     ● nie opierać rekrutacji wyłącznie na formalnych procedurach i formularzach;
+
+
+
+                                           Strona 14 z 19
+   ● korzystać z rekomendacji lekarzy, rodzin, pielęgniarek, opiekunów środowiskowych,
+       sołtysów i organizacji lokalnych.
+
+Bariera 2: "Seniorzy nie zgłaszają się sami"
+To naturalna sytuacja. Wielu seniorów przez lata funkcjonowało w przekonaniu, że problemy
+należy rozwiązywać samodzielnie i nie prosić o pomoc.
+
+Dlatego skuteczniejsze od ogólnych kampanii informacyjnych są osoby mające codzienny kontakt z
+seniorami, między innymi:
+   ● lekarze podstawowej opieki zdrowotnej;
+   ● rehabilitanci i fizjoterapeuci;
+   ● pielęgniarki środowiskowe;
+   ● rodziny i sąsiedzi;
+   ● sołtysi;
+   ● kluby seniora;
+   ● parafie i organizacje lokalne.
+
+Bariera 3: "To skończy się kosztownym remontem"
+
+Usługa nie powinna prowadzić do tworzenia listy drogich modernizacji lub całkowitej przebudowy
+mieszkania. Właśnie nie powinno. Jej celem jest przede wszystkim:
+   ● wskazanie najważniejszych zmian poprawiających bezpieczeństwo;
+   ● wykorzystanie istniejącego wyposażenia i układu mieszkania;
+   ● proponowanie rozwiązań niskokosztowych;
+   ● wybór działań możliwych do wykonania samodzielnie lub przy niewielkim wsparciu;
+   ● ograniczanie ryzyk w codziennym funkcjonowaniu seniora.
+
+Bariera 4: "Nie mamy odpowiednich kadr"
+
+Usługa nie wymaga tworzenia nowej instytucji ani dużego zespołu specjalistów zatrudnionych
+wyłącznie do realizacji projektu.
+
+W praktyce skuteczniejsze może być:
+   ● stworzenie małego zespołu współpracujących specjalistów;
+   ● wykorzystanie istniejących lokalnie kompetencji;
+   ● budowanie sieci współpracy między podmiotami;
+   ● przygotowanie bazy specjalistów i wykonawców wspierających seniorów;
+
+
+                                           Strona 15 z 19
+     ● przeszkolenie przedstawicieli istniejącej kadry w zakresie niezbędnym do wdrażania usługi i
+        prowadzenia podstawowej diagnozy funkcjonalnej.
+
+6.   Działania wspierające wdrożenie innowacji
+
+Rekomendowane działania:
+     ● domowa karta bezpieczeństwa seniora;
+     ● checklista ryzyk i barier w poszczególnych pomieszczeniach;
+     ● instruktaż dla rodziny i opiekunów dotyczący bezpiecznego wspierania seniora;
+     ● krótkie treningi codziennych czynności i bezpiecznego poruszania się po mieszkaniu;
+     ● konsultacje psychologiczne wspierające adaptację do zmian i ograniczające lęk przed utratą
+        samodzielności;
+     ● telefon kontrolny po wdrożeniu zmian;
+     ● wizyty kontrolne monitorujące funkcjonowanie seniora;
+     ● bank drobnego sprzętu i prostych rozwiązań poprawiających bezpieczeństwo;
+     ● baza wymiany lub ponownego wykorzystania wyposażenia wspierającego seniorów;
+     ● sieć lokalnych rzemieślników pomagających przy drobnych adaptacjach mieszkań;
+     ● współpraca z uczelniami architektonicznymi, artystycznymi i technicznymi;
+     ● szkolenia dla osób pracujących w środowisku seniorów, np. opiekunek środowiskowych;
+     ● współpraca z podstawową opieką zdrowotną, rehabilitacją i fizjoterapią;
+     ● działania ograniczające izolację społeczną seniorów i wspierające ich aktywność poza
+        mieszkaniem;
+     ● współpraca z klubami seniora, centrami aktywności seniorów i organizacjami lokalnymi.
+
+7.   Jak wykorzystać wdrożenie do trwałej zmiany lokalnej
+
+Po zakończeniu grantu mogą pozostać:
+     ● lokalna procedura oceny bezpieczeństwa i funkcjonalności mieszkań seniorów;
+     ● sieć lokalnych wykonawców i rzemieślników wspierających drobne adaptacje mieszkań;
+     ● baza prostych rozwiązań poprawiających bezpieczeństwo i ergonomię codziennego
+        funkcjonowania;
+     ● możliwość wymiany lub ponownego wykorzystania wyposażenia wspierającego seniorów;
+     ● lepsza współpraca między podmiotami społecznymi, zdrowotnymi i środowiskowymi;
+     ● bardziej wspierający i relacyjny sposób komunikowania usług kierowanych do seniorów;
+
+
+
+                                          Strona 16 z 19
+     ● skuteczniejsze docieranie do osób samotnych i zagrożonych utratą samodzielności;
+     ● większa wiedza o tym, jak niewielkie zmiany w mieszkaniu i codziennych nawykach mogą
+        ograniczać ryzyko upadków, hospitalizacji i konieczności opieki całodobowej;
+     ● przeszkolona kadra posiadająca kompetencje w zakresie oceny funkcjonalnej mieszkania i
+        pracy środowiskowej z seniorem.
+
+Najważniejsza zmiana myślenia:
+Wsparcie seniora przestaje koncentrować się wyłącznie na reagowaniu na kryzys lub utratę
+samodzielności. Usługa pokazuje, że odpowiednio wcześnie wprowadzone, proste i możliwe do
+zaakceptowania zmiany mogą pomóc seniorowi dłużej, bezpieczniej i bardziej komfortowo
+funkcjonować we własnym domu, przy wykorzystaniu lokalnych zasobów, relacji i codziennych
+nawyków.
+
+8.   Możliwe kierunki rozwoju usługi lokalnie
+
+Po etapie pilotażowym usługa może być rozwijana w zależności od lokalnych potrzeb, dostępnych
+partnerstw i doświadczeń zdobytych podczas pracy z seniorami.
+
+Możliwe kierunki rozwoju:
+     ● stworzenie lokalnej bazy lub punktu wymiany wyposażenia wspierającego samodzielność
+        seniorów;
+     ● budowanie sieci lokalnych rzemieślników pomagających w drobnych adaptacjach mieszkań;
+     ● współpraca z uczelniami architektonicznymi, artystycznymi i technicznymi w zakresie
+        projektowania przyjaznych rozwiązań dla seniorów;
+     ● połączenie usługi z teleopieką, usługami środowiskowymi i pomocą sąsiedzką;
+     ● rozwój ścieżki wsparcia seniora po hospitalizacji lub pogorszeniu sprawności;
+     ● włączenie lekarzy podstawowej opieki zdrowotnej, rehabilitantów i fizjoterapeutów do
+        systemu kierowania seniorów do usługi;
+     ● tworzenie prostych katalogów i poradników „zrób to sam” dla rodzin i opiekunów;
+     ● rozwój działań ograniczających izolację społeczną seniorów;
+     ● współpraca z klubami seniora i centrami aktywności seniorów;
+     ● rozwijanie lokalnych kompetencji w zakresie ergonomii mieszkań i projektowania
+        przyjaznego starzeniu;
+
+
+
+
+                                           Strona 17 z 19
+     ● tworzenie modeli współpracy między podmiotami działającymi na rzecz seniorów w
+        środowisku lokalnym.
+
+9.   Szybka checklista dla Grantobiorcy przed zaplanowaniem wdrożenia
+
+     ● Czy zachowujemy istotę innowacji: domową diagnozę funkcjonowania seniora, plan
+        prostych zmian oraz trening bezpiecznego korzystania z przestrzeni?
+     ● Czy usługa realizowana jest w rzeczywistym miejscu zamieszkania seniora?
+     ● Czy senior uczestniczy w podejmowaniu decyzji dotyczących zmian w mieszkaniu i
+        codziennym funkcjonowaniu?
+     ● Czy usługa nie została sprowadzona wyłącznie do remontu lub zakupu wyposażenia?
+     ● Czy rekomendacje uwzględniają realne możliwości finansowe seniora i jego rodziny?
+     ● Czy przewidziano wsparcie w pracy z lękiem, oporem lub trudnością w akceptacji zmian?
+     ● Czy sposób komunikowania usługi buduje poczucie wsparcia i bezpieczeństwa, a nie
+        kontroli?
+     ● Czy wykorzystujemy lokalne kanały dotarcia do seniorów i osoby cieszące się ich
+        zaufaniem?
+     ● Czy możliwe jest korzystanie z lokalnych wykonawców, rzemieślników lub innych zasobów
+        środowiskowych?
+     ● Czy po zakończeniu grantu pozostanie lokalna sieć współpracy wspierająca seniorów w
+        bezpiecznym funkcjonowaniu w miejscu zamieszkania?
+
+
+
+
+                                          Strona 18 z 19
+Strona 19 z 19
+
