@@ -23,7 +23,7 @@ Plan na podstawie `docs/modules/04-tester-innowacji/module-4-tester-innowacji.ht
 - Komentarze są widoczne dla autora dopiero po moderacji Hubu. Autor otrzymuje raport dopiero po zamknięciu naboru.
 - AI używa Anthropic Claude jak w Module 1. Raport może powstać przy dowolnej liczbie odpowiedzi, ale przy mniej niż 3 ankietach pokazuje ostrzeżenie o małej próbie.
 - Raport AI ma JSON: `summary_pl`, `barriers_pl[]`, `improvements_pl[]`, `evidence_feedback_ids[]`, `disclaimer_pl`; bez końcowej rekomendacji.
-- AI otrzymuje pełny formularz testera do sugestii dopasowania. Brak osobnej zgody na ten transfer wymaga przeglądu RODO przed produkcją.
+- AI otrzymuje formularz testera do sugestii dopasowania **bez danych kontaktowych** (bez `email` i `display_name` — triaż 2026-10-04, TI08). Brak osobnej zgody na ten transfer wymaga przeglądu RODO przed produkcją.
 - Przy wyłączonym lub niedostępnym AI działają ręczne decyzje Hubu, statystyki i anonimowe komentarze.
 - Zgłoszenie wymaga `consent=true`, wersji tekstu zgody i `consented_at`; obowiązuje jeden stały tekst zgody dla Modułu 4.
 - Publiczny `OPEN` wymaga `solutions.status = PUBLISHED`. `PENDING_REVIEW` jest tylko dla Hubu lub zaproszonych testerów i nie jest listowany publicznie.
@@ -57,6 +57,7 @@ Plan na podstawie `docs/modules/04-tester-innowacji/module-4-tester-innowacji.ht
 - [x] TI05 · Frontend publiczny: lista naborów, zgłoszenie i dostęp tokenowy · zależy: TI03, F04, F05 · agent: Auto · 2026-10-04
 - [x] TI06 · Frontend panelu Hubu: nabory, zgłoszenia, moderacja i raport · zależy: TI03, TI04, F04, F05 · agent: Auto · 2026-10-04
 - [x] TI07 · Dane demo, integracja i ścieżka demonstracyjna · zależy: TI02, TI03, TI04, TI05, TI06 · agent: Auto · 2026-10-04
+- [ ] TI08 · Porządki po triażu modułów: „rekrutacja testerów” zamiast „nabór” w UI, CSS → Tailwind, bez e-maila w AI, limity w ustawieniach · zależy: TI07
 
 ### Fale równoległości
 
@@ -66,6 +67,7 @@ Plan na podstawie `docs/modules/04-tester-innowacji/module-4-tester-innowacji.ht
 - Fala 3: TI03
 - Fala 4: TI05, TI06
 - Fala 5: TI07
+- Fala 6: TI08 (porządki; nie blokuje demo)
 
 **Najkrótsza działająca ścieżka demo:** TI00–TI03, TI05, TI06, TI07 z `M4_AI_ENABLED=false`. Pokazuje: Hub tworzy `OPEN`, użytkownik widzi nabór, składa zgłoszenie, Hub akceptuje, tester otwiera tokenowy status, wysyła ankietę, a Hub widzi statystyki i moderuje komentarz. TI04 dochodzi z sugestią AI i raportem.
 
@@ -278,6 +280,23 @@ Prompt przyjmuje dane feedbacku bez danych kontaktowych testera. Sugestia dopaso
 
 **Gotowe, gdy:** nowa osoba uruchamia Compose, seeduje dane, przechodzi pełny scenariusz bez ręcznej modyfikacji SQL, a `ruff check .`, `npm run lint` i `npm run build` są czyste.
 
+### TI08 · Porządki po triażu modułów
+
+**Cel:** usunąć z kodu M4 kolizje z innymi modułami i odstępstwa od `AGENTS.md` wykryte w triażu 2026-10-04 (`docs/modules/README.md` → „Podział między modułami”). Zachowanie API i schemat bazy się nie zmieniają.
+
+**Zależy od:** TI07
+
+**Pliki:** `web/src/pages/InnovationTestsPage.tsx`, `web/src/pages/InnovationTestPage.tsx`, `web/src/pages/InnovationTestAccessPage.tsx`, `web/src/pages/panel/InnovationTestsPage.tsx`, `web/src/pages/panel/InnovationTestCreatePage.tsx`, `web/src/pages/panel/InnovationTestManagePage.tsx`, `web/src/components/innovation-tests/*.tsx`, `web/src/styles/innovation-tests.css` (usunięcie), `web/src/lib/labels.ts` (tylko etykiety M4), `api/innovation_tests.py`, `api/pipeline/innovation_tests.py`, `api/schemas.py` (tylko schematy M4), `api/config.py` i `.env.example` (blok Moduł 4)
+
+**Kroki:**
+1. **Słownictwo.** „Nabór” znaczy w platformie konkurs grantowy (Moduł 3, `/nabory`). W tekstach UI M4 zamień „nabór/naboru/naborów…” na „rekrutacja testerów” / „test” (np. „Otwarte rekrutacje testerów”, „Zamknij rekrutację”). Nazwy w API, bazie i typach (`InnovationTest*`) zostają.
+2. **CSS.** Przenieś style z `web/src/styles/innovation-tests.css` na klasy Tailwinda z presetu i `ds-*` (zasady z `AGENTS.md` → „Stylowanie”), usuń importy i plik. Porównaj ekrany przed i po, także w `data-contrast="high"`.
+3. **AI bez danych kontaktowych.** `suggest_tester_fit` w `api/pipeline/innovation_tests.py` nie wysyła `email` ani `display_name` — wystarczą typ testera, lokalizacja, przynależność do grupy docelowej i motywacja.
+4. **Limity w ustawieniach.** `MAX_ACTIVE_APPLICATIONS` → `settings.M4_MAX_ACTIVE_APPLICATIONS` (3); `max_length` motywacji, komentarza i propozycji w schematach M4 brane z `M4_MOTIVATION_MAX_CHARS` / `M4_COMMENT_MAX_CHARS` (walidator albo stała z `settings`), bez zdublowanego literału 4000. Dopisz brakujące `M4_*` do `.env.example`.
+5. Nie dodawaj nowych globalnych nazw ogólnych — `application_status`, `material_type`, `test_mode`, `tester_type`, `ApplicationStatus`, `APPLICATION_STATUS_LABELS`, `FeedbackModerate` są już zajęte przez M4 i inne moduły ich nie użyją; nie zmieniaj ich nazw (zmiana bazy = reset u wszystkich).
+
+**Gotowe, gdy:** w `web/src/` nie ma `innovation-tests.css` ani słowa „nabór” w ekranach M4; ekrany wyglądają jak przed zmianą; `grep -n email api/pipeline/innovation_tests.py` nie pokazuje pola w ładunku dla AI; scenariusz z TI07 przechodzi; `ruff check .`, `npm run lint`, `npm run build` czyste.
+
 ## Uwagi między zadaniami
 
 - [TI00 → Moduł 1 T01/T02] dopisanie tabel i enumów do `db/init.sql` oraz modeli do `api/models.py` wymaga zachowania istniejącego schematu.
@@ -286,3 +305,4 @@ Prompt przyjmuje dane feedbacku bez danych kontaktowych testera. Sugestia dopaso
 - [TI04 → T05] użyć istniejącego `LLMProvider` Anthropic; nie tworzyć drugiego klienta HTTP.
 - [TI04 → TI06] raport autora jest tylko widokiem Hubu i nie ma publicznego endpointu.
 - [TI07 → wszystkie] brak automatycznych testów; weryfikacja pozostaje ręczna zgodnie z decyzją zespołu.
+- [triaż → TI08] 2026-10-04, podział między modułami (`docs/modules/README.md` → „Podział między modułami”): porządki zebrane w TI08. Schemat M4 zostaje w `db/init.sql` (już na masterze); nowe moduły trzymają tabele w `db/mN-*.sql`. Po zmianie M2 w `solutions` (`knowledge_type`, Z00) potrzebny `make reset-db` + `make ingest` + `make seed-m4` — seed M4 tworzy `solutions` z `kind=SOLUTION`, więc przejdzie przez nowy CHECK. `api/providers/llm.py` po dodaniu `complete()` jest zamrożony.

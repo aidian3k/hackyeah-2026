@@ -10,7 +10,7 @@ Obecnie budujemy **Moduł 1 — Matchmaking społeczny**: backend PoC, który pr
 - Plan implementacji i status zadań: `docs/modules/01-matchmaking/module-1-tasks.md` — **zanim zaczniesz pracę, przeczytaj protokół na górze tego pliku**.
 - Frontend (osobny moduł w `web/`): plan i status zadań w `docs/modules/01-matchmaking/frontend-tasks.md` — ten sam protokół pracy, zadania F00–F21.
 - Kontekst biznesowy wyzwania: `docs/base.md`.
-- Moduły 2–7 (szkielety do sesji planowania, nie implementuj): `docs/modules/README.md` — indeks, konwencje i ocena pokrycia.
+- Moduły 2–7: `docs/modules/README.md` — indeks, konwencje, stan i **podział między modułami** (właściciele wspólnych plików, triaż 2026-10-04). Implementuj tylko moduły z rozpisanymi zadaniami.
 - Zmiany i poprawki po sprincie: `docs/changes/` — każda zmiana to katalog ze `spec.md` (co) i `plan.md` (jak). Prośba o zmianę zachowania = najpierw `spec.md`, potem `plan.md`, potem kod (przebieg w `docs/changes/README.md`).
 - Mapa całej dokumentacji: `docs/README.md`. Nowe dokumenty tylko w `docs/` — bez osobnych katalogów typu `spec/`.
 
@@ -21,13 +21,14 @@ Obecnie budujemy **Moduł 1 — Matchmaking społeczny**: backend PoC, który pr
 - Embeddingi: OpenAI `text-embedding-3-large` z `dimensions=1024` (jedyna implementacja, ADR-015). Wymiar 1024 jest stały (ADR-004).
 - Reranker: Cohere `rerank-v3.5` albo `noop`.
 - LLM (streszczenie): Anthropic `claude-haiku-4-5-20251001`.
-- Schemat bazy: jeden plik `db/init.sql` (bez Alembica w PoC).
+- Schemat bazy bez Alembica w PoC: `db/init.sql` (Moduł 1, M4 i zmiany tabel M1) oraz osobne, idempotentne pliki modułów `db/mN-<nazwa>.sql` z celem `make db-mN` (ładują się alfabetycznie po `init.sql`).
 
 ## Struktura
 
 ```
 docker-compose.yml  Makefile  .env.example  pyproject.toml
-db/init.sql                    # rozszerzenia, polish_simple, 6 tabel, seed taksonomii
+db/init.sql                    # rozszerzenia, polish_simple, tabele M1 (+ M4), seed taksonomii
+db/mN-*.sql                    # schematy modułów 2, 3, 5 (m2-zasobnik, m3-kreator, m5-komunikacja)
 api/main.py config.py db.py errors.py log.py tasks.py models.py schemas.py cards.py corpus.py chunking.py
 api/routers/   chat.py search.py reports.py solutions.py staff.py meta.py
 api/pipeline/  types.py text.py preprocess.py lexical.py semantic.py fusion.py rerank.py answer.py reports.py orchestrator.py

@@ -26,7 +26,7 @@ Identyfikatory: `Z00`, `Z01`, … (prefiks modułu, żeby nie kolidować z `T` M
 
 <!-- Format linii: - [ ] Z00 · Opis · zależy: — / Zxx, T.., F.. -->
 
-- [ ] Z00 · Schemat i kontrakty: `init.sql`, modele ORM, modele pydantic, `SolutionCard.knowledge_type`, ustawienia · zależy: —
+- [ ] Z00 · Schemat i kontrakty: kolumna w `init.sql` + tabele w `db/m2-zasobnik.sql`, modele ORM, modele pydantic, `SolutionCard.knowledge_type`, ustawienia · zależy: —
 - [ ] Z01 · Skrypt `scripts/fetch_ioss.py` → `data/knowledge/indicators.json` (wskaźniki IOSS dla 22 powiatów) · zależy: —
 - [ ] Z02 · Treści: `data/knowledge/challenges.json` (8 profili) i `data/knowledge/records/wiedza.json` (raporty, materiały) · zależy: —
 - [ ] Z03 · Ingest wiedzy: `knowledge_type` w `scripts/ingest.py`, `scripts/ingest_knowledge.py`, `make ingest-knowledge` · zależy: Z00
@@ -124,16 +124,22 @@ Dokładnie 8 wpisów (wszystkie kody taksonomii poza `OTHER`). `value` to tekst 
 
 **`data/knowledge/records/wiedza.json`** (pisze Z02, ładuje `scripts/ingest.py`): lista rekordów w formacie `IngestRecord` Modułu 1 z polami: `kind: "KNOWLEDGE"`, `knowledge_type: "REPORT" | "MATERIAL"`, `title`, `summary` (2–3 zdania, nasze), `body` (nasze streszczenie, 1–3 akapity — źródło dla embeddingów i czatu), `category` (wymagana dla `REPORT`; `null` = materiał ogólny), `source_url` (wymagany — klucz idempotencji), `source_name`, `organization`, `media` (`[{ "type": "youtube", "url": "…", "title": "…" }]` dla podcastu), `evidence_level: 1`, `tags`.
 
-### SQL (Z00 dopisuje do `db/init.sql`)
+### SQL (Z00)
+
+Podział wg triażu modułów 2026-10-04 (`docs/modules/README.md` → „Podział między modułami”): zmiana tabeli Modułu 1 idzie do `db/init.sql`, nowe tabele M2 do osobnego, idempotentnego `db/m2-zasobnik.sql` (ładuje się alfabetycznie po `init.sql`; na działającej bazie `make db-m2`).
 
 ```sql
+-- db/init.sql (przed CREATE TABLE solutions):
 CREATE TYPE knowledge_type AS ENUM ('REPORT', 'MATERIAL');
 -- w CREATE TABLE solutions, po kolumnie kind:
 --   knowledge_type knowledge_type,
 -- i ograniczenie tabeli:
 --   CONSTRAINT solutions_knowledge_type_ck CHECK ((kind = 'KNOWLEDGE') = (knowledge_type IS NOT NULL))
+```
 
-CREATE TABLE challenge_profiles (
+```sql
+-- db/m2-zasobnik.sql — Splot, Moduł 2 (Zasobnik wiedzy). Idempotentny; na działającej bazie: make db-m2.
+CREATE TABLE IF NOT EXISTS challenge_profiles (
     category   TEXT PRIMARY KEY REFERENCES challenge_taxonomy(code),
     lead_pl    TEXT        NOT NULL,
     key_facts  JSONB       NOT NULL DEFAULT '[]',
@@ -141,7 +147,7 @@ CREATE TABLE challenge_profiles (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TABLE indicators (
+CREATE TABLE IF NOT EXISTS indicators (
     code            TEXT PRIMARY KEY,
     category        TEXT        NOT NULL REFERENCES challenge_taxonomy(code),
     label_pl        TEXT        NOT NULL,
@@ -155,9 +161,9 @@ CREATE TABLE indicators (
     sort_order      INT         NOT NULL DEFAULT 100,
     updated_at      TIMESTAMPTZ NOT NULL DEFAULT now()
 );
-CREATE INDEX indicators_category_idx ON indicators (category, sort_order);
+CREATE INDEX IF NOT EXISTS indicators_category_idx ON indicators (category, sort_order);
 
-CREATE TABLE indicator_values (
+CREATE TABLE IF NOT EXISTS indicator_values (
     indicator_code TEXT    NOT NULL REFERENCES indicators(code) ON DELETE CASCADE,
     powiat         TEXT    NOT NULL,
     value          NUMERIC NOT NULL,
@@ -326,23 +332,23 @@ solutionFacets: (q?: Query) => request<SolutionFacets>("GET", "/api/solutions/fa
 
 **Cel:** baza, ORM, pydantic i ustawienia gotowe dla wszystkich pozostałych zadań backendu.
 **Zależy od:** —
-**Pliki:** `db/init.sql`, `api/models.py`, `api/schemas.py`, `api/cards.py`, `api/config.py`, `.env.example`, `docs/modules/01-matchmaking/module-1-tasks.md` (tylko dopisek w „Uwagach między zadaniami”)
+**Pliki:** `db/init.sql` (tylko typ i kolumna w `solutions`), `db/m2-zasobnik.sql` (nowy), `Makefile` (cel `db-m2`), `api/models.py`, `api/schemas.py`, `api/cards.py`, `api/config.py`, `.env.example`, `docs/modules/01-matchmaking/module-1-tasks.md` (tylko dopisek w „Uwagach między zadaniami”)
 
 **Kontekst ze specyfikacji:**
 - ADR-M2-001: wiedza to `solutions` z `kind = KNOWLEDGE` i nową kolumną `knowledge_type` (`REPORT` / `MATERIAL`); `NULL` dla `SOLUTION`. Zmiana addytywna — stare klienty działają.
-- `db/init.sql` to jedyny plik schematu (bez migracji). Istniejąca baza wymaga resetu albo ręcznego `ALTER`.
+- Schemat bez migracji. Zmiana tabeli M1 (`solutions.knowledge_type`) w `db/init.sql` — istniejąca baza wymaga `make reset-db` albo ręcznego `ALTER`. Nowe tabele M2 w idempotentnym `db/m2-zasobnik.sql` (konwencja M3/M5: `db/m3-kreator.sql`, `db/m5-komunikacja.sql`).
 
 **Kroki:**
-1. `db/init.sql`: typ `knowledge_type`, kolumna i CHECK w `solutions`, tabele `challenge_profiles`, `indicators`, `indicator_values`, indeks — dokładnie wg „Wspólne kontrakty → SQL”. Tabele po `challenge_taxonomy` (klucze obce).
+1. `db/init.sql`: typ `knowledge_type`, kolumna i CHECK w `solutions`. `db/m2-zasobnik.sql`: tabele `challenge_profiles`, `indicators`, `indicator_values` i indeks (`IF NOT EXISTS`) — dokładnie wg „Wspólne kontrakty → SQL”. `Makefile`: cel `db-m2` → `docker compose exec -T db psql -U splot -d splot -v ON_ERROR_STOP=1 < db/m2-zasobnik.sql`, dopisany do `.PHONY` (blok z komentarzem `# --- Moduł 2 ---`).
 2. `api/models.py`: enum `KnowledgeType`, pole `Solution.knowledge_type` (nullable, `_pg_enum(KnowledgeType, "knowledge_type")`), modele `ChallengeProfile`, `Indicator`, `IndicatorValueRow` (nazwa klasy bez kolizji z pydantic `IndicatorValue`).
 3. `api/schemas.py`: wszystkie modele z „Wspólne kontrakty → Modele pydantic” (także `SolutionFacets`), pole `SolutionCard.knowledge_type`, pole `Stats.by_powiat` (z domyślną pustą listą, żeby `staff.py` działał przed Z05).
 4. `api/cards.py`: `_card_fields` wypełnia `knowledge_type` (wartość enuma albo `None`).
 5. `api/config.py` i `.env.example`: pięć zmiennych z tabeli ustawień, z komentarzem `# --- Moduł 2: Zasobnik wiedzy ---`.
 6. Dopisek w „Uwagach między zadaniami” Modułu 1: `- [Z00 → M1] solutions.knowledge_type, SolutionCard.knowledge_type, Stats.by_powiat — addytywnie, ADR-M2-001 / ADR-M2-005 (docs/modules/02-zasobnik-wiedzy).`
-7. Instrukcja dla istniejącej bazy (do „Uwag” tego pliku): `make reset-db` albo odpowiednie `ALTER TABLE … ADD COLUMN` + `CREATE TABLE`.
+7. Instrukcja dla istniejącej bazy (do „Uwag” tego pliku): `make reset-db` (potem `make ingest`, `make seed-m4` i seedy innych modułów) albo ręczne `CREATE TYPE` + `ALTER TABLE solutions ADD COLUMN …` + `make db-m2`.
 
 **Gotowe, gdy:**
-- Na świeżej bazie (`make reset-db && make ingest`): `psql -c "\d solutions"` pokazuje `knowledge_type` i ograniczenie `solutions_knowledge_type_ck`; `\dt` pokazuje 3 nowe tabele.
+- Na świeżej bazie (`make reset-db && make ingest`): `psql -c "\d solutions"` pokazuje `knowledge_type` i ograniczenie `solutions_knowledge_type_ck`; `\dt` pokazuje 3 nowe tabele; `make db-m2` przechodzi dwa razy z rzędu.
 - `psql -c "INSERT INTO solutions (kind, title, summary, content_hash) VALUES ('KNOWLEDGE','t','s','x')"` kończy się błędem CHECK.
 - `curl -s localhost:8000/api/solutions?limit=1 | python -c "import json,sys; print(json.load(sys.stdin)['items'][0]['knowledge_type'])"` → `None`.
 - `curl -s localhost:8000/api/stats | python -c "import json,sys; print(json.load(sys.stdin)['by_powiat'])"` → `[]` (wypełni Z05).
@@ -678,3 +684,8 @@ solutionFacets: (q?: Query) => request<SolutionFacets>("GET", "/api/solutions/fa
 
 _(dopisuj na końcu: `- [Zxx → Zyy] opis`)_
 - [Z13, Z14 → plan] 2026-10-04: Biblioteka (Z13) zaczęta wcześniej na obecnym API — `ropsGroups.tsx`, `useLibraryOverview.ts`, `ZasobnikHeader`, `ZasobnikNav`, nowy `SolutionCard`, `CatalogFilters`, `FilmStrip`, `CatalogResults`, `LibraryPage` (build i lint czyste, niecommitowane). Tymczasowe: liczniki i „Tylko z filmem” liczone w kliencie, zakładki bez „Materiały” — przepięcie na `/api/solutions/facets` i `has_video` po Z06 i Z12 (implementation-plan.md, etap C1). Biblioteka bez filtra gminy — zamyka punkt 3 `docs/changes/bugs-2026-10-03-1` dla Biblioteki.
+- [triaż → Z00, Z13, Z11] 2026-10-04, podział między modułami (`docs/modules/README.md` → „Podział między modułami”):
+  - Z00: nowe tabele M2 w `db/m2-zasobnik.sql` + `make db-m2`; w `db/init.sql` tylko typ i kolumna `solutions.knowledge_type` (zmiana tabeli M1). Treść Z00 już poprawiona.
+  - Z13: **M2 jest właścicielem `web/src/components/SolutionCard.tsx`** — używają go czat, panel, M3 (`SimilarInnovations`, K07) i M5 (`Timeline`, `OfferPage`, PK21/PK23). Nie zmieniaj ani nie usuwaj istniejących propsów (tylko nowe, opcjonalne). Z13 domknij (weryfikacja w czacie i panelu) jak najwcześniej — M3 i M5 budują na tej karcie.
+  - Materiały ROPS (Social Canvas, przewodnik, „Połącz kropki”, plany wdrożenia, podcast) mają jedno źródło: wpisy `MATERIAL` z Z02. M3 (K12, sekcja „Materiały” na `/nabory`) linkuje do `/wiedza/materialy`, nie powiela listy.
+  - `api/config.py`, `api/main.py`, `Makefile`, `.env.example`, `web/src/App.tsx`, `web/src/api/types.ts`, `web/src/api/client.ts` edytują też M3 i M5 — dopisuj tylko blokiem z komentarzem `Moduł 2` na końcu sekcji, nie przestawiaj cudzych linii. Z00 i Z06 wypchnij na master jak najwcześniej (małe PR-y).

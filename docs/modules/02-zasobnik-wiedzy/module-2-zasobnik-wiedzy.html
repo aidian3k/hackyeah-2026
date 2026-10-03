@@ -271,7 +271,7 @@ web/  /wiedza, /wiedza/wyzwania/:code, /wiedza/materialy, /panel/trendy</code></
 
 <h2 id="s6">6. Model danych <span class="badge b-draft">draft</span></h2>
 
-<p>DDL dopisywany do <code>db/init.sql</code> (jeden plik schematu, bez migracji). Istniejąca baza: <code>make down</code> z usunięciem wolumenu i ponowny ingest albo ręczny <code>ALTER</code> — opisane w zadaniu.</p>
+<p>Schemat bez migracji. Typ i kolumna <code>solutions.knowledge_type</code> (zmiana tabeli Modułu 1) w <code>db/init.sql</code>; nowe tabele M2 w idempotentnym <code>db/m2-zasobnik.sql</code> (<code>make db-m2</code>) — podział z triażu modułów 2026-10-04. Istniejąca baza: <code>make reset-db</code> i ponowny ingest albo ręczny <code>ALTER</code> — opisane w zadaniu.</p>
 
 <pre><code>-- ADR-M2-001: podtyp wiedzy w istniejącej tabeli solutions
 CREATE TYPE knowledge_type AS ENUM ('REPORT', 'MATERIAL');
@@ -463,7 +463,8 @@ CoverageRow { category: str, label_pl: str,
 
 <h2 id="s12">12. Struktura katalogów i kolejność prac <span class="badge b-draft">draft</span></h2>
 
-<pre><code>db/init.sql                         knowledge_type, challenge_profiles, indicators, indicator_values
+<pre><code>db/init.sql                         knowledge_type (typ i kolumna w solutions)
+db/m2-zasobnik.sql                  challenge_profiles, indicators, indicator_values (make db-m2)
 api/models.py api/schemas.py        modele ORM i pydantic (ChallengeSummary, ChallengeDetail, KeyFact, Indicator*, CoverageRow)
 api/routers/knowledge.py            (nowy) /api/challenges, /api/indicators
 api/routers/staff.py                by_powiat, /api/stats/coverage

@@ -94,6 +94,7 @@ Identyfikatory: `PK00`–`PK05` backend, `PK20`–`PK26` frontend.
 | `api/log.py` | PK01 | `REDACTED_KEYS` += `body`, `subject`, `title`, `description`, `author_label` |
 | `web/src/lib/auth.tsx`, `web/src/lib/modules.ts` | PK20 | rola `mentor`, konto `ekspert`; nazwa modułu |
 | `web/src/App.tsx`, `web/src/components/layout/MainNav.tsx`, `web/src/components/layout/PanelLayout.tsx` | PK20 | trasy i pozycje nawigacji |
+| `web/src/pages/panel/InboxPage.tsx` | PK24 | sekcja „Rozmowy czekające na Hub” (dopisanie; M3 K11 dopisuje „Nowe pomysły”) |
 
 Te same pliki dopisują inne moduły (np. M2, M3) — nie przestawiaj ani nie formatuj cudzych linii; przy konflikcie git zachowaj obie wersje.
 
@@ -113,7 +114,7 @@ Te same pliki dopisują inne moduły (np. M2, M3) — nie przestawiaj ani nie fo
 
 | Zdarzenie | Z | Na |
 |---|---|---|
-| utworzenie `QUESTION` przy `ASSISTANT_ENABLED` | — | `AI_PENDING` |
+| utworzenie `QUESTION` przy `M5_ASSISTANT_ENABLED` | — | `AI_PENDING` |
 | utworzenie innego rodzaju albo asystent wyłączony | — | `WAITING_STAFF` |
 | asystent: bramka przeszła, są karty → wiadomość `ASSISTANT` | `AI_PENDING` | `WAITING_USER` |
 | asystent: „nie wiem” / brak kart / wyjątek → wiadomość `SYSTEM` | `AI_PENDING` | `WAITING_STAFF` |
@@ -366,8 +367,8 @@ CREATE INDEX IF NOT EXISTS thread_messages_thread_idx ON thread_messages (thread
 1. `api/config.py` — sekcja na końcu pól `Settings`:
    ```python
    # --- Moduł 5: Platforma komunikacji ---
-   ASSISTANT_ENABLED: bool = True          # automatyczna odpowiedź na pytanie
-   ASSISTANT_TIMEOUT_SECONDS: float = 30.0
+   M5_ASSISTANT_ENABLED: bool = True          # automatyczna odpowiedź na pytanie
+   M5_ASSISTANT_TIMEOUT_SECONDS: float = 30.0
    PARTNER_MATCH_N: int = 5
    ```
 2. `api/comm/schemas.py` — dokładnie jak „Kontrakty API”.
@@ -414,7 +415,7 @@ curl -s "localhost:8000/api/threads?status=WAITING_STAFF&limit=1"               
 **Kroki (`run_assistant(thread_id)`, własna sesja):**
 1. `q = preprocess(pierwsza_wiadomość_USER, None)`; `result = await run_search(q)`.
 2. `not result.gate.passed or not result.solutions` → `SYSTEM` „Nie mam gotowej odpowiedzi w Bibliotece Innowacji. Pytanie trafiło do zespołu Hubu — odpowiemy w tym wątku.”, `WAITING_STAFF`.
-3. Karty = `result.solutions` (nigdy `result.context`). Gdy `settings.LLM_ENABLED`: tekst = `generate(q.normalized, cards, result.best_chunks, q.too_vague, get_llm_provider())` przepuszczony przez `CitationFilter(len(cards))` (`feed` dla każdego fragmentu, na końcu `flush()`), w `asyncio.timeout(settings.ASSISTANT_TIMEOUT_SECONDS)`; `should_retract` → tekst odrzucony.
+3. Karty = `result.solutions` (nigdy `result.context`). Gdy `settings.LLM_ENABLED`: tekst = `generate(q.normalized, cards, result.best_chunks, q.too_vague, get_llm_provider())` przepuszczony przez `CitationFilter(len(cards))` (`feed` dla każdego fragmentu, na końcu `flush()`), w `asyncio.timeout(settings.M5_ASSISTANT_TIMEOUT_SECONDS)`; `should_retract` → tekst odrzucony.
 4. Brak LLM / `ProviderError` / timeout / odrzucenie → treść „Te rozwiązania z Biblioteki Innowacji mogą pomóc:”, `meta.fallback` = `"no_llm" | "error" | "retracted"`.
 5. Wiadomość `ASSISTANT` z `solution_ids` w kolejności kart; status `WAITING_USER`.
 6. Każdy wyjątek → `SYSTEM` + `WAITING_STAFF`; wątek nie może zostać w `AI_PENDING`.
@@ -535,11 +536,13 @@ curl -s "localhost:8000/api/threads?status=WAITING_STAFF&limit=1"               
 ## PK24 — Frontend: Panel — Rozmowy
 
 **Zależy od:** PK21, PK02, PK04
-**Pliki:** `web/src/pages/panel/CommThreadsPage.tsx`, `web/src/pages/panel/CommThreadPage.tsx`
+**Pliki:** `web/src/pages/panel/CommThreadsPage.tsx`, `web/src/pages/panel/CommThreadPage.tsx`, `web/src/pages/panel/InboxPage.tsx` (tylko dopisanie sekcji)
 
 **Kroki:**
 1. `CommThreadsPage`: filtry statusu (domyślnie „Czeka na zespół Hubu”) i rodzaju w URL, `ThreadList` (viewer `staff`), `Pagination`.
 2. `CommThreadPage`: okruszki, `h1` temat, rodzaj, wyzwanie, typ zgłaszającego, link do ogłoszenia (`PARTNERSHIP`); `Timeline` (viewer `staff`); `MessageForm` „Odpowiedź Hubu” z polem „Podpis” (domyślnie „Zespół Hubu”); „Zamknij rozmowę” / „Otwórz ponownie”; „Ekspert”: `ds-select` z `GET /api/mentors?category=…` (pierwsi pasujący, dopisek „ten sam obszar”), „Przydziel” / „Usuń przydział”.
+
+3. `InboxPage` (Skrzynka, plik M1): dopisz na końcu osobną sekcję „Rozmowy czekające na Hub” — do 5 wątków z `listThreads({status: "WAITING_STAFF", limit: 5})`, link „Wszystkie rozmowy” → `/panel/rozmowy`; pusto → krótki `EmptyState`. Nie zmieniaj sekcji M1 ani sekcji „Nowe pomysły” (M3, K11). Tylko Tailwind i `ds-*`, bez reguł w `styles/panel.css`.
 
 **Gotowe, gdy:** licznik „Rozmowy” w nawigacji panelu pokazuje wątki z seedu; odpowiedź z panelu pojawia się u autora; przydział eksperta dodaje wiadomość systemową, a wątek pojawia się u eksperta; lista kontrolna dostępności OK.
 
@@ -574,3 +577,11 @@ curl -s "localhost:8000/api/threads?status=WAITING_STAFF&limit=1"               
 _(dopisuj na końcu: `- [PKxx → PKyy] opis`)_
 - [M3 → PK11] Plan M3 jest teraz w v0.3 i ma przenumerowane zadania (K00–K13). Backend pomysłów (`ideas`, `idea_replies`, endpointy) to **K03** (było K04), a „Moje pomysły” to **K11** (było K15). Status pomysłu nie ma już `PROMOTED`, a statusy `SUBMITTED|IN_REVIEW|INVITED|REJECTED` Hub ustawia bez macierzy przejść. Kontrakt `idea_replies` jest bez zmian. Zależność PK11 czytaj jako „K03 (M3)”.
 - [PK → M3] W v0.4 planu M5 zadanie PK11 (rozmowa o pomyśle, wątek `IDEA`) przeszło do backlogu (spec M5, sekcja 14) — M5 nie zależy teraz od M3. Przy powrocie do tematu zależność to K03 (backend pomysłów), a przycisk w „Moich pomysłach” — K11.
+- [triaż → PK01, PK03, PK20, PK24] 2026-10-04, podział między modułami (`docs/modules/README.md` → „Podział między modułami”). Treść zadań już poprawiona:
+  - Ustawienia asystenta mają prefiks `M5_`: `M5_ASSISTANT_ENABLED`, `M5_ASSISTANT_TIMEOUT_SECONDS` (M3 ma podobne `M3_ASSIST_*`). `PARTNER_MATCH_N` bez zmian.
+  - PK24 dopisuje do `InboxPage.tsx` sekcję „Rozmowy czekające na Hub” — Skrzynka panelu pokazuje wszystko, co czeka na Hub: zgłoszenia (M1), pomysły (M3, K11), rozmowy (M5).
+  - PK20: **M5 jest właścicielem `web/src/lib/auth.tsx`** (rola `mentor`) i przebudowy `MainNav.tsx` pod role. Zrób PK20 jako jeden z pierwszych PR-ów; M3 (K07) dopisze „Kreator” i plakietkę na Twojej wersji. Rola `mentor` widzi zgodnie z planem: Matchmaking, Zasobnik, „Moje konsultacje” (bez Kreatora i Testera). Zachowaj istniejące pozycje M4 (`/testy`, `/panel/testy` „Testerzy”).
+  - Trzy kanały odpowiedzi do autora zostają rozdzielone: `report_replies` (M1), `idea_replies` (M3), wątki M5. Scalanie (PK11, oś czasu przy zgłoszeniu) — backlog.
+  - `SolutionCard.tsx` należy do M2 (Z13) — w `Timeline` i `OfferPage` tylko go używaj.
+  - Schemat w osobnym `db/m5-komunikacja.sql` jest teraz konwencją wszystkich modułów (M2: `db/m2-zasobnik.sql`, M3: `db/m3-kreator.sql`); M4 zostaje w `db/init.sql` (już na masterze).
+  - Wspólne pliki (`api/config.py`, `api/main.py`, `Makefile`, `App.tsx`, `PanelLayout.tsx`) — dopisuj blokiem z komentarzem `Moduł 5`, bez przestawiania cudzych linii.

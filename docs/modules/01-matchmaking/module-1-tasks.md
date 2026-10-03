@@ -1514,3 +1514,5 @@ Format: `- [Txx → Tyy] <opis> — <agent>, <data>`. Dopisuj tylko na końcu, n
   8. **Lokalna baza** zawiera korpus seed-demo (47) + ROPS (115) + 15 zgłoszeń seed; `make up` uruchamia api+db (zweryfikowane curl z AGENTS.md w kontenerze: `status×3 → candidates → report_saved → done`, karta 1 = „Telefon Życzliwości dla seniorów”, `similar_count=5`, `gmina_count=4`).
   9. Nic nie zostało zacommitowane — zmiany są w drzewie roboczym.
 — orkiestrator, 2026-10-03
+- [triaż M2–M5 → M1] 2026-10-04 (`docs/modules/README.md` → „Podział między modułami”): pliki M1 zmieniane przez inne moduły, wyłącznie addytywnie — `db/init.sql` i `solutions.knowledge_type` (M2 Z00), `api/schemas.py` / `api/cards.py` (M2 Z00), `api/routers/solutions.py` i `staff.py` (M2 Z04, Z05, Z12), `api/log.py` `REDACTED_KEYS` (M5 PK01), `web/src/components/SolutionCard.tsx` (M2 Z13, właściciel), `web/src/pages/panel/InboxPage.tsx` (sekcje M3 K11 i M5 PK24), `NoMatchNotice.tsx` / `ChatResults.tsx` / `panel/ReportPage.tsx` (M3 K08). Kontrakty API M1 bez zmian znaczenia.
+

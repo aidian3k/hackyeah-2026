@@ -64,7 +64,7 @@ Zadania K00–K13: backend K00–K06, frontend K07–K13. Generator wniosków (K
 - awans pomysłu do Biblioteki (`solutions` jako `PENDING_REVIEW`);
 - drukowalna „karta pomysłu”;
 - podgląd symulowanego e-maila do autora;
-- tablica „problemy czekające na pomysł”.
+- tablica „problemy czekające na pomysł” — dane z `GET /api/stats/coverage` Modułu 2 (Z05, luki „Zgłoszenia a biblioteka”), bez własnego endpointu.
 
 Szczegóły w specyfikacji, sekcja 16.
 
@@ -113,7 +113,7 @@ Szczegóły w specyfikacji, sekcja 16.
 
 | Symbol | Moduł | Właściciel |
 |---|---|---|
-| `Idea`, `IdeaCanvas`, `IdeaReply`, `Application`, `IdeaStatus`, `IdeaStage` | `api/kreator/models.py` | K01 |
+| `Idea`, `IdeaCanvas`, `IdeaReply`, `GrantApplication`, `IdeaStatus`, `IdeaStage` | `api/kreator/models.py` | K01 |
 | modele API M3 (sekcja „Schematy API”) | `api/kreator/schemas.py` | K01 |
 | `router` w `api/routers/ideas.py`, `canvas.py`, `assist.py`, `applications.py` | routery | K01 (stub) → K03, K02, K04, K05 |
 | `load_definition()`, `block_map()`, `validate_block(block, value)`, `merge_blocks(data, patch)`, `progress(data) -> CanvasProgress`, `describe_block(block, value) -> str`, `async load_canvas(session, idea_id) -> dict` | `api/kreator/canvas.py` | K02 |
@@ -145,12 +145,12 @@ Enumy: `idea_status` = `DRAFT | SUBMITTED | IN_REVIEW | INVITED | REJECTED`, `id
 
 ```python
     # --- Moduł 3 — Kreator pomysłów ---
-    ASSIST_ENABLED: bool = True
-    ASSIST_MAX_TOKENS: int = 1500
-    ASSIST_DRAFT_MAX_TOKENS: int = 2500
-    ASSIST_TIMEOUT_SECONDS: float = 30.0
-    ASSIST_MAX_QUESTIONS: int = 3
-    ASSIST_MAX_SUGGESTIONS: int = 5
+    M3_ASSIST_ENABLED: bool = True
+    M3_ASSIST_MAX_TOKENS: int = 1500
+    M3_ASSIST_DRAFT_MAX_TOKENS: int = 2500
+    M3_ASSIST_TIMEOUT_SECONDS: float = 30.0
+    M3_ASSIST_MAX_QUESTIONS: int = 3
+    M3_ASSIST_MAX_SUGGESTIONS: int = 5
     IDEA_SIMILAR_LIMIT: int = 3
     CANVAS_LIST_MAX_ITEMS: int = 12
     CANVAS_ITEM_MAX_CHARS: int = 300
@@ -273,9 +273,9 @@ Pola i typy są wiążące; walidatory i limity podane w nawiasach. Daty to `dat
 - `CallSummary {id, title, short_pl, program, demo, opens_at, closes_at, state: open|closed|upcoming, is_open, max_amount}`;
 - `CallDetail(CallSummary) + {based_on, applicant_types, sections, statements}`;
 - `BudgetRow {action (1–300), when: str = "" (≤ 100), cost: int (0–10 000 000)}`;
-- `ApplicationPatch {answers?: dict[str, str | None], budget?: list[BudgetRow]}`;
-- `ApplicationCheck {code, section_id?, message_pl}`;
-- `ApplicationDetail {id, idea_id, call_id, call_title, answers: dict[str, str], budget: list[BudgetRow], total: int, max_amount: int, checks: list[ApplicationCheck], created_at, updated_at}`;
+- `GrantApplicationPatch {answers?: dict[str, str | None], budget?: list[BudgetRow]}`;
+- `GrantApplicationCheck {code, section_id?, message_pl}`;
+- `GrantApplicationDetail {id, idea_id, call_id, call_title, answers: dict[str, str], budget: list[BudgetRow], total: int, max_amount: int, checks: list[GrantApplicationCheck], created_at, updated_at}`;
 - `DraftResponse {available: bool, section_id, text: str = "", message_pl?}`.
 
 ### Kontrakt API
@@ -297,9 +297,9 @@ Pola i typy są wiążące; walidatory i limity podane w nawiasach. Daty to `dat
 | `POST /api/ideas/{id}/assist` | `AssistRequest` → `AssistResponse` | 404, 422 | K04 |
 | `GET /api/calls` | → `list[CallSummary]` (najpierw otwarte) | — | K05 |
 | `GET /api/calls/{id}` | → `CallDetail` | 404 | K05 |
-| `POST /api/ideas/{id}/applications` | `{call_id}` → 201 `ApplicationDetail` albo 200 istniejący | 404, 409 `CALL_CLOSED` | K05 |
-| `GET /api/applications/{id}` | → `ApplicationDetail` | 404 | K05 |
-| `PATCH /api/applications/{id}` | `ApplicationPatch` → `ApplicationDetail` | 404, 422 | K05 |
+| `POST /api/ideas/{id}/applications` | `{call_id}` → 201 `GrantApplicationDetail` albo 200 istniejący | 404, 409 `CALL_CLOSED` | K05 |
+| `GET /api/applications/{id}` | → `GrantApplicationDetail` | 404 | K05 |
+| `PATCH /api/applications/{id}` | `GrantApplicationPatch` → `GrantApplicationDetail` | 404, 422 | K05 |
 | `POST /api/applications/{id}/draft` | `{section_id}` → `DraftResponse` | 404, 422 | K05 |
 
 `Page` = `api.schemas.Page`.
@@ -495,13 +495,13 @@ CREATE TABLE IF NOT EXISTS applications (
 **Kontekst (ADR-M3-005, ADR-M3-007).** Provider korzysta ze structured outputs:
 
 ```python
-client = anthropic.AsyncAnthropic(api_key=settings.ANTHROPIC_API_KEY, timeout=settings.ASSIST_TIMEOUT_SECONDS)
+client = anthropic.AsyncAnthropic(api_key=settings.ANTHROPIC_API_KEY, timeout=settings.M3_ASSIST_TIMEOUT_SECONDS)
 response = await client.messages.parse(model=settings.LLM_MODEL, max_tokens=max_tokens, system=system,
                                        messages=[{"role": "user", "content": user}], output_format=OutputModel)
 result = response.parsed_output
 ```
 
-- `assist_available()` = `LLM_ENABLED and ASSIST_ENABLED and ANTHROPIC_API_KEY`.
+- `assist_available()` = `LLM_ENABLED and M3_ASSIST_ENABLED and ANTHROPIC_API_KEY`.
 - `complete_json` rzuca `ProviderError("anthropic", "LLM_UNAVAILABLE")` (z `api.providers.base`) przy błędzie SDK, przekroczeniu czasu, `stop_reason ≠ "end_turn"` albo braku `parsed_output`.
 - Log: model, czas, liczba tokenów; bez treści.
 - Jeśli zainstalowana wersja `anthropic` nie ma `messages.parse`: wpis w „Uwagach” (to plik M1) i zastępczo `messages.create(..., output_config={"format": {"type": "json_schema", "schema": Model.model_json_schema()}})` + `Model.model_validate_json(text)`.
@@ -528,7 +528,7 @@ result = response.parsed_output
 3. **`assistant.py`.**
    - `idea`: kontekst = pola fiszki bez podpisu i e-maila, etykieta wyzwania, tytuły i streszczenia podobnych innowacji. Wyjście `{questions, suggestions: [{field: title|summary|essence|audience, value, rationale}]}`.
    - `canvas_block`: kontekst = fiszka, definicja bloku, wartość, `describe_block` pozostałych bloków. Wyjście `{questions, suggestions: [{value: str, rationale}]}`, a pole `field` uzupełnia serwer (`block_id`).
-   - Listy przycinane do `ASSIST_MAX_QUESTIONS` i `ASSIST_MAX_SUGGESTIONS`.
+   - Listy przycinane do `M3_ASSIST_MAX_QUESTIONS` i `M3_ASSIST_MAX_SUGGESTIONS`.
    - Bez LLM albo przy błędzie: `available: false`, pytania zastępcze (dla bloku: `help`, a gdy brak — `[prompt]`), `message_pl` „Asystent AI jest teraz niedostępny. Oto pytania, które pomogą Ci samodzielnie.”.
 4. **Router:** `GET …/similar`, `POST …/assist`. `canvas_block` bez `block_id` albo z nieznanym → 422.
 
@@ -577,7 +577,7 @@ result = response.parsed_output
    - kontrole przy każdym odczycie: `REQUIRED_MISSING` (per pusta sekcja wymagana) i `AMOUNT_OVER_LIMIT` (np. „Suma kosztów 134 000 zł przekracza limit naboru 120 000 zł.”);
    - `POST …/draft` (tylko sekcja `text`):
      - kontekst: tytuł i pytania sekcji, fiszka, opisy wypełnionych bloków; dla `innovation` także podobne innowacje (`find_similar`) i limit znaków;
-     - wyjście `{text}`, `max_tokens = ASSIST_DRAFT_MAX_TOKENS`, tekst przycięty do limitu;
+     - wyjście `{text}`, `max_tokens = M3_ASSIST_DRAFT_MAX_TOKENS`, tekst przycięty do limitu;
      - bez LLM → `available: false`, „Asystent AI jest teraz niedostępny. Skorzystaj z pytań przy sekcji.”.
 
 **Gotowe, gdy:**
@@ -622,7 +622,7 @@ result = response.parsed_output
 **Kroki:**
 1. **Typy i klient.**
    - Typy według kontraktów.
-   - Metody klienta: `createIdea`, `ideas(q)`, `idea(id)`, `updateIdea`, `submitIdea`, `setIdeaStatus`, `ideaReplies`, `addIdeaReply`, `canvasDefinition`, `canvas`, `patchCanvas`, `similar`, `assist`, `calls`, `call`, `createApplication`, `application`, `patchApplication`, `draftSection`.
+   - Metody klienta: `createIdea`, `ideas(q)`, `idea(id)`, `updateIdea`, `submitIdea`, `setIdeaStatus`, `ideaReplies`, `addIdeaReply`, `canvasDefinition`, `canvas`, `patchCanvas`, `similar`, `assist`, `calls`, `call`, `createGrantApplication`, `grantApplication`, `patchGrantApplication`, `draftSection`.
 2. **Pamięć** `splot_ideas` (wzór „Moich zgłoszeń”, try/catch, maks. 20):
    - wpis `{idea_id, created_at, title_excerpt, seen_replies}`;
    - funkcje `listMyIdeas`, `rememberIdea`, `markRepliesSeen(id, count)`, `forgetIdea`.
@@ -818,7 +818,7 @@ Na szerokości `md` 2 kolumny w kolejności czytania, poniżej 1 kolumna w kolej
 **Kroki:**
 1. **`/nabory`:**
    - karty naborów: tytuł, opis, kwota, daty, stan (etykieta z kształtem), oznaczenie „Przykładowy nabór” dla `demo`, linki `based_on`;
-   - sekcja „Materiały”: Social Canvas (`https://rops.krakow.pl/mpliki/IS/Moj_folder/INNO_AGH_-_SOCIAL_CANVAS.pdf`) i Mapa Wyzwań Społecznych (`https://rops.krakow.pl/pliki-do-pobrania/artykul,mapa-wyzwan-spolecznych,1048`), z informacją, że to PDF.
+   - sekcja „Materiały”: odnośnik „Wszystkie materiały ROPS” do `/wiedza/materialy` (Zasobnik, M2 Z08 — jedno źródło materiałów); do czasu, gdy Z08 jest `[x]`, dodatkowo bezpośrednie linki: Social Canvas (`https://rops.krakow.pl/mpliki/IS/Moj_folder/INNO_AGH_-_SOCIAL_CANVAS.pdf`) i Mapa Wyzwań Społecznych (`https://rops.krakow.pl/pliki-do-pobrania/artykul,mapa-wyzwan-spolecznych,1048`), z informacją, że to PDF.
 2. **`/wnioski/:id`:**
    - nagłówek naboru i spis sekcji;
    - `SectionEditor`: `textarea` z licznikiem, pytania naboru jako opis pola, `hints`, „Napisz szkic” → podgląd z „Wstaw”/„Pomiń”; sekcje `info` jako tekst i lista oświadczeń;
@@ -867,4 +867,13 @@ Na szerokości `md` 2 kolumny w kolejności czytania, poniżej 1 kolumna w kolej
 ## Uwagi między zadaniami
 
 _(dopisuj na końcu: `- [Kxx → Kyy] opis`)_
-- [M5 PK11 → K03, K11] Moduł 5 (zadanie PK11, opcjonalne) zbuduje dialog o pomyśle jako wątek `IDEA`, którego oś czasu łączy `idea_replies` z wiadomościami M5. Nie zmieniaj więc kształtu `idea_replies` ani `IdeaReply` bez wpisu w „Uwagach” M5. K11 może dostać od M5 prośbę o przycisk „Porozmawiaj z Hubem o pomyśle” w „Moich pomysłach”.
+- ~~[M5 PK11 → K03, K11]~~ nieaktualne (triaż 2026-10-04): w planie M5 v0.4 PK11 (wątek `IDEA`) jest w backlogu — M5 nie zależy od M3 i nie poprosi o przycisk w „Moich pomysłach”. `idea_replies` / `IdeaReply` pozostają kanałem M3; przy powrocie PK11 obowiązuje wpis w „Uwagach” M5.
+- [triaż → K01, K04, K05, K07, K08, K11, K12] 2026-10-04, podział między modułami (`docs/modules/README.md` → „Podział między modułami”). Treść zadań już poprawiona:
+  - Ustawienia asystenta mają prefiks `M3_` (`M3_ASSIST_ENABLED`, `M3_ASSIST_TIMEOUT_SECONDS`, …) — M5 ma podobne `M5_ASSISTANT_*`. Stała frontendu `ASSIST_PRIVACY_NOTE` bez zmian.
+  - „Nabór” = konkurs grantowy i to słowo zostaje przy M3 (`/nabory`, `api/kreator/calls.py`). M4 zmienia w swoim UI „nabór” na „rekrutacja testerów”.
+  - Nazwy wniosków grantowych z prefiksem `Grant`: model `GrantApplication` (tabela `applications` bez zmian), `GrantApplicationDetail`, `GrantApplicationPatch`, `GrantApplicationCheck`, metody `createGrantApplication` / `grantApplication` / `patchGrantApplication`. Nazwy `ApplicationStatus`, `APPLICATION_STATUS_LABELS`, enum SQL `application_status` są zajęte przez M4 — nie używaj ich.
+  - `SolutionCard.tsx` należy do M2 (Z13) — w `SimilarInnovations` tylko go używaj, nie zmieniaj.
+  - K12: sekcja „Materiały” linkuje do `/wiedza/materialy` (M2). Uwaga: M2 (`rops-zasoby-kontekst.md`) nie znalazł publicznej „Mapy Wyzwań Społecznych”, a K12 podaje URL `artykul,mapa-wyzwan-spolecznych,1048` — sprawdź link przed demo i daj znać M2 („Uwagi” M2).
+  - `MainNav.tsx`: przebudowę menu pod role (nowa rola `mentor`) robi M5 w PK20 — K07 dopisuje „Kreator” i plakietkę na tym, co jest na masterze, bez przestawiania cudzych pozycji. `PanelLayout.tsx`: pozycja „Pomysły” obok „Rozmowy” (M5) i „Testerzy” (M4). `InboxPage.tsx`: sekcja „Nowe pomysły” (K11) — M5 dokłada osobną sekcję „Rozmowy czekające na Hub” (PK24); każdy moduł swoją sekcję, bez zmian w sekcji M1.
+  - `api/providers/llm.py` jest zamrożony (M4 dodał `complete()`); asystent M3 zostaje w osobnym `api/providers/llm_assist.py`.
+  - Wspólne pliki (`api/config.py`, `api/main.py`, `Makefile`, `.env.example`, `App.tsx`, `types.ts`, `client.ts`, `labels.ts`) — dopisuj blokiem z komentarzem `Moduł 3`. K01 i K07 wypchnij na master jak najwcześniej.

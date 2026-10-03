@@ -455,7 +455,7 @@ S3:  "ch_direct    partners  partners"
 <ul>
 <li>Model <code>settings.LLM_MODEL</code> (<code>claude-haiku-4-5-20251001</code>), structured outputs: <code>client.messages.parse(…, output_format=PydanticModel)</code> → <code>response.parsed_output</code>.</li>
 <li>Błąd, przekroczenie czasu albo <code>stop_reason ≠ end_turn</code> → <code>ProviderError</code>.</li>
-<li>Asystent jest dostępny, gdy spełnione są <code>LLM_ENABLED</code>, <code>ASSIST_ENABLED</code> i ustawiony jest klucz API.</li>
+<li>Asystent jest dostępny, gdy spełnione są <code>LLM_ENABLED</code>, <code>M3_ASSIST_ENABLED</code> i ustawiony jest klucz API.</li>
 <li>Gdy niedostępny lub zwróci błąd, endpoint odpowiada <strong>200</strong> z <code>available: false</code> i pytaniami zastępczymi, nigdy 5xx.</li>
 </ul>
 
@@ -464,7 +464,7 @@ S3:  "ch_direct    partners  partners"
 <li><strong><code>idea</code> (MUST)</strong>
   <ul>
   <li>Kontekst: pola fiszki (bez podpisu i e-maila), wyzwanie, tytuły i streszczenia podobnych innowacji.</li>
-  <li>Wyjście: <code>questions</code> (≤ <code>ASSIST_MAX_QUESTIONS</code>) i <code>suggestions</code> (≤ <code>ASSIST_MAX_SUGGESTIONS</code>). Propozycja to <code>{field ∈ title|summary|essence|audience, value, rationale}</code>.</li>
+  <li>Wyjście: <code>questions</code> (≤ <code>M3_ASSIST_MAX_QUESTIONS</code>) i <code>suggestions</code> (≤ <code>M3_ASSIST_MAX_SUGGESTIONS</code>). Propozycja to <code>{field ∈ title|summary|essence|audience, value, rationale}</code>.</li>
   <li>Bez LLM: 3 stałe pytania.</li>
   </ul></li>
 <li><strong><code>canvas_block</code> + <code>block_id</code> (SHOULD)</strong>
@@ -548,9 +548,9 @@ S3:  "ch_direct    partners  partners"
 <tr><td><code>POST /api/ideas/{id}/assist</code></td><td><code>{target, block_id?}</code> → <code>AssistResponse</code></td><td>404, 422</td></tr>
 <tr><td><code>GET /api/calls</code></td><td>→ <code>list[CallSummary]</code></td><td>—</td></tr>
 <tr><td><code>GET /api/calls/{id}</code></td><td>→ <code>CallDetail</code></td><td>404</td></tr>
-<tr><td><code>POST /api/ideas/{id}/applications</code></td><td><code>{call_id}</code> → 201 <code>ApplicationDetail</code> / 200 istniejący</td><td>404, 409 <code>CALL_CLOSED</code></td></tr>
-<tr><td><code>GET /api/applications/{id}</code></td><td>→ <code>ApplicationDetail</code></td><td>404</td></tr>
-<tr><td><code>PATCH /api/applications/{id}</code></td><td><code>{answers?, budget?}</code> → <code>ApplicationDetail</code></td><td>404, 422</td></tr>
+<tr><td><code>POST /api/ideas/{id}/applications</code></td><td><code>{call_id}</code> → 201 <code>GrantApplicationDetail</code> / 200 istniejący</td><td>404, 409 <code>CALL_CLOSED</code></td></tr>
+<tr><td><code>GET /api/applications/{id}</code></td><td>→ <code>GrantApplicationDetail</code></td><td>404</td></tr>
+<tr><td><code>PATCH /api/applications/{id}</code></td><td><code>{answers?, budget?}</code> → <code>GrantApplicationDetail</code></td><td>404, 422</td></tr>
 <tr><td><code>POST /api/applications/{id}/draft</code></td><td><code>{section_id}</code> → <code>DraftResponse</code></td><td>404, 422</td></tr>
 </table>
 </div>
@@ -582,7 +582,7 @@ S3:  "ch_direct    partners  partners"
 <h2 id="s12">12. Konfiguracja <span class="badge b-stable">stable</span></h2>
 <p>Dopisywane do <code>api/config.py</code> (K01):</p>
 <ul>
-<li><strong>Asystent:</strong> <code>ASSIST_ENABLED=True</code>, <code>ASSIST_MAX_TOKENS=1500</code>, <code>ASSIST_DRAFT_MAX_TOKENS=2500</code>, <code>ASSIST_TIMEOUT_SECONDS=30.0</code>, <code>ASSIST_MAX_QUESTIONS=3</code>, <code>ASSIST_MAX_SUGGESTIONS=5</code>.</li>
+<li><strong>Asystent:</strong> <code>M3_ASSIST_ENABLED=True</code>, <code>M3_ASSIST_MAX_TOKENS=1500</code>, <code>M3_ASSIST_DRAFT_MAX_TOKENS=2500</code>, <code>M3_ASSIST_TIMEOUT_SECONDS=30.0</code>, <code>M3_ASSIST_MAX_QUESTIONS=3</code>, <code>M3_ASSIST_MAX_SUGGESTIONS=5</code>.</li>
 <li><strong>Podobne innowacje:</strong> <code>IDEA_SIMILAR_LIMIT=3</code>.</li>
 <li><strong>Kanwa:</strong> <code>CANVAS_LIST_MAX_ITEMS=12</code>, <code>CANVAS_ITEM_MAX_CHARS=300</code>, <code>CANVAS_TEXT_MAX_CHARS=2000</code>, <code>CANVAS_PARTNERS_MAX=15</code>.</li>
 <li><strong>Wnioski:</strong> <code>APPLICATION_TEXT_MAX_CHARS=6000</code>, <code>APPLICATION_BUDGET_MAX_ROWS=30</code>, <code>KREATOR_CALLS_IGNORE_DATES=False</code>.</li>
