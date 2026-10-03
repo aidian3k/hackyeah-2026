@@ -1,0 +1,193 @@
+[
+  {
+    "category": "AGING",
+    "lead_pl": "Małopolska się starzeje: co czwarty mieszkaniec ma 60 lat lub więcej, a najstarsze demograficznie powiaty to Tarnów, olkuski, chrzanowski i miechowski. Rośnie zapotrzebowanie na opiekę, aktywność i wsparcie seniorów — zwłaszcza po 80. roku życia, gdy skokowo rośnie zależność od pomocy innych.",
+    "key_facts": [
+      {
+        "label_pl": "mieszkańców w wieku 60+ w województwie (24,5% ludności)",
+        "value": "841 541",
+        "unit": null,
+        "year": 2024,
+        "source_name": "ROPS Kraków, Ocena zasobów pomocy społecznej za 2024 r., s. 47",
+        "source_url": "https://rops.krakow.pl/mpliki/PS/BA/Raport_OZPS_za_rok_2024.pdf#page=47"
+      },
+      {
+        "label_pl": "osób w wieku 65+ na 100 dzieci w wieku 0–14 lat (indeks starości)",
+        "value": "120",
+        "unit": null,
+        "year": 2024,
+        "source_name": "ROPS Kraków, Ocena zasobów pomocy społecznej za 2024 r., s. 47",
+        "source_url": "https://rops.krakow.pl/mpliki/PS/BA/Raport_OZPS_za_rok_2024.pdf#page=47"
+      },
+      {
+        "label_pl": "indeks starości w Tarnowie — najwyższy w województwie",
+        "value": "205",
+        "unit": null,
+        "year": 2024,
+        "source_name": "ROPS Kraków, Ocena zasobów pomocy społecznej za 2024 r., s. 47",
+        "source_url": "https://rops.krakow.pl/mpliki/PS/BA/Raport_OZPS_za_rok_2024.pdf#page=47"
+      },
+      {
+        "label_pl": "mieszkańców w wieku 80 lat i więcej",
+        "value": "147 tys.",
+        "unit": null,
+        "year": 2024,
+        "source_name": "ROPS Kraków, Ocena zasobów pomocy społecznej za 2024 r., s. 40",
+        "source_url": "https://rops.krakow.pl/mpliki/PS/BA/Raport_OZPS_za_rok_2024.pdf#page=40"
+      }
+    ],
+    "is_demo": false
+  },
+  {
+    "category": "LONELINESS",
+    "lead_pl": "Samotności trudno zmierzyć, dlatego patrzymy na dane pośrednie: wśród osób korzystających z pomocy społecznej coraz większą część stanowią osoby mieszkające samotnie. Pomóc mogą lokalne usługi sąsiedzkie, kluby i wolontariat.",
+    "key_facts": [
+      {
+        "label_pl": "rodzin korzystających z pomocy społecznej to osoby samotnie gospodarujące (w 2012 r.: 38,7%)",
+        "value": "58,6%",
+        "unit": null,
+        "year": 2024,
+        "source_name": "ROPS Kraków, Ocena zasobów pomocy społecznej za 2024 r., s. 14",
+        "source_url": "https://rops.krakow.pl/mpliki/PS/BA/Raport_OZPS_za_rok_2024.pdf#page=14"
+      }
+    ],
+    "is_demo": false
+  },
+  {
+    "category": "DIGITAL_EXCLUSION",
+    "lead_pl": "Wykluczenie cyfrowe oznacza, że część mieszkańców — szczególnie starszych — nie korzysta z internetu i e-usług, a coraz więcej spraw załatwia się online. Dla tego wyzwania nie mamy jeszcze zweryfikowanych liczb dla Małopolski ani dla powiatów; w raportach ROPS pojawia się głównie wątek kompetencji cyfrowych kadr pomocy społecznej.",
+    "key_facts": [],
+    "is_demo": true
+  },
+  {
+    "category": "MENTAL_HEALTH",
+    "lead_pl": "Osoby w kryzysach psychicznych potrzebują wsparcia blisko domu: usług opiekuńczych, ośrodków wsparcia i pomocy rodziny. Dostęp do takich usług jest ograniczony — w 2024 r. więcej gmin niż rok wcześniej nie świadczyło usług opiekuńczych.",
+    "key_facts": [
+      {
+        "label_pl": "osobom udzielono usług opiekuńczych, w tym specjalistycznych dla osób z zaburzeniami psychicznymi",
+        "value": "8 126",
+        "unit": null,
+        "year": 2024,
+        "source_name": "ROPS Kraków, Ocena zasobów pomocy społecznej za 2024 r., s. 39",
+        "source_url": "https://rops.krakow.pl/mpliki/PS/BA/Raport_OZPS_za_rok_2024.pdf#page=39"
+      }
+    ],
+    "is_demo": false
+  },
+  {
+    "category": "SERVICE_ACCESS",
+    "lead_pl": "Dostęp do usług społecznych — opiekuńczych, asystenckich, dziennych — jest w Małopolsce nierówny. Część gmin nie świadczy ich wcale, brakuje opiekunów, a system pomocy społecznej obejmuje coraz mniej osób, choć zostają w nim najsłabsi: starsi, z niepełnosprawnościami, przewlekle chorzy.",
+    "key_facts": [
+      {
+        "label_pl": "gmin nie świadczyło usług opiekuńczych w 2024 r. (rok wcześniej: 10)",
+        "value": "14",
+        "unit": null,
+        "year": 2024,
+        "source_name": "ROPS Kraków, Ocena zasobów pomocy społecznej za 2024 r., s. 39",
+        "source_url": "https://rops.krakow.pl/mpliki/PS/BA/Raport_OZPS_za_rok_2024.pdf#page=39"
+      },
+      {
+        "label_pl": "powiatów, w których zawód opiekuna osoby starszej lub niepełnosprawnej będzie deficytowy (prognoza na 2025 r.)",
+        "value": "11",
+        "unit": null,
+        "year": 2025,
+        "source_name": "ROPS Kraków, Ocena zasobów pomocy społecznej za 2024 r., s. 40",
+        "source_url": "https://rops.krakow.pl/mpliki/PS/BA/Raport_OZPS_za_rok_2024.pdf#page=40"
+      },
+      {
+        "label_pl": "osób skorzystało z pomocy społecznej (2,7% mieszkańców — najmniej od 14 lat)",
+        "value": "93,8 tys.",
+        "unit": null,
+        "year": 2024,
+        "source_name": "ROPS Kraków, Ocena zasobów pomocy społecznej za 2024 r., s. 38",
+        "source_url": "https://rops.krakow.pl/mpliki/PS/BA/Raport_OZPS_za_rok_2024.pdf#page=38"
+      }
+    ],
+    "is_demo": false
+  },
+  {
+    "category": "COORDINATION",
+    "lead_pl": "Usługi społeczne działają skuteczniej, gdy gmina, powiat, organizacje pozarządowe i przedsiębiorstwa społeczne współpracują. Brakuje jednak wspólnych narzędzi i ciągłości finansowania — wiele inicjatyw znika po zakończeniu projektów. Dla tego wyzwania nie mamy liczb per powiat.",
+    "key_facts": [
+      {
+        "label_pl": "spotkań sieciujących dla rozwoju centrów i usług społecznych (326 uczestników; projekt „Społeczna Małopolska”)",
+        "value": "15",
+        "unit": null,
+        "year": 2024,
+        "source_name": "ROPS Kraków, Ocena zasobów pomocy społecznej za 2024 r., s. 194",
+        "source_url": "https://rops.krakow.pl/mpliki/PS/BA/Raport_OZPS_za_rok_2024.pdf#page=194"
+      }
+    ],
+    "is_demo": false
+  },
+  {
+    "category": "DEPOPULATION",
+    "lead_pl": "Liczba mieszkańców Małopolski prawie się nie zmienia, ale to uśrednienie: ubywa ludzi w miastach i w większości powiatów, a przyrost naturalny jest ujemny. Najmocniej kurczy się Tarnów, a najniższy przyrost naturalny ma powiat miechowski.",
+    "key_facts": [
+      {
+        "label_pl": "przyrost naturalny na 1 000 mieszkańców (ubyło 6,2 tys. osób)",
+        "value": "−1,8",
+        "unit": "na 1 000 mieszkańców",
+        "year": 2024,
+        "source_name": "ROPS Kraków, Ocena zasobów pomocy społecznej za 2024 r., s. 46",
+        "source_url": "https://rops.krakow.pl/mpliki/PS/BA/Raport_OZPS_za_rok_2024.pdf#page=46"
+      },
+      {
+        "label_pl": "powiatów, w których w 2024 r. zmniejszyła się liczba mieszkańców (na 22)",
+        "value": "17",
+        "unit": null,
+        "year": 2024,
+        "source_name": "ROPS Kraków, Ocena zasobów pomocy społecznej za 2024 r., s. 44",
+        "source_url": "https://rops.krakow.pl/mpliki/PS/BA/Raport_OZPS_za_rok_2024.pdf#page=44"
+      },
+      {
+        "label_pl": "spadek liczby ludności Tarnowa w porównaniu z 2015 r. — największy w województwie",
+        "value": "−7,7%",
+        "unit": null,
+        "year": 2024,
+        "source_name": "ROPS Kraków, Ocena zasobów pomocy społecznej za 2024 r., s. 44",
+        "source_url": "https://rops.krakow.pl/mpliki/PS/BA/Raport_OZPS_za_rok_2024.pdf#page=44"
+      },
+      {
+        "label_pl": "gmin ze spadkiem liczby ludności w porównaniu z 2015 r. (na 182)",
+        "value": "98",
+        "unit": null,
+        "year": 2024,
+        "source_name": "ROPS Kraków, Ocena zasobów pomocy społecznej za 2024 r., s. 44",
+        "source_url": "https://rops.krakow.pl/mpliki/PS/BA/Raport_OZPS_za_rok_2024.pdf#page=44"
+      }
+    ],
+    "is_demo": false
+  },
+  {
+    "category": "SUBURBAN_GROWTH",
+    "lead_pl": "Wokół Krakowa szybko przybywa mieszkańców, a gminy podkrakowskie muszą nadążyć z usługami: szkołami, opieką, transportem. Najszybciej rośnie powiat wielicki, a w skali gmin — Wielka Wieś.",
+    "key_facts": [
+      {
+        "label_pl": "wzrost liczby ludności powiatu wielickiego w porównaniu z 2015 r.",
+        "value": "+19,5%",
+        "unit": null,
+        "year": 2024,
+        "source_name": "ROPS Kraków, Ocena zasobów pomocy społecznej za 2024 r., s. 44",
+        "source_url": "https://rops.krakow.pl/mpliki/PS/BA/Raport_OZPS_za_rok_2024.pdf#page=44"
+      },
+      {
+        "label_pl": "wzrost liczby ludności gminy wiejskiej Wielka Wieś w porównaniu z 2015 r.",
+        "value": "+54,4%",
+        "unit": null,
+        "year": 2024,
+        "source_name": "ROPS Kraków, Ocena zasobów pomocy społecznej za 2024 r., s. 44",
+        "source_url": "https://rops.krakow.pl/mpliki/PS/BA/Raport_OZPS_za_rok_2024.pdf#page=44"
+      },
+      {
+        "label_pl": "gmin ze wzrostem liczby ludności w porównaniu z 2015 r. (na 182)",
+        "value": "84",
+        "unit": null,
+        "year": 2024,
+        "source_name": "ROPS Kraków, Ocena zasobów pomocy społecznej za 2024 r., s. 44",
+        "source_url": "https://rops.krakow.pl/mpliki/PS/BA/Raport_OZPS_za_rok_2024.pdf#page=44"
+      }
+    ],
+    "is_demo": false
+  }
+]

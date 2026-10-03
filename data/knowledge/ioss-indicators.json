@@ -1,0 +1,13 @@
+[
+  {"id": 285, "category": "AGING", "higher_is_worse": true, "sort_order": 10, "unit": "%", "label_pl": "Odsetek osób w wieku 65 lat i więcej"},
+  {"id": 284, "category": "AGING", "higher_is_worse": true, "sort_order": 20, "unit": "pkt", "label_pl": "Indeks starości"},
+  {"id": 273, "category": "AGING", "higher_is_worse": true, "sort_order": 30, "unit": "%", "label_pl": "Wskaźnik podwójnego starzenia"},
+  {"id": 91, "category": "DEPOPULATION", "higher_is_worse": false, "sort_order": 10, "unit": "na 1 000 mieszkańców", "label_pl": "Przyrost naturalny"},
+  {"id": 186, "category": "DEPOPULATION", "higher_is_worse": false, "sort_order": 20, "unit": "osób", "label_pl": "Ludność ogółem"},
+  {"id": 98, "category": "SUBURBAN_GROWTH", "higher_is_worse": false, "sort_order": 10, "unit": "osób", "label_pl": "Saldo migracji stałych"},
+  {"id": 7, "category": "SUBURBAN_GROWTH", "higher_is_worse": true, "sort_order": 20, "unit": "osób na km²", "label_pl": "Gęstość zaludnienia"},
+  {"id": 27, "category": "SERVICE_ACCESS", "higher_is_worse": true, "sort_order": 10, "unit": "osób", "label_pl": "Mieszkańcy na 1 pracownika socjalnego"},
+  {"id": 227, "category": "SERVICE_ACCESS", "higher_is_worse": false, "sort_order": 20, "unit": "osób", "label_pl": "Osoby korzystające z usług opiekuńczych i specjalistycznych usług opiekuńczych"},
+  {"id": 228, "category": "MENTAL_HEALTH", "higher_is_worse": false, "sort_order": 10, "unit": "osób", "label_pl": "Osoby korzystające ze specjalistycznych usług opiekuńczych dla osób z zaburzeniami psychicznymi"},
+  {"id": 274, "category": "LONELINESS", "higher_is_worse": false, "sort_order": 10, "unit": "pkt", "label_pl": "Wskaźnik wsparcia osób najstarszych (wskaźnik pośredni)"}
+]

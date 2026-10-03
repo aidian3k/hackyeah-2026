@@ -47,6 +47,17 @@ reset-db:
 chat:
 	curl -N -X POST localhost:8000/api/chat -H 'Content-Type: application/json' -d "{\"message\":\"$(Q)\"}"
 
+# --- Moduł 2 ---
+.PHONY: db-m2 ingest-knowledge
+
+# raporty i materiały (KNOWLEDGE), potem profile wyzwań i wskaźniki
+ingest-knowledge:
+	$(PY) -m scripts.ingest data/knowledge/records/ && $(PY) -m scripts.ingest_knowledge data/knowledge/
+
+# tabele Modułu 2 na działającej bazie (idempotentnie)
+db-m2:
+	docker compose exec -T db psql -U splot -d splot -v ON_ERROR_STOP=1 < db/m2-zasobnik.sql
+
 # ---------- Frontend (web/) ----------
 .PHONY: web-install web-dev web-mock web-build web-lint
 
