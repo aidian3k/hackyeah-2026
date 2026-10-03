@@ -1,0 +1,173 @@
+/*
+ * Splot – style komponentów. Wymaga tokens.css.
+ * Komponenty: StripeBand (baner z paskami), nawigacja, Button, Chip, CategoryTag, Card, pola formularza.
+ */
+
+/* ---------- Podstawy ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font: var(--text-body);
+}
+h1, h2, h3 { margin: 0; color: var(--navy); text-wrap: balance; }
+h1 { font: var(--text-h1); }
+h2 { font: var(--text-h2); }
+h3 { font: var(--text-h3); }
+:root[data-contrast="high"] :is(h1, h2, h3) { color: var(--ink); }
+a { color: var(--navy); text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+/* ---------- StripeBand: baner z paskami (tylko na górze strony, raz) ---------- */
+.ds-banner {
+  position: relative;
+  height: 120px;
+  background: var(--surface-muted);
+  overflow: hidden;
+}
+.ds-banner__stripes {
+  position: absolute;
+  top: 0;
+  left: 29.3%;
+  height: 100%;
+  width: auto;
+  pointer-events: none;
+}
+.ds-banner__brand {
+  position: absolute;
+  left: var(--space-6);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+}
+.ds-banner__name { font: 700 28px/1.1 var(--font-sans); color: var(--ink); }
+.ds-banner__sub { font: var(--text-body); color: var(--ink); }
+.ds-banner__tools {
+  position: absolute;
+  right: var(--space-6);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+.s-m { fill: var(--stripe-magenta); }
+.s-b { fill: var(--stripe-blue); }
+.s-o { fill: var(--stripe-overlap); }
+.s-c { fill: var(--stripe-cyan); }
+.s-g { fill: var(--stripe-green); }
+.s-y { fill: var(--stripe-yellow); }
+@media (max-width: 900px) {
+  .ds-banner { height: 72px; }
+  .ds-banner__stripes { left: auto; right: -90px; }
+  .ds-banner__brand { left: var(--space-4); }
+  .ds-banner__name { font-size: 22px; }
+  .ds-banner__sub { font: var(--text-small); }
+  .ds-banner__tools { position: static; transform: none; justify-content: flex-end; padding: var(--space-2) var(--space-4) 0; }
+}
+
+/* ---------- Nawigacja pod banerem ---------- */
+.ds-header { background: var(--surface); box-shadow: var(--shadow-header); position: relative; z-index: 10; }
+.ds-nav { display: flex; gap: var(--space-1); overflow-x: auto; padding-inline: var(--space-4); }
+.ds-nav__item {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 56px;
+  padding: var(--space-4) var(--space-3);
+  border: 0;
+  background: transparent;
+  color: var(--navy);
+  font: var(--text-nav);
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: inset 0 -4px 0 transparent;
+}
+.ds-nav__item:hover { background: var(--surface-sunken); }
+.ds-nav__item[aria-current="page"] { box-shadow: inset 0 -4px 0 var(--accent); }
+.ds-nav__home svg { width: 22px; height: 22px; fill: var(--accent); }
+
+/* ---------- Button ---------- */
+.ds-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--line-strong);
+  background: var(--surface-sunken);
+  color: var(--ink);
+  font: 700 16px/20px var(--font-sans);
+  cursor: pointer;
+  text-decoration: none;
+}
+.ds-btn--primary { background: var(--navy); border-color: var(--navy); color: var(--on-navy); }
+.ds-btn--cta { background: var(--accent); border-color: var(--accent); color: var(--on-accent); } /* max. 1 na ekran */
+.ds-btn--link { background: none; border-color: transparent; color: var(--navy); text-decoration: underline; padding-inline: var(--space-2); }
+.ds-btn--small { min-height: 36px; padding: 6px 14px; font-size: 15px; }
+.ds-btn:hover { filter: brightness(0.97); }
+.ds-btn--primary:hover, .ds-btn--cta:hover { filter: brightness(1.08); }
+.ds-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* ---------- Chip (filtry, przykłady) ---------- */
+.ds-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--navy);
+  font: 700 15px/20px var(--font-sans);
+  cursor: pointer;
+}
+.ds-chip:hover { background: var(--surface-sunken); }
+.ds-chip[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: var(--on-navy); }
+
+/* ---------- CategoryTag: zawsze z nazwą słowną ---------- */
+.ds-tag {
+  display: inline-block;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  font: var(--text-label);
+  background: var(--surface-sunken);
+  color: var(--navy);
+}
+.ds-tag--starzenie   { background: var(--soft-blue);    color: var(--cat-blue); }
+.ds-tag--psych       { background: var(--soft-magenta); color: var(--cat-magenta); }
+.ds-tag--samotnosc   { background: var(--soft-violet);  color: var(--violet); }
+.ds-tag--cyfrowe     { background: var(--soft-cyan);    color: var(--cat-cyan); }
+.ds-tag--dostep      { background: var(--soft-green);   color: var(--cat-green); }
+.ds-tag--osadnictwo  { background: var(--soft-yellow);  color: var(--cat-yellow); }
+.ds-tag--koordynacja { background: var(--surface-sunken); color: var(--navy); }
+:root[data-contrast="high"] .ds-tag { border: 1px solid var(--ink); }
+
+/* ---------- Card ---------- */
+.ds-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+}
+
+/* ---------- Formularze ---------- */
+.ds-field { display: flex; flex-direction: column; gap: var(--space-1); }
+.ds-label { font: var(--text-label); font-size: 16px; color: var(--ink); }
+.ds-input, .ds-select, .ds-textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--ink);
+  font: var(--text-body-lg);
+}
+.ds-input:focus, .ds-select:focus, .ds-textarea:focus { border-color: var(--navy); }
+.ds-error { color: var(--danger); font: var(--text-small); }
