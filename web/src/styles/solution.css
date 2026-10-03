@@ -1,0 +1,81 @@
+/*
+ * Strona rozwiązania (F10). Tylko var(--…) z design-system/tokens.css; wygląd przycisków,
+ * tagów i filmu pochodzi z klas ds-… w design-system/components.css.
+ */
+
+.solution-page { overflow-wrap: anywhere; }
+
+/* ---------- Okruszki ---------- */
+.breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font: var(--text-small);
+  color: var(--ink-muted);
+}
+.breadcrumbs__list > li { display: inline-flex; gap: var(--space-2); min-width: 0; }
+.breadcrumbs__list > li + li::before { content: "›"; content: "›" / ""; color: var(--ink-muted); }
+.breadcrumbs__list > li > * { min-width: 0; }
+.breadcrumbs__list a { color: var(--navy); }
+.breadcrumbs__list [aria-current="page"] { color: var(--ink); }
+
+/* ---------- Nagłówek ---------- */
+.solution-head { gap: var(--space-3); }
+.solution-head > * { margin: 0; }
+.solution-head h1 { font: var(--text-h1); color: var(--navy); }
+.solution-head__eyebrow { font: var(--text-label); color: var(--ink-muted); }
+.solution-head__origin { font: var(--text-body); color: var(--ink); }
+.solution-head__evidence,
+.solution-head__note { font: var(--text-small); color: var(--ink-muted); }
+
+/* ---------- Treść ---------- */
+.solution-page section { max-width: 48rem; }
+.solution-page section > h2 { font: var(--text-h2); color: var(--navy); }
+.solution-page section p { font: var(--text-body); color: var(--ink); }
+.solution-page .solution-page__lead { font: var(--text-body-lg); }
+.solution-page section:has(.ds-video) { max-width: 56rem; }
+
+.solution-body__part { gap: var(--space-2); }
+.solution-body__part > h3 { font: var(--text-h3); color: var(--navy); }
+.solution-page .solution-body__text { white-space: pre-line; }
+
+.solution-page .solution-page__hint { font: var(--text-small); color: var(--ink-muted); }
+
+/* ---------- Kroki wdrożenia ---------- */
+.impl-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding-inline-start: var(--space-6);
+  font: var(--text-body);
+  color: var(--ink);
+}
+.impl-steps__item { padding-inline-start: var(--space-1); }
+.impl-steps__item::marker { font: var(--text-label); color: var(--navy); }
+
+/* ---------- Materiały ---------- */
+.media-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.media-list__link {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font: var(--text-body);
+  color: var(--navy);
+}
+.media-list__link > span { min-width: 0; }
+.media-list__icon { flex: none; width: 1.5em; height: 1.5em; }
+.media-list__type { color: var(--ink-muted); }
+
+/* ---------- Działania na dole ---------- */
+.solution-page__actions { gap: var(--space-3); }

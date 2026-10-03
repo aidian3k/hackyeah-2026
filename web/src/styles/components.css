@@ -1,0 +1,49 @@
+/*
+ * Układ komponentów wspólnych (F05). Tylko var(--…) z design-system/tokens.css;
+ * wygląd pochodzi z klas ds-… w design-system/components.css.
+ */
+
+/* ---------- Listy kart (ds-grid na <ul>) ---------- */
+.card-list { margin: 0; padding: 0; list-style: none; }
+.card-list > li { display: flex; min-width: 0; }
+.card-list > li > .ds-card { flex: 1; min-width: 0; }
+
+/* ---------- SolutionCard ---------- */
+.solution-card { overflow-wrap: anywhere; }
+.solution-card > * { margin: 0; }
+.solution-card__title { font: var(--text-h3); }
+.solution-card__origin { font: var(--text-small); color: var(--ink-muted); }
+.solution-card__summary { font: var(--text-body); color: var(--ink); }
+.solution-card__note { font: var(--text-small); color: var(--ink-muted); }
+.solution-card__note::before { content: "• "; content: "• " / ""; }
+
+/* ---------- EvidenceBadge: kropki są ozdobą, informację niesie tekst ---------- */
+.evidence-badge { display: inline-flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-2); }
+.evidence-badge__dots { display: inline-flex; gap: var(--space-1); }
+.evidence-badge__dot {
+  width: 0.625rem;
+  height: 0.625rem;
+  border: 2px solid var(--navy); /* grubość obrysu ikony jak w DS (2 px), nie odstęp */
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+}
+.evidence-badge__dot[data-filled] { background: var(--navy); }
+
+/* ---------- LoadState / EmptyState ---------- */
+.load-state { display: flex; align-items: center; gap: var(--space-3); padding-block: var(--space-4); font: var(--text-body); color: var(--ink); }
+/* 1px = grubość linii obramowania, jak w ds-card */
+.empty-state { padding: var(--space-6) var(--space-4); border: 1px dashed var(--line-strong); border-radius: var(--radius-lg); background: var(--surface-muted); }
+.empty-state__title { margin: 0; font: var(--text-h3); color: var(--ink); }
+.empty-state__body > * { margin: 0; }
+
+/* ---------- ReplyList ---------- */
+.reply-list { display: flex; flex-direction: column; gap: var(--space-4); margin: 0; padding: 0; list-style: none; }
+.reply > * { margin: 0; }
+.reply__head { display: flex; flex-direction: column; gap: var(--space-1); }
+.reply__title { font: var(--text-h3); }
+.reply__meta { margin: 0; font: var(--text-small); color: var(--ink-muted); }
+.reply__body { font: var(--text-body-lg); white-space: pre-line; overflow-wrap: anywhere; }
+
+/* ---------- VideoEmbed ---------- */
+.video-embed { margin: 0; }
+.video-embed > figcaption { font: var(--text-body); }

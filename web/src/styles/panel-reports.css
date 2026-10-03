@@ -1,0 +1,96 @@
+/*
+ * Panel: lista zgłoszeń (F15). Tylko var(--…) z design-system/tokens.css;
+ * wygląd tabeli, chipów i pól pochodzi z klas ds-… w design-system/components.css.
+ */
+
+.reports-lead { margin: 0; font: var(--text-body); color: var(--ink-muted); max-width: 48rem; }
+
+.reports-layout { display: grid; gap: var(--space-8); min-width: 0; }
+.reports-layout > * { min-width: 0; }
+
+/* ---------- Filtry ---------- */
+/* 1px = grubość linii obramowania, jak w ds-card */
+.report-filters {
+  padding: var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface-muted);
+}
+.report-filters__tabs > .ds-label { margin: 0 0 var(--space-2); }
+.report-filters__selects {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+}
+
+/* ---------- Wyniki ---------- */
+.reports-results__count { margin: 0; font: var(--text-h3); color: var(--ink); scroll-margin-top: var(--space-16); }
+
+.reports-table__text { min-width: 16rem; overflow-wrap: anywhere; }
+.reports-table__text a { color: var(--navy); }
+.reports-table__id,
+.reports-table__muted { font: var(--text-small); color: var(--ink-muted); }
+.reports-table__id { display: block; margin-block-start: var(--space-1); }
+.reports-table td { overflow-wrap: anywhere; }
+
+/* Etykiety komórek są potrzebne tylko w układzie kart. */
+.reports-table__label { display: none; }
+
+/* ---------- Status dopasowania: ikona + słowo ---------- */
+.match-status { display: inline-flex; align-items: center; gap: var(--space-2); white-space: nowrap; }
+.match-status__icon {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2; /* obrys ikon jak w DS (2 px) */
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.match-status--no .match-status__icon { color: var(--warning); }
+.match-status--yes .match-status__icon { color: var(--success); }
+
+/* ---------- Wąski ekran (< 700 px, w em — rośnie z powiększeniem): tabela jako lista kart ---------- */
+@media (max-width: 43.75em) {
+  .reports-table-wrap { overflow-x: visible; border: 0; border-radius: 0; }
+  .reports-table,
+  .reports-table tbody,
+  .reports-table tr,
+  .reports-table td { display: block; }
+  .reports-table caption { display: block; padding: 0 0 var(--space-3); }
+
+  /* Nagłówki zostają dla czytników ekranu (wzorzec ds-sr-only; 1px to technika ukrywania, nie odstęp). */
+  .reports-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  /* 1px = grubość linii obramowania, jak w ds-card */
+  .reports-table tbody tr {
+    padding: var(--space-4);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+  .reports-table tbody tr + tr { margin-block-start: var(--space-3); }
+  .reports-table tbody tr + tr :is(th, td) { border-top: 0; }
+
+  .reports-table td {
+    display: grid;
+    grid-template-columns: minmax(0, 8rem) minmax(0, 1fr);
+    gap: var(--space-3);
+    padding: var(--space-1) 0;
+    min-width: 0;
+  }
+  .reports-table td.ds-table__num { text-align: start; }
+  .reports-table td.reports-table__text { display: block; min-width: 0; padding-block-end: var(--space-3); }
+  .reports-table__label { display: block; font: var(--text-label); color: var(--ink); }
+  /* W wąskiej kolumnie karty „Bez dopasowania” musi się zawijać (inaczej poziome przewijanie przy 320 px). */
+  .reports-table .match-status { white-space: normal; }
+}

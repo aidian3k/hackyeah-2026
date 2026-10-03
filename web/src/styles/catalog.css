@@ -1,0 +1,45 @@
+/*
+ * Biblioteka innowacji i Wiedza (F11). Tylko var(--…) z design-system/tokens.css;
+ * wygląd kontrolek pochodzi z klas ds-… w design-system/components.css.
+ */
+
+.catalog-lead { font: var(--text-body-lg); color: var(--ink); max-width: 48rem; }
+
+.catalog-layout { display: grid; gap: var(--space-8); min-width: 0; }
+.catalog-layout > * { min-width: 0; }
+
+/* ---------- Filtry: <details> zwinięte na telefonie, rozwinięte na szerokim ekranie ---------- */
+/* 1px = grubość linii obramowania, jak w ds-card */
+.catalog-filters {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface-muted);
+}
+.catalog-filters__summary {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem; /* pole trafienia jak przyciski DS */
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  font: var(--text-nav);
+  color: var(--navy);
+  cursor: pointer;
+}
+.catalog-filters__body { padding: 0 var(--space-4) var(--space-4); }
+
+.catalog-filters__group { margin: 0; padding: 0; border: 0; min-width: 0; }
+.catalog-filters__group > legend { padding: 0; margin-block-end: var(--space-2); }
+
+.catalog-filters__selects {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+}
+
+/* ---------- Wyniki ---------- */
+.catalog-results__count { margin: 0; font: var(--text-h3); color: var(--ink); scroll-margin-top: var(--space-16); }
+
+/* ---------- Wiedza ---------- */
+.knowledge-sections { display: flex; flex-direction: column; gap: var(--space-12); }
+.knowledge-description { font: var(--text-body-lg); color: var(--ink); max-width: 48rem; }
+.knowledge-cta { margin: 0; font: var(--text-body-lg); }

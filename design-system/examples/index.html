@@ -14,6 +14,7 @@
   </style>
 </head>
 <body>
+  <a class="ds-skip-link" href="#tresc">Przejdź do treści</a>
   <header class="ds-header">
     <div class="ds-banner">
       <div class="ds-banner__brand">
@@ -38,10 +39,11 @@
       <a class="ds-nav__item" href="#">Mam pomysł</a>
       <a class="ds-nav__item" href="#">Testuj</a>
       <a class="ds-nav__item" href="#">Rozmowy</a>
+      <a class="ds-nav__item" href="#">Nowe <span class="ds-badge" aria-hidden="true">12</span><span class="ds-sr-only">, 12 nowych zgłoszeń</span></a>
     </nav>
   </header>
 
-  <main>
+  <main id="tresc" tabindex="-1">
     <section class="stack">
       <h1>Opisz problem</h1>
       <div class="ds-field">
@@ -87,7 +89,196 @@
         <div><a class="ds-btn ds-btn--small" href="#">Szczegóły</a></div>
       </article>
     </section>
+
+    <!-- ===== Rozszerzenia F03 ===== -->
+    <section class="stack" aria-labelledby="h-uklad">
+      <h2 id="h-uklad">Układ: ds-page, ds-stack, ds-cluster, ds-grid</h2>
+      <p class="ds-hint">Ta strona używa własnego kontenera; w aplikacji treść ekranu owija <code>ds-page</code>. Poniżej siatka kart <code>ds-grid</code>: jedna kolumna na telefonie, kolejne od ok. 18rem.</p>
+      <div class="ds-grid">
+        <article class="ds-card ds-stack">
+          <span class="ds-rank" aria-label="Rozwiązanie numer 1">1</span>
+          <div class="ds-card__media">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23EDF0F4'/%3E%3C/svg%3E" alt="">
+            <span class="ds-card__media-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Film o rozwiązaniu</span>
+          </div>
+          <div class="ds-cluster"><span class="ds-tag ds-tag--samotnosc">Samotność i słabe więzi</span></div>
+          <h3><a href="#">Srebrna Linia Sąsiedzka</a></h3>
+          <p>Stowarzyszenie Razem · gmina Myślenice (powiat myślenicki)</p>
+          <p>Wolontariusze dzwonią codziennie do samotnych seniorów i raz w tygodniu ich odwiedzają.</p>
+          <dl class="ds-meta">
+            <div class="ds-meta__item"><dt>Dla kogo</dt><dd>Seniorzy mieszkający samotnie</dd></div>
+            <div class="ds-meta__item"><dt>Koszt</dt><dd>Niski, do 10 tys. zł rocznie</dd></div>
+            <div class="ds-meta__item"><dt>Sprawdzenie</dt><dd>Poziom sprawdzenia: 4 z 5 — Wdrożone w kilku miejscach</dd></div>
+          </dl>
+        </article>
+        <article class="ds-card ds-stack">
+          <span class="ds-rank" aria-label="Rozwiązanie numer 2">2</span>
+          <div class="ds-cluster"><span class="ds-tag ds-tag--cyfrowe">Wykluczenie cyfrowe</span></div>
+          <h3><a href="#">Cyfrowy Senior w bibliotece</a></h3>
+          <p>Gminna Biblioteka Publiczna · gmina Bochnia (powiat bocheński)</p>
+          <p>Cotygodniowe dyżury, na których młodzież pomaga seniorom załatwić sprawy urzędowe przez internet.</p>
+          <dl class="ds-meta">
+            <div class="ds-meta__item"><dt>Dla kogo</dt><dd>Osoby 60+</dd></div>
+            <div class="ds-meta__item"><dt>Koszt</dt><dd>Bez kosztów</dd></div>
+          </dl>
+        </article>
+        <article class="ds-card ds-stack">
+          <div class="ds-cluster"><span class="ds-tag ds-tag--psych">Zdrowie psychiczne</span><span class="ds-tag ds-tag--dostep">Dostęp do usług</span></div>
+          <h3><a href="#">Punkt wsparcia dla młodzieży</a></h3>
+          <p>Konsultacje z psychologiem w szkole w ciągu tygodnia od zgłoszenia.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="stack" aria-labelledby="h-alert">
+      <h2 id="h-alert">Komunikaty: ds-alert</h2>
+      <div class="ds-alert ds-alert--info">
+        <svg class="ds-alert__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>
+        <div class="ds-alert__body"><p><span class="ds-alert__title">Informacja:</span> Twoje zgłoszenie trafi do zespołu Hubu, nawet jeśli nie znajdziemy rozwiązania.</p></div>
+      </div>
+      <div class="ds-alert ds-alert--success">
+        <svg class="ds-alert__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>
+        <div class="ds-alert__body"><p><span class="ds-alert__title">Wysłano:</span> Numer Twojego zgłoszenia to 128. Zapisaliśmy go w zakładce „Moje zgłoszenia”.</p></div>
+      </div>
+      <div class="ds-alert ds-alert--warning">
+        <svg class="ds-alert__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17v.5"/></svg>
+        <div class="ds-alert__body"><p><span class="ds-alert__title">Uwaga:</span> Nie wpisuj imion, nazwisk ani adresów. Opisz sytuację ogólnie.</p></div>
+      </div>
+      <div class="ds-alert ds-alert--danger" role="alert">
+        <svg class="ds-alert__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg>
+        <div class="ds-alert__body">
+          <p><span class="ds-alert__title">Błąd:</span> Nie udało się połączyć z serwerem. Sprawdź połączenie i spróbuj ponownie.</p>
+          <div><button class="ds-btn ds-btn--small" type="button">Spróbuj ponownie</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stack" aria-labelledby="h-form">
+      <h2 id="h-form">Formularz: ds-hint, ds-counter, ds-choices</h2>
+      <div class="ds-field">
+        <label class="ds-label" for="opis">Opisz w 2–3 zdaniach</label>
+        <p class="ds-hint" id="opis-hint">Napisz, komu pomaga pomysł i co się dzięki niemu zmienia.</p>
+        <textarea class="ds-textarea" id="opis" rows="3" aria-describedby="opis-hint opis-licznik">Sąsiedzi raz w tygodniu odwiedzają samotnych seniorów i pomagają w zakupach.</textarea>
+        <p class="ds-counter" id="opis-licznik">78 z 500 znaków</p>
+      </div>
+      <div class="ds-field">
+        <label class="ds-label" for="tytul">Nazwa pomysłu</label>
+        <input class="ds-input" id="tytul" aria-invalid="true" aria-describedby="tytul-blad">
+        <p class="ds-error" id="tytul-blad">Wpisz nazwę pomysłu, np. „Sąsiedzka herbatka”.</p>
+      </div>
+      <fieldset class="ds-choices">
+        <legend class="ds-choices__legend">Zgłaszam jako (opcjonalnie)</legend>
+        <label class="ds-choice"><input class="ds-choice__input" type="radio" name="kto" value="mieszkaniec">Mieszkaniec</label>
+        <label class="ds-choice"><input class="ds-choice__input" type="radio" name="kto" value="urzad">Pracownik urzędu lub ośrodka pomocy</label>
+        <label class="ds-choice"><input class="ds-choice__input" type="radio" name="kto" value="ngo">Organizacja pozarządowa</label>
+        <label class="ds-choice"><input class="ds-choice__input" type="radio" name="kto" value="brak" checked>Nie chcę podawać</label>
+      </fieldset>
+      <fieldset class="ds-choices ds-choices--inline">
+        <legend class="ds-choices__legend">Etap realizacji</legend>
+        <label class="ds-choice"><input class="ds-choice__input" type="radio" name="etap" value="pomysl">Pomysł</label>
+        <label class="ds-choice"><input class="ds-choice__input" type="radio" name="etap" value="przygotowania" checked>Przygotowania</label>
+        <label class="ds-choice"><input class="ds-choice__input" type="radio" name="etap" value="test">Testujemy w małej skali</label>
+        <label class="ds-choice"><input class="ds-choice__input" type="radio" name="etap" value="stale">Działa na stałe</label>
+      </fieldset>
+    </section>
+
+    <section class="stack" aria-labelledby="h-progress">
+      <h2 id="h-progress">Postęp wyszukiwania: ds-progress, ds-spinner</h2>
+      <div aria-live="polite">
+        <ol class="ds-progress">
+          <li class="ds-progress__step" data-state="done"><span class="ds-progress__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span>Rozumiem opis problemu<span class="ds-sr-only"> (gotowe)</span></li>
+          <li class="ds-progress__step" data-state="done"><span class="ds-progress__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span>Szukam w bazie rozwiązań<span class="ds-sr-only"> (gotowe)</span></li>
+          <li class="ds-progress__step" aria-current="step"><span class="ds-progress__icon"><span class="ds-spinner" aria-hidden="true"></span></span>Porównuję najlepsze dopasowania</li>
+          <li class="ds-progress__step"><span class="ds-progress__icon" aria-hidden="true"></span>Przygotowuję podsumowanie</li>
+        </ol>
+      </div>
+      <p class="ds-cluster"><span class="ds-spinner ds-spinner--large" aria-hidden="true"></span><span>Wczytuję rozwiązania…</span></p>
+    </section>
+
+    <section class="stack" aria-labelledby="h-cite">
+      <h2 id="h-cite">Cytowania: ds-cite i ds-rank</h2>
+      <p>Samotność seniorów zmniejszają regularne telefony wolontariuszy <a class="ds-cite" href="#" aria-label="źródło 1: Srebrna Linia Sąsiedzka">[1]</a>, a pomoc w sprawach urzędowych przez internet daje im większą samodzielność <a class="ds-cite" href="#" aria-label="źródło 2: Cyfrowy Senior w bibliotece">[2]</a>.</p>
+      <p class="ds-hint">Numer w <code>ds-cite</code> odpowiada numerowi <code>ds-rank</code> w rogu karty (zob. karty wyżej).</p>
+    </section>
+
+    <section class="stack" aria-labelledby="h-video">
+      <h2 id="h-video">Film: ds-video</h2>
+      <div class="ds-video">
+        <iframe src="about:blank" title="Film: Srebrna Linia Sąsiedzka" loading="lazy" allowfullscreen></iframe>
+      </div>
+      <p><a href="#">Otwórz film w YouTube</a></p>
+    </section>
+
+    <section class="stack" aria-labelledby="h-quote">
+      <h2 id="h-quote">Zgłoszenie mieszkańca: ds-quote</h2>
+      <blockquote class="ds-quote">
+        <p>U nas w gminie starsi ludzie siedzą sami w domach i nie mają z kim pogadać. Dzieci wyjechały do Krakowa albo za granicę.</p>
+        <footer class="ds-quote__footer">Mieszkaniec · gmina Limanowa · 2 godziny temu</footer>
+      </blockquote>
+    </section>
+
+    <section class="stack" aria-labelledby="h-table">
+      <h2 id="h-table">Tabela panelu: ds-table, ds-pagination</h2>
+      <div class="ds-table-wrap" role="region" aria-labelledby="tab-cap" tabindex="0">
+        <table class="ds-table">
+          <caption id="tab-cap">Zgłoszenia z ostatnich 7 dni</caption>
+          <thead>
+            <tr><th scope="col">Nr</th><th scope="col">Wyzwanie</th><th scope="col">Gmina</th><th scope="col">Dopasowanie</th><th scope="col" class="ds-table__num">Podobne</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">128</th><td><span class="ds-tag ds-tag--samotnosc">Samotność i słabe więzi</span></td><td>Limanowa</td><td>Dopasowano</td><td class="ds-table__num">7</td></tr>
+            <tr><th scope="row">127</th><td><span class="ds-tag ds-tag--psych">Zdrowie psychiczne</span></td><td>Nowy Targ</td><td>Bez dopasowania</td><td class="ds-table__num">3</td></tr>
+            <tr><th scope="row">126</th><td><span class="ds-tag ds-tag--osadnictwo">Struktura osadnicza</span></td><td>Nie podano</td><td>Bez dopasowania</td><td class="ds-table__num">12</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <nav class="ds-pagination" aria-label="Strony wyników">
+        <span class="ds-pagination__status">Strona 2 z 7</span>
+        <div class="ds-pagination__controls">
+          <a class="ds-btn" href="#">Poprzednia</a>
+          <a class="ds-btn" href="#">Następna</a>
+        </div>
+      </nav>
+    </section>
+
+    <section class="stack" aria-labelledby="h-bar">
+      <h2 id="h-bar">Wykres: ds-bar</h2>
+      <p class="ds-hint">Pełny słupek: zgłoszenia dopasowane. Część z obramowaniem: bez dopasowania.</p>
+      <ul class="ds-bar-list">
+        <li class="ds-bar ds-bar--violet">
+          <span class="ds-bar__label">Samotność i słabe więzi</span>
+          <span class="ds-bar__track" aria-hidden="true"><span class="ds-bar__fill" style="--ds-bar-share: 58%"></span><span class="ds-bar__fill ds-bar__fill--rest" style="--ds-bar-share: 42%"></span></span>
+          <span class="ds-bar__value">12 zgłoszeń, w tym 5 bez dopasowania</span>
+        </li>
+        <li class="ds-bar ds-bar--blue">
+          <span class="ds-bar__label">Starzenie się społeczeństwa</span>
+          <span class="ds-bar__track" aria-hidden="true"><span class="ds-bar__fill" style="--ds-bar-share: 50%"></span><span class="ds-bar__fill ds-bar__fill--rest" style="--ds-bar-share: 17%"></span></span>
+          <span class="ds-bar__value">8 zgłoszeń, w tym 2 bez dopasowania</span>
+        </li>
+        <li class="ds-bar ds-bar--magenta">
+          <span class="ds-bar__label">Zdrowie psychiczne</span>
+          <span class="ds-bar__track" aria-hidden="true"><span class="ds-bar__fill" style="--ds-bar-share: 8%"></span><span class="ds-bar__fill ds-bar__fill--rest" style="--ds-bar-share: 34%"></span></span>
+          <span class="ds-bar__value">5 zgłoszeń, w tym 4 bez dopasowania</span>
+        </li>
+        <li class="ds-bar ds-bar--yellow">
+          <span class="ds-bar__label">Struktura osadnicza</span>
+          <span class="ds-bar__track" aria-hidden="true"><span class="ds-bar__fill" style="--ds-bar-share: 17%"></span></span>
+          <span class="ds-bar__value">2 zgłoszenia, wszystkie dopasowane</span>
+        </li>
+      </ul>
+    </section>
   </main>
+
+  <footer class="ds-footer">
+    <div class="ds-footer__inner">
+      <ul class="ds-footer__links">
+        <li><a href="#">Panel Hubu</a></li>
+        <li><a href="#">Deklaracja dostępności</a></li>
+        <li><a href="#">Kontakt z ROPS Kraków</a></li>
+      </ul>
+      <p class="ds-footer__note">Splot – Małopolski Hub Innowacji Społecznych, Regionalny Ośrodek Polityki Społecznej w Krakowie.</p>
+    </div>
+  </footer>
 
   <script>
     const b = document.getElementById('contrast');

@@ -7,3 +7,7 @@ build/
 .ruff_cache/
 .DS_Store
 data/raw/html-cache/
+
+# Frontend (web/)
+web/node_modules/
+web/dist/

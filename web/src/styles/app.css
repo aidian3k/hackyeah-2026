@@ -1,0 +1,39 @@
+/*
+ * Splot – arkusz aplikacji. Tylko var(--…) z design-system/tokens.css.
+ * Komponenty mają klasy ds-… z components.css; tu jest wyłącznie układ.
+ */
+
+html { background: var(--surface); }
+
+/* Treść strony: wyśrodkowana kolumna; szerokość w rem, żeby rosła z powiększeniem tekstu. */
+.page {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+  padding-block: var(--space-8) var(--space-12);
+}
+
+.page--narrow { max-width: 48rem; }
+
+/* Odstępy sekcji */
+.section { margin-block-start: var(--space-8); }
+.section--lg { margin-block-start: var(--space-12); }
+
+/* Pionowy stos z odstępem */
+.stack { display: flex; flex-direction: column; gap: var(--space-4); }
+.stack--sm { gap: var(--space-2); }
+.stack--lg { gap: var(--space-8); }
+
+/* Tekst tylko dla czytników ekranu: klasa ds-sr-only z design systemu. */
+
+/* h1 dostaje fokus po zmianie trasy (tabIndex=-1) – bez ramki fokusu przy fokusie programowym */
+h1[tabindex="-1"]:focus { outline: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
