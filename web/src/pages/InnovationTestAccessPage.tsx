@@ -72,11 +72,36 @@ export function InnovationTestAccessPage() {
           Dziękujemy. Status udziału: {APPLICATION_STATUS_LABELS.COMPLETED}.
         </Alert>
       ) : data.can_submit_feedback ? (
-        <section className="ds-stack" aria-labelledby="m4-feedback-heading">
-          <h2 id="m4-feedback-heading">Ankieta po teście</h2>
-          <p className="m-0 text-body-lg text-ink">Oceń rozwiązanie w skali 1–5. Ankietę można wysłać tylko raz.</p>
-          <FeedbackForm token={token} onSubmitted={setFeedback} />
-        </section>
+        <>
+          <section
+            className="flex flex-col gap-3 rounded-lg border border-solid border-line p-4"
+            aria-labelledby="m4-context-heading"
+          >
+            <h2 id="m4-context-heading" className="m-0 font-sans text-h3 text-navy">
+              Co oceniasz
+            </h2>
+            {data.solution_title && (
+              <p className="m-0 text-body-lg text-ink">
+                <strong>{data.solution_title}</strong>
+                {data.solution_summary ? ` — ${data.solution_summary}` : ""}
+              </p>
+            )}
+            {data.instruction && (
+              <p className="m-0 text-body text-ink">
+                <strong>Na czym polegał test: </strong>
+                {data.instruction}
+              </p>
+            )}
+            <p className="m-0 text-body text-ink-muted">
+              Ankieta zajmie ok. 3 minuty: 4 krótkie oceny i 2 pytania, które możesz pominąć. Nie ma złych odpowiedzi
+              — szczera opinia najbardziej pomaga autorom.
+            </p>
+          </section>
+          <section className="ds-stack" aria-labelledby="m4-feedback-heading">
+            <h2 id="m4-feedback-heading">Ankieta po teście</h2>
+            <FeedbackForm token={token} onSubmitted={setFeedback} />
+          </section>
+        </>
       ) : data.status === "SUBMITTED" ? (
         <Alert tone="info" title="Oczekujesz na decyzję Hubu.">
           Gdy Hub zaakceptuje zgłoszenie, otworzysz tę samą stronę i wypełnisz ankietę.

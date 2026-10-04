@@ -405,11 +405,9 @@ class InnovationTestApplication(Base):
     tester_type: Mapped[TesterType] = mapped_column(
         _pg_enum(TesterType, "tester_type"), nullable=False
     )
-    wojewodztwo: Mapped[str] = mapped_column(Text, nullable=False)
-    powiat: Mapped[str] = mapped_column(Text, nullable=False)
-    gmina: Mapped[str] = mapped_column(Text, nullable=False)
+    address: Mapped[str | None] = mapped_column(Text)  # tylko panel Hubu; nigdy w AI ani logach
     is_target_group_member: Mapped[bool] = mapped_column(Boolean, nullable=False)
-    motivation: Mapped[str] = mapped_column(Text, nullable=False)  # nigdy w logach
+    motivation: Mapped[str | None] = mapped_column(Text)  # nigdy w logach
     status: Mapped[ApplicationStatus] = mapped_column(
         _pg_enum(ApplicationStatus, "application_status"),
         nullable=False,
