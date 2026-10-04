@@ -96,6 +96,10 @@ class Settings(BaseSettings):
     M5_ASSISTANT_TIMEOUT_SECONDS: float = 30.0
     PARTNER_MATCH_N: int = 5
 
+    # --- Moduł 6: Panel administratora ---
+    ADMIN_LIST_DEFAULT_LIMIT: int = 25
+    ADMIN_LIST_MAX_LIMIT: int = 100
+
     @property
     def cors_origins_list(self) -> list[str]:
         return [o.strip() for o in self.CORS_ORIGINS.split(",") if o.strip()]

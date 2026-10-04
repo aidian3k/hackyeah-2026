@@ -14,6 +14,7 @@ ReporterTypeLiteral = Literal["RESIDENT", "NGO", "JST", "OTHER"]
 ReportStatusLiteral = Literal["NEW", "TRIAGED", "MATCHED", "IN_PROGRESS", "CLOSED"]
 SolutionKindLiteral = Literal["SOLUTION", "KNOWLEDGE"]
 KnowledgeTypeLiteral = Literal["REPORT", "MATERIAL"]
+SolutionStatusLiteral = Literal["PUBLISHED", "PENDING_REVIEW", "REJECTED", "ARCHIVED"]
 
 _EMAIL_RE = r"^[^@\s]+@[^@\s]+\.[^@\s]+$"
 
@@ -728,3 +729,42 @@ class SolutionFacets(BaseModel):
     with_video: int
     groups: list[FacetGroup]
     categories: list[FacetCategory]
+
+
+# --- Moduł 6: Panel administratora (edycja treści) ---------------------------------
+
+
+class SolutionAdminItem(SolutionCard):
+    status: SolutionStatusLiteral
+    updated_at: datetime
+
+
+class SolutionAdminDetail(SolutionAdminItem):
+    body: str
+    chunk_count: int
+    reembedded: bool | None = None  # tylko w odpowiedzi na POST i PUT
+
+
+class SolutionUpsert(BaseModel):
+    """Pełny stan treści wpisu. PUT nadpisuje wszystkie pola; null / [] = puste."""
+
+    title: str = Field(min_length=3, max_length=200)
+    summary: str = Field(min_length=10, max_length=2000)
+    body: str = Field("", max_length=20_000)
+    organization: str | None = None
+    gmina: str | None = None  # nieznana → 422; powiat liczony z gminy
+    category: str | None = None  # kod z challenge_taxonomy; nieznany → 422
+    tags: list[str] = Field(default_factory=list, max_length=20)
+    target_group: str | None = None
+    cost_range: str | None = None
+    implementation_steps: list[str] = Field(default_factory=list, max_length=30)
+    source_url: str | None = None
+    source_name: str | None = None
+    media: list[MediaItem] = Field(default_factory=list, max_length=10)
+    knowledge_type: KnowledgeTypeLiteral | None = None  # wymagany dla KNOWLEDGE, None dla SOLUTION
+
+
+class SolutionAdminCreate(SolutionUpsert):
+    kind: SolutionKindLiteral
+    status: Literal["PUBLISHED", "PENDING_REVIEW"] = "PUBLISHED"
+    evidence_level: int = Field(1, ge=1, le=5)

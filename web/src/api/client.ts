@@ -1,4 +1,5 @@
 import type {
+  AdminSolutionsQuery,
   ChallengeDetail,
   ChallengeSummary,
   ConsentMeta,
@@ -26,12 +27,16 @@ import type {
   ReportListItem,
   ReportStatus,
   SimilarReport,
+  SolutionAdminCreate,
+  SolutionAdminDetail,
+  SolutionAdminItem,
   SolutionCard,
   SolutionCreated,
   SolutionDetail,
   SolutionFacets,
   SolutionPatch,
   SolutionSubmit,
+  SolutionUpsert,
   Stats,
   TaxonomyItem,
 } from "./types";
@@ -130,6 +135,14 @@ export const api = {
   submitSolution: (body: SolutionSubmit) => request<SolutionCreated>("POST", "/api/solutions", { body }),
   patchSolution: (id: number, body: SolutionPatch) =>
     request<SolutionDetail>("PATCH", `/api/solutions/${id}`, { body }),
+
+  adminSolutions: (q?: AdminSolutionsQuery) =>
+    request<Page<SolutionAdminItem>>("GET", "/api/admin/solutions", { query: q as Query }),
+  adminSolution: (id: number) => request<SolutionAdminDetail>("GET", `/api/admin/solutions/${id}`),
+  createAdminSolution: (body: SolutionAdminCreate) =>
+    request<SolutionAdminDetail>("POST", "/api/admin/solutions", { body }),
+  updateAdminSolution: (id: number, body: SolutionUpsert) =>
+    request<SolutionAdminDetail>("PUT", `/api/admin/solutions/${id}`, { body }),
   // matched, status, category, gmina, reporter_type, limit, offset
   reports: (q?: Query) => request<Page<ReportListItem>>("GET", "/api/reports", { query: q }),
   report: (id: number) => request<ReportDetail>("GET", `/api/reports/${id}`),

@@ -122,6 +122,11 @@ export function SolutionReviewPage() {
               <section className="ds-card ds-stack" aria-labelledby="review-actions">
                 <h2 id="review-actions">Przejrzyj i zdecyduj</h2>
                 <ReviewActions key={solution.id} solution={solution} onUpdated={setUpdated} />
+                <p className="m-0">
+                  <Link className="ds-btn" to={`/panel/wiedza/${solution.id}`}>
+                    Edytuj treść
+                  </Link>
+                </p>
               </section>
               <ReviewContent solution={solution} />
             </>

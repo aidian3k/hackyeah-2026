@@ -37,12 +37,12 @@ Identyfikatory: `PA00`, `PA01`, … (prefiks modułu, żeby nie kolidować z `T`
 
 <!-- Format linii: - [ ] PA00 · Opis · zależy: — / PAxx, T.., F.. -->
 
-- [ ] PA00 · Backend: schematy admina, `api/admin_content.py`, router `/api/admin/solutions` (lista, szczegóły, `POST`, `PUT`) · zależy: —
-- [ ] PA01 · Frontend: typy, klient API, etykiety · zależy: —
-- [ ] PA02 · Komponent `SolutionForm` · zależy: PA01
-- [ ] PA03 · Ekran `/panel/wiedza/:id` i `/panel/wiedza/nowy` (edycja i dodawanie) + link „Edytuj treść” · zależy: PA00, PA02
-- [ ] PA04 · „Baza wiedzy” `/panel/wiedza`, pozycja w nawigacji panelu, próba demo · zależy: PA03
-- [ ] PA05 · (opcjonalne) `knowledge_type` w API admina i formularzu · zależy: PA04, Z00
+- [x] PA00 · Backend: schematy admina, `api/admin_content.py`, router `/api/admin/solutions` (lista, szczegóły, `POST`, `PUT`) · zależy: — — zrobione: claude, curl+psql OK (PUT re-embed/bez, 409, 422, 404, KNOWLEDGE tylko w context, limit 422); test 503 pominięty
+- [x] PA01 · Frontend: typy, klient API, etykiety · zależy: — — zrobione: claude, typy (+ knowledge_type), klient, SOLUTION_STATUS_LABELS, KIND_LABELS, KNOWLEDGE_TYPE_LABELS
+- [x] PA02 · Komponent `SolutionForm` · zależy: PA01 — zrobione: claude, lint+build OK; klawiatura do sprawdzenia w przeglądarce (PA03)
+- [~] PA03 · Ekran `/panel/wiedza/:id` i `/panel/wiedza/nowy` (edycja i dodawanie) + link „Edytuj treść” · zależy: PA00, PA02 — agent: claude, 2026-10-04 14:50 (kod gotowy, lint+build OK; czeka na S1/S2 w przeglądarce)
+- [~] PA04 · „Baza wiedzy” `/panel/wiedza`, pozycja w nawigacji panelu, próba demo · zależy: PA03 — agent: claude, 2026-10-04 14:50 (kod gotowy, lint+build OK; czeka na S3 i próbę demo w przeglądarce)
+- [~] PA05 · (opcjonalne) `knowledge_type` w API admina i formularzu · zależy: PA04, Z00 — agent: claude, 2026-10-04 14:50 (wdrożone razem z PA00–PA04; API: POST bez typu 422, REPORT→MATERIAL reembedded false; UI czeka na przeglądarkę)
 
 **Równolegle:** PA00 i PA01 od razu (frontend pracuje na kontrakcie poniżej), potem PA02 → PA03 → PA04.
 
@@ -367,3 +367,5 @@ Format: `- [PAxx → PAyy] <opis> — <agent>, <data>`. Dopisuj tylko na końcu,
 
 - [ORCH] Pliki współdzielone z innymi modułami: `web/src/App.tsx` i `web/src/components/layout/PanelLayout.tsx` zmieniają też M3 (K07) i M5 (PK20); `api/schemas.py`, `api/config.py` — M2 (Z00). Zmiany M6 są addytywne; przy konflikcie scalaj, nie nadpisuj cudzych linii. — plan, 2026-10-04
 - [ORCH] Plan odchudzony pod hackathon (zakres w „Odstępstwach”): bez historii zmian, `edited_at`, ochrony przed ingestem i optymistycznej blokady; PUT zamiast PATCH; 6 zadań zamiast 12. Specyfikacja HTML v0.2 nadal opisuje pełną wersję — przy sprzeczności wygrywa ten plik. `source_url` edytowalny (kolizja → 409 z `IntegrityError`); ponowny ingest nadpisze edycje z panelu — nie odpalać `make ingest` po przygotowaniu danych do demo. — plan, 2026-10-04
+- [PA00 → PA05] Z00 jest `[x]`, a `db/init.sql` ma CHECK `solutions_knowledge_type_ck` — `POST` wpisu `KNOWLEDGE` bez `knowledge_type` łamie constraint. Dlatego `knowledge_type` (z PA05) wchodzi od razu do `SolutionUpsert`, `admin_content` (walidacja 422 „knowledge_type: …”, zmiana typu bez re-embeddingu), typów TS i formularza; PA05 domykamy razem z PA03/PA04. — claude, 2026-10-04
+- [PA00] 2026-10-04: baza w dockerze była sprzed Z00 (brak `solutions.knowledge_type`, tabel M2/M4/M5) — po przebudowie obrazu api każde zapytanie o rozwiązania dawało 500. Zrobione `make reset-db` + ingest (solutions, knowledge) + `seed_reports --purge`, `seed_innovation_tests`, `seed_comm`. Uwaga: `seed_innovation_tests` przed ingestem tworzy wpis „Klub seniora w sąsiedztwie” (id 1) bez chunków — kolejność: najpierw ingest. `api/main.py`: dodany `PUT` do CORS `allow_methods`. Filtr listy `knowledge_type` działa też bez `kind`. — claude, 2026-10-04

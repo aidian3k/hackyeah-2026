@@ -88,6 +88,34 @@ export interface SolutionSubmit {
 export interface SolutionCreated { id: number; status: "PENDING_REVIEW" }
 export interface SolutionPatch { status?: "PUBLISHED" | "REJECTED" | "ARCHIVED"; evidence_level?: number; category?: string }
 
+// --- panel administratora: baza wiedzy (Moduł 6) ---
+export interface SolutionAdminItem extends SolutionCard {
+  status: SolutionStatus;
+  updated_at: string;
+}
+export interface SolutionAdminDetail extends SolutionAdminItem {
+  body: string;
+  chunk_count: number;
+  reembedded: boolean | null;        // tylko w odpowiedzi na POST i PUT
+}
+export interface SolutionUpsert {    // PUT nadpisuje wszystkie pola; null / [] = puste
+  title: string; summary: string; body: string;
+  organization: string | null; gmina: string | null; category: string | null;
+  tags: string[]; target_group: string | null; cost_range: string | null;
+  implementation_steps: string[]; source_url: string | null; source_name: string | null;
+  media: MediaItem[];
+  knowledge_type: KnowledgeType | null;   // wymagany dla KNOWLEDGE, null dla SOLUTION
+}
+export interface SolutionAdminCreate extends SolutionUpsert {
+  kind: SolutionKind;
+  status?: "PUBLISHED" | "PENDING_REVIEW";
+  evidence_level?: number;
+}
+export interface AdminSolutionsQuery {
+  kind?: SolutionKind; knowledge_type?: KnowledgeType; status?: SolutionStatus;
+  q?: string; limit?: number; offset?: number;
+}
+
 // --- skrzynka, statystyki, meta ---
 export interface Inbox {
   new_reports: number; new_unmatched: number; pending_solutions: number;
