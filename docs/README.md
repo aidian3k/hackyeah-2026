@@ -1,4 +1,4 @@
-# Dokumentacja Splot
+# Dokumentacja HubMI
 
 Mapa całej dokumentacji projektu. Reguły pracy (dla ludzi i agentów) są w [`AGENTS.md`](../AGENTS.md),
 uruchomienie — w [`README.md`](../README.md).

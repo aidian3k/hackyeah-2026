@@ -1,4 +1,4 @@
-# Moduły platformy Splot
+# Moduły platformy HubMI
 
 Siedem funkcjonalności z `docs/base.md` §2. Każdy moduł ma specyfikację HTML (sekcje ze statusami `stable` / `draft` / `todo`) i plik zadań z protokołem pracy agentów — wzór: Moduł 1.
 

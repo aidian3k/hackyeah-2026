@@ -348,7 +348,7 @@ Lustro schematów powyżej (daty jako ciągi ISO) plus typy wartości bloków:
 **Kontekst (ADR-M3-002):** plik SQL jest idempotentny i ładuje się po `init.sql`. Katalog `./db` jest w `docker-entrypoint-initdb.d`, a kolejność jest alfabetyczna. Na działającej bazie uruchamia go `make db-m3`.
 
 ```sql
--- Splot – Moduł 3 (Kreator pomysłów). Idempotentny.
+-- HubMI – Moduł 3 (Kreator pomysłów). Idempotentny.
 DO $$ BEGIN CREATE TYPE idea_status AS ENUM ('DRAFT', 'SUBMITTED', 'IN_REVIEW', 'INVITED', 'REJECTED');
 EXCEPTION WHEN duplicate_object THEN NULL; END $$;
 DO $$ BEGIN CREATE TYPE idea_stage AS ENUM ('IDEA', 'PROTOTYPE', 'TESTED', 'READY');

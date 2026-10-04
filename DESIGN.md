@@ -1,6 +1,6 @@
-# Design system Splot
+# Design system HubMI
 
-Splot jest zawsze w motywie jasnym (białe tło). Jedyny dodatkowy tryb to wysoki kontrast dla osób słabowidzących.
+HubMI jest zawsze w motywie jasnym (białe tło). Jedyny dodatkowy tryb to wysoki kontrast dla osób słabowidzących.
 
 ## Jak używać w kodzie
 
@@ -21,7 +21,7 @@ Font: Atkinson Hyperlegible Next z Google Fonts (link w nagłówku `tokens.css`)
 
 ## Zasady
 
-Splot to platforma Małopolskiego Hubu Innowacji Społecznych (ROPS Kraków). Wygląda jak serwis Samorządu Województwa Małopolskiego: spokojne, jasne tło, granatowa nawigacja, jeden akcent magenty i kolorowe paski tylko w banerze. Korzystają z niej seniorzy, osoby z niepełnosprawnościami i urzędnicy, więc czytelność jest ważniejsza od ozdób.
+HubMI to platforma Małopolskiego Hubu Innowacji Społecznych (ROPS Kraków). Wygląda jak serwis Samorządu Województwa Małopolskiego: spokojne, jasne tło, granatowa nawigacja, jeden akcent magenty i kolorowe paski tylko w banerze. Korzystają z niej seniorzy, osoby z niepełnosprawnościami i urzędnicy, więc czytelność jest ważniejsza od ozdób.
 
 ## Ton i treść
 
@@ -101,4 +101,4 @@ Na wykresach używaj pełnych `stripe-*` jako wypełnień słupków, a podpisy i
 
 - Ikony konturowe, grubość 2px, w kolorze `navy`; ikony usług dostępności (język migowy, pętla indukcyjna, dostępność) w `violet` lub `navy`, jak w nagłówku malopolska.pl.
 - Logotyp Małopolski i jego kolory są własnością Województwa Małopolskiego. Nie rysuj go odręcznie i nie przerabiaj. Przy współbrandingu użyj oficjalnych plików z Systemu Identyfikacji Wizualnej Województwa.
-- Splot nie ma jeszcze znaku graficznego. Nazwę „Splot” składaj krojem `sans` w stylu `h2`, w kolorze `ink`.
+- HubMI nie ma jeszcze znaku graficznego. Nazwę „HubMI” składaj krojem `sans` w stylu `h2`, w kolorze `ink`.

@@ -1,6 +1,6 @@
-# Splot – HackYeah 2026
+# HubMI – HackYeah 2026
 
-Platforma Małopolskiego Hubu Innowacji Społecznych (wyzwanie ROPS Kraków). Moduł 1 — matchmaking społeczny: mieszkaniec opisuje problem po polsku, a Splot znajduje istniejące rozwiązania, zapisuje zgłoszenie i pokazuje, ile osób zgłosiło podobny problem. Zespół Hubu obsługuje zgłoszenia i pomysły w panelu administratora.
+Platforma Małopolskiego Hubu Innowacji Społecznych (wyzwanie ROPS Kraków). Moduł 1 — matchmaking społeczny: mieszkaniec opisuje problem po polsku, a HubMI znajduje istniejące rozwiązania, zapisuje zgłoszenie i pokazuje, ile osób zgłosiło podobny problem. Zespół Hubu obsługuje zgłoszenia i pomysły w panelu administratora.
 
 ## Uruchomienie przez Docker Compose
 

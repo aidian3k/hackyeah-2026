@@ -85,7 +85,7 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
 
 def create_app() -> FastAPI:
     setup_logging()
-    app = FastAPI(title="Splot — Moduł 1: Matchmaking społeczny", lifespan=lifespan)
+    app = FastAPI(title="HubMI — Moduł 1: Matchmaking społeczny", lifespan=lifespan)
 
     app.add_middleware(
         CORSMiddleware,

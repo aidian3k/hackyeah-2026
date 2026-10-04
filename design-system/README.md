@@ -1,6 +1,6 @@
 # design-system
 
-Tokeny i style komponentów Splot. Zasady użycia: [`/DESIGN.md`](../DESIGN.md).
+Tokeny i style komponentów HubMI. Zasady użycia: [`/DESIGN.md`](../DESIGN.md).
 
 Szybki start w czystym HTML:
 

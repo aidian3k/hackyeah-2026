@@ -28,7 +28,7 @@ const DEFAULT_BUDGET_HEADERS = ["Działanie", "Termin realizacji", "Koszt dział
 const MIN_ROWS: Record<BudgetPhase, number> = { prep: 3, test_1: 2, test_2: 2 };
 const PHASE_ORDER: BudgetPhase[] = ["prep", "test_1", "test_2"];
 
-export const PRINT_FOOTER = "Wydruk z Kreatora pomysłów (Splot) — dokument roboczy, nie stanowi wniosku w naborze ROPS";
+export const PRINT_FOOTER = "Wydruk z Kreatora pomysłów (HubMI) — dokument roboczy, nie stanowi wniosku w naborze ROPS";
 
 /** Numery punktów: `number` z naboru, a gdy nabór ich nie ma — kolejne 1…n. */
 export function sectionNumbers(sections: CallSection[]): (string | null)[] {

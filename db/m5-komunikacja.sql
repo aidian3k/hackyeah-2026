@@ -1,4 +1,4 @@
--- Splot – Moduł 5 (Platforma aktywnej komunikacji). Idempotentny; na działającej bazie: make db-m5.
+-- HubMI – Moduł 5 (Platforma aktywnej komunikacji). Idempotentny; na działającej bazie: make db-m5.
 DO $$ BEGIN
   CREATE TYPE thread_kind AS ENUM ('QUESTION', 'MENTORING', 'PARTNERSHIP');
 EXCEPTION WHEN duplicate_object THEN NULL; END $$;

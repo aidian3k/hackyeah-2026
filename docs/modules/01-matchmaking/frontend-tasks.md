@@ -1,6 +1,6 @@
 # Moduł frontendowy — plan implementacji i zadania
 
-Plan interfejsu Splot zbudowanego na API Modułu 1 (`docs/modules/01-matchmaking/module-1-tasks.md`, T00–T26) i design systemie (`DESIGN.md`, `design-system/`). Każde zadanie jest samowystarczalne: zawiera cel, pliki, wklejony kontekst, kroki i kryterium gotowości. Agent wykonujący zadanie **nie musi czytać specyfikacji HTML ani kodu backendu**. Musi przeczytać `AGENTS.md`, `DESIGN.md` oraz sekcję „Wspólne kontrakty” poniżej.
+Plan interfejsu HubMI zbudowanego na API Modułu 1 (`docs/modules/01-matchmaking/module-1-tasks.md`, T00–T26) i design systemie (`DESIGN.md`, `design-system/`). Każde zadanie jest samowystarczalne: zawiera cel, pliki, wklejony kontekst, kroki i kryterium gotowości. Agent wykonujący zadanie **nie musi czytać specyfikacji HTML ani kodu backendu**. Musi przeczytać `AGENTS.md`, `DESIGN.md` oraz sekcję „Wspólne kontrakty” poniżej.
 
 **Decyzje dla frontendu (2026-10-03):**
 - **Osobny moduł w `web/`.** Frontend powstaje w `web/` i nie zmienia plików w `api/`, `db/` ani `scripts/` (zob. `AGENTS.md`).
@@ -387,7 +387,7 @@ export function useApi<T>(fn: () => Promise<T>, deps: unknown[]): { data: T | nu
 export function useTaxonomy(): { items: TaxonomyItem[]; byCode: Map<string, TaxonomyItem>; error: ApiError | null };  // jedno żądanie na aplikację
 export function useGminy(): { items: GminaItem[]; error: ApiError | null };                                           // jedno żądanie na aplikację
 export function usePolling(fn: () => void, ms: number): void;     // pauza, gdy document.hidden
-export function useDocumentTitle(title: string): void;            // "<title> · Splot"
+export function useDocumentTitle(title: string): void;            // "<title> · HubMI"
 export function useContrast(): [boolean, (on: boolean) => void];
 export function useInboxCount(): number | null;                   // F04 stub zwraca null; F14 implementuje (polling 30 s)
 ```
@@ -468,14 +468,14 @@ Nawigacja publiczna (`MainNav`): „Znajdź rozwiązanie” (ikona domu w `accen
 2. `vite.config.ts`: plugin React, alias `@` → `src`, `server.port = 5173`, `server.fs.allow = [".."]`, proxy `/api` i `/healthz` → `process.env.VITE_API_TARGET ?? "http://localhost:8000"`. Dla `/api/chat` ustaw w proxy wyłączenie buforowania, żeby SSE płynęło na bieżąco (sprawdź, że tokeny przychodzą pojedynczo).
 3. `tsconfig.json`: `strict`, `noUncheckedIndexedAccess`, `paths: {"@/*": ["src/*"]}`, `jsx: react-jsx`, target ES2022.
 4. `eslint.config.js`: rekomendowane `@eslint/js` + `typescript-eslint` + `react-hooks` + `jsx-a11y` (recommended).
-5. `index.html`: `<html lang="pl">`, `<meta name="viewport" …>`, link do fontu, `<title>Splot</title>`, skrypt inline ustawiający `data-contrast="high"` z `localStorage.splot_contrast` (w `try/catch`), `<div id="root">`.
-6. `src/main.tsx`: import `../../design-system/tokens.css`, `../../design-system/components.css`, `./styles/app.css`; render `<StrictMode><BrowserRouter><h1>Splot</h1></BrowserRouter></StrictMode>` (F04 podmieni zawartość na `<App/>`).
+5. `index.html`: `<html lang="pl">`, `<meta name="viewport" …>`, link do fontu, `<title>HubMI</title>`, skrypt inline ustawiający `data-contrast="high"` z `localStorage.splot_contrast` (w `try/catch`), `<div id="root">`.
+6. `src/main.tsx`: import `../../design-system/tokens.css`, `../../design-system/components.css`, `./styles/app.css`; render `<StrictMode><BrowserRouter><h1>HubMI</h1></BrowserRouter></StrictMode>` (F04 podmieni zawartość na `<App/>`).
 7. `src/styles/app.css`: podstawowe klasy układu z tokenów (`.page` z `max-width` i marginesem `space-4`, odstępy sekcji `space-8`/`space-12`). Tylko `var(--…)`.
 8. `Makefile`: cele `web-install`, `web-dev`, `web-mock` (mock w tle + Vite z `VITE_API_TARGET=http://localhost:8001`), `web-build`, `web-lint`.
 
 **Nie rób:** żadnych bibliotek UI, Tailwinda, bibliotek testowych. Nie zmieniaj istniejących celów Makefile.
 
-**Gotowe, gdy:** `make web-install && make web-dev` pokazuje na `:5173` nagłówek „Splot” w foncie Atkinson, w kolorze `navy`; przy działającym backendzie `curl localhost:5173/api/taxonomy` zwraca 9 pozycji (proxy); przy `make web-mock` `curl -N -X POST localhost:5173/api/chat -d '{}'` strumieniuje ramki z odstępami (nie jednym blokiem); `npm run build` i `npm run lint` czyste; `localStorage.splot_contrast = "high"` + odświeżenie daje czarne tło bez mignięcia białego.
+**Gotowe, gdy:** `make web-install && make web-dev` pokazuje na `:5173` nagłówek „HubMI” w foncie Atkinson, w kolorze `navy`; przy działającym backendzie `curl localhost:5173/api/taxonomy` zwraca 9 pozycji (proxy); przy `make web-mock` `curl -N -X POST localhost:5173/api/chat -d '{}'` strumieniuje ramki z odstępami (nie jednym blokiem); `npm run build` i `npm run lint` czyste; `localStorage.splot_contrast = "high"` + odświeżenie daje czarne tło bez mignięcia białego.
 
 ---
 
@@ -540,7 +540,7 @@ Nawigacja publiczna (`MainNav`): „Znajdź rozwiązanie” (ikona domu w `accen
 **Cel:** wspólna rama każdego ekranu i wszystkie trasy, na których pracują kolejne zadania.
 
 **Kontekst:**
-- Baner wg `DESIGN.md` i `design-system/examples/index.html`: nazwa „Splot” (`ds-banner__name`), podtytuł „Hub Innowacji Społecznych · ROPS Kraków”, SVG pasków (skopiuj wielokąty z przykładu, `aria-hidden="true"`), po prawej `ContrastToggle` (`ds-btn ds-btn--small`, `aria-pressed`, „Wysoki kontrast”). Paski raz na ekranie, także w panelu.
+- Baner wg `DESIGN.md` i `design-system/examples/index.html`: nazwa „HubMI” (`ds-banner__name`), podtytuł „Hub Innowacji Społecznych · ROPS Kraków”, SVG pasków (skopiuj wielokąty z przykładu, `aria-hidden="true"`), po prawej `ContrastToggle` (`ds-btn ds-btn--small`, `aria-pressed`, „Wysoki kontrast”). Paski raz na ekranie, także w panelu.
 - Mapa tras i nazwy pozycji nawigacji są w sekcji „Mapa ekranów i tras”. Aktywna pozycja ma `aria-current="page"` (użyj `NavLink`).
 - Stuby stron: każdy plik eksportuje nazwany komponent (`export function FindPage()`) z `h1` i jednym zdaniem „Ten ekran jest w przygotowaniu.” Właściciel strony (F08–F18) nadpisuje cały plik. To ten sam wzorzec co stuby routerów w backendzie (T15).
 

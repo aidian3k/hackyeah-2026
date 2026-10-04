@@ -7,7 +7,7 @@ rzędem małych przycisków-ikon, dokładamy brakujące ułatwienia, które da s
 
 ## Porównanie
 
-| Ułatwienie | rops.krakow.pl | Splot przed zmianą | Po zmianie |
+| Ułatwienie | rops.krakow.pl | HubMI przed zmianą | Po zmianie |
 |---|---|---|---|
 | Link „Przejdź do treści” | tak | tak (`ds-skip-link`) | bez zmian |
 | Link do informacji o dostępności (ikona wózka) w nagłówku | tak → `/udogodnienia-dla-niepelnosprawnych` | brak | **poza zakresem** (decyzja 2026-10-04) — deklaracja tylko ze stopki |

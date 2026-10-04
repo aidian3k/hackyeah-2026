@@ -1,4 +1,4 @@
--- Splot – Moduł 3 (Kreator pomysłów). Idempotentny.
+-- HubMI – Moduł 3 (Kreator pomysłów). Idempotentny.
 -- Ładuje się po init.sql (kolejność alfabetyczna w docker-entrypoint-initdb.d);
 -- na działającej bazie: `make db-m3` (ADR-M3-002).
 DO $$ BEGIN CREATE TYPE idea_status AS ENUM ('DRAFT', 'SUBMITTED', 'IN_REVIEW', 'INVITED', 'REJECTED');

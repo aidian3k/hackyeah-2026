@@ -37,7 +37,7 @@ BASE_URL = "https://rops.krakow.pl"
 LIBRARY_PATH = "/innowacje-spoleczne/biblioteka-innowacji-spolecznych"
 CATEGORIES_URL = f"{BASE_URL}{LIBRARY_PATH}/kategorie"
 SOURCE_NAME = "Biblioteka Innowacji Społecznych ROPS Kraków"
-USER_AGENT = "SplotHackYeah2026/0.1 (+kontakt w repozytorium)"
+USER_AGENT = "HubMIHackYeah2026/0.1 (+kontakt w repozytorium)"
 TIMEOUT_S = 20.0
 ATTEMPTS = 3
 

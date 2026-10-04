@@ -21,7 +21,7 @@ Lista zmian do wdrożenia po pierwszej iteracji frontendu.
 
 4. **Branding nagłówka — iteracja 2**
    - baner jak nagłówek `rops.krakow.pl`: oficjalny logotyp ROPS (`web/public/rops-logo.png`, w wysokim kontraście `rops-logo-i.png`, pobrane z `rops.krakow.pl/themes/page/images/`) linkujący do `/`,
-   - obok logotypu podpis **Dział Innowacji Społecznych** (nazwa działu z podstrony Kontakt ROPS) zamiast „Splot / Hub Innowacji Społecznych”,
+   - obok logotypu podpis **Dział Innowacji Społecznych** (nazwa działu z podstrony Kontakt ROPS) zamiast „HubMI / Hub Innowacji Społecznych”,
    - bez kolorowych pasków; narzędzia (logowanie, kontrast) po prawej, jak pasek narzędzi ROPS,
    - tytuł karty przeglądarki: „… · ROPS Kraków”.
 

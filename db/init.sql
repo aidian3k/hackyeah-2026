@@ -1,4 +1,4 @@
--- Splot – Moduł 1 (Matchmaking społeczny): schemat bazy PoC.
+-- HubMI – Moduł 1 (Matchmaking społeczny): schemat bazy PoC.
 -- Ładowany jednorazowo przy pierwszym starcie kontenera (docker-entrypoint-initdb.d).
 -- Przeładowanie: make reset-db. Bez Alembica, bez indeksów wektorowych (ADR-019).
 

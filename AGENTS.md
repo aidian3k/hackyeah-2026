@@ -1,4 +1,4 @@
-# Splot – HackYeah 2026
+# HubMI – HackYeah 2026
 
 Platforma Małopolskiego Hubu Innowacji Społecznych (wyzwanie ROPS Kraków).
 

@@ -1,5 +1,5 @@
 /*
- * Splot – style komponentów. Wymaga tokens.css.
+ * HubMI – style komponentów. Wymaga tokens.css.
  * Komponenty: StripeBand (baner z paskami), nawigacja, Button, Chip, CategoryTag, Card, pola formularza.
  */
 
@@ -173,7 +173,7 @@ a { color: var(--navy); text-underline-offset: 3px; }
 .ds-error { color: var(--danger); font: var(--text-small); }
 
 /* =====================================================================
- * Rozszerzenia (F03): komponenty interfejsu Splot zbudowane z tokenów.
+ * Rozszerzenia (F03): komponenty interfejsu HubMI zbudowane z tokenów.
  * Wartości w px poniżej to wyłącznie grubości obramowań, minimalne pola
  * trafienia (44 / 24 px), rozmiary ikon i progi szerokości ekranu —
  * tak jak w klasach powyżej. Kolory wyłącznie z tokens.css.

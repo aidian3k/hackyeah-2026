@@ -267,7 +267,7 @@ class PartnershipOffer(BaseModel):
 **Kontekst:** katalog `./db` jest montowany w `docker-entrypoint-initdb.d`; pliki ładują się alfabetycznie (`init.sql` < `m5-komunikacja.sql`). Plik musi być idempotentny.
 
 ```sql
--- Splot – Moduł 5 (Platforma aktywnej komunikacji). Idempotentny; na działającej bazie: make db-m5.
+-- HubMI – Moduł 5 (Platforma aktywnej komunikacji). Idempotentny; na działającej bazie: make db-m5.
 DO $$ BEGIN
   CREATE TYPE thread_kind AS ENUM ('QUESTION', 'MENTORING', 'PARTNERSHIP');
 EXCEPTION WHEN duplicate_object THEN NULL; END $$;

@@ -86,6 +86,6 @@ Różnice wobec wzoru, które zostają:
   domyślne); wzór nie ma numerów stron ani pól podpisu/pieczęci, więc wydruk też ich nie ma;
 - puste linie (kropkowane) przy polach danych pomysłodawcy i pustych punktach — we wzorze są same etykiety,
   linie ułatwiają wypełnienie odręczne; tabele pkt 9 dopełniane pustymi wierszami do minimum wzoru;
-- na końcu jedna linia „Wydruk z Kreatora pomysłów (Splot) — dokument roboczy…” ze stanem na datę zapisu
+- na końcu jedna linia „Wydruk z Kreatora pomysłów (HubMI) — dokument roboczy…” ze stanem na datę zapisu
   (zamiast stopki K12); nagłówek kolumn tabel nie powtarza się na kolejnej stronie (jak we wzorze),
   a może oderwać się od pierwszego wiersza na granicy stron.

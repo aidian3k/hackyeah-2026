@@ -138,7 +138,7 @@ CREATE TYPE knowledge_type AS ENUM ('REPORT', 'MATERIAL');
 ```
 
 ```sql
--- db/m2-zasobnik.sql — Splot, Moduł 2 (Zasobnik wiedzy). Idempotentny; na działającej bazie: make db-m2.
+-- db/m2-zasobnik.sql — HubMI, Moduł 2 (Zasobnik wiedzy). Idempotentny; na działającej bazie: make db-m2.
 CREATE TABLE IF NOT EXISTS challenge_profiles (
     category   TEXT PRIMARY KEY REFERENCES challenge_taxonomy(code),
     lead_pl    TEXT        NOT NULL,

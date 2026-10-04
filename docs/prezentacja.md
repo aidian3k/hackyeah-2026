@@ -1,6 +1,6 @@
 # Prezentacja dla jury — plan slajdów
 
-Plan prezentacji Splotu na HackYeah 2026 (wyzwanie ROPS Kraków). Stan aplikacji: 2026-10-04, master `a3aa01e`. Teksty w cudzysłowach to napisy z interfejsu — sprawdzone w kodzie.
+Plan prezentacji HubMI na HackYeah 2026 (wyzwanie ROPS Kraków). Stan aplikacji: 2026-10-04, master `a3aa01e`. Teksty w cudzysłowach to napisy z interfejsu — sprawdzone w kodzie.
 
 ## Ograniczenia z regulaminu (`docs/base.md` §4, §8)
 
@@ -29,7 +29,7 @@ Plan prezentacji Splotu na HackYeah 2026 (wyzwanie ROPS Kraków). Stan aplikacji
 
 ## Narracja (jedno zdanie na całość)
 
-> Mieszkaniec, gmina albo NGO opisuje problem własnymi słowami, a Splot w kilka sekund pokazuje sprawdzone innowacje z Biblioteki ROPS. Gdy ich nie ma, mówi wprost „nie znalazłem” i przekazuje zgłoszenie zespołowi Hubu. Każde zgłoszenie zasila trendy, które widzi ROPS.
+> Mieszkaniec, gmina albo NGO opisuje problem własnymi słowami, a HubMI w kilka sekund pokazuje sprawdzone innowacje z Biblioteki ROPS. Gdy ich nie ma, mówi wprost „nie znalazłem” i przekazuje zgłoszenie zespołowi Hubu. Każde zgłoszenie zasila trendy, które widzi ROPS.
 
 Pętla, która spina moduły (rysujemy ją na slajdzie 2 i wracamy do niej): **potrzeba → dopasowanie → wiedza → test → rozmowa i partnerstwo → trendy dla ROPS**.
 
@@ -37,16 +37,16 @@ Pętla, która spina moduły (rysujemy ją na slajdzie 2 i wracamy do niej): **p
 
 Przy każdym slajdzie: co na nim jest, jaki zrzut, co mówimy i które kryterium pokrywa.
 
-### 1. Splot — cyfrowe serce Małopolskiego Hubu Innowacji Społecznych
+### 1. HubMI — cyfrowe serce Małopolskiego Hubu Innowacji Społecznych
 
 - **Na slajdzie:** nazwa, jedno zdanie opisu, znak Matchmakingu, nazwa zespołu, linki do demo i makiet (QR).
 - **Wizual:** zrzut strony głównej `/` z polem czatu.
-- **Mówimy:** „Splot łączy potrzeby mieszkańców z innowacjami, które ROPS już przetestował. Opis problemu po polsku, bez zakładania konta.”
+- **Mówimy:** „HubMI łączy potrzeby mieszkańców z innowacjami, które ROPS już przetestował. Opis problemu po polsku, bez zakładania konta.”
 - **Kryterium:** wymagania formalne (nazwa, opis, link).
 
 ### 2. Problem i nasza odpowiedź
 
-- **Na slajdzie:** po lewej problem słowami z `base.md`: oddolne mikro-rozwiązania nie mają narzędzi do rozwoju i skalowania; brakuje miejsca, które łączy diagnozę, rozwój pomysłów, testowanie, upowszechnianie i partnerstwa. Po prawej pętla Splotu (diagram 6 kroków) z numerami modułów I–VI.
+- **Na slajdzie:** po lewej problem słowami z `base.md`: oddolne mikro-rozwiązania nie mają narzędzi do rozwoju i skalowania; brakuje miejsca, które łączy diagnozę, rozwój pomysłów, testowanie, upowszechnianie i partnerstwa. Po prawej pętla HubMI (diagram 6 kroków) z numerami modułów I–VI.
 - **Wizual:** diagram pętli w kolorach design systemu.
 - **Mówimy:** „Zamiast osobnych narzędzi mamy jedną pętlę. Każdy moduł oddaje dane następnemu.”
 - **Kryterium:** pomysłowość („nowa jakość”, nie zlepek funkcji — §6).

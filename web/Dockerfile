@@ -1,4 +1,4 @@
-# Frontend Splot: build Vite + serwowanie przez nginx.
+# Frontend HubMI: build Vite + serwowanie przez nginx.
 # Kontekst budowania: katalog web/ (filtrowany przez web/.dockerignore)
 # plus dodatkowy kontekst "design-system" (../design-system), bo main.tsx
 # importuje ../../design-system/*.css. Oba ustawia serwis `web` w docker-compose.yml.

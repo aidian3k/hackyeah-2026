@@ -1,7 +1,7 @@
 [project]
 name = "splot"
 version = "0.1.0"
-description = "Splot – Moduł 1: Matchmaking społeczny (HackYeah 2026, ROPS Kraków)"
+description = "HubMI – Moduł 1: Matchmaking społeczny (HackYeah 2026, ROPS Kraków)"
 requires-python = ">=3.12,<3.13"
 dependencies = [
     "fastapi",

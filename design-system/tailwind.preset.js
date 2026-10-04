@@ -1,5 +1,5 @@
 /**
- * Preset Tailwind dla design systemu Splot.
+ * Preset Tailwind dla design systemu HubMI.
  * Kolory wskazują na zmienne CSS z tokens.css, więc tryb wysokiego kontrastu
  * (<html data-contrast="high">) działa bez osobnych klas.
  *

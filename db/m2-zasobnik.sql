@@ -1,4 +1,4 @@
--- Splot, Moduł 2 (Zasobnik wiedzy). Idempotentny; na działającej bazie: make db-m2.
+-- HubMI, Moduł 2 (Zasobnik wiedzy). Idempotentny; na działającej bazie: make db-m2.
 -- Ładowany po init.sql (kolejność alfabetyczna w docker-entrypoint-initdb.d).
 CREATE TABLE IF NOT EXISTS challenge_profiles (
     category   TEXT PRIMARY KEY REFERENCES challenge_taxonomy(code),

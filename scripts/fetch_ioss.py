@@ -29,7 +29,7 @@ import httpx
 from api.config import settings
 
 IOSS_URL = "https://obserwator.rops.krakow.pl/differenceanalysis/{id}"
-USER_AGENT = "Mozilla/5.0 (compatible; SplotHackYeah/1.0)"
+USER_AGENT = "Mozilla/5.0 (compatible; HubMIHackYeah/1.0)"
 SOURCE_NAME = "IOSS ROPS Kraków (GUS BDL)"
 REQUEST_PAUSE_S = 1.0
 

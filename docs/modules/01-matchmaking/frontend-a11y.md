@@ -46,7 +46,7 @@ Nagłówki układają się w hierarchię: `h1` „Opisz problem” → `h2` „W
 - **Jeden `ds-btn--cta` na ekran.** W kodzie występuje tylko w `ChatForm` (`/`) i w `IdeaForm` (`/mam-pomysl`). Na żywo każdy ekran ma najwyżej 1 widoczny CTA, panel nie ma żadnego.
 - **Paski tylko w banerze.** Poza `.ds-banner` nie ma żadnego elementu `stripe`.
 - **Kolory i rozmiary na sztywno.** `grep` z „Konwencji” zwraca tylko wyjątki opisane komentarzem: grubość linii 1 px, technika `sr-only`, obrys ikon 2 px oraz obrys fokusu 3 px w `chat-results.css`, przy którym brakowało komentarza i został dopisany.
-- **Jeden `h1` na ekran.** Spełnione na każdym ekranie i w każdym wariancie. Tytuł karty ma postać „… · Splot”.
+- **Jeden `h1` na ekran.** Spełnione na każdym ekranie i w każdym wariancie. Tytuł karty ma postać „… · HubMI”.
 - **Statusy z ikoną i słowem.** Spełnione po poprawce w `ReportsTable`. Dopasowanie (`MatchStatus`, `MatchLabel`), statusy zgłoszenia (`StatusLabel`) i alerty (`ds-alert` z ikoną i słowem) były już zgodne.
 - **`prefers-reduced-motion`.** Wyłącza animacje globalnie (`app.css`). Przewijanie do karty po kliknięciu `[n]` też go uwzględnia.
 
