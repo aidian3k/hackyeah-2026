@@ -7,6 +7,7 @@ uruchomienie — w [`README.md`](../README.md).
 docs/
   README.md        # ten plik — mapa dokumentacji
   base.md          # kontekst biznesowy wyzwania ROPS (źródło nazw modułów)
+  prezentacja.md   # plan slajdów i demo dla jury (≤ 10 slajdów)
   modules/         # specyfikacje modułów 1–7 i plany zadań — CO budujemy
   changes/         # zmiany po sprincie: spec.md + plan.md per zmiana — CO poprawiamy
   mocks/           # mocki SSE/JSON dla frontendu (make web-mock, web/scripts/)
@@ -20,6 +21,7 @@ design-system/     # tokeny, komponenty ds-*, preset Tailwinda, strona przykład
 | Potrzebuję… | Plik |
 |---|---|
 | zrozumieć wyzwanie i moduły | [`base.md`](base.md) |
+| przygotować prezentację dla jury | [`prezentacja.md`](prezentacja.md) |
 | przeglądu modułów i ich stanu | [`modules/README.md`](modules/README.md) |
 | specyfikacji Modułu 1 (źródło prawdy, ADR) | [`modules/01-matchmaking/module-1-matchmaking.html`](modules/01-matchmaking/module-1-matchmaking.html) |
 | zadań backendu Modułu 1 (T00–T26) | [`modules/01-matchmaking/module-1-tasks.md`](modules/01-matchmaking/module-1-tasks.md) |
