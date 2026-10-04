@@ -11,6 +11,11 @@ import { formatDateTime, formatRelative, plural } from "@/lib/format";
 import { REPORTER_TYPE_LABELS } from "@/lib/labels";
 import { ModuleLabel } from "@/components/layout/ModuleLabel";
 import "@/styles/panel.css";
+// Moduł 3 (K11): sekcja „Nowe pomysły”
+import { api } from "@/api/client";
+import type { IdeaListItem } from "@/api/types";
+import { useApi } from "@/hooks/useApi";
+import { NewIdeaMarker } from "@/pages/panel/IdeasPage";
 
 const REPORT_EXCERPT_CHARS = 200;
 const SUMMARY_EXCERPT_CHARS = 160;
@@ -86,6 +91,79 @@ function PendingItem({ card }: { card: SolutionCard }) {
         <p>{excerpt(card.summary, SUMMARY_EXCERPT_CHARS)}</p>
       </article>
     </li>
+  );
+}
+
+// --- Moduł 3 (K11): „Nowe pomysły” — pomysły w statusie SUBMITTED z Kreatora pomysłów ---
+const NEW_IDEAS_LIMIT = 5;
+
+function NewIdeaItem({ idea }: { idea: IdeaListItem }) {
+  const place = idea.gmina ? (idea.powiat ? `${idea.gmina} (powiat ${idea.powiat})` : idea.gmina) : null;
+  const when = idea.submitted_at ?? idea.created_at;
+  return (
+    <li>
+      <article className="ds-card flex flex-col gap-2" aria-labelledby={`inbox-idea-${idea.id}`}>
+        <div className="flex flex-wrap items-center gap-2">
+          <NewIdeaMarker />
+          <CategoryTag code={idea.category} label={idea.category_label_pl} />
+        </div>
+        <h3 id={`inbox-idea-${idea.id}`} className="m-0 font-sans text-h3 text-navy [overflow-wrap:anywhere]">
+          <Link to={`/panel/pomysly/${idea.id}`}>{idea.title}</Link>
+        </h3>
+        <p className="m-0 text-body text-ink">{excerpt(idea.summary, SUMMARY_EXCERPT_CHARS)}</p>
+        <p className="m-0 flex flex-wrap gap-x-4 gap-y-1 text-small text-ink-muted">
+          <span>Pomysł nr {idea.id}</span>
+          {place && <span>{place}</span>}
+          <span>Kanwa: {Math.round(idea.canvas_percent)}%</span>
+          <time dateTime={when} title={formatDateTime(when)}>
+            {formatRelative(when)}
+          </time>
+        </p>
+      </article>
+    </li>
+  );
+}
+
+/**
+ * Sekcja Modułu 3, niezależna od /api/inbox: własne zapytanie, odświeżane razem ze skrzynką
+ * (`refreshKey` = dane skrzynki, zmieniają się co 30 s i po „Odśwież teraz”).
+ */
+function NewIdeasSection({ refreshKey }: { refreshKey: unknown }) {
+  const { data, error, loading, reload } = useApi(
+    () => api.ideas({ status: "SUBMITTED", limit: NEW_IDEAS_LIMIT }),
+    [refreshKey],
+  );
+  return (
+    <section aria-labelledby="inbox-ideas" className="flex flex-col gap-4">
+      <h2 id="inbox-ideas" className="m-0 font-sans text-h2 text-navy">
+        Nowe pomysły
+        {data && data.total > 0 && <span className="ds-badge ml-2 align-middle">{data.total}</span>}
+      </h2>
+      <LoadState loading={loading && !data} error={error} onRetry={reload} label="Wczytujemy nowe pomysły…">
+        {data &&
+          (data.total === 0 ? (
+            <EmptyState title="Nie ma nowych pomysłów.">
+              <p>Pomysły wysłane z Kreatora pomysłów pojawią się tu same.</p>
+            </EmptyState>
+          ) : (
+            <>
+              <p className="m-0 text-body text-ink">
+                {data.total}{" "}
+                {plural(data.total, "pomysł czeka", "pomysły czekają", "pomysłów czeka")} na odpowiedź Hubu.
+                {data.total > data.items.length && ` Pokazujemy ${data.items.length} najnowszych.`}
+              </p>
+              <ul className="m-0 grid list-none grid-cols-1 gap-4 p-0 md:grid-cols-2">
+                {data.items.map((idea) => (
+                  <NewIdeaItem key={idea.id} idea={idea} />
+                ))}
+              </ul>
+              <p className="m-0">
+                <Link to="/panel/pomysly">Przejdź do listy pomysłów</Link>
+              </p>
+            </>
+          ))}
+      </LoadState>
+    </section>
   );
 }
 
@@ -236,6 +314,9 @@ export function InboxPage() {
           </section>
         </>
       )}
+
+      {/* Moduł 3 (K11) */}
+      <NewIdeasSection refreshKey={data} />
     </div>
   );
 }
