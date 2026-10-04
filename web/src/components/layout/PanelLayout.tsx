@@ -39,6 +39,11 @@ export function PanelLayout() {
           <NavLink to="/panel/rozwiazania" className="ds-nav__item">
             Do zatwierdzenia
           </NavLink>
+          {/* Moduł 6 */}
+          <NavLink to="/panel/wiedza" className="ds-nav__item">
+            Baza wiedzy
+          </NavLink>
+          {/* M3: Pomysły (K07) */}
           <NavLink to="/panel/testy" className="ds-nav__item">
             Testerzy
           </NavLink>

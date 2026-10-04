@@ -16,6 +16,8 @@ import { MyReportsPage } from "@/pages/MyReportsPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { SolutionPage } from "@/pages/SolutionPage";
 import { InboxPage } from "@/pages/panel/InboxPage";
+import { KnowledgeBasePage } from "@/pages/panel/KnowledgeBasePage";
+import { KnowledgeEditPage } from "@/pages/panel/KnowledgeEditPage";
 import { PanelInnovationTestCreatePage } from "@/pages/panel/InnovationTestCreatePage";
 import { PanelInnovationTestManagePage } from "@/pages/panel/InnovationTestManagePage";
 import { PanelInnovationTestsPage } from "@/pages/panel/InnovationTestsPage";
@@ -103,6 +105,9 @@ export function App() {
         <Route path="zgloszenia/:id" element={<ReportPage />} />
         <Route path="rozwiazania" element={<SolutionsQueuePage />} />
         <Route path="rozwiazania/:id" element={<SolutionReviewPage />} />
+        {/* Moduł 6 */}
+        <Route path="wiedza" element={<KnowledgeBasePage />} />
+        <Route path="wiedza/:id" element={<KnowledgeEditPage />} />
         <Route path="testy" element={<PanelInnovationTestsPage />} />
         <Route path="testy/nowy" element={<PanelInnovationTestCreatePage />} />
         <Route path="testy/:id" element={<PanelInnovationTestManagePage />} />
