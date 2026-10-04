@@ -45,6 +45,9 @@ import { ExpertHomePage } from "@/pages/expert/ExpertHomePage";
 import { ExpertThreadPage } from "@/pages/expert/ExpertThreadPage";
 import { CommThreadPage } from "@/pages/panel/CommThreadPage";
 import { CommThreadsPage } from "@/pages/panel/CommThreadsPage";
+// Moduł 7: Middleman innowacji
+import { AdaptPage } from "@/pages/middleman/AdaptPage";
+import { MiddlemanHomePage } from "@/pages/middleman/MiddlemanHomePage";
 
 /**
  * Po zmianie ścieżki (nie przy pierwszym renderze) przenosi fokus na h1 nowej strony,
@@ -113,6 +116,9 @@ export function App() {
           <Route path="ekspert" element={<ExpertHomePage />} />
           <Route path="ekspert/rozmowy/:id" element={<ExpertThreadPage />} />
         </Route>
+        {/* Moduł 7: Middleman innowacji */}
+        <Route path="wdrozenie" element={<MiddlemanHomePage />} />
+        <Route path="wdrozenie/:id" element={<AdaptPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
       <Route path="panel" element={<RequireRole requiredRole="administrator" layout="panel" />}>

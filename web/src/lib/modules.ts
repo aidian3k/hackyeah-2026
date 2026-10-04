@@ -5,6 +5,7 @@ export const MODULE_NAMES = {
   kreator: "Kreator pomysłów",
   tester: "Tester innowacji",
   komunikacja: "Platforma komunikacji", // Moduł 5
+  middleman: "Middleman innowacji", // Moduł 7
   panel: "Panel administratora",
 } as const;
 

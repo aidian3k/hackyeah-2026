@@ -29,9 +29,9 @@ Identyfikatory: `MI00`–`MI02` backend, `MI10`–`MI13` frontend i demo.
 - [x] MI00 · Wpięcie M7: ustawienia, schematy, router-zaślepka SSE, maskowanie logów · zależy: — — zrobione: claude-lead, zaślepka SSE + ustawienia M7_*
 - [x] MI01 · Kontekst i prompt: `api/middleman/context.py`, `api/middleman/prompts.py` · zależy: MI00 — zrobione: backend-m7, context.py + prompts.py
 - [x] MI02 · Strumień z LLM w `api/routers/middleman.py` (walidacja, błędy, limit czasu, logi) · zależy: MI01 — zrobione: backend-m7, ścieżka LLM zweryfikowana (OpenAI)
-- [~] MI10 · Frontend: fundament (klient SSE, stałe, hook `useAdaptChat`, trasy, nazwa modułu) · zależy: MI00 — agent: frontend-m7, 2026-10-04
-- [ ] MI11 · Frontend: ekran rozmowy `/wdrozenie/:id` · zależy: MI10
-- [ ] MI12 · Frontend: wejścia — przycisk na stronie innowacji, strona `/wdrozenie`, nawigacja · zależy: MI10
+- [x] MI10 · Frontend: fundament (klient SSE, stałe, hook `useAdaptChat`, trasy, nazwa modułu) · zależy: MI00 — zrobione: frontend-m7, streamAdapt + useAdaptChat + trasy
+- [~] MI11 · Frontend: ekran rozmowy `/wdrozenie/:id` · zależy: MI10 — agent: frontend-m7-chat, 2026-10-04
+- [~] MI12 · Frontend: wejścia — przycisk na stronie innowacji, strona `/wdrozenie`, nawigacja · zależy: MI10 — agent: frontend-m7-entry, 2026-10-04
 - [ ] MI13 · Scenariusz demo i przegląd dostępności (`module-7-demo.md`) · zależy: MI02, MI11, MI12
 
 ### Fale równoległości (orientacyjnie)
