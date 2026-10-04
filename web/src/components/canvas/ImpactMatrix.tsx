@@ -137,7 +137,9 @@ export function ImpactMatrix({
   if (readOnly) {
     return (
       <div className="flex flex-col gap-3">
-        <div className="max-w-full overflow-x-auto">
+        {/* Na wąskim ekranie tabela przewija się w poziomie — region musi być osiągalny klawiaturą (axe: scrollable-region-focusable). */}
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
+        <div className="relative max-w-full overflow-x-auto" role="region" aria-label="Macierz wpływu" tabIndex={0}>
           <table className="w-full border-collapse text-body">
             <caption className="ds-sr-only">Macierz wpływu</caption>
             <thead>

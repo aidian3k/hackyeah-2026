@@ -146,6 +146,8 @@ interface Props {
   value: BlockValue | undefined;
   onChange: (value: BlockValue | null) => void;
   readOnly?: boolean;
+  /** Tytuł bloku tylko dla czytników (krok kanwy pokazuje go już w nagłówku `h2`). */
+  titleHidden?: boolean;
 }
 
 function asList(value: BlockValue | undefined): string[] {
@@ -153,7 +155,7 @@ function asList(value: BlockValue | undefined): string[] {
 }
 
 /** Blok `list`: wpisy dodawane polem „Dodaj”, każdy z „Usuń”. Pusta lista = `null` (usunięcie bloku). */
-export function ListBlock({ block, value, onChange, readOnly = false }: Props) {
+export function ListBlock({ block, value, onChange, readOnly = false, titleHidden = false }: Props) {
   const titleId = useId();
   const promptId = useId();
   const entries = asList(value);
@@ -169,7 +171,7 @@ export function ListBlock({ block, value, onChange, readOnly = false }: Props) {
   return (
     <div role="group" aria-labelledby={titleId} aria-describedby={promptId} className="flex flex-col gap-3">
       <div className="flex flex-col gap-1">
-        <span id={titleId} className="text-body-lg font-bold text-ink">
+        <span id={titleId} className={titleHidden ? "ds-sr-only" : "text-body-lg font-bold text-ink"}>
           {block.title}
         </span>
         <p id={promptId} className="ds-hint">

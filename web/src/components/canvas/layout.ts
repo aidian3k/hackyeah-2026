@@ -71,3 +71,38 @@ export const BLOCK_CLASS: Record<string, string> = {
 
 /** Obszar renderowany jako jedna macierz (bloki `single` z tymi samymi poziomami). */
 export const MATRIX_AREA_ID = "impact";
+
+/**
+ * Mapa arkusza (krok po kroku, `SheetMap`) i schemat planszy (`SheetIllustration`): kolumny jak na planszach PDF.
+ * `span` = względna szerokość kolumny; kilka obszarów w kolumnie leży jeden pod drugim (S3: partnerzy nad wpływem).
+ */
+export const MAP_COLUMNS: Record<string, { areas: string[]; span: number }[]> = {
+  S1: [
+    { areas: ["problem"], span: 1 },
+    { areas: ["actors"], span: 1 },
+    { areas: ["solution"], span: 1 },
+    { areas: ["costs"], span: 1 },
+  ],
+  S2: [
+    { areas: ["recipients"], span: 1 },
+    { areas: ["revenue"], span: 1 },
+    { areas: ["value"], span: 2 },
+  ],
+  S3: [
+    { areas: ["channels"], span: 1 },
+    { areas: ["partners", "impact"], span: 2 },
+  ],
+};
+
+/** Siatka kolumn mapy arkusza (od `md`; niżej jedna kolumna). Literały w całości dla Tailwinda. */
+export const MAP_GRID_CLASS: Record<string, string> = {
+  S1: "md:grid-cols-4",
+  S2: "md:grid-cols-4",
+  S3: "md:grid-cols-3",
+};
+
+/** Szerokość kolumny mapy według `span`. */
+export const MAP_SPAN_CLASS: Record<number, string> = { 1: "md:col-span-1", 2: "md:col-span-2" };
+
+/** Obszary, których kafelki stoją obok siebie (jak kolumny macierzy wpływu i dwie grupy wartości). */
+export const MAP_ROW_AREAS = new Set(["impact", "value"]);

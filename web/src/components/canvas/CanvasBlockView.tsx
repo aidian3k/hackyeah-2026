@@ -16,6 +16,8 @@ interface Props {
   readOnly?: boolean;
   /** Komunikat błędu zapisu bloku (np. 422 z API), pokazany pod blokiem. */
   error?: string | null;
+  /** Tytuł bloku tylko dla czytników (krok kanwy pokazuje go już w nagłówku `h2`). */
+  titleHidden?: boolean;
 }
 
 const noop = () => {};
@@ -24,9 +26,9 @@ const noop = () => {};
  * Blok Social Canvas renderowany z definicji: wybiera kontrolkę według `block.type`.
  * Bloki `impact_*` można też pokazać razem jako `ImpactMatrix` (3 kolumny) — tu każdy jest zwykłą grupą `radio`.
  */
-export function CanvasBlockView({ block, value, onChange = noop, readOnly = false, error = null }: Props) {
+export function CanvasBlockView({ block, value, onChange = noop, readOnly = false, error = null, titleHidden = false }: Props) {
   const errorId = useId();
-  const props = { block, value, onChange, readOnly };
+  const props = { block, value, onChange, readOnly, titleHidden };
   let control;
   switch (block.type) {
     case "single":

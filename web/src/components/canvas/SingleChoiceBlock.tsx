@@ -1,5 +1,6 @@
-import { useId, useRef } from "react";
+import { useId, useRef, type ReactNode } from "react";
 import type { BlockValue, CanvasBlock, CanvasOption } from "@/api/types";
+import { OptionArt } from "@/components/canvas/CanvasArt";
 import { LevelIndicator } from "@/components/canvas/LevelIndicator";
 
 interface Props {
@@ -7,6 +8,8 @@ interface Props {
   value: BlockValue | undefined;
   onChange: (value: BlockValue | null) => void;
   readOnly?: boolean;
+  /** Tytuł bloku tylko dla czytników (krok kanwy pokazuje go już w nagłówku `h2`). */
+  titleHidden?: boolean;
 }
 
 /** Bloki ze skalą ułożoną pionowo (na planszy strzałka „coraz częściej” w górę). */
@@ -19,10 +22,12 @@ interface OptionCardProps {
   onSelect: () => void;
   /** Opis pokazany pod etykietą (domyślnie `option.description`); `null` ukrywa opis. */
   description?: string | null;
+  /** Grafika opcji z planszy (dekoracja, np. twarz przy skali problemu). */
+  art?: ReactNode;
 }
 
 /** Karta opcji `radio`: etykieta, opis i wskaźnik poziomu. Cała karta jest klikalna. */
-export function OptionCard({ option, name, checked, onSelect, description }: OptionCardProps) {
+export function OptionCard({ option, name, checked, onSelect, description, art }: OptionCardProps) {
   const titleId = useId();
   const levelId = useId();
   const descId = useId();
@@ -40,6 +45,7 @@ export function OptionCard({ option, name, checked, onSelect, description }: Opt
         aria-labelledby={level ? `${titleId} ${levelId}` : titleId}
         aria-describedby={desc ? descId : undefined}
       />
+      {art}
       <span className="flex min-w-0 flex-1 flex-col gap-1">
         <span id={titleId}>{option.label}</span>
         {desc && (
@@ -54,10 +60,11 @@ export function OptionCard({ option, name, checked, onSelect, description }: Opt
 }
 
 /** Wybrana opcja jako tekst i znacznik poziomu (tryb tylko do odczytu). */
-export function SingleChoiceValue({ option }: { option: CanvasOption | undefined }) {
+export function SingleChoiceValue({ option, blockId }: { option: CanvasOption | undefined; blockId?: string }) {
   if (!option) return <p className="m-0 text-body text-ink-muted">Brak odpowiedzi.</p>;
   return (
     <div className="flex items-start gap-3 rounded-md border border-solid border-line px-3 py-2">
+      {blockId && <OptionArt blockId={blockId} code={option.code} level={option.level} />}
       <div className="flex min-w-0 flex-1 flex-col gap-1">
         <span className="text-body font-bold text-ink">{option.label}</span>
         {option.description && <span className="text-small text-ink-muted">{option.description}</span>}
@@ -78,7 +85,7 @@ function VerticalAxis() {
 }
 
 /** Blok `single`: grupa `radio` z opcjami jako kartami, przy skalach wskaźnik poziomu 1–4, „Wyczyść”. */
-export function SingleChoiceBlock({ block, value, onChange, readOnly = false }: Props) {
+export function SingleChoiceBlock({ block, value, onChange, readOnly = false, titleHidden = false }: Props) {
   const name = useId();
   const promptId = useId();
   const groupRef = useRef<HTMLFieldSetElement>(null);
@@ -89,7 +96,7 @@ export function SingleChoiceBlock({ block, value, onChange, readOnly = false }: 
     return (
       <div className="flex flex-col gap-2">
         <span className="text-body-lg font-bold text-ink">{block.title}</span>
-        <SingleChoiceValue option={selectedOption} />
+        <SingleChoiceValue option={selectedOption} blockId={block.id} />
       </div>
     );
   }
@@ -102,12 +109,19 @@ export function SingleChoiceBlock({ block, value, onChange, readOnly = false }: 
 
   const vertical = VERTICAL_SCALE.has(block.id);
   const options = block.options.map((o) => (
-    <OptionCard key={o.code} option={o} name={name} checked={selected === o.code} onSelect={() => onChange(o.code)} />
+    <OptionCard
+      key={o.code}
+      option={o}
+      name={name}
+      checked={selected === o.code}
+      onSelect={() => onChange(o.code)}
+      art={<OptionArt blockId={block.id} code={o.code} level={o.level} />}
+    />
   ));
 
   return (
     <fieldset ref={groupRef} className="ds-choices" aria-describedby={promptId}>
-      <legend className="ds-choices__legend">{block.title}</legend>
+      <legend className={titleHidden ? "ds-sr-only" : "ds-choices__legend"}>{block.title}</legend>
       <p id={promptId} className="ds-choices__hint">
         {block.prompt}
       </p>

@@ -11,6 +11,8 @@ interface Props {
   value: BlockValue | undefined;
   onChange: (value: BlockValue | null) => void;
   readOnly?: boolean;
+  /** Tytuł bloku tylko dla czytników (krok kanwy pokazuje go już w nagłówku `h2`). */
+  titleHidden?: boolean;
 }
 
 function asPartners(value: BlockValue | undefined): Partner[] {
@@ -163,7 +165,7 @@ function PartnerList({ block, partners }: { block: CanvasBlock; partners: Partne
  * Blok `partners`: konstelacja (3 koła ról) nad listą partnerów z nazwą, „Jak pomaga”, rolami i statusem.
  * `onChange` dostaje pełną listę, także niepełnych partnerów — do zapisu filtruj `completePartners()`.
  */
-export function PartnersBlock({ block, value, onChange, readOnly = false }: Props) {
+export function PartnersBlock({ block, value, onChange, readOnly = false, titleHidden = false }: Props) {
   const titleId = useId();
   const promptId = useId();
   const partners = asPartners(value);
@@ -180,7 +182,7 @@ export function PartnersBlock({ block, value, onChange, readOnly = false }: Prop
 
   const heading = (
     <div className="flex flex-col gap-1">
-      <span id={titleId} className="text-body-lg font-bold text-ink">
+      <span id={titleId} className={titleHidden ? "ds-sr-only" : "text-body-lg font-bold text-ink"}>
         {block.title}
       </span>
       <p id={promptId} className="ds-hint">

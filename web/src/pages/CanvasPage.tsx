@@ -1,11 +1,13 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { api } from "@/api/client";
-import type { AssistSuggestion, IdeaDetail } from "@/api/types";
+import type { AssistSuggestion, BlockValue, CanvasDefinition, IdeaDetail } from "@/api/types";
 import { Alert } from "@/components/Alert";
 import { LoadState } from "@/components/LoadState";
-import { CanvasBoard } from "@/components/canvas/CanvasBoard";
-import { CanvasProgressBar } from "@/components/canvas/CanvasProgressBar";
+import { CanvasProgressBar, percentOf } from "@/components/canvas/CanvasProgressBar";
+import { BlockStep, SheetIntro, SheetSummary, StepProgress } from "@/components/canvas/CanvasStep";
+import { SheetMap } from "@/components/canvas/SheetMap";
+import { INTRO_STEP, allBlockIds, buildSheetSteps, isBlockFilled, parseStep, stepHref, type CanvasStep } from "@/components/canvas/steps";
 import { KreatorNav } from "@/components/layout/KreatorNav";
 import { ModuleLabel } from "@/components/layout/ModuleLabel";
 import { toApiError, useApi } from "@/hooks/useApi";
@@ -69,6 +71,50 @@ function SaveIndicator({ save, onRetry }: { save: CanvasSave; onRetry: () => voi
 
 type SubmitState = { kind: "idle" } | { kind: "sending" } | { kind: "error"; message: string } | { kind: "done" };
 
+function stepTitle(step: CanvasStep | undefined, sheetNo: number): string {
+  if (!step) return "";
+  if (step.kind === "block") return step.block.title;
+  return step.kind === "intro" ? `Wstęp arkusza ${sheetNo}` : `Podsumowanie arkusza ${sheetNo}`;
+}
+
+interface StepTarget {
+  href: string;
+  label: string;
+}
+
+/** Poprzedni i następny krok; na granicy arkuszy — podsumowanie poprzedniego / wstęp następnego arkusza. */
+function neighbours(
+  def: CanvasDefinition,
+  sheetIndex: number,
+  steps: CanvasStep[],
+  index: number,
+  blocks: Record<string, BlockValue | undefined>,
+): { prev: StepTarget | null; next: StepTarget | null } {
+  const sheetNo = sheetIndex + 1;
+  const sheets = def.sheets;
+  let prev: StepTarget | null = null;
+  let next: StepTarget | null = null;
+  if (index > 0) {
+    const s = steps[index - 1];
+    if (s) prev = { href: stepHref(sheetNo, s.id), label: stepTitle(s, sheetNo) };
+  } else if (sheetIndex > 0) {
+    prev = { href: stepHref(sheetNo - 1, "podsumowanie"), label: `Podsumowanie arkusza ${sheetNo - 1}` };
+  }
+  const current = steps[index];
+  if (current?.kind === "intro") {
+    // Wstęp prowadzi do pierwszego pustego pola (albo do pierwszego, gdy wszystko uzupełnione).
+    const blockSteps = steps.filter((s): s is Extract<CanvasStep, { kind: "block" }> => s.kind === "block");
+    const target = blockSteps.find((s) => !isBlockFilled(s.block, blocks[s.id])) ?? blockSteps[0];
+    if (target) next = { href: stepHref(sheetNo, target.id), label: `Zacznij: ${target.block.title}` };
+  } else if (index < steps.length - 1) {
+    const s = steps[index + 1];
+    if (s) next = { href: stepHref(sheetNo, s.id), label: `Dalej: ${stepTitle(s, sheetNo)}` };
+  } else if (sheetIndex < sheets.length - 1) {
+    next = { href: stepHref(sheetNo + 1, INTRO_STEP), label: `Następny arkusz: ${sheets[sheetIndex + 1]?.title ?? ""}` };
+  }
+  return { prev, next };
+}
+
 export function CanvasPage() {
   const { id: rawId } = useParams();
   const ideaId = parseId(rawId);
@@ -77,6 +123,8 @@ export function CanvasPage() {
   const canvas = useCanvas(ideaId ?? 0);
   const [submit, setSubmit] = useState<SubmitState>({ kind: "idle" });
   const submitMsgRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const [announce, setAnnounce] = useState("");
 
   const title = idea.data?.title ?? "";
   useDocumentTitle(title ? `Social Canvas: ${title}` : "Social Canvas");
@@ -85,6 +133,23 @@ export function CanvasPage() {
   const sheets = def?.sheets ?? [];
   const sheetIndex = parseSheet(params.get("arkusz"), Math.max(sheets.length, 1));
   const sheet = sheets[sheetIndex];
+  const sheetNo = sheetIndex + 1;
+  const steps = def && sheet ? buildSheetSteps(def, sheet) : [];
+  const stepIndex = parseStep(params.get("krok"), steps);
+  const step = steps[stepIndex];
+  const stepKey = step ? `${sheetIndex}:${step.id}` : "";
+
+  // Zmiana kroku: fokus na nagłówek kroku i grzeczny komunikat (pierwsze wczytanie — bez przenoszenia fokusu).
+  const lastStepKey = useRef<string | null>(null);
+  useEffect(() => {
+    if (!stepKey) return;
+    const prev = lastStepKey.current;
+    lastStepKey.current = stepKey;
+    if (prev === null || prev === stepKey) return;
+    headingRef.current?.focus();
+    setAnnounce(`Arkusz ${sheetNo}, krok ${stepIndex + 1} z ${steps.length}: ${stepTitle(step, sheetNo)}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- reagujemy tylko na zmianę kroku
+  }, [stepKey]);
 
   function acceptSuggestion(blockId: string, s: AssistSuggestion) {
     const block = def?.blocks.find((b) => b.id === blockId);
@@ -114,6 +179,147 @@ export function CanvasPage() {
 
   const notFound = ideaId === null || idea.error?.status === 404 || canvas.loadError?.status === 404;
 
+  const whatNext = (
+    <section aria-labelledby="canvas-send" className="flex max-w-3xl flex-col gap-3 rounded-lg border border-solid border-line p-4">
+      <h3 id="canvas-send" className="m-0 font-sans text-h3 text-navy">
+        Co dalej?
+      </h3>
+      {idea.data?.status === "DRAFT" ? (
+        <>
+          <p className="m-0 text-body text-ink">
+            Kanwę możesz uzupełniać także po wysłaniu. Zespół Hubu zobaczy fiszkę i mapę pomysłu.
+          </p>
+          <div>
+            <button
+              type="button"
+              className="ds-btn ds-btn--cta"
+              onClick={() => void sendToHub()}
+              aria-disabled={submit.kind === "sending"}
+              aria-busy={submit.kind === "sending"}
+            >
+              {submit.kind === "sending" ? "Wysyłamy…" : "Wyślij do Hubu"}
+            </button>
+          </div>
+        </>
+      ) : (
+        idea.data && (
+          <p className="m-0 text-body text-ink">
+            {`Status pomysłu: ${IDEA_STATUS_LABELS[idea.data.status]}. Zmiany na kanwie zespół Hubu zobaczy od razu.`}
+          </p>
+        )
+      )}
+      <div ref={submitMsgRef} tabIndex={-1} aria-live="polite">
+        {submit.kind === "done" && <Alert tone="success" title="Wysłano do Hubu.">Odpowiedź zobaczysz w „Moich pomysłach”.</Alert>}
+        {submit.kind === "error" && (
+          <Alert tone="danger" title="Nie udało się wysłać.">
+            <p>{submit.message}</p>
+            <p>
+              <Link to={`/mam-pomysl/${ideaId}`}>Uzupełnij fiszkę pomysłu</Link>
+            </p>
+          </Alert>
+        )}
+      </div>
+    </section>
+  );
+
+  let body = null;
+  if (def && sheet && step && canvas.progress && ideaId !== null) {
+    const order = allBlockIds(def);
+    const { prev, next } = neighbours(def, sheetIndex, steps, stepIndex, canvas.blocks);
+    const questionText =
+      step.kind === "block" ? `Pytanie ${order.indexOf(step.id) + 1} z ${order.length} na całej kanwie` : undefined;
+    body = (
+      <div className="flex min-w-0 flex-col gap-6">
+        <nav aria-label="Arkusze Social Canvas">
+          <ul className="m-0 grid list-none grid-cols-3 gap-2 p-0">
+            {sheets.map((s, i) => {
+              const active = i === sheetIndex;
+              const p = canvas.progress?.by_sheet[s.id];
+              return (
+                <li key={s.id} className="min-w-0">
+                  <Link
+                    to={stepHref(i + 1, INTRO_STEP)}
+                    aria-current={active ? "page" : undefined}
+                    className={`flex h-full flex-col gap-1 rounded-md border border-solid px-2 py-2 text-navy md:px-3 no-underline hover:bg-surface-sunken ${
+                      active ? "border-navy bg-surface-muted shadow-[inset_0_-4px_0_var(--accent)]" : "border-line"
+                    }`}
+                  >
+                    <span className="font-sans text-label [overflow-wrap:anywhere] md:text-nav">
+                      {`Arkusz ${i + 1}`}
+                      <span className="sr-only md:not-sr-only">{`: ${s.title}`}</span>
+                    </span>
+                    {p && <CanvasProgressBar label={`Arkusz ${i + 1}`} filled={p.filled} total={p.total} compact />}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+
+        <div className="flex flex-wrap items-start justify-between gap-x-6 gap-y-2">
+          <p className="m-0 text-body text-ink">
+            <strong>Cała mapa:</strong>
+            {` ${canvas.progress.filled} z ${canvas.progress.total} pól (${percentOf(canvas.progress.filled, canvas.progress.total)}%)`}
+          </p>
+          <SaveIndicator save={canvas.save} onRetry={() => void canvas.flush()} />
+        </div>
+
+        <SheetMap definition={def} sheet={sheet} sheetNo={sheetNo} blocks={canvas.blocks} currentStep={step.id} />
+
+        <div className={`flex min-w-0 flex-col gap-6 ${step.kind === "summary" ? "" : "max-w-4xl"}`}>
+          <StepProgress steps={steps} index={stepIndex} sheetNo={sheetNo} blocks={canvas.blocks} questionText={questionText} />
+
+          {step.kind === "intro" && (
+            <SheetIntro definition={def} sheet={sheet} sheetNo={sheetNo} blocks={canvas.blocks} headingRef={headingRef} />
+          )}
+          {step.kind === "block" && (
+            <BlockStep
+              key={step.id}
+              block={step.block}
+              area={step.area}
+              value={canvas.blocks[step.id]}
+              onChange={(v) => canvas.setBlock(step.id, v)}
+              error={canvas.blockErrors[step.id] ?? null}
+              headingRef={headingRef}
+              ideaId={ideaId}
+              onAssist={acceptSuggestion}
+            />
+          )}
+
+          {step.kind === "summary" && (
+            <SheetSummary definition={def} sheet={sheet} sheetNo={sheetNo} blocks={canvas.blocks} headingRef={headingRef}>
+              {whatNext}
+            </SheetSummary>
+          )}
+
+          <nav aria-label="Kroki kanwy" className="flex flex-wrap items-center justify-between gap-3 border-0 border-t border-solid border-line pt-4">
+            {prev ? (
+              <Link className="ds-btn" to={prev.href}>
+                Wstecz
+                <span className="ds-sr-only">{`: ${prev.label}`}</span>
+              </Link>
+            ) : (
+              <span />
+            )}
+            {next && (
+              <Link className="ds-btn ds-btn--primary [overflow-wrap:anywhere]" to={next.href}>
+                {next.label}
+              </Link>
+            )}
+          </nav>
+        </div>
+
+        <p className="m-0 max-w-3xl text-small text-ink">
+          Wzór planszy:{" "}
+          <a href={def.source_url} target="_blank" rel="noreferrer">
+            Social Innovation Canvas (PDF, otwiera się w nowej karcie)
+          </a>
+          .
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="ds-page">
       <header className="flex flex-col gap-6">
@@ -139,6 +345,10 @@ export function CanvasPage() {
         <KreatorNav />
       </header>
 
+      <div className="ds-sr-only" aria-live="polite">
+        {announce}
+      </div>
+
       {notFound ? (
         <Alert tone="info" title="Nie znaleziono pomysłu.">
           <p>Sprawdź numer pomysłu albo przejdź do listy.</p>
@@ -147,116 +357,8 @@ export function CanvasPage() {
           </p>
         </Alert>
       ) : (
-        <LoadState
-          loading={canvas.loading}
-          error={canvas.loadError}
-          onRetry={canvas.reload}
-          label="Wczytujemy kanwę…"
-        >
-          {def && sheet && canvas.progress && ideaId !== null && (
-            <div className="flex min-w-0 flex-col gap-6">
-              <p className="m-0 max-w-3xl text-body text-ink">
-                Rozwiń pomysł na trzech arkuszach: problem, odbiorcy, wartość, partnerzy i wpływ. Wzór planszy:{" "}
-                <a href={def.source_url} target="_blank" rel="noreferrer">
-                  Social Innovation Canvas (PDF, otwiera się w nowej karcie)
-                </a>
-                .
-              </p>
-
-              <nav aria-label="Arkusze Social Canvas">
-                <ul className="m-0 grid list-none grid-cols-1 gap-2 p-0 md:grid-cols-3">
-                  {sheets.map((s, i) => {
-                    const active = i === sheetIndex;
-                    const p = canvas.progress?.by_sheet[s.id];
-                    return (
-                      <li key={s.id} className="min-w-0">
-                        <Link
-                          to={`?arkusz=${i + 1}`}
-                          aria-current={active ? "page" : undefined}
-                          className={`flex h-full flex-col gap-1 rounded-md border border-solid px-3 py-2 text-navy no-underline hover:bg-surface-sunken ${
-                            active ? "border-navy bg-surface-muted shadow-[inset_0_-4px_0_var(--accent)]" : "border-line"
-                          }`}
-                        >
-                          <span className="font-sans text-nav [overflow-wrap:anywhere]">{`Arkusz ${i + 1}: ${s.title}`}</span>
-                          {p && <CanvasProgressBar label={`Arkusz ${i + 1}`} filled={p.filled} total={p.total} compact />}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </nav>
-
-              {/* Postęp i stan zapisu zostają widoczne przy przewijaniu długiego arkusza (od md; na telefonie zabierałyby ekran). */}
-              <div className="grid grid-cols-1 items-start gap-4 border-0 border-b border-solid border-line bg-surface pb-3 md:sticky md:top-0 md:z-10 md:grid-cols-2 md:pt-3">
-                <CanvasProgressBar label="Cała mapa" filled={canvas.progress.filled} total={canvas.progress.total} />
-                <SaveIndicator save={canvas.save} onRetry={() => void canvas.flush()} />
-              </div>
-
-              <CanvasBoard
-                definition={def}
-                blocks={canvas.blocks}
-                sheet={sheet.id}
-                onBlockChange={canvas.setBlock}
-                onAssist={acceptSuggestion}
-                ideaId={ideaId}
-                blockErrors={canvas.blockErrors}
-              />
-
-              <nav aria-label="Następny arkusz" className="flex flex-wrap gap-3">
-                {sheetIndex > 0 && (
-                  <Link className="ds-btn" to={`?arkusz=${sheetIndex}`}>
-                    {`Poprzedni arkusz: ${sheets[sheetIndex - 1]?.title ?? ""}`}
-                  </Link>
-                )}
-                {sheetIndex < sheets.length - 1 && (
-                  <Link className="ds-btn" to={`?arkusz=${sheetIndex + 2}`}>
-                    {`Następny arkusz: ${sheets[sheetIndex + 1]?.title ?? ""}`}
-                  </Link>
-                )}
-              </nav>
-
-              <section aria-labelledby="canvas-send" className="flex max-w-3xl flex-col gap-3">
-                <h2 id="canvas-send" className="m-0 font-sans text-h2 text-navy">
-                  Co dalej?
-                </h2>
-                {idea.data?.status === "DRAFT" ? (
-                  <>
-                    <p className="m-0 text-body text-ink">
-                      Kanwę możesz uzupełniać także po wysłaniu. Zespół Hubu zobaczy fiszkę i mapę pomysłu.
-                    </p>
-                    <div>
-                      <button
-                        type="button"
-                        className="ds-btn ds-btn--cta"
-                        onClick={() => void sendToHub()}
-                        aria-disabled={submit.kind === "sending"}
-                        aria-busy={submit.kind === "sending"}
-                      >
-                        {submit.kind === "sending" ? "Wysyłamy…" : "Wyślij do Hubu"}
-                      </button>
-                    </div>
-                  </>
-                ) : (
-                  idea.data && (
-                    <p className="m-0 text-body text-ink">
-                      {`Status pomysłu: ${IDEA_STATUS_LABELS[idea.data.status]}. Zmiany na kanwie zespół Hubu zobaczy od razu.`}
-                    </p>
-                  )
-                )}
-                <div ref={submitMsgRef} tabIndex={-1} aria-live="polite">
-                  {submit.kind === "done" && <Alert tone="success" title="Wysłano do Hubu.">Odpowiedź zobaczysz w „Moich pomysłach”.</Alert>}
-                  {submit.kind === "error" && (
-                    <Alert tone="danger" title="Nie udało się wysłać.">
-                      <p>{submit.message}</p>
-                      <p>
-                        <Link to={`/mam-pomysl/${ideaId}`}>Uzupełnij fiszkę pomysłu</Link>
-                      </p>
-                    </Alert>
-                  )}
-                </div>
-              </section>
-            </div>
-          )}
+        <LoadState loading={canvas.loading} error={canvas.loadError} onRetry={canvas.reload} label="Wczytujemy kanwę…">
+          {body}
         </LoadState>
       )}
     </div>

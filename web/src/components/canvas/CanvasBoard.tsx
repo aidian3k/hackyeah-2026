@@ -1,4 +1,5 @@
 import { useId, useState } from "react";
+import { Link } from "react-router-dom";
 import type { AssistSuggestion, BlockValue, CanvasArea, CanvasBlock, CanvasDefinition } from "@/api/types";
 import { AssistPanel } from "@/components/assistant/AssistPanel";
 import { CanvasBlockView } from "@/components/canvas/CanvasBlockView";
@@ -32,9 +33,21 @@ interface Props {
   blockErrors?: Record<string, string>;
   /** Poziom nagłówka arkusza; obszary mają poziom o jeden niższy (domyślnie `h2` / `h3`). */
   headingLevel?: 2 | 3;
+  /** Tylko z `readOnly`: link „Zmień” przy każdym bloku (podsumowanie arkusza na kanwie krok po kroku). */
+  editHref?: (blockId: string) => string;
 }
 
 const noop = () => {};
+
+/** „Zmień” z nazwą bloku dla czytników. */
+function EditLink({ to, title, showTitle = false }: { to: string; title: string; showTitle?: boolean }) {
+  return (
+    <Link to={to} className="ds-btn ds-btn--link ds-btn--small px-0">
+      Zmień
+      <span className={showTitle ? "" : "ds-sr-only"}>{`: ${title}`}</span>
+    </Link>
+  );
+}
 
 /** Podpowiedzi asystenta dla obszaru: wybór bloku (gdy jest ich kilka) + `AssistPanel`. */
 function AreaAssist({
@@ -100,6 +113,7 @@ export function CanvasBoard({
   ideaId,
   blockErrors = {},
   headingLevel = 2,
+  editHref,
 }: Props) {
   const sheetDef = definition.sheets.find((s) => s.id === sheet) ?? definition.sheets[0];
   const SheetHeading = `h${headingLevel}` as const;
@@ -133,6 +147,15 @@ export function CanvasBoard({
             readOnly={readOnly}
             columnsClassName="grid-cols-1 md:grid-cols-3"
           />
+          {readOnly && editHref && (
+            <ul className="m-0 flex list-none flex-wrap gap-x-4 gap-y-1 p-0">
+              {areaBlocks.map((b) => (
+                <li key={b.id}>
+                  <EditLink to={editHref(b.id)} title={b.title} showTitle />
+                </li>
+              ))}
+            </ul>
+          )}
           {errors.map((b) => (
             <p key={b.id} className="ds-error m-0" role="alert">
               <strong>Błąd:</strong> {`${b.title}: ${blockErrors[b.id]}`}
@@ -153,6 +176,11 @@ export function CanvasBoard({
             readOnly={readOnly}
             error={blockErrors[b.id] ?? null}
           />
+          {readOnly && editHref && (
+            <p className="m-0 mt-2">
+              <EditLink to={editHref(b.id)} title={b.title} />
+            </p>
+          )}
         </div>
       )),
     ];

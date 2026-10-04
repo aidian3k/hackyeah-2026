@@ -8,6 +8,8 @@ interface Props {
   value: BlockValue | undefined;
   onChange: (value: BlockValue | null) => void;
   readOnly?: boolean;
+  /** Tytuł bloku tylko dla czytników (krok kanwy pokazuje go już w nagłówku `h2`). */
+  titleHidden?: boolean;
 }
 
 type Variant = "hearts" | "tiles" | "chips";
@@ -57,7 +59,7 @@ function MultiValueView({ block, multi, variant }: { block: CanvasBlock; multi: 
  * Blok `multi`: pola wyboru jako karty („Wartość emocjonalna” z sercami, „Wartość funkcjonalna” jako kafelki),
  * limit `max` z ogłaszanym licznikiem, własne wpisy („Dopisz własną”, „Usuń <wpis>”).
  */
-export function MultiChoiceBlock({ block, value, onChange, readOnly = false }: Props) {
+export function MultiChoiceBlock({ block, value, onChange, readOnly = false, titleHidden = false }: Props) {
   const promptId = useId();
   const counterId = useId();
   const multi = asMulti(value);
@@ -106,7 +108,7 @@ export function MultiChoiceBlock({ block, value, onChange, readOnly = false }: P
     variant === "tiles"
       ? "grid grid-cols-1 gap-2 sm:grid-cols-2"
       : variant === "hearts"
-        ? "flex flex-col gap-2"
+        ? "grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3"
         : "flex flex-wrap gap-2";
 
   const blockedReason = full
@@ -117,7 +119,7 @@ export function MultiChoiceBlock({ block, value, onChange, readOnly = false }: P
 
   return (
     <fieldset className="ds-choices gap-3" aria-describedby={max !== null ? `${promptId} ${counterId}` : promptId}>
-      <legend className="ds-choices__legend">{block.title}</legend>
+      <legend className={titleHidden ? "ds-sr-only" : "ds-choices__legend"}>{block.title}</legend>
       <p id={promptId} className="ds-choices__hint">
         {block.prompt}
       </p>

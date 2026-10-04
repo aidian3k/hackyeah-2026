@@ -9,10 +9,12 @@ interface Props {
   value: BlockValue | undefined;
   onChange: (value: BlockValue | null) => void;
   readOnly?: boolean;
+  /** Tytuł bloku tylko dla czytników (krok kanwy pokazuje go już w nagłówku `h2`). */
+  titleHidden?: boolean;
 }
 
 /** Blok `text`: pole wieloliniowe z licznikiem znaków. Puste pole = `null` (usunięcie bloku). */
-export function TextBlock({ block, value, onChange, readOnly = false }: Props) {
+export function TextBlock({ block, value, onChange, readOnly = false, titleHidden = false }: Props) {
   const fieldId = useId();
   const promptId = useId();
   const counterId = useId();
@@ -34,7 +36,7 @@ export function TextBlock({ block, value, onChange, readOnly = false }: Props) {
   const atLimit = text.length >= CANVAS_TEXT_MAX_CHARS;
   return (
     <div className="ds-field">
-      <label htmlFor={fieldId} className="ds-label">
+      <label htmlFor={fieldId} className={titleHidden ? "ds-sr-only" : "ds-label"}>
         {block.title}
       </label>
       <p id={promptId} className="ds-hint">
