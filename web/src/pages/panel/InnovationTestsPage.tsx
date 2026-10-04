@@ -6,11 +6,10 @@ import { LoadState } from "@/components/LoadState";
 import { ModuleLabel } from "@/components/layout/ModuleLabel";
 import { useApi } from "@/hooks/useApi";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import "@/styles/innovation-tests.css";
 
-/** Panel Hubu: lista naborów OPEN/CLOSED. */
+/** Panel Hubu: lista rekrutacji testerów OPEN/CLOSED. */
 export function PanelInnovationTestsPage() {
-  useDocumentTitle("Panel: Nabory testerów");
+  useDocumentTitle("Panel: Rekrutacje testerów");
   const [searchParams, setSearchParams] = useSearchParams();
   const status = searchParams.get("status");
   const queryStatus = status === "OPEN" || status === "CLOSED" ? status : undefined;
@@ -26,14 +25,14 @@ export function PanelInnovationTestsPage() {
   );
 
   return (
-    <div className="ds-page m4-page--wide">
+    <div className="ds-page">
       <div className="ds-stack">
         <ModuleLabel module="panel" />
-        <h1 tabIndex={-1}>Nabory testerów</h1>
-        <p className="m4-lead">Twórz nabory, akceptuj testerów i przeglądaj wyniki ankiet.</p>
-        <div className="m4-form__actions">
+        <h1 tabIndex={-1}>Rekrutacje testerów</h1>
+        <p className="m-0 text-body-lg text-ink">Twórz rekrutacje testerów, akceptuj zgłoszenia i przeglądaj wyniki ankiet.</p>
+        <div className="flex flex-wrap items-center gap-3">
           <Link to="/panel/testy/nowy" className="ds-btn ds-btn--cta">
-            Utwórz nabór
+            Utwórz rekrutację
           </Link>
           <button
             type="button"
@@ -65,14 +64,14 @@ export function PanelInnovationTestsPage() {
       {loading || error ? (
         <LoadState loading={loading} error={error} onRetry={reload} />
       ) : data && data.items.length === 0 ? (
-        <EmptyState title="Brak naborów">
-          Utwórz pierwszy nabór dla opublikowanego rozwiązania.
+        <EmptyState title="Brak rekrutacji testerów">
+          Utwórz pierwszą rekrutację testerów dla opublikowanego rozwiązania.
         </EmptyState>
       ) : (
         <InnovationTestList
           items={data?.items ?? []}
           linkPrefix="/panel/testy"
-          emptyTitle="Brak naborów."
+          emptyTitle="Brak rekrutacji testerów."
         />
       )}
     </div>

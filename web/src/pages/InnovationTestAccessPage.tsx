@@ -9,7 +9,6 @@ import { ModuleLabel } from "@/components/layout/ModuleLabel";
 import { useApi } from "@/hooks/useApi";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { APPLICATION_STATUS_LABELS } from "@/lib/labels";
-import "@/styles/innovation-tests.css";
 
 /** Dostęp testera po jednorazowym tokenie: status i ankieta. */
 export function InnovationTestAccessPage() {
@@ -23,7 +22,7 @@ export function InnovationTestAccessPage() {
 
   if (!token) {
     return (
-      <div className="ds-page m4-page">
+      <div className="ds-page max-w-3xl">
         <Alert tone="danger" title="Brak tokenu.">
           Link dostępu jest niekompletny.
         </Alert>
@@ -33,7 +32,7 @@ export function InnovationTestAccessPage() {
 
   if (loading || error || !data) {
     return (
-      <div className="ds-page m4-page">
+      <div className="ds-page max-w-3xl">
         <LoadState loading={loading} error={error} onRetry={reload} />
       </div>
     );
@@ -43,11 +42,11 @@ export function InnovationTestAccessPage() {
   const completed = data.status === "COMPLETED" || Boolean(doneFeedback);
 
   return (
-    <div className="ds-page m4-page">
+    <div className="ds-page max-w-3xl">
       <div className="ds-stack">
         <ModuleLabel module="tester" />
         <h1 tabIndex={-1}>{data.test_title}</h1>
-        <p className="m4-lead">
+        <p className="m-0 text-body-lg text-ink">
           Status udziału: <strong>{APPLICATION_STATUS_LABELS[data.status]}</strong>
         </p>
       </div>
@@ -63,8 +62,8 @@ export function InnovationTestAccessPage() {
         </Alert>
       )}
       {data.test_status === "CLOSED" && !completed && (
-        <Alert tone="warning" title="Nabór zamknięty.">
-          Nie można już wysłać ankiety do tego naboru.
+        <Alert tone="warning" title="Rekrutacja testerów zamknięta.">
+          Nie można już wysłać ankiety do tego testu.
         </Alert>
       )}
 
@@ -75,7 +74,7 @@ export function InnovationTestAccessPage() {
       ) : data.can_submit_feedback ? (
         <section className="ds-stack" aria-labelledby="m4-feedback-heading">
           <h2 id="m4-feedback-heading">Ankieta po teście</h2>
-          <p className="m4-lead">Oceń rozwiązanie w skali 1–5. Ankietę można wysłać tylko raz.</p>
+          <p className="m-0 text-body-lg text-ink">Oceń rozwiązanie w skali 1–5. Ankietę można wysłać tylko raz.</p>
           <FeedbackForm token={token} onSubmitted={setFeedback} />
         </section>
       ) : data.status === "SUBMITTED" ? (

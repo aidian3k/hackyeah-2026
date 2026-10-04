@@ -107,13 +107,13 @@ async def suggest_tester_fit(
         )
     system = (
         "Jesteś asystentem Hubu innowacji społecznych. Oceń dopasowanie testera do "
-        "naboru. Odpowiedz WYŁĄCZNIE poprawnym JSON-em: "
+        "testu (rekrutacji testerów). Odpowiedz WYŁĄCZNIE poprawnym JSON-em: "
         '{"label_pl":"string","rationale_pl":"string","disclaimer_pl":"string"}. '
         "To tylko sugestia, nie decyzja. Nie wymyślaj faktów spoza formularza."
     )
     user = json.dumps(
         {
-            "nabór": {
+            "test": {
                 "title": test.title,
                 "target_group": test.target_group,
                 "tester_type": test.tester_type,
@@ -121,8 +121,6 @@ async def suggest_tester_fit(
                 "goal_description": test.goal_description,
             },
             "tester": {
-                "display_name": application.display_name,
-                "email": application.email,
                 "tester_type": application.tester_type.value,
                 "wojewodztwo": application.wojewodztwo,
                 "powiat": application.powiat,
@@ -224,7 +222,7 @@ async def build_test_report(
     )
     test = result.scalar_one_or_none()
     if test is None:
-        raise ApiError(404, "NOT_FOUND", "Nie znaleziono naboru.")
+        raise ApiError(404, "NOT_FOUND", "Nie znaleziono testu.")
 
     applications = list(test.applications)
     counts = _status_counts(applications)

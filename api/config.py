@@ -77,9 +77,10 @@ class Settings(BaseSettings):
     # --- Moduł 4: Tester innowacji ---
     M4_AI_ENABLED: bool = False
     M4_AI_PROMPT_VERSION: str = "m4-report-v1"
-    M4_AI_FIT_PROMPT_VERSION: str = "m4-fit-v1"
+    M4_AI_FIT_PROMPT_VERSION: str = "m4-fit-v2"
     M4_AI_MAX_TOKENS: int = 1200
     M4_SMALL_SAMPLE_THRESHOLD: int = 3
+    M4_MAX_ACTIVE_APPLICATIONS: int = 3
     M4_MOTIVATION_MAX_CHARS: int = 4000
     M4_COMMENT_MAX_CHARS: int = 4000
     M4_REPORT_FEEDBACK_MAX: int = 100

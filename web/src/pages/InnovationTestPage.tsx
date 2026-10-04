@@ -10,9 +10,8 @@ import { useApi } from "@/hooks/useApi";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { formatDate } from "@/lib/format";
 import { MATERIAL_TYPE_LABELS, TEST_MODE_LABELS } from "@/lib/labels";
-import "@/styles/innovation-tests.css";
 
-/** Publiczne szczegóły naboru i formularz zgłoszenia. */
+/** Publiczne szczegóły rekrutacji testerów i formularz zgłoszenia. */
 export function InnovationTestPage() {
   const { id } = useParams();
   const testId = Number(id);
@@ -22,13 +21,13 @@ export function InnovationTestPage() {
     [testId],
   );
   const [submitted, setSubmitted] = useState<InnovationTestApplicationPublic | null>(null);
-  useDocumentTitle(data?.title ?? "Nabór testerów");
+  useDocumentTitle(data?.title ?? "Rekrutacja testerów");
 
   if (!valid) {
     return (
-      <div className="ds-page m4-page">
+      <div className="ds-page max-w-3xl">
         <Alert tone="danger" title="Nieprawidłowy adres.">
-          Sprawdź link do naboru.
+          Sprawdź link do testu.
         </Alert>
       </div>
     );
@@ -36,73 +35,73 @@ export function InnovationTestPage() {
 
   if (loading || error || !data) {
     return (
-      <div className="ds-page m4-page">
+      <div className="ds-page max-w-3xl">
         <LoadState loading={loading} error={error} onRetry={reload} />
       </div>
     );
   }
 
   return (
-    <div className="ds-page m4-page">
+    <div className="ds-page max-w-3xl">
       <div className="ds-stack">
         <ModuleLabel module="tester" />
         <p>
-          <Link to="/testy">Wróć do listy naborów</Link>
+          <Link to="/testy">Wróć do listy testów</Link>
         </p>
         <h1 tabIndex={-1}>{data.title}</h1>
         {data.solution_title && (
-          <p className="m4-lead">
+          <p className="m-0 text-body-lg text-ink">
             Rozwiązanie: <Link to={`/rozwiazania/${data.solution_id}`}>{data.solution_title}</Link>
           </p>
         )}
       </div>
 
-      <dl className="m4-meta-grid">
-        <div>
-          <dt>Cel testu</dt>
-          <dd>{data.goal_description}</dd>
+      <dl className="m-0 grid gap-4 sm:grid-cols-2">
+        <div className="flex flex-col gap-1">
+          <dt className="m-0 text-label text-ink-muted">Cel testu</dt>
+          <dd className="m-0 text-body text-ink">{data.goal_description}</dd>
         </div>
-        <div>
-          <dt>Grupa docelowa</dt>
-          <dd>{data.target_group}</dd>
+        <div className="flex flex-col gap-1">
+          <dt className="m-0 text-label text-ink-muted">Grupa docelowa</dt>
+          <dd className="m-0 text-body text-ink">{data.target_group}</dd>
         </div>
-        <div>
-          <dt>Oczekiwani testerzy</dt>
-          <dd>{data.tester_type}</dd>
+        <div className="flex flex-col gap-1">
+          <dt className="m-0 text-label text-ink-muted">Oczekiwani testerzy</dt>
+          <dd className="m-0 text-body text-ink">{data.tester_type}</dd>
         </div>
-        <div>
-          <dt>Lokalizacja</dt>
-          <dd>{data.location}</dd>
+        <div className="flex flex-col gap-1">
+          <dt className="m-0 text-label text-ink-muted">Lokalizacja</dt>
+          <dd className="m-0 text-body text-ink">{data.location}</dd>
         </div>
-        <div>
-          <dt>Tryb</dt>
-          <dd>{TEST_MODE_LABELS[data.mode]}</dd>
+        <div className="flex flex-col gap-1">
+          <dt className="m-0 text-label text-ink-muted">Tryb</dt>
+          <dd className="m-0 text-body text-ink">{TEST_MODE_LABELS[data.mode]}</dd>
         </div>
-        <div>
-          <dt>Czas</dt>
-          <dd>{data.estimated_duration}</dd>
+        <div className="flex flex-col gap-1">
+          <dt className="m-0 text-label text-ink-muted">Czas</dt>
+          <dd className="m-0 text-body text-ink">{data.estimated_duration}</dd>
         </div>
-        <div>
-          <dt>Miejsca</dt>
-          <dd>
+        <div className="flex flex-col gap-1">
+          <dt className="m-0 text-label text-ink-muted">Miejsca</dt>
+          <dd className="m-0 text-body text-ink">
             {data.seats_accepted}/{data.seats_limit}
           </dd>
         </div>
-        <div>
-          <dt>Termin</dt>
-          <dd>{formatDate(data.ends_at)}</dd>
+        <div className="flex flex-col gap-1">
+          <dt className="m-0 text-label text-ink-muted">Termin</dt>
+          <dd className="m-0 text-body text-ink">{formatDate(data.ends_at)}</dd>
         </div>
       </dl>
 
       <section className="ds-stack" aria-labelledby="m4-materials-heading">
         <h2 id="m4-materials-heading">Materiały do testu</h2>
-        <p className="m4-lead">
-          Hub przekaże Ci materiały poza platformą po akceptacji. Poniżej widać, czego dotyczy nabór.
+        <p className="m-0 text-body-lg text-ink">
+          Hub przekaże Ci materiały poza platformą po akceptacji. Poniżej widać, czego dotyczy test.
         </p>
-        <ul className="m4-materials">
+        <ul className="m-0 flex list-none flex-col gap-3 p-0">
           {data.materials.map((material) => (
-            <li key={material.id}>
-              <h3>
+            <li key={material.id} className="rounded-md bg-surface-muted p-4">
+              <h3 className="mb-2 font-sans text-body font-normal text-navy">
                 {material.title} · {MATERIAL_TYPE_LABELS[material.type]}
               </h3>
               {material.description && <p>{material.description}</p>}

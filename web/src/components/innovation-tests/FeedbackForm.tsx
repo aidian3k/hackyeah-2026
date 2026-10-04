@@ -60,7 +60,7 @@ export function FeedbackForm({ token, onSubmitted }: Props) {
   }
 
   return (
-    <form className="m4-form" onSubmit={onSubmit} noValidate>
+    <form className="flex flex-col gap-6" onSubmit={onSubmit} noValidate>
       {error && (
         <Alert tone="danger" title="Nie udało się zapisać ankiety.">
           {error.message}
@@ -68,11 +68,11 @@ export function FeedbackForm({ token, onSubmitted }: Props) {
       )}
 
       {FIELDS.map((field) => (
-        <fieldset key={field.key} className="m4-rating-fieldset">
-          <legend>{field.label}</legend>
-          <div className="m4-rating-options">
+        <fieldset key={field.key} className="m-0 flex flex-col gap-3 border-0 p-0">
+          <legend className="mb-2 p-0 text-label text-ink">{field.label}</legend>
+          <div className="flex flex-wrap gap-3">
             {[1, 2, 3, 4, 5].map((score) => (
-              <label key={score}>
+              <label key={score} className="inline-flex items-center gap-2 text-small font-normal">
                 <input
                   type="radio"
                   name={`${formId}-${field.key}`}
@@ -109,7 +109,7 @@ export function FeedbackForm({ token, onSubmitted }: Props) {
         />
       </div>
 
-      <div className="m4-form__actions">
+      <div className="flex flex-wrap items-center gap-3">
         <button type="submit" className="ds-btn ds-btn--cta" disabled={submitting}>
           {submitting ? "Zapisywanie…" : "Wyślij ankietę"}
         </button>

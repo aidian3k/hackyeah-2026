@@ -1,4 +1,4 @@
-"""API Modułu 4 — Tester innowacji: nabory publiczne, token testera i panel Hubu."""
+"""API Modułu 4 — Tester innowacji: publiczne rekrutacje testerów, token testera i panel Hubu."""
 
 from __future__ import annotations
 
@@ -201,7 +201,7 @@ async def _load_test(
     )
     test = result.scalar_one_or_none()
     if test is None:
-        raise ApiError(404, "NOT_FOUND", "Nie znaleziono naboru.")
+        raise ApiError(404, "NOT_FOUND", "Nie znaleziono testu.")
     return test
 
 
@@ -280,7 +280,7 @@ async def create_innovation_test(
         raise ApiError(
             422,
             "VALIDATION_ERROR",
-            "solution_id: nabór wymaga rozwiązania PUBLISHED albo PENDING_REVIEW.",
+            "solution_id: test wymaga rozwiązania PUBLISHED albo PENDING_REVIEW.",
         )
     if payload.ends_at <= datetime.now(UTC):
         raise ApiError(422, "VALIDATION_ERROR", "ends_at: termin musi być w przyszłości.")
@@ -362,9 +362,9 @@ async def get_innovation_test(
     test = await _load_test(session, test_id)
     if not hub:
         if test.status != InnovationTestStatus.OPEN:
-            raise ApiError(404, "NOT_FOUND", "Nie znaleziono naboru.")
+            raise ApiError(404, "NOT_FOUND", "Nie znaleziono testu.")
         if test.solution.status != SolutionStatus.PUBLISHED:
-            raise ApiError(404, "NOT_FOUND", "Nie znaleziono naboru.")
+            raise ApiError(404, "NOT_FOUND", "Nie znaleziono testu.")
     return await _to_test_read(session, test)
 
 
@@ -372,7 +372,7 @@ async def get_innovation_test(
 async def close_innovation_test(session: SessionDep, test_id: int) -> InnovationTestRead:
     test = await _load_test(session, test_id)
     if test.status == InnovationTestStatus.CLOSED:
-        raise ApiError(409, "CONFLICT", "Nabór jest już zamknięty.")
+        raise ApiError(409, "CONFLICT", "Rekrutacja testerów jest już zamknięta.")
     test.status = InnovationTestStatus.CLOSED
     test.closed_at = datetime.now(UTC)
     await session.commit()
@@ -393,8 +393,8 @@ async def apply_to_innovation_test(
 ) -> InnovationTestApplicationPublic:
     test = await _load_test(session, test_id)
     if test.solution.status != SolutionStatus.PUBLISHED:
-        # publiczne zgłoszenie tylko do naborów powiązanych z PUBLISHED
-        raise ApiError(404, "NOT_FOUND", "Nie znaleziono naboru.")
+        # publiczne zgłoszenie tylko do testów powiązanych z PUBLISHED
+        raise ApiError(404, "NOT_FOUND", "Nie znaleziono testu.")
     application, _token = await create_application(session, test, payload)
     try:
         suggestion = await suggest_tester_fit(application, test)

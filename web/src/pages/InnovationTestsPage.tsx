@@ -5,9 +5,8 @@ import { InnovationTestList } from "@/components/innovation-tests/InnovationTest
 import { ModuleLabel } from "@/components/layout/ModuleLabel";
 import { useApi } from "@/hooks/useApi";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import "@/styles/innovation-tests.css";
 
-/** Publiczna lista otwartych naborów testerów. */
+/** Publiczna lista otwartych rekrutacji testerów. */
 export function InnovationTestsPage() {
   useDocumentTitle("Tester innowacji");
   const { data, error, loading, reload } = useApi(
@@ -16,12 +15,12 @@ export function InnovationTestsPage() {
   );
 
   return (
-    <div className="ds-page m4-page">
+    <div className="ds-page max-w-3xl">
       <div className="ds-stack">
         <ModuleLabel module="tester" />
         <h1 tabIndex={-1}>Szukamy testerów innowacji</h1>
-        <p className="m4-lead">
-          Sprawdź otwarte nabory i zgłoś się do testu rozwiązania społecznego. Hub skontaktuje się z Tobą po
+        <p className="m-0 text-body-lg text-ink">
+          Sprawdź otwarte rekrutacje testerów i zgłoś się do testu rozwiązania społecznego. Hub skontaktuje się z Tobą po
           kwalifikacji.
         </p>
       </div>
@@ -29,7 +28,7 @@ export function InnovationTestsPage() {
       {loading || error ? (
         <LoadState loading={loading} error={error} onRetry={reload} />
       ) : data && data.items.length === 0 ? (
-        <EmptyState title="Brak otwartych naborów">
+        <EmptyState title="Brak otwartych rekrutacji testerów">
           Wróć później — Hub publikuje nowe testy.
         </EmptyState>
       ) : (

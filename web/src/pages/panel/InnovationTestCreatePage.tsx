@@ -7,14 +7,13 @@ import { ModuleLabel } from "@/components/layout/ModuleLabel";
 import { toApiError } from "@/hooks/useApi";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { MATERIAL_TYPE_LABELS, TEST_MODE_LABELS } from "@/lib/labels";
-import "@/styles/innovation-tests.css";
 
 const MATERIAL_TYPES = Object.keys(MATERIAL_TYPE_LABELS) as MaterialType[];
 const MODES = Object.keys(TEST_MODE_LABELS) as TestMode[];
 
-/** Formularz tworzenia kompletnego naboru OPEN. */
+/** Formularz tworzenia kompletnej rekrutacji testerów (OPEN). */
 export function PanelInnovationTestCreatePage() {
-  useDocumentTitle("Panel: Nowy nabór");
+  useDocumentTitle("Panel: Nowa rekrutacja testerów");
   const navigate = useNavigate();
   const formId = useId();
   const [error, setError] = useState<ApiError | null>(null);
@@ -81,21 +80,21 @@ export function PanelInnovationTestCreatePage() {
   }
 
   return (
-    <div className="ds-page m4-page">
+    <div className="ds-page max-w-3xl">
       <div className="ds-stack">
         <ModuleLabel module="panel" />
         <p>
-          <Link to="/panel/testy">Wróć do naborów</Link>
+          <Link to="/panel/testy">Wróć do rekrutacji testerów</Link>
         </p>
-        <h1 tabIndex={-1}>Nowy nabór testerów</h1>
-        <p className="m4-lead">
-          Nabór od razu trafia jako otwarty. Rozwiązanie musi mieć status PUBLISHED albo PENDING_REVIEW.
+        <h1 tabIndex={-1}>Nowa rekrutacja testerów</h1>
+        <p className="m-0 text-body-lg text-ink">
+          Rekrutacja od razu jest otwarta. Rozwiązanie musi mieć status PUBLISHED albo PENDING_REVIEW.
         </p>
       </div>
 
-      <form className="m4-form" onSubmit={onSubmit} noValidate>
+      <form className="flex flex-col gap-6" onSubmit={onSubmit} noValidate>
         {error && (
-          <Alert tone="danger" title="Nie udało się utworzyć naboru.">
+          <Alert tone="danger" title="Nie udało się utworzyć rekrutacji testerów.">
             {error.message}
           </Alert>
         )}
@@ -112,7 +111,7 @@ export function PanelInnovationTestCreatePage() {
           />
         </div>
         <div className="ds-field">
-          <label htmlFor={`${formId}-title`}>Tytuł naboru</label>
+          <label htmlFor={`${formId}-title`}>Tytuł testu</label>
           <input
             id={`${formId}-title`}
             className="ds-input"
@@ -225,8 +224,8 @@ export function PanelInnovationTestCreatePage() {
           />
         </div>
 
-        <fieldset className="m4-rating-fieldset">
-          <legend>Pierwszy materiał</legend>
+        <fieldset className="m-0 flex flex-col gap-3 border-0 p-0">
+          <legend className="mb-2 p-0 text-label text-ink">Pierwszy materiał</legend>
           <div className="ds-field">
             <label htmlFor={`${formId}-mat-title`}>Tytuł</label>
             <input
@@ -274,9 +273,9 @@ export function PanelInnovationTestCreatePage() {
           </div>
         </fieldset>
 
-        <div className="m4-form__actions">
+        <div className="flex flex-wrap items-center gap-3">
           <button type="submit" className="ds-btn ds-btn--cta" disabled={submitting}>
-            {submitting ? "Tworzenie…" : "Opublikuj nabór"}
+            {submitting ? "Tworzenie…" : "Opublikuj rekrutację"}
           </button>
         </div>
       </form>

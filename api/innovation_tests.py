@@ -11,6 +11,7 @@ from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
+from api.config import settings
 from api.errors import ApiError
 from api.models import (
     ApplicationStatus,
@@ -24,10 +25,11 @@ from api.schemas import InnovationTestApplicationCreate, InnovationTestFeedbackC
 
 log = logging.getLogger(__name__)
 
-# Stały tekst i wersja zgody dla całego Modułu 4 (MVP — Hub nie edytuje per nabór).
-M4_CONSENT_VERSION = "m4-consent-v1"
+# Stały tekst i wersja zgody dla całego Modułu 4 (MVP — Hub nie edytuje per test).
+# v2: „nabór testowy” → „rekrutacja testerów” (triaż 2026-10-04, TI08).
+M4_CONSENT_VERSION = "m4-consent-v2"
 M4_CONSENT_TEXT_PL = (
-    "Wyrażam zgodę na kontakt w sprawie udziału w tym naborze testowym oraz na "
+    "Wyrażam zgodę na kontakt w sprawie udziału w tej rekrutacji testerów oraz na "
     "przetwarzanie podanych danych w celu obsługi zgłoszenia przez Małopolski Hub "
     "Innowacji Społecznych. Dane kontaktowe są widoczne wyłącznie dla Hubu."
 )
@@ -35,7 +37,6 @@ M4_CONSENT_TEXT_PL = (
 ACTIVE_APPLICATION_STATUSES = frozenset(
     {ApplicationStatus.SUBMITTED, ApplicationStatus.ACCEPTED}
 )
-MAX_ACTIVE_APPLICATIONS = 3
 ACCESS_TOKEN_BYTES = 32
 
 
@@ -107,7 +108,7 @@ async def _count_accepted(session: AsyncSession, test_id: int) -> int:
 
 
 async def maybe_auto_close_test(session: AsyncSession, test: InnovationTest) -> None:
-    """Po limicie zaakceptowanych miejsc nabór zamyka się automatycznie (nieodwracalnie)."""
+    """Po limicie zaakceptowanych miejsc rekrutacja zamyka się automatycznie (nieodwracalnie)."""
     if test.status != InnovationTestStatus.OPEN:
         return
     accepted = await _count_accepted(session, test.id)
@@ -128,16 +129,19 @@ async def create_application(
     payload: InnovationTestApplicationCreate,
 ) -> tuple[InnovationTestApplication, str]:
     if test.status != InnovationTestStatus.OPEN:
-        raise ApiError(409, "CONFLICT", "Nabór jest zamknięty — nie można złożyć zgłoszenia.")
+        raise ApiError(
+            409, "CONFLICT", "Rekrutacja testerów jest zamknięta — nie można złożyć zgłoszenia."
+        )
 
     email_normalized = normalize_tester_email(payload.email)
     active = await _count_active_applications(session, email_normalized)
-    if active >= MAX_ACTIVE_APPLICATIONS:
+    if active >= settings.M4_MAX_ACTIVE_APPLICATIONS:
         raise ApiError(
             409,
             "CONFLICT",
-            "Masz już trzy aktywne zgłoszenia. Wycofaj jedno albo dokończ test, "
-            "zanim złożysz kolejne.",
+            "Masz już maksymalną liczbę aktywnych zgłoszeń "
+            f"({settings.M4_MAX_ACTIVE_APPLICATIONS}). Wycofaj jedno albo dokończ "
+            "test, zanim złożysz kolejne.",
         )
 
     duplicate = await session.scalar(
@@ -151,7 +155,7 @@ async def create_application(
         raise ApiError(
             409,
             "CONFLICT",
-            "Masz już aktywne zgłoszenie do tego naboru.",
+            "Masz już aktywne zgłoszenie do tego testu.",
         )
 
     token, token_hash = create_access_token()
@@ -192,9 +196,11 @@ async def accept_application(
     application: InnovationTestApplication,
 ) -> tuple[InnovationTestApplication, str]:
     if test.status != InnovationTestStatus.OPEN:
-        raise ApiError(409, "CONFLICT", "Nabór jest zamknięty — nie można akceptować zgłoszeń.")
+        raise ApiError(
+            409, "CONFLICT", "Rekrutacja testerów jest zamknięta — nie można akceptować zgłoszeń."
+        )
     if application.test_id != test.id:
-        raise ApiError(404, "NOT_FOUND", "Nie znaleziono zgłoszenia w tym naborze.")
+        raise ApiError(404, "NOT_FOUND", "Nie znaleziono zgłoszenia w tym teście.")
     if application.status != ApplicationStatus.SUBMITTED:
         raise ApiError(
             409,
@@ -204,7 +210,7 @@ async def accept_application(
 
     accepted = await _count_accepted(session, test.id)
     if accepted >= test.seats_limit:
-        raise ApiError(409, "CONFLICT", "Osiągnięto limit miejsc w naborze.")
+        raise ApiError(409, "CONFLICT", "Osiągnięto limit miejsc w teście.")
 
     token, token_hash = create_access_token()
     now = datetime.now(UTC)
@@ -231,7 +237,7 @@ async def reject_application(
     reason: str,
 ) -> InnovationTestApplication:
     if application.test_id != test.id:
-        raise ApiError(404, "NOT_FOUND", "Nie znaleziono zgłoszenia w tym naborze.")
+        raise ApiError(404, "NOT_FOUND", "Nie znaleziono zgłoszenia w tym teście.")
     if application.status != ApplicationStatus.SUBMITTED:
         raise ApiError(409, "CONFLICT", "Można odrzucić tylko zgłoszenie ze statusem SUBMITTED.")
     cleaned = reason.strip()
@@ -259,7 +265,7 @@ async def cancel_application(
     by_tester: bool = False,
 ) -> InnovationTestApplication:
     if application.test_id != test.id:
-        raise ApiError(404, "NOT_FOUND", "Nie znaleziono zgłoszenia w tym naborze.")
+        raise ApiError(404, "NOT_FOUND", "Nie znaleziono zgłoszenia w tym teście.")
     cleaned = reason.strip()
     if not cleaned:
         raise ApiError(422, "VALIDATION_ERROR", "Powód anulowania jest wymagany.")
@@ -303,9 +309,11 @@ async def submit_feedback(
     if test is None:
         test = await session.get(InnovationTest, application.test_id)
     if test is None:
-        raise ApiError(404, "NOT_FOUND", "Nie znaleziono naboru.")
+        raise ApiError(404, "NOT_FOUND", "Nie znaleziono testu.")
     if test.status != InnovationTestStatus.OPEN:
-        raise ApiError(409, "CONFLICT", "Nabór jest zamknięty — nie można wysłać ankiety.")
+        raise ApiError(
+            409, "CONFLICT", "Rekrutacja testerów jest zamknięta — nie można wysłać ankiety."
+        )
     if application.feedback is not None:
         raise ApiError(409, "CONFLICT", "Ankieta została już wysłana.")
     existing = await session.scalar(
