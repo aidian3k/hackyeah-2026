@@ -47,8 +47,8 @@ export function PanelLayout() {
           <NavLink to="/panel/testy" className="ds-nav__item">
             Testerzy
           </NavLink>
-          {/* M5: Rozmowy (PK20) — rozmowy czekające na zespół Hubu */}
-          <NavLink to="/panel/rozmowy" className="ds-nav__item">
+          {/* Moduł 5: rozmowy czekające na zespół Hubu */}
+          <NavLink to="/panel/rozmowy" className="ds-nav__item relative">
             Rozmowy
             {commCount !== null && commCount > 0 && (
               <>

@@ -1,10 +1,7 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { useSearchParams } from "react-router-dom";
 import type { ApiError } from "@/api/client";
-import type { ChatRequest, ReporterType } from "@/api/types";
-import { Alert } from "@/components/Alert";
-import { GminaSelect } from "@/components/GminaSelect";
-import { ReporterTypeField } from "@/components/chat/ReporterTypeField";
+import type { ChatRequest } from "@/api/types";
 import { EXAMPLE_PROMPTS, MESSAGE_MAX_CHARS, PRIVACY_WARNING } from "@/lib/labels";
 
 interface Props {
@@ -17,16 +14,8 @@ interface Props {
 
 const EMPTY_MESSAGE = "Opisz problem w kilku słowach.";
 const INVALID_MESSAGE = `Opisz problem w kilku słowach, najwyżej ${MESSAGE_MAX_CHARS} znaków.`;
-const INVALID_GMINA = "Wybierz gminę z listy albo zostaw „Nie wybrano”.";
 // Licznik znaków ogłaszamy czytnikom dopiero od 90% limitu.
 const COUNTER_ANNOUNCE_FROM = Math.ceil(MESSAGE_MAX_CHARS * 0.9);
-
-type ServerField = "message" | "gmina";
-
-function serverFieldOf(error: ApiError): ServerField {
-  // Backend: {"error": {"code": "VALIDATION_ERROR", "message": "gmina: nieznana gmina 'X'."}}
-  return error.message.trim().startsWith("gmina:") ? "gmina" : "message";
-}
 
 const MOCK_SCENARIOS = ["match", "no-match", "retracted", "error"] as const;
 
@@ -36,13 +25,13 @@ function DevScenarioSwitch() {
   const [params, setParams] = useSearchParams();
   const current = params.get("scenario") ?? "";
   return (
-    <div className="ds-field chat-form__dev">
-      <label className="ds-label" htmlFor={id}>
+    <div className="ds-field border-0 border-t border-dashed border-line-strong pt-4">
+      <label className="ds-label text-small font-normal text-ink-muted" htmlFor={id}>
         Scenariusz mocka (tylko tryb deweloperski)
       </label>
       <select
         id={id}
-        className="ds-select"
+        className="ds-select max-w-sm"
         value={current}
         onChange={(e) =>
           setParams(
@@ -67,36 +56,27 @@ function DevScenarioSwitch() {
   );
 }
 
-/** Formularz „Opisz problem”: opis, gmina (opcjonalnie), „Zgłaszam jako” (opcjonalnie). */
+/** Formularz „Opisz problem”: jedno pole opisu i przycisk w jednej karcie, pod nią przykłady. */
 export function ChatForm({ streaming, requestError, onSubmit, onAbort }: Props) {
   const id = useId();
   const messageId = `${id}-opis`;
   const privacyId = `${id}-prywatnosc`;
   const messageErrorId = `${id}-opis-blad`;
-  const counterId = `${id}-licznik`;
   const examplesId = `${id}-przyklady`;
-  const gminaId = `${id}-gmina`;
 
   const [text, setText] = useState("");
-  const [gmina, setGmina] = useState<string | null>(null);
-  const [reporterType, setReporterType] = useState<ReporterType>("OTHER");
   const [localError, setLocalError] = useState<string | null>(null);
   // Błąd 422 z backendu znika, gdy użytkownik poprawi pole (bez kopiowania go do stanu w efekcie).
   const [dismissed, setDismissed] = useState<ApiError | null>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
 
   const serverError = requestError && requestError.status === 422 && requestError !== dismissed ? requestError : null;
-  const serverField = serverError ? serverFieldOf(serverError) : null;
+  const messageError = localError ?? (serverError ? INVALID_MESSAGE : null);
 
-  const messageError = localError ?? (serverField === "message" ? INVALID_MESSAGE : null);
-  const gminaError = serverField === "gmina" ? INVALID_GMINA : undefined;
-
-  // Po odrzuceniu żądania (422) fokus idzie do pola, którego dotyczy błąd.
+  // Po odrzuceniu żądania (422) fokus wraca do pola opisu.
   useEffect(() => {
-    if (!serverError) return;
-    if (serverFieldOf(serverError) === "gmina") document.getElementById(gminaId)?.focus();
-    else messageRef.current?.focus();
-  }, [serverError, gminaId]);
+    if (serverError) messageRef.current?.focus();
+  }, [serverError]);
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
@@ -108,7 +88,7 @@ export function ChatForm({ streaming, requestError, onSubmit, onAbort }: Props) 
       return;
     }
     setLocalError(null);
-    onSubmit({ message, gmina, reporter_type: reporterType });
+    onSubmit({ message });
   };
 
   const abort = () => {
@@ -119,7 +99,7 @@ export function ChatForm({ streaming, requestError, onSubmit, onAbort }: Props) 
   const insertExample = (example: string) => {
     setText(example);
     setLocalError(null);
-    if (serverField === "message") setDismissed(requestError);
+    if (serverError) setDismissed(requestError);
     messageRef.current?.focus();
   };
 
@@ -129,22 +109,23 @@ export function ChatForm({ streaming, requestError, onSubmit, onAbort }: Props) 
   const describedBy = [privacyId, messageError ? messageErrorId : null].filter(Boolean).join(" ");
 
   return (
-    <form className="chat-form" onSubmit={submit} noValidate aria-label="Opisz problem">
-      <div className="ds-field">
-        <label className="ds-label chat-form__label" htmlFor={messageId}>
+    <form className="flex min-w-0 flex-col gap-6" onSubmit={submit} noValidate aria-label="Opisz problem">
+      <div className="ds-field gap-3 rounded-lg border border-line bg-surface-muted p-4 shadow-card md:p-6">
+        <label className="ds-label text-h3 text-ink" htmlFor={messageId}>
           Co się dzieje w Twojej okolicy?
         </label>
         <textarea
           ref={messageRef}
           id={messageId}
-          className="ds-textarea chat-form__message"
-          rows={4}
+          className="ds-textarea resize-y bg-surface text-body-lg"
+          rows={5}
           maxLength={MESSAGE_MAX_CHARS}
+          placeholder="Np. kogo dotyczy problem, od kiedy trwa, czego brakuje"
           value={text}
           onChange={(e) => {
             setText(e.target.value);
             if (localError) setLocalError(null);
-            if (serverField === "message") setDismissed(requestError);
+            if (serverError) setDismissed(requestError);
           }}
           aria-invalid={messageError ? true : undefined}
           aria-describedby={describedBy}
@@ -154,54 +135,60 @@ export function ChatForm({ streaming, requestError, onSubmit, onAbort }: Props) 
             {messageError}
           </p>
         )}
-        <p id={counterId} className="ds-counter" data-state={nearLimit ? "limit" : undefined}>
-          {counterText}
+        <p id={privacyId} className="m-0 flex items-start gap-2 text-small text-ink-muted">
+          <svg
+            className="mt-px h-4 w-4 flex-none fill-none stroke-current [stroke-linecap:round] [stroke-linejoin:round] [stroke-width:2]"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <rect x="5" y="11" width="14" height="10" rx="2" />
+            <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+          </svg>
+          <span>{PRIVACY_WARNING}</span>
         </p>
-        <p className="ds-sr-only" aria-live="polite">
-          {nearLimit ? counterText : ""}
-        </p>
-        <div id={privacyId} className="chat-form__privacy">
-          <Alert tone="warning">{PRIVACY_WARNING}</Alert>
+
+        <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
+          <div className="flex flex-wrap items-center gap-4">
+            <button
+              type="submit"
+              className="ds-btn ds-btn--cta aria-disabled:cursor-progress"
+              aria-disabled={streaming ? true : undefined}
+            >
+              {streaming ? "Szukam…" : "Znajdź rozwiązania"}
+            </button>
+            {streaming && (
+              <button type="button" className="ds-btn ds-btn--link" onClick={abort}>
+                Przerwij
+              </button>
+            )}
+          </div>
+          <p className="ds-counter m-0" data-state={nearLimit ? "limit" : undefined}>
+            {counterText}
+          </p>
+          <p className="ds-sr-only" aria-live="polite">
+            {nearLimit ? counterText : ""}
+          </p>
         </div>
       </div>
 
-      <div className="chat-form__examples">
-        <p id={examplesId} className="chat-form__examples-label">
-          Przykłady (wstawiają tekst do pola):
+      <div className="flex flex-col gap-2">
+        <p id={examplesId} className="m-0 text-body text-ink-muted">
+          Nie wiesz, od czego zacząć? Wybierz przykład, wstawimy go do pola:
         </p>
-        <ul className="ds-cluster chat-form__chips" aria-labelledby={examplesId}>
+        <ul className="ds-cluster m-0 list-none p-0" aria-labelledby={examplesId}>
           {EXAMPLE_PROMPTS.map((example) => (
-            <li key={example}>
-              <button type="button" className="ds-chip" onClick={() => insertExample(example)}>
+            <li key={example} className="max-w-full">
+              <button
+                type="button"
+                className="ds-chip max-w-full whitespace-normal text-start [overflow-wrap:anywhere]"
+                onClick={() => insertExample(example)}
+              >
                 {example}
               </button>
             </li>
           ))}
         </ul>
-      </div>
-
-      <GminaSelect
-        id={gminaId}
-        value={gmina}
-        onChange={(v) => {
-          setGmina(v);
-          if (serverField === "gmina") setDismissed(requestError);
-        }}
-        label="Gmina, której dotyczy problem (opcjonalnie)"
-        error={gminaError}
-      />
-
-      <ReporterTypeField name={`${id}-zglaszam`} value={reporterType} onChange={setReporterType} />
-
-      <div className="ds-cluster chat-form__actions">
-        <button type="submit" className="ds-btn ds-btn--cta" aria-disabled={streaming ? true : undefined}>
-          {streaming ? "Szukam…" : "Znajdź rozwiązania"}
-        </button>
-        {streaming && (
-          <button type="button" className="ds-btn ds-btn--link" onClick={abort}>
-            Przerwij
-          </button>
-        )}
       </div>
 
       {import.meta.env?.DEV && <DevScenarioSwitch />}

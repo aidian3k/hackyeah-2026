@@ -5,7 +5,7 @@ import { MODULE_NAMES } from "@/lib/modules";
 
 const ROPS = "https://rops.krakow.pl";
 
-/** Menu stopki rops.krakow.pl (te same pozycje i adresy). */
+/** Menu stopki: pozycje serwisu rops.krakow.pl związane z tą aplikacją (te same adresy). */
 const ROPS_LINKS = [
   { label: "O ROPS", href: `${ROPS}/o-rops/zadania` },
   {
@@ -13,12 +13,6 @@ const ROPS_LINKS = [
     href: `${ROPS}/programy-i-modele/regionalny-plan-rozwoju-uslug-spolecznych-i-deinstytucjonalizacji-wojewodztwa-malopolskiego`,
   },
   { label: "Realizowane projekty i zadania", href: `${ROPS}/realizowane-projekty-i-zadania/spoleczna-malopolska` },
-  {
-    label: "Zakończone projekty i zadania",
-    href: `${ROPS}/zakonczone-projekty-i-zadania/inkubator-wlaczenia-spolecznego-projekt-zakonczony-31122023`,
-  },
-  { label: "Praca w ROPS", href: `${ROPS}/praca-w-rops/rekrutacja` },
-  { label: "Zamówienia publiczne", href: `${ROPS}/zamowienia-publiczne/postepowania` },
   { label: "Kontakt", href: `${ROPS}/kontakt/regionalny-osrodek-polityki-spolecznej-w-krakowie` },
 ];
 
