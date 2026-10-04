@@ -8,6 +8,34 @@ Spec: [spec.md](spec.md).
 2. **S3 i CloudFront** z behaviorem `/api/*` → EC2: kroki 2 i 3A. `VITE_API_BASE_URL` zostaje pusty.
 3. **Zawężenie portu 8000** do CloudFront: krok 4.
 
+**Skrót: kroki 1.1–1.5 robi skrypt [`deploy/aws/backend.sh`](../../../deploy/aws/backend.sh)** (z laptopa, przez AWS CLI i SSH):
+
+```bash
+aws configure                      # raz: klucze IAM, region eu-central-1
+cp .env .env.aws                   # klucze OpenAI/Cohere, CORS_ORIGINS; plik poza gitem
+deploy/aws/backend.sh all          # key pair, SG, EC2 t3.small, Elastic IP, Docker, kod, db+api, seed przy pustej bazie
+deploy/aws/backend.sh deploy       # kolejne wdrożenia (kod + .env.aws → przebudowa api, baza zostaje)
+deploy/aws/backend.sh status | logs | ssh | seed | destroy
+```
+
+Skrypt nie trzyma pliku stanu: zasoby znajduje po nazwach i tagach (`hubmi-key`, `hubmi-api-sg`, `hubmi-api`).
+Klucz SSH zapisuje w `deploy/aws/hubmi-key.pem` (poza gitem). Na serwerze kod jest w `~/hubmi`, projekt compose
+nazywa się `hubmi`. `HTTPS=1` dodatkowo otwiera porty 80/443 i uruchamia Caddy (krok 1.9).
+
+**Kroki 2, 3A i 4 (S3, CloudFront, zawężenie portu) robi [`deploy/aws/frontend.sh`](../../../deploy/aws/frontend.sh):**
+
+```bash
+deploy/aws/frontend.sh all         # bucket (prywatny), OAC, funkcja SPA, dystrybucja z /api/* → EC2, build + upload
+deploy/aws/frontend.sh lockdown    # gdy strona działa: port 8000 tylko z CloudFront (unlock cofa)
+deploy/aws/frontend.sh deploy      # kolejne wdrożenia frontendu (build, S3, inwalidacja)
+deploy/aws/frontend.sh status | destroy
+```
+
+Build zawsze idzie z pustym `VITE_API_BASE_URL`, nawet gdy istnieje `web/.env.production.local`. Ponowne `infra`/`all`
+aktualizuje origin API w istniejącej dystrybucji, np. po odtworzeniu EC2. `backend.sh` nie otwiera ponownie portu 8000
+po `lockdown`. `ORIGIN_HTTPS=1` kieruje CloudFront na Caddy (`<ip>.sslip.io:443`) zamiast na EC2:8000, co daje
+szyfrowanie na całej trasie (wymaga `HTTPS=1 backend.sh deploy`).
+
 Caddy (krok 1.9) jest opcjonalny. Przydaje się tylko wtedy, gdy API ma mieć własny adres HTTPS niezależny od CloudFront.
 Krok 3B (S3 po HTTP) nie dotyczy tego wdrożenia.
 
@@ -368,4 +396,8 @@ Release Elastic IP, usuń dystrybucję i bucket.
 - [x] `npm run lint`, `npm run build`. Bez zmiennej bundle nie zawiera adresu, z `VITE_API_BASE_URL` adres jest w bundlu.
 - [x] `docker compose -f docker-compose.yml -f docker-compose.aws.yml config`: baza bez portu na hoście.
 - [x] `make -n web-deploy`: komendy `aws s3 sync` i inwalidacji poprawne.
-- [ ] wdrożenie na AWS (kroki 1–5) wykonuje zespół.
+- [x] wdrożenie na AWS skryptami (2026-10-04): `backend.sh all`, `frontend.sh all` → https://d3l6fiahpzf4iw.cloudfront.net.
+  Przez CloudFront: `/` i `/panel/zgloszenia/1` → 200 HTML, `/healthz` i `/api/taxonomy` → 200 JSON,
+  `/api/solutions/999999` → 404 JSON, `/api/chat` → pełny strumień `status → candidates → token* → report_saved → done`.
+- [ ] `frontend.sh lockdown` (port 8000 tylko z CloudFront) — jeszcze nie uruchomione.
+- [x] koszt miesięczny: [koszt-aws.md](koszt-aws.md) (≈ 23 USD netto za infrastrukturę).

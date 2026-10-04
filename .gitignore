@@ -21,3 +21,8 @@ web/dist/
 
 # Lokalne zmienne frontendu (VITE_API_BASE_URL itp.)
 .env*.local
+
+# Wdrożenie AWS (deploy/aws/backend.sh): klucz SSH, known_hosts, .env serwera
+deploy/aws/*.pem
+deploy/aws/known_hosts
+.env.aws
