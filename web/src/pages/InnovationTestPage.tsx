@@ -21,7 +21,11 @@ export function InnovationTestPage() {
     [testId],
   );
   const [submitted, setSubmitted] = useState<InnovationTestApplicationPublic | null>(null);
-  useDocumentTitle(data?.title ?? "Rekrutacja testerów");
+  const heading =
+    data?.solution_title && /^szukamy\s+tester/i.test(data.title)
+      ? data.solution_title
+      : (data?.title ?? "Test innowacji");
+  useDocumentTitle(heading);
 
   if (!valid) {
     return (
@@ -41,17 +45,25 @@ export function InnovationTestPage() {
     );
   }
 
+  const showSolutionBelow =
+    Boolean(data.solution_title) && data.solution_title !== heading;
+
   return (
     <div className="ds-page max-w-3xl">
       <div className="ds-stack">
         <ModuleLabel module="tester" />
         <p>
-          <Link to="/testy">Wróć do listy testów</Link>
+          <Link to="/testy">Wróć do otwartych testów</Link>
         </p>
-        <h1 tabIndex={-1}>{data.title}</h1>
-        {data.solution_title && (
+        <h1 tabIndex={-1}>{heading}</h1>
+        {showSolutionBelow && (
           <p className="m-0 text-body-lg text-ink">
             Rozwiązanie: <Link to={`/rozwiazania/${data.solution_id}`}>{data.solution_title}</Link>
+          </p>
+        )}
+        {!showSolutionBelow && data.solution_title && data.solution_id && (
+          <p className="m-0 text-body-lg text-ink">
+            <Link to={`/rozwiazania/${data.solution_id}`}>Zobacz kartę rozwiązania</Link>
           </p>
         )}
       </div>

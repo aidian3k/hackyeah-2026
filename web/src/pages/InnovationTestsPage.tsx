@@ -8,7 +8,7 @@ import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 /** Publiczna lista otwartych rekrutacji testerów. */
 export function InnovationTestsPage() {
-  useDocumentTitle("Tester innowacji");
+  useDocumentTitle("Otwarte testy");
   const { data, error, loading, reload } = useApi(
     () => api.innovationTests({ status: "OPEN", limit: 50, offset: 0 }),
     [],
@@ -18,9 +18,9 @@ export function InnovationTestsPage() {
     <div className="ds-page max-w-3xl">
       <div className="ds-stack">
         <ModuleLabel module="tester" />
-        <h1 tabIndex={-1}>Szukamy testerów innowacji</h1>
+        <h1 tabIndex={-1}>Otwarte testy</h1>
         <p className="m-0 text-body-lg text-ink">
-          Sprawdź otwarte rekrutacje testerów i zgłoś się do testu rozwiązania społecznego. Hub skontaktuje się z Tobą po
+          Wybierz rozwiązanie, które Hub chce sprawdzić z testerami, i wyślij zgłoszenie. Hub odezwie się po
           kwalifikacji.
         </p>
       </div>

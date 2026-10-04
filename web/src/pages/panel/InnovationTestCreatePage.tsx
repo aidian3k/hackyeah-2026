@@ -119,7 +119,11 @@ export function PanelInnovationTestCreatePage() {
             onChange={(e) => setTitle(e.target.value)}
             required
             minLength={3}
+            placeholder="np. Test instrukcji klubu rozmów"
           />
+          <p className="ds-hint">
+            Opisz, co jest testowane — nie powtarzaj „Szukamy testerów”. Na liście i tak widać nazwę rozwiązania.
+          </p>
         </div>
         <div className="ds-field">
           <label htmlFor={`${formId}-goal`}>Cel testu</label>

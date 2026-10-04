@@ -12,7 +12,7 @@
     "status": "PUBLISHED"
   },
   "test": {
-    "title": "Szukamy testerów klubu seniora",
+    "title": "Test instrukcji klubu rozmów",
     "goal_description": "Sprawdzamy, czy instrukcja i materiały pomagają zorganizować klub rozmów w małej gminie.",
     "instruction": "Przeczytaj instrukcję, przeprowadź krótką rozmowę z seniorem i oceń przydatność.",
     "target_group": "Seniorzy 60+ oraz opiekunowie",
