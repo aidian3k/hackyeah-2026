@@ -57,6 +57,13 @@ def get_rerank_provider() -> RerankProvider:
 
 @lru_cache(maxsize=1)
 def get_llm_provider() -> LLMProvider:
-    from api.providers.llm import AnthropicLLMProvider
+    name = settings.LLM_PROVIDER
+    if name == "openai":
+        from api.providers.llm_openai import OpenAILLMProvider
 
-    return AnthropicLLMProvider()
+        return OpenAILLMProvider()
+    if name == "anthropic":
+        from api.providers.llm import AnthropicLLMProvider
+
+        return AnthropicLLMProvider()
+    raise ValueError(f"Nieznany LLM_PROVIDER: {name!r}")

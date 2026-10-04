@@ -49,8 +49,14 @@ class Settings(BaseSettings):
     SIMILAR_REPORTS_LIMIT: int = 20
     SAVE_WAIT_SECONDS: float = 2.0
 
-    # --- Generacja (LLM) ---
+    # --- Generacja (LLM, ADR-020) ---
     LLM_ENABLED: bool = True
+    # "openai" (domyślnie, ten sam klucz co embeddingi) | "anthropic" (alternatywa).
+    LLM_PROVIDER: Literal["openai", "anthropic"] = "openai"
+    OPENAI_LLM_MODEL: str = "gpt-6-luna"
+    # Tokeny rozumowania wliczają się do limitu wyjścia — "none" dla krótkich zadań.
+    OPENAI_LLM_REASONING_EFFORT: Literal["none", "low", "medium", "high", "xhigh", "max"] = "none"
+    # Model Anthropic — używany tylko przy LLM_PROVIDER=anthropic.
     LLM_MODEL: str = "claude-haiku-4-5-20251001"
     LLM_MAX_TOKENS: int = 400
 
@@ -104,6 +110,16 @@ class Settings(BaseSettings):
     @property
     def cors_origins_list(self) -> list[str]:
         return [o.strip() for o in self.CORS_ORIGINS.split(",") if o.strip()]
+
+    @property
+    def llm_model(self) -> str:
+        """Model aktywnego dostawcy LLM."""
+        return self.OPENAI_LLM_MODEL if self.LLM_PROVIDER == "openai" else self.LLM_MODEL
+
+    @property
+    def llm_api_key(self) -> str:
+        """Klucz aktywnego dostawcy LLM (pusty = LLM niedostępny)."""
+        return self.OPENAI_API_KEY if self.LLM_PROVIDER == "openai" else self.ANTHROPIC_API_KEY
 
     @model_validator(mode="after")
     def _check_invariants(self) -> Settings:

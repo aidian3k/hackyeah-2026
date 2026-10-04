@@ -271,7 +271,7 @@ async def build_test_report(
             try:
                 ai_report = await summarize_test_feedback(test, feedback_items)
                 test.ai_report = ai_report.model_dump()
-                test.ai_model = settings.LLM_MODEL
+                test.ai_model = settings.llm_model
                 test.ai_prompt_version = settings.M4_AI_PROMPT_VERSION
                 test.ai_generated_at = datetime.now(UTC)
                 ai_model = test.ai_model
