@@ -239,7 +239,7 @@ class CallSection(BaseModel):
     max_chars: int | None = None
     # odwołania "idea.<pole>" / "canvas.<block_id>"
     prefill: list[str] = Field(default_factory=list)
-    # --- układ formularza naboru (wydruk 1:1 ze wzorem; feature-2026-10-04-3) ---
+    # --- układ formularza naboru (wydruk 1:1 ze wzorem; feature-2026-10-04-5) ---
     # numer punktu we wzorze ("1"…"12"); None = podpunkt poprzedniego numerowanego punktu
     number: str | None = None
     # instrukcja wzoru, gdy inna niż `prompt` (None = jak `prompt`, "" = bez instrukcji)
@@ -291,7 +291,7 @@ class FormClause(BaseModel):
 
 
 class CallForm(BaseModel):
-    """Teksty wzoru formularza aplikacyjnego naboru — do wydruku 1:1 (feature-2026-10-04-3)."""
+    """Teksty wzoru formularza aplikacyjnego naboru — do wydruku 1:1 (feature-2026-10-04-5)."""
 
     # zestaw logotypów na każdej stronie wydruku (frontend: `web/src/assets/<logos>/`)
     logos: str | None = None

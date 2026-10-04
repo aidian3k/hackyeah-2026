@@ -3,6 +3,7 @@
 export type ReporterType = "RESIDENT" | "NGO" | "JST" | "OTHER";
 export type ReportStatus = "NEW" | "TRIAGED" | "MATCHED" | "IN_PROGRESS" | "CLOSED";
 export type SolutionKind = "SOLUTION" | "KNOWLEDGE";
+export type KnowledgeType = "REPORT" | "MATERIAL";
 export type SolutionStatus = "PUBLISHED" | "PENDING_REVIEW" | "REJECTED" | "ARCHIVED";
 export type Stage = "preprocess" | "search" | "rerank" | "answer";
 
@@ -13,7 +14,7 @@ export interface Scores {
 export interface MediaItem { type: string; url: string; title: string | null }   // type w korpusie: video | materials | document | license
 
 export interface SolutionCard {
-  id: number; kind: SolutionKind; rank: number;
+  id: number; kind: SolutionKind; knowledge_type: KnowledgeType | null; rank: number;
   title: string; summary: string;
   organization: string | null; gmina: string | null; powiat: string | null;
   category: string | null; category_label_pl: string | null;
@@ -87,6 +88,34 @@ export interface SolutionSubmit {
 export interface SolutionCreated { id: number; status: "PENDING_REVIEW" }
 export interface SolutionPatch { status?: "PUBLISHED" | "REJECTED" | "ARCHIVED"; evidence_level?: number; category?: string }
 
+// --- panel administratora: baza wiedzy (Moduł 6) ---
+export interface SolutionAdminItem extends SolutionCard {
+  status: SolutionStatus;
+  updated_at: string;
+}
+export interface SolutionAdminDetail extends SolutionAdminItem {
+  body: string;
+  chunk_count: number;
+  reembedded: boolean | null;        // tylko w odpowiedzi na POST i PUT
+}
+export interface SolutionUpsert {    // PUT nadpisuje wszystkie pola; null / [] = puste
+  title: string; summary: string; body: string;
+  organization: string | null; gmina: string | null; category: string | null;
+  tags: string[]; target_group: string | null; cost_range: string | null;
+  implementation_steps: string[]; source_url: string | null; source_name: string | null;
+  media: MediaItem[];
+  knowledge_type: KnowledgeType | null;   // wymagany dla KNOWLEDGE, null dla SOLUTION
+}
+export interface SolutionAdminCreate extends SolutionUpsert {
+  kind: SolutionKind;
+  status?: "PUBLISHED" | "PENDING_REVIEW";
+  evidence_level?: number;
+}
+export interface AdminSolutionsQuery {
+  kind?: SolutionKind; knowledge_type?: KnowledgeType; status?: SolutionStatus;
+  q?: string; limit?: number; offset?: number;
+}
+
 // --- skrzynka, statystyki, meta ---
 export interface Inbox {
   new_reports: number; new_unmatched: number; pending_solutions: number;
@@ -97,9 +126,20 @@ export interface Stats extends Counts {
   from: string; to: string;
   by_category: (Counts & { category: string | null; label_pl: string | null })[];
   by_gmina: (Counts & { gmina: string | null; powiat: string | null })[];
+  by_powiat: (Counts & { powiat: string | null })[];
   by_week: (Counts & { week: string })[];
   by_reporter_type: (Counts & { reporter_type: ReporterType })[];
 }
+
+// --- Moduł 2: Zasobnik wiedzy ---
+export interface KeyFact { label_pl: string; value: string; unit: string | null; year: number | null; source_name: string; source_url: string | null }
+export interface ChallengeSummary { code: string; label_pl: string; lead_pl: string | null; key_fact: KeyFact | null; solutions_count: number; knowledge_count: number; is_demo: boolean; updated_at: string | null }
+export interface IndicatorMeta { code: string; category: string; label_pl: string; unit: string; year: number; higher_is_worse: boolean; region_value: number | null; source_name: string; source_url: string | null; is_demo: boolean }
+export interface IndicatorDetail extends IndicatorMeta { values: { powiat: string; value: number }[] }
+export interface ChallengeDetail extends ChallengeSummary { key_facts: KeyFact[]; indicators: IndicatorMeta[]; reports: SolutionCard[]; materials: SolutionCard[]; solutions: SolutionCard[] }
+export interface CoverageRow { category: string; label_pl: string; reports_total: number; reports_unmatched: number; solutions_published: number; knowledge_published: number; is_gap: boolean }
+export interface SolutionFacets { total: number; with_video: number; groups: { tag: string; label_pl: string; count: number }[]; categories: { code: string; label_pl: string; count: number }[] }
+
 export interface FeedbackCreate { search_event_id: number; solution_id?: number | null; helpful: boolean }
 export interface TaxonomyItem { code: string; label_pl: string; description: string; sort_order: number }
 export interface GminaItem { name: string; powiat: string }
@@ -391,7 +431,7 @@ export interface CallSection {
   id: string; title: string; kind: CallSectionKind; prompt: string;
   hints: string[]; required: boolean; max_chars: number | null;
   prefill: string[];                 // "idea.<pole>" / "canvas.<block_id>"
-  // układ wzoru formularza (feature-2026-10-04-3)
+  // układ wzoru formularza (feature-2026-10-04-5)
   number: string | null;             // numer punktu we wzorze; null = podpunkt
   form_prompt: string | null;        // instrukcja na wydruku, gdy inna niż prompt ("" = brak)
   form_inline: boolean;              // instrukcja w linii nazwy punktu

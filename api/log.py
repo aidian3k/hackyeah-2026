@@ -13,7 +13,20 @@ from api.config import settings
 
 request_id_var: ContextVar[str] = ContextVar("request_id", default="-")
 
-REDACTED_KEYS = frozenset({"raw_text", "normalized_text", "message", "contact_email"})
+REDACTED_KEYS = frozenset(
+    {
+        "raw_text",
+        "normalized_text",
+        "message",
+        "contact_email",
+        # Moduł 5: treść rozmów i ogłoszeń partnerstw
+        "body",
+        "subject",
+        "title",
+        "description",
+        "author_label",
+    }
+)
 REDACTED = "***"
 
 # Atrybuty standardowego LogRecord — wszystko poza nimi pochodzi z `extra`.

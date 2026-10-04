@@ -1,9 +1,12 @@
 import type {
   ApplicationStatus,
   InnovationTestStatus,
+  KnowledgeType,
   MaterialType,
   ReportStatus,
   ReporterType,
+  SolutionKind,
+  SolutionStatus,
   TesterType,
   TestMode,
 } from "@/api/types";
@@ -83,6 +86,23 @@ export const REPORT_TRANSITIONS: Record<ReportStatus, ReportStatus[]> = {
 };
 
 // 1, 3, 5 ze specyfikacji; 2 i 4 uzupełnione przez frontend.
+export const SOLUTION_STATUS_LABELS: Record<SolutionStatus, string> = {
+  PUBLISHED: "Opublikowany",
+  PENDING_REVIEW: "Czeka na zatwierdzenie",
+  REJECTED: "Odrzucony",
+  ARCHIVED: "Zarchiwizowany",
+};
+
+export const KIND_LABELS: Record<SolutionKind, string> = {
+  SOLUTION: "Rozwiązanie",
+  KNOWLEDGE: "Wiedza",
+};
+
+export const KNOWLEDGE_TYPE_LABELS: Record<KnowledgeType, string> = {
+  REPORT: "Raport lub diagnoza",
+  MATERIAL: "Materiał",
+};
+
 export const EVIDENCE_LABELS: Record<number, string> = {
   1: "Pomysł",
   2: "Przetestowane w małej skali",

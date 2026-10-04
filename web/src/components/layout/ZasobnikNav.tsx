@@ -4,6 +4,7 @@ import { MODULE_NAMES } from "@/lib/modules";
 const TABS = [
   { to: "/wiedza", label: "Wiedza o wyzwaniach", match: /^\/wiedza(\/wyzwania(\/|$)|\/?$)/ },
   { to: "/rozwiazania", label: "Biblioteka innowacji", match: /^\/rozwiazania(\/|$)/ },
+  { to: "/wiedza/materialy", label: "Materiały", match: /^\/wiedza\/materialy\/?$/ },
 ];
 
 /** Zakładki Zasobnika wiedzy. Aktywna także na podstronach (strona innowacji → „Biblioteka innowacji”). */

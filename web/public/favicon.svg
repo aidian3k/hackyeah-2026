@@ -1,0 +1,8 @@
+<!-- Ikona karty: dwa koła (problem i rozwiązanie), część wspólna = dopasowanie; kolory = tokeny pasków ROPS z tokens.css. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs><clipPath id="l"><circle cx="22" cy="32" r="20"/></clipPath></defs>
+  <circle cx="22" cy="32" r="20" fill="#EC008C"/>
+  <circle cx="42" cy="32" r="20" fill="#00B9F1"/>
+  <circle cx="42" cy="32" r="20" fill="#294375" clip-path="url(#l)"/>
+  <path d="m25 32 5 5 8-9" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

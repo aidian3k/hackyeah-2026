@@ -17,10 +17,23 @@ from api.config import settings
 from api.db import engine
 from api.errors import REQUEST_ID_HEADER, install_error_handlers
 from api.log import request_id_var, setup_logging
+from api.routers import (
+    admin_solutions,
+    chat,
+    innovation_tests,
+    knowledge,
+    mentors,
+    meta,
+    partnerships,
+    reports,
+    search,
+    solutions,
+    staff,
+    threads,
+)
 from api.routers import applications as m3_applications
 from api.routers import assist as m3_assist
 from api.routers import canvas as m3_canvas
-from api.routers import chat, innovation_tests, meta, reports, search, solutions, staff
 from api.routers import ideas as m3_ideas
 
 log = logging.getLogger(__name__)
@@ -76,7 +89,7 @@ def create_app() -> FastAPI:
     app.add_middleware(
         CORSMiddleware,
         allow_origins=settings.cors_origins_list,
-        allow_methods=["GET", "POST", "PATCH", "OPTIONS"],
+        allow_methods=["GET", "POST", "PUT", "PATCH", "OPTIONS"],
         allow_headers=["Content-Type", "Accept", REQUEST_ID_HEADER],
         expose_headers=[REQUEST_ID_HEADER],
     )
@@ -90,8 +103,15 @@ def create_app() -> FastAPI:
         search.router,
         reports.router,
         solutions.router,
+        knowledge.router,
         staff.router,
         innovation_tests.router,
+        # Moduł 6: Panel administratora
+        admin_solutions.router,
+        # Moduł 5: Platforma komunikacji
+        threads.router,
+        mentors.router,
+        partnerships.router,
         # Moduł 3 — Kreator pomysłów
         m3_ideas.router,
         m3_canvas.router,

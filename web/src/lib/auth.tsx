@@ -1,18 +1,21 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 
-export type Role = "administrator" | "reporter";
+export type Role = "administrator" | "reporter" | "mentor";
 
 export interface AuthAccount {
   username: string;
   password: string;
   role: Role;
   displayName: string;
+  /** Tylko rola `mentor`: id eksperta w tabeli `mentors` (Moduł 5). */
+  mentorId?: number;
 }
 
 export interface AuthSession {
   username: string;
   role: Role;
   displayName: string;
+  mentorId?: number;
 }
 
 interface AuthContextValue {
@@ -27,15 +30,17 @@ const AUTH_KEY = "splot_auth_session";
 const ROLE_LABELS: Record<Role, string> = {
   administrator: "Administrator",
   reporter: "Reporter",
+  mentor: "Ekspert",
 };
 
 export const AUTH_ACCOUNTS: AuthAccount[] = [
   { username: "reporter", password: "reporter123", role: "reporter", displayName: "Reporter demo" },
   { username: "admin", password: "admin123", role: "administrator", displayName: "Administrator demo" },
+  { username: "ekspert", password: "ekspert123", role: "mentor", displayName: "Ekspert demo", mentorId: 1 },
 ];
 
 function isRole(value: unknown): value is Role {
-  return value === "administrator" || value === "reporter";
+  return value === "administrator" || value === "reporter" || value === "mentor";
 }
 
 function readSession(): AuthSession | null {
@@ -47,8 +52,9 @@ function readSession(): AuthSession | null {
     const role = (parsed as { role?: unknown }).role;
     const username = (parsed as { username?: unknown }).username;
     const displayName = (parsed as { displayName?: unknown }).displayName;
+    const mentorId = (parsed as { mentorId?: unknown }).mentorId;
     if (!isRole(role) || typeof username !== "string" || typeof displayName !== "string") return null;
-    return { role, username, displayName };
+    return typeof mentorId === "number" ? { role, username, displayName, mentorId } : { role, username, displayName };
   } catch {
     return null;
   }
@@ -87,6 +93,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const account = findAccount(username, password);
         if (!account) return null;
         const next: AuthSession = { username: account.username, role: account.role, displayName: account.displayName };
+        if (account.mentorId !== undefined) next.mentorId = account.mentorId;
         setSession(next);
         return next;
       },
@@ -111,12 +118,18 @@ export function roleLabel(role: Role): string {
 }
 
 export function roleHome(role: Role): string {
-  return role === "administrator" ? "/panel" : "/";
+  if (role === "administrator") return "/panel";
+  if (role === "mentor") return "/ekspert";
+  return "/";
 }
 
 /** Ścieżki wymagające roli — po wylogowaniu z nich wracamy na stronę główną. */
 export function isProtectedPath(pathname: string): boolean {
-  return /^\/(mam-pomysl|moje-zgloszenia|panel)(\/|$)/.test(pathname);
+  return (
+    /^\/(mam-pomysl|moje-zgloszenia|panel|ekspert)(\/|$)/.test(pathname) ||
+    // Moduł 5: tworzenie rozmów i ogłoszeń (podgląd rozmowy i tablica są publiczne)
+    /^\/(rozmowy\/nowa|partnerzy\/nowe)\/?$/.test(pathname)
+  );
 }
 
 /** Przyjmuje tylko ścieżki wewnętrzne (`/…`, nie `//…`), żeby `?next=` nie wyprowadzał poza serwis. */

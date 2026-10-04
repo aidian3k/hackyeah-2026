@@ -1,18 +1,21 @@
+import type { ReactNode } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { ApiError, api } from "@/api/client";
 import type { MediaItem, SolutionDetail } from "@/api/types";
+import { Breadcrumbs, type Crumb } from "@/components/Breadcrumbs";
 import { CategoryTag } from "@/components/CategoryTag";
 import { EmptyState } from "@/components/EmptyState";
-import { EvidenceBadge } from "@/components/EvidenceBadge";
 import { LoadState } from "@/components/LoadState";
 import { VideoEmbed } from "@/components/VideoEmbed";
 import { ImplementationSteps } from "@/components/solution/ImplementationSteps";
+import { KeyInfo } from "@/components/solution/KeyInfo";
 import { MediaList } from "@/components/solution/MediaList";
+import { SimilarSolutions } from "@/components/solution/SimilarSolutions";
 import { useApi } from "@/hooks/useApi";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { youtubeId } from "@/lib/media";
 import { MODULE_NAMES } from "@/lib/modules";
-import "@/styles/solution.css";
+import { projectName, ropsGroup } from "@/lib/ropsGroups";
 
 const NOT_FOUND_TITLE = "Nie znaleźliśmy tego rozwiązania";
 
@@ -20,13 +23,6 @@ function parseId(raw: string | undefined): number | null {
   if (!raw || !/^\d+$/.test(raw)) return null;
   const n = Number(raw);
   return Number.isSafeInteger(n) && n > 0 ? n : null;
-}
-
-function place(gmina: string | null, powiat: string | null): string | null {
-  if (gmina && powiat) return `${gmina} (powiat ${powiat})`;
-  if (gmina) return gmina;
-  if (powiat) return `powiat ${powiat}`;
-  return null;
 }
 
 interface BodyPart {
@@ -69,6 +65,23 @@ function splitMedia(media: MediaItem[]): { videos: { item: MediaItem; id: string
   return { videos, others };
 }
 
+const KNOWLEDGE_TYPE_LABELS = { REPORT: "Raport", MATERIAL: "Materiał" } as const;
+
+function kindLabel(data: SolutionDetail): string {
+  if (data.kind !== "KNOWLEDGE") return "Innowacja";
+  return data.knowledge_type ? KNOWLEDGE_TYPE_LABELS[data.knowledge_type] : "Wiedza";
+}
+
+function crumbs(data: SolutionDetail): Crumb[] {
+  const section: Crumb =
+    data.kind !== "KNOWLEDGE"
+      ? { label: "Biblioteka innowacji", to: "/rozwiazania" }
+      : data.knowledge_type === "MATERIAL"
+        ? { label: "Materiały", to: "/wiedza/materialy" }
+        : { label: "Wiedza o wyzwaniach", to: "/wiedza" };
+  return [{ label: MODULE_NAMES.zasobnik, to: "/wiedza" }, section, { label: data.title }];
+}
+
 export function SolutionPage() {
   const params = useParams();
   const id = parseId(params.id);
@@ -85,43 +98,26 @@ export function SolutionPage() {
   useDocumentTitle(data ? data.title : notFound ? NOT_FOUND_TITLE : "Rozwiązanie");
 
   const isKnowledge = data?.kind === "KNOWLEDGE";
-  const origin = data ? [data.organization, place(data.gmina, data.powiat)].filter(Boolean).join(" · ") : "";
+  const group = data ? ropsGroup(data.tags) : null;
+  const subtitle = data ? [data.organization, projectName(data.tags)].filter(Boolean).join(" · ") : "";
 
   return (
-    <div className="ds-page solution-page">
-      <header className="solution-head ds-stack">
-        {data && (
-          <nav aria-label="Jesteś tutaj" className="breadcrumbs">
-            <ol className="breadcrumbs__list">
-              <li>
-                <Link to="/wiedza">{MODULE_NAMES.zasobnik}</Link>
-              </li>
-              <li>
-                {isKnowledge ? <Link to="/wiedza">Wiedza</Link> : <Link to="/rozwiazania">Biblioteka innowacji</Link>}
-              </li>
-              <li>
-                <span aria-current="page">{data.title}</span>
-              </li>
-            </ol>
-          </nav>
-        )}
-        {data && <p className="solution-head__eyebrow">{isKnowledge ? "Wiedza o problemie" : "Rozwiązanie"}</p>}
-        <h1 tabIndex={-1}>{heading}</h1>
+    <div className="ds-page [overflow-wrap:anywhere]">
+      <header className="flex max-w-3xl flex-col gap-3">
+        {data && <Breadcrumbs items={crumbs(data)} />}
+        {data && <p className="m-0 font-sans text-label text-ink-muted">{kindLabel(data)}</p>}
+        <h1 tabIndex={-1} className="m-0 font-sans text-h1 text-navy">
+          {heading}
+        </h1>
         {data && (
           <>
-            {data.category && (
-              <div>
-                <CategoryTag code={data.category} label={data.category_label_pl} />
-              </div>
-            )}
-            {origin && <p className="solution-head__origin">{origin}</p>}
-            {!isKnowledge && (
-              <p className="solution-head__evidence">
-                <EvidenceBadge level={data.evidence_level} />
-              </p>
-            )}
+            <div className="flex flex-wrap gap-2">
+              {!isKnowledge && group && <span className="ds-tag">{group.label}</span>}
+              {data.category && <CategoryTag code={data.category} label={data.category_label_pl} />}
+            </div>
+            {subtitle && <p className="m-0 text-body text-ink">{subtitle}</p>}
             {data.origin === "USER_SUBMITTED" && (
-              <p className="solution-head__note">Zgłoszone przez użytkownika</p>
+              <p className="m-0 text-small text-ink-muted">Zgłoszone przez użytkownika</p>
             )}
           </>
         )}
@@ -145,6 +141,17 @@ export function SolutionPage() {
   );
 }
 
+function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
+  return (
+    <section aria-labelledby={id} className="flex flex-col gap-3">
+      <h2 id={id} className="m-0 font-sans text-h2 text-navy">
+        {title}
+      </h2>
+      {children}
+    </section>
+  );
+}
+
 function SolutionContent({ data }: { data: SolutionDetail }) {
   const location = useLocation();
   const navigate = useNavigate();
@@ -152,18 +159,26 @@ function SolutionContent({ data }: { data: SolutionDetail }) {
   const { videos, others } = splitMedia(data.media);
   const body = parseBody(data.body ?? "");
   const steps = isKnowledge ? [] : data.implementation_steps.filter((s) => s.trim());
-  const cost = isKnowledge ? null : data.cost_range;
-  const tags = data.tags.map((t) => t.trim()).filter(Boolean);
-  const materials = others.filter((m) => m.url);
+  const group = ropsGroup(data.tags);
+  const topics = data.tags
+    .map((t) => t.trim())
+    .filter((t) => t && t !== group?.tag && !t.startsWith("Projekt: "));
+  const downloads = others.filter((m) => m.url);
   // Wejście z innej strony aplikacji → wracamy historią; wejście z linku → do listy.
   const hasHistory = location.key !== "default";
-  const listPath = isKnowledge ? "/wiedza" : "/rozwiazania";
+  const listPath = isKnowledge
+    ? data.knowledge_type === "MATERIAL"
+      ? "/wiedza/materialy"
+      : "/wiedza"
+    : "/rozwiazania";
 
   return (
     <>
       {videos.length > 0 && (
-        <section className="ds-stack" aria-labelledby="solution-video">
-          <h2 id="solution-video">{isKnowledge ? "Film" : "Film o rozwiązaniu"}</h2>
+        <section className="flex max-w-4xl flex-col gap-3" aria-labelledby="solution-video">
+          <h2 id="solution-video" className="m-0 font-sans text-h2 text-navy">
+            {isKnowledge ? "Film" : "Film o rozwiązaniu"}
+          </h2>
           {videos.map((v, i) => (
             <VideoEmbed
               key={`${v.id}-${i}`}
@@ -174,100 +189,80 @@ function SolutionContent({ data }: { data: SolutionDetail }) {
         </section>
       )}
 
-      {data.summary && (
-        <section className="ds-stack" aria-labelledby="solution-summary">
-          <h2 id="solution-summary">W skrócie</h2>
-          <p className="solution-page__lead">{data.summary}</p>
-        </section>
-      )}
+      {/* Kolejność w DOM: „W skrócie”, opis, karta boczna. Na telefonie karta idzie zaraz po „W skrócie” (order). */}
+      <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:gap-x-8">
+        {data.summary && (
+          <div className="order-1 max-w-3xl lg:col-start-1 lg:row-start-1">
+            <Section id="solution-summary" title="W skrócie">
+              <p className="m-0 text-body-lg text-ink">{data.summary}</p>
+            </Section>
+          </div>
+        )}
 
-      {body.length > 0 && (
-        <section className="ds-stack solution-body" aria-labelledby="solution-body">
-          <h2 id="solution-body">Opis</h2>
-          {body.map((part, i) =>
-            part.heading ? (
-              <div key={i} className="ds-stack solution-body__part">
-                <h3>{part.heading}</h3>
-                {part.paragraphs.map((t, j) => (
-                  <p key={j} className="solution-body__text">
-                    {t}
-                  </p>
-                ))}
-              </div>
-            ) : (
-              part.paragraphs.map((t, j) => (
-                <p key={`${i}-${j}`} className="solution-body__text">
-                  {t}
-                </p>
-              ))
-            ),
+        <div className="order-3 flex max-w-3xl flex-col gap-8 lg:col-start-1 lg:row-start-2">
+          {body.length > 0 && (
+            <Section id="solution-body" title="Opis">
+              {body.map((part, i) =>
+                part.heading ? (
+                  <div key={i} className="flex flex-col gap-2">
+                    <h3 className="m-0 font-sans text-h3 text-navy">{part.heading}</h3>
+                    {part.paragraphs.map((t, j) => (
+                      <p key={j} className="m-0 whitespace-pre-line text-body text-ink">
+                        {t}
+                      </p>
+                    ))}
+                  </div>
+                ) : (
+                  part.paragraphs.map((t, j) => (
+                    <p key={`${i}-${j}`} className="m-0 whitespace-pre-line text-body text-ink">
+                      {t}
+                    </p>
+                  ))
+                ),
+              )}
+            </Section>
           )}
-        </section>
-      )}
 
-      {data.target_group && (
-        <section className="ds-stack" aria-labelledby="solution-target">
-          <h2 id="solution-target">Dla kogo</h2>
-          <p>{data.target_group}</p>
-        </section>
-      )}
-
-      {cost && (
-        <section className="ds-stack" aria-labelledby="solution-cost">
-          <h2 id="solution-cost">Koszt</h2>
-          <p>{cost}</p>
-        </section>
-      )}
-
-      {steps.length > 0 && (
-        <section className="ds-stack" aria-labelledby="solution-steps">
-          <h2 id="solution-steps">Jak to wdrożyć</h2>
-          <ImplementationSteps steps={steps} />
-        </section>
-      )}
-
-      {materials.length > 0 && (
-        <section className="ds-stack" aria-labelledby="solution-materials">
-          <h2 id="solution-materials">Materiały</h2>
-          <MediaList items={materials} />
-        </section>
-      )}
-
-      {(data.source_name || data.source_url) && (
-        <section className="ds-stack" aria-labelledby="solution-source">
-          <h2 id="solution-source">Źródło</h2>
-          {data.source_name && <p>{data.source_name}</p>}
-          {data.source_url && (
-            <p>
-              <a href={data.source_url} target="_blank" rel="noopener noreferrer" className="solution-page__ext">
-                Zobacz opis u źródła
-              </a>{" "}
-              <span className="solution-page__hint">(otwiera stronę zewnętrzną w nowej karcie)</span>
-            </p>
+          {steps.length > 0 && (
+            <Section id="solution-steps" title="Jak to wdrożyć">
+              <ImplementationSteps steps={steps} />
+            </Section>
           )}
-        </section>
-      )}
 
-      {tags.length > 0 && (
-        <section className="ds-stack" aria-labelledby="solution-tags">
-          <h2 id="solution-tags">Tematy</h2>
-          <p>{tags.join(", ")}</p>
-        </section>
-      )}
+          {topics.length > 0 && (
+            <Section id="solution-tags" title="Tematy">
+              <p className="m-0 text-body text-ink">{topics.join(", ")}</p>
+            </Section>
+          )}
+        </div>
 
-      <div className="ds-cluster solution-page__actions">
+        <aside
+          aria-label="Informacje dodatkowe"
+          className="order-2 flex flex-col gap-6 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-start"
+        >
+          <KeyInfo data={data} />
+          {downloads.length > 0 && (
+            <Section id="solution-materials" title="Do pobrania">
+              <MediaList items={downloads} />
+              <p className="m-0 text-small text-ink-muted">Linki otwierają zasoby zewnętrzne w tej samej karcie.</p>
+            </Section>
+          )}
+        </aside>
+      </div>
+
+      {!isKnowledge && <SimilarSolutions current={data} />}
+
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-line pt-6">
+        <Link className="ds-btn ds-btn--cta" to="/">
+          Masz podobny problem? Opisz go
+        </Link>
         {hasHistory ? (
           <button type="button" className="ds-btn ds-btn--link" onClick={() => navigate(-1)}>
             Wróć do wyników
           </button>
         ) : (
           <Link className="ds-btn ds-btn--link" to={listPath}>
-            {isKnowledge ? "Przejdź do Wiedzy" : "Przejdź do Biblioteki innowacji"}
-          </Link>
-        )}
-        {data.category && (
-          <Link className="ds-btn" to={`/rozwiazania?category=${encodeURIComponent(data.category)}`}>
-            Szukaj podobnych rozwiązań
+            {isKnowledge ? "Przejdź do wiedzy o wyzwaniach" : "Przejdź do Biblioteki innowacji"}
           </Link>
         )}
       </div>

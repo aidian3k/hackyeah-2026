@@ -40,7 +40,3 @@ h1[tabindex="-1"]:focus { outline: none; }
 
 /* Podpis z nazwą modułu (base.md) nad h1 strony */
 .module-label { margin: 0; font: var(--text-label); color: var(--ink-muted); }
-
-/* Podnawigacja Zasobnika wiedzy */
-.zasobnik-nav ul { list-style: none; margin: 0; padding: 0; gap: var(--space-4); }
-.zasobnik-nav a[aria-current="page"] { font-weight: 700; text-decoration: none; color: var(--ink); }

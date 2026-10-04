@@ -1,0 +1,44 @@
+[
+  {
+    "seed_key": "mentor-seniorzy",
+    "display_name": "dr Anna Przykładowa",
+    "organization": "Uczelnia Małopolska (przykład)",
+    "expertise": "Usługi dla seniorów w gminach wiejskich: teleopieka, dowozy, kluby seniora, opieka wytchnieniowa.",
+    "categories": ["AGING", "SERVICE_ACCESS"]
+  },
+  {
+    "seed_key": "mentor-zdrowie-psychiczne",
+    "display_name": "Marek Wzorcowy",
+    "organization": "Centrum Wsparcia Psychologicznego (przykład)",
+    "expertise": "Środowiskowe wsparcie psychologiczne dzieci i młodzieży, grupy wsparcia, profilaktyka w szkołach.",
+    "categories": ["MENTAL_HEALTH"]
+  },
+  {
+    "seed_key": "mentor-samotnosc",
+    "display_name": "Ewa Testowa",
+    "organization": "Stowarzyszenie Sąsiedzi Razem (przykład)",
+    "expertise": "Sieci sąsiedzkiej pomocy, wolontariat odwiedzinowy, przeciwdziałanie samotności.",
+    "categories": ["LONELINESS", "AGING"]
+  },
+  {
+    "seed_key": "mentor-cyfrowe",
+    "display_name": "Piotr Demonstracyjny",
+    "organization": "Fundacja Cyfrowy Most (przykład)",
+    "expertise": "Szkolenia cyfrowe dla seniorów i osób z niepełnosprawnościami, dostępność e-usług.",
+    "categories": ["DIGITAL_EXCLUSION"]
+  },
+  {
+    "seed_key": "mentor-wspolpraca",
+    "display_name": "Katarzyna Próbna",
+    "organization": "Regionalna Sieć Współpracy (przykład)",
+    "expertise": "Partnerstwa samorządu, NGO i biznesu, wspólne projekty i podział zadań między instytucjami.",
+    "categories": ["COORDINATION", "SERVICE_ACCESS"]
+  },
+  {
+    "seed_key": "mentor-rozwoj-lokalny",
+    "display_name": "Tomasz Przykładowy",
+    "organization": "Biuro Rozwoju Lokalnego (przykład)",
+    "expertise": "Rozwój lokalny gmin wyludniających się i szybko rosnących wokół Krakowa, planowanie usług społecznych.",
+    "categories": ["DEPOPULATION", "SUBURBAN_GROWTH"]
+  }
+]

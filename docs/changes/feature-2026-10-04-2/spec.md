@@ -1,48 +1,42 @@
-# feature-2026-10-04-2 — Kreator: kanwa krok po kroku z grafiką jak w Social Canvas
+# feature-2026-10-04-2 — ułatwienia dostępu jak na rops.krakow.pl
 
-**Status:** wdrożone
+**Status:** wdrożone, do weryfikacji ręcznej
 
-Uwaga z demo (właściciel produktu): „Nie do końca podoba mi się też UI kreatora jeśli chodzi o ten canvas, wydaje mi się to mało przyjazne i za dużo informacji pojawia się obok siebie. Dodałbym też więcej elementów graficznych analogicznie do tego co znajdowało się w tym pdfie z canvasem. Naraz powinno być pokazywane mniej informacji, może to mieć formę bardziej krokową.”
+Porównanie z paskiem narzędzi `rops.krakow.pl` (2026-10-04): duży przycisk „Wysoki kontrast” zastępujemy
+rzędem małych przycisków-ikon, dokładamy brakujące ułatwienia, które da się dodać bez backendu.
 
-Dotyczy ekranu `/mam-pomysl/:id/kanwa` (K10). Dziś arkusz pokazuje naraz 7–10 bloków w siatce planszy, każdy z pełnymi opisami opcji — na 1280 px to ok. 4000 px przewijania, na telefonie jeszcze więcej. Wzór graficzny: `docs/resources/rops/materialy/social_canvas.pdf` (3 plansze INNOAGH).
+## Porównanie
+
+| Ułatwienie | rops.krakow.pl | Splot przed zmianą | Po zmianie |
+|---|---|---|---|
+| Link „Przejdź do treści” | tak | tak (`ds-skip-link`) | bez zmian |
+| Link do informacji o dostępności (ikona wózka) w nagłówku | tak → `/udogodnienia-dla-niepelnosprawnych` | brak | **poza zakresem** (decyzja 2026-10-04) — deklaracja tylko ze stopki |
+| Rozmiar tekstu | 3 przyciski A−, A, A+ | brak (tylko zoom przeglądarki) | 3 przyciski A, A+, A++ (bez pomniejszania poniżej 16 px) |
+| Wersja kontrastowa | mała ikona | duży przycisk z tekstem „Wysoki kontrast” | mała ikona z `aria-pressed` |
+| Deklaracja dostępności w stopce | tak | brak | link „Deklaracja dostępności” → `/dostepnosc` |
+| Logotypy w wersji kontrastowej (`-i.png`) | tak | tak | bez zmian |
+| „Otwiera się w nowym oknie” dla linków zewnętrznych | tak (w `alt`) | tak | bez zmian |
+| Wersja angielska (EN) | tak | brak | **poza zakresem** (brak tłumaczeń treści) |
+| Wyszukiwarka w nagłówku | tak | brak (szukanie w Bibliotece) | **poza zakresem** |
 
 ## Do zmiany
 
-1. **Jedno pytanie na ekran**
-   - Każdy arkusz to sekwencja kroków: wstęp arkusza → jeden blok kanwy na krok (26 bloków razem) → podsumowanie arkusza.
-   - Krok bloku pokazuje: obszar (ikona + nazwa), nagłówek `h2` z tytułem bloku, ilustrację obszaru, kontrolkę bloku z poleceniem, rozwijane „Pytania pomocnicze” (listy) i zwinięte „Podpowiedz” (asystent tylko dla tego bloku).
-   - Nawigacja „Wstecz” / „Dalej: <następny krok>” pod kontrolką oraz postęp „Krok N z M” (w arkuszu) i „Pytanie n z 26”.
-   - Ostatni krok arkusza prowadzi do wstępu następnego arkusza; podsumowanie ostatniego arkusza kończy przebieg.
-
-2. **Mapa arkusza jak plansza z PDF**
-   - Nad krokiem widać miniaturę bieżącego arkusza: obszary ułożone kolumnami jak na planszy (S1: Problem | Aktorzy | Rozwiązanie | Koszty; S2: Odbiorcy | Dochody | Wartość; S3: Kanały | Partnerzy nad Wpływem), w każdym obszarze kafelki bloków.
-   - Kafelek ma ikonę, krótki tytuł i stan: uzupełnione (pełne kółko z „ptaszkiem”) / puste (przerywany kontur); bieżący krok jest wyróżniony (odwrócone kolory) i ma `aria-current="step"`. Stan zawsze też słowem dla czytników (nie tylko kolor/kształt).
-   - Kafelek to link do kroku (skok bez przechodzenia po kolei).
-   - Na telefonie (< 768 px) mapa jest w zwiniętym `details` „Mapa arkusza”, na szerszych ekranach rozwinięta.
-
-3. **Więcej grafiki z planszy PDF** (inline SVG, kolory z tokenów, dekoracja `aria-hidden`)
-   - Twarze przy opcjach „Intensywność” i „Częstotliwość” (od uśmiechu do „płomienia”), sylwetki ludzi przy „Skali problemu” (1 → wiele), ikony przy „Prostocie i zrozumiałości” (znak zapytania, puzzel, ptaszek, dymek).
-   - Ikony obszarów (problem, aktorzy, rozwiązanie, koszty, odbiorcy, dochody, wartość, kanały, partnerzy, wpływ) w mapie i w nagłówku kroku; ikony osoby / społeczności / środowiska przy krokach wpływu.
-   - Wstęp arkusza: ilustracja planszy (schemat obszarów) i krótka lista „co uzupełnisz”.
-   - Serca (wartość emocjonalna), konstelacja partnerów i wskaźniki poziomów zostają.
-
-4. **Podsumowanie arkusza**
-   - Cały arkusz tylko do odczytu (`CanvasBoard readOnly`) z linkami „Zmień” do kroków, przejście do następnego arkusza, a na podsumowaniach sekcja „Co dalej?” z jedynym przyciskiem `ds-btn--cta` „Wyślij do Hubu” (gdy pomysł jest szkicem).
-
-5. **Bez zmian zachowania**
-   - Autozapis z `useCanvas` (800 ms, partnerzy zapisywani dopiero kompletni, błędy per blok i „Spróbuj ponownie”) — stan wspólny dla wszystkich kroków; zmiana kroku nie gubi niezapisanych zmian.
-   - Tryb tylko do odczytu `CanvasBoard` (panel Hubu K11, `/panel/pomysly/:id`) działa jak dotąd.
-   - Głębokie linki: `?arkusz=1|2|3&krok=<block_id>|wstep|podsumowanie`; brak lub nieznany `krok` = wstęp arkusza; stary link `?arkusz=N` nadal działa.
-
-## Dostępność
-
-- Po zmianie kroku fokus na nagłówek kroku (`h2`, `tabIndex=-1`), a region `aria-live="polite"` ogłasza „Krok N z M, arkusz K”.
-- Jedno `h1`, kroki `h2`, wewnątrz `h3`; WCAG 2.1 AA, axe bez naruszeń; 320 px bez przewijania w poziomie; tryb `data-contrast="high"`.
-- Najwyżej jeden `ds-btn--cta` na ekranie; stylowanie wyłącznie Tailwind + `ds-*`.
+1. **Pasek ułatwień w banerze**
+   - zamiast przycisku z napisem „Wysoki kontrast” rząd małych przycisków (36 × 36 px, ≥ 24 px wymagane przez WCAG 2.5.8) w grupie „Ułatwienia dostępu”: A / A+ / A++, kontrast (ikona),
+   - każdy przycisk ma nazwę dla czytnika ekranu (np. „Większy tekst”) i podpowiedź `title`; wybrany rozmiar i kontrast mają `aria-pressed="true"`,
+   - „Zaloguj się / Wyloguj się” zostaje przyciskiem z tekstem obok paska.
+2. **Rozmiar tekstu**
+   - trzy poziomy: podstawowy (100%), większy (115%), największy (130%) — skalowanie całego interfejsu (`zoom` na `<html>`), więc rosną też odstępy i kontrolki,
+   - wybór zapamiętany w przeglądarce (`splot_text_size`) i ustawiany przed renderem w `index.html`, bez mignięcia,
+   - przy 130% i szerokości 390 px brak przewijania w poziomie (WCAG 1.4.10).
+3. **Strona „Deklaracja dostępności” (`/dostepnosc`)** — tylko z linku w stopce (bez ikony w nagłówku, decyzja 2026-10-04)
+   - krótka deklaracja dostępności prototypu: cel WCAG 2.1 AA, lista ułatwień, obsługa klawiaturą, kontakt do ROPS i link do udogodnień na `rops.krakow.pl`,
+   - nie twierdzimy, że serwis przeszedł audyt (i nie piszemy o jego braku — decyzja 2026-10-04).
+4. **Stopka** — link „Deklaracja dostępności” do `/dostepnosc` obok polityki prywatności.
 
 ## Kryterium akceptacji
 
-- Na ekranie kanwy widać naraz jeden blok (plus mapę arkusza), a przejście przez wszystkie 26 bloków jest możliwe samą klawiaturą przyciskiem „Dalej”.
-- Mapa arkusza odzwierciedla wypełnienie po autozapisie i pozwala przeskoczyć do dowolnego kroku; link `?arkusz=2&krok=value_emotional` otwiera właściwy krok.
-- Grafika z punktu 3 jest widoczna; w wysokim kontraście wszystkie ikony są widoczne (kolory z tokenów).
-- `npm run lint` i `npm run build` bez błędów; axe 0 naruszeń na kanwie (wstęp, krok, podsumowanie) i na `/panel/pomysly/1`.
+- w banerze nie ma już szerokiego przycisku „Wysoki kontrast”; jest rząd małych ikon, obsługiwany klawiaturą (Tab, Enter/Spacja), z widocznym fokusem,
+- A+ / A++ powiększają interfejs, wybór przetrwa odświeżenie strony, A wraca do 100%,
+- kontrast działa jak wcześniej (ten sam klucz `splot_contrast`),
+- `/dostepnosc` otwiera się z linku w stopce, także w `data-contrast="high"`.

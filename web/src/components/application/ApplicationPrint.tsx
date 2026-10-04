@@ -6,7 +6,7 @@ import iws2Footer from "@/assets/iws2/logotypy-stopka.png";
 import iws2Header from "@/assets/iws2/logotypy-naglowek.jpg";
 
 /**
- * Wersja do druku wniosku (A4) — odtwarza wzór formularza naboru (`CallDetail.form`, feature-2026-10-04-3):
+ * Wersja do druku wniosku (A4) — odtwarza wzór formularza naboru (`CallDetail.form`, feature-2026-10-04-5):
  * logotypy na każdej stronie, blok tytułowy, numerowane punkty z instrukcjami w nawiasach, dane pomysłodawcy
  * jako puste linie, tabele planu działania, oświadczenia i klauzule. Bez `form` — prosty układ pytań i odpowiedzi.
  *

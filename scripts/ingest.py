@@ -22,13 +22,14 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
+from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator, model_validator
 from sqlalchemy import func, select
 
 from api.config import settings
 from api.corpus import content_hash, rebuild_chunks
 from api.db import SessionLocal, engine
 from api.models import (
+    KnowledgeType,
     Solution,
     SolutionChunk,
     SolutionKind,
@@ -44,6 +45,7 @@ class IngestRecord(BaseModel):
     model_config = ConfigDict(extra="ignore", str_strip_whitespace=True)
 
     kind: Literal["SOLUTION", "KNOWLEDGE"] = "SOLUTION"
+    knowledge_type: Literal["REPORT", "MATERIAL"] | None = None
     title: str = Field(min_length=1)
     summary: str = Field(min_length=1)
     body: str = ""
@@ -79,6 +81,16 @@ class IngestRecord(BaseModel):
     @classmethod
     def _empty_to_none(cls, v: str | None) -> str | None:
         return v or None
+
+    @model_validator(mode="after")
+    def _knowledge_type_rules(self) -> IngestRecord:
+        if self.kind == "KNOWLEDGE" and self.knowledge_type is None:
+            raise ValueError("knowledge_type: wymagane dla kind=KNOWLEDGE (REPORT | MATERIAL)")
+        if self.kind == "SOLUTION" and self.knowledge_type is not None:
+            raise ValueError("knowledge_type: niedozwolone dla kind=SOLUTION")
+        if self.knowledge_type == "REPORT" and self.category is None:
+            raise ValueError("category: wymagana dla knowledge_type=REPORT")
+        return self
 
 
 @dataclass
@@ -125,6 +137,7 @@ def iter_files(paths: Iterable[str]) -> list[Path]:
 
 def _apply_metadata(sol: Solution, rec: IngestRecord, contact: dict[str, Any]) -> None:
     sol.kind = SolutionKind(rec.kind)
+    sol.knowledge_type = KnowledgeType(rec.knowledge_type) if rec.knowledge_type else None
     sol.organization = rec.organization
     sol.gmina = rec.gmina
     sol.powiat = rec.powiat

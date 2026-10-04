@@ -76,6 +76,13 @@ class Settings(BaseSettings):
     CORS_ORIGINS: str = "http://localhost:5173"
     SEARCH_ENDPOINT_ENABLED: bool = True
 
+    # --- Moduł 2: Zasobnik wiedzy ---
+    CHALLENGE_TOP_SOLUTIONS: int = 6
+    CHALLENGE_TOP_KNOWLEDGE: int = 6
+    COVERAGE_GAP_MIN_UNMATCHED: int = 3
+    COVERAGE_GAP_MAX_SOLUTIONS: int = 5
+    ROPS_GROUP_TAG_PREFIX: str = "ROPS: "
+
     # --- Różne ---
     DATA_DIR: str = "data"
     LOG_LEVEL: str = "INFO"
@@ -106,6 +113,15 @@ class Settings(BaseSettings):
     APPLICATION_TEXT_MAX_CHARS: int = 6000
     APPLICATION_BUDGET_MAX_ROWS: int = 30
     KREATOR_CALLS_IGNORE_DATES: bool = False
+
+    # --- Moduł 5: Platforma komunikacji ---
+    M5_ASSISTANT_ENABLED: bool = True  # automatyczna odpowiedź na pytanie (QUESTION)
+    M5_ASSISTANT_TIMEOUT_SECONDS: float = 30.0
+    PARTNER_MATCH_N: int = 5
+
+    # --- Moduł 6: Panel administratora ---
+    ADMIN_LIST_DEFAULT_LIMIT: int = 25
+    ADMIN_LIST_MAX_LIMIT: int = 100
 
     @property
     def cors_origins_list(self) -> list[str]:

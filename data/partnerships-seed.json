@@ -1,0 +1,74 @@
+[
+  {
+    "seed_key": "offer-teleopieka-ngo",
+    "intent": "SEEK",
+    "organization": "Fundacja Pomocna Dłoń (przykład)",
+    "sector": "NGO",
+    "title": "Szukamy gminy do pilotażu teleopieki",
+    "description": "Mamy opaski bezpieczeństwa i przeszkolonych wolontariuszy. Szukamy gminy, która wskaże 20 osób starszych mieszkających samotnie i udostępni punkt kontaktowy w ośrodku pomocy społecznej.",
+    "category": "AGING"
+  },
+  {
+    "seed_key": "offer-lokal-gmina",
+    "intent": "OFFER",
+    "organization": "Gmina Zielona Dolina (przykład)",
+    "sector": "JST",
+    "title": "Udostępnimy lokal i transport dla działań z seniorami",
+    "description": "Wolna sala w centrum gminy dwa dni w tygodniu oraz bus gminny do dowozu uczestników. Szukamy organizacji, która poprowadzi zajęcia lub usługę dla seniorów.",
+    "category": "AGING"
+  },
+  {
+    "seed_key": "offer-wolontariusze-ngo",
+    "intent": "OFFER",
+    "organization": "Stowarzyszenie Sąsiedzi Razem (przykład)",
+    "sector": "NGO",
+    "title": "Wolontariusze do odwiedzin domowych",
+    "description": "Grupa 15 wolontariuszy gotowych do regularnych odwiedzin osób starszych i samotnych w powiecie. Zapewniamy szkolenie i koordynację.",
+    "category": "AGING"
+  },
+  {
+    "seed_key": "offer-firma-sprzet",
+    "intent": "OFFER",
+    "organization": "Technika Bez Barier sp. z o.o. (przykład)",
+    "sector": "BUSINESS",
+    "title": "Przekażemy tablety i poprowadzimy szkolenia",
+    "description": "W ramach działań CSR przekażemy 30 tabletów z uproszczonym interfejsem i zorganizujemy szkolenia dla seniorów w bibliotekach lub świetlicach.",
+    "category": "DIGITAL_EXCLUSION"
+  },
+  {
+    "seed_key": "offer-biblioteka-cyfrowe",
+    "intent": "SEEK",
+    "organization": "Biblioteka Publiczna w Przykładowie (przykład)",
+    "sector": "PUBLIC",
+    "title": "Szukamy partnera do kursów komputerowych dla seniorów",
+    "description": "Mamy salę i czytelników chętnych do nauki, brakuje nam sprzętu i prowadzących. Chętnie połączymy siły z firmą lub fundacją.",
+    "category": "DIGITAL_EXCLUSION"
+  },
+  {
+    "seed_key": "offer-uczelnia-badania",
+    "intent": "OFFER",
+    "organization": "Wydział Pracy Socjalnej, Uczelnia Małopolska (przykład)",
+    "sector": "SCIENCE",
+    "title": "Ewaluacja i badania potrzeb dla projektów społecznych",
+    "description": "Studenci i kadra pomogą zbadać potrzeby mieszkańców i ocenić efekty działań. Szukamy projektów do współpracy w ramach praktyk.",
+    "category": "COORDINATION"
+  },
+  {
+    "seed_key": "offer-mieszkancy-mlodziez",
+    "intent": "SEEK",
+    "organization": "Rada Rodziców Szkoły w Przykładowie (przykład)",
+    "sector": "RESIDENTS",
+    "title": "Szukamy psychologa do grupy wsparcia dla młodzieży",
+    "description": "Rodzice uczniów chcą założyć grupę wsparcia dla nastolatków po pandemii. Szukamy specjalisty albo organizacji, która pomoże ją poprowadzić.",
+    "category": "MENTAL_HEALTH"
+  },
+  {
+    "seed_key": "offer-cus-koordynacja",
+    "intent": "SEEK",
+    "organization": "Centrum Usług Społecznych w Przykładowie (przykład)",
+    "sector": "PUBLIC",
+    "title": "Szukamy organizacji do wspólnej mapy usług w gminie",
+    "description": "Chcemy zebrać w jednym miejscu informacje o usługach społecznych w gminie. Szukamy NGO lub uczelni do współpracy przy zbieraniu danych.",
+    "category": "COORDINATION"
+  }
+]

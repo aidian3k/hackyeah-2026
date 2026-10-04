@@ -2,90 +2,81 @@
 
 ## Stan obecny
 
-- `web/src/pages/ApplicationPage.tsx` — edytor i (w tym samym pliku) wersja do druku `hidden print:block`:
-  tytuł naboru, sekcje `i+1. title` z pytaniem kursywą i odpowiedzią, jedna tabela „Działanie / Termin /
-  Koszt” z sumą, stopka „dokument roboczy”.
-- `data/calls/iws2-demo.json` — 11 sekcji (bez pkt 9–10 wzoru jako sekcji; budżet poza listą sekcji),
-  `statements` — 6 skróconych oświadczeń.
-- `BudgetRow {action, when, cost}` bez etapu, więc nie da się odtworzyć dwóch tabel pkt 9 wzoru.
+- `api/providers/llm.py` — `AnthropicLLMProvider` (`stream()` dla M1, `complete()` dla M4), model `LLM_MODEL`.
+- `api/providers/__init__.py` — `get_llm_provider()` zawsze zwraca Anthropic.
+- `api/providers/llm_assist.py` — M3: `assist_available()` (sprawdza `ANTHROPIC_API_KEY`) i
+  `complete_json()` przez Anthropic `messages.parse`.
+- `api/pipeline/innovation_tests.py` — zapisuje `settings.LLM_MODEL` w `ai_model`.
+- SDK: `openai` 3.24.0 i `anthropic` 1.11.0 (lokalnie i w kontenerze api) — bez zmian w `pyproject.toml`.
 
-## Wzór (16 stron A4, Calibri 11 pt)
+## Wybór modelu
 
-Str. 1–2: logotypy, blok tytułowy, pkt 1–2 (dane pomysłodawcy: trzy warianty, same etykiety);
-str. 2–5: pkt 3–8 (nagłówek pogrubiony + instrukcja w nawiasie), pkt 9 z dwiema tabelami 3-kolumnowymi
-(przygotowanie: nagłówek + 3 puste wiersze; testowanie: nagłówek, „Faza I testu” + 2 puste, „Faza II
-testu” + 2 puste), pkt 10–11; str. 5–9: pkt 12 oświadczenia A i B (punktory „o”); str. 9–12: klauzula
-ROPS; str. 13–16: klauzula IZ (od nowej strony) z przypisami. Brak numerów stron, pól podpisu i pieczęci.
+Model `gpt-6-luna` — według https://developers.openai.com/api/docs/models najtańszy model z bieżącej linii
+(0,10 USD / 1M tokenów wejścia, 0,50 USD / 1M wyjścia), przeznaczony do „focused, high-volume work”;
+strona modelu (https://developers.openai.com/api/docs/models/gpt-6-luna) wymienia `streaming` i
+`structured_outputs`, Responses i Chat Completions. To model rozumujący: poziomy `none`…`max`, domyślnie
+`medium`. Przewodnik https://developers.openai.com/api/docs/guides/reasoning: limit to `max_output_tokens`
+i obejmuje też tokeny rozumowania — dlatego domyślnie `reasoning.effort = "none"` (zero tokenów rozumowania,
+najszybszy pierwszy token, istniejące limity `LLM_MAX_TOKENS` / `M3_ASSIST_*` / `M4_AI_MAX_TOKENS` wystarczą).
+Nie wysyłamy `temperature` (dokumentacja nie potwierdza wsparcia dla modeli rozumujących).
+Sprawdzone kluczem projektu: `GET /v1/models/gpt-6-luna` → 200; `responses.parse` i `responses.stream`
+z `effort=none` działają, polski tekst poprawny.
 
 ## Kroki
 
-1. **Backend (addytywnie)** — `api/kreator/schemas.py`:
-   - `CallSectionKindLiteral` += `budget`, `total`; `CallSection` += `number: str | None`,
-     `form_prompt: str | None` (instrukcja wzoru, gdy inna niż `prompt`; `""` = brak), `form_inline: bool`
-     (instrukcja w tej samej linii co nazwa, jak pkt 1–2), `budget_phases: list[BudgetPhase]`;
-   - `BudgetPhaseLiteral = prep | test_1 | test_2`; `BudgetRow.phase` domyślnie `prep`;
-   - `CallForm` (annex_label, title, intro, applicant_variants, statement_sets, clauses) i
-     `CallFile.form` / `CallDetail.form: CallForm | None`.
-   - `api/kreator/calls.py`: walidacja — sekcja `budget` musi mieć `budget_phases`, inne nie;
-     `call_detail` przekazuje `form`.
-   - `api/kreator/prefill.py`: `costs_fixed` → `prep`, `costs_variable` → `test_1`.
-   - `api/routers/applications.py`: bez zmian (kontrole liczą tylko `text`; `_text_section_or_422` odrzuca
-     nowe rodzaje sekcji jak `info`).
-2. **`data/calls/iws2-demo.json`** — sekcje w kolejności wzoru z `number`, instrukcje dosłownie ze wzoru
-   (`prompt` tam, gdzie wzór pyta o to samo, co edytor; `form_prompt` dla `applicant` i `statements`),
-   obiekt `form` z tekstami wzoru (z `pdftotext`).
-3. **TS** — `web/src/api/types.ts`: lustro typów (`CallSectionKind`, `CallSection`, `BudgetPhase`,
-   `BudgetRow.phase`, `CallForm`…).
-4. **Druk** — nowy `web/src/components/application/ApplicationPrint.tsx` (sam Tailwind, `hidden print:block`):
-   - logotypy w `thead`/`tfoot` tabeli-ramy (Chrome powtarza je na każdej stronie); grafiki
-     `web/src/assets/iws2/naglowek.jpg`, `stopka.png` wyjęte z wzoru (`pdfimages`);
-   - tekst `text-small` (14 px ≈ Calibri 11 pt), `leading-loose` jak interlinia wzoru;
-   - tabele pkt 9 z kolumnami wzoru, puste wiersze do minimum wzoru; `break-before-page` przed klauzulą IZ.
-   - Ograniczenie: Tailwind nie generuje reguły `@page` (to at-rule bez selektora), a `AGENTS.md`
-     zabrania własnego CSS — rozmiar A4 i marginesy ustawia okno drukowania (domyślnie A4 w polskich
-     ustawieniach, marginesy „domyślne” ≈ 1 cm); poziome wcięcie wzoru (~2,5 cm) daje `print:px-*`.
-     Wzór nie ma numerów stron, więc brak `@page` nic nie odbiera.
-5. **Edytor** — `ApplicationPage.tsx`: numeracja z `number`, sekcje `budget` renderują `BudgetRows` dla
-   swoich etapów (filtr + scalanie), sekcja `total` — suma i limit; spis sekcji bez osobnej pozycji budżetu.
-   `BudgetRows.tsx`: props `phases`, `title`, `intro`, wybór fazy I/II w tabeli testowania. `SectionEditor`:
-   numer z `number`.
-6. **Dokumentacja** — kontrakty K05/K12 w „Uwagach między zadaniami” M3 (`[feature-2026-10-04-3 → K05, K12, K13]`).
+1. `api/config.py` — `LLM_PROVIDER`, `OPENAI_LLM_MODEL`, `OPENAI_LLM_REASONING_EFFORT`; właściwości
+   `llm_model` (model aktywnego dostawcy) i `llm_api_key` (klucz aktywnego dostawcy).
+2. `api/providers/llm_openai.py` (nowy) — `OpenAILLMProvider` z `stream()` (`responses.stream`, zdarzenia
+   `response.output_text.delta`) i `complete()` (`responses.create`, `output_text`); oba z
+   `instructions=system`, `input=user`, `max_output_tokens`, `reasoning.effort`; każdy wyjątek SDK →
+   `ProviderError("openai", "LLM_UNAVAILABLE")`, odpowiedź `incomplete`/`failed` w `complete()` też.
+3. `api/providers/__init__.py` — `get_llm_provider()` wybiera po `LLM_PROVIDER`; nieznana nazwa → `ValueError`.
+4. `api/providers/llm.py` — tylko docstring (Anthropic jako alternatywa); kod bez zmian.
+5. `api/providers/llm_assist.py` — gałąź OpenAI: `responses.parse(text_format=Model)`, klient z
+   `timeout=M3_ASSIST_TIMEOUT_SECONDS`; sukces tylko przy `status == "completed"` i `output_parsed`;
+   `assist_available()` sprawdza `settings.llm_api_key`; logi: dostawca, model, czas, tokeny, status.
+   Gałąź Anthropic bez zmian w zachowaniu.
+6. `api/pipeline/innovation_tests.py` — `ai_model = settings.llm_model`.
+7. Dokumentacja: ADR-020 i wiersze sekcji 11 w specyfikacji M1, „Uwagi” M1/M3/M4, `AGENTS.md`,
+   `.env.example`, `docs/modules/README.md`.
+
+8. (odejście od planu) `api/pipeline/answer.py` — reguła 3 promptu streszczenia dopuszcza dopasowanie
+   częściowe (spec, punkt 5); ta sama zmiana w 6.6 specyfikacji M1.
+
+Prompty M3 i M4 bez zmian, więc wersje promptów (`M4_AI_PROMPT_VERSION`, `M4_AI_FIT_PROMPT_VERSION`) zostają.
 
 ## Weryfikacja ręczna
 
-- `ruff check .`, `cd web && npm run lint && npm run build`;
-- restart api, `GET /api/calls/iws2-demo` (nowe pola), `GET /api/applications/1` (stare wiersze → `prep`);
-- PATCH wniosku 1 realistyczną treścią, PDF z własnego headless Chrome (`Page.printToPDF`, A4) z buildu,
-  `pdftoppm` i porównanie stron ze wzorem; PDF i PNG w tym katalogu.
+- `ruff check .`
+- restart api, potem curl czatu z `AGENTS.md` (kolejność zdarzeń, tokeny, `[n]`),
+- `POST /api/ideas/1/assist` `{"target":"idea"}` i `{"target":"canvas_block","block_id":"actors_support"}`,
+- `POST /api/ideas/1/applications` `{"call_id":"iws2-demo"}` → `POST /api/applications/{id}/draft`,
+- M4: regeneracja raportu przy `M4_AI_ENABLED=true` (endpoint albo wywołanie w procesie),
+- logi api: brak treści promptów i odpowiedzi.
 
-## Wykonanie i weryfikacja (2026-10-04)
+## Wynik (2026-10-04)
 
-Zgodnie z planem, z dwoma doprecyzowaniami: `CallForm` ma też `logos` (zestaw logotypów, `"iws2"` →
-`web/src/assets/iws2/`) i `budget_headers` (dosłowne nagłówki kolumn obu tabel pkt 9, per id sekcji `budget`).
-Logotypy powtarzane na każdej stronie przez `position: fixed` (`print:` — Chrome rysuje je na każdej stronie),
-a niewidoczne kopie w `thead`/`tfoot` tabeli-ramy rezerwują miejsce, żeby treść na nie nie wchodziła.
+Bez zmian w `.env` (domyślne `LLM_PROVIDER=openai` wystarcza); api z `--reload` wczytało kod sam.
 
-Sprawdzone:
-- `ruff check .` i `ruff format --check api/kreator` — czysto; `npm run lint`, `npm run build` — czysto;
-- po restarcie api: `GET /api/calls/iws2-demo` zwraca 16 sekcji z `number`/`kind` i `form`;
-  `GET /api/applications/1` — stare wiersze budżetu bez `phase` wczytane jako `prep`;
-- PATCH wniosku 1 (odpowiedzi `innovation`, `preparation`, `testing`, 8 wierszy budżetu w 3 etapach,
-  suma 65 000 zł) → `checks: []`;
-- PDF z własnego headless Chrome 136 (`Page.printToPDF`, A4, marginesy 0,4″, `preferCSSPageSize`) z buildu
-  (`vite preview`) — [`wydruk-wniosek-1.pdf`](wydruk-wniosek-1.pdf), 17 stron (wzór: 16); porównania
-  stron wzoru (po lewej) i wydruku (po prawej): `porownanie-s1-blok-tytulowy.png`,
-  `porownanie-pkt9-plan-dzialania.png`, `porownanie-pkt12-oswiadczenia.png`, `porownanie-klauzula-iz.png`;
-- edytor: pkt 9 z dwiema tabelami (wybór „Faza I/II testu” w tabeli testowania), pkt 10 z sumą i limitem,
-  spis sekcji z numeracją wzoru (zrzut ekranu, bez axe).
-
-Różnice wobec wzoru, które zostają:
-- krój: Atkinson Hyperlegible z design systemu zamiast Calibri (zakaz wartości dowolnych dla tokenów);
-  `text-small` 14 px ≈ Calibri 11 pt, interlinia `leading-loose` jak we wzorze; stąd 17 zamiast 16 stron;
-- przypisy klauzuli IZ stoją pod klauzulą, nie u dołu strony 13 (CSS druku w Chrome nie ma przypisów);
-- brak `@page`: rozmiar i marginesy z okna drukowania (Chrome w polskich ustawieniach: A4, marginesy
-  domyślne); wzór nie ma numerów stron ani pól podpisu/pieczęci, więc wydruk też ich nie ma;
-- puste linie (kropkowane) przy polach danych pomysłodawcy i pustych punktach — we wzorze są same etykiety,
-  linie ułatwiają wypełnienie odręczne; tabele pkt 9 dopełniane pustymi wierszami do minimum wzoru;
-- na końcu jedna linia „Wydruk z Kreatora pomysłów (Splot) — dokument roboczy…” ze stanem na datę zapisu
-  (zamiast stopki K12); nagłówek kolumn tabel nie powtarza się na kolejnej stronie (jak we wzorze),
-  a może oderwać się od pierwszego wiersza na granicy stron.
+- `ruff check .` — czysto. `ruff format --check` czysty w zmienionych plikach poza `api/pipeline/innovation_tests.py`
+  (różnice formatowania sprzed zmiany, odnotowane w TI08).
+- **M1 czat** (przykład z `AGENTS.md`): przed poprawką promptu `status×3 → candidates → status → token×14 →
+  answer_retracted → report_saved → done` (model: „Nie mam dopasowanego rozwiązania w bazie.”, także przy
+  `effort=low`); po poprawce `status×3 → candidates → status → token×95 → report_saved → done`, odpowiedź
+  z cytowaniami `[1]`, `[2]`, `[3]`. Drugie zapytanie (opiekunowie osób z niepełnosprawnością) — to samo,
+  2,4 s całość. Zgłoszenia testowe: `report_id` 18–23.
+- **M3**: `POST /api/ideas/1/assist` `{"target":"idea"}` → `available:true`, 3 pytania, 1–3 propozycje
+  (4–5 s); `{"target":"canvas_block","block_id":"actors_support"}` → 3 pytania, 5 propozycji (3,3 s).
+  `POST /api/ideas/1/applications {"call_id":"iws2-demo"}` → wniosek `id=1` (zostaje w bazie);
+  `POST /api/applications/1/draft {"section_id":"diagnosis"}` → `available:true`, szkic 1476 znaków (6,3 s).
+  Logi: dostawca, model, czas, tokeny, status — bez treści promptów i odpowiedzi.
+- **M4**: `build_test_report(test 1, regenerate_ai=True)` w procesie z `M4_AI_ENABLED=true` → `ai_available:true`,
+  raport JSON poprawny, `ai_model=gpt-6-luna` (zapisany w `innovation_tests` id 1). Endpointu
+  `/report/regenerate` nie sprawdzano (w kontenerze `M4_AI_ENABLED=false`). `suggest_tester_fit` nie sprawdzany
+  osobno — ta sama ścieżka `complete()`.
+- **Ścieżki błędów**: bez `OPENAI_API_KEY` `stream()`/`complete()` → `ProviderError LLM_UNAVAILABLE`,
+  `assist_available()=false`; `LLM_PROVIDER=anthropic` → `AnthropicLLMProvider`, `llm_model=claude-haiku-4-5-20251001`.
+  Gałęzi Anthropic nie wywołano na żywo (brak kredytów).
+- Obserwacja: pierwsze wywołanie asystenta trwało 87 s — chwilowe błędy sieci (w tym samym czasie embedding
+  dał `EMBEDDING_UNAVAILABLE`), SDK OpenAI ponawia domyślnie 2 razy, więc najgorszy przypadek to
+  ok. 3 × `M3_ASSIST_TIMEOUT_SECONDS`. Kolejne wywołania 3–6 s.

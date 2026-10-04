@@ -9,7 +9,9 @@ import { KREATOR_PATH_RE, NewReplyBadge } from "./KreatorNav";
 export function MainNav() {
   const { pathname } = useLocation();
   const { session } = useAuth();
-  const isAdmin = session?.role === "administrator";
+  const role = session?.role;
+  // Moduł 5: Platforma komunikacji obejmuje rozmowy i tablicę partnerstw.
+  const inKomunikacja = /^\/(rozmowy|partnerzy)(\/|$)/.test(pathname);
   // Zasobnik wiedzy obejmuje Wiedzę i Bibliotekę innowacji (z kartami rozwiązań).
   const inZasobnik = /^\/(wiedza|rozwiazania)(\/|$)/.test(pathname);
   // Moduł 3: Kreator pomysłów
@@ -27,20 +29,31 @@ export function MainNav() {
       <Link to="/wiedza" className="ds-nav__item" aria-current={inZasobnik ? "page" : undefined}>
         {MODULE_NAMES.zasobnik}
       </Link>
-      <NavLink to="/testy" className="ds-nav__item">
-        {MODULE_NAMES.tester}
-      </NavLink>
-      {isAdmin ? (
+      {role === "mentor" ? (
+        // Ekspert: tylko swoje konsultacje (bez Kreatora i Testera — triaż 2026-10-04).
+        <NavLink to="/ekspert" className="ds-nav__item">
+          Moje konsultacje
+        </NavLink>
+      ) : (
+        <NavLink to="/testy" className="ds-nav__item">
+          {MODULE_NAMES.tester}
+        </NavLink>
+      )}
+      {role === "administrator" && (
         <NavLink to="/panel" className="ds-nav__item">
           {MODULE_NAMES.panel}
         </NavLink>
-      ) : (
+      )}
+      {role !== "administrator" && role !== "mentor" && (
         <>
           {/* Niezalogowany też widzi te zakładki — ekran pokaże komunikat z „Zaloguj się”. */}
           {/* Moduł 3: zakładka aktywna na wszystkich trasach Kreatora, ze znacznikiem nowej odpowiedzi Hubu. */}
           <Link to="/mam-pomysl" className="ds-nav__item" aria-current={inKreator ? "page" : undefined}>
             {MODULE_NAMES.kreator}
             <NewReplyBadge count={newReplies} compact />
+          </Link>
+          <Link to="/rozmowy" className="ds-nav__item" aria-current={inKomunikacja ? "page" : undefined}>
+            {MODULE_NAMES.komunikacja}
           </Link>
           <NavLink to="/moje-zgloszenia" className="ds-nav__item">
             Moje zgłoszenia

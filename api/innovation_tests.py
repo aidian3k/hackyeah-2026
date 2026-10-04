@@ -34,9 +34,7 @@ M4_CONSENT_TEXT_PL = (
     "Innowacji Społecznych. Dane kontaktowe są widoczne wyłącznie dla Hubu."
 )
 
-ACTIVE_APPLICATION_STATUSES = frozenset(
-    {ApplicationStatus.SUBMITTED, ApplicationStatus.ACCEPTED}
-)
+ACTIVE_APPLICATION_STATUSES = frozenset({ApplicationStatus.SUBMITTED, ApplicationStatus.ACCEPTED})
 ACCESS_TOKEN_BYTES = 32
 
 
@@ -55,9 +53,7 @@ def hash_access_token(token: str) -> str:
     return hashlib.sha256(token.encode("utf-8")).hexdigest()
 
 
-async def verify_access_token(
-    session: AsyncSession, token: str
-) -> InnovationTestApplication:
+async def verify_access_token(session: AsyncSession, token: str) -> InnovationTestApplication:
     if not token or not token.strip():
         raise ApiError(404, "NOT_FOUND", "Nie znaleziono dostępu testera.")
     token_hash = hash_access_token(token.strip())
@@ -75,9 +71,7 @@ async def verify_access_token(
     return application
 
 
-async def _count_active_applications(
-    session: AsyncSession, email_normalized: str
-) -> int:
+async def _count_active_applications(session: AsyncSession, email_normalized: str) -> int:
     return int(
         await session.scalar(
             select(func.count())
@@ -181,8 +175,7 @@ async def create_application(
     session.add(application)
     await session.flush()
     log.info(
-        "innovation_test application created application_id=%s test_id=%s "
-        "motivation_len=%s",
+        "innovation_test application created application_id=%s test_id=%s motivation_len=%s",
         application.id,
         test.id,
         len(payload.motivation),

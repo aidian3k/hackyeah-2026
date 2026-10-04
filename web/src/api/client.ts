@@ -1,8 +1,14 @@
 import type {
+  AdminSolutionsQuery,
+  ChallengeDetail,
+  ChallengeSummary,
   ConsentMeta,
+  CoverageRow,
   FeedbackCreate,
   GminaItem,
   Health,
+  IndicatorDetail,
+  IndicatorMeta,
   Inbox,
   InnovationTest,
   InnovationTestAccessLink,
@@ -21,11 +27,16 @@ import type {
   ReportListItem,
   ReportStatus,
   SimilarReport,
+  SolutionAdminCreate,
+  SolutionAdminDetail,
+  SolutionAdminItem,
   SolutionCard,
   SolutionCreated,
   SolutionDetail,
+  SolutionFacets,
   SolutionPatch,
   SolutionSubmit,
+  SolutionUpsert,
   Stats,
   TaxonomyItem,
 } from "./types";
@@ -138,12 +149,20 @@ export async function request<T>(method: string, path: string, opts: RequestOpti
 export const api = {
   taxonomy: () => request<TaxonomyItem[]>("GET", "/api/taxonomy"),
   gminy: () => request<GminaItem[]>("GET", "/api/gminy"),
-  // kind, category, gmina, powiat, tag, evidence_min, q, status, sort, limit, offset
+  // kind, knowledge_type, category, gmina, powiat, tag, has_video, evidence_min, q, status, sort, limit, offset
   solutions: (q?: Query) => request<Page<SolutionCard>>("GET", "/api/solutions", { query: q }),
   solution: (id: number) => request<SolutionDetail>("GET", `/api/solutions/${id}`),
   submitSolution: (body: SolutionSubmit) => request<SolutionCreated>("POST", "/api/solutions", { body }),
   patchSolution: (id: number, body: SolutionPatch) =>
     request<SolutionDetail>("PATCH", `/api/solutions/${id}`, { body }),
+
+  adminSolutions: (q?: AdminSolutionsQuery) =>
+    request<Page<SolutionAdminItem>>("GET", "/api/admin/solutions", { query: q as Query }),
+  adminSolution: (id: number) => request<SolutionAdminDetail>("GET", `/api/admin/solutions/${id}`),
+  createAdminSolution: (body: SolutionAdminCreate) =>
+    request<SolutionAdminDetail>("POST", "/api/admin/solutions", { body }),
+  updateAdminSolution: (id: number, body: SolutionUpsert) =>
+    request<SolutionAdminDetail>("PUT", `/api/admin/solutions/${id}`, { body }),
   // matched, status, category, gmina, reporter_type, limit, offset
   reports: (q?: Query) => request<Page<ReportListItem>>("GET", "/api/reports", { query: q }),
   report: (id: number) => request<ReportDetail>("GET", `/api/reports/${id}`),
@@ -157,6 +176,16 @@ export const api = {
   stats: (q?: Query) => request<Stats>("GET", "/api/stats", { query: q }),
   feedback: (body: FeedbackCreate) => request<void>("POST", "/api/feedback", { body }),
   health: () => request<Health>("GET", "/healthz", { acceptStatus: [503] }),
+
+  // Moduł 2: Zasobnik wiedzy
+  challenges: () => request<ChallengeSummary[]>("GET", "/api/challenges"),
+  challenge: (code: string) => request<ChallengeDetail>("GET", `/api/challenges/${encodeURIComponent(code)}`),
+  indicators: (q?: Query) => request<IndicatorMeta[]>("GET", "/api/indicators", { query: q }),
+  indicator: (code: string) => request<IndicatorDetail>("GET", `/api/indicators/${encodeURIComponent(code)}`),
+  // from, to (RRRR-MM-DD)
+  coverage: (q?: Query) => request<CoverageRow[]>("GET", "/api/stats/coverage", { query: q }),
+  // kind (domyślnie SOLUTION)
+  solutionFacets: (q?: Query) => request<SolutionFacets>("GET", "/api/solutions/facets", { query: q }),
 
   innovationTests: (q?: Query) =>
     request<Page<InnovationTest>>("GET", "/api/innovation-tests", { query: q }),

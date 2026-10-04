@@ -1,51 +1,53 @@
-# feature-2026-10-04-3 — Kreator: wydruk wniosku 1:1 z wzorem formularza aplikacyjnego IWS
+# feature-2026-10-04-3 — Funkcje AI na OpenAI (jeden dostawca dla LLM i embeddingów)
 
 **Status:** wdrożone · **Plan:** [`plan.md`](plan.md)
 
-Uwaga użytkownika po demo K12: „generator pdf powinien się generować dosłownie według wzoru
-z `docs/resources/rops/za._3._Formularz_aplikacyjny_wzor.pdf`, a teraz generuje się jakiś taki biedny”.
-Dotychczasowy wydruk (`/wnioski/:id` → „Drukuj / zapisz PDF”) to lista pytań i odpowiedzi z jedną tabelą
-kosztów — nie przypomina formularza ROPS (16 stron A4).
+Zespół doładował kredyty tylko w OpenAI (klucz `OPENAI_API_KEY` już obsługuje embeddingi); klucz Anthropic
+nie ma środków, więc wszystkie funkcje oparte o LLM mają korzystać z OpenAI, żeby utrzymywać jedną subskrypcję.
 
 ## Do zmiany
 
-1. **Wydruk wniosku = układ wzoru „Załącznik nr 3 do Ogłoszenia — FORMULARZ APLIKACYJNY”**
-   - na każdej stronie pasek logotypów u góry (FE dla Rozwoju Społecznego, RP, UE) i u dołu
-     (Małopolska, INNO AGH, ROPS) — grafiki wyjęte z wzoru;
-   - blok tytułowy: „Załącznik nr 3 do Ogłoszenia” (do prawej), „FORMULARZ APLIKACYJNY”, akapit
-     „Nabór pomysłów na innowacje społeczne… 2021-2027”;
-   - punkty 1–12 z numeracją, nazwami i instrukcjami w nawiasach dosłownie jak we wzorze;
-   - pkt 2 „Dane pomysłodawcy”: trzy warianty (OSOBA FIZYCZNA a–g, PODMIOT a–k z podpunktami „o”,
-     GRUPA NIEFORMALNA a–f) z pustymi liniami do wypełnienia odręcznego — platforma tych danych nie zbiera;
-   - pkt 9 „Plan działania i koszty”: „Okres przygotowawczy” i „Okres testowania” z instrukcjami i dwiema
-     tabelami o kolumnach wzoru („Działanie (Co zrobisz? Np. …)”, „Termin realizacji (Kiedy? Np. …)”,
-     „Koszt działania (Ile to będzie kosztować?)”); w tabeli testowania wiersze „Faza I testu” i
-     „Faza II testu”; puste wiersze jak we wzorze, gdy działań jest mniej;
-   - pkt 10 „Wnioskowana kwota grantu”: suma kosztów z planu działania;
-   - pkt 12 „Oświadczenia”: pełne listy A (osoba fizyczna) i B (reprezentant podmiotu) z punktorami „o”;
-   - klauzule informacyjne ROPS i ministra (IZ) z pełną treścią; klauzula IZ od nowej strony, przypisy 1–5
-     pod klauzulą;
-   - odpowiedzi z wniosku pod instrukcjami punktów; pusty punkt = linie do wypełnienia ręcznie.
+1. **Wybór dostawcy LLM w konfiguracji**
+   - nowa zmienna `LLM_PROVIDER` (`openai` | `anthropic`), domyślnie `openai`,
+   - model OpenAI w osobnej zmiennej `OPENAI_LLM_MODEL` (domyślnie `gpt-6-luna`) i poziom rozumowania
+     `OPENAI_LLM_REASONING_EFFORT` (domyślnie `none` — krótkie zadania, najniższe opóźnienie),
+   - `LLM_MODEL` zostaje modelem Anthropic (`claude-haiku-4-5-20251001`), używanym tylko przy
+     `LLM_PROVIDER=anthropic`; kod Anthropic zostaje jako alternatywa.
 
-2. **Definicja naboru `iws2-demo` zgodna ze wzorem** (zmiany addytywne w API)
-   - sekcje w kolejności wzoru z numerami (`number`), nowe sekcje: `plan` (pkt 9, info), `preparation`
-     (Okres przygotowawczy, tekst), `budget_prep` / `budget_test` (tabele kosztów, `kind: "budget"`),
-     `amount` (pkt 10, `kind: "total"`); `testing` dostaje instrukcję „Okres testowania” ze wzoru;
-   - nowy obiekt `form` w `CallFile`/`CallDetail` z tekstami wzoru (nagłówek, warianty danych
-     pomysłodawcy, oświadczenia A i B, klauzule);
-   - wiersz budżetu ma etap `phase` (`prep` | `test_1` | `test_2`, domyślnie `prep` — stare wiersze
-     i stare żądania działają bez zmian); prefill: koszty stałe kanwy → `prep`, zmienne → `test_1`.
+2. **Moduł 1 — streszczenie w czacie (SSE)**
+   - przy `LLM_PROVIDER=openai` tokeny streszczenia strumieniuje OpenAI (Responses API),
+   - kontrakt strumienia bez zmian: `status* → candidates → token* [→ answer_retracted] → report_saved → done`,
+     cytowania `[n]`, błąd dostawcy → `error` `LLM_UNAVAILABLE` + `done`.
 
-3. **Edytor wniosku**
-   - sekcje i nagłówki z numeracją wzoru; tabela kosztów rozbita na „Okres przygotowawczy” i „Okres
-     testowania” (z wyborem fazy I/II), w miejscu pkt 9; pkt 10 pokazuje sumę i limit;
-   - pkt 12 pokazuje skrót oświadczeń i informację, że pełna treść jest w wydruku.
+3. **Moduł 4 — raport i sugestia dopasowania (`complete()`)**
+   - jednorazowa odpowiedź tekstowa z OpenAI; w `innovation_tests.ai_model` zapisuje się faktycznie użyty model.
+
+4. **Moduł 3 — asystent Kreatora i szkic wniosku (`complete_json`)**
+   - structured outputs OpenAI (`responses.parse` z modelem Pydantic), te same modele wyjścia i prompty,
+   - `assist_available()` sprawdza klucz aktywnego dostawcy (`OPENAI_API_KEY` przy `openai`),
+   - porażka (brak klucza, timeout `M3_ASSIST_TIMEOUT_SECONDS`, odpowiedź niepełna, odmowa, brak sparsowanego
+     wyniku) → `ProviderError(<dostawca>, "LLM_UNAVAILABLE")`, jak dotąd.
+
+5. **Prompt streszczenia M1 — dopasowanie częściowe** (iteracja 2, po weryfikacji na żywo)
+   - reguła 3 `SYSTEM` (`api/pipeline/answer.py`, specyfikacja 6.6): gdy rozwiązanie odpowiada na problem
+     choćby częściowo, model opisuje, czego dotyczy, i czego brakuje (z cytowaniem); „Nie mam dopasowanego
+     rozwiązania w bazie.” tylko gdy żadne nie dotyczy problemu,
+   - powód: `gpt-6-luna` stosował starą regułę dosłownie i na przykładzie z `AGENTS.md` (karty pasujące
+     częściowo) odpowiadał odmową bez cytowań → `answer_retracted`.
+
+6. **Dokumentacja decyzji**
+   - ADR-020 w specyfikacji Modułu 1, wpisy w „Uwagach między zadaniami” M1, M3 i M4,
+     `AGENTS.md` (Stack), `.env.example`, tabela triażu w `docs/modules/README.md`.
+
+Poza zakresem: zmiana promptów M3/M4, embeddingów i rerankera; usuwanie kodu Anthropic.
 
 ## Kryterium akceptacji
 
-- PDF z Chrome (A4) dla wniosku 1 ma strukturę wzoru: logotypy na każdej stronie, blok tytułowy, punkty
-  1–12, tabele planu działania w układzie wzoru, oświadczenia A i B, obie klauzule;
-- dane, których platforma nie zbiera (adres, NIP, KRS…), są pustymi liniami;
-- stare wiersze budżetu (bez `phase`) wczytują się jako okres przygotowawczy; `ruff check .`,
-  `npm run lint`, `npm run build` czyste;
-- PDF i zrzuty porównawcze zapisane w tym katalogu.
+- Bez ustawiania nowych zmiennych (`LLM_PROVIDER` domyślne) i z samym `OPENAI_API_KEY`:
+  - `POST /api/chat` z przykładem z `AGENTS.md` daje pełny strumień z tokenami i cytowaniami `[n]`,
+  - `POST /api/ideas/{id}/assist` (fiszka i blok kanwy) zwraca `available: true` z propozycjami,
+  - `POST /api/applications/{id}/draft` zwraca szkic sekcji,
+  - raport AI Modułu 4 generuje się przy `M4_AI_ENABLED=true`.
+- W logach nadal brak treści użytkownika i promptów; `contact_email` nie trafia do promptów.
+- `LLM_PROVIDER=anthropic` przywraca poprzednie zachowanie (kod bez zmian).
+- `ruff check .` czysty.

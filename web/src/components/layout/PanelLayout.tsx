@@ -1,4 +1,5 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
+import { useCommWaitingCount } from "@/hooks/useCommCount";
 import { useInboxCount } from "@/hooks/useInboxCount";
 import { plural } from "@/lib/format";
 import { MODULE_NAMES } from "@/lib/modules";
@@ -13,6 +14,7 @@ export function PanelLayout() {
   // Moduł 3: pomysły wysłane do Hubu (SUBMITTED), czekające na ocenę.
   const ideasCount = useIdeasCount();
   const showIdeasBadge = ideasCount !== null && ideasCount > 0;
+  const commCount = useCommWaitingCount(); // Moduł 5
 
   return (
     <>
@@ -42,6 +44,10 @@ export function PanelLayout() {
           <NavLink to="/panel/rozwiazania" className="ds-nav__item">
             Do zatwierdzenia
           </NavLink>
+          {/* Moduł 6 */}
+          <NavLink to="/panel/wiedza" className="ds-nav__item">
+            Baza wiedzy
+          </NavLink>
           <NavLink to="/panel/testy" className="ds-nav__item">
             Testerzy
           </NavLink>
@@ -56,6 +62,21 @@ export function PanelLayout() {
                 </span>
                 <span className="ds-sr-only">
                   , {ideasCount} {plural(ideasCount, "nowy pomysł", "nowe pomysły", "nowych pomysłów")}
+                </span>
+              </>
+            )}
+          </NavLink>
+          {/* Moduł 5: rozmowy czekające na zespół Hubu */}
+          <NavLink to="/panel/rozmowy" className="ds-nav__item relative">
+            Rozmowy
+            {commCount !== null && commCount > 0 && (
+              <>
+                {" "}
+                <span className="ds-badge" aria-hidden="true">
+                  {commCount}
+                </span>
+                <span className="ds-sr-only">
+                  , {commCount} {plural(commCount, "czeka", "czekają", "czeka")} na odpowiedź
                 </span>
               </>
             )}

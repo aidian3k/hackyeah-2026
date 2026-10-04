@@ -8,15 +8,6 @@
 .card-list > li { display: flex; min-width: 0; }
 .card-list > li > .ds-card { flex: 1; min-width: 0; }
 
-/* ---------- SolutionCard ---------- */
-.solution-card { overflow-wrap: anywhere; }
-.solution-card > * { margin: 0; }
-.solution-card__title { font: var(--text-h3); }
-.solution-card__origin { font: var(--text-small); color: var(--ink-muted); }
-.solution-card__summary { font: var(--text-body); color: var(--ink); }
-.solution-card__note { font: var(--text-small); color: var(--ink-muted); }
-.solution-card__note::before { content: "• "; content: "• " / ""; }
-
 /* ---------- EvidenceBadge: kropki są ozdobą, informację niesie tekst ---------- */
 .evidence-badge { display: inline-flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-2); }
 .evidence-badge__dots { display: inline-flex; gap: var(--space-1); }

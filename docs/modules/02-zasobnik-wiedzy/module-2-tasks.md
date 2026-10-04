@@ -26,21 +26,21 @@ Identyfikatory: `Z00`, `Z01`, … (prefiks modułu, żeby nie kolidować z `T` M
 
 <!-- Format linii: - [ ] Z00 · Opis · zależy: — / Zxx, T.., F.. -->
 
-- [ ] Z00 · Schemat i kontrakty: kolumna w `init.sql` + tabele w `db/m2-zasobnik.sql`, modele ORM, modele pydantic, `SolutionCard.knowledge_type`, ustawienia · zależy: —
-- [ ] Z01 · Skrypt `scripts/fetch_ioss.py` → `data/knowledge/indicators.json` (wskaźniki IOSS dla 22 powiatów) · zależy: —
-- [ ] Z02 · Treści: `data/knowledge/challenges.json` (8 profili) i `data/knowledge/records/wiedza.json` (raporty, materiały) · zależy: —
-- [ ] Z03 · Ingest wiedzy: `knowledge_type` w `scripts/ingest.py`, `scripts/ingest_knowledge.py`, `make ingest-knowledge` · zależy: Z00
-- [ ] Z04 · API wiedzy: `api/routers/knowledge.py` + filtr `knowledge_type` w `/api/solutions` · zależy: Z00
-- [ ] Z05 · API statystyk: `by_powiat`, filtr `powiat`, `GET /api/stats/coverage` · zależy: Z00
-- [ ] Z06 · Frontend: typy, klient, trasy i strony-zaślepki · zależy: Z04, Z05, Z12
-- [ ] Z07 · Strona wyzwania `/wiedza/wyzwania/:code` (bez mapy) · zależy: Z06
-- [ ] Z08 · Przegląd `/wiedza` i lista `/wiedza/materialy` · zależy: Z06, Z13
-- [ ] Z09 · Panel trendów: zgłoszenia w czasie, powiaty, „Zgłoszenia a biblioteka” · zależy: Z06
-- [ ] Z10 · `PowiatTileMap` (mapa kafelkowa) na `/wiedza` i stronie wyzwania, wspólny nagłówek na stronie wyzwania · zależy: Z07, Z08, Z13
-- [ ] Z12 · API Biblioteki: filtr `has_video`, `GET /api/solutions/facets` · zależy: Z00, Z04
-- [ ] Z13 · Biblioteka `/rozwiazania`, nowa karta `SolutionCard`, podnawigacja i `ZasobnikHeader` · zależy: Z06, Z12
-- [ ] Z14 · Strona innowacji `/rozwiazania/:id` · zależy: Z13
-- [ ] Z11 · Dane w bazie, scenariusze S1–S4, dostępność, README · zależy: Z01, Z02, Z03, Z07, Z08, Z09, Z10, Z13, Z14
+- [x] Z00 · Schemat i kontrakty: kolumna w `init.sql` + tabele w `db/m2-zasobnik.sql`, modele ORM, modele pydantic, `SolutionCard.knowledge_type`, ustawienia · zależy: — — zrobione: claude, 2026-10-04 (tabele przeniesione z init.sql do db/m2-zasobnik.sql)
+- [x] Z01 · Skrypt `scripts/fetch_ioss.py` → `data/knowledge/indicators.json` (wskaźniki IOSS dla 22 powiatów) · zależy: — — zrobione: claude, 2026-10-04 (11 wskaźników; IOSS 172 i 136 zwracają pustą stronę — pominięte)
+- [x] Z02 · Treści: `data/knowledge/challenges.json` (8 profili) i `data/knowledge/records/wiedza.json` (raporty, materiały) · zależy: — — zrobione: claude, 2026-10-04 (11 raportów, 8 materiałów; fakty z OZPS 2024 z numerami stron; wszystkie URL 200)
+- [x] Z03 · Ingest wiedzy: `knowledge_type` w `scripts/ingest.py`, `scripts/ingest_knowledge.py`, `make ingest-knowledge` · zależy: Z00 — zrobione: claude, 2026-10-04 (ingest wiedzy; walidacja knowledge_type)
+- [x] Z04 · API wiedzy: `api/routers/knowledge.py` + filtr `knowledge_type` w `/api/solutions` · zależy: Z00 — zrobione: claude, 2026-10-04 (API wiedzy; film = media.type==video (spec pisze YouTube, dane mają video))
+- [x] Z05 · API statystyk: `by_powiat`, filtr `powiat`, `GET /api/stats/coverage` · zależy: Z00 — zrobione: claude, 2026-10-04 (by_powiat, coverage)
+- [x] Z06 · Frontend: typy, klient, trasy i strony-zaślepki · zależy: Z04, Z05, Z12 — zrobione: claude, 2026-10-04 (typy, klient, trasy)
+- [x] Z07 · Strona wyzwania `/wiedza/wyzwania/:code` (bez mapy) · zależy: Z06 — zrobione: claude, 2026-10-04 (strona wyzwania na ZasobnikHeader, KeyFacts, DemoTag)
+- [x] Z08 · Przegląd `/wiedza` i lista `/wiedza/materialy` · zależy: Z06, Z13 — zrobione: claude, 2026-10-04 (KnowledgePage, MaterialsPage, ChallengeTile, zakładka Materiały)
+- [x] Z09 · Panel trendów: zgłoszenia w czasie, powiaty, „Zgłoszenia a biblioteka” · zależy: Z06 — zrobione: claude, 2026-10-04 (by_week, by_powiat, CoverageSection)
+- [x] Z10 · `PowiatTileMap` (mapa kafelkowa) na `/wiedza` i stronie wyzwania, wspólny nagłówek na stronie wyzwania · zależy: Z07, Z08, Z13 — zrobione: claude, 2026-10-04 (PowiatTileMap + powiatTiles; mapa na /wiedza i stronie wyzwania)
+- [x] Z12 · API Biblioteki: filtr `has_video`, `GET /api/solutions/facets` · zależy: Z00, Z04 — zrobione: claude, 2026-10-04 (has_video, facets)
+- [x] Z13 · Biblioteka `/rozwiazania`, nowa karta `SolutionCard`, podnawigacja i `ZasobnikHeader` · zależy: Z06, Z12 — zrobione: claude, 2026-10-04 (fasety i has_video z API, useLibraryOverview usunięty, CSS katalogu usunięty)
+- [x] Z14 · Strona innowacji `/rozwiazania/:id` · zależy: Z13 — zrobione: claude, 2026-10-04 (SolutionPage: KeyInfo, SimilarSolutions, Breadcrumbs)
+- [~] Z11 · Dane w bazie, scenariusze S1–S4, dostępność, README · zależy: Z01, Z02, Z03, Z07, Z08, Z09, Z10, Z13, Z14 — agent: claude, 2026-10-04 (README i stan modułu gotowe; scenariusze S1–S4 niezweryfikowane ręcznie)
 
 ### Fale równoległości (orientacyjnie)
 
@@ -689,3 +689,12 @@ _(dopisuj na końcu: `- [Zxx → Zyy] opis`)_
   - Z13: **M2 jest właścicielem `web/src/components/SolutionCard.tsx`** — używają go czat, panel, M3 (`SimilarInnovations`, K07) i M5 (`Timeline`, `OfferPage`, PK21/PK23). Nie zmieniaj ani nie usuwaj istniejących propsów (tylko nowe, opcjonalne). Z13 domknij (weryfikacja w czacie i panelu) jak najwcześniej — M3 i M5 budują na tej karcie.
   - Materiały ROPS (Social Canvas, przewodnik, „Połącz kropki”, plany wdrożenia, podcast) mają jedno źródło: wpisy `MATERIAL` z Z02. M3 (K12, sekcja „Materiały” na `/nabory`) linkuje do `/wiedza/materialy`, nie powiela listy.
   - `api/config.py`, `api/main.py`, `Makefile`, `.env.example`, `web/src/App.tsx`, `web/src/api/types.ts`, `web/src/api/client.ts` edytują też M3 i M5 — dopisuj tylko blokiem z komentarzem `Moduł 2` na końcu sekcji, nie przestawiaj cudzych linii. Z00 i Z06 wypchnij na master jak najwcześniej (małe PR-y).
+- [Z00 → Z11] 2026-10-04: istniejąca baza → `make reset-db` (potem `make ingest`, `make db-m2` jest wołane automatycznie przez initdb) albo ręcznie `CREATE TYPE knowledge_type …` + `ALTER TABLE solutions ADD COLUMN knowledge_type …` + `make db-m2`. W katalogu roboczym były już zmiany Z00 z tabelami w `init.sql` — przeniesione do `db/m2-zasobnik.sql` zgodnie z kontraktem.
+- [środowisko] 2026-10-04: klucze `OPENAI_API_KEY`/`COHERE_API_KEY`/`ANTHROPIC_API_KEY` w `.env` są puste; decyzja użytkownika: na razie bez łączenia z dostawcą embeddingów. Baza lokalnie ładowana skryptem pomocniczym (poza repo), chunki z `embedding = NULL` — po wpisaniu klucza `make ingest` przeliczy je automatycznie. Czat i wyszukiwanie semantyczne nie działają do tego czasu; przeglądanie (Biblioteka, Zasobnik, panel) tak.
+- [Z04 → Z02] 2026-10-04: film w danych to `media.type = "video"` (nie „youtube”); `has_video` i „Co już działa” używają `video`. Podcast (odc. 1–3) zapisany jako `type: video` z linkiem YouTube.
+- [Z08 → Z04] 2026-10-04: API nie filtruje po braku kategorii — „Materiały ogólne” (`?category=none`) wycinane po stronie klienta (materiałów jest kilka; pobieramy do 100 i stronicujemy lokalnie).
+- [Z09 → M1] 2026-10-04: `GET /api/reports` nie ma filtra `powiat` — tabela powiatów w Trendach bez linków do listy zgłoszeń.
+- [Z14 → plan] 2026-10-04: `web/src/styles/solution.css` ZOSTAJE — korzystają z niego `SolutionReviewPage` i `ReportPage` (`breadcrumbs`, `solution-head`, `solution-page`) oraz `MediaList`/`ImplementationSteps`. Strona publiczna jest w pełni na Tailwindzie; migracja panelu to osobna zmiana. `ropsGroups` ma rozszerzenie `.tsx` (zawiera ikony JSX).
+- [Z10 → plan] 2026-10-04: stopień 2 skali mapy w wysokim kontraście dostaje tło i tekst z tokenów powierzchni (`stripe-blue` + czarny tekst dawały 3,9:1). Stopnie różnią się też grubością obramowania.
+- [Z01 → plan] 2026-10-04: IOSS 172 (oczekujący na DPS) i 136 (zdrowie psychiczne) zwracają pustą odpowiedź (118 B) — pominięte; `MENTAL_HEALTH` ma wskaźnik 228. `region_value` = null (IOSS nie podaje wartości dla województwa w tabeli).
+- [Z11] 2026-10-04: sprawdzone: API (curl/psql), zrzuty headless Chrome 1280 px stron `/wiedza`, `/wiedza/wyzwania/AGING`, `/rozwiazania`, `/rozwiazania/:id`. NIE sprawdzone: czat (brak kluczy API — embeddingi puste), panel `/panel/trendy` (wymaga logowania demo), scenariusze S1–S4 w całości, klawiatura, 200 %, 360 px, `data-contrast="high"`, `make web-mock` z nową kartą. `seed_reports` wymaga kluczy API (woła czat).

@@ -13,14 +13,17 @@ from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api.cards import load_solutions, to_card
+from api.config import settings
 from api.db import get_session
 from api.errors import ApiError
 from api.schemas import (
+    CoverageRow,
     Inbox,
     ReportListItem,
     Stats,
     StatsByCategory,
     StatsByGmina,
+    StatsByPowiat,
     StatsByReporterType,
     StatsByWeek,
 )
@@ -103,6 +106,15 @@ _AGG = (
 )
 
 
+def _date_range(from_: date | None, to: date | None) -> tuple[date, date, dict[str, Any]]:
+    """Zakres dat jak w `/stats` (`to` włącznie); parametry SQL `from_d`, `to_next`."""
+    to_d = to or date.today()
+    from_d = from_ or (to_d - timedelta(days=STATS_DEFAULT_DAYS))
+    if from_d > to_d:
+        raise ApiError(422, "VALIDATION_ERROR", "Parametr `from` nie może być późniejszy niż `to`.")
+    return from_d, to_d, {"from_d": from_d, "to_next": to_d + timedelta(days=1)}
+
+
 @router.get("/stats", response_model=Stats, response_model_by_alias=True)
 async def get_stats(
     session: SessionDep,
@@ -110,21 +122,20 @@ async def get_stats(
     to: Annotated[date | None, Query()] = None,
     category: Annotated[str | None, Query()] = None,
     gmina: Annotated[str | None, Query()] = None,
+    powiat: Annotated[str | None, Query()] = None,
 ) -> Stats:
-    to_d = to or date.today()
-    from_d = from_ or (to_d - timedelta(days=STATS_DEFAULT_DAYS))
-    if from_d > to_d:
-        raise ApiError(422, "VALIDATION_ERROR", "Parametr `from` nie może być późniejszy niż `to`.")
+    from_d, to_d, params = _date_range(from_, to)
 
-    # `to` włącznie: created_at < to + 1 dzień
     where = ["r.created_at >= :from_d", "r.created_at < :to_next"]
-    params: dict[str, Any] = {"from_d": from_d, "to_next": to_d + timedelta(days=1)}
     if category:
         where.append("r.category = :category")
         params["category"] = category
     if gmina:
         where.append("r.gmina = :gmina")
         params["gmina"] = gmina
+    if powiat:
+        where.append("r.powiat = :powiat")
+        params["powiat"] = powiat
     where_sql = " AND ".join(where)
 
     async def q(sql: str) -> list[dict[str, Any]]:
@@ -146,6 +157,14 @@ async def get_stats(
         FROM reports r WHERE {where_sql}
         GROUP BY r.gmina, r.powiat
         ORDER BY total DESC, r.gmina NULLS LAST
+        """
+    )
+    by_powiat = await q(
+        f"""
+        SELECT r.powiat, {_AGG}
+        FROM reports r WHERE {where_sql}
+        GROUP BY r.powiat
+        ORDER BY total DESC, r.powiat ASC NULLS LAST
         """
     )
     by_week = await q(
@@ -171,6 +190,62 @@ async def get_stats(
         unmatched=total["unmatched"],
         by_category=[StatsByCategory(**r) for r in by_category],
         by_gmina=[StatsByGmina(**r) for r in by_gmina],
+        by_powiat=[StatsByPowiat(**r) for r in by_powiat],
         by_week=[StatsByWeek(**r) for r in by_week],
         by_reporter_type=[StatsByReporterType(**r) for r in by_reporter_type],
     )
+
+
+@router.get("/stats/coverage", response_model=list[CoverageRow])
+async def get_coverage(
+    session: SessionDep,
+    from_: Annotated[date | None, Query(alias="from")] = None,
+    to: Annotated[date | None, Query()] = None,
+) -> list[CoverageRow]:
+    """Zgłoszenia (w zakresie dat) a biblioteka i wiedza (stan `PUBLISHED`) per wyzwanie.
+
+    Luka: dużo niedopasowanych zgłoszeń i mało rozwiązań (progi `COVERAGE_GAP_*`, ADR-M2-005).
+    """
+    _, _, params = _date_range(from_, to)
+    params["min_unmatched"] = settings.COVERAGE_GAP_MIN_UNMATCHED
+    params["max_solutions"] = settings.COVERAGE_GAP_MAX_SOLUTIONS
+    rows = (
+        (
+            await session.execute(
+                text(
+                    """
+                    WITH rep AS (
+                        SELECT r.category, count(*) AS total,
+                               count(*) FILTER (WHERE NOT r.matched) AS unmatched
+                        FROM reports r
+                        WHERE r.created_at >= :from_d AND r.created_at < :to_next
+                        GROUP BY r.category
+                    ), sol AS (
+                        SELECT s.category,
+                               count(*) FILTER (WHERE s.kind = 'SOLUTION') AS solutions,
+                               count(*) FILTER (WHERE s.kind = 'KNOWLEDGE') AS knowledge
+                        FROM solutions s
+                        WHERE s.status = 'PUBLISHED'
+                        GROUP BY s.category
+                    )
+                    SELECT t.code AS category, t.label_pl,
+                           coalesce(rep.total, 0) AS reports_total,
+                           coalesce(rep.unmatched, 0) AS reports_unmatched,
+                           coalesce(sol.solutions, 0) AS solutions_published,
+                           coalesce(sol.knowledge, 0) AS knowledge_published,
+                           (coalesce(rep.unmatched, 0) >= :min_unmatched
+                            AND coalesce(sol.solutions, 0) < :max_solutions) AS is_gap
+                    FROM challenge_taxonomy t
+                    LEFT JOIN rep ON rep.category = t.code
+                    LEFT JOIN sol ON sol.category = t.code
+                    WHERE t.code <> 'OTHER'
+                    ORDER BY is_gap DESC, reports_unmatched DESC, t.code ASC
+                    """
+                ),
+                params,
+            )
+        )
+        .mappings()
+        .all()
+    )
+    return [CoverageRow(**dict(r)) for r in rows]

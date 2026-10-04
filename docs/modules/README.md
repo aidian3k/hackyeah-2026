@@ -5,11 +5,11 @@ Siedem funkcjonalności z `docs/base.md` §2. Każdy moduł ma specyfikację HTM
 | # | Moduł (`base.md`) | Specyfikacja | Zadania | Stan |
 |---|---|---|---|---|
 | 1 | I. Matchmaking społeczny (obligatoryjny) | `01-matchmaking/module-1-matchmaking.html` | `01-matchmaking/module-1-tasks.md`, frontend: `01-matchmaking/frontend-tasks.md` (+ `module-1-calibration.md`, `frontend-a11y.md`) | gotowy (T00–T26, F00–F21) |
-| 2 | II. Zasobnik wiedzy | `02-zasobnik-wiedzy/module-2-zasobnik-wiedzy.html` | `02-zasobnik-wiedzy/module-2-tasks.md` | draft v0.4 (zakres, model, API, ekrany, odświeżenie Biblioteki, ADR-M2-001–008, źródła: `02-zasobnik-wiedzy/rops-zasoby-kontekst.md`); zadania Z00–Z14 rozpisane |
+| 2 | II. Zasobnik wiedzy | `02-zasobnik-wiedzy/module-2-zasobnik-wiedzy.html` | `02-zasobnik-wiedzy/module-2-tasks.md` | draft v0.4 (zakres, model, API, ekrany, odświeżenie Biblioteki, ADR-M2-001–008, źródła: `02-zasobnik-wiedzy/rops-zasoby-kontekst.md`); zadania Z00–Z14 rozpisane; **wdrożone Z00–Z10, Z12–Z14 (2026-10-04), Z11 — brak weryfikacji w przeglądarce i lokalnych embeddingów, patrz „Uwagi” w `module-2-tasks.md`** |
 | 3 | III. Kreator pomysłów | `03-kreator-pomyslow/module-3-kreator-pomyslow.html` | `03-kreator-pomyslow/module-3-tasks.md` (materiały: `docs/resources/rops/`) | draft v0.3 (zakres pod hackathon); zadania K00–K13 do wzięcia |
 | 4 | IV. Tester innowacji | `04-tester-innowacji/module-4-tester-innowacji.html` | `04-tester-innowacji/module-4-tasks.md` (+ `module-4-calibration.md`) | gotowy (TI00–TI07); TI08 — porządki po triażu |
-| 5 | V. Platforma aktywnej komunikacji | `05-platforma-komunikacji/module-5-platforma-komunikacji.html` | `05-platforma-komunikacji/module-5-tasks.md` | draft v0.4 (uproszczony); zadania PK00–PK05 (backend), PK20–PK26 (frontend) do wzięcia; zalążek: odpowiedzi do autora |
-| 6 | VI. Panel administratora | `06-panel-administratora/module-6-panel-administratora.html` | `06-panel-administratora/module-6-tasks.md` | szkielet; w dużej części pokryty przez M1 |
+| 5 | V. Platforma aktywnej komunikacji | `05-platforma-komunikacji/module-5-platforma-komunikacji.html` | `05-platforma-komunikacji/module-5-tasks.md` | zaimplementowany (PK00–PK05, PK20–PK26); scenariusz demo: `05-platforma-komunikacji/module-5-demo.md`; zalążek: odpowiedzi do autora |
+| 6 | VI. Panel administratora | `06-panel-administratora/module-6-panel-administratora.html` | `06-panel-administratora/module-6-tasks.md` | draft v0.2 (edycja treści z synchronicznym re-embeddingiem, dodawanie KNOWLEDGE, powłoka panelu dla M2–M5); plan odchudzony 2026-10-04 — bez historii zmian, edited_at i blokady (ADR-M6-003–005 wycięte); zadania PA00–PA05 do wzięcia |
 | 7 | VII. Middleman Innowacji | `07-middleman-innowacji/module-7-middleman-innowacji.html` | `07-middleman-innowacji/module-7-tasks.md` | szkielet; brak |
 
 Mocki strumieni SSE zostają w `docs/mocks/` — korzystają z nich `Makefile` (`make web-mock`) i skrypty w `web/scripts/`.
@@ -35,7 +35,7 @@ Moduły 2–5 są budowane równolegle przez różne osoby. Przegląd planów M2
 | Materiały ROPS (Social Canvas, przewodniki, podcast) | M2 (Z02, `/wiedza/materialy`) | M3 linkuje, nie powiela |
 | `web/src/lib/auth.tsx` (rola `mentor`), przebudowa `MainNav.tsx` pod role | M5 (PK20) | M3 dopisuje swoją pozycję po PK20 |
 | Słowo „nabór” (konkurs grantowy, `/nabory`) | M3 | M4 mówi „rekrutacja testerów” (TI08) |
-| `api/providers/llm.py` (Anthropic), `llm_openai.py` (OpenAI, domyślny) | M1 (`stream()`) + `complete()` z M4; dostawca z `LLM_PROVIDER` (ADR-020, `feature-2026-10-04-1`) | M3 ma osobny `llm_assist.py` (obsługuje obu dostawców) |
+| `api/providers/llm.py` (Anthropic), `llm_openai.py` (OpenAI, domyślny) | M1 (`stream()`) + `complete()` z M4; dostawca z `LLM_PROVIDER` (ADR-020, `feature-2026-10-04-3`) | M3 ma osobny `llm_assist.py` (obsługuje obu dostawców) |
 | Nazwy `application_status`, `material_type`, `test_mode`, `tester_type`, `ApplicationStatus`, `APPLICATION_STATUS_LABELS`, `FeedbackModerate` | M4 | M3 używa `GrantApplication*` |
 
 **Rozstrzygnięcia**

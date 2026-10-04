@@ -1,53 +1,37 @@
-# feature-2026-10-04-1 — Funkcje AI na OpenAI (jeden dostawca dla LLM i embeddingów)
+# feature-2026-10-04-1 — Rozmowy M5 jak komunikator
 
-**Status:** wdrożone · **Plan:** [`plan.md`](plan.md)
+**Status:** wdrożone
 
-Zespół doładował kredyty tylko w OpenAI (klucz `OPENAI_API_KEY` już obsługuje embeddingi); klucz Anthropic
-nie ma środków, więc wszystkie funkcje oparte o LLM mają korzystać z OpenAI, żeby utrzymywać jedną subskrypcję.
+Uwaga po pierwszym pokazie Modułu 5: widok rozmowy wygląda jak formularz, a ma wyglądać i działać jak czat (Messenger, WhatsApp) — nowocześnie i responsywnie.
 
 ## Do zmiany
 
-1. **Wybór dostawcy LLM w konfiguracji**
-   - nowa zmienna `LLM_PROVIDER` (`openai` | `anthropic`), domyślnie `openai`,
-   - model OpenAI w osobnej zmiennej `OPENAI_LLM_MODEL` (domyślnie `gpt-6-luna`) i poziom rozumowania
-     `OPENAI_LLM_REASONING_EFFORT` (domyślnie `none` — krótkie zadania, najniższe opóźnienie),
-   - `LLM_MODEL` zostaje modelem Anthropic (`claude-haiku-4-5-20251001`), używanym tylko przy
-     `LLM_PROVIDER=anthropic`; kod Anthropic zostaje jako alternatywa.
+1. **Wiadomości jako dymki**
+   - własne wiadomości po prawej, cudze po lewej (autor: swoje po prawej; panel: wiadomości Hubu po prawej; ekspert: swoje po prawej),
+   - nad dymkiem krótko kto pisze, pod nim godzina; przy dymkach rozmówców okrągły awatar (inicjał / „AI” / „H”),
+   - informacje systemowe wyśrodkowane, małym tekstem,
+   - odpowiedź asystenta w dymku z podpisem „Odpowiedź automatyczna (AI)”, karty rozwiązań pod dymkiem.
 
-2. **Moduł 1 — streszczenie w czacie (SSE)**
-   - przy `LLM_PROVIDER=openai` tokeny streszczenia strumieniuje OpenAI (Responses API),
-   - kontrakt strumienia bez zmian: `status* → candidates → token* [→ answer_retracted] → report_saved → done`,
-     cytowania `[n]`, błąd dostawcy → `error` `LLM_UNAVAILABLE` + `done`.
+2. **Pole wiadomości jak w komunikatorze**
+   - przyklejone do dołu ekranu, jedno rosnące pole + okrągły przycisk „Wyślij” z ikoną,
+   - Enter wysyła, Shift+Enter nowa linia; licznik znaków dopiero blisko limitu,
+   - po wysłaniu wiadomość od razu w rozmowie, widok przewija się na dół.
 
-3. **Moduł 4 — raport i sugestia dopasowania (`complete()`)**
-   - jednorazowa odpowiedź tekstowa z OpenAI; w `innovation_tests.ai_model` zapisuje się faktycznie użyty model.
+3. **Zachowanie czatu**
+   - po wejściu i przy nowej wiadomości widok na dole rozmowy,
+   - gdy asystent szuka odpowiedzi — dymek „pisze…” z animowanymi kropkami (bez animacji przy `prefers-reduced-motion`),
+   - po odpowiedzi AI szybkie odpowiedzi jako „chipy”: „To mi pomogło”, „Chcę porozmawiać z zespołem Hubu”.
 
-4. **Moduł 3 — asystent Kreatora i szkic wniosku (`complete_json`)**
-   - structured outputs OpenAI (`responses.parse` z modelem Pydantic), te same modele wyjścia i prompty,
-   - `assist_available()` sprawdza klucz aktywnego dostawcy (`OPENAI_API_KEY` przy `openai`),
-   - porażka (brak klucza, timeout `M3_ASSIST_TIMEOUT_SECONDS`, odpowiedź niepełna, odmowa, brak sparsowanego
-     wyniku) → `ProviderError(<dostawca>, "LLM_UNAVAILABLE")`, jak dotąd.
+4. **Nowa rozmowa** (`/rozmowy/nowa`) zaczyna się jak pusty czat: powitanie od Hubu w dymku, pole wiadomości na dole; „Kim jesteś?” i podpis schowane w „Więcej opcji”.
 
-5. **Prompt streszczenia M1 — dopasowanie częściowe** (iteracja 2, po weryfikacji na żywo)
-   - reguła 3 `SYSTEM` (`api/pipeline/answer.py`, specyfikacja 6.6): gdy rozwiązanie odpowiada na problem
-     choćby częściowo, model opisuje, czego dotyczy, i czego brakuje (z cytowaniem); „Nie mam dopasowanego
-     rozwiązania w bazie.” tylko gdy żadne nie dotyczy problemu,
-   - powód: `gpt-6-luna` stosował starą regułę dosłownie i na przykładzie z `AGENTS.md` (karty pasujące
-     częściowo) odpowiadał odmową bez cytowań → `answer_retracted`.
+5. **Panel i ekspert** — ten sam widok czatu; w panelu na szerokim ekranie po prawej kolumna z ekspertem, podpisem i statusem, na wąskim pod czatem.
 
-6. **Dokumentacja decyzji**
-   - ADR-020 w specyfikacji Modułu 1, wpisy w „Uwagach między zadaniami” M1, M3 i M4,
-     `AGENTS.md` (Stack), `.env.example`, tabela triażu w `docs/modules/README.md`.
-
-Poza zakresem: zmiana promptów M3/M4, embeddingów i rerankera; usuwanie kodu Anthropic.
+6. **Lista „Moje rozmowy”** jak lista konwersacji: ikona rodzaju, temat pogrubiony przy nowej odpowiedzi, czas po prawej.
 
 ## Kryterium akceptacji
 
-- Bez ustawiania nowych zmiennych (`LLM_PROVIDER` domyślne) i z samym `OPENAI_API_KEY`:
-  - `POST /api/chat` z przykładem z `AGENTS.md` daje pełny strumień z tokenami i cytowaniami `[n]`,
-  - `POST /api/ideas/{id}/assist` (fiszka i blok kanwy) zwraca `available: true` z propozycjami,
-  - `POST /api/applications/{id}/draft` zwraca szkic sekcji,
-  - raport AI Modułu 4 generuje się przy `M4_AI_ENABLED=true`.
-- W logach nadal brak treści użytkownika i promptów; `contact_email` nie trafia do promptów.
-- `LLM_PROVIDER=anthropic` przywraca poprzednie zachowanie (kod bez zmian).
-- `ruff check .` czysty.
+- rozmowa na telefonie (360 px) i komputerze wygląda jak komunikator: dymki po dwóch stronach, pole wiadomości na dole, bez poziomego przewijania,
+- Enter wysyła wiadomość, Shift+Enter dodaje linię,
+- widok sam przewija się do nowej wiadomości; asystent „pisze…” jest widoczny i ogłaszany czytnikowi,
+- WCAG 2.1 AA: rola nadawcy słownie (nie tylko strona i kolor), pole ma etykietę, przycisk ma nazwę, kontrast w trybie wysokiego kontrastu,
+- tylko Tailwind z presetu i klasy `ds-*`, bez nowych arkuszy CSS; API bez zmian.

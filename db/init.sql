@@ -15,6 +15,7 @@ ALTER TEXT SEARCH CONFIGURATION polish_simple
     WITH unaccent, simple;
 
 CREATE TYPE solution_kind   AS ENUM ('SOLUTION', 'KNOWLEDGE');
+CREATE TYPE knowledge_type  AS ENUM ('REPORT', 'MATERIAL');
 CREATE TYPE solution_origin AS ENUM ('CURATED', 'USER_SUBMITTED', 'PROMOTED_FROM_REPORT');
 CREATE TYPE solution_status AS ENUM ('PUBLISHED', 'PENDING_REVIEW', 'REJECTED', 'ARCHIVED');
 CREATE TYPE report_status   AS ENUM ('NEW', 'TRIAGED', 'MATCHED', 'IN_PROGRESS', 'CLOSED');
@@ -45,6 +46,7 @@ CREATE TABLE challenge_taxonomy (
 CREATE TABLE solutions (
     id                   BIGSERIAL PRIMARY KEY,
     kind                 solution_kind NOT NULL DEFAULT 'SOLUTION',
+    knowledge_type       knowledge_type,                    -- tylko dla kind = KNOWLEDGE (ADR-M2-001)
     title                TEXT        NOT NULL,
     summary              TEXT        NOT NULL,              -- krótki opis na kartę
     body                 TEXT        NOT NULL DEFAULT '',   -- pełna treść (chunkowana)
@@ -66,7 +68,8 @@ CREATE TABLE solutions (
     content_hash         TEXT        NOT NULL,              -- hash (title, summary, body); zmiana => przebudowa chunków
     submitted_by_name    TEXT,
     created_at           TIMESTAMPTZ NOT NULL DEFAULT now(),
-    updated_at           TIMESTAMPTZ NOT NULL DEFAULT now()
+    updated_at           TIMESTAMPTZ NOT NULL DEFAULT now(),
+    CONSTRAINT solutions_knowledge_type_ck CHECK ((kind = 'KNOWLEDGE') = (knowledge_type IS NOT NULL))
 );
 CREATE UNIQUE INDEX solutions_source_url_uq ON solutions (source_url) WHERE source_url IS NOT NULL;
 CREATE INDEX solutions_category_idx ON solutions (category);

@@ -9,21 +9,32 @@ import logging
 from typing import Annotated, Literal
 
 from fastapi import APIRouter, Depends, Query
-from sqlalchemy import func, select
+from sqlalchemy import func, literal_column, select, text
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api.cards import SolutionRow, load_solutions, to_card, to_detail
+from api.config import settings
 from api.corpus import content_hash, rebuild_chunks
 from api.db import get_session
 from api.errors import ApiError
-from api.models import Solution, SolutionKind, SolutionOrigin, SolutionStatus, Taxonomy
+from api.models import (
+    KnowledgeType,
+    Solution,
+    SolutionKind,
+    SolutionOrigin,
+    SolutionStatus,
+    Taxonomy,
+)
 from api.pipeline.preprocess import GMINY
 from api.providers import ProviderError, get_embedding_provider
 from api.schemas import (
+    FacetCategory,
+    FacetGroup,
     Page,
     SolutionCard,
     SolutionCreated,
     SolutionDetail,
+    SolutionFacets,
     SolutionPatch,
     SolutionSubmit,
 )
@@ -34,6 +45,11 @@ router = APIRouter(prefix="/api", tags=["solutions"])
 
 Session = Annotated[AsyncSession, Depends(get_session)]
 StatusLiteral = Literal["PUBLISHED", "PENDING_REVIEW", "REJECTED", "ARCHIVED"]
+
+# Film = element media typu "video" (stała ścieżka JSON, bez tekstu użytkownika).
+HAS_VIDEO = func.jsonb_path_exists(
+    Solution.media, literal_column("""'$[*] ? (@.type == "video")'::jsonpath""")
+)
 
 
 def _escape_like(value: str) -> str:
@@ -58,10 +74,12 @@ async def _detail(session: AsyncSession, solution_id: int) -> SolutionDetail:
 async def list_solutions(
     session: Session,
     kind: Literal["SOLUTION", "KNOWLEDGE"] = "SOLUTION",
+    knowledge_type: Literal["REPORT", "MATERIAL"] | None = None,
     category: str | None = None,
     gmina: str | None = None,
     powiat: str | None = None,
     tag: str | None = None,
+    has_video: bool | None = None,
     evidence_min: Annotated[int | None, Query(ge=1, le=5)] = None,
     q: Annotated[str | None, Query(max_length=200)] = None,
     status: StatusLiteral = "PUBLISHED",
@@ -73,6 +91,14 @@ async def list_solutions(
         Solution.kind == SolutionKind(kind),
         Solution.status == SolutionStatus(status),
     ]
+    if knowledge_type:
+        if kind != "KNOWLEDGE":
+            raise ApiError(
+                422, "VALIDATION_ERROR", "Filtr knowledge_type działa tylko dla kind=KNOWLEDGE."
+            )
+        conds.append(Solution.knowledge_type == KnowledgeType(knowledge_type))
+    if has_video:
+        conds.append(HAS_VIDEO)
     if category:
         conds.append(Solution.category == category)
     if gmina:
@@ -113,6 +139,52 @@ async def list_solutions(
         for i, (sol, label) in enumerate(rows)
     ]
     return Page[SolutionCard](items=items, total=total or 0, limit=limit, offset=offset)
+
+
+@router.get("/solutions/facets", response_model=SolutionFacets)
+async def solution_facets(
+    session: Session, kind: Literal["SOLUTION", "KNOWLEDGE"] = "SOLUTION"
+) -> SolutionFacets:
+    """Liczniki dla nagłówka i filtrów Biblioteki (ADR-M2-008); tylko `PUBLISHED`."""
+    base = [Solution.kind == SolutionKind(kind), Solution.status == SolutionStatus.PUBLISHED]
+    total, with_video = (
+        await session.execute(
+            select(func.count(), func.count().filter(HAS_VIDEO)).select_from(Solution).where(*base)
+        )
+    ).one()
+
+    prefix = settings.ROPS_GROUP_TAG_PREFIX
+    group_rows = (
+        await session.execute(
+            text(
+                """
+                SELECT t.tag, count(*) AS count
+                FROM solutions s, unnest(s.tags) AS t(tag)
+                WHERE s.kind = CAST(:kind AS solution_kind) AND s.status = 'PUBLISHED'
+                  AND starts_with(t.tag, :prefix)
+                GROUP BY t.tag
+                ORDER BY count DESC, t.tag ASC
+                """
+            ),
+            {"kind": kind, "prefix": prefix},
+        )
+    ).all()
+    groups = [
+        FacetGroup(tag=tag, label_pl=tag.removeprefix(prefix), count=count)
+        for tag, count in group_rows
+    ]
+
+    cat_rows = (
+        await session.execute(
+            select(Taxonomy.code, Taxonomy.label_pl, func.count(Solution.id))
+            .join(Solution, Solution.category == Taxonomy.code)
+            .where(*base)
+            .group_by(Taxonomy.code, Taxonomy.label_pl, Taxonomy.sort_order)
+            .order_by(Taxonomy.sort_order, Taxonomy.code)
+        )
+    ).all()
+    categories = [FacetCategory(code=c, label_pl=label, count=n) for c, label, n in cat_rows]
+    return SolutionFacets(total=total, with_video=with_video, groups=groups, categories=categories)
 
 
 @router.get("/solutions/{solution_id}", response_model=SolutionDetail)

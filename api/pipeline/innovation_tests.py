@@ -126,9 +126,7 @@ async def suggest_tester_fit(
                 "powiat": application.powiat,
                 "gmina": application.gmina,
                 "is_target_group_member": application.is_target_group_member,
-                "motivation": application.motivation[
-                    : settings.M4_MOTIVATION_MAX_CHARS
-                ],
+                "motivation": application.motivation[: settings.M4_MOTIVATION_MAX_CHARS],
             },
         },
         ensure_ascii=False,
@@ -251,11 +249,7 @@ async def build_test_report(
     ai_prompt_version = test.ai_prompt_version
     ai_generated_at = test.ai_generated_at
 
-    if (
-        not regenerate_ai
-        and isinstance(test.ai_report, dict)
-        and test.ai_report
-    ):
+    if not regenerate_ai and isinstance(test.ai_report, dict) and test.ai_report:
         try:
             ai_report = AiTestReport.model_validate(test.ai_report)
             ai_available = True

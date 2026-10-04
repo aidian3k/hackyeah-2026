@@ -10,6 +10,7 @@ import { refreshInbox, useInbox } from "@/hooks/useInboxCount";
 import { formatDateTime, formatRelative, plural } from "@/lib/format";
 import { REPORTER_TYPE_LABELS } from "@/lib/labels";
 import { ModuleLabel } from "@/components/layout/ModuleLabel";
+import { CommInboxSection } from "@/components/comm/CommInboxSection"; // Moduł 5
 import "@/styles/panel.css";
 // Moduł 3 (K11): sekcja „Nowe pomysły”
 import { api } from "@/api/client";
@@ -314,6 +315,8 @@ export function InboxPage() {
           </section>
         </>
       )}
+      {/* Moduł 5: rozmowy czekające na zespół Hubu */}
+      <CommInboxSection />
 
       {/* Moduł 3 (K11) */}
       <NewIdeasSection refreshKey={data} />

@@ -1,104 +1,106 @@
 import { Link } from "react-router-dom";
 import { api } from "@/api/client";
-import type { SolutionCard as SolutionCardData } from "@/api/types";
-import { Alert } from "@/components/Alert";
+import type { IndicatorMeta } from "@/api/types";
+import { ChallengeTile } from "@/components/knowledge/ChallengeTile";
+import { PowiatTileMap } from "@/components/knowledge/PowiatTileMap";
+import { ZasobnikHeader } from "@/components/layout/ZasobnikHeader";
 import { LoadState } from "@/components/LoadState";
 import { SolutionCard } from "@/components/SolutionCard";
 import { useApi } from "@/hooks/useApi";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import { useTaxonomy } from "@/hooks/useTaxonomy";
-import { ModuleLabel } from "@/components/layout/ModuleLabel";
-import { ZasobnikNav } from "@/components/layout/ZasobnikNav";
-import "@/styles/catalog.css";
 
-const KNOWLEDGE_LIMIT = 100;
+const KNOWLEDGE_PREVIEW_LIMIT = 4;
 
-/** Wiedza o wyzwaniach: wpisy KNOWLEDGE pogrupowane po wyzwaniach z /api/taxonomy (bez filtrów i paginacji). */
+/** Wiedza o wyzwaniach: kafelki wyzwań z kluczowym faktem i podgląd materiałów. */
 export function KnowledgePage() {
   useDocumentTitle("Wiedza o wyzwaniach");
-  const { data, error, loading, reload } = useApi(
-    () => api.solutions({ kind: "KNOWLEDGE", limit: KNOWLEDGE_LIMIT }),
+  const challenges = useApi(() => api.challenges(), []);
+  const indicators = useApi(() => api.indicators(), []);
+  // Domyślny wskaźnik każdego wyzwania = pierwszy wg sort_order (API zwraca je posortowane);
+  // kolejność na liście wyboru jak kolejność wyzwań.
+  const defaults = (() => {
+    const first = new Map<string, IndicatorMeta>();
+    for (const i of indicators.data ?? []) if (!first.has(i.category)) first.set(i.category, i);
+    return (challenges.data ?? []).flatMap((c) => first.get(c.code) ?? []);
+  })();
+  const materials = useApi(
+    () => api.solutions({ kind: "KNOWLEDGE", knowledge_type: "MATERIAL", limit: KNOWLEDGE_PREVIEW_LIMIT }),
     [],
   );
-  const { items: taxonomy, error: taxonomyError } = useTaxonomy();
-  const challenges = taxonomy.filter((t) => t.code !== "OTHER");
-  const waitingForTaxonomy = taxonomy.length === 0 && !taxonomyError;
-
-  const byCategory = new Map<string, SolutionCardData[]>();
-  for (const card of data?.items ?? []) {
-    const code = card.category ?? "";
-    const list = byCategory.get(code);
-    if (list) list.push(card);
-    else byCategory.set(code, [card]);
-  }
-  const known = new Set(challenges.map((t) => t.code));
-  const other = (data?.items ?? []).filter((c) => !c.category || !known.has(c.category));
 
   return (
     <div className="ds-page">
-      <div className="ds-stack">
-        <ModuleLabel module="zasobnik" />
-        <h1 tabIndex={-1}>Wiedza o wyzwaniach Małopolski</h1>
-        <p className="catalog-lead">
-          Diagnozy i opracowania o najważniejszych wyzwaniach społecznych regionu, uporządkowane według wyzwań.
-        </p>
-      </div>
-      <ZasobnikNav />
+      <div className="flex flex-col gap-8">
+        <ZasobnikHeader
+          title="Wiedza o wyzwaniach Małopolski"
+          lead="Diagnozy, dane i opracowania o najważniejszych wyzwaniach społecznych regionu — z linkami do źródeł i do rozwiązań, które już działają."
+        />
 
-      <LoadState
-        loading={loading || waitingForTaxonomy}
-        error={error}
-        onRetry={reload}
-        label="Wczytujemy wiedzę o wyzwaniach…"
-      >
-        {taxonomyError && (
-          <Alert tone="warning">Nie udało się wczytać listy wyzwań. Pokazujemy wszystkie wpisy razem.</Alert>
+        <section aria-labelledby="wyzwania" className="flex flex-col gap-4">
+          <h2 id="wyzwania" className="m-0 font-sans text-h2 text-navy">
+            Wyzwania
+          </h2>
+          <LoadState
+            loading={challenges.loading}
+            error={challenges.error}
+            onRetry={challenges.reload}
+            label="Wczytujemy wyzwania…"
+          >
+            <ul className="m-0 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2 lg:grid-cols-4">
+              {challenges.data?.map((c) => (
+                <li key={c.code} className="flex min-w-0">
+                  <ChallengeTile challenge={c} />
+                </li>
+              ))}
+            </ul>
+          </LoadState>
+        </section>
+
+        {defaults.length > 0 && (
+          <section aria-labelledby="mapa" className="flex flex-col gap-4">
+            <h2 id="mapa" className="m-0 font-sans text-h2 text-navy">
+              Mapa wyzwań w powiatach
+            </h2>
+            <PowiatTileMap indicators={defaults} />
+          </section>
         )}
-        <div className="knowledge-sections">
-          {challenges.map((t) => {
-            const cards = byCategory.get(t.code) ?? [];
-            const headingId = `wyzwanie-${t.code.toLowerCase()}`;
-            return (
-              <section key={t.code} className="ds-stack" aria-labelledby={headingId}>
-                <h2 id={headingId}>{t.label_pl}</h2>
-                {t.description && <p className="knowledge-description">{t.description}</p>}
-                {cards.length > 0 ? (
-                  <ul className="ds-grid card-list">
-                    {cards.map((card) => (
-                      <li key={card.id}>
-                        <SolutionCard card={card} headingLevel={3} />
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p>
-                    Nie mamy jeszcze opracowań o tym wyzwaniu.{" "}
-                    <Link to={`/rozwiazania?category=${encodeURIComponent(t.code)}`}>
-                      Szukaj rozwiązań<span className="ds-sr-only">: {t.label_pl}</span>
-                    </Link>
-                  </p>
-                )}
-              </section>
-            );
-          })}
-          {other.length > 0 && (
-            <section className="ds-stack" aria-labelledby="wyzwanie-pozostale">
-              <h2 id="wyzwanie-pozostale">{challenges.length > 0 ? "Pozostałe opracowania" : "Opracowania"}</h2>
-              <ul className="ds-grid card-list">
-                {other.map((card) => (
-                  <li key={card.id}>
+
+        <section aria-labelledby="materialy" className="flex flex-col gap-4">
+          <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+            <h2 id="materialy" className="m-0 font-sans text-h2 text-navy">
+              Materiały
+            </h2>
+            <Link to="/wiedza/materialy">Wszystkie materiały</Link>
+          </div>
+          <LoadState
+            loading={materials.loading}
+            error={materials.error}
+            onRetry={materials.reload}
+            label="Wczytujemy materiały…"
+          >
+            {materials.data && materials.data.items.length > 0 ? (
+              <ul className="m-0 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2 lg:grid-cols-4">
+                {materials.data.items.map((card) => (
+                  <li key={card.id} className="flex min-w-0">
                     <SolutionCard card={card} headingLevel={3} />
                   </li>
                 ))}
               </ul>
-            </section>
-          )}
-        </div>
-      </LoadState>
+            ) : (
+              <p className="m-0">Nie ma jeszcze materiałów.</p>
+            )}
+          </LoadState>
+        </section>
 
-      <p className="knowledge-cta">
-        Masz konkretny problem? <Link to="/">Opisz go, a znajdziemy rozwiązania.</Link>
-      </p>
+        <div className="flex flex-col gap-3 border-t border-line pt-6">
+          <p className="m-0 text-body-lg">Masz konkretny problem? Opisz go, a znajdziemy rozwiązania.</p>
+          <p className="m-0">
+            <Link to="/" className="ds-btn ds-btn--cta">
+              Opisz swój problem
+            </Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
