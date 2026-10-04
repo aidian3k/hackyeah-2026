@@ -26,7 +26,7 @@ Plan na podstawie `docs/modules/07-middleman-innowacji/module-7-middleman-innowa
 
 Identyfikatory: `MI00`–`MI02` backend, `MI10`–`MI13` frontend i demo.
 
-- [ ] MI00 · Wpięcie M7: ustawienia, schematy, router-zaślepka SSE, maskowanie logów · zależy: —
+- [x] MI00 · Wpięcie M7: ustawienia, schematy, router-zaślepka SSE, maskowanie logów · zależy: — — zrobione: claude-lead, zaślepka SSE + ustawienia M7_*
 - [ ] MI01 · Kontekst i prompt: `api/middleman/context.py`, `api/middleman/prompts.py` · zależy: MI00
 - [ ] MI02 · Strumień z LLM w `api/routers/middleman.py` (walidacja, błędy, limit czasu, logi) · zależy: MI01
 - [ ] MI10 · Frontend: fundament (klient SSE, stałe, hook `useAdaptChat`, trasy, nazwa modułu) · zależy: MI00

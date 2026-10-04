@@ -35,6 +35,7 @@ from api.routers import applications as m3_applications
 from api.routers import assist as m3_assist
 from api.routers import canvas as m3_canvas
 from api.routers import ideas as m3_ideas
+from api.routers import middleman as m7_middleman  # Moduł 7
 
 log = logging.getLogger(__name__)
 
@@ -117,6 +118,8 @@ def create_app() -> FastAPI:
         m3_canvas.router,
         m3_assist.router,
         m3_applications.router,
+        # Moduł 7: Middleman innowacji
+        m7_middleman.router,
         meta.router,
         meta.health_router,
     ):

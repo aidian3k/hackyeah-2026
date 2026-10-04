@@ -123,6 +123,13 @@ class Settings(BaseSettings):
     ADMIN_LIST_DEFAULT_LIMIT: int = 25
     ADMIN_LIST_MAX_LIMIT: int = 100
 
+    # --- Moduł 7: Middleman innowacji ---
+    M7_ASSISTANT_ENABLED: bool = True
+    M7_MAX_MESSAGES: int = 30  # wiadomości w historii (obie strony)
+    M7_MESSAGE_MAX_CHARS: int = 4000  # = COMM_MESSAGE_MAX_CHARS (limit ChatComposer z M5)
+    M7_SOLUTION_MAX_CHARS: int = 6000  # opis innowacji w prompcie
+    M7_TIMEOUT_SECONDS: float = 45.0  # cała odpowiedź
+
     @property
     def cors_origins_list(self) -> list[str]:
         return [o.strip() for o in self.CORS_ORIGINS.split(",") if o.strip()]
