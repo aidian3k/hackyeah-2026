@@ -27,9 +27,9 @@ Plan na podstawie `docs/modules/07-middleman-innowacji/module-7-middleman-innowa
 Identyfikatory: `MI00`–`MI02` backend, `MI10`–`MI13` frontend i demo.
 
 - [x] MI00 · Wpięcie M7: ustawienia, schematy, router-zaślepka SSE, maskowanie logów · zależy: — — zrobione: claude-lead, zaślepka SSE + ustawienia M7_*
-- [ ] MI01 · Kontekst i prompt: `api/middleman/context.py`, `api/middleman/prompts.py` · zależy: MI00
-- [ ] MI02 · Strumień z LLM w `api/routers/middleman.py` (walidacja, błędy, limit czasu, logi) · zależy: MI01
-- [ ] MI10 · Frontend: fundament (klient SSE, stałe, hook `useAdaptChat`, trasy, nazwa modułu) · zależy: MI00
+- [x] MI01 · Kontekst i prompt: `api/middleman/context.py`, `api/middleman/prompts.py` · zależy: MI00 — zrobione: backend-m7, context.py + prompts.py
+- [x] MI02 · Strumień z LLM w `api/routers/middleman.py` (walidacja, błędy, limit czasu, logi) · zależy: MI01 — zrobione: backend-m7, ścieżka LLM zweryfikowana (OpenAI)
+- [~] MI10 · Frontend: fundament (klient SSE, stałe, hook `useAdaptChat`, trasy, nazwa modułu) · zależy: MI00 — agent: frontend-m7, 2026-10-04
 - [ ] MI11 · Frontend: ekran rozmowy `/wdrozenie/:id` · zależy: MI10
 - [ ] MI12 · Frontend: wejścia — przycisk na stronie innowacji, strona `/wdrozenie`, nawigacja · zależy: MI10
 - [ ] MI13 · Scenariusz demo i przegląd dostępności (`module-7-demo.md`) · zależy: MI02, MI11, MI12
@@ -450,3 +450,4 @@ Scenariusz B: nawigacja → „Middleman innowacji” → „senior” → rozmo
 ## Uwagi między zadaniami
 
 _(dopisuj na końcu: `- [MIxx → MIyy] opis`)_
+- [MI10 → MI11, MI12] `useAdaptChat`: `send` ignoruje pusty tekst i wywołanie przy `limitReached`; nowe `send` w trakcie strumienia przerywa poprzedni (pytanie bez odpowiedzi zostaje w `messages`); `retry` działa tylko, gdy ostatnia wiadomość to `user`; zmiana `solutionId` czyści rozmowę. Zaślepki `AdaptPage`/`MiddlemanHomePage` mają `ModuleLabel module="middleman"` + `h1 tabIndex={-1}`. `streamAdapt` sprawdzony skryptem tsx: tokeny + `done`, 404 → `ApiError NOT_FOUND`, strumień bez `done` → `STREAM_CLOSED` + syntetyczne `done`.
