@@ -204,7 +204,7 @@ export function PanelInnovationTestManagePage() {
                       <br />
                       {TESTER_TYPE_LABELS[app.tester_type]}
                       <br />
-                      {app.gmina}, {app.powiat}
+                      {app.address ?? "Bez adresu"}
                     </td>
                     <td className={TD}>{app.email}</td>
                     <td className={TD}>{APPLICATION_STATUS_LABELS[app.status]}</td>

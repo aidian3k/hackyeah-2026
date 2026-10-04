@@ -213,12 +213,10 @@ export interface InnovationTestCreate {
 export interface InnovationTestApplicationCreate {
   display_name: string;
   email: string;
-  tester_type: TesterType;
-  wojewodztwo: string;
-  powiat: string;
-  gmina: string;
-  is_target_group_member: boolean;
-  motivation: string;
+  tester_type?: TesterType;
+  address?: string | null;
+  is_target_group_member?: boolean;
+  motivation?: string | null;
   consent: true;
 }
 export interface InnovationTestApplicationPublic {
@@ -239,11 +237,9 @@ export interface InnovationTestApplication {
   display_name: string;
   email: string;
   tester_type: TesterType;
-  wojewodztwo: string;
-  powiat: string;
-  gmina: string;
+  address: string | null;
   is_target_group_member: boolean;
-  motivation: string;
+  motivation: string | null;
   status: ApplicationStatus;
   consent: boolean;
   consent_version: string;
@@ -287,6 +283,9 @@ export interface InnovationTestAccessStatus {
   test_id: number;
   test_title: string;
   test_status: InnovationTestStatus;
+  solution_title: string | null;
+  solution_summary: string | null;
+  instruction: string;
   status: ApplicationStatus;
   rejection_reason: string | null;
   cancel_reason: string | null;

@@ -135,9 +135,7 @@ def _application_read(app: InnovationTestApplication) -> InnovationTestApplicati
         display_name=app.display_name,
         email=app.email,
         tester_type=app.tester_type.value,  # type: ignore[arg-type]
-        wojewodztwo=app.wojewodztwo,
-        powiat=app.powiat,
-        gmina=app.gmina,
+        address=app.address,
         is_target_group_member=app.is_target_group_member,
         motivation=app.motivation,
         status=app.status.value,  # type: ignore[arg-type]
@@ -333,6 +331,9 @@ async def get_access_status(session: SessionDep, token: str) -> InnovationTestAc
         test_id=test.id,
         test_title=test.title,
         test_status=test.status.value,  # type: ignore[arg-type]
+        solution_title=test.solution.title if test.solution else None,
+        solution_summary=test.solution.summary if test.solution else None,
+        instruction=test.instruction,
         status=application.status.value,  # type: ignore[arg-type]
         rejection_reason=application.rejection_reason,
         cancel_reason=application.cancel_reason,
@@ -433,13 +434,7 @@ async def list_applications(
         conds.append(InnovationTestApplication.is_target_group_member == target_group_member)
     if location_q:
         like = f"%{location_q.strip()}%"
-        conds.append(
-            or_(
-                InnovationTestApplication.wojewodztwo.ilike(like),
-                InnovationTestApplication.powiat.ilike(like),
-                InnovationTestApplication.gmina.ilike(like),
-            )
-        )
+        conds.append(InnovationTestApplication.address.ilike(like))
     if q:
         like = f"%{q.strip()}%"
         conds.append(

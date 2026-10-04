@@ -2,7 +2,7 @@ PY ?= $(if $(wildcard .venv/bin/python),.venv/bin/python,python)
 RUFF ?= $(if $(wildcard .venv/bin/ruff),.venv/bin/ruff,ruff)
 Q ?= starsi ludzie są samotni
 
-.PHONY: up up-dev logs-dev down db dev ingest seed-m4 fmt lint psql reset-db chat
+.PHONY: up up-dev logs-dev down db dev ingest db-m4 seed-m4 fmt lint psql reset-db chat
 
 up:
 	docker compose up -d --build
@@ -28,6 +28,10 @@ dev:
 
 ingest:
 	$(PY) -m scripts.ingest data/solutions/
+
+# zmiany tabel M4 na działającej bazie (idempotentne, bez utraty danych; feature-2026-10-04-6)
+db-m4:
+	docker compose exec -T db psql -U splot -d splot -v ON_ERROR_STOP=1 < db/m4-tester.sql
 
 seed-m4:
 	$(PY) -m scripts.seed_innovation_tests

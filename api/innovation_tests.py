@@ -61,7 +61,7 @@ async def verify_access_token(session: AsyncSession, token: str) -> InnovationTe
         select(InnovationTestApplication)
         .options(
             selectinload(InnovationTestApplication.feedback),
-            selectinload(InnovationTestApplication.test),
+            selectinload(InnovationTestApplication.test).selectinload(InnovationTest.solution),
         )
         .where(InnovationTestApplication.access_token_hash == token_hash)
     )
@@ -160,11 +160,9 @@ async def create_application(
         email=payload.email.strip(),
         email_normalized=email_normalized,
         tester_type=TesterType(payload.tester_type),
-        wojewodztwo=payload.wojewodztwo.strip(),
-        powiat=payload.powiat.strip(),
-        gmina=payload.gmina.strip(),
+        address=payload.address,
         is_target_group_member=payload.is_target_group_member,
-        motivation=payload.motivation.strip(),
+        motivation=payload.motivation,
         status=ApplicationStatus.SUBMITTED,
         consent=True,
         consent_version=M4_CONSENT_VERSION,
@@ -178,7 +176,7 @@ async def create_application(
         "innovation_test application created application_id=%s test_id=%s motivation_len=%s",
         application.id,
         test.id,
-        len(payload.motivation),
+        len(payload.motivation or ""),
     )
     return application, token
 

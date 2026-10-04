@@ -122,11 +122,9 @@ async def suggest_tester_fit(
             },
             "tester": {
                 "tester_type": application.tester_type.value,
-                "wojewodztwo": application.wojewodztwo,
-                "powiat": application.powiat,
-                "gmina": application.gmina,
+                # bez adresu, e-maila i imienia — dane kontaktowe nie trafiają do AI
                 "is_target_group_member": application.is_target_group_member,
-                "motivation": application.motivation[: settings.M4_MOTIVATION_MAX_CHARS],
+                "motivation": (application.motivation or "")[: settings.M4_MOTIVATION_MAX_CHARS],
             },
         },
         ensure_ascii=False,

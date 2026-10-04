@@ -201,11 +201,9 @@ CREATE TABLE innovation_test_applications (
     email                   TEXT NOT NULL,          -- wyłącznie panel Hubu; nigdy w logach
     email_normalized        TEXT NOT NULL,          -- strip().casefold(); limit aktywnych
     tester_type             tester_type NOT NULL,
-    wojewodztwo             TEXT NOT NULL,
-    powiat                  TEXT NOT NULL,
-    gmina                   TEXT NOT NULL,
+    address                 TEXT,                   -- opcjonalny adres; wyłącznie panel Hubu, nigdy w AI ani logach
     is_target_group_member  BOOLEAN NOT NULL,
-    motivation              TEXT NOT NULL,          -- uzasadnienie udziału; nigdy w logach
+    motivation              TEXT,                   -- opcjonalne uzasadnienie udziału; nigdy w logach
     status                  application_status NOT NULL DEFAULT 'SUBMITTED',
     consent                 BOOLEAN NOT NULL,
     consent_version         TEXT NOT NULL,

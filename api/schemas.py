@@ -451,22 +451,28 @@ class InnovationTestRead(BaseModel):
 
 
 class InnovationTestApplicationCreate(BaseModel):
+    """Zgłoszenie testera: wymagane tylko imię/nazwa, e-mail i zgoda (feature-2026-10-04-6)."""
+
     model_config = ConfigDict(extra="forbid")
 
     display_name: str = Field(min_length=2, max_length=300)
     email: str = Field(max_length=320, pattern=_EMAIL_RE)
-    tester_type: TesterTypeLiteral
-    wojewodztwo: str = Field(min_length=2, max_length=100)
-    powiat: str = Field(min_length=2, max_length=100)
-    gmina: str = Field(min_length=2, max_length=100)
-    is_target_group_member: bool
-    motivation: str = Field(min_length=10, max_length=settings.M4_MOTIVATION_MAX_CHARS)
+    tester_type: TesterTypeLiteral = "RESIDENT"
+    address: str | None = Field(default=None, max_length=300)
+    is_target_group_member: bool = False
+    motivation: str | None = Field(default=None, max_length=settings.M4_MOTIVATION_MAX_CHARS)
     consent: Literal[True]
 
-    @field_validator("display_name", "wojewodztwo", "powiat", "gmina", "motivation")
+    @field_validator("display_name")
     @classmethod
     def _required_app_fields(cls, v: str, info: ValidationInfo) -> str:
         return _require_nonblank(v, str(info.field_name))
+
+    @field_validator("address", "motivation")
+    @classmethod
+    def _optional_app_fields(cls, v: str | None) -> str | None:
+        cleaned = (v or "").strip()
+        return cleaned or None
 
 
 class TesterFitSuggestion(BaseModel):
@@ -483,11 +489,9 @@ class InnovationTestApplicationRead(BaseModel):
     display_name: str
     email: str
     tester_type: TesterTypeLiteral
-    wojewodztwo: str
-    powiat: str
-    gmina: str
+    address: str | None = None
     is_target_group_member: bool
-    motivation: str
+    motivation: str | None = None
     status: ApplicationStatusLiteral
     consent: bool
     consent_version: str
@@ -585,6 +589,10 @@ class InnovationTestAccessStatus(BaseModel):
     test_id: int
     test_title: str
     test_status: InnovationTestStatusLiteral
+    # kontekst ankiety (feature-2026-10-04-7): co tester ocenia i jak przebiega test
+    solution_title: str | None = None
+    solution_summary: str | None = None
+    instruction: str = ""
     status: ApplicationStatusLiteral
     rejection_reason: str | None = None
     cancel_reason: str | None = None
