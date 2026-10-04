@@ -2,10 +2,12 @@ import { useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { commApi } from "@/api/comm";
 import { Alert } from "@/components/Alert";
-import { MessageForm } from "@/components/comm/MessageForm";
+import { ChatComposer } from "@/components/comm/ChatComposer";
+import { ChatShell } from "@/components/comm/ChatShell";
+import { QuickReplies } from "@/components/comm/QuickReplies";
 import { ThreadStatus } from "@/components/comm/ThreadStatus";
 import { Timeline } from "@/components/comm/Timeline";
-import { ModuleLabel } from "@/components/layout/ModuleLabel";
+import { TypingBubble } from "@/components/comm/TypingBubble";
 import { LoadState } from "@/components/LoadState";
 import { toApiError } from "@/hooks/useApi";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
@@ -13,7 +15,9 @@ import { useThread } from "@/hooks/useThread";
 import { loginHref, useAuth } from "@/lib/auth";
 import { rememberThread, THREAD_KIND_LABELS } from "@/lib/comm";
 
-/** Moduł 5: rozmowa widziana przez autora (publiczna po id; pisanie — rola reporter). */
+const BACK = { to: "/rozmowy", label: "Platforma komunikacji" };
+
+/** Moduł 5: rozmowa widziana przez autora — jak w komunikatorze (publiczna po id; pisanie — reporter). */
 export function ThreadPage() {
   const id = Number(useParams().id);
   const { session } = useAuth();
@@ -46,74 +50,69 @@ export function ThreadPage() {
     await thread.refresh();
   }
 
+  if (!d) {
+    return (
+      <div className="mx-auto w-full max-w-3xl px-4 py-6">
+        <LoadState loading={thread.loading} error={thread.error} onRetry={() => void thread.refresh()} />
+      </div>
+    );
+  }
+
+  const quickReplies = canWrite && d.status === "WAITING_USER" && lastRole === "ASSISTANT";
+
+  let footer;
+  if (d.status === "AI_PENDING") footer = null;
+  else if (canWrite)
+    footer = (
+      <ChatComposer
+        label={d.status === "CLOSED" ? "Napisz, aby otworzyć rozmowę ponownie" : "Twoja wiadomość"}
+        placeholder={d.status === "CLOSED" ? "Rozmowa zamknięta — napisz, aby ją otworzyć…" : "Napisz wiadomość…"}
+        onSend={reply}
+      />
+    );
+  else
+    footer = (
+      <div className="sticky bottom-0 -mx-4 border-0 border-t border-solid border-line bg-surface px-4 py-3">
+        <Link className="ds-btn ds-btn--primary" to={loginHref(pathname + search)}>
+          Zaloguj się, aby odpowiedzieć
+        </Link>
+      </div>
+    );
+
   return (
-    <div className="ds-page max-w-3xl">
-      <p className="m-0">
-        <Link to="/rozmowy">Platforma komunikacji</Link> › Rozmowa
-      </p>
-      <LoadState loading={thread.loading && !d} error={d ? null : thread.error} onRetry={() => void thread.refresh()}>
-        {d && (
+    <ChatShell
+      back={BACK}
+      title={d.subject}
+      announcement={thread.announcement}
+      meta={
+        <>
+          <span>{THREAD_KIND_LABELS[d.kind]}</span>
+          <ThreadStatus status={d.status} viewer="author" />
+          {d.partnership_id !== null && <Link to={`/partnerzy/${d.partnership_id}`}>Zobacz ogłoszenie</Link>}
+        </>
+      }
+      footer={footer}
+    >
+      <Timeline
+        messages={d.messages}
+        viewer="author"
+        scrollKey={d.status}
+        after={
           <>
-            <header className="flex flex-col gap-3">
-              <ModuleLabel module="komunikacja" />
-              <h1 tabIndex={-1} className="m-0 [overflow-wrap:anywhere]">
-                {d.subject}
-              </h1>
-              <p className="m-0 flex flex-wrap items-center gap-3 text-small text-ink-muted">
-                <span>{THREAD_KIND_LABELS[d.kind]}</span>
-                <ThreadStatus status={d.status} viewer="author" />
-                {d.partnership_id !== null && <Link to={`/partnerzy/${d.partnership_id}`}>Zobacz ogłoszenie</Link>}
-              </p>
-            </header>
-
-            <p className="ds-sr-only" aria-live="polite">
-              {thread.announcement}
-            </p>
-
-            <Timeline messages={d.messages} viewer="author" />
-
-            {d.status === "AI_PENDING" && (
-              <p role="status" className="m-0 flex items-center gap-3">
-                <span className="ds-spinner" aria-hidden="true" />
-                Asystent szuka odpowiedzi w Bibliotece Innowacji…
-              </p>
+            {d.status === "AI_PENDING" && <TypingBubble />}
+            {quickReplies && (
+              <QuickReplies
+                disabled={busy}
+                replies={[
+                  { label: "To mi pomogło", onClick: () => void setStatus("CLOSED") },
+                  { label: "Chcę porozmawiać z zespołem Hubu", onClick: () => void setStatus("WAITING_STAFF") },
+                ]}
+              />
             )}
-
             {actionError && <Alert tone="danger">{actionError}</Alert>}
-
-            {canWrite && d.status === "WAITING_USER" && lastRole === "ASSISTANT" && (
-              <section aria-label="Czy to pomogło?" className="flex flex-wrap gap-3">
-                <button type="button" className="ds-btn" disabled={busy} onClick={() => void setStatus("CLOSED")}>
-                  To mi pomogło
-                </button>
-                <button
-                  type="button"
-                  className="ds-btn ds-btn--primary"
-                  disabled={busy}
-                  onClick={() => void setStatus("WAITING_STAFF")}
-                >
-                  Chcę porozmawiać z zespołem Hubu
-                </button>
-              </section>
-            )}
-
-            {d.status !== "AI_PENDING" &&
-              (canWrite ? (
-                <MessageForm
-                  label={d.status === "CLOSED" ? "Napisz, aby otworzyć rozmowę ponownie" : "Odpowiedz"}
-                  submitLabel="Wyślij"
-                  onSend={reply}
-                />
-              ) : (
-                <p className="m-0">
-                  <Link className="ds-btn ds-btn--primary" to={loginHref(pathname + search)}>
-                    Zaloguj się, aby odpowiedzieć
-                  </Link>
-                </p>
-              ))}
           </>
-        )}
-      </LoadState>
-    </div>
+        }
+      />
+    </ChatShell>
   );
 }

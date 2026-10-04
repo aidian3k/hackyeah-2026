@@ -105,3 +105,23 @@ export function rememberThread(t: MyThread): void {
 export function forgetThread(threadId: number): void {
   saveMyThreads(listMyThreads().filter((x) => x.thread_id !== threadId));
 }
+
+// --- czat ----------------------------------------------------------------------------
+
+const timeOnly = new Intl.DateTimeFormat("pl-PL", { hour: "2-digit", minute: "2-digit" });
+const dayAndTime = new Intl.DateTimeFormat("pl-PL", {
+  day: "numeric",
+  month: "short",
+  hour: "2-digit",
+  minute: "2-digit",
+});
+
+/** Czas jak w komunikatorze: dziś — sama godzina, wcześniej — dzień i godzina. */
+export function chatTime(iso: string, now: Date = new Date()): string {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  return d.toDateString() === now.toDateString() ? timeOnly.format(d) : dayAndTime.format(d);
+}
+
+/** Od tylu znaków pokazujemy licznik w polu wiadomości. */
+export const COMM_COUNTER_FROM = COMM_MESSAGE_MAX_CHARS - 200;

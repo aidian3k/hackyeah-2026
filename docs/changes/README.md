@@ -9,6 +9,7 @@ co zmienia już zbudowane ekrany lub zachowanie.
 | ID | Tytuł | Status | Pliki |
 |---|---|---|---|
 | `feature-2026-10-03-1` | Dostęp po rolach, logowanie w tle | wdrożone, do weryfikacji ręcznej | [spec](feature-2026-10-03-1/spec.md), [plan](feature-2026-10-03-1/plan.md) |
+| `feature-2026-10-04-1` | Rozmowy M5 jak komunikator | wdrożone | [spec](feature-2026-10-04-1/spec.md), [plan](feature-2026-10-04-1/plan.md) |
 | `bugs-2026-10-03-1` | Frontend po pierwszym sprincie (branding ROPS, usunięcie gminy) | otwarte | [spec](bugs-2026-10-03-1/spec.md) |
 
 Statusy: `otwarte` → `zaplanowane` (jest `plan.md`) → `w toku` → `wdrożone` → `zweryfikowane`.
