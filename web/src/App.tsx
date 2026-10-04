@@ -12,6 +12,7 @@ import { KnowledgePage } from "@/pages/KnowledgePage";
 import { LibraryPage } from "@/pages/LibraryPage";
 import { AccessibilityPage } from "@/pages/AccessibilityPage";
 import { LoginPage } from "@/pages/LoginPage";
+import { RegisterPage } from "@/pages/RegisterPage";
 import { MaterialsPage } from "@/pages/MaterialsPage";
 import { MyReportsPage } from "@/pages/MyReportsPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
@@ -83,6 +84,7 @@ export function App() {
       <Route element={<AppShell />}>
         <Route index element={<HomeRoute />} />
         <Route path="login" element={<LoginPage />} />
+        <Route path="rejestracja" element={<RegisterPage />} />
         <Route path="dostepnosc" element={<AccessibilityPage />} />
         <Route path="rozwiazania" element={<LibraryPage />} />
         <Route path="rozwiazania/:id" element={<SolutionPage />} />

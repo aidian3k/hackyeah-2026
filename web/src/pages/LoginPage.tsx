@@ -1,7 +1,7 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Alert } from "@/components/Alert";
-import { roleHome, safeNext, useAuth } from "@/lib/auth";
+import { registerHref, roleHome, safeNext, useAuth } from "@/lib/auth";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 /** Logowanie demo. Dane kont są tylko w README — ekran ich nie pokazuje. */
@@ -91,6 +91,13 @@ export function LoginPage() {
           </button>
         </div>
       </form>
+
+      <p className="m-0 text-body text-ink">
+        Nie masz konta?{" "}
+        <Link className="text-navy" to={registerHref(next)}>
+          Załóż konto
+        </Link>
+      </p>
 
       <p className="m-0">
         <Link className="ds-btn ds-btn--link px-0" to="/">

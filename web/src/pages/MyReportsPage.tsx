@@ -8,6 +8,7 @@ import { ReplyList } from "@/components/ReplyList";
 import { useApi } from "@/hooks/useApi";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { formatDateTime, plural } from "@/lib/format";
+import { MODULE_NAMES } from "@/lib/modules";
 import {
   EXCERPT_CHARS,
   listMyReports,
@@ -69,7 +70,7 @@ export function MyReportsPage() {
       {reports.length === 0 ? (
         <EmptyState title="Nie masz jeszcze zgłoszeń na tym urządzeniu.">
           <p>
-            Opisz problem w module <Link to="/">Matchmaking społeczny</Link>.
+            Opisz problem w zakładce <Link to="/">{MODULE_NAMES.matchmaking}</Link>.
             Zgłoszenie pojawi się tutaj, a z nim odpowiedzi zespołu Hubu.
           </p>
         </EmptyState>

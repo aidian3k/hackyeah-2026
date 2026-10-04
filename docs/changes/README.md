@@ -17,6 +17,7 @@ co zmienia już zbudowane ekrany lub zachowanie.
 | `feature-2026-10-04-5` | Kreator: wydruk wniosku 1:1 z wzorem formularza aplikacyjnego IWS | wdrożone | [spec](feature-2026-10-04-5/spec.md), [plan](feature-2026-10-04-5/plan.md) |
 | `feature-2026-10-04-6` | Tester: krótszy formularz zgłoszenia (opcjonalny adres) i czytelna walidacja | wdrożone, do weryfikacji ręcznej | [spec](feature-2026-10-04-6/spec.md), [plan](feature-2026-10-04-6/plan.md) |
 | `feature-2026-10-04-7` | Tester: ankieta po teście krok po kroku (kontekst, kafelki ocen, podsumowanie) | wdrożone, do weryfikacji ręcznej | [spec](feature-2026-10-04-7/spec.md), [plan](feature-2026-10-04-7/plan.md) |
+| `feature-2026-10-04-8` | Rejestracja konta reportera (e-mail, login, hasło) | wdrożone, do weryfikacji ręcznej | [spec](feature-2026-10-04-8/spec.md), [plan](feature-2026-10-04-8/plan.md) |
 
 Statusy: `otwarte` → `zaplanowane` (jest `plan.md`) → `w toku` → `wdrożone` → `zweryfikowane`.
 Zmieniając status, popraw go w tej tabeli **i** w linii `**Status:**` pod tytułem `spec.md`.

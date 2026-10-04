@@ -1,6 +1,6 @@
 /** Nazwy modułów z `docs/base.md` §2 — jedno źródło dla nawigacji i podpisów nad nagłówkami stron. */
 export const MODULE_NAMES = {
-  matchmaking: "Matchmaking społeczny",
+  matchmaking: "Znajdź rozwiązanie", // Moduł 1 (Matchmaking społeczny)
   zasobnik: "Zasobnik wiedzy",
   kreator: "Kreator pomysłów",
   tester: "Tester innowacji",
