@@ -698,3 +698,4 @@ _(dopisuj na końcu: `- [Zxx → Zyy] opis`)_
 - [Z10 → plan] 2026-10-04: stopień 2 skali mapy w wysokim kontraście dostaje tło i tekst z tokenów powierzchni (`stripe-blue` + czarny tekst dawały 3,9:1). Stopnie różnią się też grubością obramowania.
 - [Z01 → plan] 2026-10-04: IOSS 172 (oczekujący na DPS) i 136 (zdrowie psychiczne) zwracają pustą odpowiedź (118 B) — pominięte; `MENTAL_HEALTH` ma wskaźnik 228. `region_value` = null (IOSS nie podaje wartości dla województwa w tabeli).
 - [Z11] 2026-10-04: sprawdzone: API (curl/psql), zrzuty headless Chrome 1280 px stron `/wiedza`, `/wiedza/wyzwania/AGING`, `/rozwiazania`, `/rozwiazania/:id`. NIE sprawdzone: czat (brak kluczy API — embeddingi puste), panel `/panel/trendy` (wymaga logowania demo), scenariusze S1–S4 w całości, klawiatura, 200 %, 360 px, `data-contrast="high"`, `make web-mock` z nową kartą. `seed_reports` wymaga kluczy API (woła czat).
+- [MI12 → M2] przycisk Moduł 7 w aside SolutionPage

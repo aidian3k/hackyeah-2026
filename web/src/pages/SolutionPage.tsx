@@ -14,6 +14,8 @@ import { SimilarSolutions } from "@/components/solution/SimilarSolutions";
 import { useApi } from "@/hooks/useApi";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { youtubeId } from "@/lib/media";
+// Moduł 7: Middleman innowacji
+import { adaptPath } from "@/lib/middleman";
 import { MODULE_NAMES } from "@/lib/modules";
 import { projectName, ropsGroup } from "@/lib/ropsGroups";
 
@@ -241,6 +243,17 @@ function SolutionContent({ data }: { data: SolutionDetail }) {
           className="order-2 flex flex-col gap-6 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-start"
         >
           <KeyInfo data={data} />
+          {/* Moduł 7: Middleman innowacji */}
+          {!isKnowledge && (
+            <div className="flex flex-col gap-2">
+              <Link className="ds-btn ds-btn--primary self-start" to={adaptPath(data.id)}>
+                Zapytaj asystenta, jak to wdrożyć
+              </Link>
+              <p className="m-0 text-small text-ink-muted">
+                Asystent AI podpowie, jak uruchomić tę innowację w Twojej instytucji.
+              </p>
+            </div>
+          )}
           {downloads.length > 0 && (
             <Section id="solution-materials" title="Do pobrania">
               <MediaList items={downloads} />

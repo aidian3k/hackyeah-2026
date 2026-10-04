@@ -31,7 +31,7 @@ Identyfikatory: `MI00`–`MI02` backend, `MI10`–`MI13` frontend i demo.
 - [x] MI02 · Strumień z LLM w `api/routers/middleman.py` (walidacja, błędy, limit czasu, logi) · zależy: MI01 — zrobione: backend-m7, ścieżka LLM zweryfikowana (OpenAI)
 - [x] MI10 · Frontend: fundament (klient SSE, stałe, hook `useAdaptChat`, trasy, nazwa modułu) · zależy: MI00 — zrobione: frontend-m7, streamAdapt + useAdaptChat + trasy
 - [~] MI11 · Frontend: ekran rozmowy `/wdrozenie/:id` · zależy: MI10 — agent: frontend-m7-chat, 2026-10-04
-- [~] MI12 · Frontend: wejścia — przycisk na stronie innowacji, strona `/wdrozenie`, nawigacja · zależy: MI10 — agent: frontend-m7-entry, 2026-10-04
+- [x] MI12 · Frontend: wejścia — przycisk na stronie innowacji, strona `/wdrozenie`, nawigacja · zależy: MI10 — zrobione: frontend-m7-entry, przycisk + /wdrozenie + MainNav; „senior” nie znajduje centrum (wyszukiwarka po tytule) — w demo „starszych”
 - [ ] MI13 · Scenariusz demo i przegląd dostępności (`module-7-demo.md`) · zależy: MI02, MI11, MI12
 
 ### Fale równoległości (orientacyjnie)
@@ -451,3 +451,4 @@ Scenariusz B: nawigacja → „Middleman innowacji” → „senior” → rozmo
 
 _(dopisuj na końcu: `- [MIxx → MIyy] opis`)_
 - [MI10 → MI11, MI12] `useAdaptChat`: `send` ignoruje pusty tekst i wywołanie przy `limitReached`; nowe `send` w trakcie strumienia przerywa poprzedni (pytanie bez odpowiedzi zostaje w `messages`); `retry` działa tylko, gdy ostatnia wiadomość to `user`; zmiana `solutionId` czyści rozmowę. Zaślepki `AdaptPage`/`MiddlemanHomePage` mają `ModuleLabel module="middleman"` + `h1 tabIndex={-1}`. `streamAdapt` sprawdzony skryptem tsx: tokeny + `done`, 404 → `ApiError NOT_FOUND`, strumień bez `done` → `STREAM_CLOSED` + syntetyczne `done`.
+- [MI12 → MI13] `GET /api/solutions?q=` szuka tylko po tytule (trigram/ILIKE), więc „senior” NIE zwraca „Mobilne centrum pomocy dla osób starszych” (zwraca 5 innych, np. „Senior CUDER”); w scenariuszu demo wpisz „starszych” albo „mobilne” (1 wynik). Przycisk w aside `SolutionPage` i pozycja w `MainNav` (`role !== "mentor"`, NavLink bez `end` → `aria-current` także na `/wdrozenie/:id`) — 360 px i wysoki kontrast niesprawdzone w przeglądarce.
