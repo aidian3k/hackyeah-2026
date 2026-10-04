@@ -1,0 +1,27 @@
+{
+  "id": "uw2-demo",
+  "title": "Usługa Wrażliwa — II nabór (pilotażowe wdrożenie innowacji)",
+  "short_pl": "Grant do 600 000 zł na pilotażowe wdrożenie przetestowanej innowacji społecznej jako usługi w społeczności lokalnej. Tylko dla instytucji z Małopolski. Nabór zakończony — pokazujemy go jako przykład kolejnego kroku po teście innowacji.",
+  "program": "Usługa Wrażliwa — upowszechnianie innowacji społecznych w środowiskach lokalnych (FEM 2021–2027, Działanie 6.23)",
+  "demo": false,
+  "based_on": [
+    {
+      "title": "Wniosek o grant — II nabór (PDF)",
+      "url": "https://rops.krakow.pl/pliki-do-pobrania/artykul,wniosek-o-grant,1455"
+    },
+    {
+      "title": "Regulamin udzielania grantów w ramach projektu Usługa Wrażliwa (PDF)",
+      "url": "https://rops.krakow.pl/pliki-do-pobrania/artykul,regulamin-udzielania-grantow-w-ramach-projektu-usluga-wrazliwa,1461"
+    }
+  ],
+  "opens_at": "2026-05-27",
+  "closes_at": "2026-06-30",
+  "max_amount": 600000,
+  "applicant_types": [
+    "jednostka sektora finansów publicznych z Małopolski z co najmniej 3-letnim doświadczeniem",
+    "osoba prawna z siedzibą lub oddziałem w Małopolsce i co najmniej 3-letnim doświadczeniem",
+    "jednostka bez osobowości prawnej, posiadająca zdolność prawną, z Małopolski i z co najmniej 3-letnim doświadczeniem"
+  ],
+  "sections": [],
+  "statements": []
+}

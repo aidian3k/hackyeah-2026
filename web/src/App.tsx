@@ -27,6 +27,13 @@ import { ReportsPage } from "@/pages/panel/ReportsPage";
 import { SolutionReviewPage } from "@/pages/panel/SolutionReviewPage";
 import { SolutionsQueuePage } from "@/pages/panel/SolutionsQueuePage";
 import { TrendsPage } from "@/pages/panel/TrendsPage";
+// Moduł 3: Kreator pomysłów
+import { ApplicationPage } from "@/pages/ApplicationPage";
+import { CallsPage } from "@/pages/CallsPage";
+import { CanvasPage } from "@/pages/CanvasPage";
+import { MyIdeasPage } from "@/pages/MyIdeasPage";
+import { PanelIdeaReviewPage } from "@/pages/panel/IdeaReviewPage";
+import { PanelIdeasPage } from "@/pages/panel/IdeasPage";
 // Moduł 5: Platforma komunikacji
 import { CommHomePage } from "@/pages/comm/CommHomePage";
 import { NewOfferPage } from "@/pages/comm/NewOfferPage";
@@ -85,7 +92,14 @@ export function App() {
         <Route element={<RequireRole requiredRole="reporter" />}>
           <Route path="mam-pomysl" element={<IdeaPage />} />
           <Route path="moje-zgloszenia" element={<MyReportsPage />} />
+          {/* Moduł 3: Kreator pomysłów */}
+          <Route path="mam-pomysl/:id" element={<IdeaPage />} />
+          <Route path="mam-pomysl/:id/kanwa" element={<CanvasPage />} />
+          <Route path="moje-pomysly" element={<MyIdeasPage />} />
+          <Route path="wnioski/:id" element={<ApplicationPage />} />
         </Route>
+        {/* Moduł 3: lista naborów jest publiczna */}
+        <Route path="nabory" element={<CallsPage />} />
         {/* Moduł 5: Platforma komunikacji (rozmowy, tablica partnerstw, konsultacje eksperta) */}
         <Route path="rozmowy" element={<CommHomePage />} />
         <Route path="rozmowy/:id" element={<ThreadPage />} />
@@ -114,6 +128,9 @@ export function App() {
         <Route path="testy/nowy" element={<PanelInnovationTestCreatePage />} />
         <Route path="testy/:id" element={<PanelInnovationTestManagePage />} />
         <Route path="trendy" element={<TrendsPage />} />
+        {/* Moduł 3: Kreator pomysłów */}
+        <Route path="pomysly" element={<PanelIdeasPage />} />
+        <Route path="pomysly/:id" element={<PanelIdeaReviewPage />} />
         {/* Moduł 5 */}
         <Route path="rozmowy" element={<CommThreadsPage />} />
         <Route path="rozmowy/:id" element={<CommThreadPage />} />

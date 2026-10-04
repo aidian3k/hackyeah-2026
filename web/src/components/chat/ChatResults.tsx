@@ -102,7 +102,11 @@ export function ChatResults({ state, onFollowUp }: Props) {
       </div>
 
       {noMatch ? (
-        <NoMatchNotice noMatch={noMatch} onFollowUp={done ? onFollowUp : null} />
+        <NoMatchNotice
+          noMatch={noMatch}
+          onFollowUp={done ? onFollowUp : null}
+          reportId={saved?.report_id ?? null}
+        />
       ) : (
         answer !== "" && <AnswerSummary answer={answer} cards={citable} busy={streaming} />
       )}

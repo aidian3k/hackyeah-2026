@@ -14,9 +14,12 @@ import {
   TEST_STATUS_LABELS,
   TESTER_TYPE_LABELS,
 } from "@/lib/labels";
-import "@/styles/innovation-tests.css";
 
-/** Panel Hubu: zarządzanie naborem, decyzje, link, raport i moderacja. */
+/** Komórki tabeli zgłoszeń — wspólne klasy dla th i td. */
+const TD = "border-0 border-b border-solid border-line p-3 text-left align-top";
+const TH = `${TD} text-label text-ink-muted`;
+
+/** Panel Hubu: zarządzanie rekrutacją testerów, decyzje, link, raport i moderacja. */
 export function PanelInnovationTestManagePage() {
   const { id } = useParams();
   const testId = Number(id);
@@ -40,7 +43,7 @@ export function PanelInnovationTestManagePage() {
     [testId, statusFilter],
   );
 
-  useDocumentTitle(testState.data?.title ?? "Panel: Nabór");
+  useDocumentTitle(testState.data?.title ?? "Panel: Rekrutacja testerów");
 
   async function runAction(fn: () => Promise<void>) {
     setActionError(null);
@@ -75,14 +78,14 @@ export function PanelInnovationTestManagePage() {
     : null;
 
   return (
-    <div className="ds-page m4-page--wide">
+    <div className="ds-page">
       <div className="ds-stack">
         <ModuleLabel module="panel" />
         <p>
-          <Link to="/panel/testy">Wróć do naborów</Link>
+          <Link to="/panel/testy">Wróć do rekrutacji testerów</Link>
         </p>
         <h1 tabIndex={-1}>{test.title}</h1>
-        <p className="m4-lead">
+        <p className="m-0 text-body-lg text-ink">
           {TEST_STATUS_LABELS[test.status]} · {TEST_MODE_LABELS[test.mode]} · miejsca{" "}
           {test.seats_accepted}/{test.seats_limit} · do {formatDate(test.ends_at)}
         </p>
@@ -94,7 +97,7 @@ export function PanelInnovationTestManagePage() {
         </Alert>
       )}
 
-      <div className="m4-form__actions">
+      <div className="flex flex-wrap items-center gap-3">
         {test.status === "OPEN" && (
           <button
             type="button"
@@ -105,7 +108,7 @@ export function PanelInnovationTestManagePage() {
               })
             }
           >
-            Zamknij nabór
+            Zamknij rekrutację
           </button>
         )}
         <button
@@ -182,30 +185,30 @@ export function PanelInnovationTestManagePage() {
         {appsState.loading || appsState.error ? (
           <LoadState loading={appsState.loading} error={appsState.error} onRetry={appsState.reload} />
         ) : (
-          <div className="m4-table-wrap">
-            <table className="m4-table">
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse text-small">
               <thead>
                 <tr>
-                  <th>Osoba</th>
-                  <th>Kontakt</th>
-                  <th>Status</th>
-                  <th>Sugestia AI</th>
-                  <th>Akcje</th>
+                  <th className={TH}>Osoba</th>
+                  <th className={TH}>Kontakt</th>
+                  <th className={TH}>Status</th>
+                  <th className={TH}>Sugestia AI</th>
+                  <th className={TH}>Akcje</th>
                 </tr>
               </thead>
               <tbody>
                 {(appsState.data?.items ?? []).map((app) => (
                   <tr key={app.id}>
-                    <td>
+                    <td className={TD}>
                       <strong>{app.display_name}</strong>
                       <br />
                       {TESTER_TYPE_LABELS[app.tester_type]}
                       <br />
                       {app.gmina}, {app.powiat}
                     </td>
-                    <td>{app.email}</td>
-                    <td>{APPLICATION_STATUS_LABELS[app.status]}</td>
-                    <td>
+                    <td className={TD}>{app.email}</td>
+                    <td className={TD}>{APPLICATION_STATUS_LABELS[app.status]}</td>
+                    <td className={TD}>
                       {app.ai_fit_suggestion ? (
                         <>
                           <strong>{app.ai_fit_suggestion.label_pl}</strong>
@@ -216,8 +219,8 @@ export function PanelInnovationTestManagePage() {
                         "—"
                       )}
                     </td>
-                    <td>
-                      <div className="m4-inline-actions">
+                    <td className={TD}>
+                      <div className="flex flex-wrap gap-2">
                         {app.status === "SUBMITTED" && (
                           <>
                             <button
@@ -295,21 +298,21 @@ export function PanelInnovationTestManagePage() {
               Zebrano mniej niż 3 ankiety — wyniki traktuj ostrożnie.
             </Alert>
           )}
-          <div className="m4-stats">
-            <div className="m4-stats__card">
-              <h3>Zgłoszenia</h3>
-              <p>łącznie {report.applications_total}</p>
-              <p>zaakceptowane {report.applications_accepted}</p>
-              <p>ukończone {report.applications_completed}</p>
-              <p>odrzucone {report.applications_rejected}</p>
-              <p>anulowane {report.applications_canceled}</p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="rounded-md bg-surface-muted p-4">
+              <h3 className="mb-2 font-sans text-body font-normal text-navy">Zgłoszenia</h3>
+              <p className="m-0">łącznie {report.applications_total}</p>
+              <p className="m-0">zaakceptowane {report.applications_accepted}</p>
+              <p className="m-0">ukończone {report.applications_completed}</p>
+              <p className="m-0">odrzucone {report.applications_rejected}</p>
+              <p className="m-0">anulowane {report.applications_canceled}</p>
             </div>
-            <div className="m4-stats__card">
-              <h3>Średnie ocen</h3>
-              <p>przydatność {report.usefulness.average ?? "—"}</p>
-              <p>łatwość użycia {report.ease_of_use.average ?? "—"}</p>
-              <p>dostępność {report.accessibility.average ?? "—"}</p>
-              <p>dopasowanie {report.fit_to_needs.average ?? "—"}</p>
+            <div className="rounded-md bg-surface-muted p-4">
+              <h3 className="mb-2 font-sans text-body font-normal text-navy">Średnie ocen</h3>
+              <p className="m-0">przydatność {report.usefulness.average ?? "—"}</p>
+              <p className="m-0">łatwość użycia {report.ease_of_use.average ?? "—"}</p>
+              <p className="m-0">dostępność {report.accessibility.average ?? "—"}</p>
+              <p className="m-0">dopasowanie {report.fit_to_needs.average ?? "—"}</p>
             </div>
           </div>
 
@@ -317,9 +320,9 @@ export function PanelInnovationTestManagePage() {
             <div className="ds-stack">
               <h3>Podsumowanie AI</h3>
               <p>{report.ai_report.summary_pl}</p>
-              <p className="m4-list__meta">{report.ai_report.disclaimer_pl}</p>
+              <p className="m-0 text-small text-ink-muted">{report.ai_report.disclaimer_pl}</p>
               {report.ai_generated_at && (
-                <p className="m4-list__meta">
+                <p className="m-0 text-small text-ink-muted">
                   Wygenerowano {formatDateTime(report.ai_generated_at)}
                   {report.ai_model ? ` · ${report.ai_model}` : ""}
                 </p>
@@ -335,14 +338,14 @@ export function PanelInnovationTestManagePage() {
           <div className="ds-stack">
             {report.anonymous_comments.length === 0 && <p>Brak komentarzy.</p>}
             {report.anonymous_comments.map((item) => (
-              <article key={item.feedback_id} className="m4-comment">
-                <p>
+              <article key={item.feedback_id} className="flex flex-col gap-2 rounded-md bg-surface-muted p-4">
+                <p className="m-0">
                   <strong>#{item.feedback_id}</strong> · widoczny dla autora:{" "}
                   {item.comment_visible_to_author ? "tak" : "nie"}
                 </p>
-                {item.comment && <p>{item.comment}</p>}
-                {item.improvement && <p>Usprawnienie: {item.improvement}</p>}
-                <div className="m4-inline-actions">
+                {item.comment && <p className="m-0">{item.comment}</p>}
+                {item.improvement && <p className="m-0">Usprawnienie: {item.improvement}</p>}
+                <div className="flex flex-wrap gap-2">
                   <button
                     type="button"
                     className="ds-btn"

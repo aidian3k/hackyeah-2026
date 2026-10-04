@@ -1,5 +1,4 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
-import { useSearchParams } from "react-router-dom";
 import type { ApiError } from "@/api/client";
 import type { ChatRequest } from "@/api/types";
 import { EXAMPLE_PROMPTS, MESSAGE_MAX_CHARS, PRIVACY_WARNING } from "@/lib/labels";
@@ -16,45 +15,6 @@ const EMPTY_MESSAGE = "Opisz problem w kilku słowach.";
 const INVALID_MESSAGE = `Opisz problem w kilku słowach, najwyżej ${MESSAGE_MAX_CHARS} znaków.`;
 // Licznik znaków ogłaszamy czytnikom dopiero od 90% limitu.
 const COUNTER_ANNOUNCE_FROM = Math.ceil(MESSAGE_MAX_CHARS * 0.9);
-
-const MOCK_SCENARIOS = ["match", "no-match", "retracted", "error"] as const;
-
-/** Tylko w trybie DEV: przełącznik scenariusza mocka (`?scenario=` → /api/chat?scenario=…). */
-function DevScenarioSwitch() {
-  const id = useId();
-  const [params, setParams] = useSearchParams();
-  const current = params.get("scenario") ?? "";
-  return (
-    <div className="ds-field border-0 border-t border-dashed border-line-strong pt-4">
-      <label className="ds-label text-small font-normal text-ink-muted" htmlFor={id}>
-        Scenariusz mocka (tylko tryb deweloperski)
-      </label>
-      <select
-        id={id}
-        className="ds-select max-w-sm"
-        value={current}
-        onChange={(e) =>
-          setParams(
-            (prev) => {
-              const next = new URLSearchParams(prev);
-              if (e.target.value) next.set("scenario", e.target.value);
-              else next.delete("scenario");
-              return next;
-            },
-            { replace: true },
-          )
-        }
-      >
-        <option value="">Bez scenariusza (API z proxy)</option>
-        {MOCK_SCENARIOS.map((s) => (
-          <option key={s} value={s}>
-            {s}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
-}
 
 /** Formularz „Opisz problem”: jedno pole opisu i przycisk w jednej karcie, pod nią przykłady. */
 export function ChatForm({ streaming, requestError, onSubmit, onAbort }: Props) {
@@ -191,7 +151,6 @@ export function ChatForm({ streaming, requestError, onSubmit, onAbort }: Props) 
         </ul>
       </div>
 
-      {import.meta.env?.DEV && <DevScenarioSwitch />}
     </form>
   );
 }

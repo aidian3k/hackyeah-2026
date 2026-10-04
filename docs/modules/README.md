@@ -35,7 +35,7 @@ Moduły 2–5 są budowane równolegle przez różne osoby. Przegląd planów M2
 | Materiały ROPS (Social Canvas, przewodniki, podcast) | M2 (Z02, `/wiedza/materialy`) | M3 linkuje, nie powiela |
 | `web/src/lib/auth.tsx` (rola `mentor`), przebudowa `MainNav.tsx` pod role | M5 (PK20) | M3 dopisuje swoją pozycję po PK20 |
 | Słowo „nabór” (konkurs grantowy, `/nabory`) | M3 | M4 mówi „rekrutacja testerów” (TI08) |
-| `api/providers/llm.py` | zamrożony (M1 + `complete()` z M4) | M3 ma osobny `llm_assist.py` |
+| `api/providers/llm.py` (Anthropic), `llm_openai.py` (OpenAI, domyślny) | M1 (`stream()`) + `complete()` z M4; dostawca z `LLM_PROVIDER` (ADR-020, `feature-2026-10-04-3`) | M3 ma osobny `llm_assist.py` (obsługuje obu dostawców) |
 | Nazwy `application_status`, `material_type`, `test_mode`, `tester_type`, `ApplicationStatus`, `APPLICATION_STATUS_LABELS`, `FeedbackModerate` | M4 | M3 używa `GrantApplication*` |
 
 **Rozstrzygnięcia**

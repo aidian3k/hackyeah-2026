@@ -85,6 +85,13 @@ web-lint:
 web-up:
 	docker compose up -d --build web
 
+# ---------- Moduł 3 — Kreator pomysłów ----------
+.PHONY: db-m3
+
+# tabele M3 na działającej bazie (idempotentne, bez resetu; ADR-M3-002)
+db-m3:
+	docker compose exec -T db psql -U splot -d splot -v ON_ERROR_STOP=1 < db/m3-kreator.sql
+
 # ---------- Moduł 5: Platforma komunikacji ----------
 .PHONY: db-m5 seed-comm
 

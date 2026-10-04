@@ -10,6 +10,8 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationInfo, field_validator
 
+from api.config import settings
+
 ReporterTypeLiteral = Literal["RESIDENT", "NGO", "JST", "OTHER"]
 ReportStatusLiteral = Literal["NEW", "TRIAGED", "MATCHED", "IN_PROGRESS", "CLOSED"]
 SolutionKindLiteral = Literal["SOLUTION", "KNOWLEDGE"]
@@ -395,7 +397,7 @@ class InnovationTestMaterialRead(BaseModel):
 
 
 class InnovationTestCreate(BaseModel):
-    """Kompletny nabór — utworzenie od razu ustawia status OPEN."""
+    """Kompletna rekrutacja testerów — utworzenie od razu ustawia status OPEN."""
 
     model_config = ConfigDict(extra="forbid")
 
@@ -458,7 +460,7 @@ class InnovationTestApplicationCreate(BaseModel):
     powiat: str = Field(min_length=2, max_length=100)
     gmina: str = Field(min_length=2, max_length=100)
     is_target_group_member: bool
-    motivation: str = Field(min_length=10, max_length=4000)
+    motivation: str = Field(min_length=10, max_length=settings.M4_MOTIVATION_MAX_CHARS)
     consent: Literal[True]
 
     @field_validator("display_name", "wojewodztwo", "powiat", "gmina", "motivation")
@@ -551,8 +553,8 @@ class InnovationTestFeedbackCreate(BaseModel):
     ease_of_use: int = Field(ge=1, le=5)
     accessibility: int = Field(ge=1, le=5)
     fit_to_needs: int = Field(ge=1, le=5)
-    comment: str | None = Field(default=None, max_length=4000)
-    improvement: str | None = Field(default=None, max_length=4000)
+    comment: str | None = Field(default=None, max_length=settings.M4_COMMENT_MAX_CHARS)
+    improvement: str | None = Field(default=None, max_length=settings.M4_COMMENT_MAX_CHARS)
 
     @field_validator("comment", "improvement")
     @classmethod

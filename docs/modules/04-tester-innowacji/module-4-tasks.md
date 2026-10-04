@@ -57,7 +57,7 @@ Plan na podstawie `docs/modules/04-tester-innowacji/module-4-tester-innowacji.ht
 - [x] TI05 · Frontend publiczny: lista naborów, zgłoszenie i dostęp tokenowy · zależy: TI03, F04, F05 · agent: Auto · 2026-10-04
 - [x] TI06 · Frontend panelu Hubu: nabory, zgłoszenia, moderacja i raport · zależy: TI03, TI04, F04, F05 · agent: Auto · 2026-10-04
 - [x] TI07 · Dane demo, integracja i ścieżka demonstracyjna · zależy: TI02, TI03, TI04, TI05, TI06 · agent: Auto · 2026-10-04
-- [ ] TI08 · Porządki po triażu modułów: „rekrutacja testerów” zamiast „nabór” w UI, CSS → Tailwind, bez e-maila w AI, limity w ustawieniach · zależy: TI07
+- [x] TI08 · Porządki po triażu modułów: „rekrutacja testerów” zamiast „nabór” w UI, CSS → Tailwind, bez e-maila w AI, limity w ustawieniach · zależy: TI07 · zrobione: claude-TI08 · 2026-10-04
 
 ### Fale równoległości
 
@@ -286,7 +286,7 @@ Prompt przyjmuje dane feedbacku bez danych kontaktowych testera. Sugestia dopaso
 
 **Zależy od:** TI07
 
-**Pliki:** `web/src/pages/InnovationTestsPage.tsx`, `web/src/pages/InnovationTestPage.tsx`, `web/src/pages/InnovationTestAccessPage.tsx`, `web/src/pages/panel/InnovationTestsPage.tsx`, `web/src/pages/panel/InnovationTestCreatePage.tsx`, `web/src/pages/panel/InnovationTestManagePage.tsx`, `web/src/components/innovation-tests/*.tsx`, `web/src/styles/innovation-tests.css` (usunięcie), `web/src/lib/labels.ts` (tylko etykiety M4), `api/innovation_tests.py`, `api/pipeline/innovation_tests.py`, `api/schemas.py` (tylko schematy M4), `api/config.py` i `.env.example` (blok Moduł 4)
+**Pliki:** `api/routers/innovation_tests.py` (tylko komunikaty), `web/src/pages/InnovationTestsPage.tsx`, `web/src/pages/InnovationTestPage.tsx`, `web/src/pages/InnovationTestAccessPage.tsx`, `web/src/pages/panel/InnovationTestsPage.tsx`, `web/src/pages/panel/InnovationTestCreatePage.tsx`, `web/src/pages/panel/InnovationTestManagePage.tsx`, `web/src/components/innovation-tests/*.tsx`, `web/src/styles/innovation-tests.css` (usunięcie), `web/src/lib/labels.ts` (tylko etykiety M4), `api/innovation_tests.py`, `api/pipeline/innovation_tests.py`, `api/schemas.py` (tylko schematy M4), `api/config.py` i `.env.example` (blok Moduł 4)
 
 **Kroki:**
 1. **Słownictwo.** „Nabór” znaczy w platformie konkurs grantowy (Moduł 3, `/nabory`). W tekstach UI M4 zamień „nabór/naboru/naborów…” na „rekrutacja testerów” / „test” (np. „Otwarte rekrutacje testerów”, „Zamknij rekrutację”). Nazwy w API, bazie i typach (`InnovationTest*`) zostają.
@@ -306,3 +306,5 @@ Prompt przyjmuje dane feedbacku bez danych kontaktowych testera. Sugestia dopaso
 - [TI04 → TI06] raport autora jest tylko widokiem Hubu i nie ma publicznego endpointu.
 - [TI07 → wszystkie] brak automatycznych testów; weryfikacja pozostaje ręczna zgodnie z decyzją zespołu.
 - [triaż → TI08] 2026-10-04, podział między modułami (`docs/modules/README.md` → „Podział między modułami”): porządki zebrane w TI08. Schemat M4 zostaje w `db/init.sql` (już na masterze); nowe moduły trzymają tabele w `db/mN-*.sql`. Po zmianie M2 w `solutions` (`knowledge_type`, Z00) potrzebny `make reset-db` + `make ingest` + `make seed-m4` — seed M4 tworzy `solutions` z `kind=SOLUTION`, więc przejdzie przez nowy CHECK. `api/providers/llm.py` po dodaniu `complete()` jest zamrożony.
+- [TI08 → wszystkie] 2026-10-04: porządki zrobione. Słownictwo „rekrutacja testerów” / „test” w UI, komunikatach API i treści zgody (wersja zgody `m4-consent-v2`, prompt dopasowania `m4-fit-v2`); `innovation-tests.css` usunięty, ekrany na Tailwindzie (szerokość stron publicznych `max-w-3xl` zamiast 52rem — brak tokenu); AI dopasowania bez e-maila i imienia; `M4_MAX_ACTIVE_APPLICATIONS` i limity długości ze `settings`. Zostało: `maxLength={4000}` w `ApplicationForm`/`FeedbackForm` (brak wartości z API), `ruff format` w plikach M4 (różnice sprzed TI08). Scenariusz TI07 do sprawdzenia na bazie po `make reset-db && make seed-m4`.
+- [feature-2026-10-04-3 → TI04, TI08] 2026-10-04: `get_llm_provider()` zwraca domyślnie `OpenAILLMProvider` (ADR-020 w specyfikacji M1) — `complete()` ma tę samą sygnaturę (Responses API, `OPENAI_LLM_MODEL=gpt-6-luna`); `innovation_tests.ai_model` zapisuje `settings.llm_model` (faktycznie użyty model). Prompty i wersje (`m4-report-v1`, `m4-fit-v2`) bez zmian. Raport AI sprawdzony na żywo (test 1, `M4_AI_ENABLED=true` w procesie). `api/providers/llm.py` nie jest już jedynym providerem LLM — zamrożenie dotyczy kontraktu, nie dostawcy.

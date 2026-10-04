@@ -1,220 +1,178 @@
-import { useId, useState, type FormEvent } from "react";
+import { forwardRef, useId, useImperativeHandle, useState, type FormEvent } from "react";
 import { api, type ApiError } from "@/api/client";
-import type { SolutionSubmit } from "@/api/types";
+import type { IdeaCreate, IdeaDetail, IdeaStage, IdeaUpdate } from "@/api/types";
 import { Alert } from "@/components/Alert";
 import { GminaSelect } from "@/components/GminaSelect";
+import { IDEA_FIELD_LABELS } from "@/components/assistant/AssistPanel";
 import { toApiError } from "@/hooks/useApi";
 import { useTaxonomy } from "@/hooks/useTaxonomy";
 import { plural } from "@/lib/format";
-import { PRIVACY_WARNING } from "@/lib/labels";
+import { IDEA_STAGES, IDEA_STAGE_DESCRIPTIONS, IDEA_STAGE_LABELS, PRIVACY_WARNING } from "@/lib/labels";
+import { rememberIdea } from "@/lib/storage";
 
-// Limity lustrzane do SolutionSubmit w backendzie (api/schemas.py).
-const LIMITS = {
+// Limity lustrzane do IdeaCreate w backendzie (api/kreator/schemas.py).
+export const IDEA_LIMITS = {
   titleMin: 3,
   titleMax: 200,
   summaryMin: 10,
   summaryMax: 2000,
-  bodyMax: 20_000,
-  organizationMax: 300,
-  targetGroupMax: 300,
-  costRangeMax: 100,
-  sourceUrlMax: 2000,
-  signatureMax: 200,
-  tagsMax: 20,
-  stepsMax: 30,
+  essenceMax: 2000,
+  audienceMax: 1000,
+  authorMax: 100,
+  emailMax: 320,
 } as const;
 
-const STAGES = ["Pomysł", "Przygotowania", "Testujemy w małej skali", "Działa na stałe"] as const;
+// Jak _EMAIL_RE w api/schemas.py.
+const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
-type FieldKey =
-  | "title"
-  | "summary"
-  | "body"
-  | "category"
-  | "target_group"
-  | "gmina"
-  | "organization"
-  | "implementation_steps"
-  | "cost_range"
-  | "source_url"
-  | "tags"
-  | "submitted_by_name";
+type FieldKey = "title" | "summary" | "essence" | "audience" | "stage" | "category" | "gmina" | "author_name" | "contact_email";
 
 // Kolejność pól w formularzu — pierwszy błąd w tej kolejności dostaje fokus.
 const FIELD_ORDER: FieldKey[] = [
   "title",
   "summary",
-  "body",
+  "essence",
+  "audience",
+  "stage",
   "category",
-  "target_group",
   "gmina",
-  "organization",
-  "implementation_steps",
-  "cost_range",
-  "source_url",
-  "tags",
-  "submitted_by_name",
+  "author_name",
+  "contact_email",
 ];
 
 // Komunikaty, gdy backend odrzuci pole (422), a walidacja po stronie przeglądarki go nie złapała.
 const SERVER_FIELD_MESSAGES: Record<FieldKey, string> = {
-  title: `Nazwa musi mieć od ${LIMITS.titleMin} do ${LIMITS.titleMax} znaków.`,
-  summary: `Opis musi mieć od ${LIMITS.summaryMin} do ${LIMITS.summaryMax} znaków.`,
-  body: "Skróć szczegóły — mogą mieć najwyżej 20 000 znaków.",
+  title: `Tytuł musi mieć od ${IDEA_LIMITS.titleMin} do ${IDEA_LIMITS.titleMax} znaków.`,
+  summary: `Opis musi mieć od ${IDEA_LIMITS.summaryMin} do ${IDEA_LIMITS.summaryMax} znaków.`,
+  essence: `Istota pomysłu może mieć najwyżej ${IDEA_LIMITS.essenceMax} znaków.`,
+  audience: `Pole „Dla kogo” może mieć najwyżej ${IDEA_LIMITS.audienceMax} znaków.`,
+  stage: "Wybierz etap z listy.",
   category: "Wybierz wyzwanie z listy.",
-  target_group: `Pole „Dla kogo” może mieć najwyżej ${LIMITS.targetGroupMax} znaków.`,
   gmina: "Wybierz gminę z listy albo zostaw „Nie wybrano”.",
-  organization: `Nazwa organizacji może mieć najwyżej ${LIMITS.organizationMax} znaków.`,
-  implementation_steps: `Wpisz najwyżej ${LIMITS.stepsMax} kroków.`,
-  cost_range: `Koszt może mieć najwyżej ${LIMITS.costRangeMax} znaków.`,
-  source_url: "Sprawdź adres strony lub filmu.",
-  tags: `Wpisz najwyżej ${LIMITS.tagsMax} słów kluczowych.`,
-  submitted_by_name: `Podpis może mieć najwyżej ${LIMITS.signatureMax} znaków.`,
+  author_name: `Podpis może mieć najwyżej ${IDEA_LIMITS.authorMax} znaków.`,
+  contact_email: "Sprawdź adres e-mail, np. jan@example.pl.",
 };
 
-interface Values {
+const ESSENCE_REQUIRED = "Opisz istotę pomysłu — bez tego nie wyślesz go do Hubu.";
+const AUDIENCE_REQUIRED = "Napisz, dla kogo jest pomysł — bez tego nie wyślesz go do Hubu.";
+
+export interface IdeaFormValues {
   title: string;
   summary: string;
-  stage: string;
-  body: string;
+  essence: string;
+  audience: string;
+  stage: IdeaStage;
   category: string;
-  target_group: string;
   gmina: string | null;
-  organization: string;
-  steps: string;
-  cost_range: string;
-  source_url: string;
-  tags: string;
-  submitted_by_name: string;
+  author_name: string;
+  contact_email: string;
 }
 
-const EMPTY: Values = {
+export const EMPTY_IDEA_VALUES: IdeaFormValues = {
   title: "",
   summary: "",
-  stage: "",
-  body: "",
+  essence: "",
+  audience: "",
+  stage: "IDEA",
   category: "",
-  target_group: "",
   gmina: null,
-  organization: "",
-  steps: "",
-  cost_range: "",
-  source_url: "",
-  tags: "",
-  submitted_by_name: "",
+  author_name: "",
+  contact_email: "",
 };
+
+/** Wartości formularza z zapisanego pomysłu (e-mail nigdy nie wraca z API). */
+export function valuesFromIdea(idea: IdeaDetail): IdeaFormValues {
+  return {
+    title: idea.title,
+    summary: idea.summary,
+    essence: idea.essence,
+    audience: idea.audience,
+    stage: idea.stage,
+    category: idea.category ?? "",
+    gmina: idea.gmina,
+    author_name: idea.author_name ?? "",
+    contact_email: "",
+  };
+}
+
+/** Co zrobić po zapisie: zostać na fiszce, przejść na kanwę albo wysłać do Hubu. */
+export type IdeaFormAction = "save" | "canvas" | "submit";
+
+export interface IdeaSaveResult {
+  idea: IdeaDetail;
+  action: IdeaFormAction;
+  /** Pomysł zapisany, ale wysłanie się nie udało (np. sieć) — tylko przy action="submit". */
+  submitError?: ApiError;
+}
+
+/** Pola, które asystent może wstawić (AssistSuggestion.field przy target="idea"). */
+const ASSIST_FIELDS = ["title", "summary", "essence", "audience"] as const;
+type AssistField = (typeof ASSIST_FIELDS)[number];
+
+export interface IdeaFormHandle {
+  /** Wstawia propozycję asystenta do pola (bez zapisu). Zwraca false dla nieznanego pola. */
+  applySuggestion(field: string, value: string): boolean;
+}
 
 type Errors = Partial<Record<FieldKey, string>>;
 
-function splitLines(text: string): string[] {
-  return text
-    .split("\n")
-    .map((s) => s.trim())
-    .filter(Boolean);
-}
-
-function splitTags(text: string): string[] {
-  const seen = new Set<string>();
-  const out: string[] = [];
-  for (const raw of text.split(",")) {
-    const tag = raw.trim();
-    const key = tag.toLocaleLowerCase("pl");
-    if (!tag || seen.has(key)) continue;
-    seen.add(key);
-    out.push(tag);
-  }
-  return out;
-}
-
-function isHttpUrl(text: string): boolean {
-  try {
-    const u = new URL(text);
-    return u.protocol === "http:" || u.protocol === "https:";
-  } catch {
-    return false;
-  }
-}
-
-/** Treść body wysyłana do API: etap realizacji jako pierwsza linia (backend nie ma osobnego pola). */
-function composeBody(v: Values): string {
-  const details = v.body.trim();
-  if (!v.stage) return details;
-  const head = `Etap realizacji: ${v.stage}`;
-  return details ? `${head}\n\n${details}` : head;
-}
-
-const orNull = (s: string) => s.trim() || null;
-
-/** Buduje SolutionSubmit wyłącznie z pól typu (extra="forbid" w backendzie). */
-function toPayload(v: Values): SolutionSubmit {
-  const payload: SolutionSubmit = {
-    title: v.title.trim(),
-    summary: v.summary.trim(),
-  };
-  const body = composeBody(v);
-  if (body) payload.body = body;
-  const organization = orNull(v.organization);
-  if (organization) payload.organization = organization;
-  if (v.gmina) payload.gmina = v.gmina;
-  if (v.category) payload.category = v.category;
-  const tags = splitTags(v.tags);
-  if (tags.length) payload.tags = tags;
-  const targetGroup = orNull(v.target_group);
-  if (targetGroup) payload.target_group = targetGroup;
-  const cost = orNull(v.cost_range);
-  if (cost) payload.cost_range = cost;
-  const steps = splitLines(v.steps);
-  if (steps.length) payload.implementation_steps = steps;
-  const url = orNull(v.source_url);
-  if (url) payload.source_url = url;
-  const name = orNull(v.submitted_by_name);
-  if (name) payload.submitted_by_name = name;
-  return payload;
-}
-
-function tooLong(text: string, max: number): boolean {
-  return text.trim().length > max;
-}
-
-function validate(v: Values): Errors {
+function validate(v: IdeaFormValues, forSubmit: boolean): Errors {
   const e: Errors = {};
   const title = v.title.trim();
-  if (!title) e.title = "Wpisz nazwę pomysłu, np. „Sąsiedzka herbatka”.";
-  else if (title.length < LIMITS.titleMin) e.title = `Nazwa musi mieć co najmniej ${LIMITS.titleMin} znaki.`;
-  else if (title.length > LIMITS.titleMax) e.title = `Nazwa może mieć najwyżej ${LIMITS.titleMax} znaków.`;
+  if (!title) e.title = "Wpisz tytuł pomysłu, np. „Sąsiedzka herbatka”.";
+  else if (title.length < IDEA_LIMITS.titleMin) e.title = `Tytuł musi mieć co najmniej ${IDEA_LIMITS.titleMin} znaki.`;
+  else if (title.length > IDEA_LIMITS.titleMax) e.title = `Tytuł może mieć najwyżej ${IDEA_LIMITS.titleMax} znaków.`;
 
   const summary = v.summary.trim();
   if (!summary) e.summary = "Opisz pomysł w 2–3 zdaniach.";
-  else if (summary.length < LIMITS.summaryMin) e.summary = `Opis musi mieć co najmniej ${LIMITS.summaryMin} znaków.`;
-  else if (summary.length > LIMITS.summaryMax) e.summary = `Opis może mieć najwyżej ${LIMITS.summaryMax} znaków.`;
+  else if (summary.length < IDEA_LIMITS.summaryMin) e.summary = `Opis musi mieć co najmniej ${IDEA_LIMITS.summaryMin} znaków.`;
+  else if (summary.length > IDEA_LIMITS.summaryMax) e.summary = `Opis może mieć najwyżej ${IDEA_LIMITS.summaryMax} znaków.`;
 
-  if (composeBody(v).length > LIMITS.bodyMax) e.body = SERVER_FIELD_MESSAGES.body;
-  if (tooLong(v.target_group, LIMITS.targetGroupMax)) e.target_group = SERVER_FIELD_MESSAGES.target_group;
-  if (tooLong(v.organization, LIMITS.organizationMax)) e.organization = SERVER_FIELD_MESSAGES.organization;
+  const essence = v.essence.trim();
+  if (essence.length > IDEA_LIMITS.essenceMax) e.essence = SERVER_FIELD_MESSAGES.essence;
+  else if (forSubmit && !essence) e.essence = ESSENCE_REQUIRED;
 
-  const steps = splitLines(v.steps);
-  if (steps.length > LIMITS.stepsMax)
-    e.implementation_steps = `Wpisz najwyżej ${LIMITS.stepsMax} kroków. Teraz jest ich ${steps.length}.`;
+  const audience = v.audience.trim();
+  if (audience.length > IDEA_LIMITS.audienceMax) e.audience = SERVER_FIELD_MESSAGES.audience;
+  else if (forSubmit && !audience) e.audience = AUDIENCE_REQUIRED;
 
-  if (tooLong(v.cost_range, LIMITS.costRangeMax)) e.cost_range = SERVER_FIELD_MESSAGES.cost_range;
+  if (v.author_name.trim().length > IDEA_LIMITS.authorMax) e.author_name = SERVER_FIELD_MESSAGES.author_name;
 
-  const url = v.source_url.trim();
-  if (url && !isHttpUrl(url)) e.source_url = "Wpisz pełny adres zaczynający się od https://, np. https://www.youtube.com/watch?v=…";
-  else if (url.length > LIMITS.sourceUrlMax) e.source_url = `Adres może mieć najwyżej ${LIMITS.sourceUrlMax} znaków.`;
-
-  const tags = splitTags(v.tags);
-  if (tags.length > LIMITS.tagsMax)
-    e.tags = `Wpisz najwyżej ${LIMITS.tagsMax} słów kluczowych. Teraz jest ich ${tags.length}.`;
-
-  if (tooLong(v.submitted_by_name, LIMITS.signatureMax)) e.submitted_by_name = SERVER_FIELD_MESSAGES.submitted_by_name;
+  const email = v.contact_email.trim();
+  if (email && (email.length > IDEA_LIMITS.emailMax || !EMAIL_RE.test(email)))
+    e.contact_email = SERVER_FIELD_MESSAGES.contact_email;
   return e;
 }
 
-/** 422 z backendu ma komunikat „pole: opis” (np. „gmina: nieznana gmina …”) — mapujemy po prefiksie. */
-function fieldFromServerMessage(message: string): FieldKey | null {
-  const prefix = message.split(":", 1)[0]?.split(".", 1)[0]?.trim() ?? "";
-  if (prefix === "media") return "source_url";
-  return (FIELD_ORDER as string[]).includes(prefix) ? (prefix as FieldKey) : null;
+/** Pola wspólne dla POST i PATCH. Pusty e-mail nie jest wysyłany (nie kasuje zapisanego). */
+function toUpdate(v: IdeaFormValues): IdeaUpdate {
+  const payload: IdeaUpdate = {
+    title: v.title.trim(),
+    summary: v.summary.trim(),
+    essence: v.essence.trim(),
+    audience: v.audience.trim(),
+    stage: v.stage,
+    category: v.category || null,
+    gmina: v.gmina,
+    author_name: v.author_name.trim() || null,
+  };
+  const email = v.contact_email.trim();
+  if (email) payload.contact_email = email;
+  return payload;
+}
+
+/** 422 VALIDATION_ERROR ma komunikat „pole: opis”; IDEA_INCOMPLETE wymienia brakujące pola słownie. */
+function errorsFromServer(err: ApiError): Errors | null {
+  if (err.status !== 422) return null;
+  if (err.code === "IDEA_INCOMPLETE") {
+    const msg = err.message.toLocaleLowerCase("pl");
+    const e: Errors = {};
+    if (msg.includes("istota")) e.essence = ESSENCE_REQUIRED;
+    if (msg.includes("dla kogo")) e.audience = AUDIENCE_REQUIRED;
+    return Object.keys(e).length ? e : null;
+  }
+  const prefix = err.message.split(":", 1)[0]?.split(".", 1)[0]?.trim() ?? "";
+  return (FIELD_ORDER as string[]).includes(prefix) ? { [prefix]: SERVER_FIELD_MESSAGES[prefix as FieldKey] } : null;
 }
 
 function firstError(errors: Errors): FieldKey | null {
@@ -222,30 +180,60 @@ function firstError(errors: Errors): FieldKey | null {
 }
 
 interface Props {
-  onCreated(id: number): void;
+  initial: IdeaFormValues;
+  /** Zapisany pomysł (edycja przez PATCH) albo null (nowy, POST). */
+  idea: IdeaDetail | null;
+  /** Numer zgłoszenia, z którego powstaje nowy pomysł (tylko przy POST). */
+  sourceReportId?: number | null;
+  onSaved(result: IdeaSaveResult): void;
 }
 
-/** Fiszka pomysłu (base.md III): trafia do kolejki Hubu jako PENDING_REVIEW. */
-export function IdeaForm({ onCreated }: Props) {
+const LEGEND = "mb-4 p-0 font-sans text-h2 text-navy";
+const GROUP = "m-0 flex min-w-0 flex-col gap-6 border-0 p-0";
+
+/** Fiszka pomysłu (Moduł 3): zapis na /api/ideas, przejście na kanwę i wysłanie do Hubu. */
+export const IdeaForm = forwardRef<IdeaFormHandle, Props>(function IdeaForm(
+  { initial, idea, sourceReportId = null, onSaved },
+  ref,
+) {
   const uid = useId();
   const ids = Object.fromEntries(FIELD_ORDER.map((k) => [k, `${uid}-${k}`])) as Record<FieldKey, string>;
   const { items: taxonomy, error: taxonomyError } = useTaxonomy();
   const categories = taxonomy.filter((t) => t.code !== "OTHER");
 
-  const [values, setValues] = useState<Values>(EMPTY);
+  const [values, setValues] = useState<IdeaFormValues>(initial);
   const [errors, setErrors] = useState<Errors>({});
   const [submitError, setSubmitError] = useState<ApiError | null>(null);
-  const [sending, setSending] = useState(false);
+  const [busy, setBusy] = useState<IdeaFormAction | null>(null);
   const [status, setStatus] = useState("");
 
-  function set<K extends keyof Values>(key: K, value: Values[K]) {
+  const isDraft = idea === null || idea.status === "DRAFT";
+
+  function set<K extends keyof IdeaFormValues>(key: K, value: IdeaFormValues[K]) {
     setValues((v) => ({ ...v, [key]: value }));
   }
 
   function focusField(key: FieldKey) {
     // Po renderze komunikatów błędu, żeby czytnik od razu przeczytał opis pola.
-    requestAnimationFrame(() => document.getElementById(ids[key])?.focus());
+    requestAnimationFrame(() => {
+      const el = document.getElementById(ids[key]);
+      // Etap to grupa radio — fokus na zaznaczonej opcji.
+      const target = el?.matches("input, textarea, select") ? el : el?.querySelector<HTMLElement>("input:checked, input");
+      target?.focus();
+    });
   }
+
+  useImperativeHandle(ref, () => ({
+    applySuggestion(field: string, value: string) {
+      if (!(ASSIST_FIELDS as readonly string[]).includes(field)) return false;
+      const key = field as AssistField;
+      set(key, value);
+      setErrors((e) => ({ ...e, [key]: undefined }));
+      setStatus(`Wstawiono propozycję do pola „${IDEA_FIELD_LABELS[key]}”. Zapisz zmiany, żeby ją zachować.`);
+      focusField(key);
+      return true;
+    },
+  }));
 
   function showErrors(next: Errors) {
     setErrors(next);
@@ -255,34 +243,74 @@ export function IdeaForm({ onCreated }: Props) {
     if (first) focusField(first);
   }
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (sending) return;
+  async function save(action: IdeaFormAction) {
+    if (busy) return;
     setSubmitError(null);
-    const found = validate(values);
+    const found = validate(values, action === "submit");
     if (firstError(found)) {
       showErrors(found);
       return;
     }
     setErrors({});
-    setSending(true);
-    setStatus("Wysyłanie pomysłu…");
+    setBusy(action);
+    setStatus(action === "submit" ? "Wysyłanie pomysłu…" : "Zapisywanie pomysłu…");
+
+    let saved: IdeaDetail;
     try {
-      const created = await api.submitSolution(toPayload(values));
+      if (idea) {
+        saved = await api.updateIdea(idea.id, toUpdate(values));
+      } else {
+        const body: IdeaCreate = { ...(toUpdate(values) as IdeaCreate) };
+        if (sourceReportId !== null) body.source_report_id = sourceReportId;
+        saved = await api.createIdea(body);
+      }
+      rememberIdea(saved);
+    } catch (err: unknown) {
+      handleError(toApiError(err));
+      setBusy(null);
+      return;
+    }
+
+    if (action !== "submit") {
+      setBusy(null);
+      setStatus(action === "save" ? "Zapisano." : "");
+      onSaved({ idea: saved, action });
+      return;
+    }
+
+    try {
+      const submitted = await api.submitIdea(saved.id);
       setStatus("");
-      onCreated(created.id);
+      onSaved({ idea: submitted, action });
     } catch (err: unknown) {
       const apiErr = toApiError(err);
-      const field = apiErr.status === 422 ? fieldFromServerMessage(apiErr.message) : null;
-      if (field) {
-        showErrors({ [field]: SERVER_FIELD_MESSAGES[field] });
+      if (idea) {
+        // Edycja: zostajemy na fiszce, błąd przy polu albo pod przyciskami.
+        onSaved({ idea: saved, action: "save" });
+        handleError(apiErr);
       } else {
-        setStatus("");
-        setSubmitError(apiErr);
+        // Nowy pomysł już istnieje — rodzic przenosi na jego fiszkę i pokazuje błąd wysłania.
+        onSaved({ idea: saved, action, submitError: apiErr });
       }
     } finally {
-      setSending(false);
+      setBusy(null);
     }
+  }
+
+  function handleError(apiErr: ApiError) {
+    const fieldErrors = errorsFromServer(apiErr);
+    if (fieldErrors) {
+      showErrors(fieldErrors);
+    } else {
+      setStatus("");
+      setSubmitError(apiErr);
+    }
+  }
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    // Enter w polu = zapis bez zmiany ekranu (wysłanie do Hubu tylko przyciskiem).
+    void save("save");
   }
 
   /** aria-describedby z istniejących elementów pomocy, licznika i błędu. */
@@ -299,18 +327,26 @@ export function IdeaForm({ onCreated }: Props) {
     ) : null;
   }
 
-  const summaryLen = values.summary.trim().length;
-  const summaryAtLimit = summaryLen >= LIMITS.summaryMax * 0.9;
+  function counter(key: "summary" | "essence" | "audience", max: number) {
+    const len = values[key].trim().length;
+    return (
+      <p className="ds-counter" id={`${ids[key]}-counter`} data-state={len >= max * 0.9 ? "limit" : undefined}>
+        {len} z {max} znaków
+      </p>
+    );
+  }
+
   const stageName = `${uid}-stage`;
+  const busyAttr = (a: IdeaFormAction) => (busy === a ? true : undefined);
 
   return (
-    <form className="idea-form" noValidate onSubmit={handleSubmit}>
-      <fieldset className="idea-group">
-        <legend className="idea-group__legend">Na czym polega pomysł</legend>
+    <form className="flex flex-col gap-8" noValidate onSubmit={handleSubmit}>
+      <fieldset className={GROUP}>
+        <legend className={LEGEND}>Na czym polega pomysł</legend>
 
         <div className="ds-field">
           <label className="ds-label" htmlFor={ids.title}>
-            Nazwa pomysłu
+            Tytuł pomysłu
           </label>
           <input
             id={ids.title}
@@ -318,7 +354,7 @@ export function IdeaForm({ onCreated }: Props) {
             type="text"
             value={values.title}
             onChange={(e) => set("title", e.target.value)}
-            maxLength={LIMITS.titleMax}
+            maxLength={IDEA_LIMITS.titleMax}
             autoComplete="off"
             required
             aria-required="true"
@@ -330,10 +366,10 @@ export function IdeaForm({ onCreated }: Props) {
 
         <div className="ds-field">
           <label className="ds-label" htmlFor={ids.summary}>
-            Opisz w 2–3 zdaniach
+            Krótki opis
           </label>
           <p className="ds-hint" id={`${ids.summary}-hint`}>
-            Napisz, komu pomaga pomysł i co się dzięki niemu zmienia.
+            Opisz pomysł w 2–3 zdaniach: jaki problem rozwiązuje i co się dzięki niemu zmienia.
           </p>
           <textarea
             id={ids.summary}
@@ -341,21 +377,61 @@ export function IdeaForm({ onCreated }: Props) {
             rows={4}
             value={values.summary}
             onChange={(e) => set("summary", e.target.value)}
-            maxLength={LIMITS.summaryMax}
+            maxLength={IDEA_LIMITS.summaryMax}
             required
             aria-required="true"
             aria-invalid={errors.summary ? true : undefined}
             aria-describedby={describedBy("summary", [`${ids.summary}-hint`, `${ids.summary}-counter`])}
           />
-          <p className="ds-counter" id={`${ids.summary}-counter`} data-state={summaryAtLimit ? "limit" : undefined}>
-            {summaryLen} z {LIMITS.summaryMax} znaków
-          </p>
+          {counter("summary", IDEA_LIMITS.summaryMax)}
           {fieldError("summary")}
         </div>
 
-        <fieldset className="ds-choices">
-          <legend className="ds-choices__legend">Etap realizacji (opcjonalnie)</legend>
-          {STAGES.map((stage) => (
+        <div className="ds-field">
+          <label className="ds-label" htmlFor={ids.essence}>
+            Na czym polega istota pomysłu?
+          </label>
+          <p className="ds-hint" id={`${ids.essence}-hint`}>
+            Co jest w nim najważniejsze i czym różni się od tego, co już jest. Wymagane do wysłania.
+          </p>
+          <textarea
+            id={ids.essence}
+            className="ds-textarea"
+            rows={4}
+            value={values.essence}
+            onChange={(e) => set("essence", e.target.value)}
+            maxLength={IDEA_LIMITS.essenceMax}
+            aria-invalid={errors.essence ? true : undefined}
+            aria-describedby={describedBy("essence", [`${ids.essence}-hint`, `${ids.essence}-counter`])}
+          />
+          {counter("essence", IDEA_LIMITS.essenceMax)}
+          {fieldError("essence")}
+        </div>
+
+        <div className="ds-field">
+          <label className="ds-label" htmlFor={ids.audience}>
+            Dla kogo jest pomysł?
+          </label>
+          <p className="ds-hint" id={`${ids.audience}-hint`}>
+            Np. seniorzy mieszkający samotnie, młodzież ze szkół średnich. Wymagane do wysłania.
+          </p>
+          <textarea
+            id={ids.audience}
+            className="ds-textarea"
+            rows={3}
+            value={values.audience}
+            onChange={(e) => set("audience", e.target.value)}
+            maxLength={IDEA_LIMITS.audienceMax}
+            aria-invalid={errors.audience ? true : undefined}
+            aria-describedby={describedBy("audience", [`${ids.audience}-hint`, `${ids.audience}-counter`])}
+          />
+          {counter("audience", IDEA_LIMITS.audienceMax)}
+          {fieldError("audience")}
+        </div>
+
+        <fieldset className="ds-choices" id={ids.stage} aria-describedby={describedBy("stage")}>
+          <legend className="ds-choices__legend">Etap</legend>
+          {IDEA_STAGES.map((stage) => (
             <label key={stage} className="ds-choice">
               <input
                 className="ds-choice__input"
@@ -364,38 +440,22 @@ export function IdeaForm({ onCreated }: Props) {
                 value={stage}
                 checked={values.stage === stage}
                 onChange={() => set("stage", stage)}
+                aria-describedby={`${stageName}-${stage}-desc`}
               />
-              {stage}
+              <span className="flex flex-col">
+                {IDEA_STAGE_LABELS[stage]}
+                <span id={`${stageName}-${stage}-desc`} className="text-small text-ink-muted">
+                  {IDEA_STAGE_DESCRIPTIONS[stage]}
+                </span>
+              </span>
             </label>
           ))}
-          {values.stage && (
-            <div>
-              <button type="button" className="ds-btn ds-btn--link" onClick={() => set("stage", "")}>
-                Wyczyść wybór etapu
-              </button>
-            </div>
-          )}
+          {fieldError("stage")}
         </fieldset>
-
-        <div className="ds-field">
-          <label className="ds-label" htmlFor={ids.body}>
-            Więcej szczegółów (opcjonalnie)
-          </label>
-          <textarea
-            id={ids.body}
-            className="ds-textarea"
-            rows={6}
-            value={values.body}
-            onChange={(e) => set("body", e.target.value)}
-            aria-invalid={errors.body ? true : undefined}
-            aria-describedby={describedBy("body")}
-          />
-          {fieldError("body")}
-        </div>
       </fieldset>
 
-      <fieldset className="idea-group">
-        <legend className="idea-group__legend">Dla kogo i gdzie</legend>
+      <fieldset className={GROUP}>
+        <legend className={LEGEND}>Gdzie i jakie wyzwanie</legend>
 
         <div className="ds-field">
           <label className="ds-label" htmlFor={ids.category}>
@@ -424,26 +484,6 @@ export function IdeaForm({ onCreated }: Props) {
           {fieldError("category")}
         </div>
 
-        <div className="ds-field">
-          <label className="ds-label" htmlFor={ids.target_group}>
-            Dla kogo (opcjonalnie)
-          </label>
-          <p className="ds-hint" id={`${ids.target_group}-hint`}>
-            Np. seniorzy mieszkający samotnie, młodzież ze szkół średnich.
-          </p>
-          <input
-            id={ids.target_group}
-            className="ds-input"
-            type="text"
-            value={values.target_group}
-            onChange={(e) => set("target_group", e.target.value)}
-            maxLength={LIMITS.targetGroupMax}
-            aria-invalid={errors.target_group ? true : undefined}
-            aria-describedby={describedBy("target_group", [`${ids.target_group}-hint`])}
-          />
-          {fieldError("target_group")}
-        </div>
-
         <GminaSelect
           id={ids.gmina}
           label="Gmina (opcjonalnie)"
@@ -452,145 +492,102 @@ export function IdeaForm({ onCreated }: Props) {
           onChange={(g) => set("gmina", g)}
           error={errors.gmina}
         />
+      </fieldset>
+
+      <fieldset className={GROUP}>
+        <legend className={LEGEND}>Kontakt (opcjonalnie)</legend>
 
         <div className="ds-field">
-          <label className="ds-label" htmlFor={ids.organization}>
-            Organizacja (opcjonalnie)
+          <label className="ds-label" htmlFor={ids.author_name}>
+            Podpis (opcjonalnie)
           </label>
+          <p className="ds-hint" id={`${ids.author_name}-hint`}>
+            Imię lub nazwa organizacji.
+          </p>
           <input
-            id={ids.organization}
+            id={ids.author_name}
             className="ds-input"
             type="text"
-            value={values.organization}
-            onChange={(e) => set("organization", e.target.value)}
-            maxLength={LIMITS.organizationMax}
-            autoComplete="organization"
-            aria-invalid={errors.organization ? true : undefined}
-            aria-describedby={describedBy("organization")}
+            value={values.author_name}
+            onChange={(e) => set("author_name", e.target.value)}
+            maxLength={IDEA_LIMITS.authorMax}
+            autoComplete="off"
+            aria-invalid={errors.author_name ? true : undefined}
+            aria-describedby={describedBy("author_name", [`${ids.author_name}-hint`])}
           />
-          {fieldError("organization")}
+          {fieldError("author_name")}
+        </div>
+
+        <div className="ds-field">
+          <label className="ds-label" htmlFor={ids.contact_email}>
+            E-mail (opcjonalnie)
+          </label>
+          <p className="ds-hint" id={`${ids.contact_email}-hint`}>
+            {idea?.has_contact
+              ? "Twój e-mail jest już zapisany. Wpisz nowy tylko wtedy, gdy chcesz go zmienić."
+              : "Tylko do kontaktu z zespołem Hubu. Nie pokazujemy go nikomu."}
+          </p>
+          <input
+            id={ids.contact_email}
+            className="ds-input"
+            type="email"
+            inputMode="email"
+            value={values.contact_email}
+            onChange={(e) => set("contact_email", e.target.value)}
+            maxLength={IDEA_LIMITS.emailMax}
+            autoComplete="email"
+            aria-invalid={errors.contact_email ? true : undefined}
+            aria-describedby={describedBy("contact_email", [`${ids.contact_email}-hint`])}
+          />
+          {fieldError("contact_email")}
         </div>
       </fieldset>
 
-      <fieldset className="idea-group">
-        <legend className="idea-group__legend">Jak to zrobić (opcjonalnie)</legend>
-
-        <div className="ds-field">
-          <label className="ds-label" htmlFor={ids.implementation_steps}>
-            Kolejne kroki, każdy w nowej linii
-          </label>
-          <p className="ds-hint" id={`${ids.implementation_steps}-hint`}>
-            Najwyżej {LIMITS.stepsMax} kroków. Puste linie pomijamy.
-          </p>
-          <textarea
-            id={ids.implementation_steps}
-            className="ds-textarea"
-            rows={5}
-            value={values.steps}
-            onChange={(e) => set("steps", e.target.value)}
-            aria-invalid={errors.implementation_steps ? true : undefined}
-            aria-describedby={describedBy("implementation_steps", [`${ids.implementation_steps}-hint`])}
-          />
-          {fieldError("implementation_steps")}
-        </div>
-
-        <div className="ds-field">
-          <label className="ds-label" htmlFor={ids.cost_range}>
-            Szacowany koszt
-          </label>
-          <p className="ds-hint" id={`${ids.cost_range}-hint`}>
-            Np. do 10 tys. zł.
-          </p>
-          <input
-            id={ids.cost_range}
-            className="ds-input"
-            type="text"
-            value={values.cost_range}
-            onChange={(e) => set("cost_range", e.target.value)}
-            maxLength={LIMITS.costRangeMax}
-            aria-invalid={errors.cost_range ? true : undefined}
-            aria-describedby={describedBy("cost_range", [`${ids.cost_range}-hint`])}
-          />
-          {fieldError("cost_range")}
-        </div>
-
-        <div className="ds-field">
-          <label className="ds-label" htmlFor={ids.source_url}>
-            Link do strony lub filmu
-          </label>
-          <p className="ds-hint" id={`${ids.source_url}-hint`}>
-            Pełny adres, np. https://www.youtube.com/watch?v=…
-          </p>
-          <input
-            id={ids.source_url}
-            className="ds-input"
-            type="url"
-            inputMode="url"
-            value={values.source_url}
-            onChange={(e) => set("source_url", e.target.value)}
-            maxLength={LIMITS.sourceUrlMax}
-            autoComplete="url"
-            aria-invalid={errors.source_url ? true : undefined}
-            aria-describedby={describedBy("source_url", [`${ids.source_url}-hint`])}
-          />
-          {fieldError("source_url")}
-        </div>
-
-        <div className="ds-field">
-          <label className="ds-label" htmlFor={ids.tags}>
-            Słowa kluczowe
-          </label>
-          <p className="ds-hint" id={`${ids.tags}-hint`}>
-            Rozdziel przecinkiem, np. seniorzy, wolontariat, sąsiedzi.
-          </p>
-          <input
-            id={ids.tags}
-            className="ds-input"
-            type="text"
-            value={values.tags}
-            onChange={(e) => set("tags", e.target.value)}
-            aria-invalid={errors.tags ? true : undefined}
-            aria-describedby={describedBy("tags", [`${ids.tags}-hint`])}
-          />
-          {fieldError("tags")}
-        </div>
-      </fieldset>
-
-      <div className="ds-field">
-        <label className="ds-label" htmlFor={ids.submitted_by_name}>
-          Podpis (opcjonalnie)
-        </label>
-        <p className="ds-hint" id={`${ids.submitted_by_name}-hint`}>
-          Imię lub nazwa organizacji.
-        </p>
-        <input
-          id={ids.submitted_by_name}
-          className="ds-input"
-          type="text"
-          value={values.submitted_by_name}
-          onChange={(e) => set("submitted_by_name", e.target.value)}
-          maxLength={LIMITS.signatureMax}
-          autoComplete="off"
-          aria-invalid={errors.submitted_by_name ? true : undefined}
-          aria-describedby={describedBy("submitted_by_name", [`${ids.submitted_by_name}-hint`])}
-        />
-        {fieldError("submitted_by_name")}
-      </div>
-
-      <div className="idea-form__submit">
+      <div className="flex flex-col gap-4">
         <Alert tone="warning">{PRIVACY_WARNING}</Alert>
-        <div role="alert">
+        <div role="alert" className="empty:hidden">
           {submitError &&
-            (submitError.status === 503 ? (
+            (submitError.status === 503 || submitError.status === 0 ? (
               <Alert tone="danger">Nie udało się teraz zapisać pomysłu. Spróbuj ponownie za chwilę.</Alert>
             ) : (
               <Alert tone="danger">{submitError.message}</Alert>
             ))}
         </div>
-        <div>
-          <button type="submit" className="ds-btn ds-btn--cta" aria-disabled={sending ? true : undefined}>
-            {sending ? "Wysyłanie…" : "Wyślij pomysł do Hubu"}
+        <div className="flex flex-wrap gap-3">
+          {isDraft ? (
+            <button type="submit" className="ds-btn" aria-disabled={busyAttr("save")} aria-busy={busyAttr("save")}>
+              {busy === "save" ? "Zapisywanie…" : "Zapisz szkic"}
+            </button>
+          ) : (
+            <button
+              type="submit"
+              className="ds-btn ds-btn--primary"
+              aria-disabled={busyAttr("save")}
+              aria-busy={busyAttr("save")}
+            >
+              {busy === "save" ? "Zapisywanie…" : "Zapisz zmiany"}
+            </button>
+          )}
+          <button
+            type="button"
+            className="ds-btn"
+            onClick={() => void save("canvas")}
+            aria-disabled={busyAttr("canvas")}
+            aria-busy={busyAttr("canvas")}
+          >
+            {busy === "canvas" ? "Zapisywanie…" : "Zapisz i rozwiń na kanwie"}
           </button>
+          {isDraft && (
+            <button
+              type="button"
+              className="ds-btn ds-btn--cta aria-disabled:cursor-progress"
+              onClick={() => void save("submit")}
+              aria-disabled={busyAttr("submit")}
+              aria-busy={busyAttr("submit")}
+            >
+              {busy === "submit" ? "Wysyłanie…" : "Wyślij do Hubu"}
+            </button>
+          )}
         </div>
         <p className="ds-sr-only" aria-live="polite">
           {status}
@@ -598,4 +595,4 @@ export function IdeaForm({ onCreated }: Props) {
       </div>
     </form>
   );
-}
+});

@@ -337,3 +337,139 @@ export interface InnovationTestReport {
   ai_generated_at: string | null;
 }
 export interface ConsentMeta { version: string; text_pl: string }
+
+// --- Moduł 3: Kreator pomysłów (lustro api/kreator/schemas.py; daty jako ciągi ISO) ---
+export type IdeaStatus = "DRAFT" | "SUBMITTED" | "IN_REVIEW" | "INVITED" | "REJECTED";
+export type IdeaStage = "IDEA" | "PROTOTYPE" | "TESTED" | "READY";
+/** Statusy, które może ustawić Hub (POST /api/ideas/{id}/status). */
+export type IdeaHubStatus = Exclude<IdeaStatus, "DRAFT">;
+export type CanvasBlockType = "single" | "multi" | "list" | "text" | "partners";
+export type AssistTarget = "idea" | "canvas_block";
+export type CallSectionKind = "text" | "info" | "budget" | "total";   // budget — tabela kosztów etapów, total — wnioskowana kwota
+export type BudgetPhase = "prep" | "test_1" | "test_2";              // okres przygotowawczy, faza I i II testu
+export type CallState = "open" | "closed" | "upcoming";
+
+export interface IdeaCreate {
+  title: string;                     // 3..200
+  summary: string;                   // 10..2000
+  essence?: string;                  // ..2000
+  audience?: string;                 // ..1000
+  stage?: IdeaStage;                 // domyślnie IDEA
+  category?: string | null;
+  gmina?: string | null;
+  author_name?: string | null;       // ..100
+  contact_email?: string | null;     // ..320, nigdy nie wraca z API
+  source_report_id?: number | null;
+}
+export type IdeaUpdate = Partial<Omit<IdeaCreate, "source_report_id">>;
+export interface IdeaListItem {
+  id: number; title: string; summary: string;
+  stage: IdeaStage; status: IdeaStatus;
+  category: string | null; category_label_pl: string | null;
+  gmina: string | null; powiat: string | null; author_name: string | null;
+  has_contact: boolean; source_report_id: number | null;
+  canvas_percent: number; reply_count: number;
+  created_at: string; updated_at: string; submitted_at: string | null;
+}
+export interface IdeaApplicationRef { id: number; call_id: string; updated_at: string }
+export interface IdeaDetail extends IdeaListItem {
+  essence: string; audience: string;
+  applications: IdeaApplicationRef[];
+}
+export interface IdeaStatusChange { status: IdeaHubStatus }
+export interface IdeaReply {
+  id: number; idea_id: number; author_label: string | null;
+  body: string; created_at: string; author_verified: false;
+}
+
+// kanwa: definicja (data/social-canvas.json)
+export interface CanvasOption { code: string; label: string; description: string; level: number | null }
+export interface CanvasRole { code: string; label: string; description: string }
+export interface CanvasStatus { code: string; label: string }
+export interface CanvasBlock {
+  id: string; sheet: string; area: string; type: CanvasBlockType;
+  title: string; prompt: string; help: string[]; max: number | null;
+  options: CanvasOption[]; roles: CanvasRole[]; statuses: CanvasStatus[];
+}
+export interface CanvasArea { id: string; title: string; blocks: string[] }
+export interface CanvasSheet { id: string; title: string; areas: CanvasArea[] }
+export interface CanvasDefinition {
+  version: string; source_pl: string; source_url: string;
+  sheets: CanvasSheet[]; blocks: CanvasBlock[];
+}
+
+// kanwa: wartości bloków (idea_canvases.data[block_id])
+export interface MultiValue { selected: string[]; other: string[] }
+export interface Partner { name: string; how: string; roles: string[]; status: string }
+/** single/text → string, list → string[], multi → MultiValue, partners → Partner[]. */
+export type BlockValue = string | string[] | MultiValue | Partner[];
+
+// kanwa: postęp, stan, zapis
+export interface SheetProgress { filled: number; total: number }
+export interface CanvasProgress { filled: number; total: number; percent: number; by_sheet: Record<string, SheetProgress> }
+export interface CanvasState {
+  idea_id: number; blocks: Record<string, BlockValue>;
+  progress: CanvasProgress; updated_at: string | null;
+}
+/** Wartość `null` usuwa blok. */
+export interface CanvasPatch { blocks: Record<string, BlockValue | null> }
+
+// asystent i podobne innowacje
+export interface AssistRequest { target: AssistTarget; block_id?: string | null }
+export interface AssistSuggestion { field: string; value: string; rationale: string }
+export interface AssistResponse {
+  available: boolean; questions: string[]; suggestions: AssistSuggestion[];
+  message_pl: string | null;
+}
+export interface SimilarResponse {
+  available: boolean; matched: boolean; solutions: SolutionCard[];
+  message_pl: string | null;
+}
+
+// nabory (data/calls/<id>.json)
+export interface CallSection {
+  id: string; title: string; kind: CallSectionKind; prompt: string;
+  hints: string[]; required: boolean; max_chars: number | null;
+  prefill: string[];                 // "idea.<pole>" / "canvas.<block_id>"
+  // układ wzoru formularza (feature-2026-10-04-5)
+  number: string | null;             // numer punktu we wzorze; null = podpunkt
+  form_prompt: string | null;        // instrukcja na wydruku, gdy inna niż prompt ("" = brak)
+  form_inline: boolean;              // instrukcja w linii nazwy punktu
+  budget_phases: BudgetPhase[];      // tylko kind "budget"
+}
+export interface FormField { marker: string; label: string; sub: string[] }
+export interface FormApplicantVariant { title: string; fields: FormField[] }
+export interface FormStatementSet { title: string; intro: string; items: string[] }
+export interface FormClauseBlock { text: string; kind: "p" | "heading" | "item"; marker: string; level: number }
+export interface FormClause { title: string; new_page: boolean; blocks: FormClauseBlock[]; footnotes: string[] }
+export interface CallForm {
+  logos: string | null;              // zestaw logotypów wydruku (web/src/assets/<logos>/)
+  annex_label: string; title: string; intro: string;
+  budget_headers: Record<string, string[]>;   // 3 nagłówki kolumn per id sekcji "budget"
+  applicant_variants: FormApplicantVariant[]; statement_sets: FormStatementSet[]; clauses: FormClause[];
+}
+export interface CallSource { title: string; url: string }
+export interface CallSummary {
+  id: string; title: string; short_pl: string; program: string; demo: boolean;
+  opens_at: string; closes_at: string;   // RRRR-MM-DD
+  state: CallState; is_open: boolean; max_amount: number;
+}
+export interface CallDetail extends CallSummary {
+  based_on: CallSource[]; applicant_types: string[];
+  sections: CallSection[]; statements: string[];
+  form: CallForm | null;             // teksty wzoru formularza do wydruku 1:1
+}
+
+// wnioski grantowe (tabela applications; nazwy z prefiksem Grant — ApplicationStatus należy do M4)
+export interface BudgetRow { action: string; when: string; cost: number; phase: BudgetPhase }   // action 1..300, when ..100, cost 0..10 000 000; phase domyślnie "prep"
+export interface GrantApplicationCreate { call_id: string }
+export interface GrantApplicationPatch { answers?: Record<string, string | null>; budget?: BudgetRow[] }
+export interface GrantApplicationCheck { code: string; section_id: string | null; message_pl: string }
+export interface GrantApplicationDetail {
+  id: number; idea_id: number; call_id: string; call_title: string;
+  answers: Record<string, string>; budget: BudgetRow[];
+  total: number; max_amount: number; checks: GrantApplicationCheck[];
+  created_at: string; updated_at: string;
+}
+export interface DraftRequest { section_id: string }
+export interface DraftResponse { available: boolean; section_id: string; text: string; message_pl: string | null }

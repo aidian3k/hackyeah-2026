@@ -49,8 +49,14 @@ class Settings(BaseSettings):
     SIMILAR_REPORTS_LIMIT: int = 20
     SAVE_WAIT_SECONDS: float = 2.0
 
-    # --- Generacja (LLM) ---
+    # --- Generacja (LLM, ADR-020) ---
     LLM_ENABLED: bool = True
+    # "openai" (domyślnie, ten sam klucz co embeddingi) | "anthropic" (alternatywa).
+    LLM_PROVIDER: Literal["openai", "anthropic"] = "openai"
+    OPENAI_LLM_MODEL: str = "gpt-6-luna"
+    # Tokeny rozumowania wliczają się do limitu wyjścia — "none" dla krótkich zadań.
+    OPENAI_LLM_REASONING_EFFORT: Literal["none", "low", "medium", "high", "xhigh", "max"] = "none"
+    # Model Anthropic — używany tylko przy LLM_PROVIDER=anthropic.
     LLM_MODEL: str = "claude-haiku-4-5-20251001"
     LLM_MAX_TOKENS: int = 400
 
@@ -84,12 +90,29 @@ class Settings(BaseSettings):
     # --- Moduł 4: Tester innowacji ---
     M4_AI_ENABLED: bool = False
     M4_AI_PROMPT_VERSION: str = "m4-report-v1"
-    M4_AI_FIT_PROMPT_VERSION: str = "m4-fit-v1"
+    M4_AI_FIT_PROMPT_VERSION: str = "m4-fit-v2"
     M4_AI_MAX_TOKENS: int = 1200
     M4_SMALL_SAMPLE_THRESHOLD: int = 3
+    M4_MAX_ACTIVE_APPLICATIONS: int = 3
     M4_MOTIVATION_MAX_CHARS: int = 4000
     M4_COMMENT_MAX_CHARS: int = 4000
     M4_REPORT_FEEDBACK_MAX: int = 100
+
+    # --- Moduł 3 — Kreator pomysłów ---
+    M3_ASSIST_ENABLED: bool = True
+    M3_ASSIST_MAX_TOKENS: int = 1500
+    M3_ASSIST_DRAFT_MAX_TOKENS: int = 2500
+    M3_ASSIST_TIMEOUT_SECONDS: float = 30.0
+    M3_ASSIST_MAX_QUESTIONS: int = 3
+    M3_ASSIST_MAX_SUGGESTIONS: int = 5
+    IDEA_SIMILAR_LIMIT: int = 3
+    CANVAS_LIST_MAX_ITEMS: int = 12
+    CANVAS_ITEM_MAX_CHARS: int = 300
+    CANVAS_TEXT_MAX_CHARS: int = 2000
+    CANVAS_PARTNERS_MAX: int = 15
+    APPLICATION_TEXT_MAX_CHARS: int = 6000
+    APPLICATION_BUDGET_MAX_ROWS: int = 30
+    KREATOR_CALLS_IGNORE_DATES: bool = False
 
     # --- Moduł 5: Platforma komunikacji ---
     M5_ASSISTANT_ENABLED: bool = True  # automatyczna odpowiedź na pytanie (QUESTION)
@@ -103,6 +126,16 @@ class Settings(BaseSettings):
     @property
     def cors_origins_list(self) -> list[str]:
         return [o.strip() for o in self.CORS_ORIGINS.split(",") if o.strip()]
+
+    @property
+    def llm_model(self) -> str:
+        """Model aktywnego dostawcy LLM."""
+        return self.OPENAI_LLM_MODEL if self.LLM_PROVIDER == "openai" else self.LLM_MODEL
+
+    @property
+    def llm_api_key(self) -> str:
+        """Klucz aktywnego dostawcy LLM (pusty = LLM niedostępny)."""
+        return self.OPENAI_API_KEY if self.LLM_PROVIDER == "openai" else self.ANTHROPIC_API_KEY
 
     @model_validator(mode="after")
     def _check_invariants(self) -> Settings:

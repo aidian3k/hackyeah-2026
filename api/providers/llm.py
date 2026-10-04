@@ -1,4 +1,5 @@
-"""LLM do streszczenia: Anthropic `claude-haiku-4-5-20251001` (strumieniowo)."""
+"""LLM Anthropic (`LLM_MODEL`, domyślnie `claude-haiku-4-5-20251001`) — alternatywa przy
+`LLM_PROVIDER=anthropic` (ADR-020; domyślny dostawca: `api/providers/llm_openai.py`)."""
 
 from __future__ import annotations
 

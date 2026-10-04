@@ -20,7 +20,7 @@ Obecnie budujemy **Moduł 1 — Matchmaking społeczny**: backend PoC, który pr
 - PostgreSQL 16 z rozszerzeniami `vector` (pgvector), `unaccent`, `pg_trgm` — obraz `pgvector/pgvector:pg16`. Brak innych baz, kolejek i silników wyszukiwania.
 - Embeddingi: OpenAI `text-embedding-3-large` z `dimensions=1024` (jedyna implementacja, ADR-015). Wymiar 1024 jest stały (ADR-004).
 - Reranker: Cohere `rerank-v3.5` albo `noop`.
-- LLM (streszczenie): Anthropic `claude-haiku-4-5-20251001`.
+- LLM (streszczenie M1, raport M4, asystent M3): OpenAI `gpt-6-luna` (Responses API, ten sam `OPENAI_API_KEY` co embeddingi) — `LLM_PROVIDER=openai`, domyślnie; alternatywa `LLM_PROVIDER=anthropic` z `claude-haiku-4-5-20251001` (ADR-020).
 - Schemat bazy bez Alembica w PoC: `db/init.sql` (Moduł 1, M4 i zmiany tabel M1) oraz osobne, idempotentne pliki modułów `db/mN-<nazwa>.sql` z celem `make db-mN` (ładują się alfabetycznie po `init.sql`).
 
 ## Struktura

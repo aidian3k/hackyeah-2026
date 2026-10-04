@@ -10,6 +10,8 @@ import type {
   TesterType,
   TestMode,
 } from "@/api/types";
+// Moduł 3: Kreator pomysłów
+import type { CallState, IdeaStage, IdeaStatus } from "@/api/types";
 
 export const PRIVACY_WARNING = "Nie wpisuj imion, adresów ani danych o zdrowiu konkretnych osób.";
 export const MESSAGE_MAX_CHARS = 2000; // backend i tak przycina zapytanie do MAX_QUERY_CHARS = 2000
@@ -127,3 +129,38 @@ export const EXAMPLE_PROMPTS: string[] = [
   "Seniorzy nie umieją załatwić spraw w urzędzie przez internet",
   "Z naszej wsi nie da się dojechać do lekarza bez samochodu",
 ];
+
+// --- Moduł 3: Kreator pomysłów ---
+export const IDEA_STATUS_LABELS: Record<IdeaStatus, string> = {
+  DRAFT: "Szkic",
+  SUBMITTED: "Wysłany",
+  IN_REVIEW: "W analizie",
+  INVITED: "Zaproszony do dalszych prac",
+  REJECTED: "Odrzucony",
+};
+
+/** Kolejność opcji etapu = kolejność w bloku `solution_readiness` kanwy. */
+export const IDEA_STAGES: IdeaStage[] = ["IDEA", "PROTOTYPE", "TESTED", "READY"];
+
+// Etykiety i opisy jak w bloku „Gotowość do wdrożenia” Social Canvas (data/social-canvas.json).
+export const IDEA_STAGE_LABELS: Record<IdeaStage, string> = {
+  IDEA: "Pomysł",
+  PROTOTYPE: "Prototyp",
+  TESTED: "Przetestowane rozwiązanie",
+  READY: "Gotowe do wdrożenia",
+};
+
+export const IDEA_STAGE_DESCRIPTIONS: Record<IdeaStage, string> = {
+  IDEA: "Mamy koncepcję, ale rozwiązanie nie zostało jeszcze sprawdzone z odbiorcami.",
+  PROTOTYPE: "Mamy pierwszą wersję rozwiązania, jednak wciąż wymaga ona testów i dopracowania.",
+  TESTED: "Rozwiązanie zostało sprawdzone z realnymi użytkownikami i wiemy, co trzeba poprawić.",
+  READY: "Rozwiązanie można uruchomić w rzeczywistym miejscu, z prawdziwymi odbiorcami i znanymi zasobami.",
+};
+
+export const CALL_STATE_LABELS: Record<CallState, string> = {
+  open: "Nabór otwarty",
+  upcoming: "Nabór wkrótce",
+  closed: "Nabór zamknięty",
+};
+
+export const ASSIST_PRIVACY_NOTE = "Asystent korzysta z zewnętrznego modelu AI. Nie wpisuj danych osobowych.";

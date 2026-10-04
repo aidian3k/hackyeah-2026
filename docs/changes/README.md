@@ -12,6 +12,9 @@ co zmienia już zbudowane ekrany lub zachowanie.
 | `feature-2026-10-04-1` | Rozmowy M5 jak komunikator | wdrożone | [spec](feature-2026-10-04-1/spec.md), [plan](feature-2026-10-04-1/plan.md) |
 | `feature-2026-10-04-2` | Ułatwienia dostępu jak na rops.krakow.pl (rozmiar tekstu, kontrast jako małe ikony, deklaracja w stopce) | wdrożone, do weryfikacji ręcznej | [spec](feature-2026-10-04-2/spec.md), [plan](feature-2026-10-04-2/plan.md) |
 | `bugs-2026-10-03-1` | Frontend po pierwszym sprincie (branding ROPS, usunięcie gminy, prostszy formularz) | w toku | [spec](bugs-2026-10-03-1/spec.md), [plan](bugs-2026-10-03-1/plan.md) |
+| `feature-2026-10-04-3` | Funkcje AI na OpenAI (jeden dostawca dla LLM i embeddingów) | wdrożone | [spec](feature-2026-10-04-3/spec.md), [plan](feature-2026-10-04-3/plan.md) |
+| `feature-2026-10-04-4` | Kreator: kanwa krok po kroku z grafiką jak w Social Canvas | wdrożone | [spec](feature-2026-10-04-4/spec.md), [plan](feature-2026-10-04-4/plan.md) |
+| `feature-2026-10-04-5` | Kreator: wydruk wniosku 1:1 z wzorem formularza aplikacyjnego IWS | wdrożone | [spec](feature-2026-10-04-5/spec.md), [plan](feature-2026-10-04-5/plan.md) |
 
 Statusy: `otwarte` → `zaplanowane` (jest `plan.md`) → `w toku` → `wdrożone` → `zweryfikowane`.
 Zmieniając status, popraw go w tej tabeli **i** w linii `**Status:**` pod tytułem `spec.md`.

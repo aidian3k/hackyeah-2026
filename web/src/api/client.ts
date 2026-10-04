@@ -40,6 +40,26 @@ import type {
   Stats,
   TaxonomyItem,
 } from "./types";
+// Moduł 3: Kreator pomysłów
+import type {
+  AssistRequest,
+  AssistResponse,
+  CallDetail,
+  CallSummary,
+  CanvasDefinition,
+  CanvasPatch,
+  CanvasState,
+  DraftResponse,
+  GrantApplicationDetail,
+  GrantApplicationPatch,
+  IdeaCreate,
+  IdeaDetail,
+  IdeaHubStatus,
+  IdeaListItem,
+  IdeaReply,
+  IdeaUpdate,
+  SimilarResponse,
+} from "./types";
 
 export class ApiError extends Error {
   status: number;
@@ -220,4 +240,34 @@ export const api = {
       { body: { comment_visible_to_author: visible } },
     ),
   innovationConsent: () => request<ConsentMeta>("GET", "/api/innovation-tests/meta/consent"),
+
+  // --- Moduł 3: Kreator pomysłów ---
+  createIdea: (body: IdeaCreate) => request<IdeaDetail>("POST", "/api/ideas", { body }),
+  // status, limit, offset (bez status pomija DRAFT)
+  ideas: (q?: Query) => request<Page<IdeaListItem>>("GET", "/api/ideas", { query: q }),
+  idea: (id: number) => request<IdeaDetail>("GET", `/api/ideas/${id}`),
+  updateIdea: (id: number, body: IdeaUpdate) => request<IdeaDetail>("PATCH", `/api/ideas/${id}`, { body }),
+  submitIdea: (id: number) => request<IdeaDetail>("POST", `/api/ideas/${id}/submit`),
+  setIdeaStatus: (id: number, status: IdeaHubStatus) =>
+    request<IdeaDetail>("POST", `/api/ideas/${id}/status`, { body: { status } }),
+  ideaReplies: (id: number) => request<IdeaReply[]>("GET", `/api/ideas/${id}/replies`),
+  addIdeaReply: (id: number, body: ReplyCreate) =>
+    request<IdeaReply>("POST", `/api/ideas/${id}/replies`, { body }),
+  canvasDefinition: () => request<CanvasDefinition>("GET", "/api/canvas/definition"),
+  canvas: (ideaId: number) => request<CanvasState>("GET", `/api/ideas/${ideaId}/canvas`),
+  patchCanvas: (ideaId: number, body: CanvasPatch) =>
+    request<CanvasState>("PATCH", `/api/ideas/${ideaId}/canvas`, { body }),
+  similar: (ideaId: number) => request<SimilarResponse>("GET", `/api/ideas/${ideaId}/similar`),
+  assist: (ideaId: number, body: AssistRequest) =>
+    request<AssistResponse>("POST", `/api/ideas/${ideaId}/assist`, { body }),
+  calls: () => request<CallSummary[]>("GET", "/api/calls"),
+  call: (id: string) => request<CallDetail>("GET", `/api/calls/${encodeURIComponent(id)}`),
+  /** 201 nowy albo 200 istniejący wniosek tego pomysłu w naborze; 409 CALL_CLOSED. */
+  createGrantApplication: (ideaId: number, callId: string) =>
+    request<GrantApplicationDetail>("POST", `/api/ideas/${ideaId}/applications`, { body: { call_id: callId } }),
+  grantApplication: (id: number) => request<GrantApplicationDetail>("GET", `/api/applications/${id}`),
+  patchGrantApplication: (id: number, body: GrantApplicationPatch) =>
+    request<GrantApplicationDetail>("PATCH", `/api/applications/${id}`, { body }),
+  draftSection: (applicationId: number, sectionId: string) =>
+    request<DraftResponse>("POST", `/api/applications/${applicationId}/draft`, { body: { section_id: sectionId } }),
 };

@@ -36,7 +36,7 @@ export function ApplicationForm({ testId, onSubmitted }: Props) {
       () => {
         if (active) {
           setConsentText(
-            "Wyrażam zgodę na kontakt w sprawie udziału w tym naborze testowym oraz na przetwarzanie podanych danych przez Hub.",
+            "Wyrażam zgodę na kontakt w sprawie udziału w tej rekrutacji testerów oraz na przetwarzanie podanych danych przez Hub.",
           );
         }
       },
@@ -75,7 +75,7 @@ export function ApplicationForm({ testId, onSubmitted }: Props) {
   }
 
   return (
-    <form className="m4-form" onSubmit={onSubmit} noValidate>
+    <form className="flex flex-col gap-6" onSubmit={onSubmit} noValidate>
       {error && (
         <Alert tone="danger" title="Nie udało się wysłać zgłoszenia.">
           {error.message}
@@ -193,7 +193,7 @@ export function ApplicationForm({ testId, onSubmitted }: Props) {
         {consentText}
       </label>
 
-      <div className="m4-form__actions">
+      <div className="flex flex-wrap items-center gap-3">
         <button type="submit" className="ds-btn ds-btn--cta" disabled={submitting}>
           {submitting ? "Wysyłanie…" : "Wyślij zgłoszenie"}
         </button>
