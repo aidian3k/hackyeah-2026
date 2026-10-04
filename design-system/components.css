@@ -191,6 +191,11 @@ a { color: var(--navy); text-underline-offset: 3px; }
   white-space: nowrap;
   border: 0;
 }
+/* Rozmiar tekstu z paska ułatwień (jak A / A+ / A++ na rops.krakow.pl). Typografia jest w px,
+   więc skalujemy cały interfejs — razem z odstępami i kontrolkami. */
+:root[data-text-size="large"] { zoom: 1.15; }
+:root[data-text-size="xlarge"] { zoom: 1.3; }
+
 .ds-skip-link {
   position: absolute;
   top: var(--space-2);

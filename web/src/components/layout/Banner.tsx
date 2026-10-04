@@ -1,4 +1,4 @@
-import { ContrastToggle } from "./ContrastToggle";
+import { AccessibilityToolbar } from "./AccessibilityToolbar";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContrast } from "@/hooks/useContrast";
 import { isProtectedPath, loginHref, useAuth } from "@/lib/auth";
@@ -12,9 +12,9 @@ export function Banner() {
 
   return (
     <div className="relative flex flex-wrap items-center justify-between gap-x-6 gap-y-3 overflow-hidden bg-surface px-4 py-4 md:px-6">
-      {/* Paski marki (tylko tu, raz na ekranie): dekoracja między logo a narzędziami, od szerokości xl. */}
+      {/* Paski marki (tylko tu, raz na ekranie): dekoracja między logo a narzędziami, od szerokości xl; przy A+/A++ ukryte, bo zasłaniałyby powiększony podpis. */}
       <svg
-        className="pointer-events-none absolute inset-y-0 left-[40%] hidden h-full w-auto xl:block"
+        className="pointer-events-none absolute inset-y-0 left-[40%] hidden h-full w-auto xl:block [[data-text-size]_&]:hidden"
         viewBox="0 0 712 176"
         aria-hidden="true"
         focusable="false"
@@ -71,7 +71,8 @@ export function Banner() {
             />
           </a>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 md:justify-end">
+          <AccessibilityToolbar />
           {session ? (
             <button
               type="button"
@@ -94,7 +95,6 @@ export function Banner() {
               </Link>
             )
           )}
-          <ContrastToggle />
         </div>
       </div>
     </div>

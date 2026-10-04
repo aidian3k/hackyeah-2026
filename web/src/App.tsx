@@ -10,6 +10,7 @@ import { InnovationTestPage } from "@/pages/InnovationTestPage";
 import { InnovationTestsPage } from "@/pages/InnovationTestsPage";
 import { KnowledgePage } from "@/pages/KnowledgePage";
 import { LibraryPage } from "@/pages/LibraryPage";
+import { AccessibilityPage } from "@/pages/AccessibilityPage";
 import { LoginPage } from "@/pages/LoginPage";
 import { MaterialsPage } from "@/pages/MaterialsPage";
 import { MyReportsPage } from "@/pages/MyReportsPage";
@@ -72,6 +73,7 @@ export function App() {
       <Route element={<AppShell />}>
         <Route index element={<HomeRoute />} />
         <Route path="login" element={<LoginPage />} />
+        <Route path="dostepnosc" element={<AccessibilityPage />} />
         <Route path="rozwiazania" element={<LibraryPage />} />
         <Route path="rozwiazania/:id" element={<SolutionPage />} />
         <Route path="wiedza" element={<KnowledgePage />} />

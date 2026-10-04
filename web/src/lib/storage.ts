@@ -4,6 +4,7 @@
 
 const SESSION_KEY = "splot_session";
 const CONTRAST_KEY = "splot_contrast";
+const TEXT_SIZE_KEY = "splot_text_size";
 const REPORTS_KEY = "splot_reports";
 const MAX_REPORTS = 20;
 export const EXCERPT_CHARS = 80;
@@ -50,6 +51,18 @@ export function setContrast(on: boolean): void {
   try {
     if (on) localStorage.setItem(CONTRAST_KEY, "high");
     else localStorage.removeItem(CONTRAST_KEY);
+  } catch {
+    // pamięć niedostępna — ustawienie działa tylko do odświeżenia
+  }
+}
+
+/** Rozmiar tekstu z paska ułatwień; `normal` nie jest zapisywany. */
+export type TextSize = "normal" | "large" | "xlarge";
+
+export function setTextSize(size: TextSize): void {
+  try {
+    if (size === "normal") localStorage.removeItem(TEXT_SIZE_KEY);
+    else localStorage.setItem(TEXT_SIZE_KEY, size);
   } catch {
     // pamięć niedostępna — ustawienie działa tylko do odświeżenia
   }

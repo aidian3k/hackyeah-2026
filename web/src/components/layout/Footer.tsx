@@ -107,9 +107,14 @@ export function Footer() {
           />
         </div>
 
-        <a className="text-small uppercase text-navy" href={`${ROPS}/polityka-prywatnosci`}>
-          Polityka prywatności i wykorzystywania plików cookies
-        </a>
+        <p className="m-0 flex flex-wrap justify-center gap-x-6 gap-y-2">
+          <a className="text-small uppercase text-navy" href={`${ROPS}/polityka-prywatnosci`}>
+            Polityka prywatności i wykorzystywania plików cookies
+          </a>
+          <Link className="text-small uppercase text-navy" to="/dostepnosc">
+            Deklaracja dostępności
+          </Link>
+        </p>
 
         <p className="m-0 text-small text-ink-muted">
           Prototyp HackYeah 2026 — Dział Innowacji Społecznych, dane testowe.

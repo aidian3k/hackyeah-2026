@@ -12,8 +12,12 @@
         if (localStorage.getItem("splot_contrast") === "high") {
           document.documentElement.setAttribute("data-contrast", "high");
         }
+        var size = localStorage.getItem("splot_text_size");
+        if (size === "large" || size === "xlarge") {
+          document.documentElement.setAttribute("data-text-size", size);
+        }
       } catch (e) {
-        /* brak dostępu do localStorage: zostaje motyw jasny */
+        /* brak dostępu do localStorage: zostaje motyw jasny i podstawowy rozmiar tekstu */
       }
     </script>
     <!-- Wyjątek od reguły tokenów: tło przed załadowaniem tokens.css, żeby tryb wysokiego kontrastu nie mignął bielą (wartości = --surface z tokens.css). -->
