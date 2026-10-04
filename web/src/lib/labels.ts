@@ -34,12 +34,22 @@ export const REPORT_STATUS_LABELS: Record<ReportStatus, string> = {
 export const TESTER_TYPE_LABELS: Record<TesterType, string> = {
   RESIDENT: "Mieszkaniec lub mieszkanka",
   TARGET_MEMBER: "Osoba z grupy docelowej",
-  CAREGIVER: "Opiekun lub opiekunka",
-  NGO: "Organizacja społeczna",
-  JST: "Samorząd",
-  SOCIAL_INSTITUTION: "Instytucja społeczna",
-  OTHER: "Inny typ",
+  CAREGIVER: "Opiekun lub opiekunka osoby potrzebującej wsparcia",
+  NGO: "Organizacja pozarządowa (fundacja, stowarzyszenie)",
+  JST: "Urząd gminy lub inny samorząd",
+  SOCIAL_INSTITUTION: "Instytucja społeczna (np. OPS, CUS, DPS)",
+  OTHER: "Inaczej",
 };
+
+/** Opcje „Zgłaszam się jako” — bez TARGET_MEMBER, bo grupę docelową zaznacza osobne pole (feature-2026-10-04-6). */
+export const TESTER_TYPE_FORM_OPTIONS: TesterType[] = [
+  "RESIDENT",
+  "CAREGIVER",
+  "NGO",
+  "JST",
+  "SOCIAL_INSTITUTION",
+  "OTHER",
+];
 
 export const APPLICATION_STATUS_LABELS: Record<ApplicationStatus, string> = {
   SUBMITTED: "Złożono",
