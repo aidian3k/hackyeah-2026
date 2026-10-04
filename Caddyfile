@@ -1,0 +1,12 @@
+# HTTPS dla API na EC2 (chore-2026-10-04-1). Caddy sam pobiera i odnawia certyfikat Let's Encrypt
+# dla API_DOMAIN (z .env), np. api.twojadomena.pl albo 3-121-10-20.sslip.io.
+# SSE (/api/chat): Caddy przepuszcza text/event-stream bez buforowania.
+{$API_DOMAIN} {
+	encode {
+		gzip
+		match {
+			header Content-Type application/json*
+		}
+	}
+	reverse_proxy api:8000
+}

@@ -1,0 +1,31 @@
+# Nakładka dla EC2 (chore-2026-10-04-1). Wszystko na jednej maszynie, frontend leży w S3:
+#   docker compose -f docker-compose.yml -f docker-compose.aws.yml up -d --build db api caddy
+# db:    bez portu 5432 na hoście (Docker omija firewall systemu; baza tylko w sieci compose)
+# caddy: HTTPS na 443 (Let's Encrypt) → api:8000; domena z API_DOMAIN w .env
+# Bez HTTPS (np. CloudFront przed API): pomiń `caddy` w poleceniu.
+services:
+  db:
+    restart: unless-stopped
+    ports: !reset []
+
+  api:
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    environment:
+      API_DOMAIN: ${API_DOMAIN:-}
+    ports:
+      - "80:80"     # wyzwanie ACME HTTP-01 i przekierowanie na HTTPS
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data     # certyfikaty: nie kasuj, bo Let's Encrypt ma limity wystawień
+      - caddy-config:/config
+    depends_on:
+      - api
+
+volumes:
+  caddy-data:
+  caddy-config:

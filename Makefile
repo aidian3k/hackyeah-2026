@@ -106,3 +106,15 @@ db-m5:
 # dane demo M5 (eksperci, ogłoszenia, rozmowy) — idempotentnie, po make db-m5 i make ingest
 seed-comm:
 	$(PY) -m scripts.seed_comm
+
+# ---------- AWS: frontend na S3 (+ CloudFront) — chore-2026-10-04-1 ----------
+.PHONY: web-deploy
+
+# make web-deploy S3_BUCKET=splot-web [CF_DISTRIBUTION=E123ABC]
+# Adres backendu: VITE_API_BASE_URL w web/.env.production.local (pusty = ten sam origin, np. CloudFront /api/*).
+# assets/ mają hash w nazwie → długi cache; reszta (index.html, logo) → no-cache.
+web-deploy: web-build
+	@test -n "$(S3_BUCKET)" || (echo "Ustaw S3_BUCKET=<nazwa-bucketu>"; exit 1)
+	aws s3 sync web/dist/assets s3://$(S3_BUCKET)/assets --cache-control "public,max-age=31536000,immutable"
+	aws s3 sync web/dist s3://$(S3_BUCKET) --delete --exclude "assets/*" --cache-control "no-cache"
+	$(if $(CF_DISTRIBUTION),aws cloudfront create-invalidation --distribution-id $(CF_DISTRIBUTION) --paths "/*",)
