@@ -115,10 +115,6 @@ export function Footer() {
             Deklaracja dostępności
           </Link>
         </p>
-
-        <p className="m-0 text-small text-ink-muted">
-          Prototyp HackYeah 2026 — Dział Innowacji Społecznych, dane testowe.
-        </p>
       </div>
     </footer>
   );

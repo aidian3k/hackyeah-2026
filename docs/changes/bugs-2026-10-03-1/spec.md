@@ -30,7 +30,7 @@ Lista zmian do wdrożenia po pierwszej iteracji frontendu.
    - znacznik i przycisk **Dojazd** (mapa Google, nowe okno), adres `30-070 Kraków, ul. Piastowska 32`, `tel./fax: (+48 12) 422 06 36`, e-mail `biuro@rops.krakow.pl`, linki Facebook i YouTube ROPS,
    - menu stopki z tymi samymi pozycjami i adresami co na `rops.krakow.pl` (O ROPS, Programy i modele, Realizowane projekty i zadania, Zakończone projekty i zadania, Praca w ROPS, Zamówienia publiczne, Kontakt); administrator widzi dodatkowo link do Panelu,
    - logotypy ROPS (link do `/`) i Małopolski (`web/public/malopolska-logo.png`, `rops-marker.png` i warianty `-i` dla wysokiego kontrastu — pobrane z `rops.krakow.pl/themes/page/images/`),
-   - na dole link **Polityka prywatności i wykorzystywania plików cookies** (do `rops.krakow.pl`) i dopisek o prototypie,
+   - na dole link **Polityka prywatności i wykorzystywania plików cookies** (do `rops.krakow.pl`), bez dopisku o prototypie (usunięty 2026-10-04),
    - stylowanie wyłącznie Tailwindem (bez klasy `ds-footer`), linki otwierane w nowym oknie mają informację dla czytnika ekranu.
 
 6. **Logo w nagłówku prowadzi na stronę główną**
