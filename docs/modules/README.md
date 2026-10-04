@@ -10,7 +10,7 @@ Siedem funkcjonalności z `docs/base.md` §2. Każdy moduł ma specyfikację HTM
 | 4 | IV. Tester innowacji | `04-tester-innowacji/module-4-tester-innowacji.html` | `04-tester-innowacji/module-4-tasks.md` (+ `module-4-calibration.md`) | gotowy (TI00–TI07); TI08 — porządki po triażu |
 | 5 | V. Platforma aktywnej komunikacji | `05-platforma-komunikacji/module-5-platforma-komunikacji.html` | `05-platforma-komunikacji/module-5-tasks.md` | zaimplementowany (PK00–PK05, PK20–PK26); scenariusz demo: `05-platforma-komunikacji/module-5-demo.md`; zalążek: odpowiedzi do autora |
 | 6 | VI. Panel administratora | `06-panel-administratora/module-6-panel-administratora.html` | `06-panel-administratora/module-6-tasks.md` | draft v0.2 (edycja treści z synchronicznym re-embeddingiem, dodawanie KNOWLEDGE, powłoka panelu dla M2–M5); plan odchudzony 2026-10-04 — bez historii zmian, edited_at i blokady (ADR-M6-003–005 wycięte); zadania PA00–PA05 do wzięcia |
-| 7 | VII. Middleman Innowacji | `07-middleman-innowacji/module-7-middleman-innowacji.html` | `07-middleman-innowacji/module-7-tasks.md` | szkielet; brak |
+| 7 | VII. Middleman Innowacji | `07-middleman-innowacji/module-7-middleman-innowacji.html` | `07-middleman-innowacji/module-7-tasks.md` | draft v0.2 (asystent AI rozmowy o wdrożeniu jednej innowacji; bez zapisu rozmów, bez kwot, ADR-M7-001–006); zadania MI00–MI02, MI10–MI13 do wzięcia |
 
 Mocki strumieni SSE zostają w `docs/mocks/` — korzystają z nich `Makefile` (`make web-mock`) i skrypty w `web/scripts/`.
 

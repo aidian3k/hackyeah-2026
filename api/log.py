@@ -25,6 +25,8 @@ REDACTED_KEYS = frozenset(
         "title",
         "description",
         "author_label",
+        # Moduł 7: treść rozmowy z asystentem
+        "content",
     }
 )
 REDACTED = "***"

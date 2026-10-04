@@ -1,6 +1,8 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "@/lib/auth";
 import { MODULE_NAMES } from "@/lib/modules";
+// Moduł 7: Middleman innowacji
+import { MIDDLEMAN_PATH } from "@/lib/middleman";
 // Moduł 3: Kreator pomysłów
 import { useNewReplies } from "@/hooks/useNewReplies";
 import { KREATOR_PATH_RE, NewReplyBadge } from "./KreatorNav";
@@ -29,6 +31,12 @@ export function MainNav() {
       <Link to="/wiedza" className="ds-nav__item" aria-current={inZasobnik ? "page" : undefined}>
         {MODULE_NAMES.zasobnik}
       </Link>
+      {/* Moduł 7 */}
+      {role !== "mentor" && (
+        <NavLink to={MIDDLEMAN_PATH} className="ds-nav__item">
+          {MODULE_NAMES.middleman}
+        </NavLink>
+      )}
       {role === "mentor" ? (
         // Ekspert: tylko swoje konsultacje (bez Kreatora i Testera — triaż 2026-10-04).
         <NavLink to="/ekspert" className="ds-nav__item">
