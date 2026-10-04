@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useRef, useState, type MouseEvent } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ApiError, api } from "@/api/client";
-import type { CallDetail, GrantApplicationCheck, GrantApplicationDetail, GrantApplicationPatch, IdeaDetail } from "@/api/types";
+import type { BudgetPhase, CallDetail, CallSection, GrantApplicationCheck, GrantApplicationDetail, GrantApplicationPatch, IdeaDetail } from "@/api/types";
 import { Alert } from "@/components/Alert";
-import { BudgetRows, completeRows, formatMoney, toDraftRows, type BudgetRowDraft } from "@/components/application/BudgetRows";
+import { ApplicationPrint, sectionNumbers } from "@/components/application/ApplicationPrint";
+import { BudgetRows, completeRows, formatMoney, parseCost, toDraftRows, type BudgetRowDraft } from "@/components/application/BudgetRows";
 import { SectionEditor } from "@/components/application/SectionEditor";
 import { LoadState } from "@/components/LoadState";
 import { KreatorNav } from "@/components/layout/KreatorNav";
@@ -14,8 +15,6 @@ import { formatDate, formatDateTime } from "@/lib/format";
 
 /** Opóźnienie autozapisu po ostatniej zmianie (jak w kanwie). */
 const AUTOSAVE_DELAY_MS = 800;
-
-const PRINT_FOOTER = "Wygenerowano w Kreatorze pomysłów — dokument roboczy, nie stanowi wniosku w naborze ROPS";
 
 type SaveStatus = "idle" | "pending" | "saving" | "saved" | "error";
 
@@ -36,8 +35,11 @@ function ideaTitleOf({ app, idea }: Loaded): string {
   return idea?.title ?? `Pomysł nr ${app.idea_id}`;
 }
 
-function sectionAnchor(sectionId: string | null): string {
-  return sectionId ? `sekcja-${sectionId}` : "sekcja-budzet";
+/** Kotwica sekcji; kontrola budżetu (`section_id: null`) prowadzi do kwoty grantu albo pierwszej tabeli kosztów. */
+function sectionAnchor(sectionId: string | null, sections: CallSection[] = []): string {
+  if (sectionId) return `sekcja-${sectionId}`;
+  const target = sections.find((s) => s.kind === "total") ?? sections.find((s) => s.kind === "budget");
+  return target ? `sekcja-${target.id}` : "sekcja-budzet";
 }
 
 /** Przewija do sekcji i przenosi na nią fokus (nagłówek ma tabIndex=-1). */
@@ -123,7 +125,7 @@ export function ApplicationPage() {
   );
 }
 
-function ApplicationEditor({ app, call, idea }: Loaded) {
+function ApplicationEditor({ app, call }: Loaded) {
   const [answers, setAnswers] = useState<Record<string, string>>(() => ({ ...app.answers }));
   const [rows, setRows] = useState<BudgetRowDraft[]>(() => toDraftRows(app.budget));
   const [checks, setChecks] = useState<GrantApplicationCheck[]>(app.checks);
@@ -141,6 +143,8 @@ function ApplicationEditor({ app, call, idea }: Loaded) {
   const aliveRef = useRef(true);
 
   const textSections = call.sections.filter((s) => s.kind === "text");
+  const hasBudgetSections = call.sections.some((s) => s.kind === "budget");
+  const numbers = sectionNumbers(call.sections);
 
   /** Wysyła zaległe zmiany (jeden PATCH naraz, po kolei). */
   const save = useCallback((): Promise<void> => {
@@ -224,14 +228,17 @@ function ApplicationEditor({ app, call, idea }: Loaded) {
     schedule();
   }
 
+  /** Zmiana wierszy jednej tabeli (etapy `phases`) — pozostałe wiersze budżetu bez zmian. */
+  function changePhaseRows(phases: BudgetPhase[], next: BudgetRowDraft[]) {
+    changeRows([...rowsRef.current.filter((r) => !phases.includes(r.phase)), ...next]);
+  }
+
   async function print() {
     await save();
     window.print();
   }
 
-  const ideaTitle = ideaTitleOf({ app, call, idea });
-  const printRows = completeRows(rows);
-  const printTotal = printRows.reduce((sum, r) => sum + r.cost, 0);
+  const total = rows.reduce((sum, r) => sum + parseCost(r.cost), 0);
 
   const statusText: Record<SaveStatus, string> = {
     idle: `Ostatni zapis: ${formatDateTime(updatedAt)}`,
@@ -293,10 +300,11 @@ function ApplicationEditor({ app, call, idea }: Loaded) {
                 Spis sekcji
               </h2>
               <ol className="m-0 flex flex-col gap-1 pl-6">
-                {call.sections.map((s) => {
-                  const filled = s.kind === "info" || Boolean(answers[s.id]?.trim());
+                {call.sections.map((s, i) => {
+                  const filled = s.kind !== "text" || Boolean(answers[s.id]?.trim());
+                  const number = numbers[i] ?? null;
                   return (
-                    <li key={s.id} className="text-body">
+                    <li key={s.id} className={number === null ? "list-none text-body" : "text-body"} value={number ? Number(number) : undefined}>
                       <a href={`#${sectionAnchor(s.id)}`} className="text-navy" onClick={(e) => goToSection(e, sectionAnchor(s.id))}>
                         {s.title}
                       </a>
@@ -306,11 +314,13 @@ function ApplicationEditor({ app, call, idea }: Loaded) {
                     </li>
                   );
                 })}
-                <li className="text-body">
-                  <a href="#sekcja-budzet" className="text-navy" onClick={(e) => goToSection(e, "sekcja-budzet")}>
-                    Plan działań i koszty
-                  </a>
-                </li>
+                {!hasBudgetSections && (
+                  <li className="text-body">
+                    <a href="#sekcja-budzet" className="text-navy" onClick={(e) => goToSection(e, "sekcja-budzet")}>
+                      Plan działań i koszty
+                    </a>
+                  </li>
+                )}
               </ol>
             </nav>
 
@@ -335,9 +345,9 @@ function ApplicationEditor({ app, call, idea }: Loaded) {
                   {checks.map((c) => (
                     <li key={`${c.code}-${c.section_id ?? "budzet"}`} className="text-body text-ink">
                       <a
-                        href={`#${sectionAnchor(c.section_id)}`}
+                        href={`#${sectionAnchor(c.section_id, call.sections)}`}
                         className="text-navy"
-                        onClick={(e) => goToSection(e, sectionAnchor(c.section_id))}
+                        onClick={(e) => goToSection(e, sectionAnchor(c.section_id, call.sections))}
                       >
                         {c.message_pl}
                       </a>
@@ -349,20 +359,43 @@ function ApplicationEditor({ app, call, idea }: Loaded) {
           </div>
 
           <div className="flex min-w-0 flex-1 flex-col gap-6">
-            {call.sections.map((s, i) => (
-              <SectionEditor
-                key={s.id}
-                applicationId={app.id}
-                section={s}
-                index={i + 1}
-                value={answers[s.id] ?? ""}
-                onChange={(v) => setAnswer(s.id, v)}
-                error={fieldErrors[s.id]}
-                statements={call.statements}
-                flush={save}
-              />
-            ))}
-            <BudgetRows rows={rows} onChange={changeRows} maxAmount={call.max_amount} error={fieldErrors.budget} />
+            {call.sections.map((s, i) => {
+              if (s.kind === "budget") {
+                return (
+                  <BudgetRows
+                    key={s.id}
+                    anchorId={`sekcja-${s.id}`}
+                    title={s.title}
+                    intro={s.prompt}
+                    phases={s.budget_phases}
+                    rows={rows.filter((r) => s.budget_phases.includes(r.phase))}
+                    totalRows={rows.length}
+                    onChange={(next) => changePhaseRows(s.budget_phases, next)}
+                  />
+                );
+              }
+              if (s.kind === "total") {
+                return (
+                  <TotalSection key={s.id} section={s} number={numbers[i] ?? null} total={total} maxAmount={call.max_amount} error={fieldErrors.budget} />
+                );
+              }
+              return (
+                <SectionEditor
+                  key={s.id}
+                  applicationId={app.id}
+                  section={s}
+                  number={numbers[i] ?? null}
+                  value={answers[s.id] ?? ""}
+                  onChange={(v) => setAnswer(s.id, v)}
+                  error={fieldErrors[s.id]}
+                  statements={call.statements}
+                  flush={save}
+                />
+              );
+            })}
+            {!hasBudgetSections && (
+              <BudgetRows rows={rows} onChange={changeRows} maxAmount={call.max_amount} error={fieldErrors.budget} />
+            )}
             {textSections.length === 0 && (
               <Alert tone="info">Ten nabór nie ma pytań w Kreatorze. Skorzystaj z dokumentów ROPS na stronie naborów.</Alert>
             )}
@@ -370,90 +403,46 @@ function ApplicationEditor({ app, call, idea }: Loaded) {
         </div>
       </div>
 
-      {/* ---------- Wersja do druku (A4) ---------- */}
-      <div className="hidden text-ink print:block">
-        <p className="m-0 text-small text-ink-muted">Kreator pomysłów · dokument roboczy</p>
-        <p className="mb-2 mt-4 font-sans text-h1 text-ink">{call.title}</p>
-        <p className="m-0 text-body-lg text-ink">
-          <strong>Pomysł:</strong> {ideaTitle}
-        </p>
-        <p className="m-0 text-body text-ink">
-          Kwota grantu do {formatMoney(call.max_amount)} · termin naboru {formatDate(call.opens_at)} – {formatDate(call.closes_at)}
-        </p>
-
-        {call.sections.map((s, i) => (
-          <div key={s.id} className="mt-6 break-inside-avoid-page">
-            <p className="m-0 font-sans text-h3 text-ink">
-              {i + 1}. {s.title}
-            </p>
-            {s.kind === "info" ? (
-              <>
-                <p className="mb-0 mt-2 text-body text-ink">{s.prompt}</p>
-                {s.id === "statements" && call.statements.length > 0 && (
-                  <ul className="mb-0 mt-2 pl-6">
-                    {call.statements.map((st) => (
-                      <li key={st} className="text-body text-ink">
-                        {st}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </>
-            ) : (
-              <>
-                <p className="mb-0 mt-2 text-small italic text-ink-muted">{s.prompt}</p>
-                <p className="mb-0 mt-2 whitespace-pre-line text-body text-ink [overflow-wrap:anywhere]">
-                  {answers[s.id]?.trim() ? answers[s.id] : "Brak odpowiedzi."}
-                </p>
-              </>
-            )}
-          </div>
-        ))}
-
-        <div className="mt-6 break-inside-avoid-page">
-          <p className="m-0 font-sans text-h3 text-ink">Plan działań i koszty</p>
-          {printRows.length === 0 ? (
-            <p className="mb-0 mt-2 text-body text-ink">Brak pozycji.</p>
-          ) : (
-            <table className="mt-2 w-full border-collapse text-body text-ink">
-              <thead>
-                <tr>
-                  <th scope="col" className="border border-solid border-ink p-2 text-left">
-                    Działanie
-                  </th>
-                  <th scope="col" className="border border-solid border-ink p-2 text-left">
-                    Termin
-                  </th>
-                  <th scope="col" className="border border-solid border-ink p-2 text-right">
-                    Koszt
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {printRows.map((r, i) => (
-                  <tr key={i}>
-                    <td className="border border-solid border-ink p-2">{r.action}</td>
-                    <td className="border border-solid border-ink p-2">{r.when || "—"}</td>
-                    <td className="whitespace-nowrap border border-solid border-ink p-2 text-right">{formatMoney(r.cost)}</td>
-                  </tr>
-                ))}
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th scope="row" colSpan={2} className="border border-solid border-ink p-2 text-left">
-                    Suma (limit naboru {formatMoney(call.max_amount)})
-                  </th>
-                  <td className="whitespace-nowrap border border-solid border-ink p-2 text-right font-bold">{formatMoney(printTotal)}</td>
-                </tr>
-              </tfoot>
-            </table>
-          )}
-        </div>
-
-        <p className="mb-0 mt-8 border-0 border-t border-solid border-line pt-2 text-small text-ink-muted">
-          {PRINT_FOOTER}. Stan na {formatDateTime(updatedAt)}.
-        </p>
-      </div>
+      {/* ---------- Wersja do druku (A4, układ wzoru formularza naboru) ---------- */}
+      <ApplicationPrint call={call} answers={answers} rows={completeRows(rows)} updatedAt={updatedAt} />
     </>
+  );
+}
+
+/** Pkt „Wnioskowana kwota grantu”: suma kosztów z planu działania i limit naboru. */
+function TotalSection({
+  section,
+  number,
+  total,
+  maxAmount,
+  error,
+}: {
+  section: CallSection;
+  number: string | null;
+  total: number;
+  maxAmount: number;
+  error?: string;
+}) {
+  const headingId = `naglowek-${section.id}`;
+  const over = total > maxAmount;
+  return (
+    <section id={`sekcja-${section.id}`} aria-labelledby={headingId} className="ds-card flex scroll-mt-4 flex-col gap-3">
+      <h2 id={headingId} tabIndex={-1} className="m-0 font-sans text-h3 text-navy">
+        {number ? `${number}. ` : ""}
+        {section.title}
+      </h2>
+      <p className="m-0 text-body text-ink">{section.prompt}</p>
+      <p className="m-0 text-body-lg text-ink">
+        <strong>{formatMoney(total)}</strong> — suma kosztów z planu działania (limit naboru {formatMoney(maxAmount)})
+      </p>
+      <div aria-live="polite">
+        {over && (
+          <Alert tone="warning">
+            Suma kosztów przekracza limit naboru o {formatMoney(total - maxAmount)}. Zmniejsz koszty albo usuń część działań.
+          </Alert>
+        )}
+      </div>
+      {error && <p className="ds-error m-0">{error}</p>}
+    </section>
   );
 }

@@ -20,7 +20,11 @@ IdeaStageLiteral = Literal["IDEA", "PROTOTYPE", "TESTED", "READY"]
 IdeaHubStatusLiteral = Literal["SUBMITTED", "IN_REVIEW", "INVITED", "REJECTED"]
 CanvasBlockTypeLiteral = Literal["single", "multi", "list", "text", "partners"]
 AssistTargetLiteral = Literal["idea", "canvas_block"]
-CallSectionKindLiteral = Literal["text", "info"]
+# text — odpowiedź opisowa; info — tylko treść; budget — tabela kosztów dla `budget_phases`;
+# total — wnioskowana kwota (suma budżetu). Rodzaje inne niż `text` nie przyjmują odpowiedzi.
+CallSectionKindLiteral = Literal["text", "info", "budget", "total"]
+# Etap wiersza budżetu (pkt 9 wzoru IWS): okres przygotowawczy, faza I i II testu.
+BudgetPhaseLiteral = Literal["prep", "test_1", "test_2"]
 CallStateLiteral = Literal["open", "closed", "upcoming"]
 
 
@@ -235,11 +239,70 @@ class CallSection(BaseModel):
     max_chars: int | None = None
     # odwołania "idea.<pole>" / "canvas.<block_id>"
     prefill: list[str] = Field(default_factory=list)
+    # --- układ formularza naboru (wydruk 1:1 ze wzorem; feature-2026-10-04-3) ---
+    # numer punktu we wzorze ("1"…"12"); None = podpunkt poprzedniego numerowanego punktu
+    number: str | None = None
+    # instrukcja wzoru, gdy inna niż `prompt` (None = jak `prompt`, "" = bez instrukcji)
+    form_prompt: str | None = None
+    # instrukcja w tej samej linii co nazwa punktu (pkt 1–2 wzoru)
+    form_inline: bool = False
+    # etapy wierszy budżetu pokazywane w sekcji `budget`
+    budget_phases: list[BudgetPhaseLiteral] = Field(default_factory=list)
 
 
 class CallSource(BaseModel):
     title: str
     url: str
+
+
+class FormField(BaseModel):
+    """Pole danych pomysłodawcy we wzorze: „a. Imię”, podpunkty „o Funkcja:”."""
+
+    marker: str
+    label: str
+    sub: list[str] = Field(default_factory=list)
+
+
+class FormApplicantVariant(BaseModel):
+    title: str  # "OSOBA FIZYCZNA:"
+    fields: list[FormField]
+
+
+class FormStatementSet(BaseModel):
+    title: str  # "A. Oświadczenia dla osoby fizycznej:"
+    intro: str
+    items: list[str]
+
+
+class FormClauseBlock(BaseModel):
+    """Akapit klauzuli: `heading` — nagłówek (np. rzymski), `marker` — numer/punktor listy."""
+
+    text: str
+    kind: Literal["p", "heading", "item"] = "p"
+    marker: str = ""
+    level: int = Field(default=0, ge=0, le=2)
+
+
+class FormClause(BaseModel):
+    title: str
+    new_page: bool = False
+    blocks: list[FormClauseBlock]
+    footnotes: list[str] = Field(default_factory=list)
+
+
+class CallForm(BaseModel):
+    """Teksty wzoru formularza aplikacyjnego naboru — do wydruku 1:1 (feature-2026-10-04-3)."""
+
+    # zestaw logotypów na każdej stronie wydruku (frontend: `web/src/assets/<logos>/`)
+    logos: str | None = None
+    annex_label: str
+    title: str
+    intro: str
+    # nagłówki 3 kolumn tabeli planu działania, per id sekcji `budget`
+    budget_headers: dict[str, list[str]] = Field(default_factory=dict)
+    applicant_variants: list[FormApplicantVariant] = Field(default_factory=list)
+    statement_sets: list[FormStatementSet] = Field(default_factory=list)
+    clauses: list[FormClause] = Field(default_factory=list)
 
 
 class CallFile(BaseModel):
@@ -257,6 +320,7 @@ class CallFile(BaseModel):
     applicant_types: list[str]
     sections: list[CallSection] = Field(default_factory=list)
     statements: list[str] = Field(default_factory=list)
+    form: CallForm | None = None
 
 
 class CallSummary(BaseModel):
@@ -277,6 +341,7 @@ class CallDetail(CallSummary):
     applicant_types: list[str]
     sections: list[CallSection]
     statements: list[str]
+    form: CallForm | None = None
 
 
 # --- wnioski grantowe (tabela `applications`) -------------------------------------
@@ -286,6 +351,8 @@ class BudgetRow(BaseModel):
     action: str = Field(min_length=1, max_length=300)
     when: str = Field(default="", max_length=100)
     cost: int = Field(ge=0, le=10_000_000)
+    # brak w starych wierszach i żądaniach → okres przygotowawczy
+    phase: BudgetPhaseLiteral = "prep"
 
 
 class GrantApplicationCreate(BaseModel):

@@ -30,8 +30,12 @@ IDEA_PREFILL_FIELDS = ("title", "summary", "essence", "audience")
 def _check_prefill(call: CallFile) -> None:
     blocks = block_map()
     for section in call.sections:
-        if section.kind == "info" and section.prefill:
-            raise ValueError(f"{call.id}: sekcja info {section.id!r} nie może mieć prefill")
+        if section.kind != "text" and section.prefill:
+            raise ValueError(f"{call.id}: sekcja {section.id!r} ({section.kind}) bez prefill")
+        if (section.kind == "budget") != bool(section.budget_phases):
+            raise ValueError(
+                f"{call.id}: budget_phases tylko i obowiązkowo w sekcji budget ({section.id!r})"
+            )
         for ref in section.prefill:
             source, _, name = ref.partition(".")
             ok = (source == "idea" and name in IDEA_PREFILL_FIELDS) or (
@@ -104,6 +108,7 @@ def call_detail(call: CallFile) -> CallDetail:
         applicant_types=call.applicant_types,
         sections=call.sections,
         statements=call.statements,
+        form=call.form,
     )
 
 

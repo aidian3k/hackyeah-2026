@@ -31,8 +31,8 @@ function Linkified({ text }: { text: string }) {
 interface Props {
   applicationId: number;
   section: CallSection;
-  /** Numer sekcji w spisie (1…n). */
-  index: number;
+  /** Numer punktu (wzór naboru albo kolejność); `null` = podpunkt bez numeru. */
+  number: string | null;
   value: string;
   onChange: (value: string) => void;
   /** Komunikat 422 dla tej sekcji (`answers.<id>: …`). */
@@ -49,7 +49,7 @@ export function sectionLimit(section: CallSection): number {
 }
 
 /** Sekcja wniosku: pytania naboru, podpowiedzi, odpowiedź z licznikiem i szkic AI. Sekcje `info` tylko jako tekst. */
-export function SectionEditor({ applicationId, section, index, value, onChange, error, statements = [], flush }: Props) {
+export function SectionEditor({ applicationId, section, number, value, onChange, error, statements = [], flush }: Props) {
   const headingId = useId();
   const fieldId = useId();
   const promptId = useId();
@@ -65,7 +65,8 @@ export function SectionEditor({ applicationId, section, index, value, onChange, 
 
   const heading = (
     <h2 id={headingId} tabIndex={-1} className="m-0 font-sans text-h3 text-navy">
-      {index}. {section.title}
+      {number ? `${number}. ` : ""}
+      {section.title}
     </h2>
   );
 

@@ -2,8 +2,9 @@
 
 - sekcja `text`: połączenie źródeł z `section.prefill` — `idea.<pole>` to tekst pola fiszki,
   `canvas.<block_id>` to `describe_block`; puste pomijane, wynik przycięty do limitu sekcji;
-- budżet: wiersz `{action: <etykieta>, when: "", cost: 0}` dla każdej pozycji kosztów stałych
-  i zmiennych z kanwy (zaznaczone opcje i wpisy „inne”), do `APPLICATION_BUDGET_MAX_ROWS`.
+- budżet: wiersz `{action: <etykieta>, when: "", cost: 0, phase}` dla każdej pozycji kosztów stałych
+  (`phase: prep` — okres przygotowawczy) i zmiennych (`phase: test_1` — faza I testu) z kanwy
+  (zaznaczone opcje i wpisy „inne”), do `APPLICATION_BUDGET_MAX_ROWS`.
 
 Wypełnienie liczone tylko raz — przy tworzeniu wniosku.
 """
@@ -18,7 +19,8 @@ from api.kreator.canvas import block_map, describe_block
 from api.kreator.models import Idea
 from api.kreator.schemas import CallFile, CallSection
 
-COST_BLOCKS = ("costs_fixed", "costs_variable")
+# blok kanwy → etap planu działania (pkt 9 wzoru IWS)
+COST_BLOCKS = (("costs_fixed", "prep"), ("costs_variable", "test_1"))
 # = `BudgetRow.action` max_length (api/kreator/schemas.py)
 BUDGET_ACTION_MAX_CHARS = 300
 
@@ -62,7 +64,7 @@ def prefill_budget(canvas: dict[str, Any]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     seen: set[str] = set()
     blocks = block_map()
-    for block_id in COST_BLOCKS:
+    for block_id, phase in COST_BLOCKS:
         block = blocks.get(block_id)
         value = canvas.get(block_id)
         if block is None or not isinstance(value, dict):
@@ -74,5 +76,5 @@ def prefill_budget(canvas: dict[str, Any]) -> list[dict[str, Any]]:
             action = item.strip()[:BUDGET_ACTION_MAX_CHARS]
             if action and action.casefold() not in seen:
                 seen.add(action.casefold())
-                rows.append({"action": action, "when": "", "cost": 0})
+                rows.append({"action": action, "when": "", "cost": 0, "phase": phase})
     return rows[: max(settings.APPLICATION_BUDGET_MAX_ROWS, 0)]

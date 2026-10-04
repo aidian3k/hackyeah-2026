@@ -12,7 +12,7 @@ co zmienia już zbudowane ekrany lub zachowanie.
 | `bugs-2026-10-03-1` | Frontend po pierwszym sprincie (branding ROPS, usunięcie gminy) | otwarte | [spec](bugs-2026-10-03-1/spec.md) |
 | `feature-2026-10-04-1` | Funkcje AI na OpenAI (jeden dostawca dla LLM i embeddingów) | wdrożone | [spec](feature-2026-10-04-1/spec.md), [plan](feature-2026-10-04-1/plan.md) |
 | `feature-2026-10-04-2` | Kreator: kanwa krok po kroku z grafiką jak w Social Canvas | wdrożone | [spec](feature-2026-10-04-2/spec.md), [plan](feature-2026-10-04-2/plan.md) |
-| `feature-2026-10-04-3` | Kreator: wydruk wniosku 1:1 z wzorem formularza aplikacyjnego IWS | w toku | [spec](feature-2026-10-04-3/spec.md), [plan](feature-2026-10-04-3/plan.md) |
+| `feature-2026-10-04-3` | Kreator: wydruk wniosku 1:1 z wzorem formularza aplikacyjnego IWS | wdrożone | [spec](feature-2026-10-04-3/spec.md), [plan](feature-2026-10-04-3/plan.md) |
 
 Statusy: `otwarte` → `zaplanowane` (jest `plan.md`) → `w toku` → `wdrożone` → `zweryfikowane`.
 Zmieniając status, popraw go w tej tabeli **i** w linii `**Status:**` pod tytułem `spec.md`.

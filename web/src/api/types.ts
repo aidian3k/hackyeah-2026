@@ -305,7 +305,8 @@ export type IdeaStage = "IDEA" | "PROTOTYPE" | "TESTED" | "READY";
 export type IdeaHubStatus = Exclude<IdeaStatus, "DRAFT">;
 export type CanvasBlockType = "single" | "multi" | "list" | "text" | "partners";
 export type AssistTarget = "idea" | "canvas_block";
-export type CallSectionKind = "text" | "info";
+export type CallSectionKind = "text" | "info" | "budget" | "total";   // budget — tabela kosztów etapów, total — wnioskowana kwota
+export type BudgetPhase = "prep" | "test_1" | "test_2";              // okres przygotowawczy, faza I i II testu
 export type CallState = "open" | "closed" | "upcoming";
 
 export interface IdeaCreate {
@@ -390,6 +391,22 @@ export interface CallSection {
   id: string; title: string; kind: CallSectionKind; prompt: string;
   hints: string[]; required: boolean; max_chars: number | null;
   prefill: string[];                 // "idea.<pole>" / "canvas.<block_id>"
+  // układ wzoru formularza (feature-2026-10-04-3)
+  number: string | null;             // numer punktu we wzorze; null = podpunkt
+  form_prompt: string | null;        // instrukcja na wydruku, gdy inna niż prompt ("" = brak)
+  form_inline: boolean;              // instrukcja w linii nazwy punktu
+  budget_phases: BudgetPhase[];      // tylko kind "budget"
+}
+export interface FormField { marker: string; label: string; sub: string[] }
+export interface FormApplicantVariant { title: string; fields: FormField[] }
+export interface FormStatementSet { title: string; intro: string; items: string[] }
+export interface FormClauseBlock { text: string; kind: "p" | "heading" | "item"; marker: string; level: number }
+export interface FormClause { title: string; new_page: boolean; blocks: FormClauseBlock[]; footnotes: string[] }
+export interface CallForm {
+  logos: string | null;              // zestaw logotypów wydruku (web/src/assets/<logos>/)
+  annex_label: string; title: string; intro: string;
+  budget_headers: Record<string, string[]>;   // 3 nagłówki kolumn per id sekcji "budget"
+  applicant_variants: FormApplicantVariant[]; statement_sets: FormStatementSet[]; clauses: FormClause[];
 }
 export interface CallSource { title: string; url: string }
 export interface CallSummary {
@@ -400,10 +417,11 @@ export interface CallSummary {
 export interface CallDetail extends CallSummary {
   based_on: CallSource[]; applicant_types: string[];
   sections: CallSection[]; statements: string[];
+  form: CallForm | null;             // teksty wzoru formularza do wydruku 1:1
 }
 
 // wnioski grantowe (tabela applications; nazwy z prefiksem Grant — ApplicationStatus należy do M4)
-export interface BudgetRow { action: string; when: string; cost: number }   // action 1..300, when ..100, cost 0..10 000 000
+export interface BudgetRow { action: string; when: string; cost: number; phase: BudgetPhase }   // action 1..300, when ..100, cost 0..10 000 000; phase domyślnie "prep"
 export interface GrantApplicationCreate { call_id: string }
 export interface GrantApplicationPatch { answers?: Record<string, string | null>; budget?: BudgetRow[] }
 export interface GrantApplicationCheck { code: string; section_id: string | null; message_pl: string }
