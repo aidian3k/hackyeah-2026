@@ -5,3 +5,5 @@ npm-debug.log*
 *.tsbuildinfo
 Dockerfile
 .dockerignore
+# lokalny adres backendu nie trafia do obrazu (make up = ten sam origin przez nginx)
+.env*.local

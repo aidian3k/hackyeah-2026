@@ -1,4 +1,5 @@
 // Moduł 7: Middleman innowacji — klient strumienia SSE rozmowy o wdrożeniu innowacji.
+import { apiUrl } from "./base";
 import { ApiError, errorFromResponse, networkError } from "./client";
 import { parseFrames } from "./sse";
 import type { ReporterType } from "./types";
@@ -60,7 +61,7 @@ export async function streamAdapt(
 ): Promise<void> {
   let res: Response;
   try {
-    res = await fetch(`/api/solutions/${solutionId}/adapt-chat`, {
+    res = await fetch(apiUrl(`/api/solutions/${solutionId}/adapt-chat`), {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "text/event-stream" },
       body: JSON.stringify(req),

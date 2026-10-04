@@ -1,3 +1,4 @@
+import { apiUrl } from "./base";
 import { ApiError, errorFromResponse, networkError } from "./client";
 import type { ChatEvent, ChatRequest } from "./types";
 
@@ -60,9 +61,9 @@ export function parseFrames(buffer: string): { events: ChatEvent[]; rest: string
 function chatUrl(): string {
   if (import.meta.env?.DEV && typeof location !== "undefined") {
     const scenario = new URLSearchParams(location.search).get("scenario");
-    if (scenario) return `/api/chat?scenario=${encodeURIComponent(scenario)}`;
+    if (scenario) return apiUrl(`/api/chat?scenario=${encodeURIComponent(scenario)}`);
   }
-  return "/api/chat";
+  return apiUrl("/api/chat");
 }
 
 function isAbort(e: unknown, signal?: AbortSignal): boolean {

@@ -1,3 +1,4 @@
+import { apiUrl } from "./base";
 import type {
   AdminSolutionsQuery,
   ChallengeDetail,
@@ -130,7 +131,7 @@ export async function request<T>(method: string, path: string, opts: RequestOpti
 
   let res: Response;
   try {
-    res = await fetch(path + buildQuery(opts.query), init);
+    res = await fetch(apiUrl(path) + buildQuery(opts.query), init);
   } catch {
     throw networkError();
   }
