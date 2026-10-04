@@ -122,13 +122,13 @@ export function ImpactMatrix({
     <dl className="m-0 grid grid-cols-1 gap-x-4 gap-y-1 text-small sm:grid-cols-2">
       {levels.map((o) => (
         <div key={o.code} className="flex items-start gap-2">
-          {o.level ? <LevelIndicator level={o.level} /> : null}
-          <div>
-            <dt className="inline font-bold text-ink">{`${o.label}: `}</dt>
-            <dd id={descIds[o.code]} className="m-0 inline text-ink-muted">
-              {o.description}
-            </dd>
-          </div>
+          <dt className="flex shrink-0 items-start gap-2 font-bold text-ink">
+            {o.level ? <LevelIndicator level={o.level} /> : null}
+            <span>{`${o.label}:`}</span>
+          </dt>
+          <dd id={descIds[o.code]} className="m-0 text-ink-muted">
+            {o.description}
+          </dd>
         </div>
       ))}
     </dl>
