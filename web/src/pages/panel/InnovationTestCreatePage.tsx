@@ -1,15 +1,17 @@
-import { useId, useState, type FormEvent } from "react";
+import { useId, useMemo, useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { api, ApiError } from "@/api/client";
-import type { MaterialType, TestMode } from "@/api/types";
+import type { MaterialType, SolutionAdminItem, TestMode } from "@/api/types";
 import { Alert } from "@/components/Alert";
+import { LoadState } from "@/components/LoadState";
 import { ModuleLabel } from "@/components/layout/ModuleLabel";
-import { toApiError } from "@/hooks/useApi";
+import { toApiError, useApi } from "@/hooks/useApi";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import { MATERIAL_TYPE_LABELS, TEST_MODE_LABELS } from "@/lib/labels";
+import { MATERIAL_TYPE_LABELS, SOLUTION_STATUS_LABELS, TEST_MODE_LABELS } from "@/lib/labels";
 
 const MATERIAL_TYPES = Object.keys(MATERIAL_TYPE_LABELS) as MaterialType[];
 const MODES = Object.keys(TEST_MODE_LABELS) as TestMode[];
+const SOLUTION_LIMIT = 100;
 
 /** Formularz tworzenia kompletnej rekrutacji testerów (OPEN). */
 export function PanelInnovationTestCreatePage() {
@@ -34,13 +36,52 @@ export function PanelInnovationTestCreatePage() {
   const [materialLocator, setMaterialLocator] = useState("https://");
   const [materialDescription, setMaterialDescription] = useState("");
 
+  const published = useApi(
+    () =>
+      api.adminSolutions({
+        kind: "SOLUTION",
+        status: "PUBLISHED",
+        limit: SOLUTION_LIMIT,
+        offset: 0,
+      }),
+    [],
+  );
+  const pending = useApi(
+    () =>
+      api.adminSolutions({
+        kind: "SOLUTION",
+        status: "PENDING_REVIEW",
+        limit: SOLUTION_LIMIT,
+        offset: 0,
+      }),
+    [],
+  );
+
+  const solutionsLoading = published.loading || pending.loading;
+  const solutionsError = published.error ?? pending.error;
+  const solutions = useMemo(() => {
+    const items: SolutionAdminItem[] = [
+      ...(published.data?.items ?? []),
+      ...(pending.data?.items ?? []),
+    ];
+    return items.sort((a, b) => a.title.localeCompare(b.title, "pl"));
+  }, [published.data, pending.data]);
+
+  function onSolutionChange(nextId: string) {
+    setSolutionId(nextId);
+    const selected = solutions.find((item) => String(item.id) === nextId);
+    if (!selected) return;
+    if (!title.trim()) setTitle(`Test: ${selected.title}`);
+    if (!targetGroup.trim() && selected.target_group) setTargetGroup(selected.target_group);
+  }
+
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
     setError(null);
     const sid = Number(solutionId);
     const seatsLimit = Number(seats);
     if (!Number.isFinite(sid) || sid <= 0) {
-      setError(new ApiError(422, "VALIDATION_ERROR", "Podaj poprawne ID rozwiązania."));
+      setError(new ApiError(422, "VALIDATION_ERROR", "Wybierz rozwiązanie z listy."));
       return;
     }
     if (!endsAt) {
@@ -88,7 +129,7 @@ export function PanelInnovationTestCreatePage() {
         </p>
         <h1 tabIndex={-1}>Nowa rekrutacja testerów</h1>
         <p className="m-0 text-body-lg text-ink">
-          Rekrutacja od razu jest otwarta. Rozwiązanie musi mieć status PUBLISHED albo PENDING_REVIEW.
+          Wybierz rozwiązanie z katalogu albo z kolejki do przejrzenia. Rekrutacja od razu będzie otwarta.
         </p>
       </div>
 
@@ -100,15 +141,43 @@ export function PanelInnovationTestCreatePage() {
         )}
 
         <div className="ds-field">
-          <label htmlFor={`${formId}-solution`}>ID rozwiązania</label>
-          <input
-            id={`${formId}-solution`}
-            className="ds-input"
-            value={solutionId}
-            onChange={(e) => setSolutionId(e.target.value)}
-            required
-            inputMode="numeric"
-          />
+          <label htmlFor={`${formId}-solution`}>Rozwiązanie</label>
+          {solutionsLoading || solutionsError ? (
+            <LoadState
+              loading={solutionsLoading}
+              error={solutionsError}
+              onRetry={() => {
+                published.reload();
+                pending.reload();
+              }}
+              label="Wczytujemy rozwiązania…"
+            />
+          ) : (
+            <>
+              <select
+                id={`${formId}-solution`}
+                className="ds-input"
+                value={solutionId}
+                onChange={(e) => onSolutionChange(e.target.value)}
+                required
+              >
+                <option value="">Wybierz rozwiązanie…</option>
+                {solutions.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.title}
+                    {item.status !== "PUBLISHED"
+                      ? ` (${SOLUTION_STATUS_LABELS[item.status] ?? item.status})`
+                      : ""}
+                  </option>
+                ))}
+              </select>
+              {solutions.length === 0 && (
+                <p className="ds-hint">
+                  Brak dostępnych rozwiązań. Opublikuj coś w bibliotece albo zatwierdź pomysł w kolejce.
+                </p>
+              )}
+            </>
+          )}
         </div>
         <div className="ds-field">
           <label htmlFor={`${formId}-title`}>Tytuł testu</label>
@@ -278,7 +347,11 @@ export function PanelInnovationTestCreatePage() {
         </fieldset>
 
         <div className="flex flex-wrap items-center gap-3">
-          <button type="submit" className="ds-btn ds-btn--cta" disabled={submitting}>
+          <button
+            type="submit"
+            className="ds-btn ds-btn--cta"
+            disabled={submitting || solutionsLoading || solutions.length === 0}
+          >
             {submitting ? "Tworzenie…" : "Opublikuj rekrutację"}
           </button>
         </div>
